@@ -380,19 +380,19 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .points{display:grid;gap:12px;margin-top:36px;max-width:440px}
 .points div{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--night-text);padding:12px 14px;border:1px solid var(--night-line);border-radius:12px}
 .points .i{width:18px;height:18px;color:var(--brand-glow)}
-.hub{position:relative;width:100%;max-width:560px;aspect-ratio:1;margin-inline:auto}
+.hub{position:relative;width:100%;max-width:580px;aspect-ratio:560 / 440;margin-inline:auto}
 .hub-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.hub-lines line{stroke:var(--night-line);stroke-width:.3}
-.hub-lines line.flow{stroke:var(--brand-glow);stroke-width:.45;stroke-dasharray:2 6;stroke-linecap:round;animation:flow 2.6s linear infinite;animation-delay:var(--d)}
-@keyframes flow{to{stroke-dashoffset:-16}}
-.hub-core{position:absolute;left:50%;top:50%;translate:-50% -50%;width:23%;aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 0 0 10px rgba(106,168,255,.08),0 0 0 22px rgba(106,168,255,.05),0 20px 60px -10px rgba(0,112,255,.6)}
-.hub-core img{width:52%;height:auto}
-.node{position:absolute;translate:-50% -50%;display:flex;align-items:center;gap:8px;padding:8px 12px 8px 8px;border-radius:999px;background:var(--night-2);border:1px solid var(--night-line);color:var(--night-text);font-size:13px;font-weight:500;white-space:nowrap;transition:border-color .2s,background .2s}
-.node .ni{width:28px;height:28px;border-radius:50%;background:rgba(106,168,255,.14);color:var(--brand-glow);display:grid;place-items:center;flex:none}
-.node .ni .i{width:15px;height:15px}
-.node.lit{border-color:var(--brand);background:#0E2550}
+.hub-lines path{fill:none;stroke:var(--night-line);stroke-width:1.5;stroke-linejoin:round;transition:stroke .3s}
+.hub-lines path.flow{stroke:var(--brand-glow);stroke-opacity:.55;stroke-dasharray:4 8;stroke-linecap:round;animation:flow 1.6s linear infinite}
+.hub-lines path.flow.lit{stroke-opacity:1;stroke-width:2}
+.hub-lines .joint{fill:var(--night);stroke:var(--brand-glow);stroke-width:1.5}
+@keyframes flow{to{stroke-dashoffset:-24}}
+.hub-core{position:absolute;left:50%;top:50%;translate:-50% -50%;width:20%;aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 0 0 10px rgba(106,168,255,.08),0 0 0 22px rgba(106,168,255,.05),0 20px 60px -10px rgba(0,112,255,.6)}
+.hub-core img{width:54%;height:auto}
+.node{position:absolute;translate:-50% -50%;width:10.5%;aspect-ratio:1;border-radius:24%;background:var(--night-2);border:1px solid var(--night-line);color:var(--brand-glow);display:grid;place-items:center;transition:border-color .3s,background .3s,color .3s,box-shadow .3s}
+.node .i{width:44%;height:44%}
+.node.lit{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 10px 30px -8px rgba(0,112,255,.7)}
 @media (max-width:1000px){.night .wrap{grid-template-columns:1fr;gap:56px}}
-@media (max-width:560px){.node{padding:0;border-radius:50%}.node span.lb{display:none}.node .ni{width:40px;height:40px}.node .ni .i{width:18px;height:18px}}
 
 /* ───────── Pricing ───────── */
 .pricing{padding-block:clamp(72px,9vw,120px);background:var(--canvas)}
@@ -928,10 +928,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
           <div><svg class="i"><use href="#i-buoy"/></svg>Ongoing support and optimisation</div>
         </div>
       </div>
-      <div class="hub" id="hub" role="img" aria-label="wBizManager at the centre, connected to Accounting, Sales, Purchases, Approvals, Inventory, Reports, Commercial, Project and Human Resources">
-        <svg class="hub-lines" id="hub-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <circle cx="50" cy="50" r="38" fill="none" stroke="var(--night-line)" stroke-width=".25" stroke-dasharray="1 1.2"/>
-          <circle cx="50" cy="50" r="22" fill="none" stroke="var(--night-line)" stroke-width=".25"/>
+      <div class="hub" id="hub" role="img" aria-label="Flow chart: wBizManager at the centre, connected to Accounting, Sales, Purchases, Approvals, Inventory, Reports, Commercial, Project and Human Resources">
+        <svg class="hub-lines" id="hub-lines" viewBox="0 0 560 440" aria-hidden="true">
+          <circle cx="280" cy="220" r="92" fill="none" stroke="var(--night-line)" stroke-width="1" stroke-dasharray="3 5"/>
         </svg>
         <div class="hub-core"><img src="assets/mark.png" alt="" width="61" height="60"></div>
       </div>
@@ -1203,22 +1202,30 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     list.innerHTML = data.map(([l, v, c]) => `<div><i style="background:${c}"></i><span>${l}</span><b>${v}</b><small>${Math.round(v / total * 100)}%</small></div>`).join('');
   })(document.getElementById('donut'), document.getElementById('donut-list'));
 
-  /* Hub diagram: modules around the platform */
+  /* Hub flow chart: modules fan out from the platform on right-angle connectors */
   (function hub() {
     const box = document.getElementById('hub'), svg = document.getElementById('hub-lines');
-    MODS.forEach((m, i) => {
-      const a = (-90 + i * 360 / MODS.length) * Math.PI / 180, x = 50 + 38 * Math.cos(a), y = 50 + 38 * Math.sin(a);
-      const ix = 50 + 12 * Math.cos(a), iy = 50 + 12 * Math.sin(a);
-      el('line', { x1: ix, y1: iy, x2: x, y2: y }, svg);
-      el('line', { x1: x, y1: y, x2: ix, y2: iy, class: 'flow', style: `--d:${-i * .29}s` }, svg);
-      const n = document.createElement('div');
-      n.className = 'node'; n.style.left = x + '%'; n.style.top = y + '%';
-      n.innerHTML = `<span class="ni">${icon(m.icon)}</span><span class="lb">${m.name}</span>`;
+    const cx = 280, cy = 220, r = 56, left = [70, 170, 270, 370], right = [40, 130, 220, 310, 400];
+    const spots = [...left.map(y => ({ side: -1, y })), ...right.map(y => ({ side: 1, y }))];
+    const flows = [];
+    spots.forEach((p, i) => {
+      const m = MODS[i], tx = p.side < 0 ? 60 : 500, bus = p.side < 0 ? 150 : 410, edge = tx - p.side * 30;
+      const d = `M${cx + p.side * r} ${cy} H${bus} V${p.y} H${edge}`;
+      el('path', { d }, svg);
+      flows.push(el('path', { d, class: 'flow', style: `animation-delay:${-i * .18}s` }, svg));
+      const n = document.createElement('span');
+      n.className = 'node'; n.title = m.name;
+      n.style.left = (tx / 560 * 100) + '%'; n.style.top = (p.y / 440 * 100) + '%';
+      n.innerHTML = icon(m.icon);
       box.appendChild(n);
     });
+    [150, 410].forEach(x => el('circle', { cx: x, cy, r: 4, class: 'joint' }, svg));
     if (reduce) return;
     const nodes = [...box.querySelectorAll('.node')]; let k = 0;
-    setInterval(() => { nodes.forEach(n => n.classList.remove('lit')); nodes[k % nodes.length].classList.add('lit'); k++; }, 1400);
+    setInterval(() => {
+      nodes.forEach((n, i) => { n.classList.toggle('lit', i === k % nodes.length); flows[i].classList.toggle('lit', i === k % nodes.length); });
+      k++;
+    }, 1400);
   })();
 
   /* Header */
