@@ -380,13 +380,12 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .points{display:grid;gap:12px;margin-top:36px;max-width:440px}
 .points div{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--night-text);padding:12px 14px;border:1px solid var(--night-line);border-radius:12px}
 .points .i{width:18px;height:18px;color:var(--brand-glow)}
-.orb-panel{position:relative;border-radius:var(--r-panel);overflow:hidden;padding:4% 2%;
-  background:radial-gradient(60% 50% at 20% 15%,#FFFFFF,transparent 70%),radial-gradient(70% 60% at 90% 90%,#D6E6FF,transparent 70%),linear-gradient(160deg,#F4F8FF,#E3EEFF)}
+.orb-panel{position:relative}
 .orb{position:relative;width:100%;max-width:600px;aspect-ratio:1;margin-inline:auto;container-type:inline-size;
   transform:perspective(1600px) rotateX(18deg) rotateZ(-7deg) scale(.94);transform-style:preserve-3d}
 .orb-rings{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .orb-rings circle{fill:none}
-.ring-outer{stroke:#9CC2FF;stroke-width:.25}
+.ring-outer{stroke:#3A5A8C;stroke-width:.3}
 .ring-inner{stroke:#7FB0FF;stroke-width:.35}
 .ring-run{stroke:var(--brand);stroke-width:.5;stroke-dasharray:6 144.8;stroke-linecap:round;animation:orbit 6s linear infinite;transform-origin:50% 50%}
 @keyframes orbit{to{transform:rotate(360deg)}}
@@ -396,15 +395,15 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .core-mark{width:17cqw;aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 1cqw 3cqw rgba(0,30,90,.3)}
 .core-mark img{width:62%;height:auto}
 .core b{font-size:3.4cqw;font-weight:600;letter-spacing:-.02em}
-.sat{position:absolute;translate:-50% -50%;width:15%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.92);
-  box-shadow:0 2cqw 5cqw -1.5cqw rgba(15,50,120,.25),inset 0 0 0 1px rgba(255,255,255,.9);display:grid;place-content:center;justify-items:center;text-align:center;gap:.9cqw;padding:2cqw;
+.sat{position:absolute;translate:-50% -50%;width:15%;aspect-ratio:1;border-radius:50%;background:#fff;
+  box-shadow:0 2cqw 6cqw -1.5cqw rgba(0,0,0,.5);display:grid;place-content:center;justify-items:center;text-align:center;gap:.9cqw;padding:2cqw;
   transition:box-shadow .4s;animation:bob 6s ease-in-out infinite;animation-delay:var(--d)}
 @keyframes bob{50%{translate:-50% calc(-50% - 1cqw)}}
-.sat .si{width:8.6cqw;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;color:#fff;background:radial-gradient(circle at 35% 30%,#4C97FF,#0062E6);box-shadow:0 1cqw 2cqw -.5cqw rgba(0,90,220,.6)}
-.sat .si .i{width:52%;height:52%;stroke-width:2}
+.sat .si{width:8.6cqw;aspect-ratio:1;display:grid;place-items:center;color:var(--brand)}
+.sat .si .i{width:100%;height:100%;stroke-width:1.75}
 .sat b{font-size:2.5cqw;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.1}
 .sat small{font-size:1.75cqw;color:var(--muted);line-height:1.3}
-.sat.lit{box-shadow:0 0 0 .6cqw var(--brand),0 2cqw 5cqw -1.5cqw rgba(0,80,200,.45)}
+.sat.lit{box-shadow:0 0 0 .6cqw var(--brand),0 2cqw 6cqw -1.5cqw rgba(0,112,255,.6)}
 @media (max-width:1000px){.night .wrap{grid-template-columns:1fr;gap:56px}}
 
 /* ───────── Pricing ───────── */
@@ -945,8 +944,6 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         <div class="orb" id="orb" role="img" aria-label="wBizManager at the centre, surrounded by Accounting, Sales, Purchases, Approvals, Inventory, Reports, Commercial, Project and Human Resources">
           <svg class="orb-rings" viewBox="0 0 100 100" aria-hidden="true">
             <circle cx="50" cy="50" r="38.5" class="ring-outer"/>
-            <circle cx="50" cy="50" r="24" class="ring-inner"/>
-            <circle cx="50" cy="50" r="24" class="ring-run"/>
           </svg>
           <div class="core"><span class="core-mark"><img src="assets/mark.png" alt="" width="61" height="60"></span></div>
         </div>
@@ -1227,7 +1224,6 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       const x = 50 + 38.5 * Math.cos(a), y = 50 + 38.5 * Math.sin(a);
       const b = (-90 + (i + .5) * 360 / MODS.length) * Math.PI / 180;
       el('circle', { cx: 50 + 38.5 * Math.cos(b), cy: 50 + 38.5 * Math.sin(b), r: .55, class: 'dot' }, rings);
-      el('circle', { cx: 50 + 24 * Math.cos(a), cy: 50 + 24 * Math.sin(a), r: .5, class: 'dot' }, rings);
       const n = document.createElement('div');
       n.className = 'sat'; n.style.left = x + '%'; n.style.top = y + '%'; n.style.setProperty('--d', (-i * .7) + 's');
       n.title = m.name; n.innerHTML = `<span class="si">${icon(m.icon)}</span>`;
