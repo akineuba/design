@@ -7,7 +7,7 @@
 <meta name="description" content="wBizManager brings sales, finance, inventory, purchasing, customer management and HR together in one cloud-based business management platform.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Caveat:wght@500;600&display=swap">
 <style>
 /* Layout concept (after Parley): huge, quiet type on white; the product lives inside
    solid colour and soft grey panels that bleed off the page edge; real fragments of
@@ -111,8 +111,9 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .hero{padding-top:28px;overflow:clip}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:stretch}
 .hero-copy{display:flex;flex-direction:column;justify-content:center;gap:28px;padding-block:48px 72px;min-width:0}
-.say{display:flex;align-items:center;gap:10px}
-.say p{background:var(--panel);border-radius:18px 18px 18px 6px;padding:9px 14px;font-size:14px;color:var(--text-2)}
+.kicker{display:inline-flex;align-items:center;gap:10px;width:max-content;max-width:100%;padding:7px 14px 7px 12px;border-radius:999px;background:var(--brand-subtle);color:var(--brand-ink);font-size:14px;font-weight:500}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(0,112,255,.18);animation:ping 2.4s ease-in-out infinite}
+@keyframes ping{50%{box-shadow:0 0 0 7px rgba(0,112,255,0)}}
 .hero h1{font-size:clamp(46px,5.4vw,80px)}
 .hero .lead{font-size:18px}
 .hero-act{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
@@ -221,27 +222,47 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .hf1{animation-delay:.3s}.hf2{animation-delay:.45s}
 
-/* ───────── Noise: the statement among scattered messages ───────── */
-.noise{position:relative;overflow:clip;padding-block:190px 170px}
+/* ───────── Noise: the statement among the paperwork it replaces ───────── */
+.noise{position:relative;overflow:clip;padding-block:200px 190px}
 .noise .statement{position:relative;z-index:1;font-size:clamp(30px,3.8vw,50px);font-weight:600;letter-spacing:-.035em;line-height:1.1;text-align:center;max-width:21ch;margin-inline:auto}
 .noise .statement span{color:var(--brand)}
 .noise .after{position:relative;z-index:1;text-align:center;margin:22px auto 0;color:var(--muted);font-size:18px;max-width:44ch}
-.bubs{display:contents}
-.bub{position:absolute;left:var(--x);top:var(--y);display:flex;align-items:flex-end;gap:8px;animation:drift 9s ease-in-out infinite;animation-delay:var(--d,0s)}
-.bub p{background:var(--panel);border-radius:18px 18px 18px 6px;padding:10px 14px;font-size:14px;color:var(--text-2);white-space:nowrap;display:flex;gap:10px;align-items:baseline}
-.bub time{font-size:11px;color:var(--faint)}
-.bub.me{flex-direction:row-reverse}
-.bub.me p{background:var(--brand);color:#fff;border-radius:18px 18px 6px 18px}
-.bub.me time{color:rgba(255,255,255,.7)}
-@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.frags{display:contents}
+.frag{position:absolute;left:var(--x);top:var(--y);rotate:var(--r,0deg);font-size:13px;color:var(--text-2);animation:drift 9s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes drift{0%,100%{translate:0 0}50%{translate:0 -7px}}
+.sheet{background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-float);overflow:hidden;width:250px}
+.sheet .xl{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#F3F7F4;border-bottom:1px solid var(--border);font-size:12px}
+.xl-ic{width:18px;height:18px;border-radius:4px;background:#1D7044;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+.sheet table{border-collapse:collapse;width:100%;font-size:12px}
+.sheet th,.sheet td{border:1px solid #E5E7EB;padding:5px 8px;text-align:left;font-weight:400}
+.sheet th{background:#F8FAFC;color:var(--faint);width:28px;font-size:11px}
+.sheet td.err{color:var(--error);font-weight:600}
+.receipt{width:150px;background:#FFFEFB;padding:14px 14px 22px;display:grid;gap:4px;justify-items:center;text-align:center;font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;box-shadow:var(--shadow-float);
+  -webkit-mask:conic-gradient(from 135deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/12px 8px repeat-x,linear-gradient(#000 0 0) top/100% calc(100% - 7px) no-repeat;
+  mask:conic-gradient(from 135deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/12px 8px repeat-x,linear-gradient(#000 0 0) top/100% calc(100% - 7px) no-repeat}
+.receipt small{font-size:10px;color:var(--faint);letter-spacing:.06em}
+.receipt b{font-size:13px;letter-spacing:.1em}
+.receipt span{font-size:18px;font-weight:600;color:var(--text)}
+.paper{width:200px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:16px;display:grid;gap:9px;box-shadow:var(--shadow-float)}
+.paper b{font-size:11px;letter-spacing:.08em}
+.paper i{height:6px;border-radius:3px;background:var(--panel)}
+.paper i.short{width:60%}
+.paper span{font-size:11.5px;color:var(--faint);margin-top:4px}
+.note{width:190px;background:#FFE58A;padding:18px 16px;font-family:"Caveat",cursive;font-size:24px;line-height:1.1;color:#4A3B00;box-shadow:0 14px 24px -12px rgba(90,70,0,.35)}
+.invoice{width:210px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px;display:grid;gap:6px;box-shadow:var(--shadow-float)}
+.invoice div{display:flex;justify-content:space-between;align-items:baseline}
+.invoice b{font-size:12px;letter-spacing:.1em}.invoice small{color:var(--faint);font-size:11px}
+.invoice span:last-of-type{font-weight:600;color:var(--text)}
+.invoice em{position:absolute;right:-14px;bottom:-12px;rotate:-10deg;font-style:normal;font-family:"Caveat",cursive;font-size:26px;color:var(--error);font-weight:600}
+.folder{display:flex;align-items:center;gap:10px;background:#FBE7B5;border-radius:4px 10px 10px 10px;padding:14px 18px;font-weight:500;color:#5B4300;box-shadow:var(--shadow-float)}
+.folder .i{width:18px;height:18px}
 @media (max-width:960px){
-  .noise{padding-block:72px}
-  .bubs{display:flex;flex-direction:column;gap:12px;margin-bottom:40px}
-  .bubs.b2{margin:40px 0 0}
-  .bub{position:static;animation:none}
-  .bub:nth-child(even){align-self:flex-end}
-  .bub.hide-m{display:none}
-  .bub p{white-space:normal}
+  .noise{padding-block:64px}
+  .frags{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:20px 16px;margin-bottom:48px}
+  .frags.f-bot{margin:48px 0 0}
+  .frag{position:relative;left:auto;top:auto;animation:none}
+  .frag.paper,.frag.folder{display:none}
+  .sheet{width:230px}
 }
 
 /* ───────── Modules carousel ───────── */
@@ -287,17 +308,16 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .panel-grey .scaler{position:absolute;right:56px;top:64px;width:760px}
 .panel-grey .frame{box-shadow:0 24px 60px -24px rgba(15,23,42,.28)}
 .report-copy{display:grid;gap:24px;min-width:0}
-.insight{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:20px 22px;display:grid;gap:14px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
-.insight .row{display:flex;align-items:center;gap:12px}
-.insight .play{width:36px;height:36px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;flex:none}
-.insight .play .i{width:17px;height:17px}
-.spark{flex:1;display:flex;align-items:flex-end;gap:3px;height:34px}
-.spark i{flex:1;border-radius:2px;background:#C7DCFF}
+.insight{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;display:grid;gap:16px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.ins-top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted);font-weight:500}
+.ins-num{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.ins-num strong{font-size:60px;line-height:1;font-weight:600;letter-spacing:-.045em}
+.ins-num span{color:var(--muted);font-size:15px}
+.spark{display:flex;align-items:flex-end;gap:4px;height:56px}
+.spark i{flex:1;border-radius:3px;background:#C7DCFF}
 .spark i.hot{background:var(--brand)}
-.insight .when{font-size:12px;color:var(--faint);white-space:nowrap}
-.insight blockquote{margin:0;font-size:20px;line-height:1.4;font-weight:500;letter-spacing:-.015em}
-.insight blockquote span{color:var(--faint)}
-.insight .link{font-size:13.5px}
+.ins-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--border);font-size:13.5px;color:var(--muted)}
+.ins-foot .link{font-size:13.5px}
 .minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .mini{border:1px solid var(--border);border-radius:16px;padding:16px;display:grid;gap:12px;align-content:start}
 .mini .vis{height:52px;border-radius:10px;background:var(--canvas);display:flex;align-items:center;justify-content:center;gap:6px;padding:8px}
@@ -360,15 +380,19 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .points{display:grid;gap:12px;margin-top:36px;max-width:440px}
 .points div{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--night-text);padding:12px 14px;border:1px solid var(--night-line);border-radius:12px}
 .points .i{width:18px;height:18px;color:var(--brand-glow)}
-.records{display:grid;gap:12px}
-.rec{background:var(--night-2);border:1px solid var(--night-line);border-radius:16px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:4px 14px;align-items:center}
-.rec .thumb{grid-row:span 2;background:rgba(106,168,255,.12);color:var(--brand-glow);width:38px;height:38px;border-radius:10px}
-.rec s{grid-column:2 / -1;font-size:12.5px;color:#5C6880;text-decoration-color:#5C6880}
-.rec b{font-size:15px;font-weight:500;color:var(--night-text)}
-.rec .status{background:rgba(34,197,94,.14);color:#4ADE80}
-.rec:nth-child(2){margin-left:32px}.rec:nth-child(4){margin-left:32px}
-@media (max-width:1000px){.night .wrap{grid-template-columns:1fr;gap:56px}.rec:nth-child(2),.rec:nth-child(4){margin-left:0}}
-@media (max-width:480px){.rec{grid-template-columns:auto 1fr}.rec .status{grid-column:2;justify-self:start}.rec s{grid-column:2}}
+.hub{position:relative;width:100%;max-width:560px;aspect-ratio:1;margin-inline:auto}
+.hub-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hub-lines line{stroke:var(--night-line);stroke-width:.3}
+.hub-lines line.flow{stroke:var(--brand-glow);stroke-width:.45;stroke-dasharray:2 6;stroke-linecap:round;animation:flow 2.6s linear infinite;animation-delay:var(--d)}
+@keyframes flow{to{stroke-dashoffset:-16}}
+.hub-core{position:absolute;left:50%;top:50%;translate:-50% -50%;width:23%;aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 0 0 10px rgba(106,168,255,.08),0 0 0 22px rgba(106,168,255,.05),0 20px 60px -10px rgba(0,112,255,.6)}
+.hub-core img{width:52%;height:auto}
+.node{position:absolute;translate:-50% -50%;display:flex;align-items:center;gap:8px;padding:8px 12px 8px 8px;border-radius:999px;background:var(--night-2);border:1px solid var(--night-line);color:var(--night-text);font-size:13px;font-weight:500;white-space:nowrap;transition:border-color .2s,background .2s}
+.node .ni{width:28px;height:28px;border-radius:50%;background:rgba(106,168,255,.14);color:var(--brand-glow);display:grid;place-items:center;flex:none}
+.node .ni .i{width:15px;height:15px}
+.node.lit{border-color:var(--brand);background:#0E2550}
+@media (max-width:1000px){.night .wrap{grid-template-columns:1fr;gap:56px}}
+@media (max-width:560px){.node{padding:0;border-radius:50%}.node span.lb{display:none}.node .ni{width:40px;height:40px}.node .ni .i{width:18px;height:18px}}
 
 /* ───────── Pricing ───────── */
 .pricing{padding-block:clamp(72px,9vw,120px);background:var(--canvas)}
@@ -574,7 +598,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <div class="say"><span class="av" style="background:#EC4899">TB</span><p>Wait, the invoice already updated our stock?</p></div>
+        <span class="kicker"><span class="pulse-dot"></span>Cloud ERP for growing businesses</span>
         <h1 class="display">Run your business from one connected platform.</h1>
         <p class="lead">wBizManager brings sales, finance, inventory, purchasing, customers and HR into one cloud-based system, so you spend less time on scattered records and more time on decisions.</p>
         <div class="hero-act">
@@ -681,18 +705,26 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   <!-- NOISE -->
   <section class="noise" id="why">
     <div class="wrap">
-      <div class="bubs b1" aria-hidden="true">
-        <div class="bub" style="--x:5%;--y:7%;--d:-1s"><span class="av" style="background:#0EA5E9">MU</span><p>Who has the latest stock sheet? <time>9:14am</time></p></div>
-        <div class="bub hide-m" style="--x:38%;--y:3%;--d:-3s"><span class="av" style="background:#F59E0B">KO</span><p>The fuel receipt is somewhere in my bag <time>6:40pm</time></p></div>
-        <div class="bub me" style="--x:70%;--y:12%;--d:-5s"><span class="av" style="background:#0F172A">AO</span><p>Is this FINAL_v3 or FINAL_v4? <time>10:02am</time></p></div>
-        <div class="bub hide-m" style="--x:-1%;--y:44%;--d:-2s"><span class="av" style="background:#A855F7">FN</span><p>Leave form is on my desk for approval <time>Tue</time></p></div>
+      <div class="frags f-top" aria-hidden="true">
+        <div class="frag sheet" style="--x:4%;--y:6%;--r:-3deg;--d:-1s">
+          <div class="xl"><span class="xl-ic">X</span><b>stock_count_FINAL_v4.xlsx</b></div>
+          <table><tr><th></th><th>B</th><th>C</th></tr><tr><th>12</th><td>Rice 50kg</td><td>14</td></tr><tr><th>13</th><td>Groundnut oil</td><td class="err">#REF!</td></tr></table>
+        </div>
+        <div class="frag receipt num" style="--x:39%;--y:2%;--r:4deg;--d:-3s">
+          <small>FILLING STATION</small><b>FUEL</b><span>₦38,500</span><small>14/09 · CASH</small>
+        </div>
+        <div class="frag paper" style="--x:74%;--y:8%;--r:3deg;--d:-5s">
+          <b>LEAVE APPLICATION</b><i></i><i></i><i class="short"></i><span>Approved by: ________</span>
+        </div>
       </div>
       <h2 class="statement">A growing business needs more than individual tools. <span>It needs processes that work together.</span></h2>
       <p class="after">One platform where the stock sheet, the invoice, the receipt and the approval are all the same record.</p>
-      <div class="bubs b2" aria-hidden="true">
-        <div class="bub" style="--x:72%;--y:47%;--d:-4s"><span class="av" style="background:#22C55E">IB</span><p>Customer says they paid. Can't find it. <time>2:31pm</time></p></div>
-        <div class="bub me hide-m" style="--x:8%;--y:80%;--d:-6s"><span class="av" style="background:#0F172A">AO</span><p>I'll reconcile the bank statement this weekend <time>11:02pm</time></p></div>
-        <div class="bub" style="--x:62%;--y:84%;--d:-1.5s"><span class="av" style="background:#EC4899">TB</span><p>Did anyone record the 40 units for Adewale Stores? <time>4:15pm</time></p></div>
+      <div class="frags f-bot" aria-hidden="true">
+        <div class="frag note" style="--x:7%;--y:74%;--r:-4deg;--d:-2s">Reconcile bank statement, Saturday!!</div>
+        <div class="frag invoice num" style="--x:70%;--y:70%;--r:-2deg;--d:-4s">
+          <div><b>INVOICE</b><small>No. 142</small></div><span>Adewale Stores</span><span>₦845,000</span><em>PAID?</em>
+        </div>
+        <div class="frag folder" style="--x:43%;--y:86%;--r:2deg;--d:-6s"><svg class="i"><use href="#i-file"/></svg>Purchase orders 2025 (old)</div>
       </div>
     </div>
   </section>
@@ -787,14 +819,11 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       <div class="report-copy">
         <span class="ctx"><span class="av" style="background:var(--brand)"><svg class="i" style="width:14px;height:14px;stroke-width:2"><use href="#i-chart"/></svg></span><b>Reports</b> · updated 2 minutes ago</span>
         <h2 class="h2">Know where the business stands.</h2>
-        <div class="insight">
-          <div class="row">
-            <span class="play"><svg class="i"><use href="#i-trend"/></svg></span>
-            <span class="spark" aria-hidden="true"><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:50%"></i><i style="height:46%"></i><i style="height:58%"></i><i style="height:55%"></i><i style="height:64%"></i><i style="height:60%"></i><i style="height:72%"></i><i style="height:70%"></i><i style="height:84%"></i><i class="hot" style="height:100%"></i></span>
-            <span class="when num">Gross margin · Oct</span>
-          </div>
-          <blockquote class="num">“Gross margin is 31% this month, up from 27%. <span>Rice and groundnut oil drove most of the gain.”</span></blockquote>
-          <a class="link" href="#">Open the sales report <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+        <div class="insight num">
+          <div class="ins-top"><span>Gross margin · October</span><span class="status st-ok"><svg class="i"><use href="#i-trend"/></svg>+4.0 pts</span></div>
+          <div class="ins-num"><strong>31%</strong><span>up from 27% in September</span></div>
+          <span class="spark" aria-hidden="true"><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:50%"></i><i style="height:46%"></i><i style="height:58%"></i><i style="height:55%"></i><i style="height:64%"></i><i style="height:60%"></i><i style="height:72%"></i><i style="height:70%"></i><i style="height:84%"></i><i class="hot" style="height:100%"></i></span>
+          <div class="ins-foot"><span>Top contributors: Rice 50kg, Groundnut oil 25L</span><a class="link" href="#">Open report <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
         </div>
         <div class="minis">
           <div class="mini">
@@ -899,12 +928,12 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
           <div><svg class="i"><use href="#i-buoy"/></svg>Ongoing support and optimisation</div>
         </div>
       </div>
-      <div class="records num">
-        <div class="rec"><span class="thumb"><svg class="i"><use href="#i-box"/></svg></span><s>“Who has the latest stock sheet?”</s><b>Groundnut oil 25L · 212 in stock</b><span class="status">Live</span></div>
-        <div class="rec"><span class="thumb"><svg class="i"><use href="#i-file"/></svg></span><s>“Customer says they paid. Can't find it.”</s><b>INV-0142 · Adewale Stores · ₦845,000</b><span class="status">Paid</span></div>
-        <div class="rec"><span class="thumb"><svg class="i"><use href="#i-receipt"/></svg></span><s>“The fuel receipt is somewhere in my bag”</s><b>Expense claim · Fuel · ₦38,500</b><span class="status">Approved</span></div>
-        <div class="rec"><span class="thumb"><svg class="i"><use href="#i-cal"/></svg></span><s>“Leave form is on my desk for approval”</s><b>Leave request · Funmi N. · 3 days</b><span class="status">Approved</span></div>
-        <div class="rec"><span class="thumb"><svg class="i"><use href="#i-calc"/></svg></span><s>“I'll reconcile the bank statement this weekend”</s><b>Bank reconciliation · September</b><span class="status">Complete</span></div>
+      <div class="hub" id="hub" role="img" aria-label="wBizManager at the centre, connected to Accounting, Sales, Purchases, Approvals, Inventory, Reports, Commercial, Project and Human Resources">
+        <svg class="hub-lines" id="hub-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="38" fill="none" stroke="var(--night-line)" stroke-width=".25" stroke-dasharray="1 1.2"/>
+          <circle cx="50" cy="50" r="22" fill="none" stroke="var(--night-line)" stroke-width=".25"/>
+        </svg>
+        <div class="hub-core"><img src="assets/mark.png" alt="" width="61" height="60"></div>
       </div>
     </div>
   </section>
@@ -1004,8 +1033,8 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         <p>Integrated business management for growing businesses.</p>
       </div>
       <div><h4>Solutions</h4><ul>
-        <li><a href="#">Sales &amp; CRM</a></li><li><a href="#">Accounting &amp; Finance</a></li><li><a href="#">Inventory</a></li><li><a href="#">Purchasing</a></li>
-        <li><a href="#">Human Resources</a></li><li><a href="#">Expenses</a></li><li><a href="#">Fixed Assets</a></li><li><a href="#">Reporting &amp; Analytics</a></li></ul></div>
+        <li><a href="#">Accounting</a></li><li><a href="#">Sales</a></li><li><a href="#">Purchases</a></li><li><a href="#">Approvals</a></li><li><a href="#">Inventory</a></li>
+        <li><a href="#">Reports</a></li><li><a href="#">Commercial</a></li><li><a href="#">Project</a></li><li><a href="#">Human Resources</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="#">Contact Us</a></li></ul></div>
       <div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="#faq">FAQs</a></li><li><a href="#">Help &amp; Support</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
       <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
@@ -1022,24 +1051,24 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
   /* Modules: paragraphs written from the content doc's capability lists */
   const MODS = [
-    { name: 'Sales', icon: 'cart', tag: 'From first order to final payment.',
-      text: 'Create sales orders straight from your customer records, generate invoices from them and track every sale through to payment. Sales and profitability reports show what is selling, who is buying and where your margins come from.' },
     { name: 'Accounting', icon: 'calc', tag: 'A clearer view of every naira.',
-      text: 'Manage your accounts, categorise transactions as they come in and reconcile them against your bank statements. Expense tracking and financial reports sit in the same place, so you always know how the business is performing.' },
+      text: 'Manage your accounts, categorise transactions as they come in and reconcile them against your bank statements. Expenses, fixed assets and depreciation sit in the same books, so your financial reports always reflect how the business is really performing.' },
+    { name: 'Sales', icon: 'cart', tag: 'From first order to final payment.',
+      text: 'Create sales orders from your customer records, generate invoices from them and track every sale through to payment. Customer profiles keep contacts and sales history together, and sales reports show what is selling and where your margins come from.' },
+    { name: 'Purchases', icon: 'bag', tag: 'Suppliers and purchases, in order.',
+      text: 'Raise purchase orders and requests for quotation, track each one against its supplier and keep supplier details in one organised place. Purchasing reports show what you are buying, from whom, and how it connects to the rest of the business.' },
+    { name: 'Approvals', icon: 'clip', tag: 'Sign-off without the paper trail.',
+      text: 'Material requisitions, purchase orders and other requests move through one clear approval workflow. Approvers see everything waiting for their sign-off in a single queue, and every decision is recorded against the request it belongs to.' },
     { name: 'Inventory', icon: 'box', tag: 'Know what is on the shelf.',
       text: 'Track stock across all your product records and watch inventory update as items are bought and sold. Because stock is linked to sales and orders, your inventory reports reflect what is actually happening in the business.' },
-    { name: 'Purchasing', icon: 'bag', tag: 'Suppliers and purchases, in order.',
-      text: 'Raise and manage purchases, track each one against its supplier and keep supplier details in one organised place. Purchasing reports show what you are buying, from whom, and how it connects to the rest of the business.' },
-    { name: 'CRM', icon: 'users', tag: 'Every relationship in one place.',
-      text: 'Build a complete profile for each customer, with contacts and sales history kept together. Supplier records sit alongside them, so your team has a clear view of the people the business depends on.' },
-    { name: 'Human Resources', icon: 'person', tag: 'Your people, organised.',
-      text: 'Keep employee records and HR administration in one central system. Manage administrative resources, run performance appraisals and give managers the employee information they need without digging through files.' },
-    { name: 'Expenses', icon: 'receipt', tag: 'See where the money goes.',
-      text: 'Capture business costs as they happen and let staff submit expense claims for approval and reimbursement. Spending stays visible as it builds up, and expense reports show exactly where costs are going.' },
-    { name: 'Fixed Assets', icon: 'building', tag: 'Assets tracked for life.',
-      text: 'Record every business asset and track it from purchase through to disposal. Depreciation is managed alongside each asset record, and fixed asset reports keep your register accurate and up to date.' },
-    { name: 'Reporting', icon: 'chart', tag: 'Decisions backed by real numbers.',
+    { name: 'Reports', icon: 'chart', tag: 'Decisions backed by real numbers.',
       text: 'Turn day-to-day activity into real-time reports on sales, finance and inventory. Track profitability, monitor business performance and spot the areas that need attention before they become problems.' },
+    { name: 'Commercial', icon: 'brief', tag: 'Every tender, one pipeline.',
+      text: 'Open and track tenders from one place, follow the value of your pipeline and see your win rate at a glance, so the commercial team always knows which opportunities need attention next.' },
+    { name: 'Project', icon: 'layers', tag: 'Projects, kept on track.',
+      text: 'Set up and follow your projects in the same system as the rest of the business, so progress, people and costs live alongside your sales, purchases and accounts instead of in a separate spreadsheet.' },
+    { name: 'Human Resources', icon: 'person', tag: 'Your people, organised.',
+      text: 'Keep employee records, recruitment, attendance, leave and performance appraisals in one central system, and give managers the people information they need without digging through files.' },
   ];
   document.getElementById('menu-solutions').innerHTML = MODS.map((m, i) => `<a href="#modules" data-mod="${i}"><span class="ic">${icon(m.icon)}</span>${m.name}</a>`).join('');
   document.getElementById('mnav-solutions').innerHTML = MODS.map((m, i) => `<a href="#modules" data-mod="${i}">${m.name}</a>`).join('');
@@ -1049,7 +1078,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   const nameEl = document.getElementById('mod-name'), body = document.getElementById('mod-body');
   const tagEl = document.getElementById('mod-tag'), textEl = document.getElementById('mod-text');
   const n = MODS.length;
-  let cur = 1, timer = null, stopped = reduce;
+  let cur = 0, timer = null, stopped = reduce;
   const cards = MODS.map((m, i) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'mcard'; b.setAttribute('aria-label', m.name);
@@ -1173,6 +1202,24 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     el('text', { x: 60, y: 76, 'text-anchor': 'middle', style: 'font-size:7px;letter-spacing:.1em;fill:#94A3B8' }, svg).textContent = 'TOTAL';
     list.innerHTML = data.map(([l, v, c]) => `<div><i style="background:${c}"></i><span>${l}</span><b>${v}</b><small>${Math.round(v / total * 100)}%</small></div>`).join('');
   })(document.getElementById('donut'), document.getElementById('donut-list'));
+
+  /* Hub diagram: modules around the platform */
+  (function hub() {
+    const box = document.getElementById('hub'), svg = document.getElementById('hub-lines');
+    MODS.forEach((m, i) => {
+      const a = (-90 + i * 360 / MODS.length) * Math.PI / 180, x = 50 + 38 * Math.cos(a), y = 50 + 38 * Math.sin(a);
+      const ix = 50 + 12 * Math.cos(a), iy = 50 + 12 * Math.sin(a);
+      el('line', { x1: ix, y1: iy, x2: x, y2: y }, svg);
+      el('line', { x1: x, y1: y, x2: ix, y2: iy, class: 'flow', style: `--d:${-i * .29}s` }, svg);
+      const n = document.createElement('div');
+      n.className = 'node'; n.style.left = x + '%'; n.style.top = y + '%';
+      n.innerHTML = `<span class="ni">${icon(m.icon)}</span><span class="lb">${m.name}</span>`;
+      box.appendChild(n);
+    });
+    if (reduce) return;
+    const nodes = [...box.querySelectorAll('.node')]; let k = 0;
+    setInterval(() => { nodes.forEach(n => n.classList.remove('lit')); nodes[k % nodes.length].classList.add('lit'); k++; }, 1400);
+  })();
 
   /* Header */
   const dds = [...document.querySelectorAll('.dd')];
