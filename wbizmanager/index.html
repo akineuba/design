@@ -73,17 +73,25 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .nav{display:flex;align-items:center;gap:2px;margin-inline:auto}
 .nav > a,.dd > button{display:inline-flex;align-items:center;gap:4px;height:38px;padding-inline:12px;border-radius:var(--r-ctl);font-size:14.5px;font-weight:500;color:var(--text-2)}
 .nav > a:hover,.dd > button:hover,.dd.open > button{color:var(--text);background:var(--panel)}
-.dd{position:relative}
+.dd{position:static}
 .dd > button .i{width:15px;height:15px;transition:transform .2s}
 .dd.open > button .i{transform:rotate(180deg)}
-.menu{position:absolute;top:calc(100% + 8px);left:-8px;min-width:240px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);box-shadow:var(--shadow-float);padding:8px;display:none}
-.menu.cols{grid-template-columns:1fr 1fr;min-width:500px;gap:2px}
-.dd.open .menu{display:block}
-.dd.open .menu.cols{display:grid}
-.menu a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;font-size:14px;font-weight:500}
-.menu a:hover{background:var(--canvas)}
-.menu a .ic{width:32px;height:32px;border-radius:8px;background:var(--brand-subtle);color:var(--brand);display:grid;place-items:center;flex:none}
-.menu a .ic .i{width:17px;height:17px}
+/* Mega menu: full-width panel under the header */
+.menu{position:absolute;left:0;right:0;top:100%;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);box-shadow:0 24px 48px -24px rgba(15,23,42,.18);display:none}
+.dd.open .menu{display:block;animation:menu-in .18s ease-out}
+@keyframes menu-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.mega{max-width:1240px;margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr)) minmax(0,380px);gap:32px;padding-block:40px 44px}
+.mega h5{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--error);margin:0 0 18px}
+.mega ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.mega li a{display:block;padding:8px 10px;margin-inline:-10px;border-radius:10px}
+.mega li a:hover{background:var(--canvas)}
+.mega li b{display:block;font-size:16px;font-weight:500;color:var(--text)}
+.mega li small{display:block;font-size:14px;color:var(--faint);margin-top:2px}
+.mega-card{border:1px solid var(--border);border-radius:var(--r-card);padding:28px 30px;display:flex;flex-direction:column;gap:12px;align-self:start}
+.mega-card h4{font-size:20px;font-weight:600;letter-spacing:-.015em}
+.mega-card p{font-size:14.5px;line-height:1.6;color:var(--muted)}
+.mega-card .link{margin-top:6px;font-size:14.5px}
+@media (max-width:1180px){.mega{gap:24px}.mega-card{padding:22px}}
 .hdr-cta{display:flex;align-items:center;gap:6px}
 .login{font-size:14.5px;font-weight:500;color:var(--text-2);padding-inline:12px;height:38px;display:inline-flex;align-items:center;border-radius:var(--r-ctl)}
 .login:hover{color:var(--text);background:var(--panel)}
@@ -562,35 +570,20 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     <nav class="nav" aria-label="Main">
       <div class="dd">
         <button type="button" aria-expanded="false" aria-haspopup="true">Solutions <svg class="i"><use href="#i-down"/></svg></button>
-        <div class="menu cols" id="menu-solutions"></div>
+        <div class="menu"><div class="mega" style="--cols:3"><div><h5>Financial</h5><ul><li><a href="#modules" data-mod="0"><b>Accounting</b><small>Manage finances &amp; ledgers</small></a></li><li><a href="#modules" data-mod="1"><b>Sales</b><small>Track deals &amp; customers</small></a></li><li><a href="#modules" data-mod="2"><b>Purchases</b><small>Manage orders &amp; suppliers</small></a></li></ul></div><div><h5>Operations</h5><ul><li><a href="#modules" data-mod="4"><b>Inventory</b><small>Monitor stock &amp; warehouses</small></a></li><li><a href="#modules" data-mod="3"><b>Approvals</b><small>Streamline approval flows</small></a></li><li><a href="#modules" data-mod="5"><b>Reports</b><small>Insights &amp; analytics</small></a></li></ul></div><div><h5>Management</h5><ul><li><a href="#modules" data-mod="6"><b>Commercial</b><small>Business operations hub</small></a></li><li><a href="#modules" data-mod="7"><b>Project</b><small>Plan &amp; track milestones</small></a></li><li><a href="#modules" data-mod="8"><b>Human Resources</b><small>People &amp; payroll management</small></a></li></ul></div><div class="mega-card"><h4>Built for growing businesses</h4><p>One integrated platform to run your entire business, from finance and procurement to people and projects, without the complexity of disconnected tools.</p><a class="link" href="#modules">See all nine modules <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
       </div>
       <div class="dd">
         <button type="button" aria-expanded="false" aria-haspopup="true">Industries <svg class="i"><use href="#i-down"/></svg></button>
-        <div class="menu">
-          <a href="#industries"><span class="ic"><svg class="i"><use href="#i-store"/></svg></span>Retail &amp; Trading</a>
-          <a href="#industries"><span class="ic"><svg class="i"><use href="#i-truck"/></svg></span>Distribution</a>
-          <a href="#industries"><span class="ic"><svg class="i"><use href="#i-factory"/></svg></span>Manufacturing</a>
-          <a href="#industries"><span class="ic"><svg class="i"><use href="#i-brief"/></svg></span>Professional Services</a>
-          <a href="#industries"><span class="ic"><svg class="i"><use href="#i-sprout"/></svg></span>Growing SMEs</a>
-        </div>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Products</h5><ul><li><a href="#industries"><b>Retail &amp; Trading</b><small>Sales, stock &amp; customers</small></a></li><li><a href="#industries"><b>Distribution</b><small>Suppliers, orders &amp; deliveries</small></a></li><li><a href="#industries"><b>Manufacturing</b><small>Materials &amp; operations</small></a></li></ul></div><div><h5>Services</h5><ul><li><a href="#industries"><b>Professional Services</b><small>Clients, invoices &amp; expenses</small></a></li><li><a href="#industries"><b>Growing SMEs</b><small>One platform for daily operations</small></a></li></ul></div><div class="mega-card"><h4>One platform, the way you do business</h4><p>Every business runs differently. wBizManager gives yours a connected foundation, whether you sell products, deliver services or manage a growing team.</p><a class="link" href="#industries">Explore industries <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
       </div>
       <a href="#pricing">Pricing</a>
       <div class="dd">
         <button type="button" aria-expanded="false" aria-haspopup="true">Resources <svg class="i"><use href="#i-down"/></svg></button>
-        <div class="menu">
-          <a href="#"><span class="ic"><svg class="i"><use href="#i-book"/></svg></span>Blog</a>
-          <a href="#"><span class="ic"><svg class="i"><use href="#i-quote"/></svg></span>Customer Stories</a>
-          <a href="#faq"><span class="ic"><svg class="i"><use href="#i-help"/></svg></span>FAQs</a>
-          <a href="#"><span class="ic"><svg class="i"><use href="#i-buoy"/></svg></span>Help &amp; Support</a>
-        </div>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Learn</h5><ul><li><a href="#"><b>Blog</b><small>Guides &amp; business tips</small></a></li><li><a href="#"><b>Customer Stories</b><small>How businesses use wBizManager</small></a></li></ul></div><div><h5>Get help</h5><ul><li><a href="#faq"><b>FAQs</b><small>Answers to common questions</small></a></li><li><a href="#"><b>Help &amp; Support</b><small>Guides, tutorials &amp; our team</small></a></li></ul></div><div class="mega-card"><h4>Need a hand getting set up?</h4><p>Our team can talk through your business requirements and help you get value from wBizManager from day one.</p><a class="link" href="#">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
       </div>
       <div class="dd">
         <button type="button" aria-expanded="false" aria-haspopup="true">Company <svg class="i"><use href="#i-down"/></svg></button>
-        <div class="menu">
-          <a href="#"><span class="ic"><svg class="i"><use href="#i-info"/></svg></span>About Us</a>
-          <a href="#"><span class="ic"><svg class="i"><use href="#i-hand"/></svg></span>Partners</a>
-          <a href="#"><span class="ic"><svg class="i"><use href="#i-mail"/></svg></span>Contact Us</a>
-        </div>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>About</h5><ul><li><a href="#"><b>About Us</b><small>Who we are &amp; what we build</small></a></li><li><a href="#"><b>Partners</b><small>Bring wBizManager to your clients</small></a></li></ul></div><div><h5>Get in touch</h5><ul><li><a href="#"><b>Contact Us</b><small>Talk to sales or support</small></a></li><li><a href="#"><b>Become a Partner</b><small>Join the partner programme</small></a></li></ul></div><div class="mega-card"><h4>Let’s talk about your business</h4><p>Explore wBizManager and see how a connected business management platform can support your day-to-day operations.</p><a class="link" href="#">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
       </div>
     </nav>
     <div class="hdr-cta">
@@ -634,9 +627,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         <div class="proof">
           <span class="stack">
             <span class="av" style="background:#0070FF"><svg class="i"><use href="#i-cart"/></svg></span>
-            <span class="av" style="background:#22C55E"><svg class="i"><use href="#i-calc"/></svg></span>
-            <span class="av" style="background:#F59E0B"><svg class="i"><use href="#i-box"/></svg></span>
-            <span class="av" style="background:#A855F7"><svg class="i"><use href="#i-person"/></svg></span>
+            <span class="av" style="background:#0070FF"><svg class="i"><use href="#i-calc"/></svg></span>
+            <span class="av" style="background:#0070FF"><svg class="i"><use href="#i-box"/></svg></span>
+            <span class="av" style="background:#0070FF"><svg class="i"><use href="#i-person"/></svg></span>
           </span>
           Free trial. Cloud-based. Built for growing businesses.
         </div>
@@ -745,9 +738,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       <div class="head-c">
         <span class="ctx"><span class="stack">
           <span class="av" style="background:#0070FF"><svg class="i"><use href="#i-cart"/></svg></span>
-          <span class="av" style="background:#22C55E"><svg class="i"><use href="#i-calc"/></svg></span>
-          <span class="av" style="background:#F59E0B"><svg class="i"><use href="#i-box"/></svg></span>
-        </span><b>9 modules</b> · one login</span>
+          <span class="av" style="background:#0070FF"><svg class="i"><use href="#i-calc"/></svg></span>
+          <span class="av" style="background:#0070FF"><svg class="i"><use href="#i-box"/></svg></span>
+        </span><b>9 modules</b> <span class="blue">· one login</span></span>
         <h2 class="h2">Everything your business needs. <span class="blue">Connected.</span></h2>
         <p class="lead">Choose the areas you want to manage and bring them together in one system.</p>
       </div>
@@ -1087,7 +1080,6 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     { name: 'Human Resources', icon: 'person', tag: 'Your people, organised.',
       text: 'Keep employee records, recruitment, attendance, leave and performance appraisals in one central system, and give managers the people information they need without digging through files.' },
   ];
-  document.getElementById('menu-solutions').innerHTML = MODS.map((m, i) => `<a href="#modules" data-mod="${i}"><span class="ic">${icon(m.icon)}</span>${m.name}</a>`).join('');
   document.getElementById('mnav-solutions').innerHTML = MODS.map((m, i) => `<a href="#modules" data-mod="${i}">${m.name}</a>`).join('');
 
   /* Carousel */
@@ -1245,12 +1237,13 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     dds.forEach(d => { if (d !== except) { d.classList.remove('open'); d.querySelector('button').setAttribute('aria-expanded', 'false'); } });
     if (!except) { mnav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.innerHTML = icon('menu'); }
   }
+  const hoverable = matchMedia('(hover: hover)').matches;
   dds.forEach(d => {
     const b = d.querySelector('button');
-    b.addEventListener('click', e => { e.stopPropagation(); const open = !d.classList.contains('open'); closeAll(d); d.classList.toggle('open', open); b.setAttribute('aria-expanded', open); });
+    b.addEventListener('click', e => { e.stopPropagation(); const open = hoverable && d.dataset.hovered ? true : !d.classList.contains('open'); delete d.dataset.hovered; closeAll(d); d.classList.toggle('open', open); b.setAttribute('aria-expanded', open); });
     if (matchMedia('(hover: hover)').matches) {
       let t;
-      d.addEventListener('mouseenter', () => { clearTimeout(t); closeAll(d); d.classList.add('open'); b.setAttribute('aria-expanded', 'true'); });
+      d.addEventListener('mouseenter', () => { clearTimeout(t); if (!d.classList.contains('open')) d.dataset.hovered = 1; closeAll(d); d.classList.add('open'); b.setAttribute('aria-expanded', 'true'); });
       d.addEventListener('mouseleave', () => { t = setTimeout(() => { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); }, 120); });
     }
   });
