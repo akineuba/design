@@ -7,7 +7,7 @@
 <meta name="description" content="wBizManager brings sales, finance, inventory, purchasing, customer management and HR together in one cloud-based business management platform.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Caveat:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
 <style>
 /* Layout concept (after Parley): huge, quiet type on white; the product lives inside
    solid colour and soft grey panels that bleed off the page edge; real fragments of
@@ -110,32 +110,35 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 /* ───────── Hero ───────── */
 .hero{padding-top:28px;overflow:clip}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:stretch}
-.hero-copy{display:flex;flex-direction:column;justify-content:center;gap:28px;padding-block:48px 72px;min-width:0}
-.kicker{display:inline-flex;align-items:center;gap:10px;width:max-content;max-width:100%;padding:7px 14px 7px 12px;border-radius:999px;background:var(--brand-subtle);color:var(--brand-ink);font-size:14px;font-weight:500}
-.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(0,112,255,.18);animation:ping 2.4s ease-in-out infinite}
-@keyframes ping{50%{box-shadow:0 0 0 7px rgba(0,112,255,0)}}
+.hero-copy{display:flex;flex-direction:column;justify-content:center;gap:28px;padding-block:111px 72px;min-width:0}
 .hero h1{font-size:clamp(46px,5.4vw,80px)}
+.hero h1 .hl{color:var(--brand)}
 .hero .lead{font-size:18px}
 .hero-act{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
 .proof{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--muted)}
 .hero-art{position:relative;min-width:0;margin-right:calc(var(--bleed) * -1)}
 .panel-blue{position:relative;height:100%;min-height:600px;background:var(--brand);border-radius:var(--r-panel) 0 0 var(--r-panel);overflow:hidden}
 .panel-blue::before{content:"";position:absolute;width:520px;height:520px;right:-140px;top:-180px;border-radius:50%;background:radial-gradient(closest-side, rgba(255,255,255,.22), transparent)}
-.panel-blue .scaler{position:absolute;left:64px;top:72px;width:900px}
+/* Desktop monitor mockup: the HTML screen sits under the transparent bezel */
+.monitor{position:absolute;left:75px;top:80px;width:840px;aspect-ratio:840/716.5}
+.monitor > img{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.monitor .scaler{position:absolute;left:1.8%;top:1.29%;width:96.4%}
+.monitor .frame{border-radius:16px;box-shadow:0 23px 61px -15px rgba(0,23,71,.45)}
 .hero-art .float{position:absolute;z-index:3}
-.hf1{left:-44px;bottom:120px}
-.hf2{left:38%;bottom:36px}
+.hf1{left:-77px;top:226px}
+.hf2{left:-52px;top:414px}
 @media (max-width:1060px){
   .hero .wrap{grid-template-columns:1fr;gap:0}
   .hero-copy{padding-block:24px 48px}
   .panel-blue{min-height:440px}
-  .panel-blue .scaler{left:28px;top:36px;width:760px}
-  .hf1{left:-6px;bottom:72px}
+  .monitor{left:40px;top:40px;width:680px}
+  .hf1{left:-6px;top:auto;bottom:150px}
+  .hf2{left:24px;top:auto;bottom:56px}
 }
 @media (max-width:640px){.hero-art .hf2{display:none}}
 @media (max-width:560px){
   .panel-blue{min-height:340px}
-  .panel-blue .scaler{left:20px;top:28px;width:560px}
+  .monitor{left:20px;top:28px;width:480px}
   .hero-art .hf2{display:none}
   .hero-act .btn{width:100%}
 }
@@ -223,47 +226,11 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .hf1{animation-delay:.3s}.hf2{animation-delay:.45s}
 
 /* ───────── Noise: the statement among the paperwork it replaces ───────── */
-.noise{position:relative;overflow:clip;padding-block:200px 190px}
+.noise{position:relative;padding-block:110px}
 .noise .statement{position:relative;z-index:1;font-size:clamp(30px,3.8vw,50px);font-weight:600;letter-spacing:-.035em;line-height:1.1;text-align:center;max-width:21ch;margin-inline:auto}
 .noise .statement span{color:var(--brand)}
 .noise .after{position:relative;z-index:1;text-align:center;margin:22px auto 0;color:var(--muted);font-size:18px;max-width:44ch}
-.frags{display:contents}
-.frag{position:absolute;left:var(--x);top:var(--y);rotate:var(--r,0deg);font-size:13px;color:var(--text-2);animation:drift 9s ease-in-out infinite;animation-delay:var(--d,0s)}
-@keyframes drift{0%,100%{translate:0 0}50%{translate:0 -7px}}
-.sheet{background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-float);overflow:hidden;width:250px}
-.sheet .xl{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#F3F7F4;border-bottom:1px solid var(--border);font-size:12px}
-.xl-ic{width:18px;height:18px;border-radius:4px;background:#1D7044;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
-.sheet table{border-collapse:collapse;width:100%;font-size:12px}
-.sheet th,.sheet td{border:1px solid #E5E7EB;padding:5px 8px;text-align:left;font-weight:400}
-.sheet th{background:#F8FAFC;color:var(--faint);width:28px;font-size:11px}
-.sheet td.err{color:var(--error);font-weight:600}
-.receipt{width:150px;background:#FFFEFB;padding:14px 14px 22px;display:grid;gap:4px;justify-items:center;text-align:center;font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;box-shadow:var(--shadow-float);
-  -webkit-mask:conic-gradient(from 135deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/12px 8px repeat-x,linear-gradient(#000 0 0) top/100% calc(100% - 7px) no-repeat;
-  mask:conic-gradient(from 135deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/12px 8px repeat-x,linear-gradient(#000 0 0) top/100% calc(100% - 7px) no-repeat}
-.receipt small{font-size:10px;color:var(--faint);letter-spacing:.06em}
-.receipt b{font-size:13px;letter-spacing:.1em}
-.receipt span{font-size:18px;font-weight:600;color:var(--text)}
-.paper{width:200px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:16px;display:grid;gap:9px;box-shadow:var(--shadow-float)}
-.paper b{font-size:11px;letter-spacing:.08em}
-.paper i{height:6px;border-radius:3px;background:var(--panel)}
-.paper i.short{width:60%}
-.paper span{font-size:11.5px;color:var(--faint);margin-top:4px}
-.note{width:190px;background:#FFE58A;padding:18px 16px;font-family:"Caveat",cursive;font-size:24px;line-height:1.1;color:#4A3B00;box-shadow:0 14px 24px -12px rgba(90,70,0,.35)}
-.invoice{width:210px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px;display:grid;gap:6px;box-shadow:var(--shadow-float)}
-.invoice div{display:flex;justify-content:space-between;align-items:baseline}
-.invoice b{font-size:12px;letter-spacing:.1em}.invoice small{color:var(--faint);font-size:11px}
-.invoice span:last-of-type{font-weight:600;color:var(--text)}
-.invoice em{position:absolute;right:-14px;bottom:-12px;rotate:-10deg;font-style:normal;font-family:"Caveat",cursive;font-size:26px;color:var(--error);font-weight:600}
-.folder{display:flex;align-items:center;gap:10px;background:#FBE7B5;border-radius:4px 10px 10px 10px;padding:14px 18px;font-weight:500;color:#5B4300;box-shadow:var(--shadow-float)}
-.folder .i{width:18px;height:18px}
-@media (max-width:960px){
-  .noise{padding-block:64px}
-  .frags{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:20px 16px;margin-bottom:48px}
-  .frags.f-bot{margin:48px 0 0}
-  .frag{position:relative;left:auto;top:auto;animation:none}
-  .frag.paper,.frag.folder{display:none}
-  .sheet{width:230px}
-}
+@media (max-width:960px){.noise{padding-block:72px}}
 
 /* ───────── Modules carousel ───────── */
 .mods{padding-block:clamp(72px,9vw,120px);overflow:clip;background:var(--canvas)}
@@ -305,8 +272,12 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .report .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:center}
 .report-art{position:relative;margin-left:calc(var(--bleed) * -1);min-width:0}
 .panel-grey{position:relative;background:var(--panel);border-radius:0 var(--r-panel) var(--r-panel) 0;height:620px;overflow:hidden}
-.panel-grey .scaler{position:absolute;right:56px;top:64px;width:760px}
-.panel-grey .frame{box-shadow:0 24px 60px -24px rgba(15,23,42,.28)}
+/* Laptop mockup: the HTML screen sits inside the black display */
+.laptop{position:absolute;left:-210px;top:55px;width:834px;aspect-ratio:834/564.66}
+.laptop > img{position:absolute;inset:0;width:100%;height:100%}
+.laptop .screen{position:absolute;left:6.92%;top:6.874%;width:86.16%;height:83.68%;border-radius:12.8px;overflow:hidden;background:#fff;box-shadow:0 19px 48px -19px rgba(15,23,42,.28)}
+.laptop .scaler{position:absolute;inset:0 auto auto 0;width:100%}
+.laptop .frame{border-radius:0;box-shadow:none}
 .report-copy{display:grid;gap:24px;min-width:0}
 .insight{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;display:grid;gap:16px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
 .ins-top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted);font-weight:500}
@@ -330,9 +301,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   .report .wrap{grid-template-columns:1fr;gap:40px}
   .report-art{order:2}
   .panel-grey{height:440px}
-  .panel-grey .scaler{right:auto;left:var(--bleed);top:40px;width:680px}
+  .laptop{left:var(--bleed);top:36px;width:600px}
 }
-@media (max-width:560px){.minis{grid-template-columns:1fr}.panel-grey{height:340px}.panel-grey .scaler{width:520px}}
+@media (max-width:560px){.minis{grid-template-columns:1fr}.panel-grey{height:340px}.laptop{width:440px}}
 
 /* ───────── Industries (Parley "week two" card row) ───────── */
 .inds{padding-block:clamp(72px,9vw,120px) clamp(72px,9vw,120px);overflow:clip;border-top:1px solid var(--border)}
@@ -441,9 +412,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 @media (max-width:900px){.faq .wrap{grid-template-columns:1fr;gap:32px}.faq-side{position:static}}
 
 /* ───────── Start (full-bleed blue) ───────── */
-.start{background:var(--brand);color:#fff;overflow:hidden;padding-top:clamp(72px,9vw,112px)}
+.start{background:var(--brand);color:#fff;overflow:clip;padding-top:clamp(72px,9vw,112px)}
 .start .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px}
-.start-copy{display:flex;flex-direction:column;gap:28px;padding-bottom:clamp(72px,9vw,112px)}
+.start-copy{display:flex;flex-direction:column;gap:28px;padding-bottom:clamp(72px,9vw,112px);position:relative;z-index:1}
 .start h2{font-size:clamp(56px,8.4vw,124px);color:#fff}
 .start p{font-size:18px;line-height:1.6;color:rgba(255,255,255,.88);max-width:42ch}
 .btn-white{background:#fff;color:var(--brand-ink)}
@@ -451,25 +422,67 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .partner{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:14.5px;color:rgba(255,255,255,.85);padding-top:24px;border-top:1px solid rgba(255,255,255,.25);max-width:520px}
 .partner a{color:#fff;font-weight:600;display:inline-flex;align-items:center;gap:6px}
 .partner a .i{width:16px;height:16px}
-.start-art{align-self:end;min-width:0}
-.inv{background:var(--surface);color:var(--text);border-radius:28px 28px 0 0;padding:22px 22px 0;box-shadow:0 -10px 60px -20px rgba(0,20,60,.45);max-width:460px;margin-left:auto;height:520px;overflow:hidden;font-size:13.5px}
-.inv header{display:flex;justify-content:space-between;align-items:center}
-.inv header h4{font-size:22px;font-weight:600;letter-spacing:-.02em}
-.inv .new{width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center}
-.inv .new .i{width:17px;height:17px;stroke-width:2.2}
-.inv .search{display:flex;align-items:center;gap:8px;margin-top:14px;background:var(--panel);border-radius:10px;padding:9px 12px;color:var(--faint)}
-.inv .search .i{width:16px;height:16px}
-.inv .filters{display:flex;gap:6px;margin:12px 0 6px;flex-wrap:wrap}
-.inv .filters span{padding:5px 10px;border-radius:999px;background:var(--panel);font-size:12.5px;font-weight:500;color:var(--text-2)}
-.inv .filters .on{background:var(--text);color:#fff}
-.inv .row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
-.inv .row .av{width:38px;height:38px;font-size:12.5px}
-.inv .row .grow{flex:1;min-width:0}
-.inv .row .grow b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.inv .row .grow small{color:var(--faint);font-size:12px}
-.inv .row .end{display:grid;justify-items:end;gap:3px}
-.inv .row .end b{font-weight:600}
-@media (max-width:900px){.start .wrap{grid-template-columns:1fr;gap:0}.start-copy{padding-bottom:48px}.inv{margin-inline:auto;height:440px}}
+.start .wrap{position:relative}
+.start-art{position:absolute;left:428px;top:90px;width:1000px;min-width:0;pointer-events:none}
+.kb-stage{position:absolute;top:0;left:0;width:1000px;height:761px;transform-origin:0 0;transform:scale(var(--s))}
+.kb-stage > img{position:absolute;inset:0;width:100%;height:100%}
+.kb-screen{position:absolute;inset:0;clip-path:path("M 371.17 51.75 C 371.16 47.96 371.15 46.07 371.92 44.73 C 372.6 43.56 373.66 42.66 374.94 42.19 C 376.39 41.65 378.25 41.97 381.98 42.62 L 581.79 77.11 C 583.07 77.33 583.72 77.44 584.2 77.76 C 584.62 78.05 584.95 78.44 585.16 78.91 C 585.4 79.44 585.4 80.09 585.4 81.39 L 585.4 85.57 C 585.4 87.2 585.4 88.01 585.69 88.68 C 585.96 89.26 586.37 89.76 586.91 90.11 C 587.51 90.51 588.31 90.65 589.91 90.93 L 639.74 99.47 C 641.49 99.77 642.36 99.92 643.04 99.67 C 643.64 99.45 644.14 99.02 644.46 98.47 C 644.82 97.84 644.82 96.96 644.82 95.18 L 644.82 91.21 C 644.82 90.1 644.82 89.55 645.05 89.16 C 645.25 88.81 645.56 88.55 645.93 88.41 C 646.36 88.25 646.91 88.35 648 88.54 L 852.92 123.91 C 856.14 124.46 857.74 124.74 858.95 125.55 C 860.01 126.26 860.85 127.26 861.37 128.43 C 861.96 129.75 861.95 131.39 861.94 134.65 L 860.78 495.42 L 372.16 406.45 L 371.17 51.75 Z")}
+.kb-sheet{position:absolute;left:369px;top:50px;width:500px;height:358px;background:#fff;overflow:hidden;transform-origin:0 0;transform:matrix(.98456,.17503,0,1,0,0)}
+.kbx{width:1440px;transform-origin:0 0;transform:scale(.34722);font-family:Inter,sans-serif;color:#0F172A}
+.kbx svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.kbx h1,.kbx h2,.kbx h3,.kbx h6,.kbx p{line-height:normal;color:#0F172A}
+.kbx .sub{color:#475569}.kbx h6{color:#64748B}
+.kbx .page{display:block;gap:0;padding-left:99px}.kbx p.sub{display:block}.kbx .tag{width:auto}.kbx .av{width:36px;height:36px;font-size:13px}.kbx .crumb{font-size:15px;color:#334155;padding:14px 36px}
+.kbx .app{display:grid;grid-template-columns:240px 1fr;width:1440px;height:950px;overflow:hidden}
+.kbx .sb{background:#F3F3F3;border-right:1px solid #E2E8F0;padding:18px 14px}
+.kbx .brand{display:flex;align-items:center;justify-content:space-between;padding:0 4px 0 12px;margin-bottom:44px}
+.kbx .brand img{height:30px}
+.kbx .brand i{width:24px;height:24px;border:1.5px solid #0F172A;border-radius:7px;display:grid;place-items:center}
+.kbx .brand i svg{width:14px;height:14px;stroke-width:2.4}
+.kbx h6{margin:0 0 14px 4px;font-size:13px;letter-spacing:.08em;font-weight:500;color:#64748B}
+.kbx ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.kbx li{display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:8px;font-size:15.5px;font-weight:500;color:#1E293B;position:relative}
+.kbx li .chev{margin-left:auto;width:16px;height:16px;color:#64748B}
+.kbx li .up{transform:rotate(180deg)}
+.kbx li.on{color:#0060DF}
+.kbx li.on::before{content:"";position:absolute;left:-14px;top:6px;bottom:6px;width:3px;border-radius:2px;background:#0070FF}
+.kbx li.sub{padding:9px 12px;font-size:15px;color:#334155}
+.kbx li.sub.hl{background:#EEF4FF;color:#0060DF}
+.kbx .main{display:flex;flex-direction:column;min-width:0;background:#fff}
+.kbx .top{height:74px;display:flex;align-items:center;justify-content:flex-end;gap:18px;padding:0 26px;border-bottom:1px solid #EEF1F5}
+.kbx .pill{display:flex;align-items:center;gap:8px;border:1px solid #EEF1F5;border-radius:10px;padding:8px 12px;font-weight:600;font-size:15px;box-shadow:0 1px 2px rgba(15,23,42,.05)}
+.kbx .pill .i{width:16px;height:16px}
+.kbx .dot{width:18px;height:18px;color:#E11D48}
+.kbx .tb{display:flex;align-items:center;gap:6px;color:#475569;font-size:14px}
+.kbx .moon{width:38px;height:38px;border-radius:10px;background:#EEF2F7;display:grid;place-items:center;color:#334155}
+.kbx .moon .i{width:18px;height:18px}
+.kbx .av{width:36px;height:36px;border-radius:50%;background:#64748B;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
+.kbx .who b{display:block;font-size:14px}
+.kbx .who small{font-size:11px;color:#94A3B8}
+.kbx .crumb{padding:14px 36px;font-size:15px;color:#334155;border-bottom:1px solid #F1F4F8}
+.kbx .crumb b{color:#0060DF;font-weight:500}
+.kbx .page{flex:1;margin:22px 26px 0;background:#FBFCFE;border-radius:18px 18px 0 0;padding:44px 0 0 182px}
+.kbx .tag{display:inline-flex;align-items:center;gap:8px;background:#EAF2FF;color:#0060DF;font-size:12px;font-weight:600;letter-spacing:.12em;padding:6px 12px;border-radius:999px}
+.kbx .tag i{width:6px;height:6px;border-radius:50%;background:#0060DF}
+.kbx h1{margin:16px 0 10px;font-size:34px;font-weight:700;letter-spacing:-.02em}
+.kbx .sub{font-size:17px;line-height:1.7;color:#475569;max-width:640px;margin:0}
+.kbx .chips{display:flex;gap:10px;margin:22px 0 30px}
+.kbx .chip{display:flex;align-items:center;gap:9px;border:1px solid #E2E8F0;background:#fff;border-radius:10px;padding:10px 14px;font-size:15px;font-weight:500;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+.kbx .chip .i{width:17px;height:17px;color:#0070FF}
+.kbx .search{width:555px;display:flex;align-items:center;gap:12px;border:1px solid #E2E8F0;background:#fff;border-radius:12px;padding:15px 16px;color:#94A3B8;font-size:15px;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+.kbx .search .i{width:18px;height:18px;color:#64748B}
+.kbx h2{margin:48px 0 4px;font-size:25px;font-weight:600;letter-spacing:-.01em}
+.kbx .cap{color:#64748B;font-size:15px}
+.kbx .grid{display:grid;grid-template-columns:repeat(3,306px);gap:16px;margin-top:24px}
+.kbx .cat{background:#fff;border:1px solid #E5EAF1;border-radius:16px;padding:20px 20px 22px;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+.kbx .ct{display:flex;justify-content:space-between;align-items:flex-start}
+.kbx .ci{width:40px;height:40px;border-radius:10px;display:grid;place-items:center}
+.kbx .cnt{font-size:12px;font-weight:500;color:#475569;background:#F1F5F9;padding:4px 9px;border-radius:999px}
+.kbx .cat h3{margin:20px 0 8px;font-size:16.5px;font-weight:600}
+.kbx .cat p{margin:0 0 18px;font-size:14.5px;line-height:1.6;color:#475569;min-height:46px}
+.kbx .cat a{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:15px}
+.kbx .cat .ar{width:15px;height:15px}
+@media (max-width:1100px){.start .wrap{grid-template-columns:1fr;gap:0}.start-copy{padding-bottom:0}.start-art{position:relative;top:auto;left:auto;width:auto;margin:16px calc(var(--bleed) * -1) 0 0;height:min(64vw,640px)}.start-art .scaler{margin-left:-16%}}
 
 /* ───────── Footer ───────── */
 .ftr{padding-block:56px 32px;font-size:14px}
@@ -538,7 +551,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
     <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
       <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
-  </defs>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+</defs>
 </svg>
 
 <header class="hdr" id="hdr">
@@ -610,8 +625,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <span class="kicker"><span class="pulse-dot"></span>Cloud ERP for growing businesses</span>
-        <h1 class="display">Run your business from one connected platform.</h1>
+        <h1 class="display">Run your business from <span class="hl">one connected platform.</span></h1>
         <p class="lead">wBizManager brings sales, finance, inventory, purchasing, customers and HR into one cloud-based system, so you spend less time on scattered records and more time on decisions.</p>
         <div class="hero-act">
           <a class="btn btn-primary btn-lg" href="#">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a>
@@ -630,6 +644,8 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
       <div class="hero-art" role="img" aria-label="The wBizManager dashboard, shown with sample data">
         <div class="panel-blue">
+          <div class="monitor">
+          <img src="assets/device-monitor.webp" alt="" width="840" height="717">
           <div class="scaler" data-w="1060" style="--w:1060;--h:700">
             <div class="frame" aria-hidden="true">
               <div class="app">
@@ -700,6 +716,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
               </div>
             </div>
           </div>
+          </div>
         </div>
         <div class="float hf1">
           <span class="ico b-green"><svg class="i"><use href="#i-file"/></svg></span>
@@ -717,27 +734,8 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   <!-- NOISE -->
   <section class="noise" id="why">
     <div class="wrap">
-      <div class="frags f-top" aria-hidden="true">
-        <div class="frag sheet" style="--x:4%;--y:6%;--r:-3deg;--d:-1s">
-          <div class="xl"><span class="xl-ic">X</span><b>stock_count_FINAL_v4.xlsx</b></div>
-          <table><tr><th></th><th>B</th><th>C</th></tr><tr><th>12</th><td>Rice 50kg</td><td>14</td></tr><tr><th>13</th><td>Groundnut oil</td><td class="err">#REF!</td></tr></table>
-        </div>
-        <div class="frag receipt num" style="--x:39%;--y:2%;--r:4deg;--d:-3s">
-          <small>FILLING STATION</small><b>FUEL</b><span>₦38,500</span><small>14/09 · CASH</small>
-        </div>
-        <div class="frag paper" style="--x:74%;--y:8%;--r:3deg;--d:-5s">
-          <b>LEAVE APPLICATION</b><i></i><i></i><i class="short"></i><span>Approved by: ________</span>
-        </div>
-      </div>
       <h2 class="statement">A growing business needs more than individual tools. <span>It needs processes that work together.</span></h2>
       <p class="after">One platform where the stock sheet, the invoice, the receipt and the approval are all the same record.</p>
-      <div class="frags f-bot" aria-hidden="true">
-        <div class="frag note" style="--x:7%;--y:74%;--r:-4deg;--d:-2s">Reconcile bank statement, Saturday!!</div>
-        <div class="frag invoice num" style="--x:70%;--y:70%;--r:-2deg;--d:-4s">
-          <div><b>INVOICE</b><small>No. 142</small></div><span>Adewale Stores</span><span>₦845,000</span><em>PAID?</em>
-        </div>
-        <div class="frag folder" style="--x:43%;--y:86%;--r:2deg;--d:-6s"><svg class="i"><use href="#i-file"/></svg>Purchase orders 2025 (old)</div>
-      </div>
     </div>
   </section>
 
@@ -775,6 +773,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     <div class="wrap">
       <div class="report-art" role="img" aria-label="The HR dashboard in wBizManager, shown with sample data">
         <div class="panel-grey">
+          <div class="laptop">
+          <img src="assets/device-laptop.webp" alt="" width="834" height="565">
+          <div class="screen">
           <div class="scaler" data-w="900" style="--w:900;--h:640">
             <div class="frame" aria-hidden="true">
               <div class="app">
@@ -825,6 +826,8 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
                 </div>
               </div>
             </div>
+          </div>
+          </div>
           </div>
         </div>
       </div>
@@ -1021,17 +1024,18 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         <div><a class="btn btn-white btn-lg" href="#">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
         <div class="partner">Want to bring wBizManager to your clients? <a href="#">Become a Partner <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
       </div>
-      <div class="start-art" aria-hidden="true">
-        <div class="inv num">
-          <header><h4>Invoices</h4><span class="new"><svg class="i"><use href="#i-plus"/></svg></span></header>
-          <div class="search"><svg class="i"><use href="#i-search"/></svg>Search</div>
-          <div class="filters"><span class="on">All 24</span><span>Paid 15</span><span>Due 6</span><span>Overdue 3</span></div>
-          <div class="row"><span class="av" style="background:#EC4899">AS</span><span class="grow"><b>Adewale Stores</b><small>INV-0142 · 12 Oct</small></span><span class="end"><b>₦845,000</b><span class="status st-ok">Paid</span></span></div>
-          <div class="row"><span class="av" style="background:#0EA5E9">MT</span><span class="grow"><b>Musa Traders</b><small>INV-0141 · 11 Oct</small></span><span class="end"><b>₦312,400</b><span class="status st-warn">Due</span></span></div>
-          <div class="row"><span class="av" style="background:#22C55E">KK</span><span class="grow"><b>Kemi's Kitchen</b><small>INV-0140 · 10 Oct</small></span><span class="end"><b>₦96,000</b><span class="status st-ok">Paid</span></span></div>
-          <div class="row"><span class="av" style="background:#EF4444">BP</span><span class="grow"><b>Bright Path Logistics</b><small>INV-0139 · 3 Oct</small></span><span class="end"><b>₦1,250,000</b><span class="status st-bad">Overdue</span></span></div>
-          <div class="row"><span class="av" style="background:#A855F7">OI</span><span class="grow"><b>Oak &amp; Ivy Studio</b><small>INV-0138 · 2 Oct</small></span><span class="end"><b>₦180,000</b><span class="status st-ok">Paid</span></span></div>
-          <div class="row"><span class="av" style="background:#F59E0B">LP</span><span class="grow"><b>Lagoon Pharmacy</b><small>INV-0137 · 1 Oct</small></span><span class="end"><b>₦57,500</b><span class="status st-warn">Due</span></span></div>
+      <div class="start-art" role="img" aria-label="The wBizManager Knowledge Base on a laptop">
+        <div class="scaler" data-w="1000" style="--w:1000;--h:761">
+          <div class="kb-stage">
+            <img src="assets/device-laptop-table.webp" alt="" width="1000" height="761">
+            <div class="kb-screen" aria-hidden="true"><div class="kb-sheet"><div class="kbx"><div class="app"><aside class="sb"><div class="brand"><img src="assets/logo.png" alt=""><i><svg class="i"><use href="#i-left"/></svg></i></div><h6>MAIN MENU</h6><ul><li class=""><svg class="i"><use href="#i-calc"/></svg><span>Accounting</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-cart"/></svg><span>Sales</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-bag"/></svg><span>Purchases</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-clip"/></svg><span>Approvals</span></li><li class=""><svg class="i"><use href="#i-box"/></svg><span>Inventory</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-file"/></svg><span>Reports</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-brief"/></svg><span>Commercial</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-layers"/></svg><span>Project Module</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-person"/></svg><span>Human Resour...</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-gear"/></svg><span>Settings</span><svg class="i chev"><use href="#i-down"/></svg></li><li class="on"><svg class="i"><use href="#i-buoy"/></svg><span>Help &amp; Support</span><svg class="i chev up"><use href="#i-down"/></svg></li><li class="sub hl"><svg class="i"><use href="#i-help"/></svg><span>Help Center</span></li><li class="sub"><svg class="i"><use href="#i-msg"/></svg><span>FAQs</span></li><li class="sub hl"><svg class="i"><use href="#i-book"/></svg><span>Knowledge Base</span></li></ul></aside>
+<div class="main"><div class="top"><span class="pill"><svg class="i dot" style="width:18px;height:18px"><use href="#i-spark"/></svg>Super User<svg class="i"><use href="#i-down"/></svg></span><span class="tb"><svg class="i"><use href="#i-spark"/></svg>Tour</span><span class="moon"><svg class="i"><use href="#i-moon"/></svg></span><span class="tb"><svg class="i"><use href="#i-bell"/></svg></span><span class="av">ST</span><span class="who"><b>sure</b><small>Super User</small></span><span class="tb"><svg class="i"><use href="#i-down"/></svg></span><span class="tb" style="margin-left:18px"><svg class="i"><use href="#i-grid"/></svg></span></div>
+<div class="crumb">Help Support <span style="color:#94A3B8">/</span> <b>Knowledge Base</b></div>
+<div class="page"><span class="tag"><i></i>HELP CENTER</span><h1>Knowledge Base</h1><p class="sub">Detailed guides, tutorials, and documentation for every wBizHR module — written like a manual, not a marketing page.</p>
+<div class="chips"><span class="chip"><svg class="i"><use href="#i-book"/></svg>61 articles</span><span class="chip"><svg class="i"><use href="#i-layers"/></svg>13 categories</span></div>
+<div class="search"><svg class="i"><use href="#i-search"/></svg>Search articles, guides, tutorials...</div>
+<h2>Browse by Category</h2><div class="cap">Find documentation for any wBizHR module</div><div class="grid"><div class="cat"><div class="ct"><span class="ci" style="background:#EAF2FF;color:#0070FF"><svg class="i"><use href="#i-users"/></svg></span><span class="cnt">4 articles</span></div><h3>Employee Management</h3><p>Manage employee records, documents, and profiles</p><a style="color:#0070FF">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div><div class="cat"><div class="ct"><span class="ci" style="background:#EAF2FF;color:#0070FF"><svg class="i"><use href="#i-clip"/></svg></span><span class="cnt">3 articles</span></div><h3>Onboarding</h3><p>New hire checklists, tasks, and onboarding workflows</p><a style="color:#0070FF">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div><div class="cat"><div class="ct"><span class="ci" style="background:#ECFCCB;color:#4D7C0F"><svg class="i"><use href="#i-pulse"/></svg></span><span class="cnt">4 articles</span></div><h3>Attendance</h3><p>Check-ins, geofenced attendance, and override approvals</p><a style="color:#4D7C0F">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div><div class="cat"><div class="ct"><span class="ci" style="background:#E6FAF6;color:#0D9488"><svg class="i"><use href="#i-cal"/></svg></span><span class="cnt">7 articles</span></div><h3>Leave Management</h3><p>Apply for leave, configure types, and manage approvals</p><a style="color:#0D9488">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div><div class="cat"><div class="ct"><span class="ci" style="background:#FFF7E6;color:#D97706"><svg class="i"><use href="#i-target"/></svg></span><span class="cnt">7 articles</span></div><h3>Performance</h3><p>KPIs, appraisals, goals, and performance reviews</p><a style="color:#D97706">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div><div class="cat"><div class="ct"><span class="ci" style="background:#ECFDF3;color:#15803D"><svg class="i"><use href="#i-book"/></svg></span><span class="cnt">4 articles</span></div><h3>Training Management</h3><p>Plan, schedule, and track training programmes and certifications</p><a style="color:#15803D">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div></div></div></div></div></div></div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1263,6 +1267,5 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 })();
 </script>
-
 </body>
 </html>
