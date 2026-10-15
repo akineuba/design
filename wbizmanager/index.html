@@ -398,22 +398,34 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
 /* ───────── Pricing ───────── */
 .pricing{padding-block:clamp(72px,9vw,120px);background:var(--canvas)}
-.annual{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--success);background:var(--success-bg);padding:6px 12px;border-radius:999px}
-.annual .i{width:16px;height:16px}
-.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.plan{display:flex;flex-direction:column;gap:18px;padding:26px;background:var(--surface);border:1px solid var(--border);border-radius:20px;position:relative;min-width:0}
-.plan.rec{border:2px solid var(--brand);padding:25px;box-shadow:0 24px 48px -24px rgba(0,112,255,.35)}
-.plan .flag{position:absolute;top:-12px;left:25px;background:var(--brand);color:#fff;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
-.plan h3{font-size:18px;font-weight:600}
-.plan .desc{font-size:14px;color:var(--muted);margin-top:4px;min-height:4.5em}
-.price{display:flex;align-items:baseline;gap:6px}
-.price strong{font-size:38px;font-weight:600;letter-spacing:-.04em}
-.price span{font-size:14px;color:var(--muted)}
-.plan ul{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--border);display:grid;gap:10px;font-size:14px;color:var(--text-2);flex:1;align-content:start}
-.plan li{display:flex;gap:10px;align-items:flex-start}
-.plan li .i{width:18px;height:18px;color:var(--brand);stroke-width:2.2;margin-top:1px}
-.plan .btn{width:100%}
-@media (max-width:1060px){.plans{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.billing{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:8px}
+.toggle{display:inline-flex;padding:5px;border:1px solid var(--border);border-radius:999px;background:var(--surface);box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.toggle button{height:40px;padding-inline:22px;border-radius:999px;font-size:15px;font-weight:500;color:var(--text-2);transition:background .2s,color .2s}
+.toggle button[aria-pressed="true"]{background:var(--brand);color:#fff;font-weight:600}
+.save{font-size:13px;font-weight:500;color:var(--success);background:var(--success-bg);padding:5px 10px;border-radius:999px}
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:8px}
+.plan{display:flex;flex-direction:column;padding:28px 26px 26px;background:var(--surface);border:1px solid var(--border);border-radius:20px;position:relative;min-width:0;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.plan.rec{border:2px solid var(--brand);padding:27px 25px 25px;box-shadow:0 24px 56px -24px rgba(0,112,255,.4)}
+.plan .flag{position:absolute;top:-14px;left:16px;background:var(--brand);color:#fff;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.plan h3{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.plan .desc{font-size:15.5px;line-height:1.45;color:var(--muted);margin-top:12px;min-height:4.4em}
+.price{display:flex;align-items:baseline;gap:6px;margin-top:22px;white-space:nowrap}
+.price strong{font-size:clamp(28px,2.25vw,32px);font-weight:700;letter-spacing:-.04em;line-height:1}
+.price span{font-size:15px;color:var(--muted)}
+.plan .from{font-size:13px;color:var(--muted);margin-top:8px}
+.plan ul{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:14px;font-size:15px;color:var(--text);flex:1;align-content:start}
+.plan li{display:flex;gap:12px;align-items:flex-start}
+.plan li .i{width:18px;height:18px;color:var(--faint);stroke-width:2.2;margin-top:2px}
+.plan.rec li .i{color:var(--brand)}
+.plan .note{display:flex;gap:10px;align-items:flex-start;margin-top:26px;padding:12px 14px;background:var(--canvas);border-radius:12px;font-size:12.5px;line-height:1.5;color:var(--muted);min-height:82px}
+.plan .note .i{width:16px;height:16px;flex:none;margin-top:1px}
+.plan .btn{width:100%;margin-top:22px}
+.btn-outline{background:var(--surface);color:var(--brand-ink);border:1.5px solid var(--brand)}
+.btn-outline:hover{background:var(--brand-subtle)}
+.plans-foot{display:grid;justify-items:center;gap:22px;margin-top:40px;text-align:center}
+.plans-foot p{font-size:16px;color:var(--text-2)}
+.plans-foot p a{color:var(--brand-ink);font-weight:600}
+@media (max-width:1060px){.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.plan .note{min-height:0}}
 @media (max-width:560px){.plans{grid-template-columns:1fr}.plan .desc{min-height:0}}
 
 /* ───────── FAQ ───────── */
@@ -982,34 +994,51 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       <div class="head-c">
         <h2 class="h2">Plans that fit your business.</h2>
         <p class="lead">Start with what you need today and choose a plan that supports your team as you grow.</p>
-        <span class="annual"><svg class="i"><use href="#i-cal"/></svg>Pay annually and get one month free on any paid plan</span>
+        <div class="billing">
+          <div class="toggle" role="group" aria-label="Billing period">
+            <button type="button" aria-pressed="false" data-bill="m">Monthly</button>
+            <button type="button" aria-pressed="true" data-bill="y">Yearly</button>
+          </div>
+          <span class="save">2 months free on yearly</span>
+        </div>
       </div>
       <div class="plans">
         <div class="plan">
-          <div><h3>Free Trial</h3><p class="desc">Explore wBizManager before committing.</p></div>
-          <div class="price num"><strong>₦0</strong></div>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>Start with a free trial</li></ul>
-          <a class="btn btn-secondary" href="#">Choose Plan</a>
+          <h3>Finance</h3><p class="desc">Finance teams that need accounting with item and stock information</p>
+          <div class="price num"><strong data-y="₦500,000" data-m="₦50,000">₦500,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Accounting</li><li><svg class="i"><use href="#i-check"/></svg>Inventory</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
+          <a class="btn btn-outline" href="#">Choose Finance</a>
         </div>
         <div class="plan">
-          <div><h3>Plus</h3><p class="desc">For small teams getting started with integrated business management.</p></div>
-          <div class="price num"><strong>₦14,607</strong><span>/ month</span></div>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>3-user bundle (1 admin, 2 users)</li><li><svg class="i"><use href="#i-check"/></svg>Detailed analytics</li><li><svg class="i"><use href="#i-check"/></svg>Chat support</li></ul>
-          <a class="btn btn-secondary" href="#">Choose Plan</a>
+          <h3>HR Suite</h3><p class="desc">People teams managing employees from recruitment to exit</p>
+          <div class="price num"><strong data-y="₦650,000" data-m="₦65,000">₦650,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Employee records</li><li><svg class="i"><use href="#i-check"/></svg>Recruitment &amp; onboarding</li><li><svg class="i"><use href="#i-check"/></svg>Leave &amp; attendance</li><li><svg class="i"><use href="#i-check"/></svg>Payroll &amp; payslips</li><li><svg class="i"><use href="#i-check"/></svg>Performance &amp; appraisals</li><li><svg class="i"><use href="#i-check"/></svg>Training, cases &amp; exits</li><li><svg class="i"><use href="#i-check"/></svg>Self-service</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
+          <a class="btn btn-outline" href="#">Choose HR Suite</a>
         </div>
         <div class="plan rec">
-          <span class="flag">Recommended</span>
-          <div><h3>Premium</h3><p class="desc">For growing businesses that need more users and deeper visibility.</p></div>
-          <div class="price num"><strong>₦23,128</strong><span>/ month</span></div>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>5-user bundle (1 admin, 4 users)</li><li><svg class="i"><use href="#i-check"/></svg>Detailed analytics</li><li><svg class="i"><use href="#i-check"/></svg>Chat support</li></ul>
-          <a class="btn btn-primary" href="#">Choose Plan</a>
+          <span class="flag">Most complete</span><h3>Full ERP</h3><p class="desc">Organisations that want one connected business system</p>
+          <div class="price num"><strong data-y="₦1,200,000" data-m="₦120,000">₦1,200,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Accounting</li><li><svg class="i"><use href="#i-check"/></svg>Inventory</li><li><svg class="i"><use href="#i-check"/></svg>Procurement</li><li><svg class="i"><use href="#i-check"/></svg>Projects &amp; Commercial</li><li><svg class="i"><use href="#i-check"/></svg>HR</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
+          <a class="btn btn-primary" href="#">Choose Full ERP</a>
         </div>
         <div class="plan">
-          <div><h3>Platinum</h3><p class="desc">For larger teams managing more business activities.</p></div>
-          <div class="price num"><strong>₦43,822</strong><span>/ month</span></div>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>10-user bundle (2 admins, 8 users)</li><li><svg class="i"><use href="#i-check"/></svg>Detailed analytics</li><li><svg class="i"><use href="#i-check"/></svg>Chat support</li></ul>
-          <a class="btn btn-secondary" href="#">Choose Plan</a>
+          <h3>Custom</h3><p class="desc">Organisations that want to choose only the areas they need</p>
+          <div class="price num"><strong data-y="₦250,000" data-m="₦25,000">₦250,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Choose business areas</li><li><svg class="i"><use href="#i-check"/></svg>Required supporting access</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
+          <a class="btn btn-outline" href="#">Choose Custom</a>
         </div>
+      </div>
+      <div class="plans-foot">
+        <a class="btn btn-primary btn-lg" href="#">View comparisons</a>
+        <p>Need multi-entity, more seats, or a scoped implementation? <a href="#">Talk to sales</a> — we will size it with you.</p>
       </div>
     </div>
   </section>
@@ -1189,7 +1218,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       ['.report-art', 'left', 0], ['.report-copy > *', 'up', .08],
       ['.inds-head > *', 'up', .1], ['.track .ind', 'up', .09],
       ['.night .wrap > div:first-child > *', 'up', .08], ['.orb-panel', 'zoom', 0],
-      ['.pricing .head-c > *', 'up', .08], ['.plans .plan', 'up', .09],
+      ['.pricing .head-c > *', 'up', .08], ['.plans .plan', 'up', .09], ['.plans-foot > *', 'up', .1],
       ['.faq-side', 'left', 0], ['.faq .qa', 'up', .06],
       ['.start-copy > *', 'up', .08], ['.start-art', 'right', .15],
       ['.ftr .top > *', 'up', .06], ['.ftr .base', 'fade', 0]
@@ -1204,6 +1233,17 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     const lastProp = { up: 'translate', left: 'translate', right: 'translate', zoom: 'scale', fade: 'opacity' };
     document.addEventListener('transitionend', e => { const t = e.target; if (t.classList && t.classList.contains('in') && e.propertyName === lastProp[t.dataset.rv]) { t.classList.remove('rv'); t.removeAttribute('data-rv'); t.style.removeProperty('--rd'); } });
   }
+
+  /* Pricing: monthly / yearly toggle */
+  const billBtns = document.querySelectorAll('[data-bill]');
+  billBtns.forEach(btn => btn.addEventListener('click', () => {
+    const p = btn.dataset.bill;
+    billBtns.forEach(x => x.setAttribute('aria-pressed', x === btn));
+    document.querySelectorAll('.plan .price').forEach(pr => {
+      const st = pr.querySelector('strong'); st.textContent = st.dataset[p];
+      pr.querySelector('.per').textContent = p === 'y' ? '/year' : '/month';
+    });
+  }));
 
   /* Scale the HTML screen recreations */
   const scalers = document.querySelectorAll('.scaler[data-w]');
