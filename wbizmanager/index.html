@@ -124,29 +124,37 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .hero .lead{font-size:18px}
 .hero-act{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
 .proof{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--muted)}
-.hero-art{position:relative;min-width:0;margin-right:calc(var(--bleed) * -1)}
+.hero-art{position:relative;min-width:0;margin-right:calc(var(--bleed) * -1);container-type:inline-size;
+  /* Monitor geometry from the Figma frame (840 wide at 75,80 on a 640 panel), shared with the floats */
+  --mx:min(11.77cqw,75px);--my:min(12.49cqw,80px);--mw:min(131.17cqw,840px)}
 .panel-blue{position:relative;height:100%;min-height:600px;background:var(--brand);border-radius:var(--r-panel) 0 0 var(--r-panel);overflow:hidden}
 .panel-blue::before{content:"";position:absolute;width:520px;height:520px;right:-140px;top:-180px;border-radius:50%;background:radial-gradient(closest-side, rgba(255,255,255,.22), transparent)}
 /* Desktop monitor mockup: the HTML screen sits under the transparent bezel */
-.monitor{position:absolute;left:75px;top:80px;width:840px;aspect-ratio:840/716.5}
+.monitor{position:absolute;left:var(--mx);top:var(--my);width:var(--mw);aspect-ratio:840/716.5}
 .monitor > img{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 .monitor .scaler{position:absolute;left:1.8%;top:1.29%;width:96.4%}
 .monitor .frame{border-radius:16px;box-shadow:0 23px 61px -15px rgba(0,23,71,.45)}
 .hero-art .float{position:absolute;z-index:3}
-.hf1{left:-77px;top:226px}
-.hf2{left:-52px;top:414px}
+.hf1{left:-77px;top:calc(var(--my) + var(--mw) * .174)}
+.hf2{left:-52px;top:calc(var(--my) + var(--mw) * .398)}
+.hf3{right:28px;top:28px}
+.hf4{left:calc(var(--mx) + var(--mw) * .09);top:calc(var(--my) + var(--mw) * .625)}
+.float .spark-s{display:flex;align-items:flex-end;gap:3px;height:26px;margin-left:4px}
+.float .spark-s i{width:5px;border-radius:2px;background:#C7DCFF}
+.float .spark-s i:last-child{background:var(--brand)}
+.float .num-up{display:flex;align-items:baseline;gap:8px}
 @media (max-width:1060px){
   .hero .wrap{grid-template-columns:1fr;gap:0}
   .hero-copy{padding-block:24px 48px}
   .panel-blue{min-height:440px}
-  .monitor{left:40px;top:40px;width:680px}
   .hf1{left:-6px;top:auto;bottom:150px}
   .hf2{left:24px;top:auto;bottom:56px}
+  .hf3{right:16px;top:16px}
+  .hf4{display:none}
 }
-@media (max-width:640px){.hero-art .hf2{display:none}}
+@media (max-width:640px){.hero-art .hf2,.hero-art .hf3{display:none}}
 @media (max-width:560px){
   .panel-blue{min-height:340px}
-  .monitor{left:20px;top:28px;width:480px}
   .hero-art .hf2{display:none}
   .hero-act .btn{width:100%}
 }
@@ -231,7 +239,10 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .status .i{width:12px;height:12px;stroke-width:2.4}
 .st-ok{background:var(--success-bg);color:var(--success)} .st-warn{background:var(--warn-bg);color:var(--warn)} .st-blue{background:var(--brand-subtle);color:var(--brand-ink)} .st-bad{background:var(--error-bg);color:var(--error)}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.hf1{animation-delay:.3s}.hf2{animation-delay:.45s}
+/* Floats rise in once, then breathe gently, out of step with each other */
+.hero-art .float{animation:rise .7s cubic-bezier(.2,.7,.2,1) both,breathe 4.2s ease-in-out infinite}
+.hf1{animation-delay:.3s,1.2s}.hf2{animation-delay:.45s,2.3s}.hf3{animation-delay:.6s,1.7s}.hf4{animation-delay:.75s,2.9s}
+@keyframes breathe{0%,100%{scale:1;box-shadow:var(--shadow-float)}50%{scale:1.035;box-shadow:0 1px 2px rgba(15,23,42,.06),0 22px 44px -12px rgba(0,60,160,.32)}}
 
 /* ───────── Noise: the statement among the paperwork it replaces ───────── */
 .noise{position:relative;padding-block:110px}
@@ -727,6 +738,16 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         <div class="float hf2">
           <span class="ico b-orange"><svg class="i"><use href="#i-box"/></svg></span>
           <div><b>Stock updated</b><small class="num">Groundnut oil 25L · −40 · 212 left</small></div>
+        </div>
+        <div class="float hf3">
+          <span class="ico b-blue"><svg class="i"><use href="#i-trend"/></svg></span>
+          <div><small>Revenue · October</small><span class="num-up"><b class="num">₦12.4M</b><span class="status st-ok">↑ 8.2%</span></span></div>
+          <span class="spark-s" aria-hidden="true"><i style="height:35%"></i><i style="height:50%"></i><i style="height:42%"></i><i style="height:64%"></i><i style="height:58%"></i><i style="height:100%"></i></span>
+        </div>
+        <div class="float hf4">
+          <span class="ico b-blue"><svg class="i"><use href="#i-check-c"/></svg></span>
+          <div><b class="num">PO-0087 approved</b><small>Musa Traders · ₦1,250,000</small></div>
+          <span class="status st-blue">Approvals</span>
         </div>
       </div>
     </div>
