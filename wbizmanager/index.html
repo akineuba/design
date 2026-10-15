@@ -507,6 +507,14 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 @media (max-width:900px){.ftr .top{grid-template-columns:repeat(2,minmax(0,1fr))}.ftr .about{grid-column:1 / -1}}
 
 @media (max-width:640px){.inds-head{flex-direction:column;align-items:flex-start}}
+/* Scroll reveal: added by JS only, so the page reads fine without it */
+.rv{opacity:0;translate:0 28px;transition:opacity .8s cubic-bezier(.2,.7,.2,1) var(--rd,0s),translate .9s cubic-bezier(.2,.7,.2,1) var(--rd,0s)}
+.rv[data-rv="left"]{translate:-48px 0}
+.rv[data-rv="right"]{translate:48px 0}
+.rv[data-rv="zoom"]{translate:none;scale:.94;transition-property:opacity,scale}
+.rv[data-rv="fade"]{translate:none}
+.rv.in{opacity:1;translate:none;scale:none}
+@media (max-width:900px){.rv[data-rv="left"],.rv[data-rv="right"]{translate:0 28px}}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -1150,6 +1158,31 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   const step = () => (track.querySelector('.ind')?.offsetWidth || 400) + 20;
   document.getElementById('ind-prev').addEventListener('click', () => track.scrollBy({ left: -step(), behavior: reduce ? 'auto' : 'smooth' }));
   document.getElementById('ind-next').addEventListener('click', () => track.scrollBy({ left: step(), behavior: reduce ? 'auto' : 'smooth' }));
+
+  /* Scroll reveal: [selector, direction, stagger between matches (s)] */
+  if (!reduce && 'IntersectionObserver' in window) {
+    const REVEAL = [
+      ['.hero-copy > *', 'up', .08], ['.hero-art', 'right', 0],
+      ['.noise .statement, .noise .after', 'up', .12],
+      ['.mods .head-c > *', 'up', .08], ['.mods .carousel', 'zoom', 0],
+      ['.report-art', 'left', 0], ['.report-copy > *', 'up', .08],
+      ['.inds-head > *', 'up', .1], ['.track .ind', 'up', .09],
+      ['.night .wrap > div:first-child > *', 'up', .08], ['.orb-panel', 'zoom', 0],
+      ['.pricing .head-c > *', 'up', .08], ['.plans .plan', 'up', .09],
+      ['.faq-side', 'left', 0], ['.faq .qa', 'up', .06],
+      ['.start-copy > *', 'up', .08], ['.start-art', 'right', .15],
+      ['.ftr .top > *', 'up', .06], ['.ftr .base', 'fade', 0]
+    ];
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -40px 0px', threshold: .12 });
+    REVEAL.forEach(([sel, dir, step]) => document.querySelectorAll(sel).forEach((el, i) => {
+      el.classList.add('rv'); el.dataset.rv = dir;
+      if (step) el.style.setProperty('--rd', Math.min(i * step, .6).toFixed(2) + 's');
+      io.observe(el);
+    }));
+    /* Drop the transition once shown so hover effects keep their own timing */
+    const lastProp = { up: 'translate', left: 'translate', right: 'translate', zoom: 'scale', fade: 'opacity' };
+    document.addEventListener('transitionend', e => { const t = e.target; if (t.classList && t.classList.contains('in') && e.propertyName === lastProp[t.dataset.rv]) { t.classList.remove('rv'); t.removeAttribute('data-rv'); t.style.removeProperty('--rd'); } });
+  }
 
   /* Scale the HTML screen recreations */
   const scalers = document.querySelectorAll('.scaler[data-w]');
