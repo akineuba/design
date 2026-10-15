@@ -135,10 +135,11 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .monitor .scaler{position:absolute;left:1.8%;top:1.29%;width:96.4%}
 .monitor .frame{border-radius:16px;box-shadow:0 23px 61px -15px rgba(0,23,71,.45)}
 .hero-art .float{position:absolute;z-index:3}
-.hf1{left:-77px;top:calc(var(--my) + var(--mw) * .174)}
-.hf2{left:-52px;top:calc(var(--my) + var(--mw) * .398)}
-.hf3{right:28px;top:28px}
-.hf4{left:calc(var(--mx) + var(--mw) * .09);top:calc(var(--my) + var(--mw) * .625)}
+/* Positions from the Figma hero, expressed against the monitor so they hold as it scales */
+.hf1{left:-104px;top:calc(var(--my) + var(--mw) * .1488)}
+.hf2{left:-51px;top:calc(var(--my) + var(--mw) * .444)}
+.hf3{left:calc(var(--mx) + var(--mw) * .1814);top:calc(var(--my) * .475)}
+.hf4{left:calc(var(--mx) + var(--mw) * .1314);top:calc(var(--my) + var(--mw) * .688)}
 .float .spark-s{display:flex;align-items:flex-end;gap:3px;height:26px;margin-left:4px}
 .float .spark-s i{width:5px;border-radius:2px;background:#C7DCFF}
 .float .spark-s i:last-child{background:var(--brand)}
@@ -149,7 +150,7 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
   .panel-blue{min-height:440px}
   .hf1{left:-6px;top:auto;bottom:150px}
   .hf2{left:24px;top:auto;bottom:56px}
-  .hf3{right:16px;top:16px}
+  .hf3{left:auto;right:16px;top:16px}
   .hf4{display:none}
 }
 @media (max-width:640px){.hero-art .hf2,.hero-art .hf3{display:none}}
@@ -652,8 +653,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         <h1 class="display">Run your business from <span class="hl">one connected platform.</span></h1>
         <p class="lead">wBizManager brings sales, finance, inventory, purchasing, customers and HR into one cloud-based system, so you spend less time on scattered records and more time on decisions.</p>
         <div class="hero-act">
-          <a class="btn btn-primary btn-lg" href="#">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a>
-          <a class="link" href="#modules">See all nine modules <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-primary btn-lg" href="#pricing">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a>
         </div>
         <div class="proof">
           <span class="stack">
