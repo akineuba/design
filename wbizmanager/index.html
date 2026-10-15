@@ -602,7 +602,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     <nav class="nav" aria-label="Main">
       <div class="dd">
         <button type="button" aria-expanded="false" aria-haspopup="true">Solutions <svg class="i"><use href="#i-down"/></svg></button>
-        <div class="menu"><div class="mega" style="--cols:3"><div><h5>Financial</h5><ul><li><a href="#modules" data-mod="0"><b>Accounting</b><small>Manage finances &amp; ledgers</small></a></li><li><a href="#modules" data-mod="1"><b>Sales</b><small>Track deals &amp; customers</small></a></li><li><a href="#modules" data-mod="2"><b>Purchases</b><small>Manage orders &amp; suppliers</small></a></li></ul></div><div><h5>Operations</h5><ul><li><a href="#modules" data-mod="4"><b>Inventory</b><small>Monitor stock &amp; warehouses</small></a></li><li><a href="#modules" data-mod="3"><b>Approvals</b><small>Streamline approval flows</small></a></li><li><a href="#modules" data-mod="5"><b>Reports</b><small>Insights &amp; analytics</small></a></li></ul></div><div><h5>Management</h5><ul><li><a href="#modules" data-mod="6"><b>Commercial</b><small>Business operations hub</small></a></li><li><a href="#modules" data-mod="7"><b>Project</b><small>Plan &amp; track milestones</small></a></li><li><a href="#modules" data-mod="8"><b>Human Resources</b><small>People &amp; payroll management</small></a></li></ul></div><div class="mega-card"><h4>Built for growing businesses</h4><p>One integrated platform to run your entire business, from finance and procurement to people and projects, without the complexity of disconnected tools.</p><a class="link" href="#modules">See all nine modules <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+        <div class="menu"><div class="mega" style="--cols:3"><div><h5>Financial</h5><ul><li><a href="modules/accounting.html"><b>Accounting</b><small>Manage finances &amp; ledgers</small></a></li><li><a href="modules/sales.html"><b>Sales</b><small>Track deals &amp; customers</small></a></li><li><a href="modules/purchases.html"><b>Purchases</b><small>Manage orders &amp; suppliers</small></a></li></ul></div><div><h5>Operations</h5><ul><li><a href="modules/inventory.html"><b>Inventory</b><small>Monitor stock &amp; warehouses</small></a></li><li><a href="modules/approvals.html"><b>Approvals</b><small>Streamline approval flows</small></a></li><li><a href="modules/reports.html"><b>Reports</b><small>Insights &amp; analytics</small></a></li></ul></div><div><h5>Management</h5><ul><li><a href="modules/commercial.html"><b>Commercial</b><small>Business operations hub</small></a></li><li><a href="modules/project.html"><b>Project</b><small>Plan &amp; track milestones</small></a></li><li><a href="modules/human-resources.html"><b>Human Resources</b><small>People &amp; payroll management</small></a></li></ul></div><div class="mega-card"><h4>Built for growing businesses</h4><p>One integrated platform to run your entire business, from finance and procurement to people and projects, without the complexity of disconnected tools.</p><a class="link" href="#modules">See all nine modules <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
       </div>
       <div class="dd">
         <button type="button" aria-expanded="false" aria-haspopup="true">Industries <svg class="i"><use href="#i-down"/></svg></button>
@@ -796,7 +796,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         <div class="mod-body" id="mod-body" role="tabpanel">
           <h3 id="mod-tag"></h3>
           <p id="mod-text"></p>
-          <a class="btn btn-primary" href="#">Learn more <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-primary" id="mod-learn" href="modules/accounting.html">Learn more <svg class="i arrow"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
     </div>
@@ -1101,8 +1101,8 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         <p>Integrated business management for growing businesses.</p>
       </div>
       <div><h4>Solutions</h4><ul>
-        <li><a href="#">Accounting</a></li><li><a href="#">Sales</a></li><li><a href="#">Purchases</a></li><li><a href="#">Approvals</a></li><li><a href="#">Inventory</a></li>
-        <li><a href="#">Reports</a></li><li><a href="#">Commercial</a></li><li><a href="#">Project</a></li><li><a href="#">Human Resources</a></li></ul></div>
+        <li><a href="modules/accounting.html">Accounting</a></li><li><a href="modules/sales.html">Sales</a></li><li><a href="modules/purchases.html">Purchases</a></li><li><a href="modules/approvals.html">Approvals</a></li><li><a href="modules/inventory.html">Inventory</a></li>
+        <li><a href="modules/reports.html">Reports</a></li><li><a href="modules/commercial.html">Commercial</a></li><li><a href="modules/project.html">Project</a></li><li><a href="modules/human-resources.html">Human Resources</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="#">Contact Us</a></li></ul></div>
       <div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="#faq">FAQs</a></li><li><a href="#">Help &amp; Support</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
       <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
@@ -1119,30 +1119,30 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
   /* Modules: paragraphs written from the content doc's capability lists */
   const MODS = [
-    { name: 'Accounting', icon: 'calc', tag: 'A clearer view of every naira.',
+    { name: 'Accounting', slug: 'accounting', icon: 'calc', tag: 'A clearer view of every naira.',
       text: 'Manage your accounts, categorise transactions as they come in and reconcile them against your bank statements. Expenses, fixed assets and depreciation sit in the same books, so your financial reports always reflect how the business is really performing.' },
-    { name: 'Sales', icon: 'cart', tag: 'From first order to final payment.',
+    { name: 'Sales', slug: 'sales', icon: 'cart', tag: 'From first order to final payment.',
       text: 'Create sales orders from your customer records, generate invoices from them and track every sale through to payment. Customer profiles keep contacts and sales history together, and sales reports show what is selling and where your margins come from.' },
-    { name: 'Purchases', icon: 'bag', tag: 'Suppliers and purchases, in order.',
+    { name: 'Purchases', slug: 'purchases', icon: 'bag', tag: 'Suppliers and purchases, in order.',
       text: 'Raise purchase orders and requests for quotation, track each one against its supplier and keep supplier details in one organised place. Purchasing reports show what you are buying, from whom, and how it connects to the rest of the business.' },
-    { name: 'Approvals', icon: 'clip', tag: 'Sign-off without the paper trail.',
+    { name: 'Approvals', slug: 'approvals', icon: 'clip', tag: 'Sign-off without the paper trail.',
       text: 'Material requisitions, purchase orders and other requests move through one clear approval workflow. Approvers see everything waiting for their sign-off in a single queue, and every decision is recorded against the request it belongs to.' },
-    { name: 'Inventory', icon: 'box', tag: 'Know what is on the shelf.',
+    { name: 'Inventory', slug: 'inventory', icon: 'box', tag: 'Know what is on the shelf.',
       text: 'Track stock across all your product records and watch inventory update as items are bought and sold. Because stock is linked to sales and orders, your inventory reports reflect what is actually happening in the business.' },
-    { name: 'Reports', icon: 'chart', tag: 'Decisions backed by real numbers.',
+    { name: 'Reports', slug: 'reports', icon: 'chart', tag: 'Decisions backed by real numbers.',
       text: 'Turn day-to-day activity into real-time reports on sales, finance and inventory. Track profitability, monitor business performance and spot the areas that need attention before they become problems.' },
-    { name: 'Commercial', icon: 'brief', tag: 'Every tender, one pipeline.',
+    { name: 'Commercial', slug: 'commercial', icon: 'brief', tag: 'Every tender, one pipeline.',
       text: 'Open and track tenders from one place, follow the value of your pipeline and see your win rate at a glance, so the commercial team always knows which opportunities need attention next.' },
-    { name: 'Project', icon: 'layers', tag: 'Projects, kept on track.',
+    { name: 'Project', slug: 'project', icon: 'layers', tag: 'Projects, kept on track.',
       text: 'Set up and follow your projects in the same system as the rest of the business, so progress, people and costs live alongside your sales, purchases and accounts instead of in a separate spreadsheet.' },
-    { name: 'Human Resources', icon: 'person', tag: 'Your people, organised.',
+    { name: 'Human Resources', slug: 'human-resources', icon: 'person', tag: 'Your people, organised.',
       text: 'Keep employee records, recruitment, attendance, leave and performance appraisals in one central system, and give managers the people information they need without digging through files.' },
   ];
-  document.getElementById('mnav-solutions').innerHTML = MODS.map((m, i) => `<a href="#modules" data-mod="${i}">${m.name}</a>`).join('');
+  document.getElementById('mnav-solutions').innerHTML = MODS.map(m => `<a href="modules/${m.slug}.html">${m.name}</a>`).join('');
 
   /* Carousel */
   const stage = document.getElementById('stage'), dashes = document.getElementById('dashes');
-  const nameEl = document.getElementById('mod-name'), body = document.getElementById('mod-body');
+  const learnEl = document.getElementById('mod-learn'), nameEl = document.getElementById('mod-name'), body = document.getElementById('mod-body');
   const tagEl = document.getElementById('mod-tag'), textEl = document.getElementById('mod-text');
   const n = MODS.length;
   let cur = 0, timer = null, stopped = reduce;
@@ -1176,7 +1176,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   function go(i, first) {
     cur = (i + n) % n; layout();
     tabs.forEach((t, k) => t.setAttribute('aria-selected', k === cur ? 'true' : 'false'));
-    const m = MODS[cur]; nameEl.textContent = m.name;
+    const m = MODS[cur]; nameEl.textContent = m.name; learnEl.href = 'modules/' + m.slug + '.html';
     const fill = () => { tagEl.textContent = m.tag; textEl.textContent = m.text; body.classList.remove('swap'); };
     if (first || reduce) fill(); else { body.classList.add('swap'); setTimeout(fill, 180); }
   }
