@@ -1,0 +1,15 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# wBiz Design System
+
+Design tokens and React components for wBizManager, taken from the
+[w-Biz Figma file](https://www.figma.com/design/TJAupALP2AYuN7NXNlY33g/w-Biz).
+
+- **Foundations** shows every token: colours, type scale, spacing, radius and shadows.
+  Tokens tagged *derived* are not in Figma; they cover states the file doesn't draw (hover, focus, loading).
+- **Components** has one page per component, with a story for each Figma variant and a matrix for side-by-side checks.
+
+Every value in a component comes from `tokens/tokens.json` through CSS variables (`--wbiz-*`) and the Tailwind theme.
+See `CLAUDE.md` and `docs/` in the repository for the rules.
