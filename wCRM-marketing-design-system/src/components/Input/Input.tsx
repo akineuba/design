@@ -68,10 +68,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const state = disabled ? 'disabled' : hasError ? 'error' : readOnly ? 'readOnly' : 'default';
 
   return (
-    <div className={cn('flex w-full flex-col gap-2', wrapperClassName)} data-state={state}>
+    <div className={cn('flex flex-col gap-2', wrapperClassName ?? 'w-full')} data-state={state}>
       <label
         htmlFor={inputId}
-        className={cn('text-label font-medium text-text-primary', hideLabel && 'sr-only', disabled && 'text-text-muted')}
+        className={cn('text-label font-medium', disabled ? 'text-text-muted' : 'text-text-primary', hideLabel && 'sr-only')}
       >
         {label}
         {required && (

@@ -118,6 +118,11 @@ export const tokens = {
         "value": "#EEF2F7",
         "usage": "Inner row dividers",
         "figmaUses": 26
+      },
+      "danger-subtle": {
+        "value": "#FECACA",
+        "usage": "Outline of a selected option card in a modal list",
+        "figmaUses": 4
       }
     },
     "status": {
@@ -170,6 +175,11 @@ export const tokens = {
         "value": "#EDF3FF",
         "usage": "Info badge background",
         "figmaUses": 84
+      },
+      "toggle-off": {
+        "value": "#CBD5E1",
+        "usage": "Switch track when off",
+        "derived": "Figma only draws the on state"
       }
     }
   },
@@ -393,6 +403,16 @@ export const tokens = {
       "value": "0 0 0 3px rgba(225, 29, 72, 0.16)",
       "usage": "Focus ring on an invalid field",
       "derived": "focus is not drawn in Figma"
+    },
+    "menu": {
+      "value": "0 8px 16px 0 rgba(163, 174, 208, 0.25)",
+      "usage": "Context menus and dropdown panels",
+      "figmaUses": 26
+    },
+    "modal": {
+      "value": "0 2px 10px 0 rgba(0, 0, 0, 0.06), 0 16px 40px 0 rgba(0, 0, 0, 0.08)",
+      "usage": "Centred modals",
+      "figmaUses": 8
     }
   },
   "size": {
@@ -428,12 +448,95 @@ export const tokens = {
     "page": {
       "value": "1440px",
       "usage": "Desktop artboard width"
+    },
+    "avatar-sm": {
+      "value": "28px",
+      "usage": "Avatar in table rows",
+      "figmaUses": 40
+    },
+    "avatar-md": {
+      "value": "32px",
+      "usage": "Avatar in record lists",
+      "figmaUses": 30
+    },
+    "avatar-lg": {
+      "value": "40px",
+      "usage": "Avatar in cards",
+      "figmaUses": 20
+    },
+    "checkbox": {
+      "value": "16px",
+      "usage": "Checkbox box",
+      "figmaUses": 60
+    },
+    "switch-width": {
+      "value": "42px",
+      "usage": "Switch track width",
+      "figmaUses": 10
+    },
+    "switch-height": {
+      "value": "22px",
+      "usage": "Switch track height",
+      "figmaUses": 10
+    },
+    "switch-thumb": {
+      "value": "18px",
+      "usage": "Switch thumb",
+      "figmaUses": 10
+    },
+    "menu": {
+      "value": "160px",
+      "usage": "Minimum width of menus and dropdown panels",
+      "figmaUses": 10
+    },
+    "popover": {
+      "value": "240px",
+      "usage": "Filter popover width",
+      "figmaUses": 5
+    },
+    "modal-sm": {
+      "value": "400px",
+      "usage": "Confirmation and picker modals",
+      "figmaUses": 5
+    },
+    "modal-md": {
+      "value": "560px",
+      "usage": "Form modals",
+      "figmaUses": 3
+    },
+    "modal-lg": {
+      "value": "720px",
+      "usage": "Preview modals",
+      "figmaUses": 2
+    },
+    "menu-max-height": {
+      "value": "320px",
+      "usage": "Maximum height of dropdown lists before they scroll"
+    },
+    "table-header": {
+      "value": "40px",
+      "usage": "Table header row height",
+      "figmaUses": 12
+    },
+    "table-row": {
+      "value": "52px",
+      "usage": "Table body row height",
+      "figmaUses": 60
+    },
+    "chip": {
+      "value": "28px",
+      "usage": "Filter chip height",
+      "figmaUses": 12
     }
   },
   "motion": {
     "duration-fast": {
       "value": "120ms",
       "derived": "not specified in Figma"
+    },
+    "duration-base": {
+      "value": "200ms",
+      "derived": "not specified in Figma; used for drawers and accordions"
     },
     "easing": {
       "value": "cubic-bezier(0.2, 0, 0, 1)",
@@ -463,6 +566,7 @@ export const cssVariables = {
   "color-border-default": "#E2E8F0",
   "color-border-strong": "#CBD5E1",
   "color-border-subtle": "#EEF2F7",
+  "color-border-danger-subtle": "#FECACA",
   "color-status-success": "#05D38A",
   "color-status-success-text": "#16966A",
   "color-status-success-subtle": "#EAF9F3",
@@ -473,6 +577,7 @@ export const cssVariables = {
   "color-status-danger-subtle": "#FFF1F2",
   "color-status-info": "#409CFF",
   "color-status-info-subtle": "#EDF3FF",
+  "color-status-toggle-off": "#CBD5E1",
   "font-sans": "'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif",
   "font-data": "'Roboto', ui-sans-serif, system-ui, sans-serif",
   "font-mono": "'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace",
@@ -536,6 +641,8 @@ export const cssVariables = {
   "shadow-lg": "0 12px 28px 0 rgba(15, 23, 42, 0.12)",
   "shadow-focus": "0 0 0 3px rgba(61, 90, 152, 0.20)",
   "shadow-focus-danger": "0 0 0 3px rgba(225, 29, 72, 0.16)",
+  "shadow-menu": "0 8px 16px 0 rgba(163, 174, 208, 0.25)",
+  "shadow-modal": "0 2px 10px 0 rgba(0, 0, 0, 0.06), 0 16px 40px 0 rgba(0, 0, 0, 0.08)",
   "size-control-sm": "36px",
   "size-control-md": "40px",
   "size-control-lg": "44px",
@@ -543,7 +650,24 @@ export const cssVariables = {
   "size-mobile-content": "358px",
   "size-drawer": "462px",
   "size-page": "1440px",
+  "size-avatar-sm": "28px",
+  "size-avatar-md": "32px",
+  "size-avatar-lg": "40px",
+  "size-checkbox": "16px",
+  "size-switch-width": "42px",
+  "size-switch-height": "22px",
+  "size-switch-thumb": "18px",
+  "size-menu": "160px",
+  "size-popover": "240px",
+  "size-modal-sm": "400px",
+  "size-modal-md": "560px",
+  "size-modal-lg": "720px",
+  "size-menu-max-height": "320px",
+  "size-table-header": "40px",
+  "size-table-row": "52px",
+  "size-chip": "28px",
   "motion-duration-fast": "120ms",
+  "motion-duration-base": "200ms",
   "motion-easing": "cubic-bezier(0.2, 0, 0, 1)"
 } as const;
 

@@ -22,7 +22,7 @@ const meta = {
   tags: ['autodocs'],
   args: { children: 'Create contact', onClick: fn() },
   argTypes: {
-    variant: { control: 'inline-radio', options: ['primary', 'secondary', 'outline', 'ghost'] },
+    variant: { control: 'inline-radio', options: ['primary', 'secondary', 'outline', 'ghost', 'danger'] },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
     leadingIcon: { control: false },
     trailingIcon: { control: false },
@@ -53,6 +53,9 @@ export const Outline: Story = { args: { variant: 'outline', children: 'Clear all
 /** Text-only brand action used under a primary button on mobile forms. */
 export const Ghost: Story = { args: { variant: 'ghost', children: 'Save as draft' } };
 
+/** Outlined destructive action beside a primary, e.g. "Delete" next to "Mark complete". */
+export const Danger: Story = { args: { variant: 'danger', children: 'Delete' } };
+
 /** Disabled looks the same for every variant: sunken fill, muted label. */
 export const Disabled: Story = {
   args: { disabled: true },
@@ -62,6 +65,7 @@ export const Disabled: Story = {
       <Button {...args} variant="secondary">Secondary</Button>
       <Button {...args} variant="outline">Outline</Button>
       <Button {...args} variant="ghost">Ghost</Button>
+      <Button {...args} variant="danger">Danger</Button>
     </div>
   ),
 };
@@ -99,7 +103,7 @@ export const FullWidth: Story = {
 export const Matrix: Story = {
   parameters: { layout: 'padded' },
   render: () => {
-    const variants = ['primary', 'secondary', 'outline', 'ghost'] as const;
+    const variants = ['primary', 'secondary', 'outline', 'ghost', 'danger'] as const;
     return (
       <div className="grid grid-cols-4 items-center gap-x-6 gap-y-4">
         <span />

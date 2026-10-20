@@ -2,7 +2,7 @@ import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { Spinner } from '../../icons';
 import { cn } from '../../utils/cn';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -12,6 +12,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    * - secondary: navy outline ("Connection History", "Save as Draft")
    * - outline: neutral outline ("Clear all", "Cancel", "Export")
    * - ghost: text-only brand action ("Save as draft" on mobile forms)
+   * - danger: outlined destructive action that sits beside a primary ("Delete" in task details)
    */
   variant?: ButtonVariant;
   /** sm 36px (toolbars), md 40px (desktop default), lg 44px (forms and mobile). */
@@ -41,6 +42,8 @@ const variants: Record<ButtonVariant, string> = {
     'border-border-default bg-surface-default text-text-primary hover:border-border-strong hover:bg-surface-subtle',
   ghost:
     'border-transparent bg-transparent text-brand-primary hover:bg-brand-primary-subtle',
+  danger:
+    'border-status-danger bg-surface-default text-status-danger hover:bg-status-danger-subtle',
 };
 
 // Disabled is shared by every variant so it always reads as unavailable.

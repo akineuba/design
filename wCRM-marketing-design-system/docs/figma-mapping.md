@@ -51,3 +51,21 @@ Derived (not in Figma): focus (navy border + `shadow-focus`), hover border, disa
 * Input borders alternate between `#E2E8F0`, `#DDE3ED` and `#CBD5E1`. Code uses `border.default` and reserves `border.strong` for hover.
 * Mobile V2 labels are Roboto SemiBold 11; desktop labels are Inter Medium 14. Code uses the desktop label everywhere; mobile density can be added as a `size="sm"` later.
 * Validation red on mobile is the brand red; code uses `status.danger` (`#E11D48`) so errors are distinguishable from primary actions.
+
+### Overlays, selection and data display (added)
+
+| Component | Figma frame(s) | Notes / derived |
+|---|---|---|
+| Select | `Selector Dropdown` 1147:17013, 1225:25729, 1438:31619; `filters` panel selects | Option height 36px; check mark on the selected option and red text are derived. |
+| Menu | `context-menu` 795:6000, 869:11860 | Figma uses a #A3AED0 border on menus; code uses `border.default` + `shadow.menu` (same blur/offset as Figma). Item colours follow Figma (View blue → `accent.navy`, Edit amber → `status.warning-text`, Delete red → `status.danger`). |
+| FilterPopover | `filter-popup` 1233:5729, `dropdown-panel` 1228:25996, `filters` 1036:6256 | Figma's "Clear All" is a navy outline 27px button; code uses `Button variant="secondary" size="sm"`. |
+| Tag | `filter-tag-chip` 1039:3995 | Remove (×) button is derived; Figma chips are static. |
+| Badge | `status-badge` 1126:16406 | Figma's yellow `#E9BB2B` badge text maps to `status.warning-text` for contrast. |
+| Checkbox | `checkbox-checked` (16px, r4, `#E53E3E`) | Uses `brand.primary`. Indeterminate and disabled states are derived. |
+| Switch | `toggle-switch` 42×22 `#05D38A` | Off track `status.toggle-off` is derived. |
+| Accordion | `Component 15/16/17` (section), `pref-row-4` (card) | Card variant uses `radius.lg`; Figma pref rows are square-cornered inside a card list. |
+| Modal / ConfirmDialog | `Move To New Audience - Modal` 1446:32223; mobile Contacts "Delete 3 contacts?" | Selected option card uses `status.danger-subtle` + `border.danger-subtle` (#FECACA) as in Figma. |
+| Drawer | `new contact` 808:6024, `create user` 1823:7659, `email config` 1556:14067 | Width `size.drawer` 462. |
+| Table | Contacts 817:8972, Social accounts 1224:25339, `company-row-expanded` 817:8786 | Header 11px Inter Bold `text.muted` on `surface.subtle`; name cells semibold `accent.navy-hover` (#2B3674). Sort affordance, selection, skeleton and empty states are derived. |
+| Pagination | Contacts list footer | Ellipsis rules derived. |
+| IconButton | `Filter button` 1931:24248 / 1931:24486 (active) | |

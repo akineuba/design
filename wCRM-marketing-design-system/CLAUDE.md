@@ -104,7 +104,10 @@ Controls use 8–16px inside; groups use 24–40px between. Main content padding
 
 * Radius: `rounded-xs` 4 · `rounded-sm` 6 · `rounded-md` 8 (controls) · `rounded-lg` 12 (cards, tables) · `rounded-xl` 16 (modals) · `rounded-full` (badges, avatars).
 * Shadow: `shadow-sm` resting cards · `shadow-md` dropdowns · `shadow-lg` drawers/modals · `shadow-focus` / `shadow-focus-danger` keyboard focus.
-* Heights: `h-control-sm` 36 · `h-control-md` 40 · `h-control-lg` 44. Widths: `w-mobile-content` 358, `w-drawer` 462, `max-w-page` 1440, `w-field-sm` 320.
+* Heights: `h-control-sm` 36 · `h-control-md` 40 · `h-control-lg` 44 · `h-table-header` 40 · `h-table-row` 52 · `h-chip` 28.
+* Widths: `w-field-sm` 320 · `w-popover` 240 · `min-w-menu` 160 · `w-modal-sm/md/lg` 400/560/720 · `w-drawer` 462 · `w-mobile-content` 358 · `max-w-page` 1440. `max-h-menu-max-height` 320.
+* Component sizes: `size-avatar-sm/md/lg` 28/32/40 · `size-checkbox` 16 · `w-switch-width`/`h-switch-height` 42×22.
+* Shadows added for overlays: `shadow-menu` (menus, dropdown panels), `shadow-modal` (centred modals).
 
 Tailwind's default colours, spacing and radii are **removed** by the preset, so `bg-blue-500`, `p-7` or
 `rounded-2xl` will not compile to anything. If you need a value that does not exist, add it to
@@ -112,14 +115,36 @@ Tailwind's default colours, spacing and radii are **removed** by the preset, so 
 
 ## Components
 
-| Component | Figma source | Variants / props |
-|---|---|---|
-| `Button` | `Button`, `create-button`, `Save-Btn` frames (817:8441, 1926:27103, 1926:27101, 1931:24592) | `variant`: primary · secondary · outline · ghost; `size`: sm 36 · md 40 · lg 44; `loading`, `disabled`, `leadingIcon`, `trailingIcon`, `fullWidth` |
-| `Input` | `Field input`, `Input`, `input-box` frames (1926:27086, 1926:27124, 1931:24364, 1823:7673) | `label` (required), `hideLabel`, `helperText`, `error`, `size`: md 40 · lg 44; `leadingIcon`, `trailingIcon`, `required`, `disabled`, `readOnly` |
+Interactive behaviour (focus trapping, keyboard navigation, ARIA) comes from **Radix UI** primitives
+(`@radix-ui/react-*`); every visual style comes from the tokens. Don't re-implement these behaviours by hand.
 
-Figma does not draw focus, hover, disabled or loading states for these; they were derived and are listed in
-`docs/figma-mapping.md`. Patterns that exist in Figma but are not yet components: status badge, table row,
-tabs, selector dropdown, drawer, modal, toolbar search, pagination, sidebar nav.
+| Component | Figma source | Variants / states |
+|---|---|---|
+| `Button` | `create-button`, `Button`, `Save-Btn` (817:8441, 1926:27103, 1926:27101, 1931:24592) | primary · secondary · outline · ghost · danger; sm/md/lg; loading, disabled, icons, fullWidth |
+| `IconButton` | toolbar `Filter button` (1931:24248 / active 1931:24486), row `more-horizontal` | outline · ghost; sm/md/lg; `active` (filters applied), disabled. `aria-label` required |
+| `Input` | `Field input`, `Input`, `input-box` (1926:27086, 1926:27124, 1931:24364) | md/lg; default, focus, error, disabled, read-only, leading/trailing icon |
+| `Select` | `Selector Dropdown` (1147:17013, 1225:25729), form selects in Filters panels | md/lg; placeholder, value, toolbar `prefix` ("Accounts: All"), required, error, disabled, open |
+| `Checkbox` | `checkbox-checked` in `filter-popup`, pref rows, frequency checklist | unchecked, checked, indeterminate, disabled; optional label + description |
+| `Switch` | `toggle-switch` in `pref-row-4` (1529:9553) | on, off, disabled; label start/end |
+| `Badge` | `status-badge` (1126:16406), Active/Inactive/Failed pills | success · warning · danger · info · neutral · brand; sm/md; dot |
+| `Tag` | `filter-tag-chip` Active Filters (1039:3995) | default, selected, removable |
+| `Avatar` | 28px initials circles in Contacts/Owners columns | sm 28 / md 32 / lg 40; image or initials |
+| `Tabs` | settings `sub-tabs` (1224:25545), mobile list filters | underline · pill; counts; disabled |
+| `Menu` | `context-menu` (795:6000) | item tones default/info/warning/danger, icons, label, separator, disabled, shortcut |
+| `FilterPopover` + `FilterCheckboxList` | `filter-popup` (1233:5729), `dropdown-panel` (1228:25996), `filters` (1036:6256) | checkbox list, searchable list, stacked selects; Clear all / Apply; trigger active state |
+| `Accordion` | drawer sections `Component 15/16/17` (808:6625), `pref-row-4` (1529:9554) | section · card; description, trailing `actions` (e.g. Switch), disabled |
+| `Modal`, `ConfirmDialog` | `Move To New Audience - Modal` (1446:32223), mobile "Delete 3 contacts?" | sm/md/lg; picker, form, destructive confirm, loading confirm |
+| `Drawer` | `new contact` (808:6024), `create user` (1823:7659) | 462px right sheet, scrolling body, sticky footer |
+| `Table` (`TableCard`, `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableEmpty`, `TableSkeleton`, `TableExpandableRow`) | Contacts (817:8972), Social accounts (1224:25339), `company-row-expanded` (817:8786) | toolbar, sortable headers, selection, selected/interactive rows, empty/no-results, loading skeleton, expandable rows |
+| `Pagination` | Contacts / User management footers | summary, ellipses, current page, page size |
+
+Icons live in `src/icons` (outline set matching Figma's vuesax/lucide icons): `PlusIcon`, `SearchIcon`, `FilterIcon`,
+`CloseIcon`, `ChevronDownIcon`, `MoreIcon`, `EyeIcon`, `PencilIcon`, `TrashIcon`, `UploadIcon`, `DownloadIcon`,
+`HistoryIcon`, `UsersIcon`, `MailIcon`, plus `Spinner` and `AlertCircle`.
+
+Figma does not draw focus, hover, disabled or loading states for most of these; those were derived and are listed in
+`docs/figma-mapping.md`. Patterns in Figma that are still not components: date/time pickers, the frequency
+day-picker, sidebar navigation, app header, KPI stat cards, charts.
 
 ### Conventions for new components
 
@@ -127,6 +152,8 @@ tabs, selector dropdown, drawer, modal, toolbar search, pagination, sidebar nav.
 * `forwardRef`, spread remaining native props, accept `className` last in `cn(...)` so callers can extend but not fight the base styles.
 * Variants are typed unions mapped to class strings in a `Record<Variant, string>`; never build class names dynamically from props.
 * Lay out with flex/grid exactly as Figma Auto Layout does: direction → `flex-row`/`flex-col`, spacing → `gap-*`, padding → `p*-*`, "Fill container" → `w-full`/`flex-1`, "Hug" → default.
+* Never combine two classes that set the same property (e.g. `text-text-primary` and `text-text-muted`); pick one with a ternary. The preset does not de-duplicate them, so the result depends on CSS order.
+* Dialogs and popovers use `focusFirstField` (src/utils/focus.ts) so opening one focuses the first field, not the close button.
 * Accessibility: native elements first, visible label for every field, `aria-invalid` + `aria-describedby` for errors, `focus-visible:shadow-focus` on every interactive element, 44px minimum touch target on mobile.
 * Every Figma variant gets a story; add a `Matrix`/`States` story for side-by-side review and a `play` test for interactive behaviour.
 

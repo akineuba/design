@@ -1,6 +1,18 @@
 import type { ReactNode } from 'react';
+import { Accordion, AccordionItem } from '../components/Accordion';
+import { Avatar } from '../components/Avatar';
+import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
+import { Checkbox } from '../components/Checkbox';
+import { IconButton } from '../components/IconButton';
 import { Input } from '../components/Input';
+import { Pagination } from '../components/Pagination';
+import { Select } from '../components/Select';
+import { Switch } from '../components/Switch';
+import { Table, TableBody, TableCard, TableCell, TableHead, TableHeader, TableRow } from '../components/Table';
+import { Tabs, TabsList, TabsTrigger } from '../components/Tabs';
+import { Tag } from '../components/Tag';
+import { FilterIcon, MoreIcon, PlusIcon, SearchIcon } from '../icons';
 import { tokens } from '../tokens/tokens';
 import { cn } from '../utils/cn';
 
@@ -71,23 +83,6 @@ function Note({ children }: { children: ReactNode }) {
 
 function Eyebrow({ children }: { children: ReactNode }) {
   return <p className="mb-3 text-label-sm text-text-secondary">{children}</p>;
-}
-
-function Badge({ tone, children }: { tone: 'success' | 'warning' | 'danger' | 'neutral' | 'info'; children: ReactNode }) {
-  const tones = {
-    success: 'bg-status-success-subtle text-status-success-text',
-    warning: 'bg-status-warning-subtle text-status-warning-text',
-    danger: 'bg-status-danger-subtle text-status-danger',
-    info: 'bg-status-info-subtle text-accent-navy',
-    neutral: 'bg-surface-sunken text-text-secondary',
-  };
-  const dots = { success: 'bg-status-success', warning: 'bg-status-warning', danger: 'bg-status-danger', info: 'bg-status-info', neutral: 'bg-text-muted' };
-  return (
-    <span className={cn('inline-flex h-6 items-center gap-1.5 rounded-full px-3 text-label-sm', tones[tone])}>
-      <span className={cn('size-1.5 rounded-full', dots[tone])} aria-hidden="true" />
-      {children}
-    </span>
-  );
 }
 
 export function Foundations() {
@@ -178,11 +173,12 @@ export function Foundations() {
 
         {/* 04 Buttons & text fields */}
         <Section index="04" title="Buttons & text fields" aside="Practical defaults for everyday tasks">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
             {([
               ['Primary', <Button key="p">Create contact</Button>],
               ['Secondary', <Button key="s" variant="secondary">Save as draft</Button>],
               ['Outline', <Button key="o" variant="outline">Clear all</Button>],
+              ['Danger', <Button key="x" variant="danger">Delete</Button>],
               ['Disabled', <Button key="d" disabled>Create contact</Button>],
               ['Loading', <Button key="l" loading>Create contact</Button>],
             ] as const).map(([label, el]) => (
@@ -193,7 +189,7 @@ export function Foundations() {
             ))}
           </div>
           <p className="mt-6 text-body-sm text-text-secondary">40px desktop / 44px form height · 8px radius · 16px inset · 14/600 label · one primary action per view</p>
-          <div className="mt-8 grid gap-6 border-t border-border-default pt-8 md:grid-cols-3">
+          <div className="mt-8 grid gap-6 border-t border-border-default pt-8 md:grid-cols-2 lg:grid-cols-4">
             <div>
               <Eyebrow>Default</Eyebrow>
               <Input label="Work email" placeholder="you@company.com" helperText="Use your business email address." />
@@ -206,38 +202,124 @@ export function Foundations() {
               <Eyebrow>Disabled</Eyebrow>
               <Input label="Work email" defaultValue="alex@company.com" disabled helperText="Managed by your administrator." />
             </div>
+            <div>
+              <Eyebrow>Select</Eyebrow>
+              <Select label="Reporting window" defaultValue="24h" options={[{ value: '24h', label: 'First 24 hours' }, { value: 'week', label: 'First week' }]} helperText="One choice from a short list." />
+            </div>
           </div>
         </Section>
 
-        {/* 05 Patterns */}
-        <Section index="05" title="Badges & card" aside="Patterns in Figma, not yet components">
+        {/* 05 Selection & status */}
+        <Section index="05" title="Selection & status" aside="Badges, chips, checkboxes, switches, tabs">
           <div className="grid gap-8 lg:grid-cols-2">
-            <div>
-              <Eyebrow>Status badges</Eyebrow>
-              <div className="flex flex-wrap gap-2">
-                <Badge tone="success">Active</Badge>
-                <Badge tone="info">Scheduled</Badge>
-                <Badge tone="warning">Pending</Badge>
-                <Badge tone="danger">Failed</Badge>
-                <Badge tone="neutral">Inactive</Badge>
+            <div className="flex flex-col gap-6">
+              <div>
+                <Eyebrow>Status badges</Eyebrow>
+                <div className="flex flex-wrap gap-2">
+                  <Badge tone="success">Active</Badge>
+                  <Badge tone="info">Scheduled</Badge>
+                  <Badge tone="warning">Spam report</Badge>
+                  <Badge tone="danger">Failed</Badge>
+                  <Badge tone="neutral">Inactive</Badge>
+                </div>
               </div>
-              <p className="mt-4 text-body-sm text-text-secondary">24px height · 12px inset · full radius · 6px status dot. Always pair status colour with a readable label.</p>
-              <p className="mt-6 border-t border-border-default pt-6 text-body-sm text-text-secondary">
-                Card recipe: surface-default, 1px border-default, radius-lg (12px), 20–24px padding. Keep content left-aligned and give the action a clear purpose.
-              </p>
+              <div>
+                <Eyebrow>Filter chips</Eyebrow>
+                <div className="flex flex-wrap gap-2">
+                  <Tag onRemove={() => {}}>Enterprise Account</Tag>
+                  <Tag onRemove={() => {}}>Jan 2024</Tag>
+                  <Tag selected>Microsoft Security</Tag>
+                </div>
+              </div>
+              <div>
+                <Eyebrow>Tabs</Eyebrow>
+                <div className="flex flex-col gap-4">
+                  <Tabs defaultValue="accounts">
+                    <TabsList aria-label="Settings sections">
+                      <TabsTrigger value="accounts">Accounts</TabsTrigger>
+                      <TabsTrigger value="notifications">Notifications</TabsTrigger>
+                      <TabsTrigger value="publishing">Publishing</TabsTrigger>
+                    </TabsList>
+                  </Tabs>
+                  <Tabs variant="pill" defaultValue="all">
+                    <TabsList aria-label="Record views">
+                      <TabsTrigger value="all">All records</TabsTrigger>
+                      <TabsTrigger value="mine">My records</TabsTrigger>
+                      <TabsTrigger value="recent">Recently updated</TabsTrigger>
+                    </TabsList>
+                  </Tabs>
+                </div>
+              </div>
             </div>
-            <div className="rounded-lg border border-border-default bg-surface-default p-6 shadow-sm">
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="text-heading-3 text-text-primary">Q4 enterprise campaign</h3>
-                <Badge tone="success">Active</Badge>
+            <div className="flex flex-col gap-6">
+              <div>
+                <Eyebrow>Checkboxes</Eyebrow>
+                <div className="grid grid-cols-2 gap-3">
+                  <Checkbox label="Facebook Page" defaultChecked />
+                  <Checkbox label="All accounts" checked="indeterminate" />
+                  <Checkbox label="X Account" />
+                  <Checkbox label="YouTube (disabled)" disabled />
+                </div>
               </div>
-              <p className="mt-2 text-body text-text-secondary">2,480 recipients across 3 audiences. Next send on 24 Oct, 09:00.</p>
-              <div className="mt-6 flex gap-3">
-                <Button variant="outline">View report</Button>
-                <Button>Open campaign</Button>
+              <div>
+                <Eyebrow>Preference row · accordion card with switch</Eyebrow>
+                <Accordion type="single" collapsible variant="card">
+                  <AccordionItem
+                    value="social"
+                    title="Social interactions"
+                    description="Get notified about new conversations, interactions and follower changes."
+                    actions={<Switch aria-label="Social interactions notifications" defaultChecked />}
+                  >
+                    <Checkbox label="Facebook Page" defaultChecked />
+                  </AccordionItem>
+                </Accordion>
               </div>
             </div>
           </div>
+        </Section>
+
+        {/* 06 Table */}
+        <Section index="06" title="Data table" aside="Toolbar, sortable header, rows, row actions, pagination">
+          <TableCard
+            toolbar={
+              <>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Input label="Search contacts" hideLabel size="md" placeholder="Search..." leadingIcon={<SearchIcon />} wrapperClassName="w-field-sm" />
+                  <IconButton variant="outline" active aria-label="Filter (1 applied)" icon={<FilterIcon />} />
+                </div>
+                <Button leadingIcon={<PlusIcon />}>Create contact</Button>
+              </>
+            }
+            footer={<Pagination page={1} pageSize={10} totalItems={49} onPageChange={() => {}} />}
+          >
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead sort="asc" onSort={() => {}}>Name</TableHead>
+                  <TableHead>Email address</TableHead>
+                  <TableHead>Company</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead align="right"><span className="sr-only">Actions</span></TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {[
+                  ['Olumide Balogun', 'olumideb@wragbybiz.com', 'Technologia', 'Active'],
+                  ['Dean Liam', 'deen@yopmail.com', 'Carter', 'Active'],
+                  ['Pam Mancha', 'emmanuell.mancha@gmail.com', 'Cash Drive', 'Inactive'],
+                ].map(([n, e, c, st], i) => (
+                  <TableRow key={n} selected={i === 1}>
+                    <TableCell emphasis><span className="flex items-center gap-2.5"><Avatar name={n} />{n}</span></TableCell>
+                    <TableCell>{e}</TableCell>
+                    <TableCell>{c}</TableCell>
+                    <TableCell><Badge tone={st === 'Active' ? 'success' : 'neutral'}>{st}</Badge></TableCell>
+                    <TableCell align="right"><IconButton size="sm" aria-label={`Actions for ${n}`} icon={<MoreIcon />} /></TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableCard>
+          <Note>Overlays (Menu, FilterPopover, Modal, ConfirmDialog, Drawer) and the loading, empty and expandable table states are documented interactively in Storybook.</Note>
         </Section>
 
         <footer className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border-default pt-6">
