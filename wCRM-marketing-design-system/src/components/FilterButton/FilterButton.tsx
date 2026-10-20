@@ -1,5 +1,5 @@
 import { forwardRef, type ButtonHTMLAttributes } from 'react';
-import { FilterIcon } from '../../icons';
+import { CalendarOutlineIcon, FilterIcon } from '../../icons';
 import { cn } from '../../utils/cn';
 
 export interface FilterButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
@@ -10,8 +10,8 @@ export interface FilterButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonE
   /** Force the active style (filters applied, or the popover is open). Defaults to `count > 0`. */
   active?: boolean;
   /**
-   * - labelled: desktop toolbar button, icon + "Filter" (Figma `filter-button`, 1230:26010)
-   * - icon: 40 × 40 square for mobile toolbars (Figma `Filter button`, 1931:24248 / active 1931:24486)
+   * - labelled: desktop toolbar button, calendar icon + "Filter" (Figma `filter-button`, 1230:26010)
+   * - icon: 40 × 40 square with the funnel icon for mobile toolbars (Figma `Filter button`, 1931:24248 / active 1931:24486)
    * - responsive: labelled from `sm` up, icon-only below
    */
   display?: 'labelled' | 'icon' | 'responsive';
@@ -49,13 +49,11 @@ export const FilterButton = forwardRef<HTMLButtonElement, FilterButtonProps>(fun
       )}
       {...rest}
     >
-      <FilterIcon
-        className={cn(
-          'shrink-0',
-          display === 'icon' ? 'size-icon-md' : display === 'responsive' ? 'size-5 max-sm:size-icon-md' : 'size-5',
-          !isActive && display !== 'icon' && 'text-text-muted',
-        )}
-      />
+      {/* Figma draws the desktop button with the vuesax calendar glyph and the mobile square with the funnel. */}
+      {display !== 'icon' && (
+        <CalendarOutlineIcon className={cn('size-5 shrink-0', !isActive && 'text-text-muted', display === 'responsive' && 'max-sm:hidden')} />
+      )}
+      {display !== 'labelled' && <FilterIcon className={cn('size-icon-md shrink-0', display === 'responsive' && 'sm:hidden')} />}
       <span className={hideLabel}>{label}</span>
       {count > 0 && (
         <span

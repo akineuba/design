@@ -126,7 +126,7 @@ Interactive behaviour (focus trapping, keyboard navigation, ARIA) comes from **R
 |---|---|---|
 | `Button` | `create-button`, `Button`, `Save-Btn` (817:8441, 1926:27103, 1926:27101, 1931:24592) | primary · secondary · outline · ghost · danger; sm/md/lg; loading, disabled, icons, fullWidth |
 | `IconButton` | toolbar tools, drawer close, inline row actions | outline · ghost; tone default/danger; sm/md/lg; `active`, disabled. `aria-label` required |
-| `FilterButton` | desktop `filter-button` (1230:26010), mobile `Filter button` (1931:24248 / active 1931:24486) | labelled · icon · responsive; applied `count`; active; disabled. Use as the `FilterPopover` trigger |
+| `FilterButton` | desktop `filter-button` (1230:26010), mobile `Filter button` (1931:24248 / active 1931:24486) | labelled (calendar icon) · icon (funnel) · responsive; applied `count`; active; disabled. Use as the `FilterPopover` trigger |
 | `ViewToggle` | Social posts view switch (`btn-list-view` / `btn-calendar-view`) | swap buttons: 2+ icon options, radio-group keyboard model |
 | `Input` | `Field input`, `Input`, `input-box` (1926:27086, 1926:27124, 1931:24364) | md/lg; default, focus, error, disabled, read-only, leading/trailing icon |
 | `Select` | `Selector Dropdown` (1147:17013, 1225:25729), form selects in Filters panels | md/lg; placeholder, value, toolbar `prefix` ("Accounts: All"), required, error, disabled, open |
@@ -149,7 +149,8 @@ Interactive behaviour (focus trapping, keyboard navigation, ARIA) comes from **R
 Icons live in `src/icons` (outline set matching Figma's vuesax/lucide icons): `PlusIcon`, `SearchIcon`, `FilterIcon`,
 `CloseIcon`, `ChevronDownIcon`, `MoreIcon`, `EyeIcon`, `PencilIcon`, `TrashIcon`, `UploadIcon`, `DownloadIcon`,
 `HistoryIcon`, `UsersIcon`, `MailIcon`, `ListIcon`, `CalendarIcon`, `GridIcon`, `TrendUpIcon`, `TrendDownIcon`, `SendIcon`,
-`CheckIcon`, `CopyIcon`, plus `Spinner` and `AlertCircle`. `FilterIcon`, `ListIcon` and `CalendarIcon` are the exact Figma vector exports.
+`CheckIcon`, `CopyIcon`, plus `Spinner` and `AlertCircle`. `FilterIcon`, `CalendarOutlineIcon`, `ListIcon` and `CalendarIcon` are the exact Figma vector exports.
+The labelled `FilterButton` uses `CalendarOutlineIcon` (as drawn in Figma); the icon-only one uses `FilterIcon`.
 
 Figma does not draw focus, hover, disabled or loading states for most of these; those were derived and are listed in
 `docs/figma-mapping.md`. Patterns in Figma that are still not components: date/time pickers, the frequency

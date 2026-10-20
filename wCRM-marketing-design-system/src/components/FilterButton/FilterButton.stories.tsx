@@ -14,7 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Figma: desktop `filter-button` (1230:26010) — 40px, transparent fill, 1px `border-default`, radius 8, 10/16 padding, 8px gap, 20px muted icon, 14/500 secondary label. ' +
+          'Figma: desktop `filter-button` (1230:26010) — 40px, transparent fill, 1px `border-default`, radius 8, 10/16 padding, 8px gap, 20px vuesax outline calendar icon in `text-muted`, 14/500 secondary label. ' +
           'Mobile `Filter button` (1931:24248) — 40 × 40 white square with the 18px vuesax funnel; active (1931:24486) uses `brand-primary-subtle` fill and a `brand-primary` border.',
       },
     },
