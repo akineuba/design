@@ -116,47 +116,51 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 }
 
 /* ───────── Hero ───────── */
-.hero{padding-top:28px;overflow:clip}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:stretch}
-.hero-copy{display:flex;flex-direction:column;justify-content:center;gap:28px;padding-block:111px 72px;min-width:0}
+.hero{padding-block:80px;overflow:clip}
+/* Hero and reports use the full 1240px content width, as in the Figma frame */
+.hero .wrap,.report .wrap{max-width:calc(1240px + var(--gutter) * 2)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,520fr) minmax(0,686fr);gap:35px;align-items:start}
+.hero-copy{display:flex;flex-direction:column;gap:20px;min-width:0}
 .hero h1{font-size:clamp(46px,5.4vw,80px)}
 .hero h1 .hl{color:var(--brand)}
+@media (max-width:1060px){.br-d{display:none}}
 .hero .lead{font-size:18px}
 .hero-act{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
 .proof{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--muted)}
-.hero-art{position:relative;min-width:0;margin-right:calc(var(--bleed) * -1);container-type:inline-size;
-  /* Monitor geometry from the Figma frame (840 wide at 75,80 on a 640 panel), shared with the floats */
-  --mx:min(11.77cqw,75px);--my:min(12.49cqw,80px);--mw:min(131.17cqw,840px)}
-.panel-blue{position:relative;height:100%;min-height:600px;background:var(--brand);border-radius:var(--r-panel) 0 0 var(--r-panel);overflow:hidden}
+.hero-art{position:relative;min-width:0;container-type:inline-size;
+  /* Monitor geometry from the Figma frame (780 wide at 39,37 on a 686 x 631 panel) */
+  --mx:5.69cqw;--my:5.39cqw;--mw:113.7cqw}
+.panel-blue{position:relative;aspect-ratio:686/631;background:var(--brand);border-radius:var(--r-panel);overflow:hidden}
 .panel-blue::before{content:"";position:absolute;width:520px;height:520px;right:-140px;top:-180px;border-radius:50%;background:radial-gradient(closest-side, rgba(255,255,255,.22), transparent)}
 /* Desktop monitor mockup: the HTML screen sits under the transparent bezel */
 .monitor{position:absolute;left:var(--mx);top:var(--my);width:var(--mw);aspect-ratio:840/716.5}
 .monitor > img{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-.monitor .scaler{position:absolute;left:1.8%;top:1.29%;width:96.4%}
+.monitor .scaler{position:absolute;left:1.54%;top:0;width:98.46%}
 .monitor .frame{border-radius:16px;box-shadow:0 23px 61px -15px rgba(0,23,71,.45)}
 .hero-art .float{position:absolute;z-index:3}
 /* Positions from the Figma hero, expressed against the monitor so they hold as it scales */
-.hf1{left:-104px;top:calc(var(--my) + var(--mw) * .1488)}
-.hf2{left:-51px;top:calc(var(--my) + var(--mw) * .444)}
-.hf3{left:calc(var(--mx) + var(--mw) * .1814);top:calc(var(--my) * .475)}
-.hf4{left:calc(var(--mx) + var(--mw) * .1314);top:calc(var(--my) + var(--mw) * .688)}
+/* Float positions from the Figma hero, as a share of the panel width so they hold as it scales */
+.hf1{left:46.5cqw;top:-4.66cqw}
+.hf2{left:-4.08cqw;top:11.08cqw}
+.hf3{left:45.34cqw;top:67.49cqw}
+.hf4{left:-9.62cqw;top:45.19cqw}
 .float .spark-s{display:flex;align-items:flex-end;gap:3px;height:26px;margin-left:4px}
 .float .spark-s i{width:5px;border-radius:2px;background:#C7DCFF}
 .float .spark-s i:last-child{background:var(--brand)}
 .float .num-up{display:flex;align-items:baseline;gap:8px}
 @media (max-width:1060px){
-  .hero .wrap{grid-template-columns:1fr;gap:0}
-  .hero-copy{padding-block:24px 48px}
-  .panel-blue{min-height:440px}
-  .hf1{left:-6px;top:auto;bottom:150px}
-  .hf2{left:24px;top:auto;bottom:56px}
-  .hf3{left:auto;right:16px;top:16px}
-  .hf4{display:none}
+  .hero{padding-block:32px 56px}
+  .hero .wrap{grid-template-columns:1fr;gap:40px}
+  .hero-art{--mx:40px;--my:40px;--mw:min(108cqw,780px)}
+  .panel-blue{aspect-ratio:auto;height:min(68cqw,560px)}
+  .hf1{left:auto;right:16px;top:-20px}
+  .hf2{left:-6px;top:auto;bottom:40px}
+  .hero-art .hf3,.hero-art .hf4{display:none}
 }
 @media (max-width:640px){.hero-art .hf2,.hero-art .hf3{display:none}}
 @media (max-width:560px){
-  .panel-blue{min-height:340px}
-  .hero-art .hf2{display:none}
+  .hero-art{--mx:20px;--my:24px}
+  .panel-blue{height:min(84cqw,380px)}
   .hero-act .btn{width:100%}
 }
 
@@ -246,7 +250,11 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 @keyframes breathe{0%,100%{scale:1;box-shadow:var(--shadow-float)}50%{scale:1.035;box-shadow:0 1px 2px rgba(15,23,42,.06),0 22px 44px -12px rgba(0,60,160,.32)}}
 
 /* ───────── Noise: the statement among the paperwork it replaces ───────── */
-.noise{position:relative;padding-block:110px}
+.noise{position:relative;padding-block:110px;overflow:clip}
+.noise .wave{position:absolute;width:clamp(150px,20.6vw,297px);aspect-ratio:297/287;pointer-events:none}
+.noise .wave svg{display:block;width:100%;height:100%}
+.noise .wave.w1{left:0;top:0}
+.noise .wave.w2{right:0;bottom:0;rotate:180deg}
 .noise .statement{position:relative;z-index:1;font-size:clamp(30px,3.8vw,50px);font-weight:600;letter-spacing:-.035em;line-height:1.1;text-align:center;max-width:21ch;margin-inline:auto}
 .noise .statement span{color:var(--brand)}
 .noise .after{position:relative;z-index:1;text-align:center;margin:22px auto 0;color:var(--muted);font-size:18px;max-width:44ch}
@@ -289,11 +297,12 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
 /* ───────── Reporting (panel left, copy right) ───────── */
 .report{padding-block:clamp(72px,9vw,120px);overflow:clip}
-.report .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:center}
-.report-art{position:relative;margin-left:calc(var(--bleed) * -1);min-width:0}
-.panel-grey{position:relative;background:var(--panel);border-radius:0 var(--r-panel) var(--r-panel) 0;height:620px;overflow:hidden}
+.report .wrap{display:grid;grid-template-columns:minmax(0,661fr) minmax(0,544fr);gap:35px;align-items:center}
+.report-art{position:relative;min-width:0;container-type:inline-size}
+.panel-grey{position:relative;background:var(--panel);border-radius:var(--r-panel);aspect-ratio:661/620;overflow:hidden}
 /* Laptop mockup: the HTML screen sits inside the black display */
-.laptop{position:absolute;left:-210px;top:55px;width:834px;aspect-ratio:834/564.66}
+/* Laptop geometry from the Figma frame (818 wide at -202,47 on a 661 x 620 panel) */
+.laptop{position:absolute;left:-30.56cqw;top:7.11cqw;width:123.75cqw;aspect-ratio:834/564.66}
 .laptop > img{position:absolute;inset:0;width:100%;height:100%}
 .laptop .screen{position:absolute;left:6.92%;top:6.874%;width:86.16%;height:83.68%;border-radius:12.8px;overflow:hidden;background:#fff;box-shadow:0 19px 48px -19px rgba(15,23,42,.28)}
 .laptop .scaler{position:absolute;inset:0 auto auto 0;width:100%}
@@ -320,10 +329,10 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 @media (max-width:1000px){
   .report .wrap{grid-template-columns:1fr;gap:40px}
   .report-art{order:2}
-  .panel-grey{height:440px}
-  .laptop{left:var(--bleed);top:36px;width:600px}
+  .panel-grey{aspect-ratio:auto;height:min(66cqw,460px)}
+  .laptop{left:-4cqw;top:6cqw;width:min(104cqw,720px)}
 }
-@media (max-width:560px){.minis{grid-template-columns:1fr}.panel-grey{height:340px}.laptop{width:440px}}
+@media (max-width:560px){.minis{grid-template-columns:1fr}.panel-grey{height:min(72cqw,340px)}}
 
 /* ───────── Industries (Parley "week two" card row) ───────── */
 .inds{padding-block:clamp(72px,9vw,120px) clamp(72px,9vw,120px);overflow:clip;border-top:1px solid var(--border)}
@@ -333,6 +342,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .inds-nav{display:flex;gap:10px}
 .track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:calc(var(--bleed) * -1);padding-right:var(--bleed);scroll-padding-left:0}
 .track::-webkit-scrollbar{display:none}
+.track.drift{scroll-snap-type:none}
 .ind{flex:0 0 min(400px,84vw);scroll-snap-align:start;border:1px solid var(--border);border-radius:24px;padding:28px 28px 0;display:flex;flex-direction:column;gap:10px;overflow:hidden;background:var(--surface)}
 .ind h3{font-size:22px;font-weight:600;letter-spacing:-.02em}
 .ind > p{font-size:15px;color:var(--muted);max-width:34ch}
@@ -532,14 +542,14 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
 @media (max-width:640px){.inds-head{flex-direction:column;align-items:flex-start}}
 /* Scroll reveal: added by JS only, so the page reads fine without it */
-.rv{opacity:0;translate:0 28px;transition:opacity .8s cubic-bezier(.2,.7,.2,1) var(--rd,0s),translate .9s cubic-bezier(.2,.7,.2,1) var(--rd,0s)}
+.rv{opacity:0;translate:0 36px;transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--rd,0s),translate 1s cubic-bezier(.2,.7,.2,1) var(--rd,0s)}
 .rv[data-rv="left"]{translate:-48px 0}
 .rv[data-rv="right"]{translate:48px 0}
 .rv[data-rv="zoom"]{translate:none;scale:.94;transition-property:opacity,scale}
 .rv[data-rv="fade"]{translate:none}
 .rv.in{opacity:1;translate:none;scale:none}
 @media (max-width:900px){.rv[data-rv="left"],.rv[data-rv="right"]{translate:0 28px}}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*:not(.rv),*::before,*::after{animation:none!important;transition:none!important}.rv{translate:none!important;scale:none!important}}
 </style>
 </head>
 <body>
@@ -650,7 +660,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <h1 class="display">Run your business from <span class="hl">one connected platform.</span></h1>
+        <h1 class="display">Run your business from <span class="hl">one<br class="br-d"> connected platform.</span></h1>
         <p class="lead">wBizManager brings sales, finance, inventory, purchasing, customers and HR into one cloud-based system, so you spend less time on scattered records and more time on decisions.</p>
         <div class="hero-act">
           <a class="btn btn-primary btn-lg" href="#pricing">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a>
@@ -767,6 +777,8 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
   <!-- NOISE -->
   <section class="noise" id="why">
+    <div class="wave w1" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
+    <div class="wave w2" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
     <div class="wrap">
       <h2 class="statement">A growing business needs more than individual tools. <span>It needs processes that work together.</span></h2>
       <p class="after">One platform where the stock sheet, the invoice, the receipt and the approval are all the same record.</p>
@@ -1145,7 +1157,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   const learnEl = document.getElementById('mod-learn'), nameEl = document.getElementById('mod-name'), body = document.getElementById('mod-body');
   const tagEl = document.getElementById('mod-tag'), textEl = document.getElementById('mod-text');
   const n = MODS.length;
-  let cur = 0, timer = null, stopped = reduce;
+  let cur = 0, timer = null, stopped = false, resumeT = null, inView = false;
   const cards = MODS.map((m, i) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'mcard'; b.setAttribute('aria-label', m.name);
@@ -1180,14 +1192,14 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     const fill = () => { tagEl.textContent = m.tag; textEl.textContent = m.text; body.classList.remove('swap'); };
     if (first || reduce) fill(); else { body.classList.add('swap'); setTimeout(fill, 180); }
   }
-  function stopAuto() { stopped = true; clearInterval(timer); }
-  function startAuto() { if (stopped) return; clearInterval(timer); timer = setInterval(() => go(cur + 1), 5000); }
+  /* Any manual change restarts the 5s clock, after a short pause so the choice can be read */
+  function stopAuto() { clearInterval(timer); clearTimeout(resumeT); resumeT = setTimeout(startAuto, 4000); }
+  function startAuto() { if (stopped || !inView) return; clearInterval(timer); timer = setInterval(() => go(cur + 1), 5000); }
   document.getElementById('prev').addEventListener('click', () => { stopAuto(); go(cur - 1); });
   document.getElementById('next').addEventListener('click', () => { stopAuto(); go(cur + 1); });
   const car = document.getElementById('carousel');
-  car.addEventListener('mouseenter', () => clearInterval(timer));
-  car.addEventListener('mouseleave', startAuto);
-  car.addEventListener('focusin', () => clearInterval(timer));
+  car.addEventListener('focusin', e => { if (e.target.matches(':focus-visible')) { stopped = true; clearInterval(timer); } });
+  car.addEventListener('focusout', () => { stopped = false; startAuto(); });
   car.addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft') { stopAuto(); go(cur - 1); }
     if (e.key === 'ArrowRight') { stopAuto(); go(cur + 1); }
@@ -1201,22 +1213,52 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   document.querySelectorAll('[data-mod]').forEach(a => a.addEventListener('click', () => { stopAuto(); go(+a.dataset.mod); closeAll(); }));
   addEventListener('resize', layout);
   go(cur, true);
-  if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => e.isIntersecting ? startAuto() : clearInterval(timer), { threshold: .4 }).observe(car);
+  if (!('IntersectionObserver' in window)) { inView = true; startAuto(); }
+  if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { inView = e.isIntersecting; inView ? startAuto() : clearInterval(timer); }, { threshold: .3 }).observe(car);
 
   /* Industries row arrows */
   const track = document.getElementById('track');
   const step = () => (track.querySelector('.ind')?.offsetWidth || 400) + 20;
-  document.getElementById('ind-prev').addEventListener('click', () => track.scrollBy({ left: -step(), behavior: reduce ? 'auto' : 'smooth' }));
-  document.getElementById('ind-next').addEventListener('click', () => track.scrollBy({ left: step(), behavior: reduce ? 'auto' : 'smooth' }));
+  /* Duplicate the cards once so the drift can loop without a visible jump */
+  const originals = [...track.children];
+  originals.forEach(c => { const d = c.cloneNode(true); d.setAttribute('aria-hidden', 'true'); d.setAttribute('inert', ''); d.querySelectorAll('a').forEach(a => a.tabIndex = -1); track.appendChild(d); });
+  track.classList.add('drift');
+  const loopW = () => track.children[originals.length].offsetLeft - track.children[0].offsetLeft;
+  let paused = false, holdT = null, pos = 0, last = 0;
+  const hold = ms => { paused = true; clearTimeout(holdT); if (ms) holdT = setTimeout(() => { paused = false; }, ms); };
+  const frame = t => {
+    const dt = last ? Math.min(t - last, 64) : 0; last = t;
+    if (!paused) {
+      pos += dt * 0.035;                      /* about 35px per second */
+      const w = loopW(); if (pos >= w) pos -= w;
+      track.scrollLeft = pos;
+    } else pos = track.scrollLeft;
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+  track.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hold(0); });
+  track.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') hold(600); });
+  track.addEventListener('touchstart', () => hold(0), { passive: true });
+  track.addEventListener('touchend', () => hold(3000), { passive: true });
+  track.addEventListener('focusin', e => { if (e.target.matches(':focus-visible')) hold(0); });
+  track.addEventListener('focusout', () => hold(1500));
+  const nudge = dir => {
+    hold(2500); const w = loopW();
+    if (dir < 0 && track.scrollLeft < step()) track.scrollLeft += w;
+    if (dir > 0 && track.scrollLeft > w) track.scrollLeft -= w;
+    track.scrollBy({ left: dir * step(), behavior: 'smooth' });
+  };
+  document.getElementById('ind-prev').addEventListener('click', () => nudge(-1));
+  document.getElementById('ind-next').addEventListener('click', () => nudge(1));
 
   /* Scroll reveal: [selector, direction, stagger between matches (s)] */
-  if (!reduce && 'IntersectionObserver' in window) {
+  if ('IntersectionObserver' in window) {
     const REVEAL = [
       ['.hero-copy > *', 'up', .08], ['.hero-art', 'right', 0],
       ['.noise .statement, .noise .after', 'up', .12],
       ['.mods .head-c > *', 'up', .08], ['.mods .carousel', 'zoom', 0],
       ['.report-art', 'left', 0], ['.report-copy > *', 'up', .08],
-      ['.inds-head > *', 'up', .1], ['.track .ind', 'up', .09],
+      ['.inds-head > *', 'up', .1], ['.track', 'up', .15],
       ['.night .wrap > div:first-child > *', 'up', .08], ['.orb-panel', 'zoom', 0],
       ['.pricing .head-c > *', 'up', .08], ['.plans .plan', 'up', .09], ['.plans-foot > *', 'up', .1],
       ['.faq-side', 'left', 0], ['.faq .qa', 'up', .06],
@@ -1225,7 +1267,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     ];
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -40px 0px', threshold: .12 });
     REVEAL.forEach(([sel, dir, step]) => document.querySelectorAll(sel).forEach((el, i) => {
-      el.classList.add('rv'); el.dataset.rv = dir;
+      el.classList.add('rv'); el.dataset.rv = reduce ? 'fade' : dir;
       if (step) el.style.setProperty('--rd', Math.min(i * step, .6).toFixed(2) + 's');
       io.observe(el);
     }));

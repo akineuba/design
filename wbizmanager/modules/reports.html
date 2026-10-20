@@ -69,8 +69,95 @@
 .btn-ghost-w{color:#fff;border:1.5px solid rgba(255,255,255,.55)}
 .btn-ghost-w:hover{background:rgba(255,255,255,.1)}
 .menu li a[aria-current="page"] b{color:var(--brand-ink)}
+/* Real ERP screens (HTML), placed as in the Figma module pages */
+.shot.screen{background:#fff;border:1px solid rgba(15,23,42,.08)}
+.shot.screen .scaler{width:100%}
+.shot.screen .frame{border-radius:0;box-shadow:none}
+.mshot-panel.has-screen{padding:0;aspect-ratio:1160/726;container-type:inline-size}
+.mshot-panel.has-screen .shot{position:absolute;left:3.19%;width:93.62%;top:6.55cqw}
+.feat-art.bleed{position:relative;overflow:hidden;padding:0;aspect-ratio:617/433;container-type:inline-size}
+.feat-art.bleed .shot{position:absolute;left:9.4%;top:15.9%;width:99.7%;border-radius:16px;box-shadow:0 22px 50px -22px rgba(15,23,42,.35)}
+.feat.flip .feat-art.bleed .shot{left:auto;right:7.8%;width:106.6%}
+.feat.flip.wide{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
+.feat.flip:not(.wide) .feat-art.bleed{aspect-ratio:456/400}
+.feat.flip:not(.wide) .feat-art.bleed .shot{left:8%;right:auto;width:135%;top:14%}
+@media (max-width:900px){.feat.flip.wide{grid-template-columns:1fr}.feat.flip .feat-art.bleed{aspect-ratio:617/433}.feat.flip .feat-art.bleed .shot,.feat.flip:not(.wide) .feat-art.bleed .shot{left:9.4%;right:auto;top:15.9%;width:99.7%}}
+
 @media (max-width:900px){.feat{grid-template-columns:1fr;gap:28px}.feat.flip .feat-copy{order:0}.rel-grid{grid-template-columns:1fr}}
 @media (max-width:560px){.pn a b{font-size:15px}.mhero-act .btn{width:100%}}
+
+/* ───────── ERP screen recreations ───────── */
+.erp{display:grid;grid-template-columns:52px minmax(0,1fr);font-family:Inter,sans-serif;color:#0F172A;font-size:12.5px;background:#fff;letter-spacing:0}
+.erp svg.i{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.erp .rail{background:#F3F4F6;border-right:1px solid #ECEEF2;display:flex;flex-direction:column;align-items:center;gap:7px;padding-top:15px}
+.erp .rail span{width:34px;height:32px;border-radius:8px;display:grid;place-items:center;color:#374151}
+.erp .rail span.e-tog{margin-bottom:12px}
+.erp .rail span.on{background:#E3EDFD;color:#1D6FE8}
+.erp .e-main{display:flex;flex-direction:column;min-width:0}
+.erp .e-top{height:52px;flex:none;display:flex;align-items:center;justify-content:flex-end;gap:16px;padding:0 24px;border-bottom:1px solid #F1F3F5}
+.erp .e-pill{display:flex;align-items:center;gap:7px;border:1px solid #EEF0F3;border-radius:9px;padding:6px 10px;font-weight:600;font-size:12px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.erp .e-pill .sp{color:#E11D48}.erp .e-pill .i:last-child{width:12px;height:12px;color:#64748B}
+.erp .tour{display:flex;align-items:center;gap:6px;color:#475569;font-size:11.5px}
+.erp .moon{width:28px;height:28px;border-radius:8px;background:#EEF2F7;display:grid;place-items:center;color:#334155}
+.erp .bell{color:#475569}
+.erp .e-who{display:flex;align-items:center;gap:8px}
+.erp .e-av{width:26px;height:26px;border-radius:50%;background:#5B6B82;color:#fff;display:grid;place-items:center;font-size:10px;font-weight:600}
+.erp .e-who b{display:block;font-size:11.5px;line-height:1.1}.erp .e-who small{font-size:9.5px;color:#94A3B8}
+.erp .grid-ic{margin-left:16px;color:#475569}
+.erp .e-crumb{padding:14px 26px 0;font-size:12px;color:#4B5563}
+.erp .e-crumb em{font-style:normal;color:#94A3B8;margin:0 4px}.erp .e-crumb b{font-weight:400;color:#1D6FE8}
+.erp .e-tabs{display:flex;gap:26px;padding:0 26px;margin-top:14px;border-bottom:1px solid #ECEEF2;font-size:12.5px;color:#4B5563}
+.erp .e-tabs span{padding:4px 3px 11px;position:relative}
+.erp .e-tabs span.on{color:#1D6FE8}.erp .e-tabs span.on::after{content:"";position:absolute;left:-2px;right:-2px;bottom:-1px;height:2px;background:#1D6FE8;border-radius:2px}
+.erp .e-body{flex:1;min-height:0;padding:20px 26px 0;overflow:hidden}
+.erp .e-card{border:1px solid #EEF0F3;border-radius:10px;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.03);overflow:hidden}
+.erp .e-bar{display:flex;align-items:center;gap:10px;padding:14px 18px}
+.erp .e-bar .sp{flex:1}
+.erp .e-srch{display:flex;align-items:center;gap:8px;width:210px;height:32px;border:1px solid #E5E7EB;border-radius:8px;padding:0 10px;color:#94A3B8;font-size:12px}
+.erp .e-srch .i{width:14px;height:14px;color:#334155}
+.erp .e-btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:1px solid #E5E7EB;border-radius:8px;font-size:12px;font-weight:500;color:#111827;background:#fff;white-space:nowrap}
+.erp .e-btn .i{width:14px;height:14px}
+.erp .e-btn.pri{background:#1D6FE8;border-color:#1D6FE8;color:#fff}
+.erp .e-btn.ghost{border:0;padding:0 4px}
+.erp table{width:100%;border-collapse:collapse}
+.erp th{background:#FAFAFB;text-align:left;font-size:11px;font-weight:600;color:#4B5563;padding:10px 14px;border-top:1px solid #F0F2F5;border-bottom:1px solid #F0F2F5;white-space:nowrap;letter-spacing:.02em}
+.erp th .i{width:11px;height:11px;vertical-align:-1px;margin-left:3px}
+.erp td{padding:0 14px;height:38px;border-bottom:1px solid #F3F4F6;color:#4B5563;white-space:nowrap}
+.erp td.k{color:#0F172A;font-weight:500}.erp td.r,.erp th.r{text-align:right}
+.erp td a{color:#1D6FE8}
+.erp .e-cb{width:13px;height:13px;border:1px solid #D1D5DB;border-radius:4px;display:inline-block;vertical-align:middle}
+.erp .e-dots{width:22px;height:22px;border:1px solid #EEF0F3;border-radius:6px;display:inline-grid;place-items:center;color:#6B7280}
+.erp .e-dots .i{width:12px;height:12px}
+.erp .e-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em}
+.erp .t-draft{background:#FECACA;color:#DC2626}.erp .t-posted{background:#BBF7D0;color:#15803D}
+.erp .t-blue{background:#DBEAFE;color:#1D4ED8}.erp .t-amber{background:#FEF3C7;color:#B45309}.erp .t-grey{background:#E5E7EB;color:#4B5563}
+.erp .t-active{background:#DCFCE7;color:#15803D;text-transform:none;font-size:10.5px;font-weight:500;letter-spacing:0}
+.erp .t-active::before{content:"";width:5px;height:5px;border-radius:50%;background:#16A34A}
+.erp .e-lock{color:#F59E0B}.erp .e-lock .i{width:13px;height:13px}
+.erp .e-pg{display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:12px 18px;font-size:11px;color:#6B7280}
+.erp .e-pg .n{width:24px;height:24px;border-radius:6px;background:#1D6FE8;color:#fff;display:grid;place-items:center;font-weight:600}
+.erp .e-pg .e-sel{border:1px solid #EEF0F3;border-radius:6px;padding:4px 8px;display:flex;align-items:center;gap:14px;color:#111827}
+.erp .e-pg .i{width:12px;height:12px}
+.erp .neg{color:#DC2626}.erp .pos{color:#16A34A}
+.erp h2{margin:0;font-size:22px;font-weight:700;letter-spacing:-.01em}
+.erp h3{margin:0;font-size:15px;font-weight:600}
+.erp .muted{color:#94A3B8}
+.erp .e-ttl{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.erp .e-lbl{font-size:10.5px;font-weight:600;letter-spacing:.09em;color:#4B5563;text-transform:uppercase}
+.erp .e-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+.erp .e-kpi{border:1px solid #EEF0F3;border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.erp .e-kpi strong{display:block;font-size:20px;font-weight:700;margin-top:8px}
+.erp .e-kpi .ic{width:30px;height:30px;border-radius:50%;background:#EEF4FF;color:#1D6FE8;display:grid;place-items:center}
+.erp .e-kpi .ic.g{background:#DCFCE7;color:#16A34A}
+.erp .who-c{display:flex;align-items:center;gap:10px}
+.erp .who-c i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:10px;font-weight:600;color:#fff}
+.erp .who-c b{display:block;font-weight:500;color:#0F172A}.erp .who-c small{font-size:10.5px;color:#94A3B8}
+.erp .due small{display:block;font-size:10px;color:#DC2626;margin-top:2px}
+.erp .due{color:#DC2626;line-height:1.25}
+.erp .e-fld{display:grid;gap:6px;font-size:11px;color:#4B5563;font-weight:500}
+.erp .e-fld span{height:34px;border:1px solid #E5E7EB;border-radius:8px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:12px;color:#0F172A;font-weight:400}
+.erp .e-fld span .i{width:13px;height:13px;color:#64748B}
+.erp .e-in{display:inline-block;min-width:110px;border:1px solid #BFD6FF;border-radius:6px;padding:5px 8px;text-align:right;color:#0F172A;background:#F8FBFF}
 </style>
 </head>
 <body>
@@ -123,6 +210,17 @@
       <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
   <symbol id="i-msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
 <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+
+<symbol id="i-dots" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 6h18M7 12h10M10 18h4"/></symbol>
+<symbol id="i-cloud-up" viewBox="0 0 24 24"><path d="M12 13v8M8 17l4-4 4 4"/><path d="M20.4 15.6A5 5 0 0 0 18 7h-1.3A8 8 0 1 0 4 15.3"/></symbol>
+<symbol id="i-cloud-down" viewBox="0 0 24 24"><path d="M12 13v8M8 17l4 4 4-4"/><path d="M20.4 15.6A5 5 0 0 0 18 7h-1.3A8 8 0 1 0 4 15.3"/></symbol>
+<symbol id="i-sort" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
+<symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m10 9 3 3-3 3"/></symbol>
+<symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
+<symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7z"/></symbol>
 <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></symbol>
 </defs>
 </svg>
@@ -209,7 +307,7 @@
       </div>
       <div class="rel-grid">
         <a class="rel-card" href="accounting.html"><span class="ic"><svg class="i"><use href="#i-calc"/></svg></span><h3>Accounting</h3><p>A clearer view of every naira.</p><span class="link">Explore Accounting <svg class="i arrow"><use href="#i-arrow"/></svg></span></a>
-        <a class="rel-card" href="sales.html"><span class="ic"><svg class="i"><use href="#i-cart"/></svg></span><h3>Sales</h3><p>From first order to final payment.</p><span class="link">Explore Sales <svg class="i arrow"><use href="#i-arrow"/></svg></span></a>
+        <a class="rel-card" href="sales.html"><span class="ic"><svg class="i"><use href="#i-cart"/></svg></span><h3>Sales</h3><p>Sell smarter, get paid faster.</p><span class="link">Explore Sales <svg class="i arrow"><use href="#i-arrow"/></svg></span></a>
         <a class="rel-card" href="inventory.html"><span class="ic"><svg class="i"><use href="#i-box"/></svg></span><h3>Inventory</h3><p>Know what is on the shelf.</p><span class="link">Explore Inventory <svg class="i arrow"><use href="#i-arrow"/></svg></span></a>
       </div>
       <nav class="pn" aria-label="Other modules">
@@ -250,7 +348,7 @@
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const icon = id => `<svg class="i"><use href="#i-${id}"/></svg>`;
-  if (!reduce && 'IntersectionObserver' in window) {
+  if ('IntersectionObserver' in window) {
     const REVEAL = [
       ['.mhero-copy > *', 'up', .08], ['.mshot-panel', 'zoom', .1],
       ['.feat-copy', 'up', 0], ['.feat:not(.flip) .feat-art', 'right', 0], ['.feat.flip .feat-art', 'left', 0],
@@ -259,13 +357,18 @@
     ];
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -40px 0px', threshold: .12 });
     REVEAL.forEach(([sel, dir, step]) => document.querySelectorAll(sel).forEach((el, i) => {
-      el.classList.add('rv'); el.dataset.rv = dir;
+      el.classList.add('rv'); el.dataset.rv = reduce ? 'fade' : dir;
       if (step) el.style.setProperty('--rd', Math.min(i * step, .6).toFixed(2) + 's');
       io.observe(el);
     }));
     const lastProp = { up: 'translate', left: 'translate', right: 'translate', zoom: 'scale', fade: 'opacity' };
     document.addEventListener('transitionend', e => { const t = e.target; if (t.classList && t.classList.contains('in') && e.propertyName === lastProp[t.dataset.rv]) { t.classList.remove('rv'); t.removeAttribute('data-rv'); t.style.removeProperty('--rd'); } });
   }
+  /* Scale the HTML screen recreations */
+  const scalers = document.querySelectorAll('.scaler[data-w]');
+  const rescale = () => scalers.forEach(s => s.style.setProperty('--s', (s.clientWidth / +s.dataset.w).toFixed(4)));
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(rescale); scalers.forEach(s => ro.observe(s)); }
+  rescale(); addEventListener('resize', rescale);
 })();
 </script>
 </body>
