@@ -11,7 +11,6 @@ Horizontal Auto Layout → `inline-flex`, 8px gap, 10/16 padding, 40px tall, 8px
 | `primary` | Create New, Receive Payment | primary / primary / fg-inverse + shadow-xs |
 | `secondary` | Import | surface / line / fg |
 | `tertiary` | Tertiary | none / none / fg-muted |
-| `soft` | Secondary (purple) | accent-subtle / accent-subtle / accent + shadow-xs |
 | `destructive` | Clear all lines | surface / error / error |
 
 Sizes: `sm` 34px, `md` 40px (default), `lg` 46px. `iconOnly` makes a square button and needs `aria-label`.

@@ -41,7 +41,10 @@ export default { presets: [wbiz], content: ['./src/**/*.{ts,tsx}'] };
 ```
 tokens/            tokens.json (source of truth) and the CSS/Tailwind mappers
 src/styles/        generated tokens.css + Tailwind entry
-src/components/    Button, Input, Spinner (component, stories, index)
+src/components/    Button, Input, Select, FilterDropdown, Table, StatusPill, Accordion, Modal,
+                   Tabs, SegmentedControl, Switch, Sidebar, TopBar, PageHeader, Card, Spinner
+src/icons/         Vuesax-style line icons used by the components
+src/patterns/      full-screen reference layouts (Storybook only)
 src/foundations/   Storybook token pages
 docs/              foundations, component specs, Figma sync, contributing
 CLAUDE.md          rules and token reference for AI-assisted code generation

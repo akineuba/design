@@ -12,7 +12,7 @@ const preview: Preview = {
         { name: 'surface', value: 'var(--wbiz-color-surface)' },
       ],
     },
-    options: { storySort: { order: ['Introduction', 'Foundations', 'Components'] } },
+    options: { storySort: { order: ['Introduction', 'Foundations', 'Components', 'Patterns'] } },
   },
   tags: ['autodocs'],
 };

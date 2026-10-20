@@ -1,6 +1,20 @@
 import './styles/index.css';
 
+export * from './components/Accordion';
 export * from './components/Button';
+export * from './components/Card';
+export * from './components/FilterDropdown';
 export * from './components/Input';
+export * from './components/Modal';
+export * from './components/PageHeader';
+export * from './components/SegmentedControl';
+export * from './components/Select';
+export * from './components/Sidebar';
 export * from './components/Spinner';
+export * from './components/StatusPill';
+export * from './components/Switch';
+export * from './components/Table';
+export * from './components/Tabs';
+export * from './components/TopBar';
+export * from './icons';
 export { cx } from './utils/cx';

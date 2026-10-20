@@ -17,7 +17,7 @@ The scale follows the gaps and padding the screens actually use. 10px exists bec
 
 ## Radius & shadow
 
-`rounded-lg` (8px) is the default for buttons, inputs and cards. `rounded-2xl` (16px) is for badges and `rounded-full` for avatars and pills. `shadow-xs` sits under primary and soft buttons, `shadow-md` under menus, and `shadow-focus` is the keyboard focus ring.
+`rounded-lg` (8px) is the default for buttons, inputs, menus and modals. `rounded-xl` (10px) is for cards, the table card and sidebar items, `rounded-panel` (12px) for form accordions, `rounded-md` (6px) for status pills and `rounded-full` for avatars and pills. `shadow-xs` sits under primary buttons, `shadow-md` under menus, and `shadow-focus` is the keyboard focus ring.
 
 ## Auto Layout → CSS
 

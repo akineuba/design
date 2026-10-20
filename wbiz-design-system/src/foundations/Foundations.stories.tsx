@@ -2,16 +2,15 @@ import type { Meta, StoryObj } from '@storybook/react';
 import tokens from '../../tokens/tokens.json';
 
 type Leaf = { value: string; note?: string; derived?: boolean; lineHeight?: string };
-type Group = Record<string, Leaf | Record<string, Leaf>>;
+type Group = { [key: string]: Leaf | Group };
 
 const isLeaf = (x: unknown): x is Leaf => typeof x === 'object' && x !== null && 'value' in x;
 const varName = (path: string[]) => `--wbiz-${path.filter((p) => p !== 'DEFAULT').map((p) => p.replace('.', '_')).join('-')}`;
 
-function flatten(group: Group, root: string) {
-  const rows: Array<{ path: string[]; leaf: Leaf }> = [];
+function flatten(group: Group, root: string, rows: Array<{ path: string[]; leaf: Leaf }> = [], prefix: string[] = [root]) {
   for (const [k, v] of Object.entries(group)) {
-    if (isLeaf(v)) rows.push({ path: [root, k], leaf: v });
-    else for (const [k2, v2] of Object.entries(v)) rows.push({ path: [root, k, k2], leaf: v2 });
+    if (isLeaf(v)) rows.push({ path: [...prefix, k], leaf: v });
+    else flatten(v, root, rows, [...prefix, k]);
   }
   return rows;
 }

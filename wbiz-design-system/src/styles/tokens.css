@@ -4,16 +4,16 @@
   --wbiz-color-primary-hover: color-mix(in srgb, #0070FF 86%, #000000); /* derived: not in Figma */
   --wbiz-color-primary-subtle: #F7FAFF;
   --wbiz-color-primary-muted: #EDF3FB;
-  --wbiz-color-accent: #6941C6;
-  --wbiz-color-accent-subtle: #F9F5FF;
-  --wbiz-color-accent-muted: color-mix(in srgb, #6941C6 12%, #FFFFFF); /* derived: not in Figma */
-  --wbiz-color-fg-strong: #101828;
+  --wbiz-color-primary-tint: rgba(0, 112, 255, 0.05);
+  --wbiz-color-fg-strong: #1D2939;
   --wbiz-color-fg: #344054;
   --wbiz-color-fg-muted: #667085;
   --wbiz-color-fg-placeholder: #C1C4CB;
   --wbiz-color-fg-disabled: #D0D5DD;
   --wbiz-color-fg-inverse: #FFFFFF;
+  --wbiz-color-fg-subtle: #626D7C;
   --wbiz-color-icon: #292D32;
+  --wbiz-color-icon-muted: #475467;
   --wbiz-color-line-subtle: #EAECF0;
   --wbiz-color-line: #D0D5DD;
   --wbiz-color-line-strong: #667085;
@@ -22,14 +22,37 @@
   --wbiz-color-surface-muted: #F8F8F8;
   --wbiz-color-surface-sunken: #F3F3F3;
   --wbiz-color-surface-disabled: #D0D5DD;
+  --wbiz-color-surface-control: #F1F4F9;
+  --wbiz-color-surface-track: #E5E7EB;
   --wbiz-color-success: #34C759;
   --wbiz-color-success-strong: #00C167;
   --wbiz-color-success-subtle: color-mix(in srgb, #34C759 10%, #FFFFFF); /* derived: not in Figma */
   --wbiz-color-error: #FF2E3B;
   --wbiz-color-error-subtle: color-mix(in srgb, #FF2E3B 8%, #FFFFFF); /* derived: not in Figma */
   --wbiz-color-warning: #FF9500;
+  --wbiz-color-badge: #E52E40;
+  --wbiz-color-status-warning-fg: #D1C700;
+  --wbiz-color-status-warning-bg: rgba(209, 199, 0, 0.20);
+  --wbiz-color-status-info-fg: #0070FF;
+  --wbiz-color-status-info-bg: rgba(0, 112, 255, 0.06);
+  --wbiz-color-status-neutral-fg: #667085;
+  --wbiz-color-status-neutral-bg: rgba(204, 204, 204, 0.41);
+  --wbiz-color-status-success-fg: #00C167;
+  --wbiz-color-status-success-bg: rgba(95, 255, 175, 0.40);
+  --wbiz-color-status-error-fg: #FF2E3B;
+  --wbiz-color-status-error-bg: rgba(255, 46, 59, 0.10); /* derived: not in Figma */
+  --wbiz-color-switch-off: rgba(120, 120, 128, 0.16);
+  --wbiz-color-overlay: rgba(16, 24, 40, 0.50); /* derived: not in Figma */
   --wbiz-fontFamily-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --wbiz-fontFamily-data: "Roboto", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --wbiz-fontSize-11: 11px;
+  --wbiz-lineHeight-11: 16px;
+  --wbiz-fontSize-13: 13px;
+  --wbiz-lineHeight-13: 16px;
+  --wbiz-fontSize-15: 15px;
+  --wbiz-lineHeight-15: 18px;
+  --wbiz-fontSize-28: 28px;
+  --wbiz-lineHeight-28: 34px;
   --wbiz-fontSize-2xs: 10px;
   --wbiz-lineHeight-2xs: 14px;
   --wbiz-fontSize-xs: 12px;
@@ -47,6 +70,7 @@
   --wbiz-fontWeight-regular: 400;
   --wbiz-fontWeight-medium: 500;
   --wbiz-fontWeight-semibold: 600;
+  --wbiz-fontWeight-bold: 700;
   --wbiz-space-0: 0px;
   --wbiz-space-1: 4px;
   --wbiz-space-2: 8px;
@@ -58,13 +82,38 @@
   --wbiz-space-10: 40px;
   --wbiz-space-12: 48px;
   --wbiz-space-0_5: 2px;
+  --wbiz-space-1_5: 6px;
   --wbiz-space-2_5: 10px;
+  --wbiz-space-3_5: 14px;
   --wbiz-space-7_5: 30px;
   --wbiz-size-control-sm: 34px;
   --wbiz-size-control-md: 40px;
   --wbiz-size-control-lg: 46px;
   --wbiz-size-icon: 20px;
   --wbiz-size-field: 320px; /* derived: not in Figma */
+  --wbiz-size-control-xs: 32px;
+  --wbiz-size-icon-sm: 16px;
+  --wbiz-size-icon-xs: 14px;
+  --wbiz-size-pill: 22px;
+  --wbiz-size-badge: 16px;
+  --wbiz-size-avatar: 36px;
+  --wbiz-size-theme-toggle: 38px;
+  --wbiz-size-tab: 35px;
+  --wbiz-size-row: 54px;
+  --wbiz-size-row-head: 38px;
+  --wbiz-size-nav-item: 48px;
+  --wbiz-size-nav-subitem: 44px;
+  --wbiz-size-topbar: 64px;
+  --wbiz-size-sidebar: 200px;
+  --wbiz-size-sidebar-collapsed: 72px; /* derived: not in Figma */
+  --wbiz-size-dialog: 515px;
+  --wbiz-size-menu: 240px;
+  --wbiz-size-switch-w: 51px;
+  --wbiz-size-switch-h: 31px;
+  --wbiz-size-knob: 27px;
+  --wbiz-size-nav-indicator: 3px;
+  --wbiz-size-filter-field: 235px;
+  --wbiz-size-popover-max: min(90vw, 1100px); /* derived: not in Figma */
   --wbiz-radius-none: 0px;
   --wbiz-radius-xs: 2px;
   --wbiz-radius-sm: 4px;
@@ -74,9 +123,12 @@
   --wbiz-radius-2xl: 16px;
   --wbiz-radius-3xl: 20px;
   --wbiz-radius-full: 9999px;
+  --wbiz-radius-panel: 12px;
   --wbiz-shadow-none: none;
   --wbiz-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.05);
   --wbiz-shadow-md: 0 10px 20px rgba(37, 49, 76, 0.15);
   --wbiz-shadow-focus: 0 0 0 4px color-mix(in srgb, #0070FF 24%, transparent); /* derived: not in Figma */
   --wbiz-shadow-focus-error: 0 0 0 4px color-mix(in srgb, #FF2E3B 20%, transparent); /* derived: not in Figma */
+  --wbiz-shadow-dialog: 0 20px 40px -8px rgba(16, 24, 40, 0.24); /* derived: not in Figma */
+  --wbiz-shadow-knob: 0 3px 1px rgba(0, 0, 0, 0.06), 0 3px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.04);
 }

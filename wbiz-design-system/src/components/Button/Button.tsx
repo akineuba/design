@@ -2,11 +2,11 @@ import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 import { Spinner } from '../Spinner';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'soft' | 'destructive';
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'destructive';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Visual style. Figma: Button 9 (primary), Button 5 (secondary), Button 04 (tertiary), Button 03 (soft), Button 6 (destructive). */
+  /** Visual style. Figma: Button 9 (primary), Button 5 (secondary), Button 04 (tertiary), Button 6 (destructive). */
   variant?: ButtonVariant;
   /** Height: sm 34px, md 40px (default in Figma), lg 46px. */
   size?: ButtonSize;
@@ -38,7 +38,6 @@ const variants: Record<ButtonVariant, string> = {
   primary: 'border-primary bg-primary text-fg-inverse shadow-xs hover:border-primary-hover hover:bg-primary-hover',
   secondary: 'border-line bg-surface text-fg hover:bg-surface-muted',
   tertiary: 'border-transparent bg-transparent text-fg-muted hover:bg-surface-muted hover:text-fg',
-  soft: 'border-accent-subtle bg-accent-subtle text-accent shadow-xs hover:border-accent-muted hover:bg-accent-muted',
   destructive: 'border-error bg-surface text-error hover:bg-error-subtle',
 };
 
@@ -48,7 +47,6 @@ const disabledStyles: Record<ButtonVariant, string> = {
   primary: 'border-surface-disabled bg-surface-disabled text-fg-inverse shadow-none',
   secondary: 'border-line-subtle bg-surface text-fg-disabled',
   tertiary: 'border-transparent bg-transparent text-fg-disabled',
-  soft: 'border-surface-muted bg-surface-muted text-fg-disabled shadow-none',
   destructive: 'border-line-subtle bg-surface text-fg-disabled',
 };
 
@@ -92,7 +90,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       {...rest}
     >
       {loading ? <Spinner /> : leadingIcon && <span className="inline-flex size-icon shrink-0 items-center justify-center" aria-hidden>{leadingIcon}</span>}
-      {iconOnly ? (loading ? null : children) : children}
+      {iconOnly ? (
+        loading ? null : <span className="inline-flex size-icon shrink-0 items-center justify-center" aria-hidden>{children}</span>
+      ) : (
+        children
+      )}
       {!iconOnly && trailingIcon && !loading && (
         <span className="inline-flex size-icon shrink-0 items-center justify-center" aria-hidden>{trailingIcon}</span>
       )}

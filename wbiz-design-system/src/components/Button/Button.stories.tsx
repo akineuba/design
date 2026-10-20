@@ -10,7 +10,7 @@ const meta = {
   component: Button,
   args: { children: 'Create New', onClick: fn() },
   argTypes: {
-    variant: { control: 'inline-radio', options: ['primary', 'secondary', 'tertiary', 'soft', 'destructive'] },
+    variant: { control: 'inline-radio', options: ['primary', 'secondary', 'tertiary', 'destructive'] },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
     leadingIcon: { control: false },
     trailingIcon: { control: false },
@@ -44,11 +44,6 @@ export const Tertiary: Story = {
   parameters: { design: { url: FIGMA + '209-4260' } },
 };
 
-export const Soft: Story = {
-  args: { variant: 'soft', children: 'Secondary' },
-  parameters: { design: { url: FIGMA + '209-4263' } },
-};
-
 export const Destructive: Story = {
   args: { variant: 'destructive', children: 'Clear all lines', leadingIcon: <TrashIcon /> },
   parameters: { design: { url: FIGMA + '6309-33224' } },
@@ -77,7 +72,7 @@ export const Sizes: Story = {
   ),
 };
 
-const VARIANTS: ButtonVariant[] = ['primary', 'secondary', 'tertiary', 'soft', 'destructive'];
+const VARIANTS: ButtonVariant[] = ['primary', 'secondary', 'tertiary', 'destructive'];
 
 /** Every variant against every state, for a side-by-side check with Figma. */
 export const Matrix: Story = {

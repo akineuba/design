@@ -2,14 +2,14 @@
 
 ## Where the tokens came from
 
-The w-Biz file has **no Figma variables, text styles, colour styles or effect styles**, and its own pages hold no published component library. The tokens were extracted on 2026-10-19 with the Figma MCP server by reading every node on the **accounting** (`0:1`) and **inventory** (`4651:44574`) pages and counting:
+The w-Biz file has **no Figma variables, text styles, colour styles or effect styles**, and its own pages hold no published component library. The tokens were extracted with the Figma MCP server by reading every node on the **accounting** (`0:1`), **inventory** (`4651:44574`) and **new features** (`7004:31166`) pages and counting:
 
 - solid fills, text colours and strokes
 - font family, style, size and line height on text
 - corner radius, auto-layout gap and padding
 - drop shadows
 
-The most-used values became tokens; one-off and fractional values were dropped or snapped. The **icons & components** page was excluded at the team's request.
+The most-used values became tokens; one-off and fractional values were dropped or snapped. **New features** is the primary reference: its sidebar and top bar are the current versions. The **landing page**, **email templates** and **icons & components** pages are excluded at the team's request.
 
 ## Recommended next step in Figma
 
