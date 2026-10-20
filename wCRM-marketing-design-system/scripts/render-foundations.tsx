@@ -13,7 +13,8 @@ mkdirSync(outDir, { recursive: true });
 const cssOut = resolve(outDir, 'foundations.css');
 execFileSync('npx', ['tailwindcss', '-i', 'src/styles/index.css', '-o', cssOut, '--minify'], { cwd: root, stdio: 'inherit' });
 const css = readFileSync(cssOut, 'utf8');
-const body = renderToStaticMarkup(<Foundations />);
+const logo = `data:image/png;base64,${readFileSync(resolve(root, 'src/assets/wragby-logo.png')).toString('base64')}`;
+const body = renderToStaticMarkup(<Foundations logoSrc={logo} />);
 
 // Written as an artifact-ready fragment: the host adds doctype/head/body. The design system is
 // light-only by design, so the page commits to one theme and sets its own background.

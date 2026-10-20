@@ -85,7 +85,12 @@ function Eyebrow({ children }: { children: ReactNode }) {
   return <p className="mb-3 text-label-sm text-text-secondary">{children}</p>;
 }
 
-export function Foundations() {
+export interface FoundationsProps {
+  /** URL of the Wragby logo. Storybook passes the bundled asset; the static export passes a data URI. */
+  logoSrc: string;
+}
+
+export function Foundations({ logoSrc }: FoundationsProps) {
   const t = tokens.typography;
   return (
     <div data-page="foundations" className="min-h-screen bg-surface-canvas px-4 py-10 font-sans text-text-primary md:px-12 md:py-12">
@@ -93,16 +98,13 @@ export function Foundations() {
         {/* Masthead */}
         <header className="mb-4 flex flex-col gap-6">
           <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex size-8 items-center justify-center rounded-md bg-brand-primary text-label text-text-inverse">W</span>
-              <span className="text-label text-text-primary">Wragby <span className="text-text-secondary">wCRM Marketing</span></span>
-            </div>
+            <img src={logoSrc} alt="Wragby" className="h-10 w-auto" />
             <span className="text-overline text-text-secondary">Foundations + UI kit / v{tokens.$meta.version}</span>
           </div>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="flex flex-col gap-2">
-              <h1 className="text-display text-text-primary">A connected design language.</h1>
-              <p className="text-body text-text-secondary">Tokens and components extracted from the Figma “marketing design updates” page.</p>
+              <h1 className="text-display text-text-primary">wCRM marketing design system</h1>
+              <p className="text-body text-text-secondary">Tokens and components for wCRM marketing design</p>
             </div>
             <span className="inline-flex h-8 items-center rounded-full bg-accent-navy-subtle px-3 text-label-sm text-accent-navy">Marketing · Light</span>
           </div>
