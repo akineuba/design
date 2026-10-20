@@ -1,0 +1,46 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Overview/Getting started" />
+
+# wCRM Marketing design system
+
+Tokens and React components for the Wragby wCRM **Marketing** module, extracted from the Figma file
+[wCRM updates → marketing design updates](https://www.figma.com/design/EIQlA9M6mP2KlskFFy2X2U/wCRM-updates).
+
+## Install and use
+
+```bash
+npm install
+npm run storybook        # http://localhost:6006
+```
+
+```tsx
+import 'wcrm-marketing-design-system/src/styles/index.css';
+import { Button, Input } from 'wcrm-marketing-design-system';
+
+<Input label="Work email" helperText="Use your business email address." />
+<Button>Create contact</Button>
+```
+
+In a Tailwind app, add the preset so utilities resolve to the same CSS variables:
+
+```js
+// tailwind.config.js
+import preset from 'wcrm-marketing-design-system/tailwind.preset.js';
+export default { presets: [preset], content: ['./src/**/*.{ts,tsx}'] };
+```
+
+## How tokens flow
+
+1. `tokens/tokens.json` is the only place values are edited.
+2. `npm run tokens` writes `src/styles/tokens.css` (CSS variables) and `src/tokens/tokens.ts` (typed object).
+3. `tailwind.preset.js` maps every Tailwind utility to those variables and **replaces** Tailwind's default palette,
+   spacing and radii, so off-system values such as `bg-blue-500` or `p-7` do not exist.
+
+## Rules
+
+- Never use raw hex values or arbitrary pixel spacing (`p-[13px]`); bind to tokens.
+- Check this library and the Figma components before building a new element.
+- Lay components out with flex/grid that mirrors Figma Auto Layout (direction, gap, padding, fill vs hug).
+
+See `CLAUDE.md` in the repository for the full contributor and AI-assistant context.
