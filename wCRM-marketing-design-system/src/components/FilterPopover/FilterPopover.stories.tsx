@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { FilterIcon } from '../../icons';
-import { Button } from '../Button';
-import { IconButton } from '../IconButton';
+import { FilterButton } from '../FilterButton';
 import { Select } from '../Select';
 import { FilterCheckboxList, FilterPopover } from './FilterPopover';
 
@@ -20,7 +18,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
-    docs: { description: { component: 'Toolbar filter dropdowns. Figma: `filter-popup` (1233:5729, checkbox list + Clear All / Apply), `dropdown-panel` (1228:25996, searchable list) and `filters` (1036:6256, stacked selects). The trigger shows the active state while filters are applied.' } },
+    docs: { description: { component: 'Toolbar filter dropdowns. Figma: `filter-popup` (1233:5729, checkbox list + Clear All / Apply), `dropdown-panel` (1228:25996, searchable list) and `filters` (1036:6256, stacked selects). Use `FilterButton` as the trigger; it shows the active state and count while filters are applied.' } },
   },
   args: { trigger: <button type="button">Filters</button>, children: null },
 } satisfies Meta<typeof FilterPopover>;
@@ -33,7 +31,7 @@ function CheckboxFilter({ open, searchable }: { open?: boolean; searchable?: boo
   return (
     <div className="flex h-modal-sm justify-end">
       <FilterPopover
-        trigger={<IconButton variant="outline" active={applied.length > 0} aria-label={`Filter accounts (${applied.length} applied)`} icon={<FilterIcon />} />}
+        trigger={<FilterButton display="icon" label="Filter accounts" count={applied.length} />}
         onClear={() => setDraft([])}
         onApply={() => setApplied(draft)}
         {...(open ? { open: true } : {})}
@@ -54,7 +52,7 @@ export const StackedSelects: Story = {
       <FilterPopover
         size="md"
         open
-        trigger={<Button variant="outline" leadingIcon={<FilterIcon />}>Filter</Button>}
+        trigger={<FilterButton />}
       >
         <Select label="Account" options={accounts} />
         <Select label="Date" defaultValue="today" options={[{ value: 'today', label: 'Today' }, { value: '7d', label: 'Last 7 days' }, { value: '30d', label: 'Last 30 days' }]} />

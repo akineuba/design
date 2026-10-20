@@ -27,6 +27,7 @@ for (const [name, t] of Object.entries(tokens.typography)) {
 for (const [name, t] of Object.entries(tokens.space)) add(`space-${key(name)}`, t.value);
 for (const [name, t] of Object.entries(tokens.radius)) add(`radius-${name}`, t.value);
 for (const [name, t] of Object.entries(tokens.shadow)) add(`shadow-${name}`, t.value);
+for (const [name, t] of Object.entries(tokens.gradient)) add(`gradient-${name}`, t.value);
 for (const [name, t] of Object.entries(tokens.size)) add(`size-${name}`, t.value);
 for (const [name, t] of Object.entries(tokens.motion)) add(`motion-${name}`, t.value);
 

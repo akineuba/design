@@ -1,5 +1,7 @@
 import {
+  createContext,
   forwardRef,
+  useContext,
   useState,
   type HTMLAttributes,
   type ReactNode,
@@ -31,8 +33,20 @@ export const TableCard = forwardRef<HTMLDivElement, TableCardProps>(function Tab
   );
 });
 
-export const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(function Table({ className, ...rest }, ref) {
-  return <table ref={ref} className={cn('w-full border-collapse text-left font-sans', className)} {...rest} />;
+export type TableDensity = 'default' | 'compact';
+const DensityContext = createContext<TableDensity>('default');
+
+export interface TableProps extends HTMLAttributes<HTMLTableElement> {
+  /** default: 52px rows (lists, two-line cells grow to ≈ 61px as in the Email table). compact: 44px rows for dense reports. */
+  density?: TableDensity;
+}
+
+export const Table = forwardRef<HTMLTableElement, TableProps>(function Table({ density = 'default', className, ...rest }, ref) {
+  return (
+    <DensityContext.Provider value={density}>
+      <table ref={ref} className={cn('w-full border-collapse text-left font-sans', className)} {...rest} />
+    </DensityContext.Provider>
+  );
 });
 
 export const TableHeader = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTMLTableSectionElement>>(function TableHeader({ className, ...rest }, ref) {
@@ -56,7 +70,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(function 
       ref={ref}
       aria-selected={selected || undefined}
       className={cn(
-        'border-b border-border-default transition-colors duration-fast',
+        'group/row border-b border-border-default transition-colors duration-fast',
         selected ? 'bg-accent-navy-subtle' : interactive && 'hover:bg-surface-subtle',
         interactive && 'cursor-pointer',
         className,
@@ -123,11 +137,13 @@ export interface TableCellProps extends TdHTMLAttributes<HTMLTableCellElement> {
 }
 
 export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(function TableCell({ align = 'left', emphasis, className, ...rest }, ref) {
+  const density = useContext(DensityContext);
   return (
     <td
       ref={ref}
       className={cn(
-        'h-table-row px-5 py-3 align-middle text-body-sm',
+        'px-5 align-middle text-body-sm',
+        density === 'compact' ? 'h-table-row-sm py-2' : 'h-table-row py-3',
         emphasis ? 'font-semibold text-accent-navy-hover' : 'text-text-secondary',
         align === 'right' && 'text-right',
         align === 'center' && 'text-center',
@@ -137,6 +153,23 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(functi
     />
   );
 });
+
+export interface TableCellStackProps {
+  /** First line, e.g. the date. */
+  primary: ReactNode;
+  /** Second line, e.g. who did it ("Sarah K."), shown in navy. */
+  secondary?: ReactNode;
+}
+
+/** Two-line cell content (Figma Email table "LAST UPDATED": date over author, 5px gap). */
+export function TableCellStack({ primary, secondary }: TableCellStackProps) {
+  return (
+    <span className="flex flex-col gap-1">
+      <span className="text-text-secondary">{primary}</span>
+      {secondary && <span className="text-accent-navy-hover">{secondary}</span>}
+    </span>
+  );
+}
 
 export interface TableEmptyProps {
   colSpan: number;

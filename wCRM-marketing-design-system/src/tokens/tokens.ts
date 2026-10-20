@@ -72,6 +72,16 @@ export const tokens = {
         "value": "#FFFFFF",
         "usage": "Text on brand or dark fills",
         "figmaUses": 235
+      },
+      "link": {
+        "value": "#3366E5",
+        "usage": "Inline record links in tables, e.g. campaign codes",
+        "figmaUses": 12
+      },
+      "icon": {
+        "value": "#8F9BB3",
+        "usage": "Unselected icons in swap buttons (view toggle)",
+        "figmaUses": 8
       }
     },
     "surface": {
@@ -527,6 +537,26 @@ export const tokens = {
       "value": "28px",
       "usage": "Filter chip height",
       "figmaUses": 12
+    },
+    "icon-md": {
+      "value": "18px",
+      "usage": "Icon inside a 40px icon-only button (vuesax 18 grid)",
+      "figmaUses": 10
+    },
+    "icon-tile": {
+      "value": "28px",
+      "usage": "Square icon tile in stat cards",
+      "figmaUses": 8
+    },
+    "table-row-sm": {
+      "value": "44px",
+      "usage": "Compact table row height",
+      "derived": "density option"
+    },
+    "module-card": {
+      "value": "196px",
+      "usage": "Square module / channel picker card",
+      "figmaUses": 6
     }
   },
   "motion": {
@@ -541,6 +571,13 @@ export const tokens = {
     "easing": {
       "value": "cubic-bezier(0.2, 0, 0, 1)",
       "derived": "not specified in Figma"
+    }
+  },
+  "gradient": {
+    "feature": {
+      "value": "linear-gradient(90deg, #324BF2 0%, #8E30F2 100%)",
+      "usage": "Featured stat card (first KPI in a stats row)",
+      "figmaUses": 4
     }
   }
 } as const;
@@ -558,6 +595,8 @@ export const cssVariables = {
   "color-text-muted": "#A3AED0",
   "color-text-placeholder": "#98A4BF",
   "color-text-inverse": "#FFFFFF",
+  "color-text-link": "#3366E5",
+  "color-text-icon": "#8F9BB3",
   "color-surface-default": "#FFFFFF",
   "color-surface-canvas": "#F4F6FA",
   "color-surface-subtle": "#F8FAFC",
@@ -643,6 +682,7 @@ export const cssVariables = {
   "shadow-focus-danger": "0 0 0 3px rgba(225, 29, 72, 0.16)",
   "shadow-menu": "0 8px 16px 0 rgba(163, 174, 208, 0.25)",
   "shadow-modal": "0 2px 10px 0 rgba(0, 0, 0, 0.06), 0 16px 40px 0 rgba(0, 0, 0, 0.08)",
+  "gradient-feature": "linear-gradient(90deg, #324BF2 0%, #8E30F2 100%)",
   "size-control-sm": "36px",
   "size-control-md": "40px",
   "size-control-lg": "44px",
@@ -666,6 +706,10 @@ export const cssVariables = {
   "size-table-header": "40px",
   "size-table-row": "52px",
   "size-chip": "28px",
+  "size-icon-md": "18px",
+  "size-icon-tile": "28px",
+  "size-table-row-sm": "44px",
+  "size-module-card": "196px",
   "motion-duration-fast": "120ms",
   "motion-duration-base": "200ms",
   "motion-easing": "cubic-bezier(0.2, 0, 0, 1)"

@@ -1,17 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useMemo, useState } from 'react';
-import { DownloadIcon, EyeIcon, FilterIcon, MoreIcon, PencilIcon, PlusIcon, SearchIcon, TrashIcon, UploadIcon, UsersIcon } from '../../icons';
+import { CalendarIcon, CopyIcon, DownloadIcon, ListIcon, PencilIcon, PlusIcon, SearchIcon, TrashIcon, UploadIcon, UsersIcon } from '../../icons';
 import { Avatar } from '../Avatar';
 import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { Checkbox } from '../Checkbox';
-import { IconButton } from '../IconButton';
+import { Card, StatCard } from '../Card';
+import { FilterButton } from '../FilterButton';
+import { FilterCheckboxList, FilterPopover } from '../FilterPopover';
 import { Input } from '../Input';
-import { Menu, MenuContent, MenuItem, MenuTrigger } from '../Menu';
 import { Pagination } from '../Pagination';
+import { RowActionButtons, RowActionLink, RowActionsMenu, TableLink } from '../RowActions';
 import { Select } from '../Select';
+import { Tabs, TabsList, TabsTrigger } from '../Tabs';
+import { ViewToggle } from '../ViewToggle';
 import {
-  Table, TableBody, TableCard, TableCell, TableEmpty, TableExpandableRow, TableHead, TableHeader, TableRow, TableSkeleton, type SortDirection,
+  Table, TableBody, TableCard, TableCell, TableCellStack, TableEmpty, TableExpandableRow, TableHead, TableHeader, TableRow, TableSkeleton, type SortDirection,
 } from './Table';
 
 const meta = {
@@ -21,7 +25,7 @@ const meta = {
   parameters: {
     layout: 'padded',
     backgrounds: { default: 'canvas' },
-    docs: { description: { component: 'Figma: Contacts (817:8972), Companies, Social accounts (1224:25339) and User management (1823:7411) lists. Compose `TableCard` → `Table` → rows; use `Pagination` in the footer.' } },
+    docs: { description: { component: 'Figma: Contacts (817:8972), Companies, Social accounts (1224:25339), User management (1823:7411), Email marketing, Campaigns and Social posts lists. Compose `TableCard` → `Table` → rows; use `Pagination` in the footer and `RowActions` for row-level actions.' } },
   },
 } satisfies Meta<typeof Table>;
 export default meta;
@@ -38,16 +42,7 @@ const contacts = [
   { id: 8, name: 'John Doe', email: 'john.doee@example.com', company: 'TechNova Ltd', phone: '08012345678', owner: 'Waliyullahi Lulrman' },
 ];
 
-const RowMenu = ({ name }: { name: string }) => (
-  <Menu modal={false}>
-    <MenuTrigger asChild><IconButton size="sm" aria-label={`Actions for ${name}`} icon={<MoreIcon />} /></MenuTrigger>
-    <MenuContent>
-      <MenuItem tone="info" icon={<EyeIcon />}>View</MenuItem>
-      <MenuItem tone="warning" icon={<PencilIcon />}>Edit</MenuItem>
-      <MenuItem tone="danger" icon={<TrashIcon />}>Delete</MenuItem>
-    </MenuContent>
-  </Menu>
-);
+const RowMenu = ({ name }: { name: string }) => <RowActionsMenu recordName={name} onView={() => {}} onEdit={() => {}} onDelete={() => {}} />;
 
 function ContactsTable({ mode = 'data' }: { mode?: 'data' | 'loading' | 'empty' }) {
   const [query, setQuery] = useState(mode === 'empty' ? 'zzz' : '');
@@ -167,7 +162,7 @@ export const SocialAccounts: Story = {
           <div className="flex flex-wrap items-center gap-3">
             <Input label="Search accounts" hideLabel size="md" placeholder="Search..." leadingIcon={<SearchIcon />} wrapperClassName="w-field-sm" />
             <Select label="Platforms" hideLabel prefix="Platforms:" size="md" defaultValue="all" options={[{ value: 'all', label: 'All' }, { value: 'fb', label: 'Facebook' }]} />
-            <IconButton variant="outline" aria-label="Filter" icon={<FilterIcon />} />
+            <FilterButton />
           </div>
           <Button leadingIcon={<PlusIcon />}>Connect account</Button>
         </>
@@ -234,5 +229,236 @@ export const ExpandableRows: Story = {
         </TableBody>
       </Table>
     </TableCard>
+  ),
+};
+
+/* ------------------------------------------------------------ Email marketing */
+
+const emails = [
+  { id: 1, title: 'Summer Sale: Up to 50% off all plans', delivered: '12,450', open: '64.2%', click: '12.8%', updated: 'Jan 14, 2025', by: 'Sarah K.', send: 'Jan 13, 2025', source: 'Scheduled' },
+  { id: 2, title: 'New Azure features are here! What’s changed', delivered: '9,890', open: '42.1%', click: '8.5%', updated: 'Jan 12, 2025', by: 'Alex T.', send: 'Jan 11, 2025', source: 'API' },
+  { id: 3, title: 'Just launched: Microsoft Security Copilot', delivered: '15,340', open: '55.8%', click: '14.2%', updated: 'Jan 10, 2025', by: 'Mike R.', send: 'Jan 09, 2025', source: 'Manual' },
+  { id: 4, title: 'The Future of Enterprise Security', delivered: '8,560', open: '38.9%', click: '7.1%', updated: 'Jan 08, 2025', by: 'Lisa M.', send: 'Jan 07, 2025', source: 'Scheduled' },
+  { id: 5, title: 'Behind the scenes: Our design process', delivered: '11,200', open: '48.3%', click: '9.6%', updated: 'Jan 05, 2025', by: 'Sarah K.', send: 'Jan 04, 2025', source: 'API' },
+  { id: 6, title: 'Join our upcoming webinar: Securing the cloud', delivered: '14,150', open: '52.0%', click: '11.4%', updated: 'Jan 03, 2025', by: 'Akinola E.', send: 'Jan 02, 2025', source: 'Manual' },
+];
+
+/**
+ * Email marketing list: dot status tabs, numeric columns right-aligned, a two-line "Last updated" cell
+ * (date over author, rows grow to ≈ 61px) and the "…" row menu.
+ */
+export const EmailMarketing: Story = {
+  render: () => {
+    const [page, setPage] = useState(1);
+    return (
+      <div className="flex flex-col gap-4">
+        <TableCard footer={<Pagination page={page} pageSize={6} totalItems={24} onPageChange={setPage} />}>
+          <Tabs variant="dot" defaultValue="all" className="gap-0">
+            <TabsList aria-label="Email status" className="px-5 pt-4">
+              <TabsTrigger value="all">All</TabsTrigger>
+              <TabsTrigger value="drafts">Drafts</TabsTrigger>
+              <TabsTrigger value="scheduled" tone="warning">Scheduled</TabsTrigger>
+              <TabsTrigger value="sent" tone="success">Sent</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Email title</TableHead>
+                <TableHead align="right">Delivered</TableHead>
+                <TableHead align="right">Open rate</TableHead>
+                <TableHead align="right">Click rate</TableHead>
+                <TableHead>Last updated</TableHead>
+                <TableHead>Publish/send date</TableHead>
+                <TableHead>Publish source</TableHead>
+                <TableHead align="right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {emails.map((e) => (
+                <TableRow key={e.id} interactive>
+                  <TableCell emphasis className="max-w-field-sm truncate">{e.title}</TableCell>
+                  <TableCell align="right" className="tabular-nums">{e.delivered}</TableCell>
+                  <TableCell align="right" className="font-medium tabular-nums">{e.open}</TableCell>
+                  <TableCell align="right" className="font-medium tabular-nums">{e.click}</TableCell>
+                  <TableCell className="whitespace-nowrap"><TableCellStack primary={e.updated} secondary={e.by} /></TableCell>
+                  <TableCell className="whitespace-nowrap">{e.send}</TableCell>
+                  <TableCell>{e.source}</TableCell>
+                  <TableCell align="right"><RowMenu name={e.title} /></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableCard>
+      </div>
+    );
+  },
+};
+
+/* ------------------------------------------------------------------ Campaigns */
+
+const campaigns = [
+  { code: '60210', name: 'Q1 Lagos product launch', type: 'Email', audience: 'Lagos prospects', status: 'Active', start: 'Jan 06, 2025' },
+  { code: '60211', name: 'Valentine’s promo', type: 'Social', audience: 'All subscribers', status: 'Scheduled', start: 'Feb 10, 2025' },
+  { code: '60198', name: 'Webinar follow-up', type: 'Email', audience: 'Webinar attendees', status: 'Completed', start: 'Dec 12, 2024' },
+  { code: '60187', name: 'Holiday retargeting', type: 'Ads', audience: 'Cart abandoners', status: 'Paused', start: 'Dec 01, 2024' },
+];
+const statusTone = { Active: 'success', Scheduled: 'info', Completed: 'neutral', Paused: 'warning' } as const;
+
+/** Campaigns list: campaign code as a `TableLink`, status badges, and an inline "View" `RowActionLink` instead of a menu. */
+export const Campaigns: Story = {
+  render: () => (
+    <TableCard
+      toolbar={
+        <>
+          <Input label="Search campaigns" hideLabel size="md" placeholder="Search..." leadingIcon={<SearchIcon />} wrapperClassName="w-field-sm" />
+          <div className="flex items-center gap-3">
+            <FilterButton count={1} />
+            <Button leadingIcon={<PlusIcon />}>New campaign</Button>
+          </div>
+        </>
+      }
+    >
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Code</TableHead><TableHead>Campaign</TableHead><TableHead>Type</TableHead><TableHead>Audience</TableHead><TableHead>Status</TableHead><TableHead>Start date</TableHead><TableHead align="right"><span className="sr-only">Actions</span></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {campaigns.map((c) => (
+            <TableRow key={c.code}>
+              <TableCell><TableLink numeric href="#">{c.code}</TableLink></TableCell>
+              <TableCell emphasis>{c.name}</TableCell>
+              <TableCell>{c.type}</TableCell>
+              <TableCell>{c.audience}</TableCell>
+              <TableCell><Badge tone={statusTone[c.status as keyof typeof statusTone]}>{c.status}</Badge></TableCell>
+              <TableCell className="whitespace-nowrap">{c.start}</TableCell>
+              <TableCell align="right"><RowActionLink>View<span className="sr-only"> {c.name}</span></RowActionLink></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableCard>
+  ),
+};
+
+/* --------------------------------------------------------------- Social posts */
+
+const posts = [
+  { id: 1, title: 'Meet the team behind wCRM', channels: 'Instagram, LinkedIn', status: 'Published', date: 'Jan 14, 2025 · 10:00', by: 'Sarah Chen' },
+  { id: 2, title: '5 tips for cleaner contact data', channels: 'LinkedIn', status: 'Scheduled', date: 'Jan 18, 2025 · 09:30', by: 'Jimmy Dane' },
+  { id: 3, title: 'Product update: bulk import', channels: 'X, Facebook', status: 'Draft', date: '—', by: 'Alex Wong' },
+  { id: 4, title: 'Customer story: Cash Drive', channels: 'Facebook', status: 'Failed', date: 'Jan 12, 2025 · 15:00', by: 'Sarah Chen' },
+];
+const postTone = { Published: 'success', Scheduled: 'warning', Draft: 'neutral', Failed: 'danger' } as const;
+const channelOptions = [{ value: 'ig', label: 'Instagram' }, { value: 'li', label: 'LinkedIn' }, { value: 'fb', label: 'Facebook' }, { value: 'x', label: 'X' }];
+
+/**
+ * Social posts screen: stats row (first card featured), toolbar with `FilterButton`, "New Post" and the list/calendar
+ * `ViewToggle` swap buttons, dot status tabs, then the table with hover-revealed inline actions.
+ */
+export const SocialPosts: Story = {
+  render: () => {
+    const [view, setView] = useState('list');
+    const [draft, setDraft] = useState<string[]>([]);
+    const [applied, setApplied] = useState<string[]>([]);
+    return (
+      <div className="flex flex-col gap-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <StatCard featured label="Total posts" value="127" />
+          <StatCard label="Scheduled" value="24" />
+          <StatCard label="Published" value="89" />
+          <StatCard label="Drafts" value="8" />
+        </div>
+        <TableCard
+          toolbar={
+            <>
+              <Tabs variant="dot" defaultValue="all" className="gap-0">
+                <TabsList aria-label="Post status" className="border-b-0">
+                  <TabsTrigger value="all">All</TabsTrigger>
+                  <TabsTrigger value="drafts">Drafts</TabsTrigger>
+                  <TabsTrigger value="scheduled" tone="warning">Scheduled</TabsTrigger>
+                  <TabsTrigger value="sent" tone="success">Sent</TabsTrigger>
+                </TabsList>
+              </Tabs>
+              <div className="flex flex-wrap items-center gap-5">
+                <FilterPopover trigger={<FilterButton display="responsive" count={applied.length} />} onClear={() => setDraft([])} onApply={() => setApplied(draft)}>
+                  <FilterCheckboxList label="Channels" options={channelOptions} value={draft} onChange={setDraft} />
+                </FilterPopover>
+                <Button leadingIcon={<PlusIcon />}>New post</Button>
+                <ViewToggle
+                  aria-label="Posts view"
+                  value={view}
+                  onValueChange={setView}
+                  options={[{ value: 'list', label: 'List view', icon: <ListIcon /> }, { value: 'calendar', label: 'Calendar view', icon: <CalendarIcon /> }]}
+                />
+              </div>
+            </>
+          }
+        >
+          {view === 'list' ? (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Post</TableHead><TableHead>Channels</TableHead><TableHead>Status</TableHead><TableHead>Publish date</TableHead><TableHead>Author</TableHead><TableHead align="right"><span className="sr-only">Actions</span></TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {posts.map((p) => (
+                  <TableRow key={p.id} interactive>
+                    <TableCell emphasis>{p.title}</TableCell>
+                    <TableCell>{p.channels}</TableCell>
+                    <TableCell><Badge tone={postTone[p.status as keyof typeof postTone]}>{p.status}</Badge></TableCell>
+                    <TableCell className="whitespace-nowrap tabular-nums">{p.date}</TableCell>
+                    <TableCell><span className="flex items-center gap-2"><Avatar name={p.by} />{p.by}</span></TableCell>
+                    <TableCell align="right">
+                      <RowActionButtons
+                        revealOnHover
+                        recordName={p.title}
+                        actions={[
+                          { label: 'Edit', icon: <PencilIcon /> },
+                          { label: 'Duplicate', icon: <CopyIcon /> },
+                          { label: 'Delete', icon: <TrashIcon />, danger: true },
+                        ]}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          ) : (
+            <p className="px-5 py-12 text-center text-body-sm text-text-secondary">Calendar view</p>
+          )}
+        </TableCard>
+      </div>
+    );
+  },
+};
+
+/* -------------------------------------------------------------------- Compact */
+
+/** `density="compact"`: 44px rows for dense reports and side panels. */
+export const Compact: Story = {
+  render: () => (
+    <Card padding="none" className="overflow-hidden">
+      <Table density="compact">
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead><TableHead>Company</TableHead><TableHead>Owner</TableHead><TableHead align="right"><span className="sr-only">Actions</span></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {contacts.slice(0, 5).map((c) => (
+            <TableRow key={c.id}>
+              <TableCell emphasis>{c.name}</TableCell>
+              <TableCell>{c.company}</TableCell>
+              <TableCell>{c.owner}</TableCell>
+              <TableCell align="right"><RowMenu name={c.name} /></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Card>
   ),
 };

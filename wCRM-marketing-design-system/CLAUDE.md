@@ -62,6 +62,8 @@ Figma does not draw were added and marked `"derived"` in `tokens.json`.
 | `text.muted` | `#A3AED0` | Inactive tabs, meta, disabled text |
 | `text.placeholder` | `#98A4BF` | Placeholders |
 | `text.inverse` | `#FFFFFF` | Text on brand fills |
+| `text.link` | `#3366E5` | Record links and inline "View" row actions |
+| `text.icon` | `#8F9BB3` | Unselected icons in the view toggle (swap buttons) |
 | `surface.default` | `#FFFFFF` | Cards, inputs, tables |
 | `surface.canvas` | `#F4F6FA` | Page background |
 | `surface.subtle` | `#F8FAFC` | Table header, read-only fields |
@@ -108,6 +110,8 @@ Controls use 8–16px inside; groups use 24–40px between. Main content padding
 * Widths: `w-field-sm` 320 · `w-popover` 240 · `min-w-menu` 160 · `w-modal-sm/md/lg` 400/560/720 · `w-drawer` 462 · `w-mobile-content` 358 · `max-w-page` 1440. `max-h-menu-max-height` 320.
 * Component sizes: `size-avatar-sm/md/lg` 28/32/40 · `size-checkbox` 16 · `w-switch-width`/`h-switch-height` 42×22.
 * Shadows added for overlays: `shadow-menu` (menus, dropdown panels), `shadow-modal` (centred modals).
+* Gradient: `bg-feature` (`gradient.feature`, #324BF2 → #8E30F2) for the featured stat card only.
+* More sizes: `size-icon-md` 18 (icon in a 40px icon-only button) · `size-icon-tile` 28 (stat card icon tile) · `h-table-row-sm` 44 (compact tables) · `size-module-card` 196.
 
 Tailwind's default colours, spacing and radii are **removed** by the preset, so `bg-blue-500`, `p-7` or
 `rounded-2xl` will not compile to anything. If you need a value that does not exist, add it to
@@ -121,7 +125,9 @@ Interactive behaviour (focus trapping, keyboard navigation, ARIA) comes from **R
 | Component | Figma source | Variants / states |
 |---|---|---|
 | `Button` | `create-button`, `Button`, `Save-Btn` (817:8441, 1926:27103, 1926:27101, 1931:24592) | primary · secondary · outline · ghost · danger; sm/md/lg; loading, disabled, icons, fullWidth |
-| `IconButton` | toolbar `Filter button` (1931:24248 / active 1931:24486), row `more-horizontal` | outline · ghost; sm/md/lg; `active` (filters applied), disabled. `aria-label` required |
+| `IconButton` | toolbar tools, drawer close, inline row actions | outline · ghost; tone default/danger; sm/md/lg; `active`, disabled. `aria-label` required |
+| `FilterButton` | desktop `filter-button` (1230:26010), mobile `Filter button` (1931:24248 / active 1931:24486) | labelled · icon · responsive; applied `count`; active; disabled. Use as the `FilterPopover` trigger |
+| `ViewToggle` | Social posts view switch (`btn-list-view` / `btn-calendar-view`) | swap buttons: 2+ icon options, radio-group keyboard model |
 | `Input` | `Field input`, `Input`, `input-box` (1926:27086, 1926:27124, 1931:24364) | md/lg; default, focus, error, disabled, read-only, leading/trailing icon |
 | `Select` | `Selector Dropdown` (1147:17013, 1225:25729), form selects in Filters panels | md/lg; placeholder, value, toolbar `prefix` ("Accounts: All"), required, error, disabled, open |
 | `Checkbox` | `checkbox-checked` in `filter-popup`, pref rows, frequency checklist | unchecked, checked, indeterminate, disabled; optional label + description |
@@ -129,22 +135,25 @@ Interactive behaviour (focus trapping, keyboard navigation, ARIA) comes from **R
 | `Badge` | `status-badge` (1126:16406), Active/Inactive/Failed pills | success · warning · danger · info · neutral · brand; sm/md; dot |
 | `Tag` | `filter-tag-chip` Active Filters (1039:3995) | default, selected, removable |
 | `Avatar` | 28px initials circles in Contacts/Owners columns | sm 28 / md 32 / lg 40; image or initials |
-| `Tabs` | settings `sub-tabs` (1224:25545), mobile list filters | underline · pill; counts; disabled |
+| `Tabs` | settings `sub-tabs` (1224:25545), mobile list filters, status `subtabs` | underline · pill · dot (status dot per `tone`); counts; disabled |
 | `Menu` | `context-menu` (795:6000) | item tones default/info/warning/danger, icons, label, separator, disabled, shortcut |
 | `FilterPopover` + `FilterCheckboxList` | `filter-popup` (1233:5729), `dropdown-panel` (1228:25996), `filters` (1036:6256) | checkbox list, searchable list, stacked selects; Clear all / Apply; trigger active state |
 | `Accordion` | drawer sections `Component 15/16/17` (808:6625), `pref-row-4` (1529:9554) | section · card; description, trailing `actions` (e.g. Switch), disabled |
 | `Modal`, `ConfirmDialog` | `Move To New Audience - Modal` (1446:32223), mobile "Delete 3 contacts?" | sm/md/lg; picker, form, destructive confirm, loading confirm |
 | `Drawer` | `new contact` (808:6024), `create user` (1823:7659) | 462px right sheet, scrolling body, sticky footer |
-| `Table` (`TableCard`, `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableEmpty`, `TableSkeleton`, `TableExpandableRow`) | Contacts (817:8972), Social accounts (1224:25339), `company-row-expanded` (817:8786) | toolbar, sortable headers, selection, selected/interactive rows, empty/no-results, loading skeleton, expandable rows |
+| `Table` (`TableCard`, `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableEmpty`, `TableSkeleton`, `TableExpandableRow`, `TableCellStack`) | Contacts (817:8972), Social accounts (1224:25339), `company-row-expanded` (817:8786), Email marketing, Campaigns, Social posts | toolbar, sortable headers, selection, selected/interactive rows, empty/no-results, loading skeleton, expandable rows, two-line cells, `density` default/compact |
 | `Pagination` | Contacts / User management footers | summary, ellipses, current page, page size |
+| `Card`, `CardHeader`, `StatCard`, `SummaryCard`, `MetricCard`, `ProgressBar`, `ModuleCard`, `ActivityFeed` | `stats-row` / `stat-card-*` (Social posts, Email), audience summaries, email performance, module picker, activity panel | stat: featured gradient, icon tile, trend up/down (`invert` when a drop is good); summary tones; metric details; progress tones; module selected/disabled |
+| `RowActionsMenu`, `RowActionLink`, `RowActionButtons`, `TableLink` | `more-horizontal` + `context-menu`, Campaigns "View" link and code link | View/Edit/Delete from handlers or custom actions with separators; inline link (a or button); inline icon buttons with optional hover reveal |
 
 Icons live in `src/icons` (outline set matching Figma's vuesax/lucide icons): `PlusIcon`, `SearchIcon`, `FilterIcon`,
 `CloseIcon`, `ChevronDownIcon`, `MoreIcon`, `EyeIcon`, `PencilIcon`, `TrashIcon`, `UploadIcon`, `DownloadIcon`,
-`HistoryIcon`, `UsersIcon`, `MailIcon`, plus `Spinner` and `AlertCircle`.
+`HistoryIcon`, `UsersIcon`, `MailIcon`, `ListIcon`, `CalendarIcon`, `GridIcon`, `TrendUpIcon`, `TrendDownIcon`, `SendIcon`,
+`CheckIcon`, `CopyIcon`, plus `Spinner` and `AlertCircle`. `FilterIcon`, `ListIcon` and `CalendarIcon` are the exact Figma vector exports.
 
 Figma does not draw focus, hover, disabled or loading states for most of these; those were derived and are listed in
 `docs/figma-mapping.md`. Patterns in Figma that are still not components: date/time pickers, the frequency
-day-picker, sidebar navigation, app header, KPI stat cards, charts.
+day-picker, sidebar navigation, app header, charts.
 
 ### Conventions for new components
 

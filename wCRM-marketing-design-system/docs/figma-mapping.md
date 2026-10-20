@@ -68,4 +68,11 @@ Derived (not in Figma): focus (navy border + `shadow-focus`), hover border, disa
 | Drawer | `new contact` 808:6024, `create user` 1823:7659, `email config` 1556:14067 | Width `size.drawer` 462. |
 | Table | Contacts 817:8972, Social accounts 1224:25339, `company-row-expanded` 817:8786 | Header 11px Inter Bold `text.muted` on `surface.subtle`; name cells semibold `accent.navy-hover` (#2B3674). Sort affordance, selection, skeleton and empty states are derived. |
 | Pagination | Contacts list footer | Ellipsis rules derived. |
-| IconButton | `Filter button` 1931:24248 / 1931:24486 (active) | |
+| IconButton | toolbar tools, close, inline row actions | `tone="danger"` hover is derived. |
+| FilterButton | `filter-button` 1230:26010 (desktop), `Filter button` 1931:24248 / 1931:24486 (mobile, active) | Desktop: 40px, transparent, 1px `border.default`, r8, 10/16 padding, 8px gap, 14/500 `text.secondary`. Figma's desktop instance uses a calendar glyph; code uses the vuesax funnel from the mobile button so both read as "filter". Count pill is derived. |
+| ViewToggle | `Frame 1618874107` → `btn-list-view` / `btn-calendar-view` | Group outline `text.muted`, cells 40×40 r8, selected `brand.primary` + white icon, unselected `text.icon` (#8F9BB3). Keyboard model derived. |
+| StatCard | `stats-row` / `stat-card-0..3` | 12/600 uppercase `text.muted` label, 28/700 value (`text-display`), p20, gap 12. Featured uses `gradient.feature`; its label is white (Figma's #A3AED0 on the gradient fails contrast). Icon tile and trend are derived from dashboard KPI cards. |
+| SummaryCard, MetricCard, ProgressBar, ModuleCard, ActivityFeed | audience summaries, email performance, module picker, activity panel | Module card 196 square, r16, `border.subtle`, resting shadow. |
+| Tabs `dot` | `subtabs` (All / Drafts / Scheduled / Sent) | Roboto 14, 8px dot, active red underline. Inactive labels use the `-text` status tokens instead of Figma's bright #E9BB2B / #05D38A for contrast. |
+| RowActions | `more-horizontal` (54×22, r4, 14px icon), `context-menu`, Campaigns "View" (eye + 13/500 #409CFF), code link #3366E5 | Trigger is 24px (WCAG 2.2 target size) instead of 22. "View" uses `text.link` (#3366E5) because #409CFF fails 4.5:1 on white. |
+| Table (email style) | Email marketing `table-content` | Two-line "Last updated" cell (date `text.secondary` over author `accent.navy-hover`), rows ≈ 61px, numeric columns right-aligned (Figma left-aligns them). |

@@ -49,6 +49,7 @@ export default {
     spacing: { ...group('space', tokens.space), px: '1px' },
     borderRadius: { none: '0px', ...group('radius', tokens.radius) },
     boxShadow: { none: 'none', ...group('shadow', tokens.shadow) },
+    backgroundImage: { none: 'none', ...group('gradient', tokens.gradient) },
     fontFamily: group('font', tokens.font.family),
     fontWeight: group('font-weight', tokens.font.weight),
     fontSize,

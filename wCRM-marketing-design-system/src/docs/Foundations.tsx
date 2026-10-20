@@ -3,16 +3,19 @@ import { Accordion, AccordionItem } from '../components/Accordion';
 import { Avatar } from '../components/Avatar';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
+import { StatCard, SummaryCard } from '../components/Card';
 import { Checkbox } from '../components/Checkbox';
-import { IconButton } from '../components/IconButton';
+import { FilterButton } from '../components/FilterButton';
 import { Input } from '../components/Input';
 import { Pagination } from '../components/Pagination';
+import { RowActionLink, RowActionsMenu, TableLink } from '../components/RowActions';
 import { Select } from '../components/Select';
 import { Switch } from '../components/Switch';
-import { Table, TableBody, TableCard, TableCell, TableHead, TableHeader, TableRow } from '../components/Table';
+import { Table, TableBody, TableCard, TableCell, TableCellStack, TableHead, TableHeader, TableRow } from '../components/Table';
 import { Tabs, TabsList, TabsTrigger } from '../components/Tabs';
 import { Tag } from '../components/Tag';
-import { FilterIcon, MoreIcon, PlusIcon, SearchIcon } from '../icons';
+import { ViewToggle } from '../components/ViewToggle';
+import { CalendarIcon, ListIcon, MailIcon, PlusIcon, SearchIcon, SendIcon, UsersIcon } from '../icons';
 import { tokens } from '../tokens/tokens';
 import { cn } from '../utils/cn';
 
@@ -287,7 +290,7 @@ export function Foundations({ logoSrc }: FoundationsProps) {
               <>
                 <div className="flex flex-wrap items-center gap-3">
                   <Input label="Search contacts" hideLabel size="md" placeholder="Search..." leadingIcon={<SearchIcon />} wrapperClassName="w-field-sm" />
-                  <IconButton variant="outline" active aria-label="Filter (1 applied)" icon={<FilterIcon />} />
+                  <FilterButton count={1} />
                 </div>
                 <Button leadingIcon={<PlusIcon />}>Create contact</Button>
               </>
@@ -315,13 +318,119 @@ export function Foundations({ logoSrc }: FoundationsProps) {
                     <TableCell>{e}</TableCell>
                     <TableCell>{c}</TableCell>
                     <TableCell><Badge tone={st === 'Active' ? 'success' : 'neutral'}>{st}</Badge></TableCell>
-                    <TableCell align="right"><IconButton size="sm" aria-label={`Actions for ${n}`} icon={<MoreIcon />} /></TableCell>
+                    <TableCell align="right"><RowActionsMenu recordName={n} onView={() => {}} onEdit={() => {}} onDelete={() => {}} /></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableCard>
           <Note>Overlays (Menu, FilterPopover, Modal, ConfirmDialog, Drawer) and the loading, empty and expandable table states are documented interactively in Storybook.</Note>
+        </Section>
+
+
+        {/* 07 Cards, toolbar controls and more table styles */}
+        <Section index="07" title="Cards & list toolbars" aside="Stat and summary cards, filter and swap buttons, table styles">
+          <div className="flex flex-col gap-8">
+            <div>
+              <Eyebrow>Stats row · first card featured</Eyebrow>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                <StatCard featured label="Total posts" value="127" />
+                <StatCard label="Scheduled" value="24" />
+                <StatCard icon={<SendIcon />} label="Emails sent" value="72,130" trend={{ value: '12%', direction: 'up', label: 'vs last month' }} />
+                <StatCard icon={<UsersIcon />} label="Unsubscribes" value="184" trend={{ value: '8%', direction: 'down', invert: true }} />
+              </div>
+            </div>
+            <div>
+              <Eyebrow>Summary cards</Eyebrow>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <SummaryCard icon={<UsersIcon />} tone="brand" label="Total audiences" value="12" />
+                <SummaryCard icon={<MailIcon />} tone="info" label="Subscribed contacts" value="8,420" />
+                <SummaryCard icon={<SendIcon />} tone="success" label="Campaigns sent" value="36" />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div>
+                <Eyebrow>Filter button · desktop, applied, mobile, mobile applied</Eyebrow>
+                <div className="flex flex-wrap items-center gap-3">
+                  <FilterButton />
+                  <FilterButton count={2} />
+                  <FilterButton display="icon" />
+                  <FilterButton display="icon" count={2} />
+                </div>
+              </div>
+              <div>
+                <Eyebrow>Toolbar · filter, primary action, list / calendar swap</Eyebrow>
+                <div className="flex flex-wrap items-center gap-5">
+                  <FilterButton />
+                  <Button leadingIcon={<PlusIcon />}>New post</Button>
+                  <ViewToggle aria-label="Posts view" value="list" onValueChange={() => {}} options={[{ value: 'list', label: 'List view', icon: <ListIcon /> }, { value: 'calendar', label: 'Calendar view', icon: <CalendarIcon /> }]} />
+                </div>
+              </div>
+            </div>
+            <div>
+              <Eyebrow>Email table · dot status tabs, numeric columns, two-line cell, row menu</Eyebrow>
+              <TableCard>
+                <Tabs variant="dot" defaultValue="all" className="gap-0">
+                  <TabsList aria-label="Email status" className="px-5 pt-4">
+                    <TabsTrigger value="all">All</TabsTrigger>
+                    <TabsTrigger value="drafts">Drafts</TabsTrigger>
+                    <TabsTrigger value="scheduled" tone="warning">Scheduled</TabsTrigger>
+                    <TabsTrigger value="sent" tone="success">Sent</TabsTrigger>
+                  </TabsList>
+                </Tabs>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Email title</TableHead>
+                      <TableHead align="right">Delivered</TableHead>
+                      <TableHead align="right">Open rate</TableHead>
+                      <TableHead>Last updated</TableHead>
+                      <TableHead>Source</TableHead>
+                      <TableHead align="right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      ['Summer Sale: Up to 50% off', '12,450', '64.2%', 'Jan 14, 2025', 'Sarah K.', 'Scheduled'],
+                      ['New Azure features are here!', '9,890', '42.1%', 'Jan 12, 2025', 'Alex T.', 'API'],
+                    ].map(([title, d, o, u, by, s]) => (
+                      <TableRow key={title}>
+                        <TableCell emphasis>{title}</TableCell>
+                        <TableCell align="right" className="tabular-nums">{d}</TableCell>
+                        <TableCell align="right" className="font-medium tabular-nums">{o}</TableCell>
+                        <TableCell className="whitespace-nowrap"><TableCellStack primary={u} secondary={by} /></TableCell>
+                        <TableCell>{s}</TableCell>
+                        <TableCell align="right"><RowActionsMenu recordName={title} onView={() => {}} onEdit={() => {}} onDelete={() => {}} /></TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableCard>
+            </div>
+            <div>
+              <Eyebrow>Campaign table · record link and inline View action</Eyebrow>
+              <TableCard>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Code</TableHead><TableHead>Campaign</TableHead><TableHead>Status</TableHead><TableHead align="right"><span className="sr-only">Actions</span></TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[['60210', 'Q1 Lagos product launch', 'Active'], ['60211', 'Valentine’s promo', 'Scheduled']].map(([code, name, st]) => (
+                      <TableRow key={code}>
+                        <TableCell><TableLink numeric href="#">{code}</TableLink></TableCell>
+                        <TableCell emphasis>{name}</TableCell>
+                        <TableCell><Badge tone={st === 'Active' ? 'success' : 'info'}>{st}</Badge></TableCell>
+                        <TableCell align="right"><RowActionLink>View<span className="sr-only"> {name}</span></RowActionLink></TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableCard>
+            </div>
+          </div>
+          <Note>Metric, progress, module and activity cards, hover-revealed row buttons and compact tables are in Storybook under Card, RowActions and Table.</Note>
         </Section>
 
         <footer className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border-default pt-6">
