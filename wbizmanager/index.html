@@ -128,8 +128,8 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .hero-act{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
 .proof{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--muted)}
 .hero-art{position:relative;min-width:0;container-type:inline-size;
-  /* Monitor sized so the whole dashboard sits inside the panel */
-  --mx:6cqw;--my:8.5cqw;--mw:88cqw}
+  /* Monitor geometry from the Figma frame (780 wide at 39,37 on a 686 x 631 panel) */
+  --mx:5.69cqw;--my:5.39cqw;--mw:113.7cqw}
 .panel-blue{position:relative;aspect-ratio:686/631;background:var(--brand);border-radius:var(--r-panel);overflow:hidden}
 .panel-blue::before{content:"";position:absolute;width:520px;height:520px;right:-140px;top:-180px;border-radius:50%;background:radial-gradient(closest-side, rgba(255,255,255,.22), transparent)}
 /* Desktop monitor mockup: the HTML screen sits under the transparent bezel */
@@ -138,11 +138,11 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .monitor .scaler{position:absolute;left:1.54%;top:0;width:98.46%}
 .monitor .frame{border-radius:16px;box-shadow:0 23px 61px -15px rgba(0,23,71,.45)}
 .hero-art .float{position:absolute;z-index:3}
-/* Float positions as a share of the panel width; kept on the edges so the dashboard stays readable */
-.hf1{right:-3cqw;top:-5cqw}
-.hf4{left:-6cqw;top:-4cqw}
-.hf2{left:-6cqw;top:74cqw}
-.hf3{right:-3cqw;top:76cqw}
+/* Float positions from the Figma hero, as a share of the panel width so they hold as it scales */
+.hf1{left:46.5cqw;top:-4.66cqw}
+.hf2{left:-4.08cqw;top:11.08cqw}
+.hf3{left:45.34cqw;top:67.49cqw}
+.hf4{left:-9.62cqw;top:45.19cqw}
 .float .spark-s{display:flex;align-items:flex-end;gap:3px;height:26px;margin-left:4px}
 .float .spark-s i{width:5px;border-radius:2px;background:#C7DCFF}
 .float .spark-s i:last-child{background:var(--brand)}
@@ -150,16 +150,16 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 @media (max-width:1060px){
   .hero{padding-block:32px 56px}
   .hero .wrap{grid-template-columns:1fr;gap:40px}
-  .hero-art{--mx:12cqw;--my:7cqw;--mw:76cqw}
-  .panel-blue{aspect-ratio:auto;height:71cqw}
+  .hero-art{--mx:40px;--my:40px;--mw:min(108cqw,780px)}
+  .panel-blue{aspect-ratio:auto;height:min(68cqw,560px)}
   .hf1{left:auto;right:16px;top:-20px}
   .hf2{left:-6px;top:auto;bottom:40px}
   .hero-art .hf3,.hero-art .hf4{display:none}
 }
 @media (max-width:640px){.hero-art .hf2,.hero-art .hf3{display:none}}
 @media (max-width:560px){
-  .hero-art{--mx:6cqw;--my:9cqw;--mw:88cqw}
-  .panel-blue{height:80cqw}
+  .hero-art{--mx:20px;--my:24px}
+  .panel-blue{height:min(84cqw,380px)}
   .hero-act .btn{width:100%}
 }
 
@@ -187,6 +187,10 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .tb-ic .i{width:17px;height:17px}
 .tb-moon{width:30px;height:30px;border-radius:8px;background:var(--brand-subtle);color:var(--brand);display:grid;place-items:center}
 .tb-moon .i{width:16px;height:16px}
+.monitor .topbar{gap:26px;padding:0 92px 0 24px}.monitor .tb-moon{width:36px;height:36px;border-radius:10px}.monitor .tb-ic .i{width:19px;height:19px}.monitor .topbar .av{width:34px!important;height:34px!important;font-size:12px}.monitor .who{margin-left:-16px}.monitor .who b{font-size:13.5px}.tb-chev{margin-left:-16px}.monitor .tb-chev .i{width:14px;height:14px}
+.tb-crumb{margin-right:auto;color:var(--brand);font-weight:500;font-size:12.5px}
+.tb-moon.g{background:#F1F5F9;color:var(--text-2)}
+.tb-bell{position:relative}.tb-bell b{position:absolute;top:-6px;right:-7px;min-width:15px;height:15px;padding:0 3px;border-radius:999px;background:var(--c-red);color:#fff;font-size:9px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px #fff}
 .who{line-height:1.15}.who b{display:block;font-size:12.5px}.who small{font-size:10.5px;color:var(--faint)}
 .crumb{padding:10px 24px;border-bottom:1px solid var(--border);font-size:12.5px;color:var(--muted)}
 .crumb b{color:var(--brand-ink);font-weight:500}
@@ -747,12 +751,13 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
                 </aside>
                 <div class="main">
                   <div class="topbar">
-                    <span class="tb-pill"><span class="dot"></span>Accountant<svg class="i" style="width:13px;height:13px"><use href="#i-down"/></svg></span>
+                    <span class="tb-crumb">Dashboard</span>
                     <span class="tb-ic"><svg class="i"><use href="#i-spark"/></svg>Tour</span>
-                    <span class="tb-moon"><svg class="i"><use href="#i-moon"/></svg></span>
-                    <span class="tb-ic"><svg class="i"><use href="#i-bell"/></svg></span>
-                    <span class="av" style="background:var(--c-slate);width:30px;height:30px">AO</span>
-                    <span class="who"><b>Ada Obi</b><small>Accountant</small></span>
+                    <span class="tb-moon g"><svg class="i"><use href="#i-moon"/></svg></span>
+                    <span class="tb-ic tb-bell"><svg class="i"><use href="#i-bell"/></svg><b>8</b></span>
+                    <span class="av" style="background:var(--brand);width:30px;height:30px">AO</span>
+                    <span class="who"><b>Ada</b><small>Super User</small></span>
+                    <span class="tb-ic tb-chev"><svg class="i"><use href="#i-down"/></svg></span>
                     <span class="tb-ic"><svg class="i"><use href="#i-grid"/></svg></span>
                   </div>
                   <div class="page ad">
