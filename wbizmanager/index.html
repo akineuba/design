@@ -227,6 +227,50 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .donut-list i{width:8px;height:8px;border-radius:50%}
 .donut-list b{font-weight:600}.donut-list small{color:var(--faint);text-align:right}
 svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
+/* hero screen: Accounting overview */
+.page.ad{padding:18px 24px;gap:12px;background:var(--canvas);height:100%}
+.ad-hello{display:flex;justify-content:space-between;align-items:flex-end}
+.ad-hello > div{display:grid;gap:4px}.ad-hello .greet{font-size:25px}.ad-hello .greet i{font-style:normal;color:var(--brand)}
+.ad-hello .sub{font-size:12.5px}.ad-hello .date{font-size:11.5px}
+.ad-bar{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.ad-bar b{font-size:15.5px;font-weight:600;letter-spacing:-.01em}.ad-bar > .i{width:15px;height:15px}
+.ad-ico{width:30px;height:30px;border:1px solid var(--border);border-radius:8px;display:grid;place-items:center;background:#fff;color:var(--muted)}.ad-ico .i{width:15px;height:15px}
+.ad-dots{color:var(--faint);letter-spacing:1px;font-weight:700;line-height:1}
+.ad-sp{flex:1}
+.ad-btn{display:flex;align-items:center;gap:7px;height:32px;padding:0 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-weight:600;font-size:12.5px}
+.ad-btn .i{width:14px;height:14px}.ad-btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.ad-meta{display:flex;align-items:center;gap:10px;font-size:10.5px;color:var(--faint)}
+.ad-role{display:flex;align-items:center;gap:5px;background:var(--brand-subtle);color:var(--brand-ink);font-weight:500;padding:4px 8px;border-radius:6px}
+.ad-role .i,.ad-rf .i{width:12px;height:12px}.ad-rf{color:var(--muted);display:grid}
+.ad-sel{display:flex;align-items:center;gap:18px;border:1px solid var(--border);background:#fff;border-radius:7px;padding:5px 9px;color:var(--text-2);font-size:11px}.ad-sel .i{width:12px;height:12px}
+.ad-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.ad-kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:13px 14px;display:grid;gap:8px}
+.ad-kpi.on{border-top:2px solid var(--brand)}
+.ad-kh,.ad-ch{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--text-2);font-weight:500}
+.ad-kh .ad-dots,.ad-ch .ad-dots{margin-left:auto}
+.ad-kh{white-space:nowrap}
+.ad-ki{width:22px;height:22px;border-radius:6px;background:var(--brand-subtle);color:var(--brand);display:grid;place-items:center}.ad-ki .i{width:13px;height:13px}
+.ad-kpi strong{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.ad-kf{display:flex;justify-content:space-between;align-items:center}.ad-kf small{font-size:10px;color:var(--muted)}
+.ad-ne{color:var(--faint);display:grid}.ad-ne .i{width:12px;height:12px;rotate:-45deg}
+.ad-row{display:grid;grid-template-columns:minmax(0,1.72fr) minmax(0,1fr);gap:12px}
+.ad-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:13px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.ad-ch{font-size:13px;font-weight:600;color:var(--text)}
+.ad-leg{display:flex;gap:14px;font-size:10px;color:var(--muted);align-items:center}
+.ad-leg span{display:flex;align-items:center;gap:5px}.ad-leg i{width:7px;height:7px;border-radius:2px}
+.ad-cf{margin-top:auto;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:9px;font-size:9.5px;color:var(--faint)}
+.ad-cf a{display:flex;align-items:center;gap:4px;color:var(--text-2);font-size:10.5px}.ad-cf .i{width:11px;height:11px}
+.ad-donut{display:grid;place-items:center;padding:4px 0}
+.ad-dl{display:grid;grid-template-columns:1fr 1fr;gap:7px 22px;font-size:10.5px;color:var(--text-2)}
+.ad-dl div{display:flex;align-items:center;gap:6px}.ad-dl i{width:7px;height:7px;border-radius:2px}.ad-dl b{margin-left:auto;font-weight:600}
+.ad-tbl{display:grid;font-size:11.5px}
+.ad-tr{display:grid;grid-template-columns:72px 1fr 110px 140px;gap:10px;align-items:center;padding:7px 0;border-top:1px solid var(--border)}
+.ad-tr b{font-weight:600}.ad-tr .num{text-align:right;font-weight:600}
+.ad-st{justify-self:end;font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px}
+.ad-st.ov{background:var(--error-bg);color:var(--c-red)}.ad-st.se{background:var(--warn-bg);color:#B45309}.ad-st.pp{background:var(--brand-subtle);color:var(--brand-ink)}
+.ad-qa{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ad-qa span{display:flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:11.5px;font-weight:500}.ad-qa .i{width:13px;height:13px;color:var(--brand)}
+
 .trend{font-size:10.5px;font-weight:600}.trend.up{color:var(--success)}.trend.dn{color:var(--error)}
 .bar{height:6px;border-radius:999px;background:var(--panel);overflow:hidden}
 .bar i{display:block;height:100%;border-radius:inherit;background:var(--brand)}
@@ -397,10 +441,11 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .core-mark img{width:62%;height:auto}
 .core b{font-size:3.4cqw;font-weight:600;letter-spacing:-.02em}
 .sat{position:absolute;translate:-50% -50%;width:15%;aspect-ratio:1;border-radius:50%;background:#fff;
-  box-shadow:0 2cqw 6cqw -1.5cqw rgba(0,0,0,.5);display:grid;place-content:center;justify-items:center;text-align:center;gap:.9cqw;padding:2cqw;
+  box-shadow:0 2cqw 6cqw -1.5cqw rgba(0,0,0,.5);display:grid;place-content:center;justify-items:center;text-align:center;gap:1.1cqw;padding:1cqw;
   transition:box-shadow .4s;animation:bob 6s ease-in-out infinite;animation-delay:var(--d)}
 @keyframes bob{50%{translate:-50% calc(-50% - 1cqw)}}
-.sat .si{width:8.6cqw;aspect-ratio:1;display:grid;place-items:center;color:var(--brand)}
+.sat .sl{font-size:1.6cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-ink);line-height:1;white-space:nowrap}
+.sat .si{width:6.6cqw;aspect-ratio:1;display:grid;place-items:center;color:var(--brand)}
 .sat .si .i{width:100%;height:100%;stroke-width:1.75}
 .sat b{font-size:2.5cqw;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.1}
 .sat small{font-size:1.75cqw;color:var(--muted);line-height:1.3}
@@ -465,7 +510,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .partner a{color:#fff;font-weight:600;display:inline-flex;align-items:center;gap:6px}
 .partner a .i{width:16px;height:16px}
 .start .wrap{position:relative}
-.start-art{position:absolute;left:428px;top:90px;width:1000px;min-width:0;pointer-events:none}
+.start-art{position:absolute;right:calc(var(--gutter) * -1);bottom:0;width:min(820px,60vw);min-width:0;pointer-events:none}
 .kb-stage{position:absolute;top:0;left:0;width:1000px;height:761px;transform-origin:0 0;transform:scale(var(--s))}
 .kb-stage > img{position:absolute;inset:0;width:100%;height:100%}
 .kb-screen{position:absolute;inset:0;clip-path:path("M 371.17 51.75 C 371.16 47.96 371.15 46.07 371.92 44.73 C 372.6 43.56 373.66 42.66 374.94 42.19 C 376.39 41.65 378.25 41.97 381.98 42.62 L 581.79 77.11 C 583.07 77.33 583.72 77.44 584.2 77.76 C 584.62 78.05 584.95 78.44 585.16 78.91 C 585.4 79.44 585.4 80.09 585.4 81.39 L 585.4 85.57 C 585.4 87.2 585.4 88.01 585.69 88.68 C 585.96 89.26 586.37 89.76 586.91 90.11 C 587.51 90.51 588.31 90.65 589.91 90.93 L 639.74 99.47 C 641.49 99.77 642.36 99.92 643.04 99.67 C 643.64 99.45 644.14 99.02 644.46 98.47 C 644.82 97.84 644.82 96.96 644.82 95.18 L 644.82 91.21 C 644.82 90.1 644.82 89.55 645.05 89.16 C 645.25 88.81 645.56 88.55 645.93 88.41 C 646.36 88.25 646.91 88.35 648 88.54 L 852.92 123.91 C 856.14 124.46 857.74 124.74 858.95 125.55 C 860.01 126.26 860.85 127.26 861.37 128.43 C 861.96 129.75 861.95 131.39 861.94 134.65 L 860.78 495.42 L 372.16 406.45 L 371.17 51.75 Z")}
@@ -524,7 +569,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .kbx .cat p{margin:0 0 18px;font-size:14.5px;line-height:1.6;color:#475569;min-height:46px}
 .kbx .cat a{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:15px}
 .kbx .cat .ar{width:15px;height:15px}
-@media (max-width:1100px){.start .wrap{grid-template-columns:1fr;gap:0}.start-copy{padding-bottom:0}.start-art{position:relative;top:auto;left:auto;width:auto;margin:16px calc(var(--bleed) * -1) 0 0;height:min(64vw,640px)}.start-art .scaler{margin-left:-16%}}
+@media (max-width:1100px){.start .wrap{grid-template-columns:1fr;gap:0}.start-copy{padding-bottom:0}.start-art{position:relative;top:auto;left:auto;right:auto;width:100%;max-width:720px;margin:24px auto 0}}
 
 /* ───────── Footer ───────── */
 .ftr{padding-block:56px 32px;font-size:14px}
@@ -702,48 +747,32 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
                 </aside>
                 <div class="main">
                   <div class="topbar">
-                    <span class="tb-pill"><span class="dot"></span>Super User<svg class="i" style="width:13px;height:13px"><use href="#i-down"/></svg></span>
+                    <span class="tb-pill"><span class="dot"></span>Accountant<svg class="i" style="width:13px;height:13px"><use href="#i-down"/></svg></span>
                     <span class="tb-ic"><svg class="i"><use href="#i-spark"/></svg>Tour</span>
                     <span class="tb-moon"><svg class="i"><use href="#i-moon"/></svg></span>
                     <span class="tb-ic"><svg class="i"><use href="#i-bell"/></svg></span>
                     <span class="av" style="background:var(--c-slate);width:30px;height:30px">AO</span>
-                    <span class="who"><b>Adaeze</b><small>Super User</small></span>
+                    <span class="who"><b>Ada Obi</b><small>Accountant</small></span>
                     <span class="tb-ic"><svg class="i"><use href="#i-grid"/></svg></span>
                   </div>
-                  <div class="crumb"><b>Dashboard</b></div>
-                  <div class="page">
-                    <div style="display:grid;gap:6px">
-                      <span class="date"><svg class="i"><use href="#i-cal"/></svg>Monday, 12 October 2026</span>
-                      <span class="greet">Good afternoon, Adaeze</span>
-                      <span class="sub">Here's what's happening across your business today. <span class="tag">Super User</span></span>
+                  <div class="page ad">
+                    <div class="ad-hello"><div><span class="greet">Good morning, Ada<i>.</i></span><span class="sub">Here's what matters across your work today.</span></div><span class="date"><svg class="i"><use href="#i-cal"/></svg>Saturday, 17 October 2026</span></div>
+                    <div class="ad-bar"><span class="ad-ico"><svg class="i"><use href="#i-grid"/></svg></span><b>Accounting overview · Default</b><svg class="i"><use href="#i-down"/></svg><span class="ad-dots">···</span><span class="ad-sp"></span><span class="ad-btn"><svg class="i"><use href="#i-grid"/></svg>Templates</span><span class="ad-btn pri"><svg class="i"><use href="#i-sliders"/></svg>Customize</span></div>
+                    <div class="ad-meta"><span class="ad-role"><svg class="i"><use href="#i-check-c"/></svg>Accountant</span><span>Department access</span><span class="ad-sp"></span><span>Sample data · 17 Oct 2026</span><span class="ad-rf"><svg class="i"><use href="#i-refresh"/></svg></span><span class="ad-sel">October 2026<svg class="i"><use href="#i-down"/></svg></span></div>
+                    <div class="ad-kpis num"><div class="ad-kpi on"><div class="ad-kh"><span class="ad-ki"><svg class="i"><use href="#i-receipt"/></svg></span>Outstanding invoices<span class="ad-dots">···</span></div><strong>₦810.4M</strong><div class="ad-kf"><small>Unpaid invoice balance</small><span class="ad-ne"><svg class="i"><use href="#i-arrow"/></svg></span></div></div><div class="ad-kpi"><div class="ad-kh"><span class="ad-ki"><svg class="i"><use href="#i-check-c"/></svg></span>Collected this period<span class="ad-dots">···</span></div><strong>₦1.09B</strong><div class="ad-kf"><small>Payments against invoices</small><span class="ad-ne"><svg class="i"><use href="#i-arrow"/></svg></span></div></div><div class="ad-kpi"><div class="ad-kh"><span class="ad-ki"><svg class="i"><use href="#i-file"/></svg></span>Open invoices<span class="ad-dots">···</span></div><strong>14</strong><div class="ad-kf"><small>With an unpaid balance</small><span class="ad-ne"><svg class="i"><use href="#i-arrow"/></svg></span></div></div><div class="ad-kpi"><div class="ad-kh"><span class="ad-ki"><svg class="i"><use href="#i-book"/></svg></span>Journal entries<span class="ad-dots">···</span></div><strong>38</strong><div class="ad-kf"><small>In your permitted scope</small><span class="ad-ne"><svg class="i"><use href="#i-arrow"/></svg></span></div></div></div>
+                    <div class="ad-row">
+                      <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-chart"/></svg></span>Invoice activity<span class="ad-dots">···</span></div>
+                        <div class="ad-leg"><span><i style="background:#0070FF"></i>Invoice value</span><span><i style="background:#E9A23B"></i>Collected</span><span class="ad-sp"></span><span>NGN</span></div>
+                        <svg class="chart" id="inv-act" viewBox="0 0 600 176" width="100%"></svg>
+                        <div class="ad-cf"><span>Department scope · October 2026</span><a>View details<svg class="i"><use href="#i-arrow"/></svg></a></div></div>
+                      <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-target"/></svg></span>Invoice breakdown<span class="ad-dots">···</span></div>
+                        <div class="ad-donut"><svg id="inv-donut" viewBox="0 0 120 120" width="132" height="132"></svg></div>
+                        <div class="ad-dl num" id="inv-legend"></div>
+                        <div class="ad-cf"><span>Department scope · October 2026</span><a>View details<svg class="i"><use href="#i-arrow"/></svg></a></div></div>
                     </div>
-                    <div class="chips">
-                      <span class="chip"><svg class="i" style="color:var(--c-orange)"><use href="#i-clip"/></svg>56 pending approvals</span>
-                      <span class="chip"><svg class="i" style="color:var(--brand)"><use href="#i-users"/></svg>26 active employees</span>
-                      <span class="chip"><svg class="i" style="color:var(--c-green)"><use href="#i-trend"/></svg>2 open tenders</span>
-                    </div>
-                    <div class="kpis num">
-                      <div class="kpi"><div class="top">Pending Approvals<span class="badge b-orange"><svg class="i"><use href="#i-clip"/></svg></span></div><strong>56</strong><small>18 due this week</small></div>
-                      <div class="kpi"><div class="top">Active Employees<span class="badge b-green"><svg class="i"><use href="#i-users"/></svg></span></div><strong>26</strong><small>+2 this month</small></div>
-                      <div class="kpi"><div class="top">Open Tenders<span class="badge b-slate"><svg class="i"><use href="#i-brief"/></svg></span></div><strong>2</strong><small>50% win rate</small></div>
-                      <div class="kpi"><div class="top">Tender Pipeline<span class="badge b-blue"><svg class="i"><use href="#i-target"/></svg></span></div><strong>₦50.1M</strong><small>avg deal ₦25M</small></div>
-                    </div>
-                    <div class="row2">
-                      <div class="card">
-                        <div class="card-head">
-                          <div><h5>Approval Activity <span class="live">Live</span></h5><div class="cap">Submitted vs. approved vs. rejected across the workflow</div></div>
-                          <div class="seg"><span>7 days</span><span class="on">30 days</span></div>
-                        </div>
-                        <svg class="chart" id="approvals" viewBox="0 0 560 200" width="100%"></svg>
-                        <div class="legend"><span><i style="background:var(--c-green)"></i>Approved</span><span><i style="background:var(--c-red)"></i>Rejected</span><span><i style="background:var(--brand)"></i>Submitted</span></div>
-                      </div>
-                      <div class="card">
-                        <h5>Pending Items by Module</h5><div class="cap">Awaiting action right now</div>
-                        <div class="donut-wrap">
-                          <svg id="donut" viewBox="0 0 120 120" width="128" height="128"></svg>
-                          <div class="donut-list num" id="donut-list"></div>
-                        </div>
-                      </div>
+                    <div class="ad-row">
+                      <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-menu"/></svg></span>Invoices to follow up<span class="ad-dots">···</span></div><div class="ad-tbl"><div class="ad-tr"><b>INV-2029</b><span>NNPC E&amp;P Limited</span><span class="num">₦210,700,000</span><span class="ad-st ov">Overdue · 12 days</span></div><div class="ad-tr"><b>INV-2038</b><span>Shell (SPDC)</span><span class="num">₦126,000,000</span><span class="ad-st se">Sent · due 28 Oct</span></div><div class="ad-tr"><b>INV-2035</b><span>Seplat Energy</span><span class="num">₦73,200,000</span><span class="ad-st pp">Part-paid · ₦40M left</span></div><div class="ad-tr"><b>INV-2041</b><span>Emzor Pharmaceuticals</span><span class="num">₦18,950,000</span><span class="ad-st ov">Overdue · 4 days</span></div></div></div>
+                      <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-spark"/></svg></span>Quick actions<span class="ad-dots">···</span></div><div class="ad-qa"><span><svg class="i"><use href="#i-plus"/></svg>New invoice</span><span><svg class="i"><use href="#i-check-c"/></svg>Record payment</span><span><svg class="i"><use href="#i-book"/></svg>New journal</span><span><svg class="i"><use href="#i-chart"/></svg>Trial balance</span></div></div>
                     </div>
                   </div>
                 </div>
@@ -754,21 +783,21 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         </div>
         <div class="float hf1">
           <span class="ico b-green"><svg class="i"><use href="#i-file"/></svg></span>
-          <div><b class="num">INV-0142 · ₦845,000</b><small>Adewale Stores</small></div>
+          <div><b class="num">INV-2044 · ₦48,500,000</b><small>TotalEnergies EP Nigeria</small></div>
           <span class="status st-ok"><svg class="i"><use href="#i-check"/></svg>Paid</span>
         </div>
         <div class="float hf2">
           <span class="ico b-orange"><svg class="i"><use href="#i-box"/></svg></span>
-          <div><b>Stock updated</b><small class="num">Groundnut oil 25L · −40 · 212 left</small></div>
+          <div><b>Stock updated</b><small class="num">Diesel (AGO) · −12,000 L · 86,400 L left</small></div>
         </div>
         <div class="float hf3">
           <span class="ico b-blue"><svg class="i"><use href="#i-trend"/></svg></span>
-          <div><small>Revenue · October</small><span class="num-up"><b class="num">₦12.4M</b><span class="status st-ok">↑ 8.2%</span></span></div>
+          <div><small>Revenue · October</small><span class="num-up"><b class="num">₦1.9B</b><span class="status st-ok">↑ 8.2%</span></span></div>
           <span class="spark-s" aria-hidden="true"><i style="height:35%"></i><i style="height:50%"></i><i style="height:42%"></i><i style="height:64%"></i><i style="height:58%"></i><i style="height:100%"></i></span>
         </div>
         <div class="float hf4">
           <span class="ico b-blue"><svg class="i"><use href="#i-check-c"/></svg></span>
-          <div><b class="num">PO-0087 approved</b><small>Musa Traders · ₦1,250,000</small></div>
+          <div><b class="num">PO-0091 approved</b><small>First E&amp;P · ₦125,000,000</small></div>
           <span class="status st-blue">Approvals</span>
         </div>
       </div>
@@ -934,7 +963,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
           <p>Bring sales, purchasing, suppliers, inventory and customer information into one system.</p>
           <a class="link" href="#">Explore wBizManager <svg class="i arrow"><use href="#i-arrow"/></svg></a>
           <div class="scene" aria-hidden="true"><div class="ui num">
-            <header><b>PO-0087 · Musa Traders</b><span class="status st-warn">In transit</span></header>
+            <header><b>PO-0087 · Dangote Industries</b><span class="status st-warn">In transit</span></header>
             <div class="steps"><div class="done"><i></i>Ordered</div><div class="done"><i></i>Dispatched</div><div class="now"><i></i>Received</div></div>
             <div class="li"><span class="thumb b-slate"><svg class="i"><use href="#i-truck"/></svg></span><span class="grow"><b>3 of 5 pallets received</b><small>Apapa warehouse</small></span></div>
           </div></div>
@@ -1145,9 +1174,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       text: 'Turn day-to-day activity into real-time reports on sales, finance and inventory. Track profitability, monitor business performance and spot the areas that need attention before they become problems.' },
     { name: 'Commercial', slug: 'commercial', icon: 'brief', tag: 'Every tender, one pipeline.',
       text: 'Open and track tenders from one place, follow the value of your pipeline and see your win rate at a glance, so the commercial team always knows which opportunities need attention next.' },
-    { name: 'Project', slug: 'project', icon: 'layers', tag: 'Projects, kept on track.',
+    { name: 'Project', short: 'Projects', slug: 'project', icon: 'layers', tag: 'Projects, kept on track.',
       text: 'Set up and follow your projects in the same system as the rest of the business, so progress, people and costs live alongside your sales, purchases and accounts instead of in a separate spreadsheet.' },
-    { name: 'Human Resources', slug: 'human-resources', icon: 'person', tag: 'Your people, organised.',
+    { name: 'Human Resources', short: 'HR', slug: 'human-resources', icon: 'person', tag: 'Your people, organised.',
       text: 'Keep employee records, recruitment, attendance, leave and performance appraisals in one central system, and give managers the people information they need without digging through files.' },
   ];
   document.getElementById('mnav-solutions').innerHTML = MODS.map(m => `<a href="modules/${m.slug}.html">${m.name}</a>`).join('');
@@ -1295,11 +1324,11 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
   /* Charts (sample data) */
   const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
-  function lineChart(svg, { w, h, pad, ymin, ymax, ticks, labels, series, every = 1 }) {
+  function lineChart(svg, { w, h, pad, ymin, ymax, ticks, labels, series, every = 1, fmt = String, grid = '' }) {
     const x0 = pad[3], x1 = w - pad[1], y0 = pad[0], y1 = h - pad[2];
     const X = i => x0 + (x1 - x0) * i / (labels.length - 1);
     const Y = v => y1 - (y1 - y0) * (v - ymin) / (ymax - ymin);
-    ticks.forEach(t => { el('line', { x1: x0, x2: x1, y1: Y(t), y2: Y(t), stroke: '#EEF2F6' }, svg); el('text', { x: x0 - 8, y: Y(t) + 3, 'text-anchor': 'end' }, svg).textContent = t; });
+    ticks.forEach(t => { el('line', { x1: x0, x2: x1, y1: Y(t), y2: Y(t), stroke: '#EEF2F6', 'stroke-dasharray': grid }, svg); el('text', { x: x0 - 8, y: Y(t) + 3, 'text-anchor': 'end' }, svg).textContent = fmt(t); });
     labels.forEach((l, i) => { if (i % every) return; el('text', { x: X(i), y: h - 4, 'text-anchor': 'middle' }, svg).textContent = l; });
     series.forEach(s => {
       const pts = s.data.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
@@ -1309,13 +1338,12 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       const li = s.data.length - 1; el('circle', { cx: X(li), cy: Y(s.data[li]), r: 3.4, fill: s.color }, svg);
     });
   }
-  lineChart(document.getElementById('approvals'), {
-    w: 560, h: 200, pad: [8, 10, 24, 26], ymin: 0, ymax: 8, ticks: [0, 2, 4, 6, 8], every: 2,
-    labels: ['Aug 30','Sep 1','Sep 3','Sep 5','Sep 7','Sep 9','Sep 11','Sep 13','Sep 15','Sep 17','Sep 19','Sep 21','Sep 23','Sep 25','Sep 28'],
+  lineChart(document.getElementById('inv-act'), {
+    w: 600, h: 176, pad: [8, 16, 24, 40], ymin: 0, ymax: 490, ticks: [0, 160, 330, 490], grid: '3 4', fmt: t => t + 'm',
+    labels: ['Oct 01','Oct 04','Oct 07','Oct 10','Oct 13','Oct 16'],
     series: [
-      { color: '#0070FF', data: [2,3,2,4,3,5,4,6,5,4,6,7,5,6,7], area: true, width: 2.2 },
-      { color: '#22C55E', data: [1,2,2,3,2,4,3,5,4,3,5,6,4,5,6] },
-      { color: '#EF4444', data: [0,1,0,0,1,0,1,0,1,1,0,1,0,1,0], width: 1.6 },
+      { color: '#0070FF', data: [390, 460, 210, 280, 340, 220], area: true, dots: true, width: 2.2 },
+      { color: '#E9A23B', data: [120, 410, 90, 240, 170, 60], width: 1.8 },
     ],
   });
   lineChart(document.getElementById('perf'), {
@@ -1338,15 +1366,14 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     });
   })(document.getElementById('dept'));
   (function donut(svg, list) {
-    const data = [['MR', 36, '#0070FF'], ['PO', 7, '#22C55E'], ['RFQ', 4, '#F59E0B'], ['Material Req.', 3, '#06B6D4'], ['Purchase Order', 3, '#EF4444'], ['Other', 3, '#475569']];
-    const total = data.reduce((a, d) => a + d[1], 0), r = 46, C = 2 * Math.PI * r, gap = 1.6;
+    const data = [['Overdue', 4, '#0070FF'], ['Sent', 7, '#E9A23B'], ['Part-paid', 3, '#22C55E'], ['Paid', 12, '#8B6CCB']];
+    const total = data.reduce((a, d) => a + d[1], 0), r = 44, C = 2 * Math.PI * r, gap = 2.4;
     let off = 0;
-    el('circle', { cx: 60, cy: 60, r, fill: 'none', stroke: '#F1F5F9', 'stroke-width': 12 }, svg);
-    data.forEach(([, v, c]) => { const len = C * v / total; el('circle', { cx: 60, cy: 60, r, fill: 'none', stroke: c, 'stroke-width': 12, 'stroke-dasharray': `${Math.max(len - gap, 0)} ${C}`, 'stroke-dashoffset': -off, transform: 'rotate(-90 60 60)' }, svg); off += len; });
-    el('text', { x: 60, y: 62, 'text-anchor': 'middle', style: 'font-size:22px;font-weight:700;fill:#0F172A' }, svg).textContent = total;
-    el('text', { x: 60, y: 76, 'text-anchor': 'middle', style: 'font-size:7px;letter-spacing:.1em;fill:#94A3B8' }, svg).textContent = 'TOTAL';
-    list.innerHTML = data.map(([l, v, c]) => `<div><i style="background:${c}"></i><span>${l}</span><b>${v}</b><small>${Math.round(v / total * 100)}%</small></div>`).join('');
-  })(document.getElementById('donut'), document.getElementById('donut-list'));
+    data.forEach(([, v, c]) => { const len = C * v / total; el('circle', { cx: 60, cy: 60, r, fill: 'none', stroke: c, 'stroke-width': 14, 'stroke-dasharray': `${Math.max(len - gap, 0)} ${C}`, 'stroke-dashoffset': -off, transform: 'rotate(-90 60 60)' }, svg); off += len; });
+    el('text', { x: 60, y: 63, 'text-anchor': 'middle', style: 'font-size:22px;font-weight:600;fill:#0F172A' }, svg).textContent = total;
+    el('text', { x: 60, y: 76, 'text-anchor': 'middle', style: 'font-size:6.5px;fill:#94A3B8' }, svg).textContent = 'records';
+    list.innerHTML = data.map(([l, v, c]) => `<div><i style="background:${c}"></i><span>${l}</span><b>${v}</b></div>`).join('');
+  })(document.getElementById('inv-donut'), document.getElementById('inv-legend'));
 
   /* Orbit illustration: modules circle the platform */
   (function orbit() {
@@ -1358,7 +1385,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       el('circle', { cx: 50 + 38.5 * Math.cos(b), cy: 50 + 38.5 * Math.sin(b), r: .55, class: 'dot' }, rings);
       const n = document.createElement('div');
       n.className = 'sat'; n.style.left = x + '%'; n.style.top = y + '%'; n.style.setProperty('--d', (-i * .7) + 's');
-      n.title = m.name; n.innerHTML = `<span class="si">${icon(m.icon)}</span>`;
+      n.title = m.name; n.innerHTML = `<span class="si">${icon(m.icon)}</span><span class="sl">${m.short || m.name}</span>`;
       box.appendChild(n); return n;
     });
     if (reduce) return;
