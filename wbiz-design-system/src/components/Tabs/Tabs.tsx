@@ -41,7 +41,7 @@ export function Tabs({ items, value, onChange, idPrefix = 'wbiz-tabs', className
   };
 
   return (
-    <div role="tablist" aria-label={ariaLabel} className={cx('flex max-w-full overflow-x-auto', className)}>
+    <div role="tablist" aria-label={ariaLabel} className={cx('flex max-w-full shrink-0 overflow-x-auto', className)}>
       {items.map((t, i) => {
         const selected = t.value === value;
         return (

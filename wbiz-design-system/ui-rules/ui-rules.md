@@ -85,3 +85,5 @@ These are suggestions from building the library. They are **not rules yet**. Acc
 - **B12. Empty states with a next step.** Each empty table explains what belongs there and shows the Add New action.
 - **B13. Modal Cancel style.** The Tax Deduction modal's grey filled Cancel looks disabled; use the outline Cancel from the side panels everywhere (the code already does).
 - **B14. Lone radio buttons.** "Mark as Contra" is a single radio that can't be turned off; use a checkbox (the code already does).
+- **B15. Block impossible totals.** The old Payroll Generation screen shows runs with negative net pay (₦-17,500) and ₦0 gross. Proposal: generation refuses runs whose net pay would be negative and lists the employees causing it.
+- **B16. Status filter tabs vs rule 17.** The old payroll screen used tabs (All, Generated, HR Approved…) to filter by status. The redesign moves them into Filters (rule 19); a "quick status" chip row above the table could be added if users miss one-click filtering.

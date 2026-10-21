@@ -1,37 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState, type ReactNode } from 'react';
-import { Sidebar } from '../components/Sidebar';
-import { TopBar, type TopBarProps } from '../components/TopBar';
+import { useState } from 'react';
+import { Shell } from './shell';
 import { Tabs } from '../components/Tabs';
 import { PageHeader } from '../components/PageHeader';
-import { Logo } from '../components/Logo';
 import { SidePanel } from '../components/SidePanel';
 import { FilterBar, FilterBarField } from '../components/FilterBar';
 import { Select } from '../components/Select';
-import { FIGMA, appNavigation, currentUser } from './demo-data';
+import { FIGMA } from './demo-data';
 import { AccountsTable, CustomersTable, EmployeesTable, TrialBalanceTable } from './table-kits';
 import { AccountFooter, AccountForm, CustomerForm, PanelFooter } from './panel-forms';
-
-/** App frame: sidebar, top bar and a scrolling main area. Every page below uses it. */
-function Shell({ activeId, breadcrumbs, children }: { activeId: string; breadcrumbs: TopBarProps['breadcrumbs']; children: ReactNode }) {
-  return (
-    <div className="flex h-screen w-full overflow-hidden bg-surface-page">
-      <Sidebar items={appNavigation} activeId={activeId} logo={<Logo />} logoCollapsed={<Logo variant="mark" />} />
-      <div className="flex min-w-0 flex-1 flex-col">
-        <TopBar
-          breadcrumbs={breadcrumbs}
-          user={currentUser}
-          notificationCount={8}
-          onNotificationsClick={() => {}}
-          onThemeToggle={() => {}}
-          onTourClick={() => {}}
-          onAppsClick={() => {}}
-        />
-        <main className="flex min-w-0 flex-1 flex-col gap-6 overflow-y-auto p-8">{children}</main>
-      </div>
-    </div>
-  );
-}
 
 function CustomersPage() {
   const [tab, setTab] = useState('customers');

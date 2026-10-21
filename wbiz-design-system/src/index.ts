@@ -20,6 +20,7 @@ export * from './components/SidePanel';
 export * from './components/Sidebar';
 export * from './components/Spinner';
 export * from './components/StageProgress';
+export * from './components/StatCard';
 export * from './components/StatusPill';
 export * from './components/Switch';
 export * from './components/Table';

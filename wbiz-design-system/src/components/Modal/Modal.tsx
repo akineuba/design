@@ -61,7 +61,11 @@ export function Modal({ open, onClose, closeOnBackdrop = true, ...panel }: Modal
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (open && !el.open) el.showModal();
+    if (open && !el.open) {
+      el.showModal();
+      // Start in the first form field (quick-add) rather than on the close button.
+      el.querySelector<HTMLElement>('input:not([type=hidden]):not([disabled]), textarea, [role=combobox]')?.focus();
+    }
     if (!open && el.open) el.close();
   }, [open]);
 

@@ -1,6 +1,7 @@
 // Story-only: the full wBizManager menu, transcribed from the fully unfolded sidebar reference the
 // design team supplied. Labels the reference truncates are completed; groups whose sub-pages are
 // collapsed in the reference (e.g. Inventory Reports, Employee Records) are listed as single pages.
+// Payroll Management's pages come from the Payroll Generation screen (labels title-cased to match the menu).
 import type { ReactNode } from 'react';
 import type { NavItem } from '../components/Sidebar';
 import {
@@ -116,7 +117,18 @@ const menu: Spec[] = [
     ['Onboarding Management', <ClipboardCheckIcon />],
     ['Attendance Management', <ActivityIcon />],
     ['Performance Management', <AwardIcon />],
-    ['Payroll Management', <CoinIcon />],
+    ['Payroll Management', <CoinIcon />, [
+      ['Dashboard', <BarChartIcon />],
+      ['Salary Setup', <WalletIcon />],
+      ['Salary Additions', <ChartIcon />],
+      ['Salary Deductions', <ActivityIcon />],
+      ['Flexible Deductions', <LayersIcon />],
+      ['Recurring Benefits', <AwardIcon />],
+      ['Tax Config', <SettingIcon />],
+      ['Payroll Runs', <ReceiptIcon />],
+      ['Inclusions & Exclusions', <UsersIcon />],
+      ['Pending Payrolls', <ClockIcon />],
+    ]],
     ['Loan Management', <WalletIcon />, [
       ['Dashboard', <BarChartIcon />],
       ['Applications', <DocumentIcon />],

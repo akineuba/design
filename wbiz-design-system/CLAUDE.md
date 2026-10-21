@@ -142,10 +142,11 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 | `PageHeader` | action-row `7053:5433` | `title`, `description`, `actions`, `back` link |
 | `Card` | settings cards `7053:6444` | `title`, `description`, `actions`, `divided` |
 | `Spinner` | n/a | `label` |
+| `StatCard` | stat row, Appraisal Dashboard `4370:29966` (hr) | `label`, `value`, `tone` default / primary / success / warning / error, `icon`, `hint` |
 | `StageProgress` | derived (no Figma component) | stages complete / current / upcoming / rejected; horizontal (record header) or vertical (approval trail) |
 | Icons (`src/icons`) | Vuesax linear style | `currentColor`, size via wrapper (`size-icon`) |
 
-`Patterns/Pages` in Storybook composes these into full screens: a list page (Customers with side panels), a hierarchical list (Chart of Accounts), a report page (Trial balance with the filter bar) and a people directory. **Don't name components, stories or docs after one feature**; the system is used across the whole platform.
+`Patterns/Payroll Runs` is a full redesign of the Payroll Generation screen (stat cards, generate panel with quick-add, run panel with approval stages, void confirmation). `Patterns/Pages` in Storybook composes these into full screens: a list page (Customers with side panels), a hierarchical list (Chart of Accounts), a report page (Trial balance with the filter bar) and a people directory. **Don't name components, stories or docs after one feature**; the system is used across the whole platform.
 
 Inside `SidePanel` and `FilterBar`, `Input` and `Select` labels switch to the accounting form style through `FieldLabelContext`; don't restyle labels by hand.
 

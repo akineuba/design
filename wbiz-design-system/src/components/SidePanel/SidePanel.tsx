@@ -45,7 +45,7 @@ export function SidePanelContent({ title, description, footer, size = 'md', onCl
             </button>
           )}
         </div>
-        <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-7.5 pb-5">{children}</div>
+        <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-7.5 pb-5 outline-none">{children}</div>
         {footer && <div className="flex flex-wrap justify-end gap-5 px-7.5 pb-7.5 pt-2.5">{footer}</div>}
       </div>
     </FieldLabelContext.Provider>

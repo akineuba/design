@@ -188,7 +188,8 @@ export function TableSectionRow({ label, colSpan, expanded, onToggle, className 
 
 /** White card with a 1px line-subtle border and 10px radius that holds a toolbar, table and footer. */
 export function TableCard({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cx('w-full min-w-0 overflow-hidden rounded-xl border border-line-subtle bg-surface', className)} {...rest} />;
+  // No overflow-hidden: toolbar popups (Filters, Customize Columns) must be able to extend past the card.
+  return <div className={cx('w-full min-w-0 rounded-xl border border-line-subtle bg-surface', className)} {...rest} />;
 }
 
 /**
@@ -248,7 +249,7 @@ export interface TableFooterProps extends HTMLAttributes<HTMLDivElement> {
 /** Footer row. Figma: right-aligned "Showing … entries", page buttons and the "Page" jump field. */
 export function TableFooter({ summary, className, children, ...rest }: TableFooterProps) {
   return (
-    <div className={cx('flex flex-wrap items-center justify-end gap-6 bg-surface px-6 py-2.5', className)} {...rest}>
+    <div className={cx('flex flex-wrap items-center justify-end gap-6 rounded-b-xl bg-surface px-6 py-2.5', className)} {...rest}>
       <p className="font-sans text-xs text-fg-faint">{summary}</p>
       {children}
     </div>
