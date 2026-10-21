@@ -284,88 +284,49 @@ export function Foundations({ logoSrc }: FoundationsProps) {
         </Section>
 
         {/* 06 Table */}
-        <Section index="06" title="Data table" aside="Toolbar, sortable header, rows, row actions, pagination">
-          <TableCard
-            toolbar={
-              <>
-                <div className="flex flex-wrap items-center gap-3">
-                  <Input label="Search contacts" hideLabel size="md" placeholder="Search..." leadingIcon={<SearchIcon />} wrapperClassName="w-field-sm" />
-                  <FilterButton count={1} />
-                </div>
-                <Button leadingIcon={<PlusIcon />}>Create contact</Button>
-              </>
-            }
-            footer={<Pagination page={1} pageSize={10} totalItems={49} onPageChange={() => {}} />}
-          >
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead sort="asc" onSort={() => {}}>Name</TableHead>
-                  <TableHead>Email address</TableHead>
-                  <TableHead>Company</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead align="right"><span className="sr-only">Actions</span></TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {[
-                  ['Olumide Balogun', 'olumideb@wragbybiz.com', 'Technologia', 'Active'],
-                  ['Dean Liam', 'deen@yopmail.com', 'Carter', 'Active'],
-                  ['Pam Mancha', 'emmanuell.mancha@gmail.com', 'Cash Drive', 'Inactive'],
-                ].map(([n, e, c, st], i) => (
-                  <TableRow key={n} selected={i === 1}>
-                    <TableCell emphasis><span className="flex items-center gap-2.5"><Avatar name={n} />{n}</span></TableCell>
-                    <TableCell>{e}</TableCell>
-                    <TableCell>{c}</TableCell>
-                    <TableCell><Badge tone={st === 'Active' ? 'success' : 'neutral'}>{st}</Badge></TableCell>
-                    <TableCell align="right"><RowActionsMenu recordName={n} onView={() => {}} onEdit={() => {}} onDelete={() => {}} /></TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableCard>
-          <Note>Overlays (Menu, FilterPopover, Modal, ConfirmDialog, Drawer) and the loading, empty and expandable table states are documented interactively in Storybook.</Note>
-        </Section>
-
-
-        {/* 07 Cards, toolbar controls and more table styles */}
-        <Section index="07" title="Cards & list toolbars" aside="Stat and summary cards, filter and swap buttons, table styles">
+        <Section index="06" title="Data tables" aside="Contacts, email and campaign table styles with row actions">
           <div className="flex flex-col gap-8">
             <div>
-              <Eyebrow>Stats row · first card featured</Eyebrow>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                <StatCard featured label="Total posts" value="127" />
-                <StatCard label="Scheduled" value="24" />
-                <StatCard icon={<SendIcon />} label="Emails sent" value="72,130" trend={{ value: '12%', direction: 'up', label: 'vs last month' }} />
-                <StatCard icon={<UsersIcon />} label="Unsubscribes" value="184" trend={{ value: '8%', direction: 'down', invert: true }} />
-              </div>
-            </div>
-            <div>
-              <Eyebrow>Summary cards</Eyebrow>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <SummaryCard icon={<UsersIcon />} tone="brand" label="Total audiences" value="12" />
-                <SummaryCard icon={<MailIcon />} tone="info" label="Subscribed contacts" value="8,420" />
-                <SummaryCard icon={<SendIcon />} tone="success" label="Campaigns sent" value="36" />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <div>
-                <Eyebrow>Filter button · desktop, applied, mobile, mobile applied</Eyebrow>
-                <div className="flex flex-wrap items-center gap-3">
-                  <FilterButton />
-                  <FilterButton count={2} />
-                  <FilterButton display="icon" />
-                  <FilterButton display="icon" count={2} />
-                </div>
-              </div>
-              <div>
-                <Eyebrow>Toolbar · filter, primary action, list / calendar swap</Eyebrow>
-                <div className="flex flex-wrap items-center gap-5">
-                  <FilterButton />
-                  <Button leadingIcon={<PlusIcon />}>New post</Button>
-                  <ViewToggle aria-label="Posts view" value="list" onValueChange={() => {}} options={[{ value: 'list', label: 'List view', icon: <ListIcon /> }, { value: 'calendar', label: 'Calendar view', icon: <CalendarIcon /> }]} />
-                </div>
-              </div>
+              <Eyebrow>Contacts table · toolbar, sortable header, row menu, pagination</Eyebrow>
+              <TableCard
+                toolbar={
+                  <>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <Input label="Search contacts" hideLabel size="md" placeholder="Search..." leadingIcon={<SearchIcon />} wrapperClassName="w-field-sm" />
+                      <FilterButton count={1} />
+                    </div>
+                    <Button leadingIcon={<PlusIcon />}>Create contact</Button>
+                  </>
+                }
+                footer={<Pagination page={1} pageSize={10} totalItems={49} onPageChange={() => {}} />}
+              >
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead sort="asc" onSort={() => {}}>Name</TableHead>
+                      <TableHead>Email address</TableHead>
+                      <TableHead>Company</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead align="right"><span className="sr-only">Actions</span></TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      ['Olumide Balogun', 'olumideb@wragbybiz.com', 'Technologia', 'Active'],
+                      ['Dean Liam', 'deen@yopmail.com', 'Carter', 'Active'],
+                      ['Pam Mancha', 'emmanuell.mancha@gmail.com', 'Cash Drive', 'Inactive'],
+                    ].map(([n, e, c, st], i) => (
+                      <TableRow key={n} selected={i === 1}>
+                        <TableCell emphasis><span className="flex items-center gap-2.5"><Avatar name={n} />{n}</span></TableCell>
+                        <TableCell>{e}</TableCell>
+                        <TableCell>{c}</TableCell>
+                        <TableCell><Badge tone={st === 'Active' ? 'success' : 'neutral'}>{st}</Badge></TableCell>
+                        <TableCell align="right"><RowActionsMenu recordName={n} onView={() => {}} onEdit={() => {}} onDelete={() => {}} /></TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableCard>
             </div>
             <div>
               <Eyebrow>Email table · dot status tabs, numeric columns, two-line cell, row menu</Eyebrow>
@@ -428,6 +389,50 @@ export function Foundations({ logoSrc }: FoundationsProps) {
                   </TableBody>
                 </Table>
               </TableCard>
+            </div>
+          </div>
+          <Note>Overlays (Menu, FilterPopover, Modal, ConfirmDialog, Drawer) and the loading, empty and expandable table states are documented interactively in Storybook.</Note>
+        </Section>
+
+
+        {/* 07 Cards, toolbar controls and more table styles */}
+        <Section index="07" title="Cards & list toolbars" aside="Stat and summary cards, filter and swap buttons">
+          <div className="flex flex-col gap-8">
+            <div>
+              <Eyebrow>Stats row · first card featured</Eyebrow>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                <StatCard featured label="Total posts" value="127" />
+                <StatCard label="Scheduled" value="24" />
+                <StatCard icon={<SendIcon />} label="Emails sent" value="72,130" trend={{ value: '12%', direction: 'up', label: 'vs last month' }} />
+                <StatCard icon={<UsersIcon />} label="Unsubscribes" value="184" trend={{ value: '8%', direction: 'down', invert: true }} />
+              </div>
+            </div>
+            <div>
+              <Eyebrow>Summary cards</Eyebrow>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <SummaryCard icon={<UsersIcon />} tone="brand" label="Total audiences" value="12" />
+                <SummaryCard icon={<MailIcon />} tone="info" label="Subscribed contacts" value="8,420" />
+                <SummaryCard icon={<SendIcon />} tone="success" label="Campaigns sent" value="36" />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div>
+                <Eyebrow>Filter button · desktop, applied, mobile, mobile applied</Eyebrow>
+                <div className="flex flex-wrap items-center gap-3">
+                  <FilterButton />
+                  <FilterButton count={2} />
+                  <FilterButton display="icon" />
+                  <FilterButton display="icon" count={2} />
+                </div>
+              </div>
+              <div>
+                <Eyebrow>Toolbar · filter, primary action, list / calendar swap</Eyebrow>
+                <div className="flex flex-wrap items-center gap-5">
+                  <FilterButton />
+                  <Button leadingIcon={<PlusIcon />}>New post</Button>
+                  <ViewToggle aria-label="Posts view" value="list" onValueChange={() => {}} options={[{ value: 'list', label: 'List view', icon: <ListIcon /> }, { value: 'calendar', label: 'Calendar view', icon: <CalendarIcon /> }]} />
+                </div>
+              </div>
             </div>
           </div>
           <Note>Metric, progress, module and activity cards, hover-revealed row buttons and compact tables are in Storybook under Card, RowActions and Table.</Note>
