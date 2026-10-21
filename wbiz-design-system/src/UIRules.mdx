@@ -1,0 +1,15 @@
+import { Meta, Markdown } from '@storybook/blocks';
+import rules from '../ui-rules/ui-rules.md?raw';
+import { EDIT_BASE } from '../.storybook/InstructionNote';
+
+<Meta title="UI Rules" />
+
+<div className="sb-unstyled font-sans text-sm text-fg">
+  <p className="mb-4 font-sans text-xs text-fg-muted">
+    Source: <code>ui-rules/ui-rules.md</code> ·{' '}
+    <a className="text-primary underline" href={`${EDIT_BASE}ui-rules/ui-rules.md`} target="_blank" rel="noreferrer">Edit these rules</a>
+  </p>
+  <div className="wbiz-note wbiz-rules">
+    <Markdown>{rules}</Markdown>
+  </div>
+</div>

@@ -38,9 +38,11 @@ const iconBtn =
   'focus-visible:outline-none focus-visible:shadow-focus rounded-lg';
 
 /**
- * Page header bar. Figma: top-header (new features, 7053:5510): 64px, white, 1px line-subtle bottom
- * border, 32px side padding. Breadcrumb in Roboto 13 with the current page in primary. Toolbar: Tour,
- * theme toggle (38px on surface-control), notifications with a count badge, user menu and app launcher.
+ * Page header bar. Figma: top-header (new features, 7053:5510) for the metrics (64px, white, 1px
+ * line-subtle bottom border, 32px side padding) and the latest top-bar reference from the design team
+ * for the details: current page in primary Semibold 14; Tour in Inter 14; theme toggle (38px on
+ * surface-control); bell with a red count badge; blue initials avatar, name in Bold 16 and role in 12;
+ * chevron; outlined grid app launcher.
  */
 export function TopBar({
   breadcrumbs,
@@ -59,7 +61,7 @@ export function TopBar({
   return (
     <header className={cx('flex h-topbar w-full items-center justify-between gap-6 border-b border-line-subtle bg-surface px-8', className)}>
       <nav aria-label="Breadcrumb" className="min-w-0">
-        <ol className="flex min-w-0 items-center gap-1.5 font-data text-13 text-fg-muted">
+        <ol className="flex min-w-0 items-center gap-1.5 font-sans text-sm text-fg-muted">
           {breadcrumbs.map((c, i) => (
             <li key={`${c.label}-${i}`} className="flex min-w-0 items-center gap-1.5">
               {i > 0 && <span aria-hidden>/</span>}
@@ -84,7 +86,7 @@ export function TopBar({
       <div className="flex shrink-0 items-center gap-5">
         {actions}
         {onTourClick && (
-          <button type="button" onClick={onTourClick} className={cx(iconBtn, 'gap-2 px-1 font-sans text-sm font-medium')}>
+          <button type="button" onClick={onTourClick} className={cx(iconBtn, 'gap-3 px-1 font-sans text-sm')}>
             <span className="size-6"><SparkleIcon /></span>
             Tour
           </button>
@@ -124,14 +126,14 @@ export function TopBar({
             aria-haspopup="menu"
             className="flex items-center gap-3 rounded-lg text-left focus-visible:outline-none focus-visible:shadow-focus"
           >
-            <span className="inline-flex size-avatar shrink-0 items-center justify-center rounded-full bg-avatar-neutral font-sans text-13 font-semibold text-fg-inverse" aria-hidden>
+            <span className="inline-flex size-avatar shrink-0 items-center justify-center rounded-full bg-avatar font-sans text-sm font-semibold text-fg-inverse" aria-hidden>
               {user.initials ?? initialsOf(user.name)}
             </span>
             <span className="flex flex-col">
-              <span className="font-sans text-sm font-bold text-fg-strong">{user.name}</span>
-              {user.role && <span className="font-sans text-11 text-fg-subtle">{user.role}</span>}
+              <span className="font-sans text-md font-bold text-fg-ink">{user.name}</span>
+              {user.role && <span className="font-sans text-xs text-fg-subtle">{user.role}</span>}
             </span>
-            <span className="size-icon-xs text-fg-subtle" aria-hidden><ChevronDownIcon /></span>
+            <span className="ml-4 size-icon-sm text-fg-strong" aria-hidden><ChevronDownIcon /></span>
           </button>
         )}
         {onAppsClick && (

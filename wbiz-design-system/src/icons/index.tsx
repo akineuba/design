@@ -56,7 +56,7 @@ export const BellIcon = icon(<path d="M12.02 2.91c-3.31 0-6 2.69-6 6v2.89c0 .61-
 export const MoonIcon = icon(<path d="M2.03 12.42c.36 5.15 4.73 9.34 9.96 9.57a10.48 10.48 0 0 0 9.11-4.38c.6-.91.33-1.51-.53-1.35-1.41.25-2.87.15-4.2-.33a7.5 7.5 0 0 1-4.68-7.24 7.43 7.43 0 0 1 .5-2.68c.39-.98-.07-1.48-1.04-1.13A10.43 10.43 0 0 0 2.03 12.42Z" />);
 export const SunIcon = icon(<><circle cx="12" cy="12" r="4.5" /><path d="M12 2v1.5M12 20.5V22M4.93 4.93 6 6M18 18l1.07 1.07M2 12h1.5M20.5 12H22M4.93 19.07 6 18M18 6l1.07-1.07" /></>);
 export const SparkleIcon = icon(<path d="M12 3c.5 3.6 2.4 5.5 6 6-3.6.5-5.5 2.4-6 6-.5-3.6-2.4-5.5-6-6 3.6-.5 5.5-2.4 6-6ZM19 15c.25 1.8 1.2 2.75 3 3-1.8.25-2.75 1.2-3 3-.25-1.8-1.2-2.75-3-3 1.8-.25 2.75-1.2 3-3ZM5 2.5c.2 1.2.8 1.8 2 2-1.2.2-1.8.8-2 2-.2-1.2-.8-1.8-2-2 1.2-.2 1.8-.8 2-2Z" />);
-export const AppsIcon = icon(<path d="M3 3h5v5H3zM9.5 3h5v5h-5zM16 3h5v5h-5zM3 9.5h5v5H3zM9.5 9.5h5v5h-5zM16 9.5h5v5h-5zM3 16h5v5H3zM9.5 16h5v5h-5zM16 16h5v5h-5z" />);
+export const AppsIcon = icon(<><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M3 15h18M9 3v18M15 3v18" /></>);
 
 // Modules (sidebar)
 export const CalculatorIcon = icon(<><rect x="4" y="2" width="16" height="20" rx="3" /><path d="M8 6.5h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01" /></>);

@@ -11,7 +11,7 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   src?: string;
   /** sm 28px for table cells, md 36px for the top bar. */
   size?: AvatarSize;
-  /** blue: people in tables (customers, employees). neutral: the signed-in user in the top bar. */
+  /** blue: people everywhere, including the signed-in user in the top bar. neutral: system or unknown users. */
   tone?: AvatarTone;
 }
 
@@ -24,8 +24,9 @@ export const initials = (name: string) => {
 };
 
 /**
- * Round initials avatar. The blue gradient comes from the reference the design team supplied; the
- * neutral one is the top-bar avatar (new features, 7075:190). Inter Semibold, white.
+ * Round initials avatar. The blue gradient comes from the references the design team supplied (people
+ * tables and the latest top bar); neutral is the older grey top-bar avatar (new features, 7075:190).
+ * Inter Semibold, white.
  */
 export function Avatar({ name, src, size = 'md', tone = 'blue', className, ...rest }: AvatarProps) {
   return (

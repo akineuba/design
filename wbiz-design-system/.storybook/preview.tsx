@@ -1,8 +1,8 @@
 import type { Preview } from '@storybook/react';
 import { Controls, Description, Primary, Stories, Subtitle, Title } from '@storybook/blocks';
 import '../src/styles/index.css';
-import './usage.css';
-import { UsageGuidance } from './UsageGuidance';
+import './instruction-note.css';
+import { InstructionNote } from './InstructionNote';
 
 const preview: Preview = {
   parameters: {
@@ -15,14 +15,14 @@ const preview: Preview = {
         { name: 'surface', value: 'var(--wbiz-color-surface)' },
       ],
     },
-    options: { storySort: { order: ['Introduction', 'Foundations', 'Components', 'Patterns'] } },
+    options: { storySort: { order: ['Introduction', 'UI Rules', 'Foundations', 'Components', 'Patterns'] } },
     docs: {
       page: () => (
         <>
           <Title />
           <Subtitle />
           <Description />
-          <UsageGuidance />
+          <InstructionNote />
           <Primary />
           <Controls />
           <Stories />

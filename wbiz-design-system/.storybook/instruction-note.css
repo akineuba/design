@@ -1,0 +1,14 @@
+/* Typography for Instruction Notes and the UI Rules page. Values come from the wBiz tokens. */
+.wbiz-note h2 { margin: var(--wbiz-space-5) 0 var(--wbiz-space-2); font: var(--wbiz-fontWeight-semibold) var(--wbiz-fontSize-md) / var(--wbiz-lineHeight-md) var(--wbiz-fontFamily-sans); color: var(--wbiz-color-fg-ink); }
+.wbiz-note h3 { margin: var(--wbiz-space-4) 0 var(--wbiz-space-1); font: var(--wbiz-fontWeight-semibold) var(--wbiz-fontSize-sm) / var(--wbiz-lineHeight-sm) var(--wbiz-fontFamily-sans); color: var(--wbiz-color-fg-ink); }
+.wbiz-note p, .wbiz-note li { margin: var(--wbiz-space-1) 0; color: var(--wbiz-color-fg); }
+.wbiz-note ul { padding-left: var(--wbiz-space-5); list-style: disc; }
+.wbiz-note table { margin: var(--wbiz-space-2) 0; border-collapse: collapse; width: 100%; }
+.wbiz-note th, .wbiz-note td { border: 1px solid var(--wbiz-color-line-subtle); padding: var(--wbiz-space-2) var(--wbiz-space-3); text-align: left; vertical-align: top; }
+.wbiz-note th { background: var(--wbiz-color-surface); font-weight: var(--wbiz-fontWeight-medium); color: var(--wbiz-color-fg-muted); }
+.wbiz-note code { background: var(--wbiz-color-surface-muted); border-radius: var(--wbiz-radius-sm); padding: 0 var(--wbiz-space-1); }
+.wbiz-note h1 { margin: 0 0 var(--wbiz-space-3); font: var(--wbiz-fontWeight-bold) var(--wbiz-fontSize-28) / var(--wbiz-lineHeight-28) var(--wbiz-fontFamily-sans); color: var(--wbiz-color-fg-ink); }
+.wbiz-rules h2 { margin-top: var(--wbiz-space-8); font-size: var(--wbiz-fontSize-lg); line-height: var(--wbiz-lineHeight-lg); }
+.wbiz-note ol { padding-left: var(--wbiz-space-6); list-style: decimal; }
+.wbiz-note hr { margin: var(--wbiz-space-6) 0; border: 0; border-top: 1px solid var(--wbiz-color-line-subtle); }
+.wbiz-note a { color: var(--wbiz-color-primary); text-decoration: underline; }

@@ -29,4 +29,4 @@
 
 Storybook is the live reference; these pages explain the decisions behind it.
 
-**Usage guidance** (when to use a component and which state to pick) is in [`../usage/`](../usage/README.md), one editable Markdown file per component, shown on each component's Docs tab in Storybook.
+**Instruction Notes** (when and how to use a component, how it behaves) are in [`../instruction-notes/`](../instruction-notes/README.md), one editable Markdown file per component, shown on each component's Docs tab. Platform-wide rules are in [`../ui-rules/ui-rules.md`](../ui-rules/ui-rules.md).

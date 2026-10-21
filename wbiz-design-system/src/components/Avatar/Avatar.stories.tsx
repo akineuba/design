@@ -9,7 +9,7 @@ const meta = {
   argTypes: { size: { control: 'inline-radio', options: ['sm', 'md'] }, tone: { control: 'inline-radio', options: ['blue', 'neutral'] } },
   parameters: {
     design: { url: FIGMA + '7075-190' },
-    docs: { description: { component: 'Round initials avatar. Blue (gradient) for people in tables and lists; neutral grey for the signed-in user in the top bar. Initials come from the first and last name.' } },
+    docs: { description: { component: 'Round initials avatar. Blue (gradient) for people everywhere, including the signed-in user in the top bar; neutral grey for system or unknown users. Initials come from the first and last name.' } },
   },
 } satisfies Meta<typeof Avatar>;
 export default meta;

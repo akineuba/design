@@ -24,4 +24,4 @@ Accounting tables are the primary source: [Customers](https://www.figma.com/desi
 Row default, hover (`interactive`), selected (`primary-subtle`, also used for ticked rows and `activeRowId`); `loading` skeleton rows; `empty` message; header checkbox indeterminate when some rows are ticked; sort arrow (dimmed when unsorted, rotated for ascending). Cells holding a 32px control use `tight` so rows stay 44px.
 
 ## Usage
-See `usage/table.md` (shown in Storybook). Wide tables scroll inside the card.
+See `instruction-notes/table.md` (shown in Storybook). Wide tables scroll inside the card.

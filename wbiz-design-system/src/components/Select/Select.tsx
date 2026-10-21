@@ -1,7 +1,7 @@
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 import { useFieldLabelClass } from '../../utils/field-label';
-import { AddCircleIcon, CheckIcon, ChevronDownIcon } from '../../icons';
+import { AddCircleIcon, CheckIcon, ChevronDownIcon, SearchIcon } from '../../icons';
 
 export interface SelectOption {
   value: string;
@@ -24,8 +24,15 @@ export interface SelectProps {
   required?: boolean;
   disabled?: boolean;
   size?: SelectSize;
-  /** Extra row at the bottom of the menu, e.g. "Add New" (Figma: customer popup, accounting). */
-  menuAction?: { label: string; onSelect: () => void };
+  /**
+   * "Add New" row at the bottom of the menu (Figma: customer popup, accounting). Open a centred
+   * `Modal` from `onSelect` so the user can create the value without leaving the screen; it receives
+   * the current search text to prefill the new record's name.
+   */
+  menuAction?: { label: string; onSelect: (query: string) => void };
+  /** Search box at the top of the menu. On by default: every dropdown is searchable (see ui-rules). */
+  searchable?: boolean;
+  searchPlaceholder?: string;
   id?: string;
   name?: string;
   className?: string;
@@ -36,8 +43,9 @@ const heights: Record<SelectSize, string> = { sm: 'h-control-sm px-3', md: 'h-co
 
 /**
  * Dropdown select. Figma: dropdown-inner (new features, 7092:1508) for the closed field and the
- * customer "popup" (accounting, 5184:46439) for the open menu. Keyboard: arrows, Home/End, Enter,
- * Space and Escape, following the WAI-ARIA select-only combobox pattern.
+ * customer "popup" (accounting, 5184:46439) for the open menu. The menu opens with a search box
+ * (derived; the Figma menu has none) and an optional "Add New" row. Keyboard: arrows, Home/End, Enter,
+ * Space and Escape; typing goes to the search box.
  */
 export function Select({
   options,
@@ -52,6 +60,8 @@ export function Select({
   disabled,
   size = 'md',
   menuAction,
+  searchable = true,
+  searchPlaceholder = 'Search',
   id,
   name,
   className,
@@ -66,10 +76,17 @@ export function Select({
   const selected = value !== undefined ? value : inner;
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
+  const [query, setQuery] = useState('');
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
 
-  const enabled = useMemo(() => options.map((o, i) => (o.disabled ? -1 : i)).filter((i) => i >= 0), [options]);
+  const q = query.trim().toLowerCase();
+  const visible = useMemo(
+    () => options.map((o, i) => (!q || o.label.toLowerCase().includes(q) ? i : -1)).filter((i) => i >= 0),
+    [options, q],
+  );
+  const enabled = useMemo(() => visible.filter((i) => !options[i].disabled), [visible, options]);
   const selectedOption = options.find((o) => o.value === selected);
   const message = error ?? hint;
 
@@ -81,6 +98,16 @@ export function Select({
     document.addEventListener('mousedown', onDoc);
     return () => document.removeEventListener('mousedown', onDoc);
   }, [open]);
+
+  useEffect(() => {
+    if (open && searchable) searchRef.current?.focus();
+    if (!open) setQuery('');
+  }, [open, searchable]);
+
+  // Keep the highlighted option inside the filtered list.
+  useEffect(() => {
+    if (open && !enabled.includes(active)) setActive(enabled[0] ?? -1);
+  }, [open, enabled, active]);
 
   const openMenu = () => {
     if (disabled) return;
@@ -105,8 +132,27 @@ export function Select({
     setActive(next);
   };
 
+  const close = () => { setOpen(false); triggerRef.current?.focus(); };
+
+  const onSearchKey = (e: KeyboardEvent<HTMLInputElement>) => {
+    switch (e.key) {
+      case 'ArrowDown': e.preventDefault(); move(1); break;
+      case 'ArrowUp': e.preventDefault(); move(-1); break;
+      case 'Enter': e.preventDefault(); if (active >= 0) commit(active); break;
+      case 'Escape': e.preventDefault(); close(); break;
+      case 'Tab': setOpen(false); break;
+    }
+  };
+
   const onKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
     if (disabled) return;
+    if (searchable && !open && e.key.length === 1 && e.key !== ' ' && !e.metaKey && !e.ctrlKey) {
+      // Typing on the closed field opens it and starts a search.
+      e.preventDefault();
+      setQuery(e.key);
+      openMenu();
+      return;
+    }
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
@@ -186,8 +232,27 @@ export function Select({
 
       {open && (
         <div className="absolute left-0 top-full z-10 mt-1 w-full min-w-menu overflow-hidden rounded-lg border border-line bg-surface shadow-md">
+          {searchable && (
+            <label className="flex items-center gap-2 border-b border-line-subtle px-3 py-2">
+              <span className="size-icon-sm shrink-0 text-icon-muted" aria-hidden><SearchIcon /></span>
+              <input
+                ref={searchRef}
+                type="text"
+                role="searchbox"
+                aria-label={`Search ${typeof label === 'string' ? label.replace(/:$/, '') : ariaLabel ?? 'options'}`}
+                aria-controls={listId}
+                aria-activedescendant={active >= 0 ? `${baseId}-opt-${active}` : undefined}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={onSearchKey}
+                placeholder={searchPlaceholder}
+                className="min-w-0 flex-1 bg-transparent font-sans text-sm text-fg-strong outline-none placeholder:text-fg-placeholder"
+              />
+            </label>
+          )}
           <ul id={listId} role="listbox" aria-labelledby={label ? `${baseId}-label` : undefined} className="max-h-menu overflow-y-auto py-1.5">
-            {options.map((o, i) => {
+            {visible.map((i) => {
+              const o = options[i];
               const isSel = o.value === selected;
               return (
                 <li
@@ -210,16 +275,25 @@ export function Select({
                 </li>
               );
             })}
+            {visible.length === 0 && (
+              <li role="presentation" className="px-3 py-2 font-sans text-sm text-fg-muted">No matches for "{query.trim()}"</li>
+            )}
           </ul>
           {menuAction && (
             <button
               type="button"
               onMouseDown={(e) => e.preventDefault()}
-              onClick={() => { setOpen(false); menuAction.onSelect(); }}
+              onClick={() => {
+                // Focus the field first so the quick-add modal returns focus here when it closes.
+                const text = query.trim();
+                setOpen(false);
+                triggerRef.current?.focus();
+                menuAction.onSelect(text);
+              }}
               className="flex w-full items-center gap-2.5 border-t border-line-subtle px-3 py-2 font-sans text-sm text-primary hover:bg-primary-tint focus-visible:outline-none focus-visible:bg-primary-tint"
             >
               <span className="size-icon shrink-0"><AddCircleIcon /></span>
-              {menuAction.label}
+              {query.trim() && visible.length === 0 ? `${menuAction.label}: "${query.trim()}"` : menuAction.label}
             </button>
           )}
         </div>

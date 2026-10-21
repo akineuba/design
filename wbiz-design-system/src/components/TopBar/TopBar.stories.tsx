@@ -9,8 +9,8 @@ const meta = {
   title: 'Components/TopBar',
   component: TopBar,
   args: {
-    breadcrumbs: [{ label: 'Sales', href: '#' }, { label: 'Customers' }],
-    user: { name: 'sure', role: 'Super User', initials: 'ST' },
+    breadcrumbs: [{ label: 'Dashboard' }],
+    user: { name: 'Ada Obi', role: 'Super User' },
     notificationCount: 8,
     onNotificationsClick: noop,
     onThemeToggle: noop,
@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
     design: { url: FIGMA + '7053-5510' },
-    docs: { description: { component: 'Top bar from the new features screens: breadcrumb on the left; Tour, theme toggle, notifications, user menu and app launcher on the right. Each control appears only when its handler is passed.' } },
+    docs: { description: { component: 'Top bar from the latest reference: breadcrumb on the left (current page in blue); Tour, theme toggle, notifications with a red count, user (blue initials avatar, name, role, chevron) and the grid app launcher on the right. Each control appears only when its handler is passed.' } },
   },
 } satisfies Meta<typeof TopBar>;
 export default meta;

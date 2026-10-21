@@ -12,9 +12,13 @@ Design tokens and React components for wBizManager, taken from the
 - **Components** has one page per component, with a story for each Figma state.
 - **Patterns** composes full screens (a list page, a hierarchical list, a report and a people directory) from library components only.
 
-Each component's Docs tab starts with **Usage guidance**: when to use it, which state to pick and what to avoid.
-That text lives in plain Markdown files in `usage/` at the repository root, so anyone can edit it (on GitHub, use the
-pencil icon) without touching code. See `usage/README.md`.
+- **UI Rules** lists the platform-wide rules for building screens (how new data is added, where modals and panels
+  appear, how filters sit, how stages progress), with proposed improvements to vet at the bottom.
+  Source: `ui-rules/ui-rules.md`.
+
+Each component's Docs tab starts with an **Instruction Note**: when and how to use it, how it behaves and which state to pick.
+Notes are plain Markdown files in `instruction-notes/`, so anyone can edit them without touching code
+(on GitHub, use the pencil icon, or the "Edit this note" link on each Docs page).
 
 Every value in a component comes from `tokens/tokens.json` through CSS variables (`--wbiz-*`) and the Tailwind theme.
 See `CLAUDE.md` and `docs/` in the repository for the rules.

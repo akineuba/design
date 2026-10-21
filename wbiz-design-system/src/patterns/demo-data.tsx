@@ -5,7 +5,7 @@ export const FIGMA = 'https://www.figma.com/design/TJAupALP2AYuN7NXNlY33g/w-Biz?
 
 export { appNavigation } from './navigation';
 
-export const currentUser = { name: 'Sure Tester', role: 'Super User', initials: 'ST' };
+export const currentUser = { name: 'Ada Obi', role: 'Super User', initials: 'AO' };
 
 /* Customers (Sales > Customers, 191:3274) ---------------------------------------------------------- */
 export interface Customer {

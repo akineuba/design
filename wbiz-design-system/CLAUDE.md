@@ -21,7 +21,8 @@
 | `tailwind.config.js` | Replaces Tailwind's default palette, spacing, type, radius and shadow with tokens. |
 | `src/components/<Name>/` | `<Name>.tsx`, `<Name>.stories.tsx`, `index.ts`. One folder per component. |
 | `src/foundations/` | Storybook pages for tokens, plus story-only icons. |
-| `usage/` | **Usage guidance**, one Markdown file per component (`side-panel.md`…). Shown on each Docs page in Storybook. Read the file before using a component; update it when behaviour changes. |
+| `ui-rules/ui-rules.md` | **Platform-wide UI rules** (Part A agreed, Part B proposals to vet). Shown in Storybook as "UI Rules". **Follow Part A when building any screen.** Don't treat Part B as rules. |
+| `instruction-notes/` | **Instruction Notes**, one Markdown file per component (`side-panel.md`…): when and how to use it, behaviour, placement. Shown on each Docs page. Read the note before using a component; update it when behaviour changes. |
 | `src/patterns/` | Story-only sample data (`demo-data.tsx`, the full menu in `navigation.tsx`), reusable story kits (`table-kits.tsx`, `panel-forms.tsx`) and full-page patterns. Not exported. |
 | `src/assets/` | Brand assets (logo PNGs). |
 | `docs/` | Written specs: foundations, component anatomy, Figma sync, contributing. |
@@ -119,7 +120,7 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 |---|---|---|
 | `Button` | `_Button base` frames (accounting) | `variant`: primary, secondary, outline (Cancel in panels), tertiary, destructive · `size`: sm, md, lg · `disabled`, `loading`, icons, `iconOnly`, `fullWidth` |
 | `Input` | Journal fields `6309:33026` (accounting) | `size` · `label`, `hint`, `error`, `success`, `required`, `disabled`, `readOnly`, `loading`, icons |
-| `Select` | dropdown-inner `7092:1508` (new features); open menu `5184:46439` (accounting) | `options`, `value`/`defaultValue`, `placeholder`, `required`, `error`, `hint`, `disabled`, `size`, `menuAction` ("Add New"). Listbox keyboard support |
+| `Select` | dropdown-inner `7092:1508` (new features); open menu `5184:46439` (accounting) | **searchable by default**; `menuAction` ("Add New" → centred quick-add `Modal`, receives the search text); `options`, `value`/`defaultValue`, `placeholder`, `required`, `error`, `hint`, `disabled`, `size` |
 | `FilterDropdown` + `FilterField` | "Filters" on Customers `191:3274`; panel `7099:7787` | list pages · closed / open / `activeCount`, `onApply`, `onReset` |
 | `FilterBar` + `FilterBarField` | filter, General ledger `1752:21749` | report pages · default / "More Filters" open / `applying` / Advanced |
 | `Table` primitives, `DataTable`, `TableCard`, `TableToolbar`, `TableToolbarGroup`, `SearchField`, `TableSectionRow`, `TableFooter`, `Pagination` | Customers `191:3274`, Bills `4183:23454`, Chart of Accounts `1871:19163`, Trial balance `845:8824` | `selectable`, `sortable` columns, `rowActions`, `getRowChildren` (tree), `visibleColumns`, `density`, `activeRowId`, `loading`, `empty`; cell `emphasis` strong / link, `tight`; pagination with page jump |
@@ -137,10 +138,11 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 | `SegmentedControl` | Inventory/Free Text `7053:5632`; List/Card `7053:5973` | `appearance`: pill, boxed; icons; disabled options |
 | `Switch` | "Toggle" instances (accounting) | `size` md / sm (table rows) · on / off / disabled; optional `label` and `description` |
 | `Sidebar` | sidebar-content `7067:32543` (metrics) + the unfolded menu reference (structure) | three levels, any can be a group; active page and module; `expandAll`; `collapsed` icon rail (derived) |
-| `TopBar` | top-header `7053:5510` (**current top bar**) | breadcrumb; Tour, theme toggle, notifications badge, user menu, app launcher (each shown when its handler is passed) |
+| `TopBar` | top-header `7053:5510` + the latest top-bar reference from design (blue avatar, Bold 16 name, grid launcher) | breadcrumb; Tour, theme toggle, notifications badge, user menu, app launcher (each shown when its handler is passed) |
 | `PageHeader` | action-row `7053:5433` | `title`, `description`, `actions`, `back` link |
 | `Card` | settings cards `7053:6444` | `title`, `description`, `actions`, `divided` |
 | `Spinner` | n/a | `label` |
+| `StageProgress` | derived (no Figma component) | stages complete / current / upcoming / rejected; horizontal (record header) or vertical (approval trail) |
 | Icons (`src/icons`) | Vuesax linear style | `currentColor`, size via wrapper (`size-icon`) |
 
 `Patterns/Pages` in Storybook composes these into full screens: a list page (Customers with side panels), a hierarchical list (Chart of Accounts), a report page (Trial balance with the filter bar) and a people directory. **Don't name components, stories or docs after one feature**; the system is used across the whole platform.
