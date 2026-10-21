@@ -1,6 +1,6 @@
 # Tabs
 
-Section tabs from the Inventory consumption screens.
+Section tabs that switch between sibling pages of a module (Chart of accounts / Journal / Receive payment / Budget).
 
 ## Anatomy
 35px tabs, 10/20 padding, 2px bottom border. Selected: Roboto Semibold 13 in `primary` with a primary underline. Others: Roboto Medium 13 in `fg-muted`.

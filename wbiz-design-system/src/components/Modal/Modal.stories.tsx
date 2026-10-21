@@ -54,7 +54,7 @@ export const WithDescription: Story = { args: { description: 'Deductions are pos
 export const Confirmation: Story = {
   args: {
     title: 'Clear all lines?',
-    description: 'This removes all 3 requested items from the requisition. You can add them again later.',
+    description: 'This removes all 3 lines from the journal. You can add them again later.',
     children: undefined,
     footer: (<><Button variant="secondary">Keep lines</Button><Button variant="destructive">Clear all lines</Button></>),
   },

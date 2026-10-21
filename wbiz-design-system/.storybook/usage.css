@@ -1,0 +1,9 @@
+/* Typography for the Markdown usage guidance block. Values come from the wBiz tokens. */
+.wbiz-usage h2 { margin: var(--wbiz-space-5) 0 var(--wbiz-space-2); font: var(--wbiz-fontWeight-semibold) var(--wbiz-fontSize-md) / var(--wbiz-lineHeight-md) var(--wbiz-fontFamily-sans); color: var(--wbiz-color-fg-ink); }
+.wbiz-usage h3 { margin: var(--wbiz-space-4) 0 var(--wbiz-space-1); font: var(--wbiz-fontWeight-semibold) var(--wbiz-fontSize-sm) / var(--wbiz-lineHeight-sm) var(--wbiz-fontFamily-sans); color: var(--wbiz-color-fg-ink); }
+.wbiz-usage p, .wbiz-usage li { margin: var(--wbiz-space-1) 0; color: var(--wbiz-color-fg); }
+.wbiz-usage ul { padding-left: var(--wbiz-space-5); list-style: disc; }
+.wbiz-usage table { margin: var(--wbiz-space-2) 0; border-collapse: collapse; width: 100%; }
+.wbiz-usage th, .wbiz-usage td { border: 1px solid var(--wbiz-color-line-subtle); padding: var(--wbiz-space-2) var(--wbiz-space-3); text-align: left; vertical-align: top; }
+.wbiz-usage th { background: var(--wbiz-color-surface); font-weight: var(--wbiz-fontWeight-medium); color: var(--wbiz-color-fg-muted); }
+.wbiz-usage code { background: var(--wbiz-color-surface-muted); border-radius: var(--wbiz-radius-sm); padding: 0 var(--wbiz-space-1); }

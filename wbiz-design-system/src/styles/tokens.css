@@ -12,11 +12,15 @@
   --wbiz-color-fg-disabled: #D0D5DD;
   --wbiz-color-fg-inverse: #FFFFFF;
   --wbiz-color-fg-subtle: #626D7C;
+  --wbiz-color-fg-ink: #101828;
+  --wbiz-color-fg-faint: #979797;
+  --wbiz-color-fg-black: #000000;
   --wbiz-color-icon: #292D32;
   --wbiz-color-icon-muted: #475467;
   --wbiz-color-line-subtle: #EAECF0;
   --wbiz-color-line: #D0D5DD;
   --wbiz-color-line-strong: #667085;
+  --wbiz-color-line-field: #D1D5DB;
   --wbiz-color-surface: #FFFFFF;
   --wbiz-color-surface-page: #FCFCFD;
   --wbiz-color-surface-muted: #F8F8F8;
@@ -43,6 +47,11 @@
   --wbiz-color-status-error-bg: rgba(255, 46, 59, 0.10); /* derived: not in Figma */
   --wbiz-color-switch-off: rgba(120, 120, 128, 0.16);
   --wbiz-color-overlay: rgba(16, 24, 40, 0.50); /* derived: not in Figma */
+  --wbiz-color-action-view: #667085;
+  --wbiz-color-action-edit: #D4A003;
+  --wbiz-color-action-delete: #E81E25;
+  --wbiz-color-action-link: #0070FF;
+  --wbiz-color-action-positive: #00C167;
   --wbiz-fontFamily-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --wbiz-fontFamily-data: "Roboto", "Inter", ui-sans-serif, system-ui, sans-serif;
   --wbiz-fontSize-11: 11px;
@@ -99,8 +108,8 @@
   --wbiz-size-avatar: 36px;
   --wbiz-size-theme-toggle: 38px;
   --wbiz-size-tab: 35px;
-  --wbiz-size-row: 54px;
-  --wbiz-size-row-head: 38px;
+  --wbiz-size-row: 44px;
+  --wbiz-size-row-head: 44px;
   --wbiz-size-nav-item: 48px;
   --wbiz-size-nav-subitem: 44px;
   --wbiz-size-topbar: 64px;
@@ -114,6 +123,22 @@
   --wbiz-size-nav-indicator: 3px;
   --wbiz-size-filter-field: 235px;
   --wbiz-size-popover-max: min(90vw, 1100px); /* derived: not in Figma */
+  --wbiz-size-row-comfortable: 54px;
+  --wbiz-size-checkbox: 20px;
+  --wbiz-size-radio: 16px;
+  --wbiz-size-page-btn: 30px;
+  --wbiz-size-search: 203px;
+  --wbiz-size-panel-sm: 435px;
+  --wbiz-size-panel-md: 541px;
+  --wbiz-size-panel-lg: 562px;
+  --wbiz-size-columns-popup: 354px;
+  --wbiz-size-action-menu: 138px;
+  --wbiz-size-nav-leaf: 36px;
+  --wbiz-size-avatar-sm: 28px;
+  --wbiz-size-filter-control: 161px;
+  --wbiz-size-switch-sm-w: 34px;
+  --wbiz-size-switch-sm-h: 20px;
+  --wbiz-size-knob-sm: 16px;
   --wbiz-radius-none: 0px;
   --wbiz-radius-xs: 2px;
   --wbiz-radius-sm: 4px;
@@ -131,4 +156,6 @@
   --wbiz-shadow-focus-error: 0 0 0 4px color-mix(in srgb, #FF2E3B 20%, transparent); /* derived: not in Figma */
   --wbiz-shadow-dialog: 0 20px 40px -8px rgba(16, 24, 40, 0.24); /* derived: not in Figma */
   --wbiz-shadow-knob: 0 3px 1px rgba(0, 0, 0, 0.06), 0 3px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --wbiz-gradient-avatar: linear-gradient(135deg, #4361FE 0%, #1450EE 100%);
+  --wbiz-gradient-avatar-neutral: linear-gradient(117deg, #7E8FA8 0%, #55667E 100%);
 }

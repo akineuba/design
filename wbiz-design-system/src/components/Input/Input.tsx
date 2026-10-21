@@ -1,5 +1,6 @@
 import { forwardRef, useId, type InputHTMLAttributes, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
+import { useFieldLabelClass } from '../../utils/field-label';
 import { Spinner } from '../Spinner';
 
 export type InputSize = 'sm' | 'md' | 'lg';
@@ -51,6 +52,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   },
   ref,
 ) {
+  const labelClass = useFieldLabelClass();
   const autoId = useId();
   const inputId = id ?? `wbiz-input-${autoId}`;
   const messageId = `${inputId}-message`;
@@ -70,7 +72,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <div className={cx('flex w-full flex-col gap-1', wrapperClassName)}>
       {label && (
-        <label htmlFor={inputId} className="font-sans text-xs font-medium text-fg-muted">
+        <label htmlFor={inputId} className={labelClass}>
           {label}
           {required && (
             <span className="ml-0.5 text-error" aria-hidden>

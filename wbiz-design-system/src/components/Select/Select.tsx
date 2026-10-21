@@ -1,5 +1,6 @@
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
+import { useFieldLabelClass } from '../../utils/field-label';
 import { AddCircleIcon, CheckIcon, ChevronDownIcon } from '../../icons';
 
 export interface SelectOption {
@@ -56,6 +57,7 @@ export function Select({
   className,
   'aria-label': ariaLabel,
 }: SelectProps) {
+  const labelClass = useFieldLabelClass();
   const autoId = useId();
   const baseId = id ?? `wbiz-select-${autoId}`;
   const listId = `${baseId}-listbox`;
@@ -145,7 +147,7 @@ export function Select({
   return (
     <div ref={rootRef} className={cx('relative flex w-full flex-col gap-1', className)}>
       {label && (
-        <span id={`${baseId}-label`} className="font-sans text-xs font-medium text-fg-muted">
+        <span id={`${baseId}-label`} className={labelClass}>
           {label}
           {required && <span className="ml-0.5 text-error" aria-hidden>*</span>}
         </span>

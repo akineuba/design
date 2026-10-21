@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { Button, type ButtonVariant } from './Button';
-import { CopyIcon, ImportIcon, PlusIcon, TrashIcon } from '../../foundations/icons';
+import { CloseCircleIcon, CopyIcon, ImportIcon, PlusIcon, TrashIcon } from '../../foundations/icons';
 
 const FIGMA = 'https://www.figma.com/design/TJAupALP2AYuN7NXNlY33g/w-Biz?node-id=';
 
@@ -10,7 +10,7 @@ const meta = {
   component: Button,
   args: { children: 'Create New', onClick: fn() },
   argTypes: {
-    variant: { control: 'inline-radio', options: ['primary', 'secondary', 'tertiary', 'destructive'] },
+    variant: { control: 'inline-radio', options: ['primary', 'secondary', 'outline', 'tertiary', 'destructive'] },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
     leadingIcon: { control: false },
     trailingIcon: { control: false },
@@ -37,6 +37,12 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: { variant: 'secondary', children: 'Import', leadingIcon: <ImportIcon /> },
   parameters: { design: { url: FIGMA + '6309-33037' } },
+};
+
+/** Cancel button in side panels and the customise columns popup. Pair it with the primary action. */
+export const Outline: Story = {
+  args: { variant: 'outline', children: 'Cancel', leadingIcon: <CloseCircleIcon /> },
+  parameters: { design: { url: FIGMA + '209-4142' } },
 };
 
 export const Tertiary: Story = {
@@ -72,7 +78,7 @@ export const Sizes: Story = {
   ),
 };
 
-const VARIANTS: ButtonVariant[] = ['primary', 'secondary', 'tertiary', 'destructive'];
+const VARIANTS: ButtonVariant[] = ['primary', 'secondary', 'outline', 'tertiary', 'destructive'];
 
 /** Every variant against every state, for a side-by-side check with Figma. */
 export const Matrix: Story = {

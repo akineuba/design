@@ -16,13 +16,13 @@ type Story = StoryObj<typeof meta>;
 
 export const SettingsSection: Story = {
   args: {
-    title: 'Approval & Reservation',
+    title: 'Posting defaults',
     divided: true,
     children: (
       <>
-        <Select label="Insufficient-stock approval policy" defaultValue="warn" options={[{ value: 'warn', label: 'Allow with warning' }, { value: 'block', label: 'Block' }]} />
-        <Select label="Reservation policy" defaultValue="auto" options={[{ value: 'auto', label: 'Automatic on final approval' }, { value: 'manual', label: 'Manual' }]} />
-        <Input label="Reservation expiry period (days, optional)" defaultValue="14" />
+        <Select label="Default revenue account" defaultValue="4001" options={[{ value: '4001', label: '4001 · Sales Revenue' }, { value: '4002', label: '4002 · Service Revenue' }]} />
+        <Select label="When a journal is unbalanced" defaultValue="block" options={[{ value: 'warn', label: 'Allow with warning' }, { value: 'block', label: 'Block posting' }]} />
+        <Input label="Lock period after (days, optional)" defaultValue="14" />
       </>
     ),
   },
@@ -30,8 +30,8 @@ export const SettingsSection: Story = {
 
 export const WithDescriptionAndAction: Story = {
   args: {
-    title: 'Store-level Consumption Account Overrides',
-    description: 'Leave an account blank to use the purpose and category mapping.',
+    title: 'Branch-level account overrides',
+    description: 'Leave an account blank to use the company default.',
     actions: <Button variant="secondary" size="sm">Reset all</Button>,
     children: <p className="font-sans text-sm text-fg-muted">Table goes here.</p>,
   },

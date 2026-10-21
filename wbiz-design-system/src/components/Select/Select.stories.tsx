@@ -24,7 +24,7 @@ const meta = {
   decorators: [(Story) => <div className="w-field pb-12"><Story /></div>],
   parameters: {
     design: { url: FIGMA + '7092-1508' },
-    docs: { description: { component: 'Dropdown field from New Consumption Requisition and the item form, with the open menu from the accounting customer picker. Keyboard: arrows, Home, End, Enter, Space, Escape.' } },
+    docs: { description: { component: 'Dropdown field for picking one value from a known list, with the open menu from the accounting customer picker. Keyboard: arrows, Home, End, Enter, Space, Escape.' } },
   },
 } satisfies Meta<typeof Select>;
 export default meta;
@@ -32,7 +32,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Placeholder: Story = {};
 export const Selected: Story = { args: { defaultValue: 'normal' } };
-export const Required: Story = { args: { required: true, label: 'Delivery Location', placeholder: 'Select delivery location', options: [{ value: 'ho', label: 'Head Office' }, { value: 'mw', label: 'Maintenance Workshop' }] } };
+export const Required: Story = { args: { required: true, label: 'Account Type', placeholder: 'Select account type', options: [{ value: 'asset', label: 'Asset' }, { value: 'liability', label: 'Liability' }] } };
 export const WithError: Story = { args: { required: true, error: 'Choose a priority to continue.' } };
 export const Disabled: Story = { args: { disabled: true, defaultValue: 'high' } };
 export const WithHint: Story = { args: { hint: 'Urgent needs approval from a manager.' } };

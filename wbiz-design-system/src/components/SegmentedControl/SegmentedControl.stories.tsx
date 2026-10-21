@@ -14,7 +14,7 @@ const meta = {
     'aria-label': 'Line type',
   },
   argTypes: { appearance: { control: 'inline-radio', options: ['pill', 'boxed'] } },
-  parameters: { docs: { description: { component: 'Two styles from the new features screens: `pill` for the Inventory / Free Text switch on requisition lines, `boxed` for the List / Card view toggle.' } } },
+  parameters: { docs: { description: { component: 'Two styles from the new features screens: `pill` for switching how a line or form is filled in (e.g. Inventory / Free Text), `boxed` for the List / Card view toggle.' } } },
 } satisfies Meta<typeof SegmentedControl>;
 export default meta;
 type Story = StoryObj<typeof meta>;

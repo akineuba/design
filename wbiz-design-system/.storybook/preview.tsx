@@ -1,5 +1,8 @@
 import type { Preview } from '@storybook/react';
+import { Controls, Description, Primary, Stories, Subtitle, Title } from '@storybook/blocks';
 import '../src/styles/index.css';
+import './usage.css';
+import { UsageGuidance } from './UsageGuidance';
 
 const preview: Preview = {
   parameters: {
@@ -13,6 +16,19 @@ const preview: Preview = {
       ],
     },
     options: { storySort: { order: ['Introduction', 'Foundations', 'Components', 'Patterns'] } },
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <UsageGuidance />
+          <Primary />
+          <Controls />
+          <Stories />
+        </>
+      ),
+    },
   },
   tags: ['autodocs'],
 };

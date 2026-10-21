@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 import { Button } from '../Button';
-import { FilterIcon } from '../../icons';
+import { FilterLinesIcon } from '../../icons';
 
 export interface FilterDropdownProps {
   /** Filter fields, usually `FilterField`s wrapping a `Select` or `Input`. */
@@ -21,8 +21,9 @@ export interface FilterDropdownProps {
 }
 
 /**
- * Table-toolbar filter control. Figma: filter-trigger (new features, 7053:5549) for the 32px trigger
- * and the "filter" panel (7099:7787) for the open state: surface-page fill, line-subtle border,
+ * Table-toolbar filter control. Trigger: "Filters" on every accounting table (Customers 191:3274,
+ * Bills 4183:23454, Chart of Accounts 1871:19163): borderless, 40px, three-line icon, Inter 14 fg.
+ * Panel: the "filter" panel (new features, 7099:7787): surface-page fill, line-subtle border,
  * 8px radius, 16/20 padding, 20px between fields.
  */
 export function FilterDropdown({
@@ -33,7 +34,7 @@ export function FilterDropdown({
   open: openProp,
   onOpenChange,
   label = 'Filters',
-  align = 'end',
+  align = 'start',
   className,
 }: FilterDropdownProps) {
   const panelId = useId();
@@ -64,7 +65,7 @@ export function FilterDropdown({
   const active = activeCount > 0;
 
   return (
-    <div ref={rootRef} className={cx('relative inline-flex', className)}>
+    <div ref={rootRef} className={cx('relative inline-flex h-fit', className)}>
       <button
         ref={triggerRef}
         type="button"
@@ -72,12 +73,12 @@ export function FilterDropdown({
         aria-controls={panelId}
         onClick={() => setOpen(!open)}
         className={cx(
-          'inline-flex h-control-xs items-center gap-2 rounded-lg border px-4 py-2 font-data text-sm font-medium transition-colors',
+          'inline-flex h-control-md items-center gap-2 rounded-lg px-4 font-sans text-sm transition-colors',
           'focus-visible:outline-none focus-visible:shadow-focus',
-          active || open ? 'border-primary bg-primary-tint text-primary' : 'border-line-subtle bg-surface text-fg-strong hover:bg-surface-muted',
+          active || open ? 'bg-primary-subtle text-primary' : 'bg-surface text-fg hover:bg-surface-muted',
         )}
       >
-        <span className="size-icon-sm shrink-0"><FilterIcon /></span>
+        <span className="size-icon shrink-0" aria-hidden><FilterLinesIcon /></span>
         {label}
         {active && (
           <span className="inline-flex h-badge min-w-badge items-center justify-center rounded-full bg-primary px-1 font-sans text-2xs font-bold text-fg-inverse">

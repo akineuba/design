@@ -15,5 +15,7 @@ export const On: Story = { args: { defaultChecked: true } };
 export const DisabledOff: Story = { args: { disabled: true } };
 export const DisabledOn: Story = { args: { disabled: true, defaultChecked: true } };
 export const WithLabel: Story = {
-  args: { 'aria-label': undefined, label: 'Reserve stock on final approval', description: 'Reserved stock cannot be issued to other requisitions.', defaultChecked: true },
+  args: { 'aria-label': undefined, label: 'Mark account as active', description: 'Inactive accounts are hidden from journals and reports.', defaultChecked: true },
 };
+/** Inside table rows (Chart of Accounts status column). */
+export const Small: Story = { args: { size: 'sm', defaultChecked: true } };

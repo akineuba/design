@@ -7,18 +7,18 @@ import { FIGMA } from '../../patterns/demo-data';
 const meta = {
   title: 'Components/PageHeader',
   component: PageHeader,
-  args: { title: 'Consumption Requisitions', description: 'Request, approve, reserve and issue consumable stock.' },
+  args: { title: 'Customers', description: 'People and businesses you sell to.' },
   decorators: [(Story) => <div className="w-full"><Story /></div>],
   parameters: { layout: 'padded', design: { url: FIGMA + '7053-5433' } },
 } satisfies Meta<typeof PageHeader>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const WithAction: Story = { args: { actions: <Button leadingIcon={<PlusIcon />}>New Requisition</Button> } };
+export const WithAction: Story = { args: { actions: <Button leadingIcon={<PlusIcon />}>Add New</Button> } };
 export const WithBackLink: Story = {
-  args: { title: 'New Consumption Requisition', description: 'Create a request for consumable inventory.', back: { label: 'Consumption Requisitions', href: '#' } },
+  args: { title: 'New Invoice', description: 'Bill a customer for goods or services.', back: { label: 'Invoices', href: '#' } },
 };
 export const SettingsPage: Story = {
-  args: { title: 'Consumption Requisition Settings', description: 'Configure consumable approval, reservation and posting behavior.', actions: <Button size="lg" leadingIcon={<TickCircleIcon />}>Save Settings</Button> },
+  args: { title: 'Inventory Settings', description: 'Configure approval, reservation and posting behaviour.', actions: <Button size="lg" leadingIcon={<TickCircleIcon />}>Save Settings</Button> },
 };
 export const TitleOnly: Story = { args: { description: undefined } };

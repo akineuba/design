@@ -4,9 +4,9 @@ import { cx } from '../../utils/cx';
 export interface PageHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   title: ReactNode;
   description?: ReactNode;
-  /** Primary page action(s) on the right, e.g. "+ New Requisition". */
+  /** Primary page action(s) on the right, e.g. "+ Add New". */
   actions?: ReactNode;
-  /** "< Back to …" link above the title (Figma: New Consumption Requisition). */
+  /** "< Back to …" link above the title (Figma: create pages on new features, 7053:5632). */
   back?: { label: string; href?: string; onClick?: () => void };
 }
 

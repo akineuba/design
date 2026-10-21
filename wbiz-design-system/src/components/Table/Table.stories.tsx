@@ -1,77 +1,90 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { DataTable, Pagination, SearchField, TableCard, TableFooter, TableToolbar, type DataTableColumn } from './Table';
-import { StatusPill } from '../StatusPill';
-import { FilterDropdown, FilterField } from '../FilterDropdown';
-import { Select } from '../Select';
-import { FIGMA, requisitions, type Requisition } from '../../patterns/demo-data';
-
-const columns: DataTableColumn<Requisition>[] = [
-  { key: 'date', header: 'Date' },
-  { key: 'id', header: 'Requisition ID', render: (r) => <a href="#" className="font-semibold text-primary hover:underline">{r.id}</a> },
-  { key: 'requester', header: 'Requester' },
-  { key: 'department', header: 'Department' },
-  { key: 'location', header: 'Requesting Location' },
-  { key: 'required', header: 'Required Date' },
-  { key: 'qty', header: 'Qty Requested', align: 'right' },
-  { key: 'status', header: 'Status', render: (r) => <StatusPill tone={r.status.tone}>{r.status.label}</StatusPill> },
-];
+import { DataTable, Table, TableBody, TableCard, TableCell, TableFooter, TableHead, TableHeaderCell, TableRow, Pagination } from './Table';
+import { FIGMA, customers } from '../../patterns/demo-data';
+import { AccountsTable, BillsTable, CustomersTable, EmployeesTable, TrialBalanceTable, customerColumns } from '../../patterns/table-kits';
 
 const meta = {
   title: 'Components/Table',
   component: DataTable,
+  decorators: [(Story) => <div className="w-full"><Story /></div>],
   parameters: {
     layout: 'padded',
-    design: { url: FIGMA + '7053-5545' },
-    docs: { description: { component: 'Table card from Consumption Requisitions. Use `DataTable` for column-driven lists, or compose `Table`, `TableHead`, `TableRow`, `TableHeaderCell` and `TableCell` for editable grids such as requisition line items.' } },
+    design: { url: FIGMA + '191-3274' },
+    docs: {
+      description: {
+        component:
+          'Tables follow the accounting screens. Header row and body rows are 44px; the first column is the record name in dark medium text, ' +
+          'other cells are grey. The toolbar holds search and Filters on the left, Export, Bulk Upload, the Customize Columns button and Add New on the right. ' +
+          'Use `DataTable` for lists (selection, sorting, row actions, tree rows, column visibility, loading and empty states) ' +
+          'or compose the primitives (`Table`, `TableRow`, `TableCell`, `TableSectionRow`…) for reports and editable grids.',
+      },
+    },
   },
 } satisfies Meta<typeof DataTable>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const Card = ({ loading = false, rows = requisitions, selected }: { loading?: boolean; rows?: Requisition[]; selected?: string }) => {
-  const [page, setPage] = useState(1);
-  const [size, setSize] = useState(10);
-  const [sel, setSel] = useState(selected);
+// DataTable is generic, so stories render their own content and ignore args.
+const story = (render: () => JSX.Element, url?: string): Story => ({
+  args: { columns: [], rows: [], getRowId: () => '' },
+  render,
+  parameters: url ? { design: { url: FIGMA + url } } : undefined,
+});
+
+/** Sales › Customers. Two rows ticked, sortable Name / Company / Email, kebab actions, column picker (columns icon). */
+export const Standard = story(() => <CustomersTable />, '191-3274');
+
+/** People tables: blue initials avatar with the name, optional second line. */
+export const WithAvatars = story(() => <EmployeesTable />);
+
+/** Customers with avatars in the name column. */
+export const CustomersWithAvatars = story(() => <CustomersTable avatars />);
+
+/** Chart of Accounts: expandable tree, postable accounts as links, status switch. */
+export const Hierarchical = story(() => <AccountsTable />, '1871-19163');
+
+/** Bills: overdue dates and balances in red with a second line; status pills. */
+export const WithStatusAndOverdue = story(() => <BillsTable />, '4183-23454');
+
+/** Trial balance: grouped report rows with totals, Export and the primary Customize Columns button. */
+export const GroupedReport = story(() => <TrialBalanceTable />, '845-8824');
+
+export const Loading = story(() => <CustomersTable loading />);
+export const Empty = story(() => <CustomersTable empty />);
+
+/** 54px rows from the new features screens. Use for short lists with richer cells. */
+export const ComfortableDensity = story(() => (
+  <TableCard>
+    <DataTable density="comfortable" caption="Customers" columns={customerColumns} rows={customers.slice(0, 4)} getRowId={(c) => c.id} />
+  </TableCard>
+));
+
+/** Row states: default, hover (interactive rows), selected. */
+export const RowStates = story(() => (
+  <TableCard>
+    <Table>
+      <TableHead>
+        <tr><TableHeaderCell>State</TableHeaderCell><TableHeaderCell>Name</TableHeaderCell><TableHeaderCell>Email</TableHeaderCell></tr>
+      </TableHead>
+      <TableBody>
+        <TableRow><TableCell>Default</TableCell><TableCell emphasis="strong">Daniel Olabode</TableCell><TableCell>dolabode@wbiz.com</TableCell></TableRow>
+        <TableRow interactive><TableCell>Interactive (hover me)</TableCell><TableCell emphasis="strong">Damilola Audu</TableCell><TableCell>daudu@wbiz.com</TableCell></TableRow>
+        <TableRow selected><TableCell>Selected</TableCell><TableCell emphasis="strong">Deborah Akinola</TableCell><TableCell>dakinola@wbiz.com</TableCell></TableRow>
+        <TableRow><TableCell>Link cell</TableCell><TableCell emphasis="link">102310</TableCell><TableCell emphasis="link">Office Equipment</TableCell></TableRow>
+      </TableBody>
+    </Table>
+  </TableCard>
+));
+
+export const PaginationStates = story(function PaginationStates() {
+  const [a, setA] = useState(1);
+  const [b, setB] = useState(6);
   return (
-    <TableCard>
-      <TableToolbar>
-        <SearchField aria-label="Search requisitions" placeholder="Search requisitions..." />
-        <FilterDropdown onApply={() => {}} onReset={() => {}}>
-          <FilterField label="Status:"><Select aria-label="Status" size="sm" placeholder="All statuses" options={[{ value: 'pending', label: 'Pending Approval' }, { value: 'ready', label: 'Ready for Issue' }]} /></FilterField>
-        </FilterDropdown>
-      </TableToolbar>
-      <DataTable
-        columns={columns}
-        rows={rows}
-        getRowId={(r) => r.id}
-        loading={loading}
-        caption="Consumption requisitions"
-        onRowClick={(r) => setSel(r.id)}
-        selectedRowId={sel}
-        empty="No requisitions match your search."
-      />
-      <TableFooter summary={rows.length ? `Showing 1 to ${rows.length} of ${rows.length} entries` : 'Showing 0 entries'}>
-        <Pagination page={page} pageCount={1} onPageChange={setPage} pageSize={size} onPageSizeChange={setSize} />
-      </TableFooter>
-    </TableCard>
+    <div className="flex flex-col gap-4">
+      <TableCard><TableFooter summary="Showing 1 of 1 entries"><Pagination page={a} pageCount={1} onPageChange={setA} /></TableFooter></TableCard>
+      <TableCard><TableFooter summary="Showing 51 to 60 of 120 entries"><Pagination page={b} pageCount={12} onPageChange={setB} /></TableFooter></TableCard>
+      <TableCard><TableFooter summary="Without the page field"><Pagination page={b} pageCount={12} onPageChange={setB} showJump={false} /></TableFooter></TableCard>
+    </div>
   );
-};
-
-export const Default: Story = { render: () => <Card /> } as unknown as Story;
-export const SelectedRow: Story = { render: () => <Card selected="CR-000247" /> } as unknown as Story;
-export const Loading: Story = { render: () => <Card loading /> } as unknown as Story;
-export const Empty: Story = { render: () => <Card rows={[]} /> } as unknown as Story;
-
-export const PaginationStates: Story = {
-  render: () => {
-    const [page, setPage] = useState(5);
-    return (
-      <div className="flex flex-col gap-4">
-        <Pagination page={1} pageCount={1} onPageChange={() => {}} pageSize={10} onPageSizeChange={() => {}} />
-        <Pagination page={2} pageCount={4} onPageChange={() => {}} />
-        <Pagination page={page} pageCount={12} onPageChange={setPage} pageSize={20} onPageSizeChange={() => {}} />
-      </div>
-    );
-  },
-} as unknown as Story;
+});

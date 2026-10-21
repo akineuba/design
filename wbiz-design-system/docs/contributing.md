@@ -9,5 +9,10 @@ Follow [Figma sync → Updating tokens](figma-sync.md#updating-tokens). Name tok
 3. Style only with token classes. No hex values, no arbitrary `[...]` values, no inline pixel styles.
 4. Use `forwardRef`, spread native props, accept `className`, and keep variant classes in a typed `Record`.
 5. Stories: one per Figma variant, a states matrix, and `parameters.design.url` linking to the Figma node.
-6. Add `docs/components/<name>.md` (anatomy, variants, states, usage) and a row in the `CLAUDE.md` component table.
-7. Run `npm run typecheck` and `npm run build-storybook` before opening a PR.
+6. Add `docs/components/<name>.md` (anatomy, variants, states) and a row in the `CLAUDE.md` component table.
+7. Add `usage/<name>.md` (kebab-case of the component name): when to use it, which variant or state to pick, content rules. It appears on the component's Docs tab automatically.
+8. Run `npm run typecheck` and `npm run build-storybook` before opening a PR.
+
+## Editing usage guidance
+Anyone can change `usage/*.md` without touching code: on GitHub open the file and use the pencil icon, or follow the
+"Edit this guidance" link on any Docs page in Storybook. See [`usage/README.md`](../usage/README.md).

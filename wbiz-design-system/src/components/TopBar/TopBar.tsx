@@ -124,7 +124,7 @@ export function TopBar({
             aria-haspopup="menu"
             className="flex items-center gap-3 rounded-lg text-left focus-visible:outline-none focus-visible:shadow-focus"
           >
-            <span className="inline-flex size-avatar shrink-0 items-center justify-center rounded-full bg-line-strong font-sans text-13 font-semibold text-fg-inverse" aria-hidden>
+            <span className="inline-flex size-avatar shrink-0 items-center justify-center rounded-full bg-avatar-neutral font-sans text-13 font-semibold text-fg-inverse" aria-hidden>
               {user.initials ?? initialsOf(user.name)}
             </span>
             <span className="flex flex-col">

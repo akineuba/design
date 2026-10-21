@@ -1,6 +1,6 @@
 # StatusPill
 
-Status labels from the Consumption Requisitions table.
+Status labels for table rows and record headers. Pick the tone by meaning: see `usage/status-pill.md`.
 
 ## Tones
 `warning` Pending Approval · `info` Ready for Issue · `neutral` Partially Issued · `success` Completed · `error` Rejected/Cancelled (derived).

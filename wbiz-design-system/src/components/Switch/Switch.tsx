@@ -9,14 +9,17 @@ export interface SwitchProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   label?: ReactNode;
   /** Secondary line under the label. */
   description?: ReactNode;
+  /** md 51×31 (settings), sm 34×20 (table rows, Chart of Accounts status column). */
+  size?: 'sm' | 'md';
 }
 
 /**
  * On/off switch. Figma: "Toggle" instances on the accounting settings screens (51×31, success when
- * on, translucent grey when off, white knob with a soft shadow).
+ * on, translucent grey when off, white knob with a soft shadow). The small size matches the Status
+ * column on the Chart of Accounts (1871:19163).
  */
 export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch(
-  { checked, defaultChecked = false, onCheckedChange, label, description, disabled, className, id, ...rest },
+  { checked, defaultChecked = false, onCheckedChange, label, description, size = 'md', disabled, className, id, ...rest },
   ref,
 ) {
   const autoId = useId();
@@ -41,14 +44,15 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch
       disabled={disabled}
       onClick={toggle}
       className={cx(
-        'inline-flex h-switch-h w-switch-w shrink-0 items-center rounded-full p-0.5 transition-colors duration-200',
+        'inline-flex shrink-0 items-center rounded-full p-0.5 transition-colors duration-200',
+        size === 'sm' ? 'h-switch-sm-h w-switch-sm-w' : 'h-switch-h w-switch-w',
         'focus-visible:outline-none focus-visible:shadow-focus disabled:cursor-not-allowed disabled:opacity-50',
         on ? 'bg-success' : 'bg-switch-off',
         className,
       )}
       {...rest}
     >
-      <span className={cx('size-knob rounded-full bg-surface shadow-knob transition-transform duration-200', on ? 'translate-x-5' : 'translate-x-0')} />
+      <span className={cx('rounded-full bg-surface shadow-knob transition-transform duration-200', size === 'sm' ? 'size-knob-sm' : 'size-knob', on ? (size === 'sm' ? 'translate-x-3.5' : 'translate-x-5') : 'translate-x-0')} />
     </button>
   );
 

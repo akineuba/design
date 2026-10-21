@@ -1,14 +1,22 @@
 import './styles/index.css';
 
 export * from './components/Accordion';
+export * from './components/ActionMenu';
+export * from './components/Avatar';
 export * from './components/Button';
 export * from './components/Card';
+export * from './components/Checkbox';
+export * from './components/ColumnCustomizer';
+export * from './components/FilterBar';
 export * from './components/FilterDropdown';
 export * from './components/Input';
+export * from './components/Logo';
 export * from './components/Modal';
 export * from './components/PageHeader';
+export * from './components/Radio';
 export * from './components/SegmentedControl';
 export * from './components/Select';
+export * from './components/SidePanel';
 export * from './components/Sidebar';
 export * from './components/Spinner';
 export * from './components/StatusPill';
@@ -18,3 +26,4 @@ export * from './components/Tabs';
 export * from './components/TopBar';
 export * from './icons';
 export { cx } from './utils/cx';
+export { FieldLabelContext, type FieldLabelStyle } from './utils/field-label';

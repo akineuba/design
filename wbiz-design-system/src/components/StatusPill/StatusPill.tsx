@@ -5,8 +5,9 @@ export type StatusTone = 'warning' | 'info' | 'neutral' | 'success' | 'error';
 
 export interface StatusPillProps extends HTMLAttributes<HTMLSpanElement> {
   /**
-   * Figma (Consumption Requisitions): warning = Pending Approval, info = Ready for Issue,
-   * neutral = Partially Issued, success = Completed. error is derived (no error pill in Figma).
+   * Choose by meaning: warning = waiting on someone (Pending Approval), info = in progress
+   * (Awaiting Payment), neutral = partial or inactive, success = done (Paid, Completed).
+   * error = failed or late (Overdue, Rejected); derived, there is no error pill in Figma.
    */
   tone?: StatusTone;
   children: ReactNode;

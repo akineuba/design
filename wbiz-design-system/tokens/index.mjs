@@ -68,6 +68,7 @@ export function tailwindTheme() {
     fontWeight: refs('fontWeight'),
     borderRadius: { ...refs('radius'), DEFAULT: `var(${varName(['radius', 'lg'])})` },
     boxShadow: { ...refs('shadow'), DEFAULT: `var(${varName(['shadow', 'xs'])})` },
+    backgroundImage: refs('gradient'),
   };
 }
 

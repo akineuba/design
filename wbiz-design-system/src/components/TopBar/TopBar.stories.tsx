@@ -9,7 +9,7 @@ const meta = {
   title: 'Components/TopBar',
   component: TopBar,
   args: {
-    breadcrumbs: [{ label: 'Inventory', href: '#' }, { label: 'Consumption Requisitions' }],
+    breadcrumbs: [{ label: 'Sales', href: '#' }, { label: 'Customers' }],
     user: { name: 'sure', role: 'Super User', initials: 'ST' },
     notificationCount: 8,
     onNotificationsClick: noop,
@@ -28,7 +28,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-export const DeepBreadcrumb: Story = { args: { breadcrumbs: [{ label: 'Inventory', href: '#' }, { label: 'Consumption Requisitions', href: '#' }, { label: 'New' }] } };
+export const DeepBreadcrumb: Story = { args: { breadcrumbs: [{ label: 'Accounting', href: '#' }, { label: 'Fixed Assets', href: '#' }, { label: 'Asset Category' }] } };
 export const NoUnreadNotifications: Story = { args: { notificationCount: 0 } };
 export const ManyNotifications: Story = { args: { notificationCount: 128 } };
 export const DarkThemeSelected: Story = { args: { theme: 'dark' } };

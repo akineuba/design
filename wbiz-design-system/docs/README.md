@@ -9,18 +9,24 @@
 | [Component: Input](components/input.md) | Anatomy, states, validation, usage |
 | [Component: Select](components/select.md) | Dropdown field |
 | [Component: FilterDropdown](components/filter-dropdown.md) | Table toolbar filter |
-| [Component: Table](components/table.md) | Table card from Consumption Requisitions |
-| [Component: StatusPill](components/status-pill.md) | Status labels from the Consumption Requisitions table |
+| [Filters: FilterDropdown and FilterBar](components/filters.md) | Filters button on list pages, More Filters bar on reports |
+| [Component: ColumnCustomizer](components/column-customizer.md) | Customize Columns button and popup |
+| [Component: SidePanel](components/side-panel.md) | Right-hand create / edit / view panels |
+| [Checkbox, Radio, Avatar, ActionMenu, Logo](components/other-new.md) | Smaller building blocks |
+| [Component: Table](components/table.md) | Accounting tables: standard, avatars, hierarchical, grouped report |
+| [Component: StatusPill](components/status-pill.md) | Status labels for rows and record headers |
 | [Component: Accordion](components/accordion.md) | Collapsible form sections from the item form |
 | [Component: Modal](components/modal.md) | Dialog from the accounting Tax Deduction popup |
-| [Component: Tabs](components/tabs.md) | Section tabs from the Inventory consumption screens |
+| [Component: Tabs](components/tabs.md) | Section tabs between sibling pages of a module |
 | [Component: SegmentedControl](components/segmented-control.md) | Single-choice toggles from the new features screens |
 | [Component: Switch](components/switch.md) | On/off switch from the accounting settings screens |
 | [Component: Sidebar](components/sidebar.md) | Main menu from new features |
 | [Component: TopBar](components/top-bar.md) | Top bar from new features |
 | [Component: PageHeader](components/page-header.md) | Title block from the new features screens |
-| [Component: Card](components/card.md) | Settings section card from Consumption Requisition Settings |
+| [Component: Card](components/card.md) | Settings section card |
 | [Figma sync](figma-sync.md) | Where tokens came from and how to update them |
 | [Contributing](contributing.md) | Adding a token or a component |
 
 Storybook is the live reference; these pages explain the decisions behind it.
+
+**Usage guidance** (when to use a component and which state to pick) is in [`../usage/`](../usage/README.md), one editable Markdown file per component, shown on each component's Docs tab in Storybook.

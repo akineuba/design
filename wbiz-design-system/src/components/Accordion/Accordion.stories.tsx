@@ -4,6 +4,8 @@ import { Input } from '../Input';
 import { Select } from '../Select';
 import { StatusPill } from '../StatusPill';
 import { FIGMA } from '../../patterns/demo-data';
+import { CustomerForm } from '../../patterns/panel-forms';
+import { FieldLabelContext } from '../../utils/field-label';
 
 const BasicInfo = () => (
   <>
@@ -24,7 +26,7 @@ const meta = {
   parameters: {
     layout: 'padded',
     design: { url: FIGMA + '7092-1482' },
-    docs: { description: { component: 'Collapsible form section from the item form. Use `Accordion` to group sections; `type="single"` keeps one open at a time.' } },
+    docs: { description: { component: 'Collapsible form section. `card` (default) is the full-page form style from new features; `form` is the side-panel section style from the accounting panels (New Customer, New Account). Use `Accordion` to group sections; `type="single"` keeps one open at a time.' } },
   },
 } satisfies Meta<typeof AccordionItem>;
 export default meta;
@@ -47,5 +49,15 @@ export const Group: Story = {
         <Select label="Inventory Posting Group" options={[{ value: 'consumables', label: 'Consumables' }]} />
       </AccordionItem>
     </Accordion>
+  ),
+};
+
+/** Side-panel sections (accounting New Customer, 209:4142). Inside `SidePanel` the label style switches automatically. */
+export const FormVariant: Story = {
+  parameters: { design: { url: FIGMA + '209-4142' } },
+  render: () => (
+    <FieldLabelContext.Provider value="form">
+      <CustomerForm />
+    </FieldLabelContext.Provider>
   ),
 };

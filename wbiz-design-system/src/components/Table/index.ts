@@ -5,8 +5,10 @@ export {
   TableRow,
   TableHeaderCell,
   TableCell,
+  TableSectionRow,
   TableCard,
   TableToolbar,
+  TableToolbarGroup,
   TableFooter,
   SearchField,
   Pagination,
@@ -14,12 +16,17 @@ export {
 } from './Table';
 export type {
   TableAlign,
+  TableDensity,
+  TableProps,
   TableRowProps,
   TableHeaderCellProps,
   TableCellProps,
+  TableSectionRowProps,
+  SortDirection,
   SearchFieldProps,
   TableFooterProps,
   PaginationProps,
   DataTableColumn,
   DataTableProps,
+  DataTableSort,
 } from './Table';

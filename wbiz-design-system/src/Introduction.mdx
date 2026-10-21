@@ -10,7 +10,11 @@ Design tokens and React components for wBizManager, taken from the
 - **Foundations** shows every token: colours, type scale, spacing, radius and shadows.
   Tokens tagged *derived* are not in Figma; they cover states the file doesn't draw (hover, focus, loading).
 - **Components** has one page per component, with a story for each Figma state.
-- **Patterns** rebuilds the Consumption Requisitions screen from "new features" using only library components.
+- **Patterns** composes full screens (a list page, a hierarchical list, a report and a people directory) from library components only.
+
+Each component's Docs tab starts with **Usage guidance**: when to use it, which state to pick and what to avoid.
+That text lives in plain Markdown files in `usage/` at the repository root, so anyone can edit it (on GitHub, use the
+pencil icon) without touching code. See `usage/README.md`.
 
 Every value in a component comes from `tokens/tokens.json` through CSS variables (`--wbiz-*`) and the Tailwind theme.
 See `CLAUDE.md` and `docs/` in the repository for the rules.

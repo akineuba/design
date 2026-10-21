@@ -11,7 +11,7 @@ const Fields = () => (
       <Select aria-label="Dimension" size="sm" placeholder="All dimensions" options={[{ value: 'branch', label: 'Branch' }, { value: 'state', label: 'State' }]} />
     </FilterField>
     <FilterField label="Status:">
-      <Select aria-label="Status" size="sm" placeholder="All statuses" options={[{ value: 'pending', label: 'Pending Approval' }, { value: 'ready', label: 'Ready for Issue' }, { value: 'done', label: 'Completed' }]} />
+      <Select aria-label="Status" size="sm" placeholder="All statuses" options={[{ value: 'pending', label: 'Pending Approval' }, { value: 'awaiting', label: 'Awaiting Payment' }, { value: 'paid', label: 'Paid' }]} />
     </FilterField>
     <FilterField label="Date:">
       <Input aria-label="Date" size="sm" type="date" />
@@ -23,11 +23,11 @@ const meta = {
   title: 'Components/FilterDropdown',
   component: FilterDropdown,
   args: { children: <Fields />, onApply: () => {}, onReset: () => {} },
-  decorators: [(Story) => <div className="flex min-h-dialog w-full items-start justify-end p-4"><Story /></div>],
+  decorators: [(Story) => <div className="flex min-h-dialog w-full items-start justify-start p-4"><Story /></div>],
   parameters: {
     layout: 'fullscreen',
-    design: { url: FIGMA + '7099-7787' },
-    docs: { description: { component: '"Filters" trigger from the table toolbar plus the filter panel. The trigger turns primary and shows a count when filters are applied. Escape or an outside click closes it.' } },
+    design: { url: FIGMA + '191-3274' },
+    docs: { description: { component: '"Filters" button from the accounting table toolbars (three-line icon, no border) plus the filter panel. Sits next to the search field. The trigger turns blue and shows a count when filters are applied. Escape or an outside click closes it. For report pages use `FilterBar`.' } },
   },
 } satisfies Meta<typeof FilterDropdown>;
 export default meta;

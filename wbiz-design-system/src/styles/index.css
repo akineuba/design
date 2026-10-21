@@ -9,3 +9,17 @@
     @apply bg-surface-page font-sans text-sm text-fg-muted;
   }
 }
+
+@layer utilities {
+  /* Side panels slide in from the right edge. Respects reduced-motion settings. */
+  @keyframes wbiz-slide-in-right {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  .animate-slide-in-right {
+    animation: wbiz-slide-in-right 200ms ease-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-slide-in-right { animation: none; }
+  }
+}

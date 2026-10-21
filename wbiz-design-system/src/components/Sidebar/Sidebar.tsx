@@ -12,11 +12,13 @@ export interface NavItem {
 
 export interface SidebarProps {
   items: NavItem[];
-  /** Id of the current page. Its parent group is highlighted and expanded. */
+  /** Id of the current page. Its parent groups are highlighted and expanded. */
   activeId?: string;
   onNavigate?: (item: NavItem) => void;
-  /** Groups expanded on first render, in addition to the active item's group. */
+  /** Groups expanded on first render, in addition to the active item's groups. */
   defaultExpanded?: string[];
+  /** Open every group on first render (the "fully unfolded" reference). */
+  expandAll?: boolean;
   /** Icon-only rail. Controlled when `onCollapsedChange` is passed. */
   collapsed?: boolean;
   onCollapsedChange?: (collapsed: boolean) => void;
@@ -30,16 +32,22 @@ export interface SidebarProps {
 const containsActive = (item: NavItem, activeId?: string): boolean =>
   !!activeId && (item.id === activeId || !!item.children?.some((c) => containsActive(c, activeId)));
 
+const groupIds = (items: NavItem[], pick: (i: NavItem) => boolean): string[] =>
+  items.flatMap((i) => (i.children?.length ? [...(pick(i) ? [i.id] : []), ...groupIds(i.children, pick)] : []));
+
 /**
- * App navigation. Figma: sidebar-content (new features, 7067:32543), the newest version of the menu.
- * 200px wide on surface-sunken. Items are 48px (Inter Semibold 15, fg), sub-items 44px. The active
- * group gets a primary tint, primary text and a 3px indicator bar.
+ * App navigation. Figma: sidebar-content (new features, 7067:32543) for the metrics, and the fully
+ * unfolded menu supplied by the design team for the structure. Three levels:
+ * modules (48px, Inter Semibold 15, fg), pages (44px, Inter 15, fg-muted) and sub-pages (36px,
+ * Inter 13, fg-muted, indented). Any level can be a group. The active page and its modules get the
+ * primary tint; the module also gets a 3px indicator bar.
  */
 export function Sidebar({
   items,
   activeId,
   onNavigate,
   defaultExpanded = [],
+  expandAll = false,
   collapsed: collapsedProp,
   onCollapsedChange,
   logo,
@@ -53,41 +61,89 @@ export function Sidebar({
     if (collapsedProp === undefined) setInnerCollapsed(v);
     onCollapsedChange?.(v);
   };
-  const [expanded, setExpanded] = useState<string[]>(() => [
-    ...defaultExpanded,
-    ...items.filter((i) => i.children && containsActive(i, activeId)).map((i) => i.id),
-  ]);
+  const [expanded, setExpanded] = useState<string[]>(() =>
+    expandAll ? groupIds(items, () => true) : [...defaultExpanded, ...groupIds(items, (i) => containsActive(i, activeId))],
+  );
   const toggleGroup = (id: string) =>
     setExpanded((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]));
 
   const rowBase =
-    'relative flex w-full items-center gap-3 rounded-xl text-left font-sans text-15 transition-colors ' +
+    'relative flex w-full items-center gap-3 rounded-xl text-left font-sans transition-colors ' +
     'focus-visible:outline-none focus-visible:shadow-focus';
 
-  const Leaf = ({ item, sub }: { item: NavItem; sub?: boolean }) => {
+  // Per-level metrics. Level 0 = module, 1 = page, 2+ = sub-page.
+  const level = (depth: number) =>
+    depth === 0
+      ? { row: 'h-nav-item px-2.5 py-3 text-15 font-semibold', idle: 'text-fg', icon: 'size-icon' }
+      : depth === 1
+        ? { row: 'h-nav-subitem p-2.5 text-15', idle: 'text-fg-muted', icon: 'size-icon' }
+        : { row: 'h-nav-leaf py-2 pl-8 pr-2.5 text-13', idle: 'text-fg-muted', icon: 'size-icon-sm' };
+
+  const icon = (node: ReactNode | undefined, cls: string) =>
+    node ? <span className="inline-flex size-6 shrink-0 items-center justify-center" aria-hidden><span className={cls}>{node}</span></span> : null;
+
+  const leaf = (item: NavItem, depth: number) => {
     const active = item.id === activeId;
+    const m = level(depth);
     const cls = cx(
       rowBase,
-      sub ? 'h-nav-subitem p-2.5' : 'h-nav-item px-2.5 py-3 font-semibold',
+      m.row,
       collapsed && 'justify-center px-0',
-      active ? 'bg-primary-tint font-medium text-primary' : cx(sub ? 'text-fg-muted' : 'text-fg', 'hover:bg-surface-muted'),
+      active ? 'bg-primary-tint font-medium text-primary' : cx(m.idle, 'hover:bg-surface-muted'),
     );
     const content = (
       <>
-        {item.icon && <span className="inline-flex size-6 shrink-0 items-center justify-center" aria-hidden><span className="size-icon">{item.icon}</span></span>}
+        {icon(item.icon, m.icon)}
         <span className={cx('min-w-0 flex-1 truncate', collapsed && 'sr-only')}>{item.label}</span>
       </>
     );
     const common = {
       className: cls,
       'aria-current': active ? ('page' as const) : undefined,
-      title: collapsed ? item.label : undefined,
+      title: collapsed ? item.label : item.label.length > 20 ? item.label : undefined,
       onClick: (e: MouseEvent) => {
         if (!item.href) e.preventDefault();
         onNavigate?.(item);
       },
     };
     return item.href ? <a href={item.href} {...common}>{content}</a> : <button type="button" {...common}>{content}</button>;
+  };
+
+  const node = (item: NavItem, depth: number): JSX.Element => {
+    if (!item.children?.length) return <li key={item.id}>{leaf(item, depth)}</li>;
+    const open = expanded.includes(item.id) && !collapsed;
+    const activeGroup = containsActive(item, activeId);
+    const m = level(depth);
+    return (
+      <li key={item.id} className="flex flex-col gap-0.5">
+        <button
+          type="button"
+          aria-expanded={open}
+          title={collapsed ? item.label : item.label.length > 20 ? item.label : undefined}
+          onClick={() => (collapsed ? (setCollapsed(false), setExpanded((c) => [...c, item.id])) : toggleGroup(item.id))}
+          className={cx(
+            rowBase,
+            m.row,
+            collapsed && 'justify-center px-0',
+            activeGroup ? cx('text-primary', depth === 0 && 'bg-primary-tint') : cx(m.idle, 'hover:bg-surface-muted'),
+          )}
+        >
+          {activeGroup && depth === 0 && <span className="absolute inset-y-0.5 left-0 w-nav-indicator rounded-xl bg-primary" aria-hidden />}
+          {icon(item.icon, m.icon)}
+          <span className={cx('min-w-0 flex-1 truncate', collapsed && 'sr-only')}>{item.label}</span>
+          {!collapsed && (
+            <span className={cx('inline-flex size-6 shrink-0 items-center justify-center', activeGroup ? 'text-primary' : 'text-icon-muted')} aria-hidden>
+              <span className={cx('size-icon-sm transition-transform duration-200', open && 'rotate-180')}><ChevronDownIcon /></span>
+            </span>
+          )}
+        </button>
+        {open && (
+          <ul className="flex flex-col">
+            {item.children.map((c) => node(c, depth + 1))}
+          </ul>
+        )}
+      </li>
+    );
   };
 
   return (
@@ -115,41 +171,7 @@ export function Sidebar({
 
       <nav aria-label={sectionTitle}>
         <ul className="flex flex-col gap-0.5">
-          {items.map((item) => {
-            if (!item.children?.length) return <li key={item.id}><Leaf item={item} /></li>;
-            const open = expanded.includes(item.id) && !collapsed;
-            const activeGroup = containsActive(item, activeId);
-            return (
-              <li key={item.id} className="flex flex-col gap-1">
-                <button
-                  type="button"
-                  aria-expanded={open}
-                  title={collapsed ? item.label : undefined}
-                  onClick={() => (collapsed ? (setCollapsed(false), setExpanded((c) => [...c, item.id])) : toggleGroup(item.id))}
-                  className={cx(
-                    rowBase,
-                    'h-nav-item px-2.5 py-3 font-semibold',
-                    collapsed && 'justify-center px-0',
-                    activeGroup ? 'bg-primary-tint text-primary' : 'text-fg hover:bg-surface-muted',
-                  )}
-                >
-                  {activeGroup && <span className="absolute inset-y-0.5 left-0 w-nav-indicator rounded-xl bg-primary" aria-hidden />}
-                  {item.icon && <span className="inline-flex size-6 shrink-0 items-center justify-center" aria-hidden><span className="size-icon">{item.icon}</span></span>}
-                  <span className={cx('min-w-0 flex-1 truncate', collapsed && 'sr-only')}>{item.label}</span>
-                  {!collapsed && (
-                    <span className={cx('inline-flex size-6 shrink-0 items-center justify-center', activeGroup ? 'text-primary' : 'text-icon-muted')} aria-hidden>
-                      <span className={cx('size-icon-sm transition-transform duration-200', open && 'rotate-180')}><ChevronDownIcon /></span>
-                    </span>
-                  )}
-                </button>
-                {open && (
-                  <ul className="flex flex-col">
-                    {item.children.map((c) => <li key={c.id}><Leaf item={c} sub /></li>)}
-                  </ul>
-                )}
-              </li>
-            );
-          })}
+          {items.map((item) => node(item, 0))}
         </ul>
       </nav>
     </aside>
