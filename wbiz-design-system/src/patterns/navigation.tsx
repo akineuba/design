@@ -5,11 +5,12 @@
 import type { ReactNode } from 'react';
 import type { NavItem } from '../components/Sidebar';
 import {
-  ActivityIcon, AwardIcon, BagIcon, BankIcon, BarChartIcon, BookIcon, BoxIcon, BriefcaseIcon, CalculatorIcon,
+  ActivityIcon, BagIcon, BankIcon, BarChartIcon, BookIcon, BoxIcon, BriefcaseIcon, CalculatorIcon,
   CalendarIcon, CartIcon, ChartIcon, ChatIcon, ClipboardCheckIcon, ClockIcon, CoinIcon, CopyIcon, DeviceIcon,
   DocumentIcon, EditIcon, FolderIcon, GlobeIcon, GridIcon, HelpIcon, HomeIcon, KeyIcon, LayersIcon, MoneyReceiveIcon,
   PrinterIcon, ProfileIcon, ReceiptIcon, ScanIcon, SettingIcon, ShieldIcon, SlidersIcon, TagIcon, TaskIcon,
-  TrainingIcon, TransferIcon, UsersIcon, WalletIcon,
+  TrainingIcon, TransferIcon, UsersIcon, WalletIcon, FileChartIcon, BuildingIcon, BoxesIcon, ClipboardListIcon,
+  TargetIcon, DollarIcon, TrendUpIcon, TrendDownIcon, GiftIcon, UserCheckIcon,
 } from '../icons';
 
 const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -71,7 +72,7 @@ const menu: Spec[] = [
     ['Printing', <PrinterIcon />],
     ['Devices', <DeviceIcon />],
   ]],
-  ['Reports', <DocumentIcon />, [
+  ['Reports', <FileChartIcon />, [
     ['General Ledger', <BookIcon />],
     ['Trial Balance', <BarChartIcon />],
     ['Statement of Profit or Loss', <ChartIcon />],
@@ -81,7 +82,7 @@ const menu: Spec[] = [
     ['Asset Report', <DocumentIcon />],
     ['Disposal Report', <DocumentIcon />],
   ]],
-  ['Commercial', <BriefcaseIcon />, [
+  ['Commercial', <BuildingIcon />, [
     ['Dashboard', <BarChartIcon />],
     ['Tender Register', <DocumentIcon />],
     ['My Tasks', <TaskIcon />],
@@ -89,7 +90,7 @@ const menu: Spec[] = [
     ['Documents', <FolderIcon />],
     ['Admin', <SettingIcon />],
   ]],
-  ['Projects', <LayersIcon />, [
+  ['Projects', <BoxesIcon />, [
     ['Portfolio Management', <BriefcaseIcon />],
     ['Project', <FolderIcon />],
     ['WBS Template', <CopyIcon />],
@@ -114,20 +115,20 @@ const menu: Spec[] = [
       ['Reports & Analytics', <ChartIcon />],
     ]],
     ['Employee Records', <UsersIcon />],
-    ['Onboarding Management', <ClipboardCheckIcon />],
+    ['Onboarding Management', <ClipboardListIcon />],
     ['Attendance Management', <ActivityIcon />],
-    ['Performance Management', <AwardIcon />],
-    ['Payroll Management', <CoinIcon />, [
+    ['Performance Management', <TargetIcon />],
+    ['Payroll Management', <DollarIcon />, [
       ['Dashboard', <BarChartIcon />],
       ['Salary Setup', <WalletIcon />],
-      ['Salary Additions', <ChartIcon />],
-      ['Salary Deductions', <ActivityIcon />],
+      ['Salary Additions', <TrendUpIcon />],
+      ['Salary Deductions', <TrendDownIcon />],
       ['Flexible Deductions', <LayersIcon />],
-      ['Recurring Benefits', <AwardIcon />],
+      ['Recurring Benefits', <GiftIcon />],
       ['Tax Config', <SettingIcon />],
       ['Payroll Runs', <ReceiptIcon />],
-      ['Inclusions & Exclusions', <UsersIcon />],
-      ['Pending Payrolls', <ClockIcon />],
+      ['Inclusions & Exclusions', <UserCheckIcon />],
+      ['Pending Payrolls', <ClipboardListIcon />],
     ]],
     ['Loan Management', <WalletIcon />, [
       ['Dashboard', <BarChartIcon />],

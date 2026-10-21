@@ -62,8 +62,11 @@ improvements that still need to be vetted.
 
 ### Building rules (for developers and AI tools)
 37. **Use design tokens only**: no raw hex values or pixel sizes in components (see `CLAUDE.md`).
-38. **Reuse library components** before building anything new; check Storybook and Figma first.
+38. **Reuse library components** before building anything new; check Storybook and Figma first. **Icons come from the library's Lucide set only**; never mix icon sets.
 39. **Name things for what they are, not for one feature** (`SidePanel`, not `RequisitionDrawer`).
+
+### Summary figures
+40. **Headline figures sit in a row of summary cards under the page title**: icon tile on the left, label saying what and when ("Net pay — October"), a bold shortened value (`₦15.2M`), and a trend against the previous period or a context line. Up to four per row. *(SummaryCard)*
 
 ---
 

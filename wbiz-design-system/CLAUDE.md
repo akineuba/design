@@ -73,6 +73,7 @@ Extracted by counting the values the product screens use (accounting `0:1`, inve
 | `line-subtle` / `line` / `line-strong` | #EAECF0 / #D0D5DD / #667085 | Dividers, cards, tables / control borders / hover border and the outline (Cancel) button |
 | `line-field` | #D1D5DB | Side-panel section borders |
 | `action-{view,edit,delete,link,positive}` | #667085 / #D4A003 / #E81E25 / #0070FF / #00C167 | Row action menu items |
+| `tile-{green,blue,amber,teal,red}-{bg,fg}` / `trend-up` / `trend-down` | derived from the live product | Summary card icon tiles and trend lines |
 | `bg-avatar` / `bg-avatar-neutral` | gradients | Initials avatars: blue (people in tables), grey (top bar user) |
 | `surface` / `surface-page` / `surface-muted` / `surface-sunken` | #FFFFFF / #FCFCFD / #F8F8F8 / #F3F3F3 | Cards / app background, table header / hover / sidebar, search |
 | `surface-control` / `surface-track` | #F1F4F9 / #E5E7EB | Theme toggle / segmented control track |
@@ -105,7 +106,7 @@ Families: `font-sans` (Inter: controls, labels, sidebar, top bar) and `font-data
 ### Spacing, size, radius, shadow
 - Spacing (`p-*`, `gap-*`, `m-*`): `0.5`=2, `1`=4, `1.5`=6, `2`=8, `2.5`=10, `3`=12, `3.5`=14, `4`=16, `5`=20, `6`=24, `7.5`=30, `8`=32, `10`=40, `12`=48 px.
 - Controls: `control-xs` 32 (toolbar search, Filters, page buttons), `control-sm` 34, `control-md` 40 (default), `control-lg` 46. Icons: `icon` 20, `icon-sm` 16, `icon-xs` 14.
-- Layout: `sidebar` 200, `sidebar-collapsed` 72 (derived), `topbar` 64, `nav-item` 48, `nav-subitem` 44, `nav-leaf` 36, `tab` 35, `row` 44, `row-head` 44, `row-comfortable` 54, `dialog` 515, `menu` 240, `field` 320 (derived), `filter-field` 235.
+- Layout: `sidebar` 200, `sidebar-collapsed` 72 (derived), `topbar` 64, `nav-item` 44, `nav-subitem` 40, `nav-leaf` 36, `tile` 44, `icon-md` 18, `tab` 35, `row` 44, `row-head` 44, `row-comfortable` 54, `dialog` 515, `menu` 240, `field` 320 (derived), `filter-field` 235.
 - Tables and panels: `search` 203, `page-btn` 30, `checkbox` 20, `radio` 16, `avatar-sm` 28, `action-menu` 138, `columns-popup` 354, `filter-control` 161, `panel-sm` 435, `panel-md` 541, `panel-lg` 562, `switch-sm-w`/`-h` 34×20, `knob-sm` 16.
 - Radius: `rounded-xs` 2, `-sm` 4, `-md` 6 (pills), `-lg` 8 (**default**: buttons, inputs, menus, modal), `-xl` 10 (cards, table card, sidebar items), `-panel` 12 (form accordion), `-2xl` 16, `-3xl` 20 (segmented pill), `-full`.
 - Shadow: `shadow-xs` (buttons), `shadow-md` (menus, popovers), `shadow-knob` (switch), `shadow-dialog`, `shadow-focus`, `shadow-focus-error` (last three derived).
@@ -137,14 +138,15 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 | `Tabs` + `TabPanel` | sub-menu-list `7053:5433` | selected / unselected / disabled; arrow-key navigation |
 | `SegmentedControl` | Inventory/Free Text `7053:5632`; List/Card `7053:5973` | `appearance`: pill, boxed; icons; disabled options |
 | `Switch` | "Toggle" instances (accounting) | `size` md / sm (table rows) · on / off / disabled; optional `label` and `description` |
-| `Sidebar` | sidebar-content `7067:32543` (metrics) + the unfolded menu reference (structure) | three levels, any can be a group; active page and module; `expandAll`; `collapsed` icon rail (derived) |
+| `Sidebar` | live product reference (metrics: 14px text, 18/16/14px icons, deeper grey) + the unfolded menu reference (structure) | three levels, any can be a group; active page and module; `expandAll`; `collapsed` icon rail (derived) |
 | `TopBar` | top-header `7053:5510` + the latest top-bar reference from design (blue avatar, Bold 16 name, grid launcher) | breadcrumb; Tour, theme toggle, notifications badge, user menu, app launcher (each shown when its handler is passed) |
 | `PageHeader` | action-row `7053:5433` | `title`, `description`, `actions`, `back` link |
 | `Card` | settings cards `7053:6444` | `title`, `description`, `actions`, `divided` |
 | `Spinner` | n/a | `label` |
+| `SummaryCard` | live product payroll summary row (icon moved left) | `label` ("Net pay — October"), `value`, `icon`, `color` green / blue / amber / teal / red, `trend` {value, label, goodWhen}, `hint`. Page-top headline figures |
 | `StatCard` | stat row, Appraisal Dashboard `4370:29966` (hr) | `label`, `value`, `tone` default / primary / success / warning / error, `icon`, `hint` |
 | `StageProgress` | derived (no Figma component) | stages complete / current / upcoming / rejected; horizontal (record header) or vertical (approval trail) |
-| Icons (`src/icons`) | Vuesax linear style | `currentColor`, size via wrapper (`size-icon`) |
+| Icons (`src/icons`) | **Lucide** (`lucide-react`, 1.75 stroke), the set the live product uses; only "More Filters" keeps its Figma icon | `currentColor`, size via wrapper (`size-icon`). Import from `src/icons`, never from `lucide-react` directly |
 
 `Patterns/Payroll Runs` is a full redesign of the Payroll Generation screen (stat cards, generate panel with quick-add, run panel with approval stages, void confirmation). `Patterns/Pages` in Storybook composes these into full screens: a list page (Customers with side panels), a hierarchical list (Chart of Accounts), a report page (Trial balance with the filter bar) and a people directory. **Don't name components, stories or docs after one feature**; the system is used across the whole platform.
 

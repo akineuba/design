@@ -15,6 +15,7 @@ import { Select } from '../components/Select';
 import { SidePanel } from '../components/SidePanel';
 import { StageProgress } from '../components/StageProgress';
 import { StatCard } from '../components/StatCard';
+import { SummaryCard } from '../components/SummaryCard';
 import { StatusPill } from '../components/StatusPill';
 import {
   DataTable, Pagination, SearchField, Table, TableBody, TableCard, TableCell, TableFooter, TableHead, TableHeaderCell, TableRow,
@@ -22,8 +23,8 @@ import {
 } from '../components/Table';
 import { Tabs } from '../components/Tabs';
 import {
-  BlockIcon, ChevronRightIcon, ClockIcon, CloseCircleIcon, CoinIcon, ExportIcon, EyeIcon, PlusIcon, ReceiptIcon,
-  HelpIcon, TickCircleIcon, TransferIcon, WalletIcon,
+  BanknoteIcon, BlockIcon, ChevronRightIcon, CloseCircleIcon, ExportIcon, EyeIcon, PlusIcon,
+  HelpIcon, TickCircleIcon, TransferIcon, TrendUpIcon, UsersIcon, WalletIcon,
 } from '../icons';
 import {
   naira, payrollEmployees, payrollRuns, payrollStages, statusMeta, statusOrder, type PayrollRun, type RunStatus,
@@ -33,7 +34,11 @@ const PAGE_SIZE = 10;
 const opt = (...l: string[]) => l.map((v) => ({ value: v, label: v }));
 const net = (r: PayrollRun) => r.gross - r.deductions;
 /** Short form for stat cards ("₦ 76.37M"); the exact figure goes in the hint. */
-const compact = (n: number) => (n >= 1e9 ? `₦ ${(n / 1e9).toFixed(2)}B` : n >= 1e6 ? `₦ ${(n / 1e6).toFixed(2)}M` : naira(n));
+const compact = (n: number) => {
+  const short = (v: number, unit: string) => `₦${Number(v.toFixed(1)).toLocaleString('en-NG')}${unit}`;
+  return n >= 1e9 ? short(n / 1e9, 'B') : n >= 1e6 ? short(n / 1e6, 'M') : n >= 1e3 ? short(n / 1e3, 'K') : naira(n);
+};
+const change = (cur: number, prev: number) => (prev ? ((cur - prev) / prev) * 100 : 0);
 
 /** Current stage for StageProgress: the next stage still to happen. */
 const stageView = (status: RunStatus) => {
@@ -216,11 +221,15 @@ function PayrollRunsPage() {
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const rows = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
   const live = runs.filter((r) => r.status !== 'voided');
-  const paid = live.filter((r) => r.status === 'paid');
   const last = [...live].sort((a, b) => b.generatedSort - a.generatedSort)[0];
   const openRun = runs.find((r) => r.id === openId) ?? null;
-  const totalGross = live.reduce((s, r) => s + r.gross, 0);
   const totalNet = live.reduce((s, r) => s + net(r), 0);
+  const sum = (list: PayrollRun[], f: (r: PayrollRun) => number) => list.reduce((s, r) => s + f(r), 0);
+  const month = last ? last.period.split(' ')[0] : '';
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const prevMonth = monthNames[(monthNames.indexOf(month) + 11) % 12];
+  const cur = live.filter((r) => last && r.period === last.period);
+  const prev = live.filter((r) => r.period === `${prevMonth} 2026`);
   const activeCount = [filters.status, filters.template].filter(Boolean).length;
 
   const columns: DataTableColumn<PayrollRun>[] = [
@@ -250,12 +259,11 @@ function PayrollRunsPage() {
         actions={<div className="w-filter-control"><Select aria-label="Year" size="sm" options={opt('2026', '2025')} defaultValue="2026" searchable={false} /></div>}
       />
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
-        <StatCard label="Total runs" value={live.length} hint="this year" icon={<ReceiptIcon />} tone="primary" />
-        <StatCard label="Total gross pay" value={compact(totalGross)} hint={naira(totalGross)} icon={<WalletIcon />} />
-        <StatCard label="Total net pay" value={compact(totalNet)} hint={naira(totalNet)} icon={<CoinIcon />} tone="success" />
-        <StatCard label="Paid" value={paid.length} hint={`of ${live.length} runs`} icon={<TickCircleIcon />} tone="success" />
-        <StatCard label="Awaiting approval" value={live.length - paid.length} hint="needs action" icon={<ClockIcon />} tone="warning" />
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <SummaryCard label={`Net pay — ${month}`} value={compact(sum(cur, net))} icon={<BanknoteIcon />} color="green" trend={{ value: change(sum(cur, net), sum(prev, net)), label: `vs ${prevMonth}` }} />
+        <SummaryCard label={`Gross pay — ${month}`} value={compact(sum(cur, (r) => r.gross))} icon={<TrendUpIcon />} color="blue" trend={{ value: change(sum(cur, (r) => r.gross), sum(prev, (r) => r.gross)), label: `vs ${prevMonth}` }} />
+        <SummaryCard label={`Employees — ${month}`} value={sum(cur, (r) => r.staff)} icon={<UsersIcon />} color="amber" hint={`${cur.length} run${cur.length === 1 ? '' : 's'} this month`} />
+        <SummaryCard label="YTD net pay — 2026" value={compact(totalNet)} icon={<WalletIcon />} color="teal" hint={`${live.length} runs total`} />
       </div>
 
       {last && (

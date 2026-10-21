@@ -38,8 +38,8 @@ const groupIds = (items: NavItem[], pick: (i: NavItem) => boolean): string[] =>
 /**
  * App navigation. Figma: sidebar-content (new features, 7067:32543) for the metrics, and the fully
  * unfolded menu supplied by the design team for the structure. Three levels:
- * modules (48px, Inter Semibold 15, fg), pages (44px, Inter 15, fg-muted) and sub-pages (36px,
- * Inter 13, fg-muted, indented). Any level can be a group. The active page and its modules get the
+ * modules (44px, Inter Semibold 14, fg-strong, 18px icon), pages (40px, Inter 14, fg, 16px icon) and
+ * sub-pages (36px, Inter 13, fg, 14px icon, indented), sized from the live product reference. Any level can be a group. The active page and its modules get the
  * primary tint; the module also gets a 3px indicator bar.
  */
 export function Sidebar({
@@ -74,13 +74,13 @@ export function Sidebar({
   // Per-level metrics. Level 0 = module, 1 = page, 2+ = sub-page.
   const level = (depth: number) =>
     depth === 0
-      ? { row: 'h-nav-item px-2.5 py-3 text-15 font-semibold', idle: 'text-fg', icon: 'size-icon' }
+      ? { row: 'h-nav-item px-2.5 py-2.5 text-sm font-semibold', idle: 'text-fg-strong', icon: 'size-icon-md' }
       : depth === 1
-        ? { row: 'h-nav-subitem p-2.5 text-15', idle: 'text-fg-muted', icon: 'size-icon' }
-        : { row: 'h-nav-leaf py-2 pl-8 pr-2.5 text-13', idle: 'text-fg-muted', icon: 'size-icon-sm' };
+        ? { row: 'h-nav-subitem px-2.5 py-2 text-sm', idle: 'text-fg', icon: 'size-icon-sm' }
+        : { row: 'h-nav-leaf py-2 pl-8 pr-2.5 text-13', idle: 'text-fg', icon: 'size-icon-xs' };
 
   const icon = (node: ReactNode | undefined, cls: string) =>
-    node ? <span className="inline-flex size-6 shrink-0 items-center justify-center" aria-hidden><span className={cls}>{node}</span></span> : null;
+    node ? <span className="inline-flex size-5 shrink-0 items-center justify-center" aria-hidden><span className={cls}>{node}</span></span> : null;
 
   const leaf = (item: NavItem, depth: number) => {
     const active = item.id === activeId;
@@ -132,8 +132,8 @@ export function Sidebar({
           {icon(item.icon, m.icon)}
           <span className={cx('min-w-0 flex-1 truncate', collapsed && 'sr-only')}>{item.label}</span>
           {!collapsed && (
-            <span className={cx('inline-flex size-6 shrink-0 items-center justify-center', activeGroup ? 'text-primary' : 'text-icon-muted')} aria-hidden>
-              <span className={cx('size-icon-sm transition-transform duration-200', open && 'rotate-180')}><ChevronDownIcon /></span>
+            <span className={cx('inline-flex size-5 shrink-0 items-center justify-center', activeGroup ? 'text-primary' : 'text-icon-muted')} aria-hidden>
+              <span className={cx('size-icon-xs transition-transform duration-200', open && 'rotate-180')}><ChevronDownIcon /></span>
             </span>
           )}
         </button>
