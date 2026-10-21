@@ -264,6 +264,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .ad-cf{margin-top:auto;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:9px;font-size:9.5px;color:var(--faint)}
 .ad-cf a{display:flex;align-items:center;gap:4px;color:var(--text-2);font-size:10.5px}.ad-cf .i{width:11px;height:11px}
 .ad-donut{display:grid;place-items:center;padding:4px 0}
+.ad-svg{display:block;flex:none;width:100%;height:auto;aspect-ratio:600/176}
 .ad-dl{display:grid;grid-template-columns:1fr 1fr;gap:7px 22px;font-size:10.5px;color:var(--text-2)}
 .ad-dl div{display:flex;align-items:center;gap:6px}.ad-dl i{width:7px;height:7px;border-radius:2px}.ad-dl b{margin-left:auto;font-weight:600}
 .ad-tbl{display:grid;font-size:11.5px}
@@ -768,11 +769,11 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
                     <div class="ad-row">
                       <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-chart"/></svg></span>Invoice activity<span class="ad-dots">···</span></div>
                         <div class="ad-leg"><span><i style="background:#0070FF"></i>Invoice value</span><span><i style="background:#E9A23B"></i>Collected</span><span class="ad-sp"></span><span>NGN</span></div>
-                        <svg class="chart" id="inv-act" viewBox="0 0 600 176" width="100%"></svg>
+                        <svg class="chart ad-svg" id="inv-act" viewBox="0 0 600 176" width="572" height="168" preserveAspectRatio="xMidYMid meet"><line x1="40" x2="584" y1="152" y2="152" stroke="#EEF2F6" stroke-dasharray="3 4"></line><text x="32" y="155" text-anchor="end">0m</text><line x1="40" x2="584" y1="104.9795918367347" y2="104.9795918367347" stroke="#EEF2F6" stroke-dasharray="3 4"></line><text x="32" y="107.9795918367347" text-anchor="end">160m</text><line x1="40" x2="584" y1="55.0204081632653" y2="55.0204081632653" stroke="#EEF2F6" stroke-dasharray="3 4"></line><text x="32" y="58.0204081632653" text-anchor="end">330m</text><line x1="40" x2="584" y1="8" y2="8" stroke="#EEF2F6" stroke-dasharray="3 4"></line><text x="32" y="11" text-anchor="end">490m</text><text x="40" y="172" text-anchor="middle">Oct 01</text><text x="148.8" y="172" text-anchor="middle">Oct 04</text><text x="257.6" y="172" text-anchor="middle">Oct 07</text><text x="366.4" y="172" text-anchor="middle">Oct 10</text><text x="475.2" y="172" text-anchor="middle">Oct 13</text><text x="584" y="172" text-anchor="middle">Oct 16</text><polygon points="40,152 40.0,37.4 148.8,16.8 257.6,90.3 366.4,69.7 475.2,52.1 584.0,87.3 584,152" fill="#0070FF" fill-opacity="0.08"></polygon><polyline points="40.0,37.4 148.8,16.8 257.6,90.3 366.4,69.7 475.2,52.1 584.0,87.3" fill="none" stroke="#0070FF" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray=""></polyline><circle cx="40" cy="37.38775510204081" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="148.8" cy="16.81632653061226" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="257.6" cy="90.28571428571428" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="366.4" cy="69.71428571428571" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="475.2" cy="52.08163265306122" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="584" cy="87.34693877551021" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="584" cy="87.34693877551021" r="3.4" fill="#0070FF"></circle><polyline points="40.0,116.7 148.8,31.5 257.6,125.6 366.4,81.5 475.2,102.0 584.0,134.4" fill="none" stroke="#E9A23B" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray=""></polyline><circle cx="584" cy="134.3673469387755" r="3.4" fill="#E9A23B"></circle></svg>
                         <div class="ad-cf"><span>Department scope · October 2026</span><a>View details<svg class="i"><use href="#i-arrow"/></svg></a></div></div>
                       <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-target"/></svg></span>Invoice breakdown<span class="ad-dots">···</span></div>
-                        <div class="ad-donut"><svg id="inv-donut" viewBox="0 0 120 120" width="132" height="132"></svg></div>
-                        <div class="ad-dl num" id="inv-legend"></div>
+                        <div class="ad-donut"><svg id="inv-donut" viewBox="0 0 120 120" width="132" height="132" style="flex:none"><circle cx="60" cy="60" r="44" fill="none" stroke="#0070FF" stroke-width="14" stroke-dasharray="40.13233131013873 276.46015351590177" stroke-dashoffset="0" transform="rotate(-90 60 60)"></circle><circle cx="60" cy="60" r="44" fill="none" stroke="#E9A23B" stroke-width="14" stroke-dasharray="72.03157979274278 276.46015351590177" stroke-dashoffset="-42.53233131013873" transform="rotate(-90 60 60)"></circle><circle cx="60" cy="60" r="44" fill="none" stroke="#22C55E" stroke-width="14" stroke-dasharray="29.499248482604052 276.46015351590177" stroke-dashoffset="-116.96391110288151" transform="rotate(-90 60 60)"></circle><circle cx="60" cy="60" r="44" fill="none" stroke="#8B6CCB" stroke-width="14" stroke-dasharray="125.1969939304162 276.46015351590177" stroke-dashoffset="-148.86315958548556" transform="rotate(-90 60 60)"></circle><text x="60" y="63" text-anchor="middle" style="font-size:22px;font-weight:600;fill:#0F172A">26</text><text x="60" y="76" text-anchor="middle" style="font-size:6.5px;fill:#94A3B8">records</text></svg></div>
+                        <div class="ad-dl num" id="inv-legend"><div><i style="background:#0070FF"></i><span>Overdue</span><b>4</b></div><div><i style="background:#E9A23B"></i><span>Sent</span><b>7</b></div><div><i style="background:#22C55E"></i><span>Part-paid</span><b>3</b></div><div><i style="background:#8B6CCB"></i><span>Paid</span><b>12</b></div></div>
                         <div class="ad-cf"><span>Department scope · October 2026</span><a>View details<svg class="i"><use href="#i-arrow"/></svg></a></div></div>
                     </div>
                     <div class="ad-row">
@@ -1343,14 +1344,6 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       const li = s.data.length - 1; el('circle', { cx: X(li), cy: Y(s.data[li]), r: 3.4, fill: s.color }, svg);
     });
   }
-  lineChart(document.getElementById('inv-act'), {
-    w: 600, h: 176, pad: [8, 16, 24, 40], ymin: 0, ymax: 490, ticks: [0, 160, 330, 490], grid: '3 4', fmt: t => t + 'm',
-    labels: ['Oct 01','Oct 04','Oct 07','Oct 10','Oct 13','Oct 16'],
-    series: [
-      { color: '#0070FF', data: [390, 460, 210, 280, 340, 220], area: true, dots: true, width: 2.2 },
-      { color: '#E9A23B', data: [120, 410, 90, 240, 170, 60], width: 1.8 },
-    ],
-  });
   lineChart(document.getElementById('perf'), {
     w: 300, h: 170, pad: [10, 10, 22, 28], ymin: 50, ymax: 100, ticks: [50, 75, 100],
     labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],
@@ -1370,16 +1363,6 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       el('text', { x: x + bw * .32, y: 164, 'text-anchor': 'middle' }, svg).textContent = l;
     });
   })(document.getElementById('dept'));
-  (function donut(svg, list) {
-    const data = [['Overdue', 4, '#0070FF'], ['Sent', 7, '#E9A23B'], ['Part-paid', 3, '#22C55E'], ['Paid', 12, '#8B6CCB']];
-    const total = data.reduce((a, d) => a + d[1], 0), r = 44, C = 2 * Math.PI * r, gap = 2.4;
-    let off = 0;
-    data.forEach(([, v, c]) => { const len = C * v / total; el('circle', { cx: 60, cy: 60, r, fill: 'none', stroke: c, 'stroke-width': 14, 'stroke-dasharray': `${Math.max(len - gap, 0)} ${C}`, 'stroke-dashoffset': -off, transform: 'rotate(-90 60 60)' }, svg); off += len; });
-    el('text', { x: 60, y: 63, 'text-anchor': 'middle', style: 'font-size:22px;font-weight:600;fill:#0F172A' }, svg).textContent = total;
-    el('text', { x: 60, y: 76, 'text-anchor': 'middle', style: 'font-size:6.5px;fill:#94A3B8' }, svg).textContent = 'records';
-    list.innerHTML = data.map(([l, v, c]) => `<div><i style="background:${c}"></i><span>${l}</span><b>${v}</b></div>`).join('');
-  })(document.getElementById('inv-donut'), document.getElementById('inv-legend'));
-
   /* Orbit illustration: modules circle the platform */
   (function orbit() {
     const box = document.getElementById('orb'), rings = box.querySelector('.orb-rings');
