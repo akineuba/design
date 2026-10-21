@@ -128,8 +128,8 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .hero-act{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
 .proof{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--muted)}
 .hero-art{position:relative;min-width:0;container-type:inline-size;
-  /* Monitor geometry from the Figma frame (780 wide at 39,37 on a 686 x 631 panel) */
-  --mx:5.69cqw;--my:5.39cqw;--mw:113.7cqw}
+  /* Monitor sized so the whole dashboard sits inside the panel */
+  --mx:6cqw;--my:8.5cqw;--mw:88cqw}
 .panel-blue{position:relative;aspect-ratio:686/631;background:var(--brand);border-radius:var(--r-panel);overflow:hidden}
 .panel-blue::before{content:"";position:absolute;width:520px;height:520px;right:-140px;top:-180px;border-radius:50%;background:radial-gradient(closest-side, rgba(255,255,255,.22), transparent)}
 /* Desktop monitor mockup: the HTML screen sits under the transparent bezel */
@@ -138,12 +138,11 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .monitor .scaler{position:absolute;left:1.54%;top:0;width:98.46%}
 .monitor .frame{border-radius:16px;box-shadow:0 23px 61px -15px rgba(0,23,71,.45)}
 .hero-art .float{position:absolute;z-index:3}
-/* Positions from the Figma hero, expressed against the monitor so they hold as it scales */
-/* Float positions from the Figma hero, as a share of the panel width so they hold as it scales */
-.hf1{left:46.5cqw;top:-4.66cqw}
-.hf2{left:-4.08cqw;top:11.08cqw}
-.hf3{left:45.34cqw;top:67.49cqw}
-.hf4{left:-9.62cqw;top:45.19cqw}
+/* Float positions as a share of the panel width; kept on the edges so the dashboard stays readable */
+.hf1{right:-3cqw;top:-5cqw}
+.hf4{left:-6cqw;top:-4cqw}
+.hf2{left:-6cqw;top:74cqw}
+.hf3{right:-3cqw;top:76cqw}
 .float .spark-s{display:flex;align-items:flex-end;gap:3px;height:26px;margin-left:4px}
 .float .spark-s i{width:5px;border-radius:2px;background:#C7DCFF}
 .float .spark-s i:last-child{background:var(--brand)}
@@ -151,16 +150,16 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 @media (max-width:1060px){
   .hero{padding-block:32px 56px}
   .hero .wrap{grid-template-columns:1fr;gap:40px}
-  .hero-art{--mx:40px;--my:40px;--mw:min(108cqw,780px)}
-  .panel-blue{aspect-ratio:auto;height:min(68cqw,560px)}
+  .hero-art{--mx:12cqw;--my:7cqw;--mw:76cqw}
+  .panel-blue{aspect-ratio:auto;height:71cqw}
   .hf1{left:auto;right:16px;top:-20px}
   .hf2{left:-6px;top:auto;bottom:40px}
   .hero-art .hf3,.hero-art .hf4{display:none}
 }
 @media (max-width:640px){.hero-art .hf2,.hero-art .hf3{display:none}}
 @media (max-width:560px){
-  .hero-art{--mx:20px;--my:24px}
-  .panel-blue{height:min(84cqw,380px)}
+  .hero-art{--mx:6cqw;--my:9cqw;--mw:88cqw}
+  .panel-blue{height:80cqw}
   .hero-act .btn{width:100%}
 }
 
@@ -427,7 +426,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .points .i{width:18px;height:18px;color:var(--brand-glow)}
 .orb-panel{position:relative}
 .orb{position:relative;width:100%;max-width:600px;aspect-ratio:1;margin-inline:auto;container-type:inline-size;
-  transform:perspective(1600px) rotateX(18deg) rotateZ(-7deg) scale(.94);transform-style:preserve-3d}
+  }
 .orb-rings{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .orb-rings circle{fill:none}
 .ring-outer{stroke:#3A5A8C;stroke-width:.3}
@@ -437,15 +436,16 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .orb-rings .dot{fill:#5D9BFF}
 .core{position:absolute;left:50%;top:50%;translate:-50% -50%;width:36%;aspect-ratio:1;border-radius:50%;display:grid;place-content:center;justify-items:center;gap:4cqw;color:#fff;
   background:radial-gradient(circle at 35% 30%,#4C97FF,#0070FF 45%,#0050C2);box-shadow:0 0 0 2.4cqw rgba(0,112,255,.08),0 4cqw 9cqw -2cqw rgba(0,80,200,.55),inset 0 -1.5cqw 4cqw rgba(0,30,90,.35)}
-.core-mark{width:17cqw;aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 1cqw 3cqw rgba(0,30,90,.3)}
-.core-mark img{width:62%;height:auto}
+.core{background:none!important;box-shadow:none!important}
+.core-mark{width:28.3cqw;aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 1.67cqw 5cqw rgba(0,31,89,.3),0 3.17cqw 7.1cqw -1.58cqw rgba(0,79,199,.55)}
+.core-mark img{width:59%;height:auto}
 .core b{font-size:3.4cqw;font-weight:600;letter-spacing:-.02em}
 .sat{position:absolute;translate:-50% -50%;width:15%;aspect-ratio:1;border-radius:50%;background:#fff;
-  box-shadow:0 2cqw 6cqw -1.5cqw rgba(0,0,0,.5);display:grid;place-content:center;justify-items:center;text-align:center;gap:1.1cqw;padding:1cqw;
+  box-shadow:0 2cqw 6cqw -1.5cqw rgba(0,0,0,.5);display:grid;place-content:center;justify-items:center;text-align:center;gap:.9cqw;padding:2cqw;
   transition:box-shadow .4s;animation:bob 6s ease-in-out infinite;animation-delay:var(--d)}
 @keyframes bob{50%{translate:-50% calc(-50% - 1cqw)}}
-.sat .sl{font-size:1.6cqw;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-ink);line-height:1;white-space:nowrap}
-.sat .si{width:6.6cqw;aspect-ratio:1;display:grid;place-items:center;color:var(--brand)}
+.sat .sl{position:absolute;left:50%;top:calc(100% + .9cqw);translate:-50% 0;font-size:max(8px,1.84cqw);font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--brand);line-height:1;white-space:nowrap}
+.sat .si{width:8.6cqw;aspect-ratio:1;display:grid;place-items:center;color:var(--brand)}
 .sat .si .i{width:100%;height:100%;stroke-width:1.75}
 .sat b{font-size:2.5cqw;font-weight:600;letter-spacing:-.01em;color:var(--text);line-height:1.1}
 .sat small{font-size:1.75cqw;color:var(--muted);line-height:1.3}
@@ -520,7 +520,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .kbx h1,.kbx h2,.kbx h3,.kbx h6,.kbx p{line-height:normal;color:#0F172A}
 .kbx .sub{color:#475569}.kbx h6{color:#64748B}
 .kbx .page{display:block;gap:0;padding-left:99px}.kbx p.sub{display:block}.kbx .tag{width:auto}.kbx .av{width:36px;height:36px;font-size:13px}.kbx .crumb{font-size:15px;color:#334155;padding:14px 36px}
-.kbx .app{display:grid;grid-template-columns:240px 1fr;width:1440px;height:950px;overflow:hidden}
+.kbx .app{display:grid;grid-template-columns:240px 1fr;width:1440px;height:1032px;overflow:hidden}
 .kbx .sb{background:#F3F3F3;border-right:1px solid #E2E8F0;padding:18px 14px}
 .kbx .brand{display:flex;align-items:center;justify-content:space-between;padding:0 4px 0 12px;margin-bottom:44px}
 .kbx .brand img{height:30px}
@@ -1123,7 +1123,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
             <div class="kb-screen" aria-hidden="true"><div class="kb-sheet"><div class="kbx"><div class="app"><aside class="sb"><div class="brand"><img src="assets/logo.png" alt=""><i><svg class="i"><use href="#i-left"/></svg></i></div><h6>MAIN MENU</h6><ul><li class=""><svg class="i"><use href="#i-calc"/></svg><span>Accounting</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-cart"/></svg><span>Sales</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-bag"/></svg><span>Purchases</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-clip"/></svg><span>Approvals</span></li><li class=""><svg class="i"><use href="#i-box"/></svg><span>Inventory</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-file"/></svg><span>Reports</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-brief"/></svg><span>Commercial</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-layers"/></svg><span>Project Module</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-person"/></svg><span>Human Resour...</span><svg class="i chev"><use href="#i-down"/></svg></li><li class=""><svg class="i"><use href="#i-gear"/></svg><span>Settings</span><svg class="i chev"><use href="#i-down"/></svg></li><li class="on"><svg class="i"><use href="#i-buoy"/></svg><span>Help &amp; Support</span><svg class="i chev up"><use href="#i-down"/></svg></li><li class="sub hl"><svg class="i"><use href="#i-help"/></svg><span>Help Center</span></li><li class="sub"><svg class="i"><use href="#i-msg"/></svg><span>FAQs</span></li><li class="sub hl"><svg class="i"><use href="#i-book"/></svg><span>Knowledge Base</span></li></ul></aside>
 <div class="main"><div class="top"><span class="pill"><svg class="i dot" style="width:18px;height:18px"><use href="#i-spark"/></svg>Super User<svg class="i"><use href="#i-down"/></svg></span><span class="tb"><svg class="i"><use href="#i-spark"/></svg>Tour</span><span class="moon"><svg class="i"><use href="#i-moon"/></svg></span><span class="tb"><svg class="i"><use href="#i-bell"/></svg></span><span class="av">ST</span><span class="who"><b>sure</b><small>Super User</small></span><span class="tb"><svg class="i"><use href="#i-down"/></svg></span><span class="tb" style="margin-left:18px"><svg class="i"><use href="#i-grid"/></svg></span></div>
 <div class="crumb">Help Support <span style="color:#94A3B8">/</span> <b>Knowledge Base</b></div>
-<div class="page"><span class="tag"><i></i>HELP CENTER</span><h1>Knowledge Base</h1><p class="sub">Detailed guides, tutorials, and documentation for every wBizHR module — written like a manual, not a marketing page.</p>
+<div class="page"><h1>Knowledge Base</h1><p class="sub">Detailed guides, tutorials, and documentation for every wBizHR module — written like a manual, not a marketing page.</p>
 <div class="chips"><span class="chip"><svg class="i"><use href="#i-book"/></svg>61 articles</span><span class="chip"><svg class="i"><use href="#i-layers"/></svg>13 categories</span></div>
 <div class="search"><svg class="i"><use href="#i-search"/></svg>Search articles, guides, tutorials...</div>
 <h2>Browse by Category</h2><div class="cap">Find documentation for any wBizHR module</div><div class="grid"><div class="cat"><div class="ct"><span class="ci" style="background:#EAF2FF;color:#0070FF"><svg class="i"><use href="#i-users"/></svg></span><span class="cnt">4 articles</span></div><h3>Employee Management</h3><p>Manage employee records, documents, and profiles</p><a style="color:#0070FF">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div><div class="cat"><div class="ct"><span class="ci" style="background:#EAF2FF;color:#0070FF"><svg class="i"><use href="#i-clip"/></svg></span><span class="cnt">3 articles</span></div><h3>Onboarding</h3><p>New hire checklists, tasks, and onboarding workflows</p><a style="color:#0070FF">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div><div class="cat"><div class="ct"><span class="ci" style="background:#ECFCCB;color:#4D7C0F"><svg class="i"><use href="#i-pulse"/></svg></span><span class="cnt">4 articles</span></div><h3>Attendance</h3><p>Check-ins, geofenced attendance, and override approvals</p><a style="color:#4D7C0F">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div><div class="cat"><div class="ct"><span class="ci" style="background:#E6FAF6;color:#0D9488"><svg class="i"><use href="#i-cal"/></svg></span><span class="cnt">7 articles</span></div><h3>Leave Management</h3><p>Apply for leave, configure types, and manage approvals</p><a style="color:#0D9488">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div><div class="cat"><div class="ct"><span class="ci" style="background:#FFF7E6;color:#D97706"><svg class="i"><use href="#i-target"/></svg></span><span class="cnt">7 articles</span></div><h3>Performance</h3><p>KPIs, appraisals, goals, and performance reviews</p><a style="color:#D97706">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div><div class="cat"><div class="ct"><span class="ci" style="background:#ECFDF3;color:#15803D"><svg class="i"><use href="#i-book"/></svg></span><span class="cnt">4 articles</span></div><h3>Training Management</h3><p>Plan, schedule, and track training programmes and certifications</p><a style="color:#15803D">Browse articles <svg class="i ar"><use href="#i-arrow"/></svg></a></div></div></div></div></div></div></div></div>
