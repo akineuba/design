@@ -1,0 +1,14 @@
+/* Typography for Instruction Notes and the UI Rules page. Values come from the wCRM tokens. */
+.wcrm-note h1 { margin: 0 0 var(--space-3); font: var(--text-display-weight) var(--text-display-size) / var(--text-display-line-height) var(--font-sans); color: var(--color-text-primary); }
+.wcrm-note h2 { margin: var(--space-5) 0 var(--space-2); font: var(--text-heading-3-weight) var(--text-heading-3-size) / var(--text-heading-3-line-height) var(--font-sans); color: var(--color-text-primary); }
+.wcrm-note h3 { margin: var(--space-4) 0 var(--space-1); font: var(--text-label-weight) var(--text-label-size) / var(--text-label-line-height) var(--font-sans); color: var(--color-text-primary); }
+.wcrm-note p, .wcrm-note li { margin: var(--space-1) 0; color: var(--color-text-primary); }
+.wcrm-note ul { padding-left: var(--space-5); list-style: disc; }
+.wcrm-note ol { padding-left: var(--space-6); list-style: decimal; }
+.wcrm-note table { margin: var(--space-2) 0; border-collapse: collapse; width: 100%; }
+.wcrm-note th, .wcrm-note td { border: 1px solid var(--color-border-default); padding: var(--space-2) var(--space-3); text-align: left; vertical-align: top; }
+.wcrm-note th { background: var(--color-surface-default); font-weight: var(--font-weight-semibold); color: var(--color-text-secondary); }
+.wcrm-note code { background: var(--color-surface-sunken); border-radius: var(--radius-xs); padding: 0 var(--space-1); }
+.wcrm-note hr { margin: var(--space-6) 0; border: 0; border-top: 1px solid var(--color-border-default); }
+.wcrm-note a { color: var(--color-text-link); text-decoration: underline; }
+.wcrm-rules h2 { margin-top: var(--space-8); font-size: var(--text-heading-1-size); line-height: var(--text-heading-1-line-height); }

@@ -3,7 +3,7 @@ import logo from '../assets/wragby-logo.png';
 import { Foundations } from './Foundations';
 
 const meta = {
-  title: 'Overview/Foundations',
+  title: 'Foundations/Overview',
   component: Foundations,
   args: { logoSrc: logo },
   parameters: { layout: 'fullscreen', backgrounds: { default: 'canvas' }, controls: { disable: true } },

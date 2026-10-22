@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# wCRM marketing design system
+
+Design tokens and React components for the Wragby wCRM **Marketing** module, taken from the
+[wCRM updates Figma file → marketing design updates](https://www.figma.com/design/EIQlA9M6mP2KlskFFy2X2U/wCRM-updates?node-id=782-4598).
+
+- **Foundations** shows every token: colours, type scale, spacing, radius, shadows, sizes and icons.
+  Tokens tagged *derived* are not drawn in Figma; they cover states the file doesn't show (hover, focus, loading).
+- **Components** has one page per component, with a story for each state drawn in Figma and a **Matrix** story for side-by-side review.
+  The **Design** tab on each story links to the Figma node it was built from.
+- **Mobile** holds the mobile-only components (app bar, bottom sheet, record cards) from the Mobile V2 frames.
+- **Patterns** composes full screens from library components only.
+- **UI Rules** lists the platform-wide rules for building screens. Source: `ui-rules/ui-rules.md`.
+
+Each component's Docs tab starts with an **Instruction Note**: when and how to use it, how it behaves and which state to pick.
+Notes are plain Markdown files in `instruction-notes/`, so anyone can edit them without touching code
+(on GitHub use the pencil icon, or the "Edit this note" link on each Docs page).
+
+## Install and use
+
+```bash
+npm install
+npm run storybook        # http://localhost:6006
+```
+
+```tsx
+import 'wcrm-marketing-design-system/src/styles/index.css';
+import { Button, Input } from 'wcrm-marketing-design-system';
+```
+
+In a Tailwind app, add the preset so utilities resolve to the same CSS variables:
+
+```js
+// tailwind.config.js
+import preset from 'wcrm-marketing-design-system/tailwind.preset.js';
+export default { presets: [preset], content: ['./src/**/*.{ts,tsx}'] };
+```
+
+## How tokens flow
+
+1. `tokens/tokens.json` is the only place values are edited.
+2. `npm run tokens` writes `src/styles/tokens.css` (CSS variables) and `src/tokens/tokens.ts` (typed object).
+3. `tailwind.preset.js` maps every utility to those variables and **replaces** Tailwind's defaults,
+   so off-system values such as `bg-blue-500` or `p-7` do not exist.
+
+See `CLAUDE.md` and `docs/` in the repository for the full rules.

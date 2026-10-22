@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@storybook/addon-a11y": "8.6.19",
+    "@storybook/addon-designs": "8.2.1",
     "@storybook/addon-essentials": "8.6.19",
     "@storybook/blocks": "8.6.19",
     "@storybook/manager-api": "8.6.19",
