@@ -4,6 +4,8 @@
 import type { SVGProps } from 'react';
 import {
   Activity, ArrowDown, ArrowDownRight, ArrowLeftRight, ArrowUpRight, Award, Ban, Banknote, Bell, BookOpen, Boxes, BriefcaseBusiness, Building2, Calculator, Calendar, ChartColumn, ChartLine, Check, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, CircleCheck, CircleHelp, CircleMinus, CirclePlus, CircleUserRound, CircleX, ClipboardCheck, ClipboardList, Clock, CloudDownload, CloudUpload, Coins, Columns3, Copy, DollarSign, EllipsisVertical, Eye, FileChartColumn, FileInput, FileText, FileUp, FolderOpen, FolderPlus, Funnel, Gift, Globe, GraduationCap, Grid3x3, HandCoins, House, KeyRound, Landmark, Layers, LayoutGrid, List, ListFilter, ListTodo, MessageCircle, Moon, Package, PenLine, Plus, Printer, ReceiptText, RefreshCw, ScanBarcode, Search, Settings, ShieldCheck, ShoppingBag, ShoppingCart, SlidersHorizontal, Smartphone, Sparkles, SquarePen, Sun, Tag, Target, Trash2, TrendingDown, TrendingUp, UserCheck, UserLock, Users, Wallet, X,
+  Bold, Italic, Underline, ListOrdered, Paperclip, Send, Save, File, Upload, Percent, CopyPlus, Download,
+  Info, TriangleAlert, CircleAlert,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -104,6 +106,21 @@ export const BoxesIcon = wrap(Boxes);
 export const ArrowDownRightIcon = wrap(ArrowDownRight);
 export const ArrowUpRightIcon = wrap(ArrowUpRight);
 export const RefreshIcon = wrap(RefreshCw);
+export const BoldIcon = wrap(Bold);
+export const ItalicIcon = wrap(Italic);
+export const UnderlineIcon = wrap(Underline);
+export const ListOrderedIcon = wrap(ListOrdered);
+export const PaperclipIcon = wrap(Paperclip);
+export const SendIcon = wrap(Send);
+export const SaveIcon = wrap(Save);
+export const FileIcon = wrap(File);
+export const UploadIcon = wrap(Upload);
+export const PercentIcon = wrap(Percent);
+export const CopyPlusIcon = wrap(CopyPlus);
+export const DownloadIcon = wrap(Download);
+export const InfoIcon = wrap(Info);
+export const WarningIcon = wrap(TriangleAlert);
+export const ErrorIcon = wrap(CircleAlert);
 
 const Base = ({ children, ...props }: IconProps) => (
   <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden focusable="false" {...props}>

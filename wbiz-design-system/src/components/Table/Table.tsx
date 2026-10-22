@@ -40,7 +40,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
 ) {
   return (
     <DensityCtx.Provider value={density}>
-      <div className="w-full overflow-x-auto">
+      <div className="relative w-full overflow-x-auto">
         <table ref={ref} className={cx('w-full border-collapse font-sans', className)} {...rest} />
       </div>
     </DensityCtx.Provider>
@@ -84,16 +84,19 @@ export interface TableHeaderCellProps extends ThHTMLAttributes<HTMLTableCellElem
   /** Current sort on this column. Pass `onSort` to make the header a sort button. */
   sort?: SortDirection | null;
   onSort?: () => void;
+  /** 8px side padding, matching compact cells. */
+  compact?: boolean;
 }
 
 /** Column header. Sortable headers show the arrow from Figma (Name, Company, Email on Customers). */
-export function TableHeaderCell({ align = 'left', sort, onSort, className, children, ...rest }: TableHeaderCellProps) {
+export function TableHeaderCell({ align = 'left', sort, onSort, compact = false, className, children, ...rest }: TableHeaderCellProps) {
   return (
     <th
       scope="col"
       aria-sort={onSort ? (sort === 'asc' ? 'ascending' : sort === 'desc' ? 'descending' : 'none') : undefined}
       className={cx(
-        'h-row-head whitespace-nowrap border-b border-line-subtle px-4 py-3 text-xs font-medium text-fg-muted first:pl-6 last:pr-6',
+        'h-row-head whitespace-nowrap border-b border-line-subtle py-3 text-xs font-medium text-fg-muted',
+        compact ? 'px-1.5 first:pl-4 last:pr-4' : 'px-4 first:pl-6 last:pr-6',
         alignClass[align],
         className,
       )}
@@ -127,16 +130,19 @@ export interface TableCellProps extends TdHTMLAttributes<HTMLTableCellElement> {
   emphasis?: 'none' | 'strong' | 'link';
   /** 6px vertical padding instead of 12px, for cells holding a 32px control (kebab, small button). */
   tight?: boolean;
+  /** 8px side padding instead of 16px, for editable grids with many columns (invoice lines). */
+  compact?: boolean;
 }
 
 const emphasisClass = { none: 'text-fg-muted', strong: 'font-medium text-fg-ink', link: 'text-primary' };
 
-export function TableCell({ align = 'left', emphasis = 'none', tight = false, className, ...rest }: TableCellProps) {
+export function TableCell({ align = 'left', emphasis = 'none', tight = false, compact = false, className, ...rest }: TableCellProps) {
   const density = useContext(DensityCtx);
   return (
     <td
       className={cx(
-        'whitespace-nowrap px-4 text-sm first:pl-6 last:pr-6',
+        'whitespace-nowrap text-sm',
+        compact ? 'px-1.5 first:pl-4 last:pr-4' : 'px-4 first:pl-6 last:pr-6',
         tight ? 'py-1.5' : 'py-3',
         density === 'comfortable' ? 'h-row-comfortable' : 'h-row',
         emphasisClass[emphasis],

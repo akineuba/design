@@ -121,7 +121,7 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 |---|---|---|
 | `Button` | `_Button base` frames (accounting) | `variant`: primary, secondary, outline (Cancel in panels), tertiary, destructive · `size`: sm, md, lg · `disabled`, `loading`, icons, `iconOnly`, `fullWidth` |
 | `Input` | Journal fields `6309:33026` (accounting) | `size` · `label`, `hint`, `error`, `success`, `required`, `disabled`, `readOnly`, `loading`, icons |
-| `Select` | dropdown-inner `7092:1508` (new features); open menu `5184:46439` (accounting) | **searchable by default**; `menuAction` ("Add New" → centred quick-add `Modal`, receives the search text); `options`, `value`/`defaultValue`, `placeholder`, `required`, `error`, `hint`, `disabled`, `size` |
+| `Select` | dropdown-inner `7092:1508` (new features); open menu `5184:46439` (accounting) | menu is positioned against the viewport (works inside scrolling tables, cards and panels); **searchable by default**; `menuAction` ("Add New" → centred quick-add `Modal`, receives the search text); `options`, `value`/`defaultValue`, `placeholder`, `required`, `error`, `hint`, `disabled`, `size` |
 | `FilterDropdown` + `FilterField` | "Filters" on Customers `191:3274`; panel `7099:7787` | list pages · closed / open / `activeCount`, `onApply`, `onReset` |
 | `FilterBar` + `FilterBarField` | filter, General ledger `1752:21749` | report pages · default / "More Filters" open / `applying` / Advanced |
 | `Table` primitives, `DataTable`, `TableCard`, `TableToolbar`, `TableToolbarGroup`, `SearchField`, `TableSectionRow`, `TableFooter`, `Pagination` | Customers `191:3274`, Bills `4183:23454`, Chart of Accounts `1871:19163`, Trial balance `845:8824` | `selectable`, `sortable` columns, `rowActions`, `getRowChildren` (tree), `visibleColumns`, `density`, `activeRowId`, `loading`, `empty`; cell `emphasis` strong / link, `tight`; pagination with page jump |
@@ -134,7 +134,7 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 | `Logo` | brand PNG supplied by design | `variant` full / mark |
 | `StatusPill` | Status column `7053:5433` | `tone`: warning (Pending Approval), info (Ready for Issue), neutral (Partially Issued), success (Completed), error (derived) |
 | `Accordion` + `AccordionItem` | block-basic-info `7092:1482`; panel sections `209:4142` | `variant` card / form · open / closed / `disabled` / `meta`; group `type`: single or multiple |
-| `Modal` + `ModalPanel` | tax popup `3564:23503` (accounting) | native `<dialog>`; `title`, `description`, `footer`, `closeOnBackdrop` |
+| `Modal` + `ModalPanel` | tax popup `3564:23503` (accounting) | native `<dialog>`; `size` md (515) / lg (820, previews and bulk pickers); `title`, `description`, `footer`, `closeOnBackdrop` |
 | `Tabs` + `TabPanel` | sub-menu-list `7053:5433` | selected / unselected / disabled; arrow-key navigation |
 | `SegmentedControl` | Inventory/Free Text `7053:5632`; List/Card `7053:5973` | `appearance`: pill, boxed; icons; disabled options |
 | `Switch` | "Toggle" instances (accounting) | `size` md / sm (table rows) · on / off / disabled; optional `label` and `description` |
@@ -144,11 +144,14 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 | `Card` | settings cards `7053:6444` | `title`, `description`, `actions`, `divided` |
 | `Spinner` | n/a | `label` |
 | `SummaryCard` | live product payroll summary row (icon moved left) | `label` ("Net pay — October"), `value`, `icon`, `color` green / blue / amber / teal / red, `trend` {value, label, goodWhen}, `hint`. Page-top headline figures |
+| `Alert` | derived | `tone` info / success / warning / error, `title`, `actions`, `onDismiss`. Validation summaries and confirmations under the page title |
+| `RichTextField` | derived | bold, italic, underline, lists; `label`, `hint`, `disabled` |
+| `FileUpload` | attach docs `282:6176` (journal) | drop zone + file list, `maxSizeMb`, `accept`, `disabled` |
 | `StatCard` | stat row, Appraisal Dashboard `4370:29966` (hr) | `label`, `value`, `tone` default / primary / success / warning / error, `icon`, `hint` |
 | `StageProgress` | derived (no Figma component) | stages complete / current / upcoming / rejected; horizontal (record header) or vertical (approval trail) |
 | Icons (`src/icons`) | **Lucide** (`lucide-react`, 1.75 stroke), the set the live product uses; only "More Filters" keeps its Figma icon | `currentColor`, size via wrapper (`size-icon`). Import from `src/icons`, never from `lucide-react` directly |
 
-`Patterns/Payroll Runs` is a full redesign of the Payroll Generation screen (stat cards, generate panel with quick-add, run panel with approval stages, void confirmation). `Patterns/Pages` in Storybook composes these into full screens: a list page (Customers with side panels), a hierarchical list (Chart of Accounts), a report page (Trial balance with the filter bar) and a people directory. **Don't name components, stories or docs after one feature**; the system is used across the whole platform.
+`Patterns/New Invoice` is the document-page pattern (header fields, editable line grid, totals, notes and attachments, sticky action bar, preview modal, issued state). `Patterns/Payroll Runs` is a full redesign of the Payroll Generation screen (stat cards, generate panel with quick-add, run panel with approval stages, void confirmation). `Patterns/Pages` in Storybook composes these into full screens: a list page (Customers with side panels), a hierarchical list (Chart of Accounts), a report page (Trial balance with the filter bar) and a people directory. **Don't name components, stories or docs after one feature**; the system is used across the whole platform.
 
 Inside `SidePanel` and `FilterBar`, `Input` and `Select` labels switch to the accounting form style through `FieldLabelContext`; don't restyle labels by hand.
 

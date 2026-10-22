@@ -23,3 +23,10 @@
     .animate-slide-in-right { animation: none; }
   }
 }
+
+@layer components {
+  /* Lists inside the rich text field (Tailwind preflight removes list styles). */
+  .wbiz-rich ul { list-style: disc; padding-left: theme('spacing.5'); }
+  .wbiz-rich ol { list-style: decimal; padding-left: theme('spacing.5'); }
+  .wbiz-rich:empty::before { content: attr(data-placeholder); color: theme('colors.fg.placeholder'); pointer-events: none; }
+}

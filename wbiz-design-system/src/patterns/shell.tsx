@@ -20,7 +20,7 @@ export function Shell({ activeId, breadcrumbs, children }: { activeId: string; b
           onTourClick={() => {}}
           onAppsClick={() => {}}
         />
-        <main className="min-w-0 flex-1 overflow-y-auto p-8">
+        <main className="relative min-w-0 flex-1 overflow-y-auto p-8">
           <div className="flex flex-col gap-6">{children}</div>
         </main>
       </div>

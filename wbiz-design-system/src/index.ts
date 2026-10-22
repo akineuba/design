@@ -1,6 +1,7 @@
 import './styles/index.css';
 
 export * from './components/Accordion';
+export * from './components/Alert';
 export * from './components/ActionMenu';
 export * from './components/Avatar';
 export * from './components/Button';
@@ -8,12 +9,14 @@ export * from './components/Card';
 export * from './components/Checkbox';
 export * from './components/ColumnCustomizer';
 export * from './components/FilterBar';
+export * from './components/FileUpload';
 export * from './components/FilterDropdown';
 export * from './components/Input';
 export * from './components/Logo';
 export * from './components/Modal';
 export * from './components/PageHeader';
 export * from './components/Radio';
+export * from './components/RichTextField';
 export * from './components/SegmentedControl';
 export * from './components/Select';
 export * from './components/SidePanel';

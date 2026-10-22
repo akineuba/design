@@ -11,15 +11,17 @@ export interface ModalPanelProps extends Omit<HTMLAttributes<HTMLDivElement>, 't
   onClose?: () => void;
   titleId?: string;
   descriptionId?: string;
+  /** md 515px (default: forms, confirmations). lg 820px (document previews, bulk pickers). */
+  size?: 'md' | 'lg';
 }
 
 /**
  * Dialog layout without the overlay, for embedding or documenting. Figma: tax popup (accounting,
  * 3564:23503): white, 8px radius, 20/24 padding, 20px gaps, title Inter Semibold 24, actions on the right.
  */
-export function ModalPanel({ title, description, footer, onClose, titleId, descriptionId, className, children, ...rest }: ModalPanelProps) {
+export function ModalPanel({ title, description, footer, onClose, titleId, descriptionId, size = 'md', className, children, ...rest }: ModalPanelProps) {
   return (
-    <div className={cx('flex w-dialog max-w-full flex-col gap-5 rounded-lg bg-surface px-6 py-5 shadow-dialog', className)} {...rest}>
+    <div className={cx('flex max-w-full flex-col gap-5 rounded-lg bg-surface px-6 py-5 shadow-dialog', size === 'lg' ? 'w-dialog-lg' : 'w-dialog', className)} {...rest}>
       <div className="flex items-start justify-between gap-4">
         <div className="flex min-w-0 flex-col gap-1">
           <h2 id={titleId} className="font-sans text-xl font-semibold text-fg-strong">{title}</h2>

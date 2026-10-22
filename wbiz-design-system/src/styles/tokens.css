@@ -153,6 +153,13 @@
   --wbiz-size-knob-sm: 16px;
   --wbiz-size-icon-md: 18px;
   --wbiz-size-tile: 44px;
+  --wbiz-size-dialog-lg: 820px; /* derived: not in Figma */
+  --wbiz-size-editor: 120px; /* derived: not in Figma */
+  --wbiz-size-col-xs: 72px; /* derived: not in Figma */
+  --wbiz-size-col-sm: 104px; /* derived: not in Figma */
+  --wbiz-size-col-md: 136px; /* derived: not in Figma */
+  --wbiz-size-col-lg: 280px; /* derived: not in Figma */
+  --wbiz-size-line-grid: 1120px; /* derived: not in Figma */
   --wbiz-radius-none: 0px;
   --wbiz-radius-xs: 2px;
   --wbiz-radius-sm: 4px;

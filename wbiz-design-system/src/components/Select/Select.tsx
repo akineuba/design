@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 import { useFieldLabelClass } from '../../utils/field-label';
 import { AddCircleIcon, CheckIcon, ChevronDownIcon, SearchIcon } from '../../icons';
@@ -90,19 +90,53 @@ export function Select({
   const selectedOption = options.find((o) => o.value === selected);
   const message = error ?? hint;
 
+  // The menu is positioned against the viewport so scrolling tables, cards and panels never clip it.
+  // Fixed from the first frame (hidden until measured) so opening never shifts the layout.
+  const [menuStyle, setMenuStyle] = useState<CSSProperties>({ position: 'fixed', visibility: 'hidden' });
+  const menuRef = useRef<HTMLDivElement>(null);
+  const place = () => {
+    const r = triggerRef.current?.getBoundingClientRect();
+    if (!r) return false;
+    if (r.bottom < 0 || r.top > window.innerHeight) return false;
+    const below = window.innerHeight - r.bottom;
+    setMenuStyle({
+      position: 'fixed',
+      left: r.left,
+      width: r.width,
+      ...(below < 300 && r.top > below ? { bottom: window.innerHeight - r.top + 4 } : { top: r.bottom + 4 }),
+    });
+    return true;
+  };
+  useLayoutEffect(() => {
+    if (open) place();
+    else setMenuStyle({ position: 'fixed', visibility: 'hidden' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
   useEffect(() => {
     if (!open) return;
     const onDoc = (e: MouseEvent) => {
       if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
     };
+    // Follow the field when the page or a container scrolls; close once it leaves the screen.
+    const onScroll = (e: Event) => { if (!menuRef.current?.contains(e.target as Node) && !place()) setOpen(false); };
+    const onResize = () => setOpen(false);
     document.addEventListener('mousedown', onDoc);
-    return () => document.removeEventListener('mousedown', onDoc);
+    window.addEventListener('scroll', onScroll, true);
+    window.addEventListener('resize', onResize);
+    return () => {
+      document.removeEventListener('mousedown', onDoc);
+      window.removeEventListener('scroll', onScroll, true);
+      window.removeEventListener('resize', onResize);
+    };
   }, [open]);
 
+  // Focus the search box once the menu is visible (a hidden element can't take focus).
+  const menuVisible = open && menuStyle.visibility !== 'hidden';
   useEffect(() => {
-    if (open && searchable) searchRef.current?.focus();
+    if (menuVisible && searchable) searchRef.current?.focus({ preventScroll: true });
     if (!open) setQuery('');
-  }, [open, searchable]);
+  }, [menuVisible, open, searchable]);
 
   // Keep the highlighted option inside the filtered list.
   useEffect(() => {
@@ -138,7 +172,13 @@ export function Select({
     switch (e.key) {
       case 'ArrowDown': e.preventDefault(); move(1); break;
       case 'ArrowUp': e.preventDefault(); move(-1); break;
-      case 'Enter': e.preventDefault(); if (active >= 0) commit(active); break;
+      case 'Enter': {
+        e.preventDefault();
+        // Use the first match if the highlight hasn't caught up with the latest search yet.
+        const target = enabled.includes(active) ? active : enabled[0];
+        if (target !== undefined && target >= 0) commit(target);
+        break;
+      }
       case 'Escape': e.preventDefault(); close(); break;
       case 'Tab': setOpen(false); break;
     }
@@ -146,11 +186,11 @@ export function Select({
 
   const onKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
     if (disabled) return;
-    if (searchable && !open && e.key.length === 1 && e.key !== ' ' && !e.metaKey && !e.ctrlKey) {
-      // Typing on the closed field opens it and starts a search.
+    if (searchable && e.key.length === 1 && e.key !== ' ' && !e.metaKey && !e.ctrlKey) {
+      // Typing on the field opens it and starts a search; keys typed before the search box takes focus are kept.
       e.preventDefault();
-      setQuery(e.key);
-      openMenu();
+      if (open) setQuery((q) => q + e.key);
+      else { setQuery(e.key); openMenu(); }
       return;
     }
     switch (e.key) {
@@ -231,7 +271,7 @@ export function Select({
       {name && <input type="hidden" name={name} value={selected ?? ''} />}
 
       {open && (
-        <div className="absolute left-0 top-full z-10 mt-1 w-full min-w-menu overflow-hidden rounded-lg border border-line bg-surface shadow-md">
+        <div ref={menuRef} style={menuStyle} className="z-30 min-w-menu overflow-hidden rounded-lg border border-line bg-surface shadow-md">
           {searchable && (
             <label className="flex items-center gap-2 border-b border-line-subtle px-3 py-2">
               <span className="size-icon-sm shrink-0 text-icon-muted" aria-hidden><SearchIcon /></span>
