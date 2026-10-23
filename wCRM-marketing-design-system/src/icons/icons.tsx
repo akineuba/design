@@ -1,23 +1,12 @@
 import type { SVGProps } from 'react';
 
 /*
- * Line icons matching the Figma set (vuesax linear / lucide style: 24px grid, 2px stroke, round caps).
- * They inherit size from the parent ([&>svg]:size-4 in components) and colour from currentColor.
+ * Legacy icon names. Every name now points at the exact icon Figma uses in that role (see ./figma.tsx and
+ * the JSDoc node ids there); the shapes are no longer lucide approximations. They inherit size from the parent
+ * ([&>svg]:size-4 in components) and colour from currentColor.
  */
 type IconProps = SVGProps<SVGSVGElement>;
 
-const base = (paths: JSX.Element, name: string) => {
-  const Icon = (props: IconProps) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
-      {paths}
-    </svg>
-  );
-  Icon.displayName = name;
-  return Icon;
-};
-
-export const PlusIcon = base(<><path d="M5 12h14" /><path d="M12 5v14" /></>, 'PlusIcon');
-export const SearchIcon = base(<><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></>, 'SearchIcon');
 /** vuesax/linear/filter, exported from Figma `filter/Property 1=linear` (18px grid, 1.5 stroke). */
 export const FilterIcon = (props: IconProps) => (
   <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth={1.5} strokeMiterlimit={10} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
@@ -59,20 +48,47 @@ const viewIcon = (paths: JSX.Element, name: string) => {
 };
 export const ListIcon = viewIcon(<path d="M14 15.333h.007M14 20h.007M14 24.667h.007M17.333 15.333H26M17.333 20H26m-8.667 4.667H26" />, 'ListIcon');
 export const CalendarIcon = viewIcon(<path d="M17.333 13.333V16m5.334-2.667V16M14 18.667h12m-10.667-4h9.334c.736 0 1.333.597 1.333 1.333v9.334c0 .736-.597 1.333-1.333 1.333h-9.334A1.333 1.333 0 0 1 14 25.334V16c0-.736.597-1.333 1.333-1.333Z" />, 'CalendarIcon');
-export const CloseIcon = base(<><path d="M18 6 6 18" /><path d="m6 6 12 12" /></>, 'CloseIcon');
-export const ChevronDownIcon = base(<path d="m6 9 6 6 6-6" />, 'ChevronDownIcon');
-export const MoreIcon = base(<><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></>, 'MoreIcon');
-export const EyeIcon = base(<><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0" /><circle cx="12" cy="12" r="3" /></>, 'EyeIcon');
-export const PencilIcon = base(<path d="M21.17 6.81a1 1 0 0 0-3.99-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.62l4.35-1.32a2 2 0 0 0 .83-.5z" />, 'PencilIcon');
-export const TrashIcon = base(<><path d="M3 6h18" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></>, 'TrashIcon');
-export const UploadIcon = base(<><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m17 8-5-5-5 5" /><path d="M12 3v12" /></>, 'UploadIcon');
-export const DownloadIcon = base(<><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /><path d="M12 15V3" /></>, 'DownloadIcon');
-export const HistoryIcon = base(<><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l4 2" /></>, 'HistoryIcon');
-export const UsersIcon = base(<><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>, 'UsersIcon');
-export const MailIcon = base(<><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></>, 'MailIcon');
-export const GridIcon = base(<><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /></>, 'GridIcon');
-export const TrendUpIcon = base(<><path d="M22 7 13.5 15.5 8.5 10.5 2 17" /><path d="M16 7h6v6" /></>, 'TrendUpIcon');
-export const TrendDownIcon = base(<><path d="M22 17 13.5 8.5 8.5 13.5 2 7" /><path d="M16 17h6v-6" /></>, 'TrendDownIcon');
-export const SendIcon = base(<><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" /></>, 'SendIcon');
-export const CheckIcon = base(<path d="M20 6 9 17l-5-5" />, 'CheckIcon');
-export const CopyIcon = base(<><rect width="14" height="14" x="8" y="8" rx="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></>, 'CopyIcon');
+
+/*
+ * Legacy names → exact Figma icons used in the same role (exported verbatim in ./figma.tsx).
+ */
+export {
+  /** Primary "Create" button plus, Figma 817:9055. */
+  LucidePlusIcon as PlusIcon,
+  /** Toolbar / drawer search, Figma 817:8434 (mobile uses SearchNormalIcon). */
+  LucideSearchIcon as SearchIcon,
+  /** Drawer / modal close, material-symbols:close-rounded, Figma 808:6554. */
+  MaterialCloseRoundedIcon as CloseIcon,
+  /** Collapsible / select chevron, Figma 817:8781. */
+  LucideChevronDownIcon as ChevronDownIcon,
+  /** Row actions trigger, more-horizontal, Figma 830:596. */
+  LucideMoreHorizontalIcon as MoreIcon,
+  /** Menu "View" eye (stroke 1, no pupil in Figma), Figma 795:6002. */
+  LucideEyeIcon as EyeIcon,
+  /** Menu "Edit" pencil (stroke 1), Figma 795:6006. */
+  LucidePencilIcon as PencilIcon,
+  /** Menu "Delete", vuesax/outline/trash, Figma 127:906. */
+  TrashOutlineIcon as TrashIcon,
+  /** Toolbar "Upload", bi:cloud-upload, Figma 817:9254. */
+  BiCloudUploadIcon as UploadIcon,
+  /** Toolbar "Export" (Figma has no download glyph), ph:export-light, Figma 817:9260. */
+  PhExportLightIcon as DownloadIcon,
+  /** History, nimbus:history, Figma 1422:31123. */
+  NimbusHistoryIcon as HistoryIcon,
+  /** Audience / users, vuesax/outline/profile-2user, Figma 127:49019. */
+  Profile2UserOutlineIcon as UsersIcon,
+  /** Mail glyph (stroke), Figma 1535:9973. */
+  LucideMailIcon as MailIcon,
+  /** Grid / dashboard, vuesax/linear/category, Figma 127:23140. */
+  CategoryIcon as GridIcon,
+  /** Stat-card trend up arrow, Figma 950:8419. */
+  TrendArrowUpIcon as TrendUpIcon,
+  /** Stat-card trend down arrow, Figma 950:8479. */
+  TrendArrowDownIcon as TrendDownIcon,
+  /** Send action, vuesax/outline/send-2, Figma 127:1944. */
+  Send2OutlineIcon as SendIcon,
+  /** Check mark, icon/check, Figma 2518:58007. */
+  LucideCheckIcon as CheckIcon,
+  /** Copy / duplicate, vuesax/outline/copy, Figma 127:31772. */
+  CopyOutlineIcon as CopyIcon,
+} from './figma';
