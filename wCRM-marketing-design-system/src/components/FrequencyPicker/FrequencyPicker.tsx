@@ -67,7 +67,7 @@ export function DayPicker({ days = WEEK_DAYS, value, defaultValue = [], onValueC
             className={cn(
               'outline-none transition-colors duration-fast ease-standard focus-visible:shadow-focus disabled:cursor-not-allowed disabled:opacity-60',
               appearance === 'pill'
-                ? cn('rounded-xs border border-border-default px-2.5 py-1.5 text-caption font-semibold', on ? 'bg-brand-primary text-text-inverse' : 'bg-surface-default text-text-secondary')
+                ? cn('rounded-xs border border-border-default px-2.25 py-1.25 text-caption font-semibold', on ? 'bg-brand-primary text-text-inverse' : 'bg-surface-default text-text-secondary')
                 : cn(
                     'flex h-day-pill-h w-control-42 flex-col items-center justify-center gap-0.5 rounded-md border',
                     on ? 'border-brand-primary bg-brand-primary text-text-inverse' : 'border-border-default bg-surface-default',
@@ -157,11 +157,12 @@ export function FrequencyPicker({ title = 'Notification Frequency (Select multip
       {has('daily') && (
         <div className="flex flex-col gap-2">
           <span id={`${id}-daily`} className={rowLabel}>Frequency Time</span>
-          <div className="flex items-center gap-2" role="group" aria-labelledby={`${id}-daily`}>
+          {/* Figma rows are 343px wide; w-field-sm (320) until a `size.frequency-row` token exists. */}
+          <div className="flex w-field-sm items-center gap-2" role="group" aria-labelledby={`${id}-daily`}>
             <span className={rowLabel}>Every</span>
-            <UnitInput label="Hours" unit="Hrs" wrapperClassName="flex-1" value={daily.hours} onChange={(e) => update({ daily: { ...daily, hours: e.target.value } })} />
-            <UnitInput label="Minutes" unit="Mins" wrapperClassName="flex-1" value={daily.minutes} onChange={(e) => update({ daily: { ...daily, minutes: e.target.value } })} />
-            <UnitInput label="Times" unit="Times" wrapperClassName="flex-1" value={daily.times} onChange={(e) => update({ daily: { ...daily, times: e.target.value } })} />
+            <UnitInput label="Hours" unit="Hrs" wrapperClassName="min-w-0 flex-1" value={daily.hours} onChange={(e) => update({ daily: { ...daily, hours: e.target.value } })} />
+            <UnitInput label="Minutes" unit="Mins" wrapperClassName="min-w-0 flex-1" value={daily.minutes} onChange={(e) => update({ daily: { ...daily, minutes: e.target.value } })} />
+            <UnitInput label="Times" unit="Times" wrapperClassName="min-w-0 flex-1" value={daily.times} onChange={(e) => update({ daily: { ...daily, times: e.target.value } })} />
           </div>
         </div>
       )}
@@ -174,7 +175,6 @@ export function FrequencyPicker({ title = 'Notification Frequency (Select multip
             <span className={rowLabel}>Deliver at:</span>
             <TimeField
               label="Deliver at"
-              className="flex-1"
               hours={weekly.hours}
               minutes={weekly.minutes}
               onHoursChange={(hours) => update({ weekly: { ...weekly, hours } })}
@@ -185,11 +185,11 @@ export function FrequencyPicker({ title = 'Notification Frequency (Select multip
       )}
 
       {has('monthly') && (
-        <div className="flex items-center gap-2">
+        <div className="flex w-field-sm items-center gap-2">
           <span className={rowLabel}>Every</span>
           <DateTimePicker
             label="Monthly delivery date and time"
-            className="flex-1"
+            className="min-w-0 flex-1"
             date={monthly.date}
             time={monthly.time}
             onDateChange={(date) => update({ monthly: { ...monthly, date } })}

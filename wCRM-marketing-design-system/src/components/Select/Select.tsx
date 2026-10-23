@@ -173,7 +173,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(function Select
               'data-[state=open]:animate-pop-in',
             )}
           >
-            <RadixSelect.Viewport className={cn('flex max-h-menu-max-height flex-col px-4 py-3', menuSpacing === 'relaxed' ? 'gap-3.75' : 'gap-2.5')}>
+            <RadixSelect.Viewport className={cn('flex max-h-menu-max-height flex-col px-3.75 py-2.75', menuSpacing === 'relaxed' ? 'gap-3.75' : 'gap-2.5')}>
               {options.map((o) => (
                 <RadixSelect.Item
                   key={o.value}

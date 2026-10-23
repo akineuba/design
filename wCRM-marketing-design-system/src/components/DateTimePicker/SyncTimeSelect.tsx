@@ -59,7 +59,7 @@ export function SyncTimeSelect({ label, options, value, defaultValue, onValueCha
   return (
     <div className={cn('flex flex-col gap-2', className)}>
       <span id={`${id}-label`} className="text-field-label text-text-primary">{label}</span>
-      <div className="flex flex-col gap-2.5 rounded-md border border-border-default bg-surface-default px-4 py-3 focus-within:border-accent-navy">
+      <div className="flex flex-col gap-2.5 rounded-md border border-border-default bg-surface-default px-3.75 py-2.75 focus-within:border-accent-navy">
         <button
           ref={triggerRef}
           type="button"

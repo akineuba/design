@@ -31,7 +31,7 @@ export interface TimeFieldProps {
 }
 
 const segment =
-  'min-w-0 bg-transparent text-center text-body text-text-primary outline-none placeholder:text-text-primary disabled:cursor-not-allowed';
+  'w-4.5 bg-transparent text-center text-body text-text-primary outline-none placeholder:text-text-primary disabled:cursor-not-allowed';
 
 /**
  * "00 : 00 Hrs" time field from the weekly frequency row (1590:5571 "Deliver at:"): one 41px bordered box,
@@ -44,7 +44,7 @@ export function TimeField({ label, hours, minutes, defaultHours, defaultMinutes,
       role="group"
       aria-labelledby={`${id}-label`}
       className={cn(
-        'flex h-control-41 items-center justify-between rounded-md border border-border-default bg-surface-default px-4',
+        'inline-flex h-control-41 items-center justify-between gap-2.5 rounded-md border border-border-default bg-surface-default px-4',
         'focus-within:border-accent-navy focus-within:shadow-focus',
         disabled && 'cursor-not-allowed bg-surface-sunken',
         className,
@@ -55,7 +55,6 @@ export function TimeField({ label, hours, minutes, defaultHours, defaultMinutes,
         aria-label="Hours"
         inputMode="numeric"
         maxLength={2}
-        size={2}
         placeholder="00"
         value={hours}
         defaultValue={defaultHours}
@@ -68,7 +67,6 @@ export function TimeField({ label, hours, minutes, defaultHours, defaultMinutes,
         aria-label="Minutes"
         inputMode="numeric"
         maxLength={2}
-        size={2}
         placeholder="00"
         value={minutes}
         defaultValue={defaultMinutes}

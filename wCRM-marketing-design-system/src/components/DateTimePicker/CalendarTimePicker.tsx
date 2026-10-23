@@ -165,7 +165,7 @@ export function CalendarTimePicker({ value, onChange, time, onTimeChange, defaul
   const monthLabel = month.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
 
   return (
-    <div className={cn('inline-flex flex-col gap-8 border border-border-default bg-surface-default p-6', className)}>
+    <div className={cn('inline-flex flex-col gap-8 border border-border-default bg-surface-default p-5.75', className)}>
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-2 text-kpi-value text-text-ink" aria-live="polite">

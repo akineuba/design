@@ -4,11 +4,14 @@ import { useState } from 'react';
 import { CalendarIcon, GridIcon, ListIcon } from '../../icons';
 import { ViewToggle } from './ViewToggle';
 
+const FIGMA = 'https://www.figma.com/design/EIQlA9M6mP2KlskFFy2X2U/wCRM-updates?node-id=';
+
 const meta = {
   title: 'Components/ViewToggle',
   component: ViewToggle,
   tags: ['autodocs'],
   parameters: {
+    design: { type: 'figma', url: FIGMA + '1036-6314' },
     docs: {
       description: {
         component:
@@ -32,8 +35,10 @@ function Controlled({ initial = 'list', options = twoViews }: { initial?: string
   return <ViewToggle aria-label="Posts view" options={options} value={view} onValueChange={setView} />;
 }
 
-export const ListSelected: Story = { render: () => <Controlled /> };
-export const CalendarSelected: Story = { render: () => <Controlled initial="calendar" /> };
+/** Social posts toolbar, list view selected: 81×40 group, #A3AED0 outline, red 40px cell with the white list glyph. */
+export const ListSelected: Story = { render: () => <Controlled />, parameters: { design: { type: 'figma', url: FIGMA + '1036-6314' } } };
+/** Social posts calendar view: the calendar cell is selected. */
+export const CalendarSelected: Story = { render: () => <Controlled initial="calendar" />, parameters: { design: { type: 'figma', url: FIGMA + '1054-8582' } } };
 export const ThreeViews: Story = {
   render: () => <Controlled options={[...twoViews, { value: 'grid', label: 'Grid view', icon: <GridIcon /> }]} />,
 };
@@ -47,4 +52,14 @@ export const Keyboard: Story = {
     await userEvent.keyboard('{ArrowRight}');
     await expect(canvas.getByRole('radio', { name: 'Calendar view' })).toHaveAttribute('aria-checked', 'true');
   },
+};
+
+/** Both drawn states side by side. */
+export const Matrix: Story = {
+  render: () => (
+    <div className="flex items-center gap-6">
+      <Controlled />
+      <Controlled initial="calendar" />
+    </div>
+  ),
 };

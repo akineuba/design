@@ -77,10 +77,10 @@ export interface OptionCardProps extends Omit<InputHTMLAttributes<HTMLInputEleme
 }
 
 const frame: Record<OptionCardAppearance, { base: string; idle: string; selected: string }> = {
-  modal: { base: 'gap-5 rounded-lg p-3', idle: 'border-border-modal bg-surface-default', selected: 'border-border-danger-subtle bg-status-danger-subtle' },
-  sheet: { base: 'h-12.5 justify-between rounded-md p-3', idle: 'border-mobile-border bg-surface-default', selected: 'border-mobile-brand bg-brand-primary-subtle' },
-  channel: { base: 'gap-2.75 rounded-lg p-3.25', idle: 'border-mobile-border bg-surface-default', selected: 'border-mobile-selected-border bg-surface-default' },
-  platform: { base: 'gap-4 rounded-callout p-4', idle: 'border-border-default bg-surface-default', selected: 'border-brand-primary bg-surface-default' },
+  modal: { base: 'gap-5 rounded-lg p-2.75', idle: 'border-border-modal bg-surface-default', selected: 'border-border-danger-subtle bg-status-danger-subtle' },
+  sheet: { base: 'h-12.5 justify-between rounded-md px-2.75', idle: 'border-mobile-border bg-surface-default', selected: 'border-mobile-brand bg-brand-primary-subtle' },
+  channel: { base: 'gap-2.75 rounded-lg p-3', idle: 'border-mobile-border bg-surface-default', selected: 'border-mobile-selected-border bg-surface-default' },
+  platform: { base: 'gap-4 rounded-callout p-3.75', idle: 'border-border-default bg-surface-default', selected: 'border-brand-primary bg-surface-default' },
 };
 
 const titles: Record<OptionCardAppearance, { idle: string; selected: string; description: string; gap: string }> = {
@@ -158,6 +158,7 @@ export const OptionCard = forwardRef<HTMLInputElement, OptionCardProps>(function
         value={value}
         name={group?.name ?? rest.name}
         checked={checked}
+        readOnly={!group && !onChange}
         disabled={disabled}
         onChange={(e) => {
           onChange?.(e);

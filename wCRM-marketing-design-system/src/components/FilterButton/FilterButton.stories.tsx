@@ -1,21 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from '@storybook/test';
-import { useState } from 'react';
-import { FilterCheckboxList, FilterPopover } from '../FilterPopover';
 import { FilterButton } from './FilterButton';
+
+const FIGMA = 'https://www.figma.com/design/EIQlA9M6mP2KlskFFy2X2U/wCRM-updates?node-id=';
+const design = (node: string) => ({ design: { type: 'figma', url: FIGMA + node } });
 
 const meta = {
   title: 'Components/FilterButton',
   component: FilterButton,
   tags: ['autodocs'],
   args: { label: 'Filter' },
-  argTypes: { display: { control: 'inline-radio', options: ['labelled', 'icon', 'responsive'] } },
+  argTypes: {
+    display: { control: 'inline-radio', options: ['labelled', 'icon', 'responsive'] },
+    appearance: { control: 'inline-radio', options: ['v2', 'v1', 'sections'] },
+  },
   parameters: {
+    ...design('1230-26010'),
     docs: {
       description: {
         component:
-          'Figma: desktop `filter-button` (1230:26010) — 40px, transparent fill, 1px `border-default`, radius 8, 10/16 padding, 8px gap, 20px vuesax outline calendar icon in `text-muted`, 14/500 secondary label. ' +
-          'Mobile `Filter button` (1931:24248) — 40 × 40 white square with the 18px vuesax funnel; active (1931:24486) uses `brand-primary-subtle` fill and a `brand-primary` border.',
+          'Desktop `filter-button` (1230:26010): 40px, transparent, 1px #E2E8F0, r8, p10/16, gap 8, 20px vuesax calendar glyph #A3AED0, Inter Medium 14 #64748B. ' +
+          'Mobile icon-only: 44×44 (V2 / V1) or 40×40 (sections); the glyph stays #292D32 and switches linear → bold when active, with a 7px (V2) or 14px (V1) dot.',
       },
     },
   },
@@ -23,56 +28,54 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Labelled: Story = {};
+/** Desktop list toolbars (audience, social posts). */
+export const Labelled: Story = { parameters: design('1230-26010') };
+/** User management toolbar: label #4F5966. */
+export const LabelledUserManagement: Story = { args: { labelTone: 'nav' }, parameters: design('1823-7447') };
+/** Applied filters on desktop (derived: Figma draws no applied state on desktop). */
 export const LabelledActive: Story = { args: { count: 2 } };
-export const IconOnly: Story = { args: { display: 'icon' } };
-export const IconOnlyActive: Story = {
+/** Mobile V2-flow default: 44×44, #DDE3ED border, linear funnel 20. */
+export const MobileV2: Story = { args: { display: 'icon' }, parameters: design('1926-24556') };
+/** Mobile V2-flow active: #FFF0F2 fill, #F32135 border, bold funnel, 7px dot. */
+export const MobileV2Active: Story = {
   args: { display: 'icon', count: 3 },
+  parameters: design('1926-24736'),
   play: async ({ canvasElement }) => {
-    await expect(within(canvasElement).getByRole('button', { name: 'Filter, 3 applied' })).toBeInTheDocument();
+    await expect(within(canvasElement).getByRole('button', { name: 'Filter, 3 applied' })).toHaveAttribute('data-active', 'true');
   },
 };
+/** Mobile V1 default: 44×44, #E2E8F0 border. */
+export const MobileV1: Story = { args: { display: 'icon', appearance: 'v1' }, parameters: design('1918-20825') };
+/** Mobile V1 active: #FFF1F2 fill, #EE1F2F border, bold funnel, 14px count dot. */
+export const MobileV1Active: Story = { args: { display: 'icon', appearance: 'v1', count: 2 }, parameters: design('1918-20992') };
+/** Mobile V2-sections default: 40×40, 18px linear funnel. */
+export const MobileSections: Story = { args: { display: 'icon', appearance: 'sections' }, parameters: design('1931-24248') };
+/** Mobile V2-sections active: #FFF0F1 fill, #EE1F2F border, glyph stays linear, no dot. */
+export const MobileSectionsActive: Story = { args: { display: 'icon', appearance: 'sections', active: true }, parameters: design('1931-24486') };
+/** Disabled (derived). */
 export const Disabled: Story = { args: { disabled: true } };
-
-/** Labelled from 640px up, icon-only below. Resize the canvas to see it collapse. */
+/** Labelled from 640px up, 44px icon-only below. */
 export const Responsive: Story = { args: { display: 'responsive', count: 1 } };
 
-export const States: Story = {
+/** Every display × state. */
+export const Matrix: Story = {
   render: () => (
-    <div className="grid grid-cols-3 items-center gap-x-6 gap-y-4">
-      {['Default', 'Applied (2)', 'Disabled'].map((h) => (
+    <div className="grid grid-cols-4 items-center gap-x-6 gap-y-4">
+      {['', 'Default', 'Applied', 'Disabled'].map((h) => (
         <span key={h} className="text-overline text-text-secondary">{h}</span>
       ))}
+      <span className="text-label-sm">Desktop</span>
       <FilterButton />
       <FilterButton count={2} />
       <FilterButton disabled />
-      <FilterButton display="icon" />
-      <FilterButton display="icon" count={2} />
-      <FilterButton display="icon" disabled />
+      {(['v2', 'v1', 'sections'] as const).map((a) => (
+        <div key={a} className="contents">
+          <span className="text-label-sm">Mobile {a}</span>
+          <FilterButton display="icon" appearance={a} />
+          <FilterButton display="icon" appearance={a} count={2} active />
+          <FilterButton display="icon" appearance={a} disabled />
+        </div>
+      ))}
     </div>
   ),
-};
-
-const accounts = [
-  { value: 'hq', label: 'Wragby_hq' },
-  { value: 'ws', label: '@wragbysolutions' },
-  { value: 'wbs', label: 'Wragby Business Solutions' },
-];
-
-/** The button is the trigger for `FilterPopover`; the count reflects applied (not draft) filters. */
-export const WithPopover: Story = {
-  render: () => {
-    const [draft, setDraft] = useState<string[]>(['hq']);
-    const [applied, setApplied] = useState<string[]>(['hq']);
-    return (
-      <div className="flex h-modal-sm items-start gap-3">
-        <FilterPopover align="start" trigger={<FilterButton count={applied.length} />} onClear={() => setDraft([])} onApply={() => setApplied(draft)}>
-          <FilterCheckboxList label="Accounts" options={accounts} value={draft} onChange={setDraft} />
-        </FilterPopover>
-        <FilterPopover align="start" trigger={<FilterButton display="icon" count={applied.length} />} onClear={() => setDraft([])} onApply={() => setApplied(draft)}>
-          <FilterCheckboxList label="Accounts" options={accounts} value={draft} onChange={setDraft} />
-        </FilterPopover>
-      </div>
-    );
-  },
 };
