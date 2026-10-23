@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pricing · wBizManager</title>
+<meta name="description" content="Compare wBizManager plans — Full ERP, Finance, HR Suite and Custom — and every feature each one includes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>[hidden]{display:none!important}
+.nav > a[aria-current="page"]{color:var(--brand-ink);background:var(--brand-subtle)}
+.pr-hero{padding-block:clamp(56px,7vw,96px) 48px;background:var(--canvas)}
+.pr-hero .head-c{margin-bottom:0}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink)}
+.pr-hero h1{font-size:clamp(40px,5.6vw,72px)}
+.toggle .tsave{font-size:11.5px;font-weight:600;color:var(--success);background:var(--success-bg);padding:3px 8px;border-radius:999px;margin-left:8px}
+.toggle button[aria-pressed="true"] .tsave{background:rgba(255,255,255,.2);color:#fff}
+.pr-plans{background:var(--canvas);padding-bottom:clamp(64px,8vw,104px)}
+.pr-plans .plans{margin-top:0}
+.pr-plans .plans-foot{margin-top:36px}
+
+/* Comparison */
+.cmp-sec{padding-block:clamp(64px,8vw,104px)}
+.cmp-card{border:1px solid var(--border);border-radius:var(--r-card);background:var(--surface);box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.cmp-card > summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 28px}
+.cmp-card > summary::-webkit-details-marker{display:none}
+.cmp-card > summary h2{font-size:clamp(22px,2.4vw,28px);font-weight:600;letter-spacing:-.02em}
+.cmp-card > summary p{color:var(--muted);font-size:15px;margin-top:4px}
+.cmp-card > summary .tw{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;flex:none;transition:transform .25s}
+.cmp-card > summary .tw .i{width:18px;height:18px}
+.cmp-card:not([open]) > summary .tw{transform:rotate(180deg)}
+.cmp-body{padding:0 28px 28px}
+.cmp-scroll{overflow:auto;max-height:min(680px,75vh);border:1px solid var(--border);border-radius:12px;overscroll-behavior:contain}
+.cmp-tbl{width:100%;min-width:760px;border-collapse:collapse;font-size:14.5px}
+.cmp-tbl thead th{position:sticky;top:0;z-index:1;background:var(--panel);text-align:left;font-size:14px;font-weight:600;padding:16px 20px;color:var(--text)}
+.cmp-tbl thead th small{display:block;font-weight:400;color:var(--muted);font-size:12.5px;margin-top:2px}
+.cmp-tbl thead th.rec{color:var(--brand-ink)}
+.cmp-tbl th[scope="row"]{font-weight:400;color:var(--text-2);text-align:left;padding:13px 20px;width:36%}
+.cmp-tbl td{padding:13px 20px;white-space:nowrap}
+.cmp-tbl tbody tr:not(.grp):nth-child(even){background:var(--canvas)}
+.cmp-tbl tbody tr:not(.grp) td:nth-child(2){background:rgba(0,112,255,.035)}
+.cmp-tbl tr.grp th{padding:22px 20px 10px;font-size:15.5px;font-weight:600;text-align:left;color:var(--text);border-top:1px solid var(--border)}
+.cmp-tbl tbody tr.grp:first-child th{border-top:0}
+.gi{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--brand-subtle);color:var(--brand);margin-right:10px;vertical-align:-8px}
+.gi .i{width:15px;height:15px}
+.cmp{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500}
+.cmp .i{width:17px;height:17px}
+.cmp.ok{color:var(--success)}
+.cmp.no{color:var(--faint)}
+.cmp.opt{color:var(--brand-ink)}
+.cmp-key{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;font-size:13.5px;color:var(--muted)}
+.cmp-key b{font-weight:500;color:var(--text-2)}
+
+.pr-faq{padding-block:0 clamp(72px,9vw,120px)}
+.pr-faq .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
+.pr-faq .side{display:grid;gap:18px}
+.pr-faq .side p{color:var(--muted);font-size:16px;line-height:1.6}
+@media (max-width:900px){.pr-faq .wrap{grid-template-columns:1fr;gap:32px}}
+@media (max-width:640px){.cmp-card > summary{padding:20px}.cmp-body{padding:0 12px 16px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M16 14v4M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12M3.3 7l7.7 4.73a2 2 0 0 0 2 0L20.7 7M7.5 4.27l9 5.15"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.66V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.66"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 17.5v-11"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M18 17V9M13 17V5M8 17v-3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65M22 12.65l-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M20 7h-9M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></symbol>
+    <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5l-5-5L2 17M16 7h6v6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9 4.5 3h15L21 9M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9M3 9h18M9 21v-6h6v6"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1M12 18h1M7 18h1"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8zM14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.7 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-2.2 3.2M6.6 6.6C3.9 8.4 2 12 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4m0 0h11l-1.5 4L16 12H5"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M8 11v4m4-4v4m4-4v4"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-x-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></symbol>
+<symbol id="i-plus-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8m-4-4h8"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9Z"/><circle cx="8" cy="8" r="1.5"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+</defs>
+</svg>
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="wBizManager home"><img src="assets/logo.png" alt="wBizManager" width="136" height="32"></a>
+    <nav class="nav" aria-label="Main">
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Modules <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:3"><div><h5>Financial</h5><ul><li><a href="modules/accounting.html"><b>Accounting</b><small>Manage finances &amp; ledgers</small></a></li><li><a href="modules/sales.html"><b>Sales</b><small>Track deals &amp; customers</small></a></li><li><a href="modules/purchases.html"><b>Purchases</b><small>Manage orders &amp; suppliers</small></a></li></ul></div><div><h5>Operations</h5><ul><li><a href="modules/inventory.html"><b>Inventory</b><small>Monitor stock &amp; warehouses</small></a></li><li><a href="modules/approvals.html"><b>Approvals</b><small>Streamline approval flows</small></a></li><li><a href="modules/reports.html"><b>Reports</b><small>Insights &amp; analytics</small></a></li></ul></div><div><h5>Management</h5><ul><li><a href="modules/commercial.html"><b>Commercial</b><small>Business operations hub</small></a></li><li><a href="modules/project.html"><b>Project</b><small>Plan &amp; track milestones</small></a></li><li><a href="modules/human-resources.html"><b>Human Resources</b><small>People &amp; payroll management</small></a></li></ul></div><div class="mega-card"><h4>Built for growing businesses</h4><p>One integrated platform to run your entire business, from finance and procurement to people and projects, without the complexity of disconnected tools.</p><a class="link" href="index.html#modules">See all nine modules <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Industries <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Products</h5><ul><li><a href="index.html#industries"><b>Retail &amp; Trading</b><small>Sales, stock &amp; customers</small></a></li><li><a href="index.html#industries"><b>Distribution</b><small>Suppliers, orders &amp; deliveries</small></a></li><li><a href="index.html#industries"><b>Manufacturing</b><small>Materials &amp; operations</small></a></li></ul></div><div><h5>Services</h5><ul><li><a href="index.html#industries"><b>Professional Services</b><small>Clients, invoices &amp; expenses</small></a></li><li><a href="index.html#industries"><b>Growing SMEs</b><small>One platform for daily operations</small></a></li></ul></div><div class="mega-card"><h4>One platform, the way you do business</h4><p>Every business runs differently. wBizManager gives yours a connected foundation, whether you sell products, deliver services or manage a growing team.</p><a class="link" href="index.html#industries">Explore industries <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <a href="pricing.html" aria-current="page">Pricing</a>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Resources <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Learn</h5><ul><li><a href="#"><b>Blog</b><small>Guides &amp; business tips</small></a></li><li><a href="#"><b>Customer Stories</b><small>How businesses use wBizManager</small></a></li></ul></div><div><h5>Get help</h5><ul><li><a href="index.html#faq"><b>FAQs</b><small>Answers to common questions</small></a></li><li><a href="#"><b>Help &amp; Support</b><small>Guides, tutorials &amp; our team</small></a></li></ul></div><div class="mega-card"><h4>Need a hand getting set up?</h4><p>Our team can talk through your business requirements and help you get value from wBizManager from day one.</p><a class="link" href="#">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Company <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>About</h5><ul><li><a href="#"><b>About Us</b><small>Who we are &amp; what we build</small></a></li><li><a href="#"><b>Partners</b><small>Bring wBizManager to your clients</small></a></li></ul></div><div><h5>Get in touch</h5><ul><li><a href="#"><b>Contact Us</b><small>Talk to sales or support</small></a></li><li><a href="#"><b>Become a Partner</b><small>Join the partner programme</small></a></li></ul></div><div class="mega-card"><h4>Let’s talk about your business</h4><p>Explore wBizManager and see how a connected business management platform can support your day-to-day operations.</p><a class="link" href="pricing.html">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+    </nav>
+    <div class="hdr-cta">
+      <a class="login" href="login.html">Log in</a>
+      <a class="btn btn-primary" href="pricing.html">Get Started</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="mnav" id="mnav">
+  <details><summary>Modules <svg class="i"><use href="#i-down"/></svg></summary><div><a href="modules/accounting.html">Accounting</a><a href="modules/sales.html">Sales</a><a href="modules/purchases.html">Purchases</a><a href="modules/approvals.html">Approvals</a><a href="modules/inventory.html">Inventory</a><a href="modules/reports.html">Reports</a><a href="modules/commercial.html">Commercial</a><a href="modules/project.html">Project</a><a href="modules/human-resources.html">Human Resources</a></div></details>
+  <details><summary>Industries <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="index.html#industries">Retail &amp; Trading</a><a href="index.html#industries">Distribution</a><a href="index.html#industries">Manufacturing</a><a href="index.html#industries">Professional Services</a><a href="index.html#industries">Growing SMEs</a>
+  </div></details>
+  <a href="pricing.html">Pricing</a>
+  <details><summary>Resources <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="#">Blog</a><a href="#">Customer Stories</a><a href="index.html#faq">FAQs</a><a href="#">Help &amp; Support</a>
+  </div></details>
+  <details><summary>Company <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="#">About Us</a><a href="#">Partners</a><a href="#">Contact Us</a>
+  </div></details>
+  <div class="mbtns">
+    <a class="btn btn-primary" href="pricing.html">Get Started</a>
+    <a class="btn btn-secondary" href="login.html">Log in</a>
+  </div>
+</div>
+<main>
+  <section class="pr-hero">
+    <div class="wrap">
+      <div class="head-c">
+        <span class="eyebrow">Plans for the way you work</span>
+        <h1 class="display">Choose your starting point.</h1>
+        <p class="lead">Start with a complete suite, focus on finance or HR, or build a custom combination. Every plan includes configurable approvals.</p>
+        <div class="billing">
+          <div class="toggle" role="group" aria-label="Billing period">
+            <button type="button" aria-pressed="false" data-bill="m">Monthly</button>
+            <button type="button" aria-pressed="true" data-bill="y">Annual<span class="tsave">Save 2 months</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pr-plans" aria-label="Plans">
+    <div class="wrap">
+      <div class="plans">
+        <div class="plan rec">
+          <span class="flag">Most complete</span><h3>Full ERP</h3><p class="desc">Organisations that want one connected business system</p>
+          <div class="price num"><strong data-y="₦1,200,000" data-m="₦120,000">₦1,200,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Accounting</li><li><svg class="i"><use href="#i-check"/></svg>Inventory</li><li><svg class="i"><use href="#i-check"/></svg>Procurement</li><li><svg class="i"><use href="#i-check"/></svg>Projects &amp; Commercial</li><li><svg class="i"><use href="#i-check"/></svg>HR</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
+          <a class="btn btn-primary" data-plan="full" href="configure.html?plan=full">Choose Full ERP</a>
+        </div>
+        <div class="plan">
+          <h3>Finance</h3><p class="desc">Finance teams that need accounting with item and stock information</p>
+          <div class="price num"><strong data-y="₦500,000" data-m="₦50,000">₦500,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Accounting</li><li><svg class="i"><use href="#i-check"/></svg>Inventory</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
+          <a class="btn btn-outline" data-plan="finance" href="configure.html?plan=finance">Choose Finance</a>
+        </div>
+        <div class="plan">
+          <h3>HR Suite</h3><p class="desc">People teams managing employees from recruitment to exit</p>
+          <div class="price num"><strong data-y="₦650,000" data-m="₦65,000">₦650,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Employee records</li><li><svg class="i"><use href="#i-check"/></svg>Recruitment &amp; onboarding</li><li><svg class="i"><use href="#i-check"/></svg>Leave &amp; attendance</li><li><svg class="i"><use href="#i-check"/></svg>Payroll &amp; payslips</li><li><svg class="i"><use href="#i-check"/></svg>Performance &amp; appraisals</li><li><svg class="i"><use href="#i-check"/></svg>Training, cases &amp; exits</li><li><svg class="i"><use href="#i-check"/></svg>Self-service</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
+          <a class="btn btn-outline" data-plan="hr" href="configure.html?plan=hr">Choose HR Suite</a>
+        </div>
+        <div class="plan">
+          <h3>Custom</h3><p class="desc">Organisations that want to choose only the areas they need</p>
+          <div class="price num"><strong data-y="₦250,000" data-m="₦25,000">₦250,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Choose business areas</li><li><svg class="i"><use href="#i-check"/></svg>Required supporting access</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
+          <a class="btn btn-outline" data-plan="custom" href="configure.html?plan=custom">Choose Custom</a>
+        </div>
+      </div>
+      <div class="plans-foot">
+        <p>Need multi-entity, more seats, or a scoped implementation? <a href="index.html#faq">Talk to sales</a> — we will size it with you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cmp-sec" id="compare">
+    <div class="wrap">
+      <details class="cmp-card" open>
+        <summary><div><h2>Compare every included feature</h2><p>The full high-level comparison across all four plans.</p></div><span class="tw" aria-hidden="true"><svg class="i"><use href="#i-up"/></svg></span></summary>
+        <div class="cmp-body">
+          <div class="cmp-scroll">
+            <table class="cmp-tbl">
+              <thead><tr><th scope="col">Features</th><th scope="col" class="rec">Full ERP<small>Most complete</small></th><th scope="col">Finance</th><th scope="col">HR Suite</th><th scope="col">Custom</th></tr></thead>
+              <tbody>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-calc"/></svg></span>Accounting</th></tr>
+<tr><th scope="row">Financial setup, chart of accounts and dimensions</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Journals, general ledger and period close</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Customer invoices, receipts and credit notes</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Supplier bills, payments and debit notes</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Bank reconciliation</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Budgets, opening balances and fixed assets</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Financial reports and audit history</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-box"/></svg></span>Inventory</th></tr>
+<tr><th scope="row">Item catalogues, categories and units</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Locations and stock balances</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Stock receipts, issues, adjustments and transfers</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Stock cycle and stocktaking</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Costing and additional costs</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Barcode scanning, alerts and reports</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-bag"/></svg></span>Procurement</th></tr>
+<tr><th scope="row">Supplier records and terms</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Requests for quotation</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Purchase orders and goods received</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Purchasing reports</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-brief"/></svg></span>Projects &amp; Commercial</th></tr>
+<tr><th scope="row">Tender pipeline, pipeline value and win rate</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Projects and milestones</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Project people and costs</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-person"/></svg></span>Human Resources</th></tr>
+<tr><th scope="row">Employee records and documents</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Recruitment &amp; onboarding</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Leave &amp; attendance</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Payroll &amp; payslips</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Performance &amp; appraisals</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Training, cases &amp; exits</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr><th scope="row">Employee self-service</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-shield"/></svg></span>Approvals &amp; platform</th></tr>
+<tr><th scope="row">Configurable approval workflows</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Role-based access and permissions</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Multiple organisations under one account</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Real-time reports dashboard</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Cloud hosting, backups and updates</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Onboarding and ongoing support</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cmp-key"><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg><b>Included</b></span><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg><b>Optional — choose it on the Custom plan</b></span><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg><b>Not included</b></span></div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="pr-faq">
+    <div class="wrap">
+      <div class="side">
+        <h2 class="h2">Questions about pricing.</h2>
+        <p>Can't find what you're looking for? Our team can talk through your business requirements and size a plan with you.</p>
+        <div><a class="btn btn-secondary" href="index.html#faq">Talk to our team</a></div>
+      </div>
+      <div>
+<details class="qa" open><summary>What counts as a full user?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>A full user is anyone who signs in to work in wBizManager — raising invoices, approving requests or running reports. Every plan includes three full users, and you can add more when you configure your plan.</p></details>
+<details class="qa"><summary>What is an employee record?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>Employee records are the people your HR team manages. Records on the Full ERP and HR Suite plans include self-service, so employees can view payslips and request leave without needing a full user seat.</p></details>
+<details class="qa"><summary>Can I run more than one organisation?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>Yes. Each legal entity has its own plan and allowances. When you add another organisation it copies the first configuration, so you only change what is different.</p></details>
+<details class="qa"><summary>How does the Custom plan work?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>The Custom plan starts with one business area of your choice, plus the access it needs to work and configurable approvals. You can add further areas when you set up your plan.</p></details>
+<details class="qa"><summary>Can I change plans later?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>Yes. You can move between plans or add organisations at any time, and we will adjust what you pay from your next billing date.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="top">
+      <div class="about">
+        <img src="assets/logo.png" alt="wBizManager" width="145" height="34">
+        <p>Integrated business management for growing businesses.</p>
+      </div>
+      <div><h4>Solutions</h4><ul>
+        <li><a href="modules/accounting.html">Accounting</a></li><li><a href="modules/sales.html">Sales</a></li><li><a href="modules/purchases.html">Purchases</a></li><li><a href="modules/approvals.html">Approvals</a></li><li><a href="modules/inventory.html">Inventory</a></li>
+        <li><a href="modules/reports.html">Reports</a></li><li><a href="modules/commercial.html">Commercial</a></li><li><a href="modules/project.html">Project</a></li><li><a href="modules/human-resources.html">Human Resources</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="#">Contact Us</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="index.html#faq">FAQs</a></li><li><a href="#">Help &amp; Support</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
+    </div>
+    <div class="base"><span>© 2026 wBizManager. All rights reserved.</span><nav><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></nav></div>
+  </div>
+</footer>
+<script>
+(function () {
+  /* Billing toggle: swaps prices and carries the period into the configure links */
+  const btns = document.querySelectorAll('[data-bill]');
+  function setBill(p) {
+    btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.bill === p));
+    document.querySelectorAll('.price strong').forEach(s => s.textContent = s.dataset[p]);
+    document.querySelectorAll('.price .per').forEach(s => s.textContent = p === 'y' ? '/year' : '/month');
+    document.querySelectorAll('[data-plan]').forEach(a => a.href = 'configure.html?plan=' + a.dataset.plan + '&bill=' + p);
+  }
+  btns.forEach(b => b.addEventListener('click', () => setBill(b.dataset.bill)));
+  setBill('y');
+})();
+</script>
+</body>
+</html>

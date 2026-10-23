@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Configure your plan · wBizManager</title>
+<meta name="description" content="Set up the organisations you need, choose seats and employee records, and see your total before you continue.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>[hidden]{display:none!important}
+body{background:var(--canvas)}
+.cf-top{background:var(--surface);border-bottom:1px solid var(--border)}
+.cf-top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.cf-top .back{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:500;color:var(--text-2)}
+.cf-top .back:hover{color:var(--brand-ink)}
+.cf-top .back .i{width:16px;height:16px}
+.steps{list-style:none;margin:0 auto;padding:36px 0 8px;display:flex;justify-content:center;gap:12px;max-width:1080px}
+.steps li{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--muted);white-space:nowrap}
+.steps li:not(:last-child)::after{content:"";width:clamp(16px,3vw,44px);height:1px;background:var(--border);margin-left:4px}
+.steps .sn{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--panel);color:var(--text-2);font-size:13px;font-weight:600;flex:none}
+.steps li.on{color:var(--text);font-weight:600}
+.steps li.on .sn{background:var(--brand);color:#fff;box-shadow:0 0 0 4px var(--brand-subtle)}
+.cf{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);gap:32px;align-items:start;padding-block:40px 96px}
+.cf-intro{display:grid;gap:12px;margin-bottom:28px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink)}
+.cf-intro h1{font-size:clamp(30px,3.6vw,44px);font-weight:600;letter-spacing:-.035em;line-height:1.08}
+.cf-intro p{color:var(--muted);font-size:17px;line-height:1.6;max-width:60ch}
+.org{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 18px 40px -28px rgba(15,23,42,.25);display:grid;gap:26px}
+.org + .org{margin-top:20px}
+.org-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.org-head .eyebrow{font-size:12.5px}
+.org-name{display:block;margin-top:10px;font:inherit;font-size:24px;font-weight:600;letter-spacing:-.02em;color:var(--text);border:0;border-bottom:1px dashed transparent;background:none;padding:0 0 2px;width:min(100%,460px)}
+.org-name:hover{border-bottom-color:var(--border)}
+.org-name:focus{outline:0;border-bottom-color:var(--brand)}
+.org-rm{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--muted);padding:8px 10px;border-radius:8px}
+.org-rm:hover{color:var(--error);background:var(--error-bg)}
+.org-rm .i{width:16px;height:16px}
+.copied{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:13px;color:var(--muted)}
+.copied .i{width:14px;height:14px}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 28px}
+.fld{display:grid;gap:8px;align-content:start}
+.fld > label,.fld > .lbl{font-size:15px;font-weight:600;color:var(--text)}
+.fld small{font-size:13.5px;color:var(--muted);line-height:1.5}
+.fld small b{color:var(--text-2);font-weight:600}
+.sel{position:relative}
+.sel select{appearance:none;-webkit-appearance:none;width:100%;height:48px;border:1px solid var(--border);border-radius:10px;background:var(--surface);font:inherit;font-size:16px;color:var(--text);padding:0 40px 0 14px;cursor:pointer}
+.sel .i{position:absolute;right:14px;top:50%;translate:0 -50%;width:16px;height:16px;pointer-events:none;color:var(--muted)}
+.sel select:focus-visible,.step:focus-within{outline:2px solid var(--brand);outline-offset:1px}
+.step{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;height:48px;border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+.step button{height:100%;display:grid;place-items:center;color:var(--text-2)}
+.step button:hover:not(:disabled){color:var(--brand)}
+.step button:disabled{color:#CBD5E1;cursor:not-allowed}
+.step button .i{width:16px;height:16px;stroke-width:2.2}
+.step input{width:100%;border:0;background:none;text-align:center;font:inherit;font-size:16px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums;-moz-appearance:textfield}
+.step input::-webkit-inner-spin-button{-webkit-appearance:none}
+.step input:focus{outline:0}
+.fld.off{opacity:.45}
+.fld.off .step{pointer-events:none}
+.sep{height:1px;background:var(--border)}
+.mods-blk{display:grid;gap:6px}
+.mods-blk h3{font-size:19px;font-weight:600;letter-spacing:-.015em}
+.mods-blk > p{color:var(--muted);font-size:15px}
+.ok-box{display:flex;gap:12px;align-items:flex-start;background:var(--success-bg);border:1px solid #CDEFD9;border-radius:12px;padding:16px 18px;margin-top:12px}
+.ok-box > .i{width:20px;height:20px;color:var(--success);stroke-width:2.2;flex:none;margin-top:1px}
+.ok-box b{display:block;font-weight:600;font-size:15px}
+.ok-box span{font-size:14px;color:var(--text-2)}
+.ok-box button{color:var(--brand-ink);font-weight:600;font-size:14px;margin-left:auto;white-space:nowrap;align-self:center}
+.chks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.chk{display:flex;align-items:center;gap:12px;border:1px solid var(--border);border-radius:12px;padding:12px 14px;cursor:pointer;background:var(--surface);transition:border-color .15s,background .15s}
+.chk:hover{border-color:#CBD5E1}
+.chk input{width:18px;height:18px;accent-color:var(--brand);flex:none}
+.chk span{display:grid;font-size:14.5px;font-weight:500}
+.chk small{font-size:12.5px;color:var(--muted);font-weight:400}
+.chk em{font-style:normal;margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap}
+.chk:has(input:checked){border-color:var(--brand);background:var(--brand-subtle)}
+.chk:has(input:disabled){cursor:default}
+.add-org{display:inline-flex;align-items:center;gap:10px;margin-top:20px;height:52px;padding:0 22px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--brand-ink);font-weight:600;font-size:16px}
+.add-org:hover{border-color:var(--brand);background:var(--brand-subtle)}
+.add-org .i{width:18px;height:18px;stroke-width:2.2}
+
+.sum{position:sticky;top:24px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 18px 40px -28px rgba(15,23,42,.25);display:grid;gap:22px}
+.sum h2{font-size:22px;font-weight:600;letter-spacing:-.02em}
+.bill-t{display:grid;grid-template-columns:1fr 1fr;padding:4px;background:var(--panel);border-radius:10px}
+.bill-t button{height:36px;border-radius:7px;font-size:14px;font-weight:500;color:var(--text-2)}
+.bill-t button[aria-pressed="true"]{background:var(--surface);color:var(--text);font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.12)}
+.bill-t .tsave{font-size:11px;font-weight:600;color:var(--success);margin-left:6px}
+.sum-orgs{display:grid;gap:18px}
+.so b{display:block;font-size:15.5px;font-weight:600}
+.so > small{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}
+.so ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px;font-size:13.5px;color:var(--text-2)}
+.so li{display:flex;justify-content:space-between;gap:12px}
+.so li span:last-child{font-variant-numeric:tabular-nums;white-space:nowrap}
+.disc{display:grid;gap:4px}
+.disc > b{color:var(--brand-ink);font-size:15px;font-weight:600}
+.disc > small{color:var(--muted);font-size:13.5px}
+.disc-row{display:flex;margin-top:8px;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.disc-row:focus-within{outline:2px solid var(--brand);outline-offset:1px}
+.disc-row input{flex:1;min-width:0;border:0;height:46px;padding:0 14px;font:inherit;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.disc-row input:focus{outline:0}
+.disc-row input::placeholder{color:var(--faint);letter-spacing:.06em}
+.disc-row button{padding:0 16px;font-weight:600;font-size:14px;color:var(--brand-ink);border-left:1px solid var(--border)}
+.disc-msg{font-size:13px;margin-top:6px;min-height:1.2em}
+.disc-msg.ok{color:var(--success)}.disc-msg.bad{color:var(--error)}
+.tot{border-top:1px solid var(--border);padding-top:20px;display:grid;gap:4px}
+.tot > span{font-size:15px;color:var(--muted)}
+.tot .disc-line{display:flex;justify-content:space-between;font-size:14px;color:var(--success)}
+.tot .amt{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.tot strong{font-size:36px;font-weight:700;letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums}
+.tot .per{font-size:16px;color:var(--text-2)}
+.tot small{font-size:13.5px;color:var(--muted)}
+.sum .btn{width:100%;height:52px;font-size:16px}
+.saved{text-align:center;font-size:13.5px;color:var(--muted);margin-top:-8px}
+@media (max-width:1060px){.cf{grid-template-columns:1fr}.sum{position:static}}
+@media (max-width:900px){.steps{justify-content:flex-start;overflow-x:auto;padding-inline:var(--gutter);scrollbar-width:none}.steps::-webkit-scrollbar{display:none}}
+@media (max-width:760px){.ok-box{flex-wrap:wrap}.ok-box button{margin-left:32px}.fields{grid-template-columns:1fr}.chks{grid-template-columns:1fr}.org{padding:22px}.steps li:not(.on) .sl{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M16 14v4M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12M3.3 7l7.7 4.73a2 2 0 0 0 2 0L20.7 7M7.5 4.27l9 5.15"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.66V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.66"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 17.5v-11"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M18 17V9M13 17V5M8 17v-3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65M22 12.65l-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M20 7h-9M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></symbol>
+    <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5l-5-5L2 17M16 7h6v6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9 4.5 3h15L21 9M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9M3 9h18M9 21v-6h6v6"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1M12 18h1M7 18h1"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8zM14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.7 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-2.2 3.2M6.6 6.6C3.9 8.4 2 12 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4m0 0h11l-1.5 4L16 12H5"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M8 11v4m4-4v4m4-4v4"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-x-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></symbol>
+<symbol id="i-plus-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8m-4-4h8"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9Z"/><circle cx="8" cy="8" r="1.5"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+</defs>
+</svg>
+<header class="cf-top">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="wBizManager home"><img src="assets/logo.png" alt="wBizManager" width="136" height="32"></a>
+    <a class="back" href="pricing.html"><svg class="i"><use href="#i-left"/></svg> Back to plans</a>
+  </div>
+</header>
+<main>
+  <ol class="steps" aria-label="Sign-up steps"><li class="on" aria-current="step"><span class="sn">1</span><span class="sl">Configure</span></li><li><span class="sn">2</span><span class="sl">Your account</span></li><li><span class="sn">3</span><span class="sl">Verify</span></li><li><span class="sn">4</span><span class="sl">Company details</span></li><li><span class="sn">5</span><span class="sl">Review</span></li><li><span class="sn">6</span><span class="sl">Payment</span></li></ol>
+  <div class="wrap">
+    <div class="cf">
+      <div>
+        <div class="cf-intro">
+          <span class="eyebrow">Configure your plan</span>
+          <h1>Set up the organisations you need.</h1>
+          <p>Each legal entity has its own plan and allowances. Additional organisations copy the first configuration, so you only edit the exceptions.</p>
+        </div>
+        <div id="orgs"></div>
+        <button class="add-org" type="button" id="add-org">Add another organisation <svg class="i"><use href="#i-plus"/></svg></button>
+      </div>
+      <aside class="sum" aria-label="Order summary">
+        <h2>Order summary</h2>
+        <div class="bill-t" role="group" aria-label="Billing period"><button type="button" data-bill="m" aria-pressed="false">Monthly</button><button type="button" data-bill="y" aria-pressed="true">Annual<span class="tsave">Save 2 months</span></button></div>
+        <div class="sum-orgs" id="sum-orgs" aria-live="polite"></div>
+        <div class="disc">
+          <b>Discount code</b>
+          <small>Apply a discount code to your plan payment.</small>
+          <form class="disc-row" id="disc-form"><input id="disc" autocomplete="off" placeholder="XXXX-XXXX-XXXX" aria-label="Discount code"><button type="submit">Apply</button></form>
+          <div class="disc-msg" id="disc-msg" role="status"></div>
+        </div>
+        <div class="tot">
+          <span>Total due</span>
+          <div class="disc-line" id="disc-line" hidden><span>Discount</span><span id="disc-amt"></span></div>
+          <div class="amt"><strong id="total">₦0</strong><span class="per" id="per">per year</span></div>
+          <small>Taxes calculated at checkout</small>
+        </div>
+        <a class="btn btn-primary" id="continue" href="login.html">Continue <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+        <p class="saved">Your configuration is saved as you continue.</p>
+      </aside>
+    </div>
+  </div>
+</main>
+<script>
+(function () {
+  const ICON = n => `<svg class="i"><use href="#i-${n}"/></svg>`;
+  const NGN = n => '₦' + Math.round(n).toLocaleString('en-NG');
+  /* Annual prices; monthly is a tenth of annual (two months free on annual) */
+  const PLANS = {
+    full:    { name: 'Full ERP', base: 1200000, desc: 'Organisations that want one connected business system', hr: 'all' },
+    finance: { name: 'Finance',  base: 500000,  desc: 'Finance teams that need accounting with item and stock information', hr: 'none' },
+    hr:      { name: 'HR Suite', base: 650000,  desc: 'People teams managing employees from recruitment to exit', hr: 'all' },
+    custom:  { name: 'Custom',   base: 250000,  desc: 'Organisations that want to choose only the areas they need. Includes one area; each extra area is added below.', hr: 'pick' }
+  };
+  const SEAT = 10000, RECORD = 500, SELF = 250, INCLUDED_SEATS = 3, AREA = 150000;
+  const HR_MODS = [['records', 'Employee records', 'Always included'], ['recruit', 'Recruitment & onboarding'], ['leave', 'Leave & attendance'], ['payroll', 'Payroll & payslips'], ['perf', 'Performance & appraisals'], ['train', 'Training, cases & exits'], ['self', 'Self-service']];
+  const AREAS = [['acc', 'Accounting', 'Ledgers, invoices, banking, budgets'], ['inv', 'Inventory', 'Items, stock and locations'], ['proc', 'Procurement', 'Suppliers, RFQs, purchase orders'], ['proj', 'Projects & Commercial', 'Tenders, projects, milestones'], ['hrm', 'Human Resources', 'Employee records and HR processes']];
+  const CODES = { WBIZ10: .10, WELCOME15: .15 };
+
+  const q = new URLSearchParams(location.search);
+  let bill = q.get('bill') === 'm' ? 'm' : 'y';
+  let discount = 0, discCode = '';
+  const fresh = plan => ({ name: 'Primary organisation', plan, seats: 5, records: 100, self: 70, hr: HR_MODS.map(m => m[0]), areas: ['acc', 'inv'], custom: false });
+  let orgs;
+  try { const saved = JSON.parse(localStorage.getItem('wbm-config') || 'null'); if (saved && Array.isArray(saved.orgs) && saved.orgs.length) { orgs = saved.orgs; if (!q.get('bill') && saved.bill) bill = saved.bill; } } catch (e) {}
+  const want = q.get('plan');
+  if (!orgs) orgs = [fresh(PLANS[want] ? want : 'full')];
+  else if (PLANS[want]) orgs[0].plan = want;
+
+  const usesHR = o => o.plan === 'full' || o.plan === 'hr' || (o.plan === 'custom' && o.areas.includes('hrm'));
+  function lines(o) {
+    const p = PLANS[o.plan], k = bill === 'y' ? 1 : .1, out = [[p.name + ' plan', p.base * k]];
+    if (o.plan === 'custom' && o.areas.length > 1) out.push([`${o.areas.length - 1} extra business area${o.areas.length > 2 ? 's' : ''}`, (o.areas.length - 1) * AREA * k]);
+    if (o.seats > INCLUDED_SEATS) out.push([`${o.seats - INCLUDED_SEATS} extra full seat${o.seats - INCLUDED_SEATS > 1 ? 's' : ''}`, (o.seats - INCLUDED_SEATS) * SEAT * k]);
+    if (usesHR(o)) {
+      out.push([`${o.records} employee records`, o.records * RECORD * k]);
+      if (o.self) out.push([`${o.self} self-service users`, o.self * SELF * k]);
+    }
+    return out;
+  }
+  const sumOf = o => lines(o).reduce((a, l) => a + l[1], 0);
+
+  const stepper = (key, label, val, min, note, off) => `
+    <div class="fld${off ? ' off' : ''}"><span class="lbl" id="${key}-l">${label}</span>
+      <div class="step"><button type="button" data-d="-1" data-k="${key}" aria-label="Fewer ${label.toLowerCase()}" ${val <= min ? 'disabled' : ''}>${ICON('minus')}</button><input type="number" inputmode="numeric" data-k="${key}" value="${val}" min="${min}" aria-labelledby="${key}-l"><button type="button" data-d="1" data-k="${key}" aria-label="More ${label.toLowerCase()}">${ICON('plus')}</button></div>
+      <small>${note}</small></div>`;
+
+  function orgHTML(o, i) {
+    const p = PLANS[o.plan], hr = usesHR(o);
+    let mods = '';
+    if (o.plan === 'custom') {
+      mods = `<div class="mods-blk"><span class="eyebrow">Business areas</span><h3>Choose the areas you need</h3><p>Your plan includes one area. Each additional area is ${NGN(AREA * (bill === 'y' ? 1 : .1))} ${bill === 'y' ? 'a year' : 'a month'}.</p>
+        <div class="chks">${AREAS.map(([k, n, d]) => `<label class="chk"><input type="checkbox" data-area="${k}" ${o.areas.includes(k) ? 'checked' : ''} ${o.areas.length === 1 && o.areas.includes(k) ? 'disabled' : ''}><span>${n}<small>${d}</small></span></label>`).join('')}</div></div>`;
+    } else if (p.hr === 'all') {
+      const all = o.hr.length === HR_MODS.length;
+      mods = `<div class="mods-blk"><span class="eyebrow">HR modules</span><h3>Full HR suite included</h3><p>Employee records, self-service and onboarding are always included.</p>
+        ${o.custom ? `<div class="chks">${HR_MODS.map(([k, n, d]) => `<label class="chk"><input type="checkbox" data-hr="${k}" ${o.hr.includes(k) ? 'checked' : ''} ${k === 'records' ? 'disabled' : ''}><span>${n}${d ? `<small>${d}</small>` : ''}</span></label>`).join('')}</div>`
+          : `<div class="ok-box">${ICON('check')}<div><b>${all ? 'All HR modules selected' : `${o.hr.length} of ${HR_MODS.length} HR modules selected`}</b><span>Open Customise to remove modules you do not need.</span></div><button type="button" data-act="customise">Customise</button></div>`}</div>`;
+    } else {
+      mods = `<div class="mods-blk"><span class="eyebrow">Modules</span><h3>Accounting and Inventory included</h3><p>Finance covers your ledgers, invoicing, banking and stock. HR is not part of this plan.</p>
+        <div class="ok-box">${ICON('check')}<div><b>Accounting, Inventory and configurable approvals</b><span>Need HR as well? Switch to Full ERP, or choose the areas you need with Custom.</span></div></div></div>`;
+    }
+    return `<section class="org" data-i="${i}" aria-label="Organisation ${i + 1}">
+      <div class="org-head"><div><span class="eyebrow">Organisation ${i + 1}</span><input class="org-name" data-k="name" value="${o.name.replace(/"/g, '&quot;')}" aria-label="Organisation ${i + 1} name">${i ? `<span class="copied">${ICON('copy')}Copied from ${orgs[0].name.replace(/</g, '&lt;')} — edit only what is different</span>` : ''}</div>
+        ${i ? `<button class="org-rm" type="button" data-act="remove">${ICON('trash')}Remove</button>` : ''}</div>
+      <div class="fields">
+        <div class="fld"><label for="plan-${i}">Plan</label><div class="sel"><select id="plan-${i}" data-k="plan">${Object.entries(PLANS).map(([k, v]) => `<option value="${k}" ${k === o.plan ? 'selected' : ''}>${v.name}</option>`).join('')}</select>${ICON('down')}</div><small>${p.desc}</small></div>
+        ${stepper('seats', 'Full seats', o.seats, INCLUDED_SEATS, `Minimum ${INCLUDED_SEATS}, included in the plan<br>Each extra seat: <b>${NGN(SEAT * (bill === 'y' ? 1 : .1))}</b>`)}
+        ${stepper('records', 'Employee records', o.records, 0, hr ? `Price per record: <b>${NGN(RECORD * (bill === 'y' ? 1 : .1))}</b>` : 'Not used on this plan', !hr)}
+        ${stepper('self', 'Self-service', o.self, 0, hr ? `Up to your employee records<br>Price per user: <b>${NGN(SELF * (bill === 'y' ? 1 : .1))}</b>` : 'Not used on this plan', !hr)}
+      </div>
+      <div class="sep"></div>
+      ${mods}
+    </section>`;
+  }
+
+  const $orgs = document.getElementById('orgs'), $sum = document.getElementById('sum-orgs');
+  function save() { try { localStorage.setItem('wbm-config', JSON.stringify({ orgs, bill })); } catch (e) {} }
+  function renderSummary() {
+    const per = bill === 'y' ? 'per year' : 'per month';
+    $sum.innerHTML = orgs.map(o => {
+      const hr = usesHR(o), bits = [PLANS[o.plan].name, `${o.seats} seats`].concat(hr ? [`${o.records} employee records`] : []);
+      return `<div class="so"><b>${o.name.replace(/</g, '&lt;') || 'Untitled organisation'}</b><small>${bits.join(' · ')}</small><ul>${lines(o).map(([l, v]) => `<li><span>${l}</span><span>${NGN(v)}</span></li>`).join('')}</ul></div>`;
+    }).join('');
+    const sub = orgs.reduce((a, o) => a + sumOf(o), 0), off = sub * discount;
+    document.getElementById('disc-line').hidden = !discount;
+    document.getElementById('disc-amt').textContent = `${discCode} · −${NGN(off)}`;
+    document.getElementById('total').textContent = NGN(sub - off);
+    document.getElementById('per').textContent = per;
+    document.querySelectorAll('[data-bill]').forEach(b => b.setAttribute('aria-pressed', b.dataset.bill === bill));
+    save();
+  }
+  function render() { $orgs.innerHTML = orgs.map(orgHTML).join(''); renderSummary(); }
+
+  function setVal(o, k, v) {
+    v = Math.max(k === 'seats' ? INCLUDED_SEATS : 0, Math.min(99999, isNaN(v) ? 0 : v));
+    o[k] = v;
+    if (k === 'records' && o.self > o.records) o.self = o.records;
+    if (k === 'self' && o.self > o.records) o.self = o.records;
+  }
+  $orgs.addEventListener('click', e => {
+    const sec = e.target.closest('.org'); if (!sec) return;
+    const o = orgs[+sec.dataset.i], b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.d) { setVal(o, b.dataset.k, o[b.dataset.k] + (+b.dataset.d) * (b.dataset.k === 'seats' ? 1 : 5)); render(); $orgs.children[+sec.dataset.i].querySelector(`button[data-k="${b.dataset.k}"][data-d="${b.dataset.d}"]`)?.focus(); }
+    if (b.dataset.act === 'customise') { o.custom = true; render(); }
+    if (b.dataset.act === 'remove') { orgs.splice(+sec.dataset.i, 1); render(); }
+  });
+  $orgs.addEventListener('change', e => {
+    const sec = e.target.closest('.org'); if (!sec) return;
+    const o = orgs[+sec.dataset.i], t = e.target;
+    if (t.dataset.k === 'plan') { o.plan = t.value; o.custom = false; render(); document.getElementById('plan-' + sec.dataset.i).focus(); }
+    else if (t.type === 'number') { setVal(o, t.dataset.k, parseInt(t.value, 10)); render(); }
+    else if (t.dataset.hr) { o.hr = HR_MODS.map(m => m[0]).filter(k => k === 'records' || document.querySelector(`.org[data-i="${sec.dataset.i}"] [data-hr="${k}"]`).checked); render(); }
+    else if (t.dataset.area) { o.areas = AREAS.map(a => a[0]).filter(k => document.querySelector(`.org[data-i="${sec.dataset.i}"] [data-area="${k}"]`).checked); render(); }
+  });
+  $orgs.addEventListener('input', e => { if (e.target.dataset.k === 'name') { orgs[+e.target.closest('.org').dataset.i].name = e.target.value; renderSummary(); } });
+  document.getElementById('add-org').addEventListener('click', () => {
+    const c = JSON.parse(JSON.stringify(orgs[0])); c.name = 'Organisation ' + (orgs.length + 1); c.custom = false;
+    orgs.push(c); render(); const n = $orgs.lastElementChild; n.scrollIntoView({ behavior: 'smooth', block: 'start' }); n.querySelector('.org-name').select();
+  });
+  document.querySelectorAll('[data-bill]').forEach(b => b.addEventListener('click', () => { bill = b.dataset.bill; render(); }));
+  document.getElementById('disc-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const code = document.getElementById('disc').value.trim().toUpperCase().replace(/[^A-Z0-9]/g, ''), msg = document.getElementById('disc-msg');
+    if (!code) { discount = 0; discCode = ''; msg.textContent = ''; }
+    else if (CODES[code]) { discount = CODES[code]; discCode = code; msg.className = 'disc-msg ok'; msg.textContent = `${code} applied — ${discount * 100}% off`; }
+    else { discount = 0; discCode = ''; msg.className = 'disc-msg bad'; msg.textContent = 'That code is not valid. Check it and try again.'; }
+    renderSummary();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
