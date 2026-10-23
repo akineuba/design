@@ -2,10 +2,11 @@
 export const tokens = {
   "$meta": {
     "name": "wCRM Marketing design tokens",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "source": "Figma file EIQlA9M6mP2KlskFFy2X2U, page 'marketing design updates' (782:4598)",
     "extracted": "2026-10-20",
-    "note": "The Figma file has no published variables or styles. Every value below was taken from the most frequent raw value in the page audit; 'figmaUses' is the approximate number of layers using it (fills, strokes and text combined). Values marked 'derived' are not drawn in Figma and were added to complete a state."
+    "note": "The Figma file has no published variables or styles. Every value below was taken from the most frequent raw value in the page audit; 'figmaUses' is the approximate number of layers using it (fills, strokes and text combined). Values marked 'derived' are not drawn in Figma and were added to complete a state. v0.2.0 adds every value from the five Figma audits (A shell/dashboard, B CRM lists, C social/emails, D settings/fields, E mobile) so components can be pixel-perfect to Figma. 'figma' lists representative node ids; 'previous' records a value that was replaced by the Figma value.",
+    "updated": "2026-10-23"
   },
   "color": {
     "brand": {
@@ -18,6 +19,13 @@ export const tokens = {
         "value": "#D7192D",
         "usage": "Hover and pressed state of primary",
         "figmaUses": 3
+      },
+      "primary-alt": {
+        "value": "#EF2D38",
+        "usage": "Full-width drawer submit buttons (Create / Apply / Save) and the audience Filters Apply button",
+        "figma": "808:6090, 1533:9851, 869:11910, 1823:7696, 2535:65137",
+        "figmaUses": 8,
+        "previous": "listed as legacy (mapped to brand.primary) before v0.2.0"
       },
       "primary-subtle": {
         "value": "#FFF0F2",
@@ -33,7 +41,7 @@ export const tokens = {
       },
       "navy-hover": {
         "value": "#2B3674",
-        "usage": "Secondary hover, strong headings in marketing cards",
+        "usage": "Secondary hover, dashboard titles / KPI values, table emphasis cells, pagination numbers, secondary (Save Draft) button border and label, navy solid button, chart series 1",
         "figmaUses": 457
       },
       "navy-subtle": {
@@ -60,7 +68,7 @@ export const tokens = {
       },
       "muted": {
         "value": "#A3AED0",
-        "usage": "Inactive tabs, meta labels, disabled text",
+        "usage": "Inactive tabs, meta labels, disabled text; table header labels, chart axis, KPI label, mobile V1 meta",
         "figmaUses": 1707
       },
       "placeholder": {
@@ -80,8 +88,112 @@ export const tokens = {
       },
       "icon": {
         "value": "#8F9BB3",
-        "usage": "Unselected icons in swap buttons (view toggle)",
+        "usage": "Unselected icons in swap buttons (view toggle); Archived/Inactive badge label and dot; Non-User status text",
+        "figmaUses": 8,
+        "figma": "1036:6314, 2495:4176, 828:89"
+      },
+      "navy-strong": {
+        "value": "#1B2559",
+        "usage": "Dashboard activity feed text; email breakdown card title, labels and values",
+        "figma": "950:8584, 1150:18057",
+        "figmaUses": 13
+      },
+      "tertiary": {
+        "value": "#667085",
+        "usage": "App header page title, sidebar section label, header menu-toggle icon, italic hints, neutral Cancel / Remove button label",
+        "figma": "950:7534, 808:7460, 950:7532, 1206:24300, 1175:22676",
+        "figmaUses": 110
+      },
+      "nav": {
+        "value": "#4F5966",
+        "usage": "Sidebar nav labels, settings sub-items, mobile menu labels, Filter label in User management",
+        "figma": "808:7574, 782:4619, 1933:13537, 1823:7447",
+        "figmaUses": 30
+      },
+      "greeting": {
+        "value": "#B8B8C0",
+        "usage": "App header eyebrow (\"Hi Akinola\")",
+        "figma": "950:7534",
+        "figmaUses": 35
+      },
+      "ink": {
+        "value": "#0F172A",
+        "usage": "Notification titles, module card title, detail info/stat values, notifications page title, profile card titles and values",
+        "figma": "1436:6659, 1446:33139, 908:6085, 859:11760, 1287:29771",
+        "figmaUses": 40,
+        "previous": "listed as legacy (mapped to text.primary) before v0.2.0"
+      },
+      "charcoal": {
+        "value": "#1E293B",
+        "usage": "Header avatar initials, email-builder section labels, profile avatar initials, schedule checklist labels",
+        "figma": "1446:33295, 1535:9953, 1287:29771, 1265:28266",
+        "figmaUses": 50
+      },
+      "icon-strong": {
+        "value": "#4B5563",
+        "usage": "Row icon-button glyphs (edit/up/down), fields Type and Rule text, Move Up/Down menu items, info callout body, accordion card description, last-sync time",
+        "figma": "2495:4183, 2495:4207, 2525:64416, 2518:63002, 1529:9554",
+        "figmaUses": 25
+      },
+      "faint": {
+        "value": "#94A3B8",
+        "usage": "Notification time and read description, notification search placeholder/icon, field-type group labels and disabled descriptions, auth intro",
+        "figma": "1436:6659, 1473:4922, 2518:57959, 2518:58034",
+        "figmaUses": 30
+      },
+      "hint": {
+        "value": "#9CA3AF",
+        "usage": "Organisation upload hint and toggle-row description, small search placeholder",
+        "figma": "1206:24289, 1206:24406, 1239:26352",
+        "figmaUses": 5
+      },
+      "button-outline": {
+        "value": "#3B414D",
+        "usage": "Upload outline button label",
+        "figma": "817:9253",
+        "figmaUses": 2
+      },
+      "link-bright": {
+        "value": "#0070FF",
+        "usage": "Inline \"Move\" link in audience Members / sub-rows",
+        "figma": "817:8821, 817:8943",
         "figmaUses": 8
+      },
+      "avatar-gold": {
+        "value": "#CA8A04",
+        "usage": "Gold initials on owner avatars (\"TS\", \"CD\")",
+        "figma": "830:683, 882:12559",
+        "figmaUses": 2
+      },
+      "navy-deep": {
+        "value": "#1E3A8A",
+        "usage": "Expanded chevron-up in the drawer pick-list",
+        "figma": "1533:9603",
+        "figmaUses": 2
+      },
+      "slate": {
+        "value": "#475569",
+        "usage": "Mobile V2-sections field labels, unselected chips, bottom-nav labels, empty-state body; profile security notice body",
+        "figma": "1931:24362, 1931:24496, 1931:24302, 1287:30089",
+        "figmaUses": 60
+      },
+      "qualifier": {
+        "value": "#C1C1C1",
+        "usage": "\"(including bots)\" qualifier in email MetricCard",
+        "figma": "1150:18017",
+        "figmaUses": 4
+      },
+      "black": {
+        "value": "#000000",
+        "usage": "Calendar in-month day number and highlighted post-chip text, drag-drop block handle, mobile hamburger icon, unchecked carbon radio",
+        "figma": "1051:8230, 1051:8235, 1540:10430, 1933:14044, 1533:9598",
+        "figmaUses": 40
+      },
+      "link-blue": {
+        "value": "#3B82F6",
+        "usage": "Clear / Today actions in calendar-time-picker",
+        "figma": "1594:7048",
+        "figmaUses": 2
       }
     },
     "surface": {
@@ -111,6 +223,42 @@ export const tokens = {
         "usage": "Scrim behind drawers and modals",
         "figmaUses": 0,
         "derived": "matches Fields & layouts drawers"
+      },
+      "table-header": {
+        "value": "#F8F9FC",
+        "usage": "Table header rows, expanded-row panel, calendar weekday header, settings pagination bar, internal-key note, field identity strip, spec-drawer read-only input",
+        "figma": "817:9058, 817:8770, 1051:8208, 2535:64960, 2518:62872, 2535:64759",
+        "figmaUses": 30
+      },
+      "avatar": {
+        "value": "#F6F8FB",
+        "usage": "Profile / user-management avatar fill (36, 56); header bell button fill (hidden)",
+        "figma": "1287:29771, 1823:7430, 1446:33286",
+        "figmaUses": 52
+      },
+      "avatar-tint": {
+        "value": "rgba(226, 232, 240, 0.30)",
+        "usage": "Header user avatar fill",
+        "figma": "1446:33295",
+        "figmaUses": 41
+      },
+      "toggle": {
+        "value": "#E5E7EB",
+        "usage": "Header theme-toggle circle",
+        "figma": "1446:33288",
+        "figmaUses": 41
+      },
+      "group": {
+        "value": "#FAFBFC",
+        "usage": "Archived fields collapsible group",
+        "figma": "2524:9060",
+        "figmaUses": 1
+      },
+      "scrollbar": {
+        "value": "#99A6B8",
+        "usage": "Custom scrollbar thumb in the drawer pick-list",
+        "figma": "1533:9601",
+        "figmaUses": 3
       }
     },
     "border": {
@@ -133,6 +281,42 @@ export const tokens = {
         "value": "#FECACA",
         "usage": "Outline of a selected option card in a modal list",
         "figmaUses": 4
+      },
+      "muted": {
+        "value": "#A3AED0",
+        "usage": "Context menu and filter popover border, outline avatar stroke, sidebar footer separator (0.5px), dashed social dropzone, view-toggle group",
+        "figma": "795:6000, 869:11860, 830:582, 808:7498, 1525:8394, 1036:6314",
+        "figmaUses": 60
+      },
+      "modal": {
+        "value": "#E5E7EB",
+        "usage": "Move-to-audience modal border, inset divider, unselected option card",
+        "figma": "1446:32223, 1446:32228, 1446:32237",
+        "figmaUses": 6
+      },
+      "neutral": {
+        "value": "#D1D5DB",
+        "usage": "Date-filter chip border, unselected option indicator ring",
+        "figma": "950:8651, 1446:32237",
+        "figmaUses": 4
+      },
+      "module": {
+        "value": "#EDF2F7",
+        "usage": "Module picker card and greeting pill border",
+        "figma": "908:6085, 908:6079",
+        "figmaUses": 5
+      },
+      "ai-panel": {
+        "value": "#D1D6E0",
+        "usage": "Orbit AI assistant panel border",
+        "figma": "1069:9282",
+        "figmaUses": 2
+      },
+      "module-header": {
+        "value": "rgba(193, 193, 193, 0.11)",
+        "usage": "Module picker header bottom stroke",
+        "figma": "908:6066",
+        "figmaUses": 1
       }
     },
     "status": {
@@ -158,8 +342,9 @@ export const tokens = {
       },
       "warning-text": {
         "value": "#B54708",
-        "usage": "Warning label text on warning-subtle",
-        "derived": "#DF9B17 fails text contrast on its subtle fill"
+        "usage": "Warning label text on warning-subtle; Change=New/Edited badge label and dot; Hidden change-list verb",
+        "figma": "2495:4170, 2495:4173, 2518:62943",
+        "figmaUses": 6
       },
       "warning-subtle": {
         "value": "#FFF7E5",
@@ -187,9 +372,512 @@ export const tokens = {
         "figmaUses": 84
       },
       "toggle-off": {
-        "value": "#CBD5E1",
+        "value": "#9CA3AF",
         "usage": "Switch track when off",
-        "derived": "Figma only draws the on state"
+        "figma": "2542:65453, 1509:5472",
+        "figmaUses": 3,
+        "previous": "#CBD5E1",
+        "note": "Figma draws the off state (D §4); the previous value was derived."
+      },
+      "warning-bright": {
+        "value": "#E9BB2B",
+        "usage": "Scheduled dot sub-tab (dot + text), Spam status-badge dot and text, progress tone, profile Edit (warning) button fill, header sun icon",
+        "figma": "1101:14769, 1126:16406, 1150:18057, 1287:29996, 1446:33294",
+        "figmaUses": 50
+      },
+      "success-strong": {
+        "value": "#059669",
+        "usage": "KPI trend up (arrow, text, sparkline); success checkbox (YouTube \"Made for kids\")",
+        "figma": "950:8419, 950:8422, 1526:8811",
+        "figmaUses": 5
+      },
+      "danger-strong": {
+        "value": "#DC2626",
+        "usage": "KPI trend down text and arrow",
+        "figma": "950:8479",
+        "figmaUses": 2
+      },
+      "success-dark": {
+        "value": "#05A86E",
+        "usage": "State=Active badge label and dot; change-list \"Added\" verb and icon",
+        "figma": "2495:4179, 2518:62943",
+        "figmaUses": 15
+      },
+      "connected": {
+        "value": "#10B981",
+        "usage": "\"Connected\" / \"Verified\" validation hint",
+        "figma": "1206:24350",
+        "figmaUses": 5
+      },
+      "danger-alt": {
+        "value": "#E53E3E",
+        "usage": "Settings checked-checkbox fill; history Failed badge text and dot",
+        "figma": "1529:9532, 1586:5527, 1514:7169",
+        "figmaUses": 15,
+        "previous": "mapped to brand.primary before v0.2.0"
+      }
+    },
+    "badge": {
+      "brand-tint": {
+        "value": "rgba(238, 31, 47, 0.07)",
+        "usage": "badge-type industry tag fill (\"Technology\")",
+        "figma": "859:11754",
+        "figmaUses": 3
+      },
+      "active-bg": {
+        "value": "#E8FAF0",
+        "usage": "Status badge Active fill (audience detail)",
+        "figma": "828:53",
+        "figmaUses": 3
+      },
+      "active-dot": {
+        "value": "#21B873",
+        "usage": "Status badge Active dot",
+        "figma": "828:53",
+        "figmaUses": 3
+      },
+      "inactive-bg": {
+        "value": "#FCEBEB",
+        "usage": "Status badge Inactive fill",
+        "figma": "828:65",
+        "figmaUses": 3
+      },
+      "inactive-dot": {
+        "value": "#E84D4D",
+        "usage": "Status badge Inactive dot",
+        "figma": "828:65",
+        "figmaUses": 3
+      },
+      "nonuser-bg": {
+        "value": "#F0F0F2",
+        "usage": "Status badge Non-User fill",
+        "figma": "828:89",
+        "figmaUses": 2
+      },
+      "nonuser-dot": {
+        "value": "#8C8C99",
+        "usage": "Status badge Non-User dot",
+        "figma": "828:89",
+        "figmaUses": 2
+      },
+      "spam-bg": {
+        "value": "rgba(255, 221, 85, 0.10)",
+        "usage": "Spam Report warning badge fill",
+        "figma": "1126:16406",
+        "figmaUses": 1
+      },
+      "existing-bg": {
+        "value": "rgba(163, 174, 208, 0.15)",
+        "usage": "Source=Existing badge, count pill, Existing pill in identity strip",
+        "figma": "2495:4166, 2524:9065, 2518:62873",
+        "figmaUses": 4
+      },
+      "custom-bg": {
+        "value": "rgba(56, 87, 214, 0.10)",
+        "usage": "Source=Custom badge fill",
+        "figma": "2495:4168",
+        "figmaUses": 2
+      },
+      "custom": {
+        "value": "#3857D6",
+        "usage": "Source=Custom badge label",
+        "figma": "2495:4168",
+        "figmaUses": 2
+      },
+      "change-bg": {
+        "value": "rgba(247, 144, 9, 0.12)",
+        "usage": "Change=New / Edited badge fill",
+        "figma": "2495:4170, 2495:4173",
+        "figmaUses": 2
+      },
+      "archived-bg": {
+        "value": "rgba(163, 174, 208, 0.12)",
+        "usage": "State=Archived badge fill",
+        "figma": "2495:4176",
+        "figmaUses": 1
+      },
+      "success-tint": {
+        "value": "rgba(5, 211, 138, 0.10)",
+        "usage": "State=Active badge, history Success, user-management Active badge, SummaryCard success icon circle",
+        "figma": "2495:4179, 1514:7169, 1823:7430, 1150:18000",
+        "figmaUses": 12
+      },
+      "neutral-tint": {
+        "value": "rgba(163, 174, 208, 0.10)",
+        "usage": "Inactive badge in fields table, user-management Non-User badge",
+        "figma": "2542:65513, 1823:7430",
+        "figmaUses": 4
+      },
+      "danger-tint": {
+        "value": "rgba(238, 31, 47, 0.10)",
+        "usage": "User-management Inactive badge fill",
+        "figma": "1823:7430",
+        "figmaUses": 3
+      },
+      "failed-tint": {
+        "value": "rgba(229, 62, 62, 0.10)",
+        "usage": "History Failed badge fill",
+        "figma": "1514:7169",
+        "figmaUses": 3
+      },
+      "release-tint": {
+        "value": "rgba(61, 90, 152, 0.10)",
+        "usage": "\"Release 2\" / \"Later release\" pill fill",
+        "figma": "2518:58038",
+        "figmaUses": 2
+      },
+      "info-tint": {
+        "value": "rgba(64, 156, 255, 0.10)",
+        "usage": "Recipient chip fill",
+        "figma": "1542:11040",
+        "figmaUses": 3
+      },
+      "excluded-bg": {
+        "value": "#FEE2E2",
+        "usage": "Excluded recipient chip fill",
+        "figma": "1542:11078",
+        "figmaUses": 3
+      },
+      "added-tint": {
+        "value": "rgba(5, 168, 110, 0.10)",
+        "usage": "Change-list \"Added\" icon tile",
+        "figma": "2518:62943",
+        "figmaUses": 1
+      },
+      "hidden-tint": {
+        "value": "rgba(181, 71, 8, 0.10)",
+        "usage": "Change-list \"Hidden\" icon tile",
+        "figma": "2518:62943",
+        "figmaUses": 1
+      }
+    },
+    "alert": {
+      "warning-bg": {
+        "value": "#FFFAEB",
+        "usage": "Draft banner and impact callout fill",
+        "figma": "2549:65613, 2518:62987",
+        "figmaUses": 3
+      },
+      "warning-border": {
+        "value": "#FEC84B",
+        "usage": "Draft banner and impact callout border",
+        "figma": "2549:65613, 2518:62987",
+        "figmaUses": 2
+      },
+      "warning-title": {
+        "value": "#7A2E0E",
+        "usage": "Warning banner / callout title",
+        "figma": "2549:65613, 2518:62987",
+        "figmaUses": 2
+      },
+      "warning-body": {
+        "value": "#93370D",
+        "usage": "Warning banner / callout body",
+        "figma": "2549:65613, 2518:62987",
+        "figmaUses": 2
+      },
+      "warning-icon": {
+        "value": "#DC6803",
+        "usage": "Alert-triangle icon in the impact callout",
+        "figma": "2518:62990",
+        "figmaUses": 1
+      }
+    },
+    "checkbox": {
+      "disabled-checked": {
+        "value": "#F4A3AA",
+        "usage": "Disabled checked checkbox fill (fields drawer)",
+        "figma": "2518:62925",
+        "figmaUses": 1
+      }
+    },
+    "chip": {
+      "date-bg": {
+        "value": "#F3F4F6",
+        "usage": "Dashboard date-filter chip fill",
+        "figma": "950:8651",
+        "figmaUses": 1
+      },
+      "date-text": {
+        "value": "#374151",
+        "usage": "Dashboard date-filter chip label",
+        "figma": "950:8651",
+        "figmaUses": 1
+      },
+      "date-icon": {
+        "value": "#6B7280",
+        "usage": "Dashboard date-filter chip caret",
+        "figma": "950:8651",
+        "figmaUses": 1
+      }
+    },
+    "chart": {
+      "series-1": {
+        "value": "#2B3674",
+        "usage": "Donut email slice, line \"Total Contacts\"",
+        "figma": "950:8554, 950:8617",
+        "figmaUses": 3
+      },
+      "series-2": {
+        "value": "#EE1F2F",
+        "usage": "Donut social slice, line \"New Contacts\", down sparkline",
+        "figma": "950:8554, 950:8617, 950:8479",
+        "figmaUses": 3
+      },
+      "series-3": {
+        "value": "#4318FF",
+        "usage": "Donut event slice",
+        "figma": "950:8554",
+        "figmaUses": 1
+      },
+      "series-4": {
+        "value": "#FFB547",
+        "usage": "Donut referral slice",
+        "figma": "950:8554",
+        "figmaUses": 1
+      },
+      "legend": {
+        "value": "#707EAE",
+        "usage": "Chart legend labels",
+        "figma": "950:8654, 950:8562, 950:8620",
+        "figmaUses": 9,
+        "previous": "listed as legacy (mapped to text.muted) before v0.2.0"
+      },
+      "purple": {
+        "value": "#8262FF",
+        "usage": "Email breakdown progress tone",
+        "figma": "1150:18057",
+        "figmaUses": 2
+      },
+      "orange": {
+        "value": "#FF7A00",
+        "usage": "Email breakdown progress tone",
+        "figma": "1150:18057",
+        "figmaUses": 2
+      }
+    },
+    "platform": {
+      "instagram": {
+        "value": "#E1306C",
+        "usage": "Instagram chart series",
+        "figma": "950:8670",
+        "figmaUses": 4
+      },
+      "youtube": {
+        "value": "#FF0000",
+        "usage": "YouTube chart series",
+        "figma": "950:8670",
+        "figmaUses": 4
+      },
+      "linkedin": {
+        "value": "#0A66C2",
+        "usage": "LinkedIn chart series",
+        "figma": "950:8670",
+        "figmaUses": 4
+      },
+      "linkedin-logo": {
+        "value": "#0076B2",
+        "usage": "LinkedIn logo fill in notifications",
+        "figma": "1446:32489",
+        "figmaUses": 2
+      }
+    },
+    "calendar": {
+      "outside": {
+        "value": "#FAF9FC",
+        "usage": "Calendar day cell outside the current month",
+        "figma": "1051:8225, 1051:8465",
+        "figmaUses": 10
+      },
+      "today": {
+        "value": "#E8F2FF",
+        "usage": "Calendar today cell; highlighted Instagram post chip",
+        "figma": "1051:8278",
+        "figmaUses": 2
+      },
+      "chip-linkedin": {
+        "value": "#E6F0FA",
+        "usage": "Highlighted LinkedIn post chip in the today cell",
+        "figma": "1051:8285",
+        "figmaUses": 1
+      }
+    },
+    "action": {
+      "clone": {
+        "value": "#9747FF",
+        "usage": "Clone menu item and Clone outline button",
+        "figma": "1104:15107, 1049:6808",
+        "figmaUses": 3
+      }
+    },
+    "copilot": {
+      "accent": {
+        "value": "#5B5FC7",
+        "usage": "Copilot accent: links, checked chip, focus border, New Chat button, send icon",
+        "figma": "1422:30759, 1422:30766, 1422:30836",
+        "figmaUses": 20
+      },
+      "accent-subtle": {
+        "value": "rgba(91, 95, 199, 0.06)",
+        "usage": "Checked context chip and active-context tag fill",
+        "figma": "1422:30766, 1422:30800",
+        "figmaUses": 4
+      },
+      "bubble-user": {
+        "value": "rgba(91, 95, 199, 0.07)",
+        "usage": "User chat bubble fill",
+        "figma": "1422:30800",
+        "figmaUses": 2
+      },
+      "surface": {
+        "value": "#F5F5F5",
+        "usage": "Copilot launcher FAB and empty-state circle",
+        "figma": "1422:30756, 1422:30785",
+        "figmaUses": 2
+      },
+      "link": {
+        "value": "#3182CE",
+        "usage": "Chat history \"Continue\" link",
+        "figma": "1422:30917",
+        "figmaUses": 1
+      },
+      "confirm": {
+        "value": "#22C55E",
+        "usage": "Inline rename confirm tick",
+        "figma": "1422:30917",
+        "figmaUses": 1
+      }
+    },
+    "mobile": {
+      "brand": {
+        "value": "#F32135",
+        "usage": "Mobile V2-flow brand red: primary buttons, active chips, FAB, focus/error border, unread dots; desktop mobile-nav Log out",
+        "figma": "1926:25081, 1926:24564, 1926:24625, 1926:24937",
+        "figmaUses": 200,
+        "previous": "listed as legacy (mapped to brand.primary) before v0.2.0"
+      },
+      "brand-subtle": {
+        "value": "#FFF0F1",
+        "usage": "Mobile V2-sections selected chip, icon tile, danger-outline button, active filter button fill",
+        "figma": "1931:24494, 1931:24258, 1931:25568, 1931:24486",
+        "figmaUses": 20
+      },
+      "text": {
+        "value": "#151A33",
+        "usage": "Mobile V2-flow primary text, selection bar fill",
+        "figma": "1926:24537, 1926:24581, 1926:25429",
+        "figmaUses": 400,
+        "previous": "listed as legacy (mapped to text.primary) before v0.2.0"
+      },
+      "text-secondary": {
+        "value": "#66728F",
+        "usage": "Mobile V2-flow secondary text and stroked icons (bell, ellipsis, chevrons)",
+        "figma": "1926:24581, 1926:24537",
+        "figmaUses": 200
+      },
+      "caption": {
+        "value": "#8F9BBA",
+        "usage": "Mobile V2-sections captions and placeholders; desktop Create-template modal placeholder",
+        "figma": "1931:24258, 1931:24240, 1170:22099",
+        "figmaUses": 150,
+        "previous": "listed as legacy (mapped to text.muted) before v0.2.0"
+      },
+      "border": {
+        "value": "#DDE3ED",
+        "usage": "Mobile V2-flow card, input, divider and nav borders; desktop mobile-nav cards",
+        "figma": "1926:24581, 1926:24548, 1926:23101",
+        "figmaUses": 250,
+        "previous": "listed as legacy (mapped to border.default) before v0.2.0"
+      },
+      "canvas": {
+        "value": "#F5F7FB",
+        "usage": "Mobile V2-flow screen background",
+        "figma": "1926:24530",
+        "figmaUses": 30
+      },
+      "chip": {
+        "value": "#F8FAFD",
+        "usage": "Mobile neutral chip, round header button, metric tile, default-toggle row fill",
+        "figma": "1926:24566, 1926:24537, 1926:27315, 1933:13928",
+        "figmaUses": 70
+      },
+      "selected-border": {
+        "value": "#FFC8CF",
+        "usage": "Selected record card / channel card border, selection-bar action text",
+        "figma": "1926:25441, 1926:27205, 1926:25429",
+        "figmaUses": 15
+      },
+      "navy": {
+        "value": "#4268B5",
+        "usage": "Mobile avatar initials, hero names, Poppins metric values, secondary chart bars",
+        "figma": "1926:24582, 1926:25100, 1926:22745",
+        "figmaUses": 40
+      },
+      "icon": {
+        "value": "#292D32",
+        "usage": "Vuesax icon tint on mobile (search, filter, nav, toggles)",
+        "figma": "1926:24549, 1926:24556, 1926:24640",
+        "figmaUses": 700
+      },
+      "scrim": {
+        "value": "rgba(17, 24, 42, 0.60)",
+        "usage": "Bottom sheet and dialog scrim (V2-flow)",
+        "figma": "1926:24710, 1926:25687",
+        "figmaUses": 6
+      },
+      "scrim-v1": {
+        "value": "rgba(15, 23, 42, 0.60)",
+        "usage": "Bottom sheet scrim (V1)",
+        "figma": "1918:21117",
+        "figmaUses": 2
+      },
+      "warning-text": {
+        "value": "#B6780E",
+        "usage": "V2-flow warning chip text (\"Draft\")",
+        "figma": "1926:26788",
+        "figmaUses": 7
+      },
+      "warning-text-alt": {
+        "value": "#D99114",
+        "usage": "V2-sections warning chip text and notice",
+        "figma": "1931:24271, 1931:24764",
+        "figmaUses": 16
+      },
+      "info-text": {
+        "value": "#3976D4",
+        "usage": "V2-sections info chip text and notice",
+        "figma": "1931:25416, 1931:24644",
+        "figmaUses": 14
+      },
+      "info-bg": {
+        "value": "#EDF4FF",
+        "usage": "V2-sections info chip / notice fill, tinted avatar",
+        "figma": "1931:25416, 1931:22630",
+        "figmaUses": 14
+      },
+      "success-text": {
+        "value": "#179C6B",
+        "usage": "V2-sections success chip text and saved notice",
+        "figma": "1931:24923, 1931:24382",
+        "figmaUses": 20
+      },
+      "success-bg": {
+        "value": "#EAF8F2",
+        "usage": "V2-sections success chip and saved notice fill",
+        "figma": "1931:24923, 1931:24382",
+        "figmaUses": 20
+      },
+      "success-text-v1": {
+        "value": "#179C6E",
+        "usage": "Mobile V1 success chip text",
+        "figma": "1918:22585",
+        "figmaUses": 3
+      },
+      "warning-bg-v1": {
+        "value": "#FFF8E8",
+        "usage": "Mobile V1 warning chip fill",
+        "figma": "1918:22607",
+        "figmaUses": 3
       }
     }
   },
@@ -209,6 +897,30 @@ export const tokens = {
         "value": "'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace",
         "usage": "Timestamps, internal keys, IDs",
         "figmaUses": 5
+      },
+      "display": {
+        "value": "'Poppins', 'Roboto', ui-sans-serif, system-ui, sans-serif",
+        "usage": "Mobile titles (app bar, sheets, empty states, hero names, metric values) and the module-picker title",
+        "figma": "1926:24537, 1926:24897, 1926:24947, 908:6079",
+        "figmaUses": 120
+      },
+      "geist": {
+        "value": "'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif",
+        "usage": "Settings Profile screen, Reset Password button, email-config / connect-social drawer titles",
+        "figma": "1287:29771, 1287:29991, 1556:14067",
+        "figmaUses": 40
+      },
+      "instrument": {
+        "value": "'Instrument Sans', 'Inter', ui-sans-serif, system-ui, sans-serif",
+        "usage": "Connect-social platform cards",
+        "figma": "1238:26211",
+        "figmaUses": 10
+      },
+      "roboto-mono": {
+        "value": "'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace",
+        "usage": "Mobile recovery code chip",
+        "figma": "1931:25337",
+        "figmaUses": 8
       }
     },
     "weight": {
@@ -223,81 +935,192 @@ export const tokens = {
       },
       "bold": {
         "value": "700"
+      },
+      "extrabold": {
+        "value": "800",
+        "usage": "Email performance figures, Create-template / Smart-field modal titles, mobile logo \"W\"",
+        "figma": "1150:18000, 1150:18017, 1170:22099, 1926:24537"
       }
     }
   },
   "typography": {
     "display": {
       "size": "28px",
-      "lineHeight": "36px",
+      "lineHeight": "normal",
       "weight": "700",
       "usage": "Dashboard KPIs, empty-state titles",
-      "figmaUses": 36
+      "figmaUses": 36,
+      "previousLineHeight": "36px",
+      "figma": "1051:8506"
     },
     "heading-1": {
       "size": "20px",
-      "lineHeight": "28px",
+      "lineHeight": "normal",
       "weight": "700",
       "usage": "Page title in app header, drawer titles",
-      "figmaUses": 70
+      "figmaUses": 70,
+      "previousLineHeight": "28px"
     },
     "heading-2": {
       "size": "18px",
-      "lineHeight": "26px",
+      "lineHeight": "normal",
       "weight": "700",
       "usage": "Section and card titles",
-      "figmaUses": 140
+      "figmaUses": 140,
+      "previousLineHeight": "26px"
     },
     "heading-3": {
       "size": "16px",
-      "lineHeight": "24px",
+      "lineHeight": "normal",
       "weight": "700",
       "usage": "Sub-section titles, modal headings",
-      "figmaUses": 62
+      "figmaUses": 62,
+      "previousLineHeight": "24px"
     },
     "body": {
       "size": "14px",
-      "lineHeight": "20px",
+      "lineHeight": "normal",
       "weight": "400",
       "usage": "Default body and input text",
-      "figmaUses": 622
+      "figmaUses": 622,
+      "previousLineHeight": "20px"
     },
     "body-sm": {
       "size": "13px",
-      "lineHeight": "18px",
+      "lineHeight": "normal",
       "weight": "400",
       "usage": "Table cells, secondary body",
-      "figmaUses": 928
+      "figmaUses": 928,
+      "previousLineHeight": "18px",
+      "figma": "830:580, 1028:3989"
     },
     "label": {
       "size": "14px",
-      "lineHeight": "20px",
+      "lineHeight": "normal",
       "weight": "600",
       "usage": "Buttons, field labels, tabs",
-      "figmaUses": 292
+      "figmaUses": 292,
+      "previousLineHeight": "20px"
     },
     "label-sm": {
       "size": "13px",
-      "lineHeight": "18px",
+      "lineHeight": "normal",
       "weight": "600",
       "usage": "Compact buttons, row titles",
-      "figmaUses": 444
+      "figmaUses": 444,
+      "previousLineHeight": "18px"
     },
     "caption": {
       "size": "12px",
-      "lineHeight": "16px",
+      "lineHeight": "normal",
       "weight": "400",
       "usage": "Helper and validation text, meta",
-      "figmaUses": 233
+      "figmaUses": 233,
+      "previousLineHeight": "16px"
     },
     "overline": {
       "size": "11px",
-      "lineHeight": "14px",
+      "lineHeight": "normal",
       "weight": "700",
-      "letterSpacing": "0.04em",
+      "letterSpacing": "0.5px",
       "textTransform": "uppercase",
-      "usage": "Table headers, section eyebrows, badges",
-      "figmaUses": 745
+      "usage": "Table headers (typed caps, +0.5px), StatCard label, section eyebrows",
+      "figmaUses": 745,
+      "previousLineHeight": "14px",
+      "previousLetterSpacing": "0.04em",
+      "figma": "817:9058, 1034:6229, 1051:8506"
+    },
+    "heading-xl": {
+      "size": "24px",
+      "lineHeight": "normal",
+      "weight": "700",
+      "usage": "Notifications page title; MetricCard value (add font-extrabold)",
+      "figma": "1446:33121, 1150:18017"
+    },
+    "kpi-value": {
+      "size": "22px",
+      "lineHeight": "normal",
+      "weight": "700",
+      "usage": "Dashboard KPI value; mobile V2 metric value (with font-display)",
+      "figma": "950:8409, 1926:22745"
+    },
+    "mobile-title-lg": {
+      "size": "21px",
+      "lineHeight": "normal",
+      "weight": "700",
+      "usage": "Mobile success-state title (Poppins)",
+      "figma": "1926:25710"
+    },
+    "mobile-title-sm": {
+      "size": "17px",
+      "lineHeight": "normal",
+      "weight": "700",
+      "usage": "Mobile step form title and hero name (Poppins)",
+      "figma": "1926:23891, 1926:25100"
+    },
+    "card-title": {
+      "size": "15px",
+      "lineHeight": "normal",
+      "weight": "700",
+      "usage": "Dashboard card titles; Inter 15 tabs (add font-semibold); profile menu rows (font-medium)",
+      "figma": "950:8647, 1147:17666, 802:578"
+    },
+    "stat-label": {
+      "size": "13px",
+      "lineHeight": "normal",
+      "weight": "500",
+      "usage": "Dashboard KPI label (sentence case)",
+      "figma": "950:8409"
+    },
+    "field-label": {
+      "size": "13px",
+      "lineHeight": "normal",
+      "weight": "400",
+      "usage": "Drawer / form field label; Inter Regular 13 labels",
+      "figma": "808:6562, 1066:9142"
+    },
+    "badge-lg": {
+      "size": "12px",
+      "lineHeight": "normal",
+      "weight": "700",
+      "usage": "Status badge label (27px / 23px badges), notification count pill",
+      "figma": "828:53, 1126:16406, 1436:6655"
+    },
+    "badge": {
+      "size": "11px",
+      "lineHeight": "normal",
+      "weight": "700",
+      "usage": "Fields badges (19px), Release pill, count pill, sub-table headers; mobile chips use it with font-semibold",
+      "figma": "2495:4166, 2518:58038, 817:8772"
+    },
+    "caption-sm": {
+      "size": "11px",
+      "lineHeight": "normal",
+      "weight": "400",
+      "usage": "Chart x-axis / legend labels, notification time, KPI trend (font-semibold), mobile subtitles and errors",
+      "figma": "950:8687, 1436:6659, 950:8419, 1926:24581"
+    },
+    "caption-xs": {
+      "size": "10px",
+      "lineHeight": "normal",
+      "weight": "400",
+      "usage": "Chart y-axis, cell meta line, calendar post chip (font-semibold), avatar initials (font-bold), mobile detail rows",
+      "figma": "950:8665, 817:8473, 1051:8235, 830:582, 1926:25127"
+    },
+    "micro": {
+      "size": "9px",
+      "lineHeight": "normal",
+      "weight": "400",
+      "usage": "Mobile bottom-nav labels (font-medium / font-bold), list metadata, owner-avatar initials (font-bold)",
+      "figma": "1926:24640, 1926:24581, 830:592"
+    },
+    "nav": {
+      "size": "14px",
+      "lineHeight": "28px",
+      "weight": "500",
+      "letterSpacing": "-0.02em",
+      "usage": "Sidebar settings group and sub-items (Roboto; sub-items add font-regular)",
+      "figma": "782:4625, 782:4619"
     }
   },
   "space": {
@@ -328,8 +1151,18 @@ export const tokens = {
       "value": "24px",
       "figmaUses": 142
     },
+    "7": {
+      "value": "28px",
+      "usage": "Review-modal header px, custom-fields tab gap, sub-item height, mobile empty px",
+      "figma": "2518:62943, 2518:57458, 782:4619, 1926:24947"
+    },
     "8": {
       "value": "32px"
+    },
+    "9": {
+      "value": "36px",
+      "usage": "Header avatar / action circle, notification avatar, menu item height",
+      "figma": "1446:33295, 1436:6660"
     },
     "10": {
       "value": "40px",
@@ -339,21 +1172,151 @@ export const tokens = {
       "value": "48px",
       "figmaUses": 38
     },
+    "14": {
+      "value": "56px",
+      "usage": "Avatar 56, auth logo box, module header height",
+      "figma": "1287:29771, 1248:26582, 908:6066"
+    },
+    "16": {
+      "value": "64px",
+      "usage": "Sparkline width, avatar 64, dashed connector width",
+      "figma": "950:8422, 1248:26582"
+    },
+    "18": {
+      "value": "72px",
+      "usage": "Empty-state illustration circle, toolbar height",
+      "figma": "1926:24947, 817:9042"
+    },
+    "20": {
+      "value": "80px",
+      "usage": "Module header gap, upload thumbnail, organisation logo circle",
+      "figma": "908:6066, 1525:8397, 1206:24289"
+    },
+    "50": {
+      "value": "200px",
+      "usage": "Module picker main area top padding",
+      "figma": "908:6065"
+    },
     "0.5": {
       "value": "2px",
       "figmaUses": 335
+    },
+    "0.75": {
+      "value": "3px",
+      "usage": "Label → asterisk gap, field name stack gap, banner copy gap, badge py",
+      "figma": "808:6562, 2495:4207, 2549:65613"
+    },
+    "1.25": {
+      "value": "5px",
+      "usage": "Badge gap, View link gap, dot-tab py, check-chip gap, last-updated stack gap, footer hint py",
+      "figma": "828:53, 882:12471, 1101:14745, 1107:15284"
     },
     "1.5": {
       "value": "6px",
       "figmaUses": 603
     },
+    "1.75": {
+      "value": "7px",
+      "usage": "Mobile unread / filter dot, metric card gap",
+      "figma": "1926:24537, 1926:24736, 1926:22745"
+    },
+    "2.25": {
+      "value": "9px",
+      "usage": "Mobile list gap, search gap, detail-row py, metric tile padding; header brand gap (8.65)",
+      "figma": "1926:24580, 1926:24548, 1926:25127, 950:7530"
+    },
     "2.5": {
       "value": "10px",
       "figmaUses": 635
     },
+    "2.75": {
+      "value": "11px",
+      "usage": "Mobile card gap, button py, disclosure-row py, MetricCard gap, sheet content gap",
+      "figma": "1926:24581, 1926:25081, 1926:25071, 1150:18017"
+    },
+    "3.25": {
+      "value": "13px",
+      "usage": "Mobile V2 card padding, search px, chart y-axis width",
+      "figma": "1926:24581, 1926:24548, 950:8665"
+    },
     "3.5": {
       "value": "14px",
       "figmaUses": 246
+    },
+    "3.75": {
+      "value": "15px",
+      "usage": "Badge px, nav item pl, sidebar footer gap, hero card padding, sheet gap, select panel gap",
+      "figma": "828:53, 808:7468, 1926:25100, 1147:17013"
+    },
+    "4.25": {
+      "value": "17px",
+      "usage": "Accordion header → fields gap; mobile button icon",
+      "figma": "808:6625, 1926:25115"
+    },
+    "4.5": {
+      "value": "18px",
+      "usage": "Spec-drawer body gap, button px 18, FAB px, preview-card padding; icon 18",
+      "figma": "2535:64945, 1520:7380, 1926:24625, 1501:5111"
+    },
+    "4.75": {
+      "value": "19px",
+      "usage": "Mobile search icon, settings tile icon; badge height 19",
+      "figma": "1926:24549, 1931:24258"
+    },
+    "5.25": {
+      "value": "21px",
+      "usage": "FAB add icon; sub-item active indicator height",
+      "figma": "1933:13696, 782:4619"
+    },
+    "5.5": {
+      "value": "22px",
+      "usage": "Drawer gap (create user / add field), check-circle, chevron-left",
+      "figma": "808:6024, 1931:22636, 1931:26216"
+    },
+    "5.75": {
+      "value": "23px",
+      "usage": "Header px, mobile chip height",
+      "figma": "950:7528, 1926:24564"
+    },
+    "6.5": {
+      "value": "26px",
+      "usage": "Pagination button, apps icon, check chip height",
+      "figma": "817:9148, 1446:33332"
+    },
+    "6.75": {
+      "value": "27px",
+      "usage": "Badge-lg / pill chip height, page item width",
+      "figma": "828:53, 1069:9282"
+    },
+    "7.5": {
+      "value": "30px",
+      "usage": "Drawer group gap, email builder column gap, Save as Draft row gap, select inner gap; row icon button 30",
+      "figma": "808:6024, 1520:7380, 1066:9141, 2495:4183"
+    },
+    "7.75": {
+      "value": "31px",
+      "usage": "Header menu-toggle frame (31×31), xs button height",
+      "figma": "950:7531, 1206:24298"
+    },
+    "8.75": {
+      "value": "35px",
+      "usage": "Sidebar py, nav active indicator height, SummaryCard icon 35",
+      "figma": "808:7574, 950:7548, 1150:18000"
+    },
+    "9.25": {
+      "value": "37px",
+      "usage": "Header group gap; toolbar control height",
+      "figma": "950:7528, 950:7529"
+    },
+    "12.5": {
+      "value": "50px",
+      "usage": "Module picker header px",
+      "figma": "908:6066"
+    },
+    "13.5": {
+      "value": "54px",
+      "usage": "Fields table header first-column left padding",
+      "figma": "2524:8650"
     }
   },
   "radius": {
@@ -386,6 +1349,46 @@ export const tokens = {
       "value": "999px",
       "usage": "Badges, avatars, pills",
       "figmaUses": 514
+    },
+    "bar": {
+      "value": "2px",
+      "usage": "Underline tab indicator bar, stepper segments, calendar-picker day",
+      "figma": "1028:3974, 1926:23891"
+    },
+    "checkbox": {
+      "value": "3px",
+      "usage": "14px table checkbox, 16px form checkbox (Component 16), counter progress track, check chip box",
+      "figma": "817:8446, 808:6694, 1525:8384"
+    },
+    "nav": {
+      "value": "5px",
+      "usage": "Sidebar settings group, sub-items, indicator bars; 20px drawer checkbox",
+      "figma": "782:4600, 782:4619, 2535:65056"
+    },
+    "logo": {
+      "value": "9px",
+      "usage": "Mobile V2 logo symbol (30px)",
+      "figma": "1926:24537"
+    },
+    "callout": {
+      "value": "10px",
+      "usage": "Callouts / info notes, field-type menu, change list, connect-social cards, modal close button, profiles scroller",
+      "figma": "2518:62987, 2518:57958, 1446:32223, 1238:26211"
+    },
+    "tile": {
+      "value": "14px",
+      "usage": "Connect-social auth logo boxes (56)",
+      "figma": "1248:26582"
+    },
+    "pill": {
+      "value": "20px",
+      "usage": "AI option pill chips, quick-prompt pills, module greeting pill",
+      "figma": "1069:9282, 1422:30789, 908:6079"
+    },
+    "sheet": {
+      "value": "22px",
+      "usage": "Bottom sheet top corners (use rounded-t-sheet)",
+      "figma": "1926:24897, 1933:14630"
     }
   },
   "shadow": {
@@ -420,9 +1423,78 @@ export const tokens = {
       "figmaUses": 26
     },
     "modal": {
-      "value": "0 2px 10px 0 rgba(0, 0, 0, 0.06), 0 16px 40px 0 rgba(0, 0, 0, 0.08)",
+      "value": "0 2px 10px 0 rgba(0, 0, 0, 0.06), 0 16px 40px -12px rgba(0, 0, 0, 0.08)",
       "usage": "Centred modals",
-      "figmaUses": 8
+      "figmaUses": 8,
+      "previous": "0 2px 10px 0 rgba(0, 0, 0, 0.06), 0 16px 40px 0 rgba(0, 0, 0, 0.08)",
+      "figma": "1446:32223",
+      "note": "Second layer has a -12px spread in Figma."
+    },
+    "drawer": {
+      "value": "0 8px 16px 0 rgba(163, 174, 208, 0.25)",
+      "usage": "Drawers that draw a shadow (post details, email config); same value as shadow.menu",
+      "figma": "1049:6808, 1556:14067",
+      "figmaUses": 3
+    },
+    "dropdown": {
+      "value": "0 8px 24px 0 rgba(0, 0, 0, 0.08)",
+      "usage": "Header profile dropdown",
+      "figma": "802:577",
+      "figmaUses": 1
+    },
+    "panel": {
+      "value": "0 16px 32px -4px rgba(15, 23, 42, 0.10)",
+      "usage": "Header notification dropdown panel",
+      "figma": "1436:6651",
+      "figmaUses": 1
+    },
+    "card": {
+      "value": "0 4px 12px 0 rgba(0, 0, 0, 0.03)",
+      "usage": "Module picker card, email live-preview card",
+      "figma": "908:6085, 1535:9971",
+      "figmaUses": 5
+    },
+    "dialog": {
+      "value": "0 16px 32px 0 rgba(15, 23, 42, 0.12)",
+      "usage": "Create-template and Insert-smart-field modals",
+      "figma": "1170:22099, 1175:22676",
+      "figmaUses": 2
+    },
+    "listbox": {
+      "value": "0 8px 24px 0 rgba(15, 23, 41, 0.12)",
+      "usage": "Field-type grouped listbox",
+      "figma": "2518:57958",
+      "figmaUses": 1
+    },
+    "tile": {
+      "value": "0 1px 9.7px 0 rgba(0, 0, 0, 0.20)",
+      "usage": "Email-builder content block tiles",
+      "figma": "1535:9958",
+      "figmaUses": 5
+    },
+    "copilot": {
+      "value": "0 8px 24px 0 rgba(0, 0, 0, 0.10)",
+      "usage": "Copilot side panel",
+      "figma": "1422:30759",
+      "figmaUses": 4
+    },
+    "copilot-fab": {
+      "value": "0 6px 16px 0 rgba(91, 95, 199, 0.14)",
+      "usage": "Copilot launcher FAB and empty-state circle",
+      "figma": "1422:30756, 1422:30785",
+      "figmaUses": 2
+    },
+    "mobile": {
+      "value": "0 10px 28px 0 rgba(20, 33, 61, 0.16)",
+      "usage": "Mobile V2 bottom sheets, FAB, confirm dialog",
+      "figma": "1926:24897, 1926:24625, 1926:25687",
+      "figmaUses": 15
+    },
+    "mobile-v1": {
+      "value": "0 -8px 28px 0 rgba(15, 23, 42, 0.14)",
+      "usage": "Mobile V1 FAB and bottom sheet",
+      "figma": "1918:20884, 1918:21117",
+      "figmaUses": 2
     }
   },
   "size": {
@@ -524,9 +1596,11 @@ export const tokens = {
       "usage": "Maximum height of dropdown lists before they scroll"
     },
     "table-header": {
-      "value": "40px",
-      "usage": "Table header row height",
-      "figmaUses": 12
+      "value": "37px",
+      "usage": "Table header row height (lists, posts, fields, settings)",
+      "figma": "817:9058, 1034:6229, 2524:8650",
+      "figmaUses": 12,
+      "previous": "40px"
     },
     "table-row": {
       "value": "52px",
@@ -557,6 +1631,586 @@ export const tokens = {
       "value": "196px",
       "usage": "Square module / channel picker card",
       "figmaUses": 6
+    },
+    "sidebar": {
+      "value": "217px",
+      "usage": "Desktop sidebar width",
+      "figma": "808:7574"
+    },
+    "sidebar-item": {
+      "value": "191px",
+      "usage": "Sidebar nav item / settings group width",
+      "figma": "808:7468, 782:4625"
+    },
+    "header": {
+      "value": "63px",
+      "usage": "Desktop app header height",
+      "figma": "950:7528"
+    },
+    "module-header": {
+      "value": "56px",
+      "usage": "Module picker header height",
+      "figma": "908:6066"
+    },
+    "content": {
+      "value": "1143px",
+      "usage": "Main content width inside a 1440 frame (page p-10)",
+      "figma": "817:9041"
+    },
+    "nav-indicator": {
+      "value": "35px",
+      "usage": "Active nav item indicator bar height (2px wide)",
+      "figma": "950:7548"
+    },
+    "nav-indicator-sm": {
+      "value": "21px",
+      "usage": "Active settings sub-item indicator bar height",
+      "figma": "782:4619"
+    },
+    "control-23": {
+      "value": "23px",
+      "usage": "Mobile chips, recipient chips, calendar post chip, badge-type, inline rename input",
+      "figma": "1926:24564, 1542:11040, 1051:8235"
+    },
+    "control-26": {
+      "value": "26px",
+      "usage": "Pagination buttons and page-size select, inline table select, context check chips, New Chat button",
+      "figma": "817:9148, 1224:25594, 1422:30766"
+    },
+    "control-27": {
+      "value": "27px",
+      "usage": "Pill chips, account chips, platform select pill, prev/next pager, rows-per-page select",
+      "figma": "1069:9282, 1515:5786, 1259:6558"
+    },
+    "control-30": {
+      "value": "30px",
+      "usage": "Row icon button, header theme toggle / bell frame, quick-prompt pill, Reset xs button",
+      "figma": "2495:4183, 1446:33288, 1422:30789, 1503:5141"
+    },
+    "control-31": {
+      "value": "31px",
+      "usage": "xs buttons (Upload New Image / Remove)",
+      "figma": "1206:24298"
+    },
+    "control-37": {
+      "value": "37px",
+      "usage": "Toolbar buttons, read-only field, small selects/inputs, disclosure row",
+      "figma": "817:9054, 898:3456, 1526:8752, 1926:25071"
+    },
+    "control-38": {
+      "value": "38px",
+      "usage": "Social link / profile inputs, Use Template button, selection bar",
+      "figma": "1206:24343, 1287:30013, 1926:25429"
+    },
+    "control-39": {
+      "value": "39px",
+      "usage": "Banner / spec-drawer outline buttons",
+      "figma": "2549:65622"
+    },
+    "control-41": {
+      "value": "41px",
+      "usage": "Drawer submit button, 41px selects and inputs, Save as Draft / Send Now",
+      "figma": "808:6090, 1515:5781, 1066:9141"
+    },
+    "control-42": {
+      "value": "42px",
+      "usage": "Copilot composer input, search icon button",
+      "figma": "1422:30789, 1823:7444"
+    },
+    "control-48": {
+      "value": "48px",
+      "usage": "Compose-with-AI button, sidebar settings group header, Copilot FAB",
+      "figma": "1525:8388, 782:4625, 1422:30756"
+    },
+    "fab": {
+      "value": "52px",
+      "usage": "Mobile extended FAB height",
+      "figma": "1926:24625"
+    },
+    "badge-xs": {
+      "value": "17px",
+      "usage": "Inline pill (Existing, Release)",
+      "figma": "2518:62873"
+    },
+    "badge-sm": {
+      "value": "19px",
+      "usage": "Fields badges (Source / Change / State)",
+      "figma": "2495:4166"
+    },
+    "badge": {
+      "value": "21px",
+      "usage": "History Success / Failed badge",
+      "figma": "1514:7169"
+    },
+    "badge-md": {
+      "value": "23px",
+      "usage": "Spam / email status badge, badge-type, profile Active",
+      "figma": "1126:16406, 859:11754"
+    },
+    "badge-lg": {
+      "value": "27px",
+      "usage": "Audience / user-management status badge",
+      "figma": "828:53, 1823:7430"
+    },
+    "chip-sm": {
+      "value": "23px",
+      "usage": "Mobile status / filter chip, recipient chip",
+      "figma": "1926:24564, 1542:11040"
+    },
+    "checkbox-sm": {
+      "value": "14px",
+      "usage": "Table checkbox (r3, 1px)",
+      "figma": "817:8446"
+    },
+    "checkbox-list": {
+      "value": "18px",
+      "usage": "Drawer pick-list checkbox (r4, 1.5px #64748B)",
+      "figma": "1533:9596"
+    },
+    "checkbox-lg": {
+      "value": "20px",
+      "usage": "Fields drawer checkbox (r5), success checkbox",
+      "figma": "2535:65056, 1526:8811"
+    },
+    "radio": {
+      "value": "16px",
+      "usage": "Radio (carbon / Component 19)",
+      "figma": "1555:13398, 1533:9598"
+    },
+    "radio-sheet": {
+      "value": "18px",
+      "usage": "Mobile sheet radio",
+      "figma": "1933:13998"
+    },
+    "check-circle": {
+      "value": "22px",
+      "usage": "Mobile round multi-select check",
+      "figma": "1931:22636"
+    },
+    "switch-width-sm": {
+      "value": "38px",
+      "usage": "Mobile channel toggle track width",
+      "figma": "1926:27211"
+    },
+    "table-header-39": {
+      "value": "39px",
+      "usage": "Email configurations table header",
+      "figma": "1556:13972"
+    },
+    "table-header-43": {
+      "value": "43px",
+      "usage": "User management table header",
+      "figma": "1823:7430"
+    },
+    "table-header-50": {
+      "value": "50px",
+      "usage": "Two-line header (email table, table-content)",
+      "figma": "1107:15275, 2523:63565"
+    },
+    "table-row-45": {
+      "value": "45px",
+      "usage": "History table row",
+      "figma": "1514:7169"
+    },
+    "table-row-46": {
+      "value": "46px",
+      "usage": "Posts table single-line row",
+      "figma": "1028:3989"
+    },
+    "table-row-47": {
+      "value": "47px",
+      "usage": "Email configurations row",
+      "figma": "1556:13972"
+    },
+    "table-row-56": {
+      "value": "56px",
+      "usage": "Audience row (two-line date), posts two-line row",
+      "figma": "817:8457"
+    },
+    "table-row-58": {
+      "value": "58px",
+      "usage": "Social accounts row",
+      "figma": "1224:25569"
+    },
+    "table-row-60": {
+      "value": "60px",
+      "usage": "Custom fields row",
+      "figma": "2495:4207"
+    },
+    "table-row-61": {
+      "value": "61px",
+      "usage": "Email list row",
+      "figma": "1107:15284"
+    },
+    "table-row-68": {
+      "value": "68px",
+      "usage": "User management row",
+      "figma": "1823:7430"
+    },
+    "table-totals": {
+      "value": "48px",
+      "usage": "Campaign totals row",
+      "figma": "898:3516"
+    },
+    "table-footer": {
+      "value": "58px",
+      "usage": "Pagination footer",
+      "figma": "817:9145"
+    },
+    "table-footer-sm": {
+      "value": "51px",
+      "usage": "Settings pagination bar",
+      "figma": "1224:25569"
+    },
+    "table-footer-lg": {
+      "value": "68px",
+      "usage": "User management pagination",
+      "figma": "1823:7430"
+    },
+    "toolbar": {
+      "value": "72px",
+      "usage": "Table card toolbar",
+      "figma": "817:9042"
+    },
+    "toolbar-73": {
+      "value": "73px",
+      "usage": "Social accounts toolbar",
+      "figma": "1224:25569"
+    },
+    "toolbar-82": {
+      "value": "82px",
+      "usage": "User management toolbar",
+      "figma": "1823:7430"
+    },
+    "avatar-36": {
+      "value": "36px",
+      "usage": "Header avatar, user-mgmt avatar, notification avatar, mobile sections row avatar",
+      "figma": "1446:33295, 1823:7430, 1436:6660, 1931:22630"
+    },
+    "avatar-38": {
+      "value": "38px",
+      "usage": "Mobile V2 record avatar, settings category tile",
+      "figma": "1926:24582, 1931:24258"
+    },
+    "avatar-42": {
+      "value": "42px",
+      "usage": "Mobile V1 record avatar",
+      "figma": "1918:20840"
+    },
+    "avatar-44": {
+      "value": "44px",
+      "usage": "Mobile dialog icon tile, mobile hero avatar (small)",
+      "figma": "1926:25687"
+    },
+    "avatar-56": {
+      "value": "56px",
+      "usage": "Profile header / create-user upload avatar",
+      "figma": "1287:29771, 1823:7664"
+    },
+    "avatar-60": {
+      "value": "60px",
+      "usage": "Mobile hero avatar",
+      "figma": "1926:25100"
+    },
+    "avatar-64": {
+      "value": "64px",
+      "usage": "Details drawer avatar, mobile hero (large), copilot empty circle",
+      "figma": "904:3715, 1422:30785"
+    },
+    "avatar-72": {
+      "value": "72px",
+      "usage": "Mobile empty-state illustration, V1 hero",
+      "figma": "1926:24947"
+    },
+    "avatar-80": {
+      "value": "80px",
+      "usage": "Organisation logo upload, contact details card avatar",
+      "figma": "1206:24289, 854:725"
+    },
+    "menu-sm": {
+      "value": "135px",
+      "usage": "Context menu width (hug in Figma)",
+      "figma": "795:6000"
+    },
+    "popover-sm": {
+      "value": "229px",
+      "usage": "Audience filter popover width",
+      "figma": "869:11860"
+    },
+    "profile-menu": {
+      "value": "220px",
+      "usage": "Header profile dropdown width",
+      "figma": "802:577"
+    },
+    "notification-panel": {
+      "value": "420px",
+      "usage": "Header notification dropdown width",
+      "figma": "1436:6651"
+    },
+    "listbox-lg": {
+      "value": "456px",
+      "usage": "Field-type grouped listbox width",
+      "figma": "2518:57958"
+    },
+    "schedule-popover": {
+      "value": "375px",
+      "usage": "Schedule config popover width",
+      "figma": "1265:28266"
+    },
+    "date-picker": {
+      "value": "188px",
+      "usage": "Calendar-time picker width",
+      "figma": "1594:7048"
+    },
+    "modal-xs": {
+      "value": "360px",
+      "usage": "Move-to-audience modal; donut card width",
+      "figma": "1446:32223, 950:8552"
+    },
+    "modal-smart-field": {
+      "value": "454px",
+      "usage": "Insert smart field modal",
+      "figma": "1175:22676"
+    },
+    "modal-template": {
+      "value": "480px",
+      "usage": "Create new template modal",
+      "figma": "1170:22099"
+    },
+    "modal-review": {
+      "value": "680px",
+      "usage": "Review & publish modal",
+      "figma": "2518:62943"
+    },
+    "drawer-content": {
+      "value": "398px",
+      "usage": "Drawer content width (462 − 2×32)",
+      "figma": "808:6024"
+    },
+    "drawer-lg": {
+      "value": "520px",
+      "usage": "Spec drawer width",
+      "figma": "2535:64945"
+    },
+    "chat-panel": {
+      "value": "496px",
+      "usage": "Copilot side panel width",
+      "figma": "1422:30759"
+    },
+    "chat-bubble": {
+      "value": "280px",
+      "usage": "Chat bubble max width",
+      "figma": "1422:30800"
+    },
+    "search-sm": {
+      "value": "220px",
+      "usage": "Toolbar search (lists)",
+      "figma": "817:9046"
+    },
+    "search-md": {
+      "value": "260px",
+      "usage": "Custom fields toolbar search",
+      "figma": "2524:8622"
+    },
+    "search-lg": {
+      "value": "360px",
+      "usage": "Posts toolbar search",
+      "figma": "1034:6238"
+    },
+    "search-xl": {
+      "value": "415px",
+      "usage": "Notifications page search",
+      "figma": "1473:4922"
+    },
+    "card-activity": {
+      "value": "541px",
+      "usage": "Dashboard activity card width",
+      "figma": "950:8584"
+    },
+    "card-growth": {
+      "value": "578px",
+      "usage": "Dashboard growth (line chart) card width",
+      "figma": "950:8617"
+    },
+    "chart-bar-group": {
+      "value": "212px",
+      "usage": "Grouped bar chart height",
+      "figma": "950:8664"
+    },
+    "chart-plot": {
+      "value": "120px",
+      "usage": "Grouped bar plot height",
+      "figma": "950:8670"
+    },
+    "chart-line-plot": {
+      "value": "200px",
+      "usage": "Line chart plot height",
+      "figma": "950:8617"
+    },
+    "chart-bar": {
+      "value": "33px",
+      "usage": "Grouped bar width",
+      "figma": "950:8670"
+    },
+    "donut": {
+      "value": "140px",
+      "usage": "Donut frame",
+      "figma": "950:8554"
+    },
+    "donut-ring": {
+      "value": "130px",
+      "usage": "Donut ellipse (inner radius 0.70)",
+      "figma": "950:8554"
+    },
+    "progress-counter": {
+      "value": "100px",
+      "usage": "Inline character-counter track width",
+      "figma": "1525:8384"
+    },
+    "progress-breakdown": {
+      "value": "190px",
+      "usage": "Email breakdown track width",
+      "figma": "1150:18057"
+    },
+    "module-media-w": {
+      "value": "100px",
+      "usage": "Module card image width",
+      "figma": "908:6085"
+    },
+    "module-media-h": {
+      "value": "84px",
+      "usage": "Module card image height",
+      "figma": "908:6085"
+    },
+    "logo-w": {
+      "value": "140px",
+      "usage": "Header logo placeholder width (height 40)",
+      "figma": "950:7530"
+    },
+    "composer-editor": {
+      "value": "695px",
+      "usage": "Create-post editor column, publishing card, AI panel",
+      "figma": "1526:8856, 1066:9143"
+    },
+    "composer-preview": {
+      "value": "440px",
+      "usage": "Create-post live preview card",
+      "figma": "1515:5852"
+    },
+    "email-builder-side": {
+      "value": "447px",
+      "usage": "Email builder left column",
+      "figma": "1520:7380"
+    },
+    "email-builder-preview": {
+      "value": "666px",
+      "usage": "Email builder preview panel",
+      "figma": "1520:7380"
+    },
+    "email-preview-card": {
+      "value": "602px",
+      "usage": "Email live preview card",
+      "figma": "1535:9971"
+    },
+    "textarea": {
+      "value": "200px",
+      "usage": "Post content textarea",
+      "figma": "1525:8382"
+    },
+    "textarea-sm": {
+      "value": "146px",
+      "usage": "Drawer help-text textarea",
+      "figma": "2535:65079"
+    },
+    "textarea-mobile": {
+      "value": "70px",
+      "usage": "Mobile V2 textarea",
+      "figma": "1926:27160"
+    },
+    "textarea-mobile-v1": {
+      "value": "72px",
+      "usage": "Mobile V1 textarea",
+      "figma": "1918:22987"
+    },
+    "textarea-post": {
+      "value": "104px",
+      "usage": "Mobile sections post-copy textarea",
+      "figma": "1931:22704"
+    },
+    "dropzone": {
+      "value": "81px",
+      "usage": "Social media dropzone height (email dropzone is 80 = h-20)",
+      "figma": "1525:8394"
+    },
+    "block-tile": {
+      "value": "127px",
+      "usage": "Email-builder block tile height",
+      "figma": "1535:9958"
+    },
+    "calendar-row": {
+      "value": "130px",
+      "usage": "Month calendar week row height",
+      "figma": "1051:8224"
+    },
+    "calendar-weekday": {
+      "value": "33px",
+      "usage": "Month calendar weekday header height",
+      "figma": "1051:8208"
+    },
+    "day-pill-h": {
+      "value": "54px",
+      "usage": "Mobile calendar day pill height (width 42)",
+      "figma": "1931:22554"
+    },
+    "mobile-frame": {
+      "value": "390px",
+      "usage": "Mobile frame width",
+      "figma": "1926:24530"
+    },
+    "mobile-bar": {
+      "value": "68px",
+      "usage": "Mobile V2/V1 app bar and bottom nav height",
+      "figma": "1926:24537, 1926:24640"
+    },
+    "mobile-bar-sm": {
+      "value": "58px",
+      "usage": "Mobile V2-sections app bar height",
+      "figma": "1931:24350"
+    },
+    "bottom-nav-sm": {
+      "value": "64px",
+      "usage": "Mobile V2-sections bottom nav height",
+      "figma": "1931:24302"
+    },
+    "mobile-dialog": {
+      "value": "326px",
+      "usage": "Mobile confirm dialog width",
+      "figma": "1926:25687"
+    },
+    "mobile-half": {
+      "value": "170px",
+      "usage": "Two-up sheet / action bar button width",
+      "figma": "1926:24920, 1933:14630"
+    },
+    "mobile-dialog-button": {
+      "value": "138px",
+      "usage": "Mobile confirm dialog button width",
+      "figma": "1926:25687"
+    },
+    "mobile-menu-item": {
+      "value": "346px",
+      "usage": "Desktop mobile-nav menu item width",
+      "figma": "1933:13537"
+    },
+    "sheet-handle": {
+      "value": "42px",
+      "usage": "Bottom-sheet handle width (4px tall)",
+      "figma": "1926:24898"
+    },
+    "sheet-handle-lg": {
+      "value": "98px",
+      "usage": "Standalone sheet handle width",
+      "figma": "1933:13899"
     }
   },
   "motion": {
@@ -578,6 +2232,115 @@ export const tokens = {
       "value": "linear-gradient(90deg, #324BF2 0%, #8E30F2 100%)",
       "usage": "Featured stat card (first KPI in a stats row)",
       "figmaUses": 4
+    },
+    "ai": {
+      "value": "linear-gradient(90deg, #EE1F2F 0%, #F172FF 100%)",
+      "usage": "\"Compose with AI\" gradient button",
+      "figma": "1525:8388",
+      "figmaUses": 4
+    }
+  },
+  "letterSpacing": {
+    "tighter": {
+      "value": "-0.03em",
+      "usage": "Poppins module-picker title",
+      "figma": "908:6079"
+    },
+    "tight": {
+      "value": "-0.02em",
+      "usage": "Sidebar settings items, module card title",
+      "figma": "782:4625, 908:6085"
+    },
+    "snug": {
+      "value": "-0.01em",
+      "usage": "Module picker greeting pill",
+      "figma": "908:6079"
+    },
+    "normal": {
+      "value": "0",
+      "usage": "Default; sub-table headers and fields badges have no tracking",
+      "figma": "817:8772"
+    },
+    "wide-sm": {
+      "value": "0.4px",
+      "usage": "Fields table header (Roboto Bold 11), review-modal section labels",
+      "figma": "2524:8650, 2518:62943"
+    },
+    "wide": {
+      "value": "0.5px",
+      "usage": "Table headers, StatCard label, user-mgmt header, history badges, field-type group labels",
+      "figma": "817:9058, 1051:8506, 1823:7430, 2518:57959"
+    },
+    "wider": {
+      "value": "1px",
+      "usage": "Calendar weekday header",
+      "figma": "1051:8208"
+    }
+  },
+  "lineHeight": {
+    "120": {
+      "value": "1.2",
+      "usage": "Poppins module-picker title (120%)",
+      "figma": "908:6079"
+    },
+    "135": {
+      "value": "1.35",
+      "usage": "Mobile settings category caption (135%)",
+      "figma": "1931:24258"
+    },
+    "140": {
+      "value": "1.4",
+      "usage": "Notification description, module card title, mobile preference caption and sections value (140%)",
+      "figma": "1436:6659, 908:6085, 1931:24420, 1931:24362"
+    },
+    "145": {
+      "value": "1.45",
+      "usage": "Mobile dialog / empty-state body (145%)",
+      "figma": "1926:25687, 1926:24947"
+    },
+    "150": {
+      "value": "1.5",
+      "usage": "Module picker subtitle, mobile success body (150%)",
+      "figma": "908:6079, 1926:25710"
+    },
+    "normal": {
+      "value": "normal",
+      "usage": "Figma \"auto\" line height",
+      "figma": "—"
+    },
+    "none": {
+      "value": "1",
+      "usage": "Single-line glyph boxes (icons, dots)",
+      "figma": "—"
+    },
+    "nav": {
+      "value": "28px",
+      "usage": "Sidebar settings items (line height 28)",
+      "figma": "782:4619"
+    }
+  },
+  "borderWidth": {
+    "0.5": {
+      "value": "0.5px",
+      "usage": "Sidebar footer top separator",
+      "figma": "808:7498"
+    },
+    "1.5": {
+      "value": "1.5px",
+      "usage": "Focused mobile search border, 18px list checkbox, disabled 20px checkbox",
+      "figma": "1926:24937, 1533:9596, 2518:62914"
+    }
+  },
+  "strokeWidth": {
+    "1.5": {
+      "value": "1.5",
+      "usage": "Vuesax linear icons (sidebar, mobile nav, search)",
+      "figma": "808:7465, 1926:24642"
+    },
+    "1.8": {
+      "value": "1.8",
+      "usage": "Mobile V2 stroked icons (bell, back, chevrons, button icons)",
+      "figma": "1926:28098, 1926:28149"
     }
   }
 } as const;
@@ -585,6 +2348,7 @@ export const tokens = {
 export const cssVariables = {
   "color-brand-primary": "#EE1F2F",
   "color-brand-primary-hover": "#D7192D",
+  "color-brand-primary-alt": "#EF2D38",
   "color-brand-primary-subtle": "#FFF0F2",
   "color-accent-navy": "#3D5A98",
   "color-accent-navy-hover": "#2B3674",
@@ -597,15 +2361,44 @@ export const cssVariables = {
   "color-text-inverse": "#FFFFFF",
   "color-text-link": "#3366E5",
   "color-text-icon": "#8F9BB3",
+  "color-text-navy-strong": "#1B2559",
+  "color-text-tertiary": "#667085",
+  "color-text-nav": "#4F5966",
+  "color-text-greeting": "#B8B8C0",
+  "color-text-ink": "#0F172A",
+  "color-text-charcoal": "#1E293B",
+  "color-text-icon-strong": "#4B5563",
+  "color-text-faint": "#94A3B8",
+  "color-text-hint": "#9CA3AF",
+  "color-text-button-outline": "#3B414D",
+  "color-text-link-bright": "#0070FF",
+  "color-text-avatar-gold": "#CA8A04",
+  "color-text-navy-deep": "#1E3A8A",
+  "color-text-slate": "#475569",
+  "color-text-qualifier": "#C1C1C1",
+  "color-text-black": "#000000",
+  "color-text-link-blue": "#3B82F6",
   "color-surface-default": "#FFFFFF",
   "color-surface-canvas": "#F4F6FA",
   "color-surface-subtle": "#F8FAFC",
   "color-surface-sunken": "#F1F5F9",
   "color-surface-overlay": "rgba(15, 23, 42, 0.45)",
+  "color-surface-table-header": "#F8F9FC",
+  "color-surface-avatar": "#F6F8FB",
+  "color-surface-avatar-tint": "rgba(226, 232, 240, 0.30)",
+  "color-surface-toggle": "#E5E7EB",
+  "color-surface-group": "#FAFBFC",
+  "color-surface-scrollbar": "#99A6B8",
   "color-border-default": "#E2E8F0",
   "color-border-strong": "#CBD5E1",
   "color-border-subtle": "#EEF2F7",
   "color-border-danger-subtle": "#FECACA",
+  "color-border-muted": "#A3AED0",
+  "color-border-modal": "#E5E7EB",
+  "color-border-neutral": "#D1D5DB",
+  "color-border-module": "#EDF2F7",
+  "color-border-ai-panel": "#D1D6E0",
+  "color-border-module-header": "rgba(193, 193, 193, 0.11)",
   "color-status-success": "#05D38A",
   "color-status-success-text": "#16966A",
   "color-status-success-subtle": "#EAF9F3",
@@ -616,45 +2409,169 @@ export const cssVariables = {
   "color-status-danger-subtle": "#FFF1F2",
   "color-status-info": "#409CFF",
   "color-status-info-subtle": "#EDF3FF",
-  "color-status-toggle-off": "#CBD5E1",
+  "color-status-toggle-off": "#9CA3AF",
+  "color-status-warning-bright": "#E9BB2B",
+  "color-status-success-strong": "#059669",
+  "color-status-danger-strong": "#DC2626",
+  "color-status-success-dark": "#05A86E",
+  "color-status-connected": "#10B981",
+  "color-status-danger-alt": "#E53E3E",
+  "color-badge-brand-tint": "rgba(238, 31, 47, 0.07)",
+  "color-badge-active-bg": "#E8FAF0",
+  "color-badge-active-dot": "#21B873",
+  "color-badge-inactive-bg": "#FCEBEB",
+  "color-badge-inactive-dot": "#E84D4D",
+  "color-badge-nonuser-bg": "#F0F0F2",
+  "color-badge-nonuser-dot": "#8C8C99",
+  "color-badge-spam-bg": "rgba(255, 221, 85, 0.10)",
+  "color-badge-existing-bg": "rgba(163, 174, 208, 0.15)",
+  "color-badge-custom-bg": "rgba(56, 87, 214, 0.10)",
+  "color-badge-custom": "#3857D6",
+  "color-badge-change-bg": "rgba(247, 144, 9, 0.12)",
+  "color-badge-archived-bg": "rgba(163, 174, 208, 0.12)",
+  "color-badge-success-tint": "rgba(5, 211, 138, 0.10)",
+  "color-badge-neutral-tint": "rgba(163, 174, 208, 0.10)",
+  "color-badge-danger-tint": "rgba(238, 31, 47, 0.10)",
+  "color-badge-failed-tint": "rgba(229, 62, 62, 0.10)",
+  "color-badge-release-tint": "rgba(61, 90, 152, 0.10)",
+  "color-badge-info-tint": "rgba(64, 156, 255, 0.10)",
+  "color-badge-excluded-bg": "#FEE2E2",
+  "color-badge-added-tint": "rgba(5, 168, 110, 0.10)",
+  "color-badge-hidden-tint": "rgba(181, 71, 8, 0.10)",
+  "color-alert-warning-bg": "#FFFAEB",
+  "color-alert-warning-border": "#FEC84B",
+  "color-alert-warning-title": "#7A2E0E",
+  "color-alert-warning-body": "#93370D",
+  "color-alert-warning-icon": "#DC6803",
+  "color-checkbox-disabled-checked": "#F4A3AA",
+  "color-chip-date-bg": "#F3F4F6",
+  "color-chip-date-text": "#374151",
+  "color-chip-date-icon": "#6B7280",
+  "color-chart-series-1": "#2B3674",
+  "color-chart-series-2": "#EE1F2F",
+  "color-chart-series-3": "#4318FF",
+  "color-chart-series-4": "#FFB547",
+  "color-chart-legend": "#707EAE",
+  "color-chart-purple": "#8262FF",
+  "color-chart-orange": "#FF7A00",
+  "color-platform-instagram": "#E1306C",
+  "color-platform-youtube": "#FF0000",
+  "color-platform-linkedin": "#0A66C2",
+  "color-platform-linkedin-logo": "#0076B2",
+  "color-calendar-outside": "#FAF9FC",
+  "color-calendar-today": "#E8F2FF",
+  "color-calendar-chip-linkedin": "#E6F0FA",
+  "color-action-clone": "#9747FF",
+  "color-copilot-accent": "#5B5FC7",
+  "color-copilot-accent-subtle": "rgba(91, 95, 199, 0.06)",
+  "color-copilot-bubble-user": "rgba(91, 95, 199, 0.07)",
+  "color-copilot-surface": "#F5F5F5",
+  "color-copilot-link": "#3182CE",
+  "color-copilot-confirm": "#22C55E",
+  "color-mobile-brand": "#F32135",
+  "color-mobile-brand-subtle": "#FFF0F1",
+  "color-mobile-text": "#151A33",
+  "color-mobile-text-secondary": "#66728F",
+  "color-mobile-caption": "#8F9BBA",
+  "color-mobile-border": "#DDE3ED",
+  "color-mobile-canvas": "#F5F7FB",
+  "color-mobile-chip": "#F8FAFD",
+  "color-mobile-selected-border": "#FFC8CF",
+  "color-mobile-navy": "#4268B5",
+  "color-mobile-icon": "#292D32",
+  "color-mobile-scrim": "rgba(17, 24, 42, 0.60)",
+  "color-mobile-scrim-v1": "rgba(15, 23, 42, 0.60)",
+  "color-mobile-warning-text": "#B6780E",
+  "color-mobile-warning-text-alt": "#D99114",
+  "color-mobile-info-text": "#3976D4",
+  "color-mobile-info-bg": "#EDF4FF",
+  "color-mobile-success-text": "#179C6B",
+  "color-mobile-success-bg": "#EAF8F2",
+  "color-mobile-success-text-v1": "#179C6E",
+  "color-mobile-warning-bg-v1": "#FFF8E8",
   "font-sans": "'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif",
   "font-data": "'Roboto', ui-sans-serif, system-ui, sans-serif",
   "font-mono": "'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace",
+  "font-display": "'Poppins', 'Roboto', ui-sans-serif, system-ui, sans-serif",
+  "font-geist": "'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif",
+  "font-instrument": "'Instrument Sans', 'Inter', ui-sans-serif, system-ui, sans-serif",
+  "font-roboto-mono": "'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace",
   "font-weight-regular": "400",
   "font-weight-medium": "500",
   "font-weight-semibold": "600",
   "font-weight-bold": "700",
+  "font-weight-extrabold": "800",
   "text-display-size": "28px",
-  "text-display-line-height": "36px",
+  "text-display-line-height": "normal",
   "text-display-weight": "700",
   "text-heading-1-size": "20px",
-  "text-heading-1-line-height": "28px",
+  "text-heading-1-line-height": "normal",
   "text-heading-1-weight": "700",
   "text-heading-2-size": "18px",
-  "text-heading-2-line-height": "26px",
+  "text-heading-2-line-height": "normal",
   "text-heading-2-weight": "700",
   "text-heading-3-size": "16px",
-  "text-heading-3-line-height": "24px",
+  "text-heading-3-line-height": "normal",
   "text-heading-3-weight": "700",
   "text-body-size": "14px",
-  "text-body-line-height": "20px",
+  "text-body-line-height": "normal",
   "text-body-weight": "400",
   "text-body-sm-size": "13px",
-  "text-body-sm-line-height": "18px",
+  "text-body-sm-line-height": "normal",
   "text-body-sm-weight": "400",
   "text-label-size": "14px",
-  "text-label-line-height": "20px",
+  "text-label-line-height": "normal",
   "text-label-weight": "600",
   "text-label-sm-size": "13px",
-  "text-label-sm-line-height": "18px",
+  "text-label-sm-line-height": "normal",
   "text-label-sm-weight": "600",
   "text-caption-size": "12px",
-  "text-caption-line-height": "16px",
+  "text-caption-line-height": "normal",
   "text-caption-weight": "400",
   "text-overline-size": "11px",
-  "text-overline-line-height": "14px",
+  "text-overline-line-height": "normal",
   "text-overline-weight": "700",
-  "text-overline-letter-spacing": "0.04em",
+  "text-overline-letter-spacing": "0.5px",
+  "text-heading-xl-size": "24px",
+  "text-heading-xl-line-height": "normal",
+  "text-heading-xl-weight": "700",
+  "text-kpi-value-size": "22px",
+  "text-kpi-value-line-height": "normal",
+  "text-kpi-value-weight": "700",
+  "text-mobile-title-lg-size": "21px",
+  "text-mobile-title-lg-line-height": "normal",
+  "text-mobile-title-lg-weight": "700",
+  "text-mobile-title-sm-size": "17px",
+  "text-mobile-title-sm-line-height": "normal",
+  "text-mobile-title-sm-weight": "700",
+  "text-card-title-size": "15px",
+  "text-card-title-line-height": "normal",
+  "text-card-title-weight": "700",
+  "text-stat-label-size": "13px",
+  "text-stat-label-line-height": "normal",
+  "text-stat-label-weight": "500",
+  "text-field-label-size": "13px",
+  "text-field-label-line-height": "normal",
+  "text-field-label-weight": "400",
+  "text-badge-lg-size": "12px",
+  "text-badge-lg-line-height": "normal",
+  "text-badge-lg-weight": "700",
+  "text-badge-size": "11px",
+  "text-badge-line-height": "normal",
+  "text-badge-weight": "700",
+  "text-caption-sm-size": "11px",
+  "text-caption-sm-line-height": "normal",
+  "text-caption-sm-weight": "400",
+  "text-caption-xs-size": "10px",
+  "text-caption-xs-line-height": "normal",
+  "text-caption-xs-weight": "400",
+  "text-micro-size": "9px",
+  "text-micro-line-height": "normal",
+  "text-micro-weight": "400",
+  "text-nav-size": "14px",
+  "text-nav-line-height": "28px",
+  "text-nav-weight": "500",
+  "text-nav-letter-spacing": "-0.02em",
   "space-0": "0px",
   "space-1": "4px",
   "space-2": "8px",
@@ -662,27 +2579,75 @@ export const cssVariables = {
   "space-4": "16px",
   "space-5": "20px",
   "space-6": "24px",
+  "space-7": "28px",
   "space-8": "32px",
+  "space-9": "36px",
   "space-10": "40px",
   "space-12": "48px",
+  "space-14": "56px",
+  "space-16": "64px",
+  "space-18": "72px",
+  "space-20": "80px",
+  "space-50": "200px",
   "space-0_5": "2px",
+  "space-0_75": "3px",
+  "space-1_25": "5px",
   "space-1_5": "6px",
+  "space-1_75": "7px",
+  "space-2_25": "9px",
   "space-2_5": "10px",
+  "space-2_75": "11px",
+  "space-3_25": "13px",
   "space-3_5": "14px",
+  "space-3_75": "15px",
+  "space-4_25": "17px",
+  "space-4_5": "18px",
+  "space-4_75": "19px",
+  "space-5_25": "21px",
+  "space-5_5": "22px",
+  "space-5_75": "23px",
+  "space-6_5": "26px",
+  "space-6_75": "27px",
+  "space-7_5": "30px",
+  "space-7_75": "31px",
+  "space-8_75": "35px",
+  "space-9_25": "37px",
+  "space-12_5": "50px",
+  "space-13_5": "54px",
   "radius-xs": "4px",
   "radius-sm": "6px",
   "radius-md": "8px",
   "radius-lg": "12px",
   "radius-xl": "16px",
   "radius-full": "999px",
+  "radius-bar": "2px",
+  "radius-checkbox": "3px",
+  "radius-nav": "5px",
+  "radius-logo": "9px",
+  "radius-callout": "10px",
+  "radius-tile": "14px",
+  "radius-pill": "20px",
+  "radius-sheet": "22px",
   "shadow-sm": "0 4px 12px 0 rgba(15, 23, 42, 0.04)",
   "shadow-md": "0 4px 16px 0 rgba(15, 23, 42, 0.06)",
   "shadow-lg": "0 12px 28px 0 rgba(15, 23, 42, 0.12)",
   "shadow-focus": "0 0 0 3px rgba(61, 90, 152, 0.20)",
   "shadow-focus-danger": "0 0 0 3px rgba(225, 29, 72, 0.16)",
   "shadow-menu": "0 8px 16px 0 rgba(163, 174, 208, 0.25)",
-  "shadow-modal": "0 2px 10px 0 rgba(0, 0, 0, 0.06), 0 16px 40px 0 rgba(0, 0, 0, 0.08)",
+  "shadow-modal": "0 2px 10px 0 rgba(0, 0, 0, 0.06), 0 16px 40px -12px rgba(0, 0, 0, 0.08)",
+  "shadow-drawer": "0 8px 16px 0 rgba(163, 174, 208, 0.25)",
+  "shadow-dropdown": "0 8px 24px 0 rgba(0, 0, 0, 0.08)",
+  "shadow-panel": "0 16px 32px -4px rgba(15, 23, 42, 0.10)",
+  "shadow-card": "0 4px 12px 0 rgba(0, 0, 0, 0.03)",
+  "shadow-dialog": "0 16px 32px 0 rgba(15, 23, 42, 0.12)",
+  "shadow-listbox": "0 8px 24px 0 rgba(15, 23, 41, 0.12)",
+  "shadow-tile": "0 1px 9.7px 0 rgba(0, 0, 0, 0.20)",
+  "shadow-copilot": "0 8px 24px 0 rgba(0, 0, 0, 0.10)",
+  "shadow-copilot-fab": "0 6px 16px 0 rgba(91, 95, 199, 0.14)",
+  "shadow-mobile": "0 10px 28px 0 rgba(20, 33, 61, 0.16)",
+  "shadow-mobile-v1": "0 -8px 28px 0 rgba(15, 23, 42, 0.14)",
   "gradient-feature": "linear-gradient(90deg, #324BF2 0%, #8E30F2 100%)",
+  "gradient-ai": "linear-gradient(90deg, #EE1F2F 0%, #F172FF 100%)",
   "size-control-sm": "36px",
   "size-control-md": "40px",
   "size-control-lg": "44px",
@@ -703,16 +2668,151 @@ export const cssVariables = {
   "size-modal-md": "560px",
   "size-modal-lg": "720px",
   "size-menu-max-height": "320px",
-  "size-table-header": "40px",
+  "size-table-header": "37px",
   "size-table-row": "52px",
   "size-chip": "28px",
   "size-icon-md": "18px",
   "size-icon-tile": "28px",
   "size-table-row-sm": "44px",
   "size-module-card": "196px",
+  "size-sidebar": "217px",
+  "size-sidebar-item": "191px",
+  "size-header": "63px",
+  "size-module-header": "56px",
+  "size-content": "1143px",
+  "size-nav-indicator": "35px",
+  "size-nav-indicator-sm": "21px",
+  "size-control-23": "23px",
+  "size-control-26": "26px",
+  "size-control-27": "27px",
+  "size-control-30": "30px",
+  "size-control-31": "31px",
+  "size-control-37": "37px",
+  "size-control-38": "38px",
+  "size-control-39": "39px",
+  "size-control-41": "41px",
+  "size-control-42": "42px",
+  "size-control-48": "48px",
+  "size-fab": "52px",
+  "size-badge-xs": "17px",
+  "size-badge-sm": "19px",
+  "size-badge": "21px",
+  "size-badge-md": "23px",
+  "size-badge-lg": "27px",
+  "size-chip-sm": "23px",
+  "size-checkbox-sm": "14px",
+  "size-checkbox-list": "18px",
+  "size-checkbox-lg": "20px",
+  "size-radio": "16px",
+  "size-radio-sheet": "18px",
+  "size-check-circle": "22px",
+  "size-switch-width-sm": "38px",
+  "size-table-header-39": "39px",
+  "size-table-header-43": "43px",
+  "size-table-header-50": "50px",
+  "size-table-row-45": "45px",
+  "size-table-row-46": "46px",
+  "size-table-row-47": "47px",
+  "size-table-row-56": "56px",
+  "size-table-row-58": "58px",
+  "size-table-row-60": "60px",
+  "size-table-row-61": "61px",
+  "size-table-row-68": "68px",
+  "size-table-totals": "48px",
+  "size-table-footer": "58px",
+  "size-table-footer-sm": "51px",
+  "size-table-footer-lg": "68px",
+  "size-toolbar": "72px",
+  "size-toolbar-73": "73px",
+  "size-toolbar-82": "82px",
+  "size-avatar-36": "36px",
+  "size-avatar-38": "38px",
+  "size-avatar-42": "42px",
+  "size-avatar-44": "44px",
+  "size-avatar-56": "56px",
+  "size-avatar-60": "60px",
+  "size-avatar-64": "64px",
+  "size-avatar-72": "72px",
+  "size-avatar-80": "80px",
+  "size-menu-sm": "135px",
+  "size-popover-sm": "229px",
+  "size-profile-menu": "220px",
+  "size-notification-panel": "420px",
+  "size-listbox-lg": "456px",
+  "size-schedule-popover": "375px",
+  "size-date-picker": "188px",
+  "size-modal-xs": "360px",
+  "size-modal-smart-field": "454px",
+  "size-modal-template": "480px",
+  "size-modal-review": "680px",
+  "size-drawer-content": "398px",
+  "size-drawer-lg": "520px",
+  "size-chat-panel": "496px",
+  "size-chat-bubble": "280px",
+  "size-search-sm": "220px",
+  "size-search-md": "260px",
+  "size-search-lg": "360px",
+  "size-search-xl": "415px",
+  "size-card-activity": "541px",
+  "size-card-growth": "578px",
+  "size-chart-bar-group": "212px",
+  "size-chart-plot": "120px",
+  "size-chart-line-plot": "200px",
+  "size-chart-bar": "33px",
+  "size-donut": "140px",
+  "size-donut-ring": "130px",
+  "size-progress-counter": "100px",
+  "size-progress-breakdown": "190px",
+  "size-module-media-w": "100px",
+  "size-module-media-h": "84px",
+  "size-logo-w": "140px",
+  "size-composer-editor": "695px",
+  "size-composer-preview": "440px",
+  "size-email-builder-side": "447px",
+  "size-email-builder-preview": "666px",
+  "size-email-preview-card": "602px",
+  "size-textarea": "200px",
+  "size-textarea-sm": "146px",
+  "size-textarea-mobile": "70px",
+  "size-textarea-mobile-v1": "72px",
+  "size-textarea-post": "104px",
+  "size-dropzone": "81px",
+  "size-block-tile": "127px",
+  "size-calendar-row": "130px",
+  "size-calendar-weekday": "33px",
+  "size-day-pill-h": "54px",
+  "size-mobile-frame": "390px",
+  "size-mobile-bar": "68px",
+  "size-mobile-bar-sm": "58px",
+  "size-bottom-nav-sm": "64px",
+  "size-mobile-dialog": "326px",
+  "size-mobile-half": "170px",
+  "size-mobile-dialog-button": "138px",
+  "size-mobile-menu-item": "346px",
+  "size-sheet-handle": "42px",
+  "size-sheet-handle-lg": "98px",
   "motion-duration-fast": "120ms",
   "motion-duration-base": "200ms",
-  "motion-easing": "cubic-bezier(0.2, 0, 0, 1)"
+  "motion-easing": "cubic-bezier(0.2, 0, 0, 1)",
+  "tracking-tighter": "-0.03em",
+  "tracking-tight": "-0.02em",
+  "tracking-snug": "-0.01em",
+  "tracking-normal": "0",
+  "tracking-wide-sm": "0.4px",
+  "tracking-wide": "0.5px",
+  "tracking-wider": "1px",
+  "leading-120": "1.2",
+  "leading-135": "1.35",
+  "leading-140": "1.4",
+  "leading-145": "1.45",
+  "leading-150": "1.5",
+  "leading-normal": "normal",
+  "leading-none": "1",
+  "leading-nav": "28px",
+  "border-width-0_5": "0.5px",
+  "border-width-1_5": "1.5px",
+  "stroke-width-1_5": "1.5",
+  "stroke-width-1_8": "1.8"
 } as const;
 
 export type CssVariable = keyof typeof cssVariables;

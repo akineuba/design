@@ -7,7 +7,7 @@ const tokens = JSON.parse(readFileSync(new URL('./tokens/tokens.json', import.me
 
 const v = (name) => `var(--${name})`;
 const group = (prefix, entries, keyFn = (k) => k) =>
-  Object.fromEntries(Object.keys(entries).map((k) => [keyFn(k), v(`${prefix}-${k.replace('.', '_')}`)]));
+  Object.fromEntries(Object.keys(entries).map((k) => [keyFn(k), v(`${prefix}-${k.replace(/\./g, '_')}`)]));
 
 const colors = Object.fromEntries(
   Object.entries(tokens.color).map(([g, entries]) => [
@@ -53,7 +53,13 @@ export default {
     fontFamily: group('font', tokens.font.family),
     fontWeight: group('font-weight', tokens.font.weight),
     fontSize,
+    // Letter spacing and line height are replaced too: only the Figma values exist (tracking-wide, leading-140, …).
+    letterSpacing: group('tracking', tokens.letterSpacing),
+    lineHeight: group('leading', tokens.lineHeight),
     extend: {
+      // Extend (not replace) so Tailwind's 0/1/2/4/8 widths stay available alongside the Figma 0.5 and 1.5.
+      borderWidth: group('border-width', tokens.borderWidth),
+      strokeWidth: group('stroke-width', tokens.strokeWidth),
       height: group('size', tokens.size),
       width: group('size', tokens.size),
       minWidth: group('size', tokens.size),
