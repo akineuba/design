@@ -448,7 +448,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
 /* ───────── Pricing ───────── */
 .pricing{padding-block:clamp(72px,9vw,120px);background:var(--canvas)}
-.billing{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:8px}
+.billing{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;margin-top:8px}
+.price .per-fixed{font-size:15px;color:var(--muted)}
+.plan.trial ul{flex:none}.plan.trial .note{margin-bottom:auto}.price strong + .per-fixed{margin-left:-4px}
 .toggle{display:inline-flex;padding:5px;border:1px solid var(--border);border-radius:999px;background:var(--surface);box-shadow:0 1px 2px rgba(15,23,42,.04)}
 .toggle button{height:40px;padding-inline:22px;border-radius:999px;font-size:15px;font-weight:500;color:var(--text-2);transition:background .2s,color .2s}
 .toggle button[aria-pressed="true"]{background:var(--brand);color:#fff;font-weight:600}
