@@ -167,11 +167,14 @@ Interactive behaviour (focus trapping, keyboard navigation, ARIA) comes from **R
 | `Card`, `CardHeader`, `StatCard`, `SummaryCard`, `MetricCard`, `ProgressBar`, `ModuleCard`, `ActivityFeed` | `stats-row` / `stat-card-*` (Social posts, Email), audience summaries, email performance, module picker, activity panel | stat: featured gradient, icon tile, trend up/down (`invert` when a drop is good); summary tones; metric details; progress tones; module selected/disabled |
 | `RowActionsMenu`, `RowActionLink`, `RowActionButtons`, `TableLink` | `more-horizontal` + `context-menu`, Campaigns "View" link and code link | View/Edit/Delete from handlers or custom actions with separators; inline link (a or button); inline icon buttons with optional hover reveal |
 
-Icons live in `src/icons` (outline set matching Figma's vuesax/lucide icons): `PlusIcon`, `SearchIcon`, `FilterIcon`,
-`CloseIcon`, `ChevronDownIcon`, `MoreIcon`, `EyeIcon`, `PencilIcon`, `TrashIcon`, `UploadIcon`, `DownloadIcon`,
-`HistoryIcon`, `UsersIcon`, `MailIcon`, `ListIcon`, `CalendarIcon`, `GridIcon`, `TrendUpIcon`, `TrendDownIcon`, `SendIcon`,
-`CheckIcon`, `CopyIcon`, plus `Spinner` and `AlertCircle`. `FilterIcon`, `CalendarOutlineIcon`, `ListIcon` and `CalendarIcon` are the exact Figma vector exports.
-The labelled `FilterButton` uses `CalendarOutlineIcon` (as drawn in Figma); the icon-only one uses `FilterIcon`.
+Icons live in `src/icons`. **Every icon is an exact SVG export from Figma** (`src/icons/figma.tsx`, 105 icons): the vuesax set
+in each weight Figma uses (`SearchNormalIcon`, `FilterBoldIcon`, `Profile2UserOutlineIcon` / `Profile2UserIcon`,
+`ToggleOnBoldIcon`, `StatusUpBoldIcon`…), the iconify/lucide/material glyphs drawn on the page, and six brand logos
+(LinkedIn, Instagram, X, YouTube, Facebook, Copilot). Each export has a JSDoc line with its Figma node id and role.
+Icons use `currentColor`; only the brand logos keep their brand fills. The older role names in `icons.tsx`
+(`SearchIcon`, `CloseIcon`, `TrashIcon`, `UsersIcon`, `SendIcon`…) re-export the Figma glyph used in that role.
+To add an icon: export the node with `exportAsync({ format: 'SVG_STRING' })` (read-only), keep the path data verbatim,
+and replace the icon colour with `currentColor`.
 
 Figma does not draw focus, hover, disabled or loading states for most of these; those were derived and are listed in
 `docs/figma-mapping.md`. Patterns in Figma that are still not components: date/time pickers, the frequency
