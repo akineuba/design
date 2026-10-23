@@ -288,6 +288,14 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
 /* ───────── Noise: the statement among the paperwork it replaces ───────── */
 .noise{position:relative;padding-block:110px;overflow:clip}
+.wave{position:absolute;width:clamp(150px,20.6vw,297px);aspect-ratio:297/287;pointer-events:none}
+.wave svg{display:block;width:100%;height:100%}
+.wave.tl{left:0;top:0}
+.wave.tr{right:0;top:0;scale:-1 1}
+.wave.bl{left:0;bottom:0;scale:1 -1}
+.wave.br{right:0;bottom:0;rotate:180deg}
+.pricing{position:relative;overflow:clip}
+.pricing > .wrap{position:relative;z-index:1}
 .noise .wave{position:absolute;width:clamp(150px,20.6vw,297px);aspect-ratio:297/287;pointer-events:none}
 .noise .wave svg{display:block;width:100%;height:100%}
 .noise .wave.w1{left:0;top:0}
@@ -335,6 +343,8 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 /* ───────── Reporting (panel left, copy right) ───────── */
 .report{padding-block:clamp(72px,9vw,120px);overflow:clip}
 .report .wrap{display:grid;grid-template-columns:minmax(0,661fr) minmax(0,544fr);gap:35px;align-items:center}
+.sec-cta{grid-column:1/-1;display:flex;justify-content:center;margin-top:clamp(40px,5vw,64px)}
+.report .sec-cta,.night .sec-cta{margin-top:clamp(8px,2vw,28px)}
 .report-art{position:relative;min-width:0;container-type:inline-size}
 .panel-grey{position:relative;background:var(--panel);border-radius:var(--r-panel);aspect-ratio:661/620;overflow:hidden}
 /* Laptop mockup: the HTML screen sits inside the black display */
@@ -448,6 +458,10 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
 /* ───────── Pricing ───────── */
 .pricing{padding-block:clamp(72px,9vw,120px);background:var(--canvas)}
+.bill-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px 16px}
+.jump{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:15px;font-weight:600;color:var(--brand-ink);box-shadow:0 1px 2px rgba(15,23,42,.04);transition:border-color .2s,background .2s}
+.jump:hover{border-color:#9FC3FF;background:var(--brand-subtle)}
+.jump .i{width:17px;height:17px}
 .billing{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;margin-top:8px}
 .price .per-fixed{font-size:15px;color:var(--muted)}
 .plan.trial ul{flex:none}.plan.trial .note{margin-bottom:auto}.price strong + .per-fixed{margin-left:-4px}
@@ -590,4 +604,23 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .rv[data-rv="fade"]{translate:none}
 .rv.in{opacity:1;translate:none;scale:none}
 @media (max-width:900px){.rv[data-rv="left"],.rv[data-rv="right"]{translate:0 28px}}
+/* Page slider: an always-there vertical scroll control with section stops */
+.vs{position:fixed;right:18px;top:50%;translate:0 -50%;z-index:60;height:min(52vh,400px);width:30px;padding:14px 0;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid rgba(15,23,42,.08);box-shadow:0 10px 30px -12px rgba(15,23,42,.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);touch-action:none;user-select:none;-webkit-user-select:none;transition:opacity .3s}
+.vs[hidden]{display:none}
+.vs .vs-t{position:absolute;left:50%;top:14px;bottom:14px;width:3px;translate:-50% 0;border-radius:3px;background:var(--brand-subtle);cursor:pointer}
+.vs .vs-t::before{content:"";position:absolute;inset:-6px -10px}
+.vs .vs-f{position:absolute;left:0;top:0;width:100%;height:calc(var(--p,0) * 100%);border-radius:3px;background:var(--brand)}
+.vs .vs-k{position:absolute;z-index:2;left:50%;top:calc(var(--p,0) * 100%);width:16px;height:16px;translate:-50% -50%;border-radius:50%;background:#fff;border:3px solid var(--brand);box-shadow:0 2px 8px rgba(0,79,199,.35);cursor:grab;outline:none}
+.vs.drag .vs-k{cursor:grabbing;scale:1.15}
+.vs:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
+.vs .vs-d{position:absolute;z-index:1;left:50%;width:7px;height:7px;translate:-50% -50%;border-radius:50%;background:#fff;border:1.5px solid #9FC3FF;padding:0;cursor:pointer}
+.vs .vs-d::before{content:"";position:absolute;inset:-7px}
+.vs .vs-d.on{background:var(--brand);border-color:var(--brand)}
+.vs .vs-l{position:absolute;right:calc(100% + 12px);top:calc(var(--p,0) * 100%);translate:0 -50%;white-space:nowrap;font-size:12.5px;font-weight:600;color:#fff;background:var(--text);padding:6px 10px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
+.vs:hover .vs-l,.vs.drag .vs-l,.vs:focus-visible .vs-l{opacity:1}
+.vs .vs-d .vs-tip{position:absolute;right:calc(100% + 14px);top:50%;translate:0 -50%;white-space:nowrap;font-size:12px;font-weight:500;color:var(--text);background:#fff;border:1px solid var(--border);padding:4px 8px;border-radius:7px;opacity:0;pointer-events:none;transition:opacity .15s}
+.vs .vs-d:hover .vs-tip{opacity:1}
+.vs:hover .vs-d:hover ~ .vs-l{opacity:0}
+@media (max-width:640px){.vs{right:2px;width:14px;height:min(40vh,300px);padding:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}.vs .vs-t{top:0;bottom:0;background:rgba(0,112,255,.18)}.vs .vs-k{width:12px;height:12px;border-width:2.5px}.vs .vs-d{width:5px;height:5px;border-width:1px}.vs .vs-l,.vs .vs-d .vs-tip{display:none}}
+@media print{.vs{display:none}}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*:not(.rv),*::before,*::after{animation:none!important;transition:none!important}.rv{translate:none!important;scale:none!important}}

@@ -299,6 +299,14 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
 /* ───────── Noise: the statement among the paperwork it replaces ───────── */
 .noise{position:relative;padding-block:110px;overflow:clip}
+.wave{position:absolute;width:clamp(150px,20.6vw,297px);aspect-ratio:297/287;pointer-events:none}
+.wave svg{display:block;width:100%;height:100%}
+.wave.tl{left:0;top:0}
+.wave.tr{right:0;top:0;scale:-1 1}
+.wave.bl{left:0;bottom:0;scale:1 -1}
+.wave.br{right:0;bottom:0;rotate:180deg}
+.pricing{position:relative;overflow:clip}
+.pricing > .wrap{position:relative;z-index:1}
 .noise .wave{position:absolute;width:clamp(150px,20.6vw,297px);aspect-ratio:297/287;pointer-events:none}
 .noise .wave svg{display:block;width:100%;height:100%}
 .noise .wave.w1{left:0;top:0}
@@ -346,6 +354,8 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 /* ───────── Reporting (panel left, copy right) ───────── */
 .report{padding-block:clamp(72px,9vw,120px);overflow:clip}
 .report .wrap{display:grid;grid-template-columns:minmax(0,661fr) minmax(0,544fr);gap:35px;align-items:center}
+.sec-cta{grid-column:1/-1;display:flex;justify-content:center;margin-top:clamp(40px,5vw,64px)}
+.report .sec-cta,.night .sec-cta{margin-top:clamp(8px,2vw,28px)}
 .report-art{position:relative;min-width:0;container-type:inline-size}
 .panel-grey{position:relative;background:var(--panel);border-radius:var(--r-panel);aspect-ratio:661/620;overflow:hidden}
 /* Laptop mockup: the HTML screen sits inside the black display */
@@ -459,6 +469,10 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
 /* ───────── Pricing ───────── */
 .pricing{padding-block:clamp(72px,9vw,120px);background:var(--canvas)}
+.bill-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px 16px}
+.jump{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:15px;font-weight:600;color:var(--brand-ink);box-shadow:0 1px 2px rgba(15,23,42,.04);transition:border-color .2s,background .2s}
+.jump:hover{border-color:#9FC3FF;background:var(--brand-subtle)}
+.jump .i{width:17px;height:17px}
 .billing{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;margin-top:8px}
 .price .per-fixed{font-size:15px;color:var(--muted)}
 .plan.trial ul{flex:none}.plan.trial .note{margin-bottom:auto}.price strong + .per-fixed{margin-left:-4px}
@@ -601,6 +615,25 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .rv[data-rv="fade"]{translate:none}
 .rv.in{opacity:1;translate:none;scale:none}
 @media (max-width:900px){.rv[data-rv="left"],.rv[data-rv="right"]{translate:0 28px}}
+/* Page slider: an always-there vertical scroll control with section stops */
+.vs{position:fixed;right:18px;top:50%;translate:0 -50%;z-index:60;height:min(52vh,400px);width:30px;padding:14px 0;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid rgba(15,23,42,.08);box-shadow:0 10px 30px -12px rgba(15,23,42,.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);touch-action:none;user-select:none;-webkit-user-select:none;transition:opacity .3s}
+.vs[hidden]{display:none}
+.vs .vs-t{position:absolute;left:50%;top:14px;bottom:14px;width:3px;translate:-50% 0;border-radius:3px;background:var(--brand-subtle);cursor:pointer}
+.vs .vs-t::before{content:"";position:absolute;inset:-6px -10px}
+.vs .vs-f{position:absolute;left:0;top:0;width:100%;height:calc(var(--p,0) * 100%);border-radius:3px;background:var(--brand)}
+.vs .vs-k{position:absolute;z-index:2;left:50%;top:calc(var(--p,0) * 100%);width:16px;height:16px;translate:-50% -50%;border-radius:50%;background:#fff;border:3px solid var(--brand);box-shadow:0 2px 8px rgba(0,79,199,.35);cursor:grab;outline:none}
+.vs.drag .vs-k{cursor:grabbing;scale:1.15}
+.vs:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
+.vs .vs-d{position:absolute;z-index:1;left:50%;width:7px;height:7px;translate:-50% -50%;border-radius:50%;background:#fff;border:1.5px solid #9FC3FF;padding:0;cursor:pointer}
+.vs .vs-d::before{content:"";position:absolute;inset:-7px}
+.vs .vs-d.on{background:var(--brand);border-color:var(--brand)}
+.vs .vs-l{position:absolute;right:calc(100% + 12px);top:calc(var(--p,0) * 100%);translate:0 -50%;white-space:nowrap;font-size:12.5px;font-weight:600;color:#fff;background:var(--text);padding:6px 10px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
+.vs:hover .vs-l,.vs.drag .vs-l,.vs:focus-visible .vs-l{opacity:1}
+.vs .vs-d .vs-tip{position:absolute;right:calc(100% + 14px);top:50%;translate:0 -50%;white-space:nowrap;font-size:12px;font-weight:500;color:var(--text);background:#fff;border:1px solid var(--border);padding:4px 8px;border-radius:7px;opacity:0;pointer-events:none;transition:opacity .15s}
+.vs .vs-d:hover .vs-tip{opacity:1}
+.vs:hover .vs-d:hover ~ .vs-l{opacity:0}
+@media (max-width:640px){.vs{right:2px;width:14px;height:min(40vh,300px);padding:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}.vs .vs-t{top:0;bottom:0;background:rgba(0,112,255,.18)}.vs .vs-k{width:12px;height:12px;border-width:2.5px}.vs .vs-d{width:5px;height:5px;border-width:1px}.vs .vs-l,.vs .vs-d .vs-tip{display:none}}
+@media print{.vs{display:none}}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*:not(.rv),*::before,*::after{animation:none!important;transition:none!important}.rv{translate:none!important;scale:none!important}}
 </style>
 </head>
@@ -709,7 +742,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 <main id="top">
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" data-vs="Overview">
     <div class="wrap">
       <div class="hero-copy">
         <h1 class="display">Run your business from <span class="hl">one<br class="br-d"> connected platform.</span></h1>
@@ -779,7 +812,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
                         <div class="ad-cf"><span>Department scope · October 2026</span><a>View details<svg class="i"><use href="#i-arrow"/></svg></a></div></div>
                     </div>
                     <div class="ad-row">
-                      <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-menu"/></svg></span>Invoices to follow up<span class="ad-dots">···</span></div><div class="ad-tbl"><div class="ad-tr"><b>INV-2029</b><span>NNPC E&amp;P Limited</span><span class="num">₦210,700,000</span><span class="ad-st ov">Overdue · 12 days</span></div><div class="ad-tr"><b>INV-2038</b><span>Shell (SPDC)</span><span class="num">₦126,000,000</span><span class="ad-st se">Sent · due 28 Oct</span></div><div class="ad-tr"><b>INV-2035</b><span>Seplat Energy</span><span class="num">₦73,200,000</span><span class="ad-st pp">Part-paid · ₦40M left</span></div><div class="ad-tr"><b>INV-2041</b><span>Emzor Pharmaceuticals</span><span class="num">₦18,950,000</span><span class="ad-st ov">Overdue · 4 days</span></div></div></div>
+                      <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-menu"/></svg></span>Invoices to follow up<span class="ad-dots">···</span></div><div class="ad-tbl"><div class="ad-tr"><b>INV-2026-0029</b><span>NNPC E&amp;P Limited</span><span class="num">₦210,700,000</span><span class="ad-st ov">Overdue · 12 days</span></div><div class="ad-tr"><b>INV-2026-0038</b><span>Shell (SPDC)</span><span class="num">₦126,000,000</span><span class="ad-st se">Sent · due 28 Oct</span></div><div class="ad-tr"><b>INV-2026-0035</b><span>Seplat Energy</span><span class="num">₦73,200,000</span><span class="ad-st pp">Part-paid · ₦40M left</span></div><div class="ad-tr"><b>INV-2026-0041</b><span>Emzor Pharmaceuticals</span><span class="num">₦18,950,000</span><span class="ad-st ov">Overdue · 4 days</span></div></div></div>
                       <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-spark"/></svg></span>Quick actions<span class="ad-dots">···</span></div><div class="ad-qa"><span><svg class="i"><use href="#i-plus"/></svg>New invoice</span><span><svg class="i"><use href="#i-check-c"/></svg>Record payment</span><span><svg class="i"><use href="#i-book"/></svg>New journal</span><span><svg class="i"><use href="#i-chart"/></svg>Trial balance</span></div></div>
                     </div>
                   </div>
@@ -791,7 +824,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         </div>
         <div class="float hf1">
           <span class="ico b-green"><svg class="i"><use href="#i-file"/></svg></span>
-          <div><b class="num">INV-2044 · ₦48,500,000</b><small>TotalEnergies EP Nigeria</small></div>
+          <div><b class="num">INV-2026-0044 · ₦48,500,000</b><small>TotalEnergies EP Nigeria</small></div>
           <span class="status st-ok"><svg class="i"><use href="#i-check"/></svg>Paid</span>
         </div>
         <div class="float hf2">
@@ -813,7 +846,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   </section>
 
   <!-- NOISE -->
-  <section class="noise" id="why">
+  <section class="noise" id="why" data-vs="Why wBizManager">
     <div class="wave w1" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
     <div class="wave w2" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
     <div class="wrap">
@@ -823,7 +856,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   </section>
 
   <!-- MODULES -->
-  <section class="mods" id="modules">
+  <section class="mods" id="modules" data-vs="Modules">
     <div class="wrap">
       <div class="head-c">
         <span class="ctx"><span class="stack">
@@ -852,7 +885,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   </section>
 
   <!-- REPORTING -->
-  <section class="report">
+  <section class="report" data-vs="Reports">
     <div class="wrap">
       <div class="report-art" role="img" aria-label="The HR dashboard in wBizManager, shown with sample data">
         <div class="panel-grey">
@@ -938,11 +971,12 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
           </div>
         </div>
       </div>
+      <div class="sec-cta"><a class="btn btn-primary btn-lg" href="pricing.html">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
     </div>
   </section>
 
   <!-- INDUSTRIES -->
-  <section class="inds" id="industries">
+  <section class="inds" id="industries" data-vs="Industries">
     <div class="wrap">
       <div class="inds-head">
         <div>
@@ -993,9 +1027,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
           <a class="link" href="#">Explore wBizManager <svg class="i arrow"><use href="#i-arrow"/></svg></a>
           <div class="scene" aria-hidden="true"><div class="ui num">
             <header><b>Client invoices</b><small>October</small></header>
-            <div class="li"><span class="av" style="background:#0EA5E9">OI</span><span class="grow"><b>Oak &amp; Ivy Studio</b><small>INV-0138</small></span><span class="status st-ok">Paid</span></div>
-            <div class="li"><span class="av" style="background:#A855F7">LP</span><span class="grow"><b>Lagoon Pharmacy</b><small>INV-0137</small></span><span class="status st-warn">Due</span></div>
-            <div class="li"><span class="av" style="background:#EF4444">BP</span><span class="grow"><b>Bright Path Logistics</b><small>INV-0139</small></span><span class="status st-bad">Overdue</span></div>
+            <div class="li"><span class="av" style="background:#0EA5E9">OI</span><span class="grow"><b>Oak &amp; Ivy Studio</b><small>INV-2026-0138</small></span><span class="status st-ok">Paid</span></div>
+            <div class="li"><span class="av" style="background:#A855F7">LP</span><span class="grow"><b>Lagoon Pharmacy</b><small>INV-2026-0137</small></span><span class="status st-warn">Due</span></div>
+            <div class="li"><span class="av" style="background:#EF4444">BP</span><span class="grow"><b>Bright Path Logistics</b><small>INV-2026-0139</small></span><span class="status st-bad">Overdue</span></div>
           </div></div>
         </article>
         <article class="ind">
@@ -1010,11 +1044,12 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
           </div></div>
         </article>
       </div>
+      <div class="sec-cta"><a class="btn btn-primary btn-lg" href="pricing.html">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
     </div>
   </section>
 
   <!-- NIGHT -->
-  <section class="night">
+  <section class="night" data-vs="Our approach">
     <div class="wrap">
       <div>
         <span class="ctx"><span class="av"><svg class="i" style="width:14px;height:14px;stroke-width:2"><use href="#i-check"/></svg></span>Our approach</span>
@@ -1034,19 +1069,25 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
           <div class="core"><span class="core-mark"><img src="assets/mark.png" alt="" width="61" height="60"></span></div>
         </div>
       </div>
+      <div class="sec-cta"><a class="btn btn-primary btn-lg" href="pricing.html">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
     </div>
   </section>
 
   <!-- PRICING -->
-  <section class="pricing" id="pricing">
+  <section class="pricing" id="pricing" data-vs="Pricing">
+    <div class="wave tr" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
+    <div class="wave bl" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
     <div class="wrap">
       <div class="head-c">
         <h2 class="h2">Plans that fit your business.</h2>
         <p class="lead">Start with what you need today and choose a plan that supports your team as you grow.</p>
         <div class="billing">
-          <div class="toggle" role="group" aria-label="Billing period">
-            <button type="button" aria-pressed="false" data-bill="m">Monthly</button>
-            <button type="button" aria-pressed="true" data-bill="y">Yearly</button>
+          <div class="bill-row">
+            <div class="toggle" role="group" aria-label="Billing period">
+              <button type="button" aria-pressed="false" data-bill="m">Monthly</button>
+              <button type="button" aria-pressed="true" data-bill="y">Yearly</button>
+            </div>
+            <a class="jump" href="pricing.html#compare">Compare every feature <svg class="i"><use href="#i-down"/></svg></a>
           </div>
           <span class="save">2 months free on yearly</span>
         </div>
@@ -1086,14 +1127,13 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         </div>
       </div>
       <div class="plans-foot">
-        <a class="btn btn-primary btn-lg" href="pricing.html#compare">View comparisons</a>
         <p>Need multi-entity, more seats, or a scoped implementation? <a href="#">Talk to sales</a> — we will size it with you.</p>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="faq" id="faq">
+  <section class="faq" id="faq" data-vs="FAQ">
     <div class="wrap">
       <div class="faq-side">
         <h2 class="h2">Questions, answered.</h2>
@@ -1116,7 +1156,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   </section>
 
   <!-- START -->
-  <section class="start">
+  <section class="start" data-vs="Let's talk">
     <div class="wrap">
       <div class="start-copy">
         <h2 class="display">Let's talk about your business.</h2>
@@ -1297,7 +1337,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       ['.report-art', 'left', 0], ['.report-copy > *', 'up', .08],
       ['.inds-head > *', 'up', .1], ['.track', 'up', .15],
       ['.night .wrap > div:first-child > *', 'up', .08], ['.orb-panel', 'zoom', 0],
-      ['.pricing .head-c > *', 'up', .08], ['.plans .plan', 'up', .09], ['.plans-foot > *', 'up', .1],
+      ['.pricing .head-c > *', 'up', .08], ['.plans .plan', 'up', .09], ['.plans-foot > *', 'up', .1], ['.sec-cta', 'up', 0],
       ['.faq-side', 'left', 0], ['.faq .qa', 'up', .06],
       ['.start-copy > *', 'up', .08], ['.start-art', 'right', .15],
       ['.ftr .top > *', 'up', .06], ['.ftr .base', 'fade', 0]
@@ -1412,6 +1452,65 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   const hdr = document.getElementById('hdr');
   const onScroll = () => hdr.classList.toggle('scrolled', scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
+})();
+</script>
+<script>/* vslider */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vs = document.createElement('div');
+  vs.className = 'vs'; vs.tabIndex = 0;
+  vs.setAttribute('role', 'slider'); vs.setAttribute('aria-label', 'Page position'); vs.setAttribute('aria-orientation', 'vertical');
+  vs.setAttribute('aria-valuemin', '0'); vs.setAttribute('aria-valuemax', '100');
+  vs.innerHTML = '<div class="vs-t"><div class="vs-f"></div></div><span class="vs-k"></span><span class="vs-l"></span>';
+  document.body.appendChild(vs);
+  const track = vs.querySelector('.vs-t'), label = vs.querySelector('.vs-l');
+  const stops = [...document.querySelectorAll('[data-vs]')];
+  const max = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const top = el => el.getBoundingClientRect().top + scrollY;
+  const dots = stops.map(el => {
+    const d = document.createElement('button');
+    d.type = 'button'; d.className = 'vs-d'; d.tabIndex = -1;
+    d.setAttribute('aria-label', 'Go to ' + el.dataset.vs);
+    d.innerHTML = '<span class="vs-tip">' + el.dataset.vs + '</span>';
+    d.addEventListener('click', e => { e.stopPropagation(); scrollTo({ top: Math.max(0, top(el) - 72), behavior: reduce ? 'auto' : 'smooth' }); });
+    d.addEventListener('pointerdown', e => e.stopPropagation());
+    vs.insertBefore(d, label); return d;
+  });
+  /* Track runs between the padding, so positions are fractions of its own height */
+  const place = (el, p) => { el.style.top = (track.offsetTop + p * track.offsetHeight) + 'px'; };
+  function layout() {
+    vs.hidden = document.documentElement.scrollHeight - innerHeight < 120;
+    stops.forEach((el, i) => place(dots[i], Math.min(1, Math.max(0, (top(el) - 72) / max()))));
+    update();
+  }
+  function update() {
+    const p = Math.min(1, Math.max(0, scrollY / max()));
+    vs.style.setProperty('--p', p);
+    track.style.setProperty('--p', p);
+    place(vs.querySelector('.vs-k'), p); place(label, p);
+    vs.setAttribute('aria-valuenow', Math.round(p * 100));
+    let cur = -1;
+    stops.forEach((el, i) => { if (top(el) - innerHeight * .4 <= scrollY) cur = i; });
+    dots.forEach((d, i) => d.classList.toggle('on', i <= cur));
+    const name = cur >= 0 ? stops[cur].dataset.vs : (stops[0] ? stops[0].dataset.vs : '');
+    label.textContent = name || Math.round(p * 100) + '%';
+    vs.setAttribute('aria-valuetext', (name ? name + ', ' : '') + Math.round(p * 100) + '%');
+  }
+  const seek = y => { const r = track.getBoundingClientRect(); scrollTo({ top: Math.min(1, Math.max(0, (y - r.top) / r.height)) * max(), behavior: 'instant' }); };
+  vs.addEventListener('pointerdown', e => { e.preventDefault(); vs.setPointerCapture(e.pointerId); vs.classList.add('drag'); seek(e.clientY); });
+  vs.addEventListener('pointermove', e => { if (vs.classList.contains('drag')) seek(e.clientY); });
+  const end = () => vs.classList.remove('drag');
+  vs.addEventListener('pointerup', end); vs.addEventListener('pointercancel', end);
+  vs.addEventListener('keydown', e => {
+    const step = { ArrowDown: .05, ArrowRight: .05, ArrowUp: -.05, ArrowLeft: -.05, PageDown: .2, PageUp: -.2 }[e.key];
+    if (step != null) { e.preventDefault(); scrollBy(0, step * max()); }
+    else if (e.key === 'Home') { e.preventDefault(); scrollTo(0, 0); }
+    else if (e.key === 'End') { e.preventDefault(); scrollTo(0, max()); }
+  });
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', layout);
+  if ('ResizeObserver' in window) new ResizeObserver(layout).observe(document.body);
+  addEventListener('load', layout); layout();
 })();
 </script>
 </body>
