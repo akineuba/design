@@ -19,13 +19,13 @@
 .pr-hero h1{font-size:clamp(40px,5.6vw,72px)}
 .toggle .tsave{font-size:11.5px;font-weight:600;color:var(--success);background:var(--success-bg);padding:3px 8px;border-radius:999px;margin-left:8px}
 .toggle button[aria-pressed="true"] .tsave{background:rgba(255,255,255,.2);color:#fff}
-.pr-plans{background:var(--canvas);padding-bottom:clamp(64px,8vw,104px)}
+.pr-plans{background:var(--canvas);padding-bottom:clamp(32px,4vw,48px)}
 .pr-faq{padding-top:clamp(64px,8vw,104px)}
 .pr-plans .plans{margin-top:0}
 .pr-plans .plans-foot{margin-top:36px}
 
 /* Comparison */
-.cmp-sec{background:var(--canvas);padding-block:0 clamp(32px,4vw,48px);scroll-margin-top:88px}
+.cmp-sec{background:var(--canvas);padding-block:0 clamp(64px,8vw,104px);scroll-margin-top:88px}
 .cmp-card{border:1px solid var(--border);border-radius:var(--r-card);background:var(--surface);box-shadow:0 1px 2px rgba(15,23,42,.04)}
 .cmp-card > summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 28px}
 .cmp-card > summary::-webkit-details-marker{display:none}
@@ -195,6 +195,50 @@
     </div>
   </section>
 
+  <section class="pr-plans" aria-label="Plans">
+    <div class="wave br" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
+    <div class="wrap">
+      <div class="plans">
+        <div class="plan trial">
+          <h3>Free Trial</h3><p class="desc">Experience the platform before deciding on a custom plan for your organisation.</p>
+          <div class="price num"><strong>Free</strong><span class="per-fixed">/14-Days</span></div>
+          <p class="from">No commitment or credit card required</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Test business modules</li><li><svg class="i"><use href="#i-check"/></svg>Team member access &amp; permissions</li><li><svg class="i"><use href="#i-check"/></svg>Try custom approval workflows</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
+          <a class="btn btn-outline" href="login.html">Get Started Free</a>
+        </div>
+        <div class="plan rec">
+          <span class="flag">Most complete</span><h3>Full ERP</h3><p class="desc">Organisations that want one connected business system</p>
+          <div class="price num"><strong data-y="₦1,200,000" data-m="₦120,000">₦1,200,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Accounting</li><li><svg class="i"><use href="#i-check"/></svg>Inventory</li><li><svg class="i"><use href="#i-check"/></svg>Procurement</li><li><svg class="i"><use href="#i-check"/></svg>Projects &amp; Commercial</li><li><svg class="i"><use href="#i-check"/></svg>HR</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
+          <a class="btn btn-primary" data-plan="full" href="configure.html?plan=full">Choose Full ERP</a>
+        </div>
+        <div class="plan">
+          <h3>Finance</h3><p class="desc">Finance teams that need accounting with item and stock information</p>
+          <div class="price num"><strong data-y="₦500,000" data-m="₦50,000">₦500,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Accounting</li><li><svg class="i"><use href="#i-check"/></svg>Inventory</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
+          <a class="btn btn-outline" data-plan="finance" href="configure.html?plan=finance">Choose Finance</a>
+        </div>
+        <div class="plan">
+          <h3>HR Suite</h3><p class="desc">People teams managing employees from recruitment to exit</p>
+          <div class="price num"><strong data-y="₦650,000" data-m="₦65,000">₦650,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Employee records</li><li><svg class="i"><use href="#i-check"/></svg>Recruitment &amp; onboarding</li><li><svg class="i"><use href="#i-check"/></svg>Leave &amp; attendance</li><li><svg class="i"><use href="#i-check"/></svg>Payroll &amp; payslips</li><li><svg class="i"><use href="#i-check"/></svg>Performance &amp; appraisals</li><li><svg class="i"><use href="#i-check"/></svg>Training, cases &amp; exits</li><li><svg class="i"><use href="#i-check"/></svg>Self-service</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
+          <a class="btn btn-outline" data-plan="hr" href="configure.html?plan=hr">Choose HR Suite</a>
+        </div>
+      </div>
+      <div class="plans-foot">
+        <p>Need multi-entity, more seats, or a scoped implementation? <a href="index.html#faq">Talk to sales</a> — we will size it with you.</p>
+      </div>
+    </div>
+  </section>
+
+
   <section class="cmp-sec" id="compare" data-vs="Compare features">
     <div class="wrap">
       <details class="cmp-card">
@@ -251,50 +295,6 @@
       </details>
     </div>
   </section>
-
-  <section class="pr-plans" aria-label="Plans">
-    <div class="wave br" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
-    <div class="wrap">
-      <div class="plans">
-        <div class="plan trial">
-          <h3>Free Trial</h3><p class="desc">Experience the platform before deciding on a custom plan for your organisation.</p>
-          <div class="price num"><strong>Free</strong><span class="per-fixed">/14-Days</span></div>
-          <p class="from">No commitment or credit card required</p>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>Test business modules</li><li><svg class="i"><use href="#i-check"/></svg>Team member access &amp; permissions</li><li><svg class="i"><use href="#i-check"/></svg>Try custom approval workflows</li></ul>
-          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
-          <a class="btn btn-outline" href="login.html">Get Started Free</a>
-        </div>
-        <div class="plan rec">
-          <span class="flag">Most complete</span><h3>Full ERP</h3><p class="desc">Organisations that want one connected business system</p>
-          <div class="price num"><strong data-y="₦1,200,000" data-m="₦120,000">₦1,200,000</strong><span class="per">/year</span></div>
-          <p class="from">Starting price for one organisation</p>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>Accounting</li><li><svg class="i"><use href="#i-check"/></svg>Inventory</li><li><svg class="i"><use href="#i-check"/></svg>Procurement</li><li><svg class="i"><use href="#i-check"/></svg>Projects &amp; Commercial</li><li><svg class="i"><use href="#i-check"/></svg>HR</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
-          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
-          <a class="btn btn-primary" data-plan="full" href="configure.html?plan=full">Choose Full ERP</a>
-        </div>
-        <div class="plan">
-          <h3>Finance</h3><p class="desc">Finance teams that need accounting with item and stock information</p>
-          <div class="price num"><strong data-y="₦500,000" data-m="₦50,000">₦500,000</strong><span class="per">/year</span></div>
-          <p class="from">Starting price for one organisation</p>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>Accounting</li><li><svg class="i"><use href="#i-check"/></svg>Inventory</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
-          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
-          <a class="btn btn-outline" data-plan="finance" href="configure.html?plan=finance">Choose Finance</a>
-        </div>
-        <div class="plan">
-          <h3>HR Suite</h3><p class="desc">People teams managing employees from recruitment to exit</p>
-          <div class="price num"><strong data-y="₦650,000" data-m="₦65,000">₦650,000</strong><span class="per">/year</span></div>
-          <p class="from">Starting price for one organisation</p>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>Employee records</li><li><svg class="i"><use href="#i-check"/></svg>Recruitment &amp; onboarding</li><li><svg class="i"><use href="#i-check"/></svg>Leave &amp; attendance</li><li><svg class="i"><use href="#i-check"/></svg>Payroll &amp; payslips</li><li><svg class="i"><use href="#i-check"/></svg>Performance &amp; appraisals</li><li><svg class="i"><use href="#i-check"/></svg>Training, cases &amp; exits</li><li><svg class="i"><use href="#i-check"/></svg>Self-service</li></ul>
-          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
-          <a class="btn btn-outline" data-plan="hr" href="configure.html?plan=hr">Choose HR Suite</a>
-        </div>
-      </div>
-      <div class="plans-foot">
-        <p>Need multi-entity, more seats, or a scoped implementation? <a href="index.html#faq">Talk to sales</a> — we will size it with you.</p>
-      </div>
-    </div>
-  </section>
-
 
   <section class="pr-faq" data-vs="Questions">
     <div class="wrap">
