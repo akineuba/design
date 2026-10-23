@@ -4,28 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pricing · wBizManager</title>
-<meta name="description" content="Compare wBizManager plans — Full ERP, Finance, HR Suite and Custom — and every feature each one includes.">
+<meta name="description" content="Compare wBizManager plans — Free Trial, Full ERP, Finance and HR Suite — and every feature each one includes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <style>[hidden]{display:none!important}
 .nav > a[aria-current="page"]{color:var(--brand-ink);background:var(--brand-subtle)}
-.pr-hero{position:relative;overflow:clip;padding-block:clamp(56px,7vw,96px) 48px;background:var(--canvas)}
+.pr-hero{position:relative;overflow:clip;padding-block:clamp(56px,7vw,96px) 40px;background:var(--canvas)}
 .pr-hero > .wrap,.pr-plans > .wrap{position:relative;z-index:1}
 .pr-plans{position:relative}
-.billing.row{flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px 18px}
 .pr-hero .head-c{margin-bottom:0}
 .eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink)}
 .pr-hero h1{font-size:clamp(40px,5.6vw,72px)}
 .toggle .tsave{font-size:11.5px;font-weight:600;color:var(--success);background:var(--success-bg);padding:3px 8px;border-radius:999px;margin-left:8px}
 .toggle button[aria-pressed="true"] .tsave{background:rgba(255,255,255,.2);color:#fff}
-.pr-plans{background:var(--canvas);padding-bottom:clamp(48px,6vw,72px)}
+.pr-plans{background:var(--canvas);padding-bottom:clamp(64px,8vw,104px)}
+.pr-faq{padding-top:clamp(64px,8vw,104px)}
 .pr-plans .plans{margin-top:0}
 .pr-plans .plans-foot{margin-top:36px}
 
 /* Comparison */
-.cmp-sec{padding-block:clamp(40px,5vw,64px) clamp(64px,8vw,104px);scroll-margin-top:72px}
+.cmp-sec{background:var(--canvas);padding-block:0 clamp(32px,4vw,48px);scroll-margin-top:88px}
 .cmp-card{border:1px solid var(--border);border-radius:var(--r-card);background:var(--surface);box-shadow:0 1px 2px rgba(15,23,42,.04)}
 .cmp-card > summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 28px}
 .cmp-card > summary::-webkit-details-marker{display:none}
@@ -34,6 +34,8 @@
 .cmp-card > summary .tw{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;flex:none;transition:transform .25s}
 .cmp-card > summary .tw .i{width:18px;height:18px}
 .cmp-card:not([open]) > summary .tw{transform:rotate(180deg)}
+.cmp-card:not([open]){box-shadow:0 1px 2px rgba(15,23,42,.04),0 10px 24px -18px rgba(0,79,199,.35)}
+.cmp-card > summary:hover .tw{border-color:#9FC3FF;color:var(--brand-ink)}
 .cmp-body{padding:0 28px 28px}
 .cmp-scroll{overflow:auto;max-height:min(680px,75vh);border:1px solid var(--border);border-radius:12px;overscroll-behavior:contain}
 .cmp-tbl{width:100%;min-width:760px;border-collapse:collapse;font-size:14.5px}
@@ -43,7 +45,7 @@
 .cmp-tbl th[scope="row"]{font-weight:400;color:var(--text-2);text-align:left;padding:13px 20px;width:36%}
 .cmp-tbl td{padding:13px 20px;white-space:nowrap}
 .cmp-tbl tbody tr:not(.grp):nth-child(even){background:var(--canvas)}
-.cmp-tbl tbody tr:not(.grp) td:nth-child(2){background:rgba(0,112,255,.035)}
+.cmp-tbl tbody tr:not(.grp) td:nth-child(3){background:rgba(0,112,255,.035)}
 .cmp-tbl tr.grp th{padding:22px 20px 10px;font-size:15.5px;font-weight:600;text-align:left;color:var(--text);border-top:1px solid var(--border)}
 .cmp-tbl tbody tr.grp:first-child th{border-top:0}
 .gi{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--brand-subtle);color:var(--brand);margin-right:10px;vertical-align:-8px}
@@ -56,7 +58,7 @@
 .cmp-key{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;font-size:13.5px;color:var(--muted)}
 .cmp-key b{font-weight:500;color:var(--text-2)}
 
-.pr-faq{padding-block:0 clamp(72px,9vw,120px)}
+.pr-faq{padding-bottom:clamp(72px,9vw,120px)}
 .pr-faq .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
 .pr-faq .side{display:grid;gap:18px}
 .pr-faq .side p{color:var(--muted);font-size:16px;line-height:1.6}
@@ -182,15 +184,71 @@
       <div class="head-c">
         <span class="eyebrow">Plans for the way you work</span>
         <h1 class="display">Choose your starting point.</h1>
-        <p class="lead">Start with a complete suite, focus on finance or HR, or build a custom combination. Every plan includes configurable approvals.</p>
-        <div class="billing row">
+        <p class="lead">Try every module free for 14 days, then choose the complete suite or focus on finance or HR. Every plan includes configurable approvals.</p>
+        <div class="billing">
           <div class="toggle" role="group" aria-label="Billing period">
             <button type="button" aria-pressed="false" data-bill="m">Monthly</button>
             <button type="button" aria-pressed="true" data-bill="y">Annual<span class="tsave">Save 2 months</span></button>
           </div>
-          <a class="jump" href="#compare">Compare every feature <svg class="i"><use href="#i-down"/></svg></a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="cmp-sec" id="compare" data-vs="Compare features">
+    <div class="wrap">
+      <details class="cmp-card">
+        <summary><div><h2>Compare every included feature</h2><p>See what each plan includes, side by side, before you choose.</p></div><span class="tw" aria-hidden="true"><svg class="i"><use href="#i-up"/></svg></span></summary>
+        <div class="cmp-body">
+          <div class="cmp-scroll">
+            <table class="cmp-tbl">
+              <thead><tr><th scope="col">Features</th><th scope="col">Free Trial<small>14 days</small></th><th scope="col" class="rec">Full ERP<small>Most complete</small></th><th scope="col">Finance</th><th scope="col">HR Suite</th></tr></thead>
+              <tbody>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-calc"/></svg></span>Accounting</th></tr>
+<tr><th scope="row">Financial setup, chart of accounts and dimensions</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Journals, general ledger and period close</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Customer invoices, receipts and credit notes</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Supplier bills, payments and debit notes</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Bank reconciliation</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Budgets, opening balances and fixed assets</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Financial reports and audit history</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-box"/></svg></span>Inventory</th></tr>
+<tr><th scope="row">Item catalogues, categories and units</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Locations and stock balances</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Stock receipts, issues, adjustments and transfers</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Stock cycle and stocktaking</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Costing and additional costs</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Barcode scanning, alerts and reports</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-bag"/></svg></span>Procurement</th></tr>
+<tr><th scope="row">Supplier records and terms</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Requests for quotation</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Purchase orders and goods received</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Purchasing reports</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-brief"/></svg></span>Projects &amp; Commercial</th></tr>
+<tr><th scope="row">Tender pipeline, pipeline value and win rate</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Projects and milestones</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr><th scope="row">Project people and costs</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td></tr>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-person"/></svg></span>Human Resources</th></tr>
+<tr><th scope="row">Employee records and documents</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Recruitment &amp; onboarding</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Leave &amp; attendance</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Payroll &amp; payslips</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Performance &amp; appraisals</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Training, cases &amp; exits</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Employee self-service</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-shield"/></svg></span>Approvals &amp; platform</th></tr>
+<tr><th scope="row">Configurable approval workflows</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Role-based access and permissions</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Multiple organisations under one account</th><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Real-time reports dashboard</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Cloud hosting, backups and updates</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+<tr><th scope="row">Onboarding and ongoing support</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cmp-key"><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg><b>Included</b></span><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg><b>Not included</b></span></div>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -198,6 +256,14 @@
     <div class="wave br" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
     <div class="wrap">
       <div class="plans">
+        <div class="plan trial">
+          <h3>Free Trial</h3><p class="desc">Experience the platform before deciding on a custom plan for your organisation.</p>
+          <div class="price num"><strong>Free</strong><span class="per-fixed">/14-Days</span></div>
+          <p class="from">No commitment or credit card required</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Test business modules</li><li><svg class="i"><use href="#i-check"/></svg>Team member access &amp; permissions</li><li><svg class="i"><use href="#i-check"/></svg>Try custom approval workflows</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
+          <a class="btn btn-outline" href="login.html">Get Started Free</a>
+        </div>
         <div class="plan rec">
           <span class="flag">Most complete</span><h3>Full ERP</h3><p class="desc">Organisations that want one connected business system</p>
           <div class="price num"><strong data-y="₦1,200,000" data-m="₦120,000">₦1,200,000</strong><span class="per">/year</span></div>
@@ -222,14 +288,6 @@
           <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
           <a class="btn btn-outline" data-plan="hr" href="configure.html?plan=hr">Choose HR Suite</a>
         </div>
-        <div class="plan">
-          <h3>Custom</h3><p class="desc">Organisations that want to choose only the areas they need</p>
-          <div class="price num"><strong data-y="₦250,000" data-m="₦25,000">₦250,000</strong><span class="per">/year</span></div>
-          <p class="from">Starting price for one organisation</p>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>Choose business areas</li><li><svg class="i"><use href="#i-check"/></svg>Required supporting access</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
-          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
-          <a class="btn btn-outline" data-plan="custom" href="configure.html?plan=custom">Choose Custom</a>
-        </div>
       </div>
       <div class="plans-foot">
         <p>Need multi-entity, more seats, or a scoped implementation? <a href="index.html#faq">Talk to sales</a> — we will size it with you.</p>
@@ -237,62 +295,6 @@
     </div>
   </section>
 
-  <section class="cmp-sec" id="compare" data-vs="Compare features">
-    <div class="wrap">
-      <details class="cmp-card" open>
-        <summary><div><h2>Compare every included feature</h2><p>The full high-level comparison across all four plans.</p></div><span class="tw" aria-hidden="true"><svg class="i"><use href="#i-up"/></svg></span></summary>
-        <div class="cmp-body">
-          <div class="cmp-scroll">
-            <table class="cmp-tbl">
-              <thead><tr><th scope="col">Features</th><th scope="col" class="rec">Full ERP<small>Most complete</small></th><th scope="col">Finance</th><th scope="col">HR Suite</th><th scope="col">Custom</th></tr></thead>
-              <tbody>
-<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-calc"/></svg></span>Accounting</th></tr>
-<tr><th scope="row">Financial setup, chart of accounts and dimensions</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Journals, general ledger and period close</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Customer invoices, receipts and credit notes</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Supplier bills, payments and debit notes</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Bank reconciliation</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Budgets, opening balances and fixed assets</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Financial reports and audit history</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-box"/></svg></span>Inventory</th></tr>
-<tr><th scope="row">Item catalogues, categories and units</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Locations and stock balances</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Stock receipts, issues, adjustments and transfers</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Stock cycle and stocktaking</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Costing and additional costs</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Barcode scanning, alerts and reports</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-bag"/></svg></span>Procurement</th></tr>
-<tr><th scope="row">Supplier records and terms</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Requests for quotation</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Purchase orders and goods received</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Purchasing reports</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-brief"/></svg></span>Projects &amp; Commercial</th></tr>
-<tr><th scope="row">Tender pipeline, pipeline value and win rate</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Projects and milestones</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Project people and costs</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-person"/></svg></span>Human Resources</th></tr>
-<tr><th scope="row">Employee records and documents</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Recruitment &amp; onboarding</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Leave &amp; attendance</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Payroll &amp; payslips</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Performance &amp; appraisals</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Training, cases &amp; exits</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr><th scope="row">Employee self-service</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg>Not included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg>Optional</span></td></tr>
-<tr class="grp"><th colspan="5" scope="rowgroup"><span class="gi"><svg class="i"><use href="#i-shield"/></svg></span>Approvals &amp; platform</th></tr>
-<tr><th scope="row">Configurable approval workflows</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
-<tr><th scope="row">Role-based access and permissions</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
-<tr><th scope="row">Multiple organisations under one account</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
-<tr><th scope="row">Real-time reports dashboard</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
-<tr><th scope="row">Cloud hosting, backups and updates</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
-<tr><th scope="row">Onboarding and ongoing support</th><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td><td><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg>Included</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="cmp-key"><span class="cmp ok"><svg class="i"><use href="#i-check-c"/></svg><b>Included</b></span><span class="cmp opt"><svg class="i"><use href="#i-plus-c"/></svg><b>Optional — choose it on the Custom plan</b></span><span class="cmp no"><svg class="i"><use href="#i-x-c"/></svg><b>Not included</b></span></div>
-        </div>
-      </details>
-    </div>
-  </section>
 
   <section class="pr-faq" data-vs="Questions">
     <div class="wrap">
@@ -305,7 +307,7 @@
 <details class="qa" open><summary>What counts as a full user?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>A full user is anyone who signs in to work in wBizManager — raising invoices, approving requests or running reports. Every plan includes three full users, and you can add more when you configure your plan.</p></details>
 <details class="qa"><summary>What is an employee record?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>Employee records are the people your HR team manages. Records on the Full ERP and HR Suite plans include self-service, so employees can view payslips and request leave without needing a full user seat.</p></details>
 <details class="qa"><summary>Can I run more than one organisation?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>Yes. Each legal entity has its own plan and allowances. When you add another organisation it copies the first configuration, so you only change what is different.</p></details>
-<details class="qa"><summary>How does the Custom plan work?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>The Custom plan starts with one business area of your choice, plus the access it needs to work and configurable approvals. You can add further areas when you set up your plan.</p></details>
+<details class="qa"><summary>What is included in the free trial?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>The free trial runs for 14 days with every business module, team member access and permissions, and custom approval workflows for one organisation. You do not need a credit card, and you can move to a paid plan at any point.</p></details>
 <details class="qa"><summary>Can I change plans later?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary><p>Yes. You can move between plans or add organisations at any time, and we will adjust what you pay from your next billing date.</p></details>
       </div>
     </div>
@@ -335,12 +337,16 @@
   const btns = document.querySelectorAll('[data-bill]');
   function setBill(p) {
     btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.bill === p));
-    document.querySelectorAll('.price strong').forEach(s => s.textContent = s.dataset[p]);
+    document.querySelectorAll('.price strong[data-y]').forEach(s => s.textContent = s.dataset[p]);
     document.querySelectorAll('.price .per').forEach(s => s.textContent = p === 'y' ? '/year' : '/month');
     document.querySelectorAll('[data-plan]').forEach(a => a.href = 'configure.html?plan=' + a.dataset.plan + '&bill=' + p);
   }
   btns.forEach(b => b.addEventListener('click', () => setBill(b.dataset.bill)));
   setBill('y');
+  /* Open the comparison when someone arrives asking for it */
+  const cmp = document.querySelector('.cmp-card');
+  const openCmp = () => { if (location.hash === '#compare') { cmp.open = true; } };
+  addEventListener('hashchange', openCmp); openCmp();
 })();
 </script>
 <script>/* vslider */
