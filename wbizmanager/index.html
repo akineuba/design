@@ -459,7 +459,9 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 
 /* ───────── Pricing ───────── */
 .pricing{padding-block:clamp(72px,9vw,120px);background:var(--canvas)}
-.billing{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:8px}
+.billing{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;margin-top:8px}
+.price .per-fixed{font-size:15px;color:var(--muted)}
+.plan.trial ul{flex:none}.plan.trial .note{margin-bottom:auto}.price strong + .per-fixed{margin-left:-4px}
 .toggle{display:inline-flex;padding:5px;border:1px solid var(--border);border-radius:999px;background:var(--surface);box-shadow:0 1px 2px rgba(15,23,42,.04)}
 .toggle button{height:40px;padding-inline:22px;border-radius:999px;font-size:15px;font-weight:500;color:var(--text-2);transition:background .2s,color .2s}
 .toggle button[aria-pressed="true"]{background:var(--brand);color:#fff;font-weight:600}
@@ -1050,6 +1052,22 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         </div>
       </div>
       <div class="plans">
+        <div class="plan trial">
+          <h3>Free Trial</h3><p class="desc">Experience the platform before deciding on a custom plan for your organisation.</p>
+          <div class="price num"><strong>Free</strong><span class="per-fixed">/14-Days</span></div>
+          <p class="from">No commitment or credit card required</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Test business modules</li><li><svg class="i"><use href="#i-check"/></svg>Team member access &amp; permissions</li><li><svg class="i"><use href="#i-check"/></svg>Try custom approval workflows</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
+          <a class="btn btn-outline" href="login.html">Get Started Free</a>
+        </div>
+        <div class="plan rec">
+          <span class="flag">Most complete</span><h3>Full ERP</h3><p class="desc">Organisations that want one connected business system</p>
+          <div class="price num"><strong data-y="₦1,200,000" data-m="₦120,000">₦1,200,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one organisation</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Accounting</li><li><svg class="i"><use href="#i-check"/></svg>Inventory</li><li><svg class="i"><use href="#i-check"/></svg>Procurement</li><li><svg class="i"><use href="#i-check"/></svg>Projects &amp; Commercial</li><li><svg class="i"><use href="#i-check"/></svg>HR</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
+          <a class="btn btn-primary" data-plan="full" href="configure.html?plan=full">Choose Full ERP</a>
+        </div>
         <div class="plan">
           <h3>Finance</h3><p class="desc">Finance teams that need accounting with item and stock information</p>
           <div class="price num"><strong data-y="₦500,000" data-m="₦50,000">₦500,000</strong><span class="per">/year</span></div>
@@ -1065,22 +1083,6 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
           <ul><li><svg class="i"><use href="#i-check"/></svg>Employee records</li><li><svg class="i"><use href="#i-check"/></svg>Recruitment &amp; onboarding</li><li><svg class="i"><use href="#i-check"/></svg>Leave &amp; attendance</li><li><svg class="i"><use href="#i-check"/></svg>Payroll &amp; payslips</li><li><svg class="i"><use href="#i-check"/></svg>Performance &amp; appraisals</li><li><svg class="i"><use href="#i-check"/></svg>Training, cases &amp; exits</li><li><svg class="i"><use href="#i-check"/></svg>Self-service</li></ul>
           <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
           <a class="btn btn-outline" data-plan="hr" href="configure.html?plan=hr">Choose HR Suite</a>
-        </div>
-        <div class="plan rec">
-          <span class="flag">Most complete</span><h3>Full ERP</h3><p class="desc">Organisations that want one connected business system</p>
-          <div class="price num"><strong data-y="₦1,200,000" data-m="₦120,000">₦1,200,000</strong><span class="per">/year</span></div>
-          <p class="from">Starting price for one organisation</p>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>Accounting</li><li><svg class="i"><use href="#i-check"/></svg>Inventory</li><li><svg class="i"><use href="#i-check"/></svg>Procurement</li><li><svg class="i"><use href="#i-check"/></svg>Projects &amp; Commercial</li><li><svg class="i"><use href="#i-check"/></svg>HR</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
-          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users · Employee records include self-service</p>
-          <a class="btn btn-primary" data-plan="full" href="configure.html?plan=full">Choose Full ERP</a>
-        </div>
-        <div class="plan">
-          <h3>Custom</h3><p class="desc">Organisations that want to choose only the areas they need</p>
-          <div class="price num"><strong data-y="₦250,000" data-m="₦25,000">₦250,000</strong><span class="per">/year</span></div>
-          <p class="from">Starting price for one organisation</p>
-          <ul><li><svg class="i"><use href="#i-check"/></svg>Choose business areas</li><li><svg class="i"><use href="#i-check"/></svg>Required supporting access</li><li><svg class="i"><use href="#i-check"/></svg>Configurable approvals</li></ul>
-          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 full users</p>
-          <a class="btn btn-outline" data-plan="custom" href="configure.html?plan=custom">Choose Custom</a>
         </div>
       </div>
       <div class="plans-foot">
@@ -1317,7 +1319,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     const p = btn.dataset.bill;
     billBtns.forEach(x => x.setAttribute('aria-pressed', x === btn));
     document.querySelectorAll('.plan .price').forEach(pr => {
-      const st = pr.querySelector('strong'); st.textContent = st.dataset[p];
+      const st = pr.querySelector('strong[data-y]'); if (!st) return; st.textContent = st.dataset[p];
       pr.querySelector('.per').textContent = p === 'y' ? '/year' : '/month';
     });
     document.querySelectorAll('.plan [data-plan]').forEach(a => a.href = 'configure.html?plan=' + a.dataset.plan + '&bill=' + p);
