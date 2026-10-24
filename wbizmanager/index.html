@@ -135,33 +135,25 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 /* Desktop monitor mockup: the HTML screen sits under the transparent bezel */
 .monitor{position:absolute;left:var(--mx);top:var(--my);width:var(--mw);aspect-ratio:840/716.5}
 .monitor > img{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-.monitor .scaler{position:absolute;left:1.54%;top:0;width:98.46%}
+.monitor .scaler{position:absolute;left:1.54%;top:0;width:98.46%;height:72.2%!important;aspect-ratio:auto!important;overflow:hidden;border-radius:16px 16px 0 0}
 .monitor .frame{border-radius:16px;box-shadow:0 23px 61px -15px rgba(0,23,71,.45)}
-.hero-art .float{position:absolute;z-index:3}
-/* Float positions from the Figma hero, as a share of the panel width so they hold as it scales */
-.hf1{left:46.5cqw;top:-4.66cqw}
-.hf2{left:-4.08cqw;top:11.08cqw}
-.hf3{left:45.34cqw;top:67.49cqw}
-.hf4{left:-9.62cqw;top:45.19cqw}
+.hero-art .float{position:absolute;z-index:3;zoom:var(--fz,1)}
+/* Float positions from the Figma hero, as a share of the panel width; divided by the card zoom so they hold as it scales */
+.hf1{left:calc(46.5cqw / var(--fz,1));top:calc(-4.66cqw / var(--fz,1))}
+.hf2{left:calc(-4.08cqw / var(--fz,1));top:calc(11.08cqw / var(--fz,1))}
+.hf3{left:calc(45.34cqw / var(--fz,1));top:calc(67.49cqw / var(--fz,1))}
+.hf4{left:calc(-9.62cqw / var(--fz,1));top:calc(45.19cqw / var(--fz,1))}
 .float .spark-s{display:flex;align-items:flex-end;gap:3px;height:26px;margin-left:4px}
 .float .spark-s i{width:5px;border-radius:2px;background:#C7DCFF}
 .float .spark-s i:last-child{background:var(--brand)}
 .float .num-up{display:flex;align-items:baseline;gap:8px}
 @media (max-width:1060px){
   .hero{padding-block:32px 56px}
-  .hero .wrap{grid-template-columns:1fr;gap:40px}
-  .hero-art{--mx:40px;--my:40px;--mw:min(108cqw,780px)}
-  .panel-blue{aspect-ratio:auto;height:min(68cqw,560px)}
-  .hf1{left:auto;right:16px;top:-20px}
-  .hf2{left:-6px;top:auto;bottom:40px}
-  .hero-art .hf3,.hero-art .hf4{display:none}
+  .hero .wrap{grid-template-columns:1fr;gap:56px}
+  /* Same composition as desktop, just smaller; inset so the side cards stay on screen */
+  .hero-art{width:min(88%,686px);margin-inline:auto}
 }
-@media (max-width:640px){.hero-art .hf2,.hero-art .hf3{display:none}}
-@media (max-width:560px){
-  .hero-art{--mx:20px;--my:24px}
-  .panel-blue{height:min(84cqw,380px)}
-  .hero-act .btn{width:100%}
-}
+@media (max-width:560px){.hero-act .btn{width:100%}}
 
 /* Scaled HTML recreations of ERP screens */
 .scaler{--s:.6;position:relative;height:calc(var(--h) * var(--s) * 1px)}
@@ -512,7 +504,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .qa summary::-webkit-details-marker{display:none}
 .qa summary .pm{width:28px;height:28px;border-radius:50%;background:var(--panel);display:grid;place-items:center;flex:none;transition:transform .25s,background .2s,color .2s}
 .qa summary .pm .i{width:15px;height:15px;stroke-width:2.2}
-.qa[open] summary .pm{transform:rotate(45deg);background:var(--brand);color:#fff}
+.qa[open] summary .pm{transform:rotate(180deg);background:var(--brand);color:#fff}
 .qa p{padding:0 44px 22px 0;color:var(--muted);font-size:16px;line-height:1.65}
 @media (max-width:900px){.faq .wrap{grid-template-columns:1fr;gap:32px}.faq-side{position:static}}
 
@@ -540,7 +532,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 .ftr{padding-block:56px 32px;font-size:14px}
 .ftr .top{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(4,minmax(0,1fr));gap:32px}
 .ftr .about{display:grid;gap:14px;align-content:start}
-.ftr .about img{height:34px;width:auto}
+.ftr .about img{height:58px;width:auto;filter:grayscale(1) brightness(.78) contrast(.9);opacity:.85}
 .ftr .about p{color:var(--muted);max-width:30ch}
 .ftr h4{font-size:14px;font-weight:600;margin-bottom:14px}
 .ftr ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
@@ -653,7 +645,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       <a href="pricing.html">Pricing</a>
       <div class="dd">
         <button type="button" aria-expanded="false" aria-haspopup="true">Resources <svg class="i"><use href="#i-down"/></svg></button>
-        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Learn</h5><ul><li><a href="#"><b>Blog</b><small>Guides &amp; business tips</small></a></li><li><a href="#"><b>Customer Stories</b><small>How businesses use wBizManager</small></a></li></ul></div><div><h5>Get help</h5><ul><li><a href="#faq"><b>FAQs</b><small>Answers to common questions</small></a></li><li><a href="#"><b>Help &amp; Support</b><small>Guides, tutorials &amp; our team</small></a></li></ul></div><div class="mega-card"><h4>Need a hand getting set up?</h4><p>Our team can talk through your business requirements and help you get value from wBizManager from day one.</p><a class="link" href="#">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Learn</h5><ul><li><a href="#"><b>Blog</b><small>Guides &amp; business tips</small></a></li><li><a href="#"><b>Customer Stories</b><small>How businesses use wBizManager</small></a></li></ul></div><div><h5>Get help</h5><ul><li><a href="#faq"><b>FAQs</b><small>Answers to common questions</small></a></li><li><a href="#"><b>Help &amp; Support</b><small>Guides, tutorials &amp; our team</small></a></li></ul></div><div class="mega-card"><h4>Need a hand getting set up?</h4><p>Our team can talk through your business requirements and help you get value from wBizManager from day one.</p><a class="link" href="contact.html">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
       </div>
       <div class="dd">
         <button type="button" aria-expanded="false" aria-haspopup="true">Company <svg class="i"><use href="#i-down"/></svg></button>
@@ -678,7 +670,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     <a href="#">Blog</a><a href="#">Customer Stories</a><a href="#faq">FAQs</a><a href="#">Help &amp; Support</a>
   </div></details>
   <details><summary>Company <svg class="i"><use href="#i-down"/></svg></summary><div>
-    <a href="#">About Us</a><a href="#">Partners</a><a href="#">Contact Us</a>
+    <a href="#">About Us</a><a href="#">Partners</a><a href="contact.html">Contact Us</a>
   </div></details>
   <div class="mbtns">
     <a class="btn btn-primary" href="pricing.html">Get Started</a>
@@ -1071,7 +1063,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       </div>
       <div class="plans-foot">
         <a class="btn btn-primary btn-lg" href="pricing.html#compare">Compare every feature <svg class="i arrow"><use href="#i-arrow"/></svg></a>
-        <p>Need multi-entity, more seats, or a scoped implementation? <a href="#">Talk to sales</a> — we will size it with you.</p>
+        <p>Need multi-entity, more seats, or a scoped implementation? <a href="contact.html">Talk to sales</a> — we will size it with you.</p>
       </div>
     </div>
   </section>
@@ -1082,18 +1074,18 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       <div class="faq-side">
         <h2 class="h2">Questions, answered.</h2>
         <p class="lead" style="font-size:17px">Can't find what you're looking for? Our team can talk through your business requirements with you.</p>
-        <a class="link" href="#">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+        <a class="link" href="contact.html">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a>
       </div>
       <div>
-        <details class="qa" open><summary>What is wBizManager?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <details class="qa" open><summary>What is wBizManager?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary>
           <p>wBizManager is a cloud-based business management and ERP solution that helps businesses manage sales, accounting, inventory, purchasing, customer management, HR, expenses and reporting.</p></details>
-        <details class="qa"><summary>Who is wBizManager for?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <details class="qa"><summary>Who is wBizManager for?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary>
           <p>wBizManager is designed primarily for SMEs and growing businesses that need a more structured way to manage core operations.</p></details>
-        <details class="qa"><summary>Is wBizManager cloud-based?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <details class="qa"><summary>Is wBizManager cloud-based?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary>
           <p>Yes. wBizManager is delivered as a cloud-based business management solution.</p></details>
-        <details class="qa"><summary>Is there a free trial?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <details class="qa"><summary>Is there a free trial?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary>
           <p>Yes. A free trial option is currently offered, so you can explore wBizManager before choosing a plan.</p></details>
-        <details class="qa"><summary>How do I get started?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <details class="qa"><summary>How do I get started?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary>
           <p>Start the free trial or get in touch. A member of the wBizManager team can also discuss your business requirements with you.</p></details>
       </div>
     </div>
@@ -1130,7 +1122,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
       <div><h4>Solutions</h4><ul>
         <li><a href="modules/accounting.html">Accounting</a></li><li><a href="modules/sales.html">Sales</a></li><li><a href="modules/purchases.html">Purchases</a></li><li><a href="modules/approvals.html">Approvals</a></li><li><a href="modules/inventory.html">Inventory</a></li>
         <li><a href="modules/reports.html">Reports</a></li><li><a href="modules/commercial.html">Commercial</a></li><li><a href="modules/project.html">Project</a></li><li><a href="modules/human-resources.html">Human Resources</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="#">Contact Us</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
       <div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="#faq">FAQs</a></li><li><a href="#">Help &amp; Support</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
       <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
     </div>
@@ -1362,6 +1354,13 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
     setInterval(() => { sats.forEach((n, i) => n.classList.toggle('lit', i === k % sats.length)); k++; }, 1600);
   })();
 
+  /* Hero cards keep their desktop size relative to the panel */
+  const heroArt = document.querySelector('.hero-art');
+  if (heroArt) {
+    const fit = () => heroArt.style.setProperty('--fz', Math.min(1, heroArt.clientWidth / 686).toFixed(3));
+    if ('ResizeObserver' in window) new ResizeObserver(fit).observe(heroArt);
+    fit();
+  }
   /* Header */
   const dds = [...document.querySelectorAll('.dd')];
   const mnav = document.getElementById('mnav'), burger = document.querySelector('.burger');
