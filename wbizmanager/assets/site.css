@@ -564,3 +564,5 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 @media print{.vs{display:none}}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*:not(.rv),*::before,*::after{animation:none!important;transition:none!important}.rv{translate:none!important;scale:none!important}}
 .faq-more{margin-top:32px}
+.nav > a[aria-current="page"]{color:var(--brand-ink);background:var(--brand-subtle)}
+.mnav > a[aria-current="page"]{color:var(--brand-ink)}

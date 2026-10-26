@@ -319,6 +319,7 @@
   <div class="wrap">
     <a class="logo" href="../index.html" aria-label="wBizManager home"><img src="../assets/logo.png" alt="wBizManager" width="136" height="32"></a>
     <nav class="nav" aria-label="Main">
+      <a href="../index.html">Home</a>
       <div class="dd">
         <button type="button" aria-expanded="false" aria-haspopup="true">Modules <svg class="i"><use href="#i-down"/></svg></button>
         <div class="menu"><div class="mega" style="--cols:3"><div><h5>Financial</h5><ul><li><a href="accounting.html"><b>Accounting</b><small>Manage finances &amp; ledgers</small></a></li><li><a href="sales.html"><b>Sales</b><small>Track deals &amp; customers</small></a></li><li><a href="purchases.html"><b>Purchases</b><small>Manage orders &amp; suppliers</small></a></li></ul></div><div><h5>Operations</h5><ul><li><a href="inventory.html" aria-current="page"><b>Inventory</b><small>Monitor stock &amp; warehouses</small></a></li><li><a href="approvals.html"><b>Approvals</b><small>Streamline approval flows</small></a></li><li><a href="reports.html"><b>Reports</b><small>Insights &amp; analytics</small></a></li></ul></div><div><h5>Management</h5><ul><li><a href="commercial.html"><b>Commercial</b><small>Business operations hub</small></a></li><li><a href="project.html"><b>Project</b><small>Plan &amp; track milestones</small></a></li><li><a href="human-resources.html"><b>Human Resources</b><small>People &amp; payroll management</small></a></li></ul></div><div class="mega-card"><h4>Built for growing businesses</h4><p>One integrated platform to run your entire business, from finance and procurement to people and projects, without the complexity of disconnected tools.</p><a class="link" href="../index.html#modules">See all nine modules <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
@@ -345,6 +346,7 @@
   </div>
 </header>
 <div class="mnav" id="mnav">
+  <a href="../index.html">Home</a>
   <details><summary>Modules <svg class="i"><use href="#i-down"/></svg></summary><div><a href="accounting.html">Accounting</a><a href="sales.html">Sales</a><a href="purchases.html">Purchases</a><a href="approvals.html">Approvals</a><a href="inventory.html">Inventory</a><a href="reports.html">Reports</a><a href="commercial.html">Commercial</a><a href="project.html">Project</a><a href="human-resources.html">Human Resources</a></div></details>
   <details><summary>Industries <svg class="i"><use href="#i-down"/></svg></summary><div>
     <a href="../index.html#industries">Retail &amp; Trading</a><a href="../index.html#industries">Distribution</a><a href="../index.html#industries">Manufacturing</a><a href="../index.html#industries">Professional Services</a><a href="../index.html#industries">Growing SMEs</a>
@@ -430,7 +432,7 @@
         <li><a href="accounting.html">Accounting</a></li><li><a href="sales.html">Sales</a></li><li><a href="purchases.html">Purchases</a></li><li><a href="approvals.html">Approvals</a></li><li><a href="inventory.html">Inventory</a></li>
         <li><a href="reports.html">Reports</a></li><li><a href="commercial.html">Commercial</a></li><li><a href="project.html">Project</a></li><li><a href="human-resources.html">Human Resources</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="../stories.html">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="../contact.html">Contact Us</a></li></ul></div>
-      <div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="../faq.html">FAQs</a></li><li><a href="../help.html">Help &amp; Support</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="../faq.html">FAQs</a></li><li><a href="../help.html">Help &amp; Support</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
       <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
     </div>
     <div class="base"><span>© 2026 wBizManager. All rights reserved.</span><nav><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></nav></div>
@@ -462,6 +464,34 @@
   const rescale = () => scalers.forEach(s => s.style.setProperty('--s', (s.clientWidth / +s.dataset.w).toFixed(4)));
   if ('ResizeObserver' in window) { const ro = new ResizeObserver(rescale); scalers.forEach(s => ro.observe(s)); }
   rescale(); addEventListener('resize', rescale);
+  /* Header */
+  const dds = [...document.querySelectorAll('.dd')];
+  const mnav = document.getElementById('mnav'), burger = document.querySelector('.burger');
+  function closeAll(except) {
+    dds.forEach(d => { if (d !== except) { d.classList.remove('open'); d.querySelector('button').setAttribute('aria-expanded', 'false'); } });
+    if (!except) { mnav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.innerHTML = icon('menu'); }
+  }
+  const hoverable = matchMedia('(hover: hover)').matches;
+  dds.forEach(d => {
+    const b = d.querySelector('button');
+    b.addEventListener('click', e => { e.stopPropagation(); const open = hoverable && d.dataset.hovered ? true : !d.classList.contains('open'); delete d.dataset.hovered; closeAll(d); d.classList.toggle('open', open); b.setAttribute('aria-expanded', open); });
+    if (matchMedia('(hover: hover)').matches) {
+      let t;
+      d.addEventListener('mouseenter', () => { clearTimeout(t); if (!d.classList.contains('open')) d.dataset.hovered = 1; closeAll(d); d.classList.add('open'); b.setAttribute('aria-expanded', 'true'); });
+      d.addEventListener('mouseleave', () => { t = setTimeout(() => { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); }, 120); });
+    }
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('.dd')) dds.forEach(d => { d.classList.remove('open'); d.querySelector('button').setAttribute('aria-expanded', 'false'); }); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+  burger.addEventListener('click', () => {
+    const open = !mnav.classList.contains('open');
+    mnav.classList.toggle('open', open); burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); burger.innerHTML = icon(open ? 'x' : 'menu');
+  });
+  mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeAll()));
+  const hdr = document.getElementById('hdr');
+  const onScroll = () => hdr.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
 })();
 </script>
 <script>/* vslider */

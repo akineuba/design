@@ -575,6 +575,8 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 @media print{.vs{display:none}}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*:not(.rv),*::before,*::after{animation:none!important;transition:none!important}.rv{translate:none!important;scale:none!important}}
 .faq-more{margin-top:32px}
+.nav > a[aria-current="page"]{color:var(--brand-ink);background:var(--brand-subtle)}
+.mnav > a[aria-current="page"]{color:var(--brand-ink)}
 </style>
 </head>
 <body>
@@ -635,6 +637,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
   <div class="wrap">
     <a class="logo" href="#top" aria-label="wBizManager home"><img src="assets/logo.png" alt="wBizManager" width="136" height="32"></a>
     <nav class="nav" aria-label="Main">
+      <a href="#top" aria-current="page">Home</a>
       <div class="dd">
         <button type="button" aria-expanded="false" aria-haspopup="true">Modules <svg class="i"><use href="#i-down"/></svg></button>
         <div class="menu"><div class="mega" style="--cols:3"><div><h5>Financial</h5><ul><li><a href="modules/accounting.html"><b>Accounting</b><small>Manage finances &amp; ledgers</small></a></li><li><a href="modules/sales.html"><b>Sales</b><small>Track deals &amp; customers</small></a></li><li><a href="modules/purchases.html"><b>Purchases</b><small>Manage orders &amp; suppliers</small></a></li></ul></div><div><h5>Operations</h5><ul><li><a href="modules/inventory.html"><b>Inventory</b><small>Monitor stock &amp; warehouses</small></a></li><li><a href="modules/approvals.html"><b>Approvals</b><small>Streamline approval flows</small></a></li><li><a href="modules/reports.html"><b>Reports</b><small>Insights &amp; analytics</small></a></li></ul></div><div><h5>Management</h5><ul><li><a href="modules/commercial.html"><b>Commercial</b><small>Business operations hub</small></a></li><li><a href="modules/project.html"><b>Project</b><small>Plan &amp; track milestones</small></a></li><li><a href="modules/human-resources.html"><b>Human Resources</b><small>People &amp; payroll management</small></a></li></ul></div><div class="mega-card"><h4>Built for growing businesses</h4><p>One integrated platform to run your entire business, from finance and procurement to people and projects, without the complexity of disconnected tools.</p><a class="link" href="#modules">See all nine modules <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
@@ -662,6 +665,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
 </header>
 
 <div class="mnav" id="mnav">
+  <a href="#top" aria-current="page">Home</a>
   <details><summary>Modules <svg class="i"><use href="#i-down"/></svg></summary><div id="mnav-solutions"></div></details>
   <details><summary>Industries <svg class="i"><use href="#i-down"/></svg></summary><div>
     <a href="#industries">Retail &amp; Trading</a><a href="#industries">Distribution</a><a href="#industries">Manufacturing</a><a href="#industries">Professional Services</a><a href="#industries">Growing SMEs</a>
@@ -1125,7 +1129,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         <li><a href="modules/accounting.html">Accounting</a></li><li><a href="modules/sales.html">Sales</a></li><li><a href="modules/purchases.html">Purchases</a></li><li><a href="modules/approvals.html">Approvals</a></li><li><a href="modules/inventory.html">Inventory</a></li>
         <li><a href="modules/reports.html">Reports</a></li><li><a href="modules/commercial.html">Commercial</a></li><li><a href="modules/project.html">Project</a></li><li><a href="modules/human-resources.html">Human Resources</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="stories.html">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
-      <div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="faq.html">FAQs</a></li><li><a href="help.html">Help &amp; Support</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="faq.html">FAQs</a></li><li><a href="help.html">Help &amp; Support</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
       <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
     </div>
     <div class="base"><span>© 2026 wBizManager. All rights reserved.</span><nav><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></nav></div>
