@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Customer stories · wBizManager</title>
+<meta name="description" content="How oil and gas, energy, pharmaceutical and distribution businesses run their finance, operations and people on wBizManager.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>[hidden]{display:none!important}
+.st-hero{position:relative;overflow:clip;padding-block:clamp(56px,7vw,96px) clamp(40px,5vw,64px);background:var(--canvas)}
+.st-hero .wrap{position:relative;z-index:1}
+.st-hero .head-c{margin-bottom:0}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink)}
+.st-hero h1{font-size:clamp(40px,5.6vw,72px);max-width:16ch}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:8px}
+.chip{font:inherit;font-size:14px;font-weight:500;color:var(--text-2);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:8px 16px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.chip:hover{border-color:#CBD5E1}
+.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.st-sec{padding-block:clamp(56px,7vw,88px)}
+.st-sec + .st-sec{padding-top:0}
+.st-sec h2{font-size:clamp(26px,2.6vw,34px);font-weight:600;letter-spacing:-.02em}
+.st-sec .sub{margin-top:8px;color:var(--muted);font-size:16px}
+.v-grid{margin-top:32px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.v-card{display:grid;align-content:start;border:1px solid var(--border);border-radius:var(--r-card);background:var(--surface);overflow:hidden;transition:box-shadow .2s,transform .2s}
+.v-card:hover{box-shadow:var(--shadow-float);transform:translateY(-2px)}
+.thumb-box{position:relative;aspect-ratio:16/10}
+.thumb{position:absolute;inset:0;display:block;width:100%;height:100%;border:0;padding:0;cursor:pointer;overflow:hidden;color:#fff;background:var(--tone);font:inherit;text-align:left}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.thumb .art{position:absolute;inset:0;background:radial-gradient(120% 90% at 85% 10%,rgba(255,255,255,.28),transparent 55%),linear-gradient(160deg,transparent 40%,rgba(0,0,0,.35))}
+.thumb .art::before{content:"";position:absolute;right:-12%;bottom:-30%;width:70%;aspect-ratio:1;border-radius:50%;border:28px solid rgba(255,255,255,.08)}
+.thumb .mono{position:absolute;left:20px;bottom:18px;display:grid;gap:2px}
+.thumb .mono b{font-size:15px;font-weight:600}
+.thumb .mono small{font-size:12.5px;opacity:.8}
+.thumb .vtag{position:absolute;left:16px;top:16px;font-size:12px;font-weight:600;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);border-radius:999px;padding:5px 10px}
+.thumb .dur{position:absolute;right:16px;bottom:16px;font-size:12px;font-weight:600;background:rgba(15,23,42,.55);border-radius:6px;padding:4px 8px}
+.thumb .play{position:absolute;left:50%;top:44%;translate:-50% -50%;width:64px;height:64px;border-radius:50%;background:#fff;color:var(--tone);display:grid;place-items:center;box-shadow:0 10px 30px -8px rgba(0,0,0,.45);transition:scale .2s}
+.thumb .play .i{width:26px;height:26px;margin-left:3px}
+.thumb:hover .play,.thumb:focus-visible .play{scale:1.08}
+.thumb:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+.v-body{display:grid;gap:14px;padding:22px 24px 24px}
+.v-body h3{font-size:18px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.q{margin:0;color:var(--text-2);font-size:15.5px;line-height:1.65}
+.who{display:flex;align-items:center;gap:12px;margin-top:4px}
+.av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:600;color:#fff;background:var(--tone);flex:none}
+.who b{display:block;font-size:14.5px;font-weight:600}
+.who small{display:block;font-size:13px;color:var(--muted)}
+.q-grid{margin-top:32px;columns:3 320px;column-gap:24px}
+.q-card{break-inside:avoid;margin:0 0 24px;border:1px solid var(--border);border-radius:var(--r-card);background:var(--surface);padding:28px;display:grid;gap:18px}
+.q-card .mk{display:block;height:28px;font:700 64px/1 Georgia,"Times New Roman",serif;color:var(--brand)}
+.q-card .q{font-size:16.5px;line-height:1.65;color:var(--text)}
+.q-card .who{padding-top:18px;border-top:1px solid var(--border)}
+.empty{margin-top:24px;color:var(--muted)}
+.v-dlg{border:0;padding:0;border-radius:20px;width:min(920px,calc(100vw - 32px));max-height:calc(100vh - 32px);background:var(--surface);color:var(--text);box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}
+.v-dlg::backdrop{background:rgba(10,15,28,.72)}
+.v-dlg .vstage{position:relative;aspect-ratio:16/9;background:var(--tone);color:#fff;display:grid;place-items:center;overflow:hidden}
+.v-dlg .vstage video{position:absolute;inset:0;width:100%;height:100%;background:#000}
+.v-dlg .vstage .soon{position:relative;display:grid;justify-items:center;gap:10px;text-align:center;padding:24px}
+.v-dlg .vstage .soon .play{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center}
+.v-dlg .vstage .soon .play .i{width:28px;height:28px;margin-left:3px}
+.v-dlg .vstage .soon b{font-size:18px}
+.v-dlg .vstage .soon small{opacity:.8;font-size:14px}
+.v-dlg .x{position:absolute;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:rgba(15,23,42,.55);color:#fff;display:grid;place-items:center;cursor:pointer}
+.v-dlg .x .i{width:18px;height:18px}
+.v-dlg .info{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:28px 32px 32px}
+.v-dlg h3{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.v-dlg .q{margin-top:12px}
+.v-dlg .who{margin-top:18px}
+.res{list-style:none;margin:0;padding:0;display:grid;gap:14px;align-content:start}
+.res li{border-left:3px solid var(--tone);padding-left:14px}
+.res b{display:block;font-size:22px;font-weight:700;letter-spacing:-.01em}
+.res small{font-size:13.5px;color:var(--muted)}
+.cta-band{background:var(--brand);color:#fff;padding-block:clamp(72px,9vw,112px);overflow:hidden;position:relative}
+.cta-band .wrap{display:grid;justify-items:center;text-align:center;gap:24px;position:relative;z-index:1}
+.cta-band h2{font-size:clamp(40px,6vw,84px);color:#fff}
+.cta-band p{font-size:18px;line-height:1.6;color:rgba(255,255,255,.88);max-width:48ch}
+.cta-band .acts{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.btn-ghost-w{color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+.btn-ghost-w:hover{background:rgba(255,255,255,.1)}
+@media (max-width:1000px){.v-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.v-grid{grid-template-columns:1fr}.v-dlg .info{grid-template-columns:1fr;gap:24px;padding:22px 20px 24px}.q-card{padding:22px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M16 14v4M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12M3.3 7l7.7 4.73a2 2 0 0 0 2 0L20.7 7M7.5 4.27l9 5.15"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.66V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.66"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 17.5v-11"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M18 17V9M13 17V5M8 17v-3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65M22 12.65l-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M20 7h-9M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></symbol>
+    <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5l-5-5L2 17M16 7h6v6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9 4.5 3h15L21 9M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9M3 9h18M9 21v-6h6v6"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1M12 18h1M7 18h1"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8zM14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.7 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-2.2 3.2M6.6 6.6C3.9 8.4 2 12 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4m0 0h11l-1.5 4L16 12H5"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M8 11v4m4-4v4m4-4v4"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-x-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></symbol>
+<symbol id="i-plus-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8m-4-4h8"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9Z"/><circle cx="8" cy="8" r="1.5"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5Z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9m-3 3 3 3m-6 0 2 2"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+</defs>
+</svg>
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="wBizManager home"><img src="assets/logo.png" alt="wBizManager" width="136" height="32"></a>
+    <nav class="nav" aria-label="Main">
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Modules <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:3"><div><h5>Financial</h5><ul><li><a href="modules/accounting.html"><b>Accounting</b><small>Manage finances &amp; ledgers</small></a></li><li><a href="modules/sales.html"><b>Sales</b><small>Track deals &amp; customers</small></a></li><li><a href="modules/purchases.html"><b>Purchases</b><small>Manage orders &amp; suppliers</small></a></li></ul></div><div><h5>Operations</h5><ul><li><a href="modules/inventory.html"><b>Inventory</b><small>Monitor stock &amp; warehouses</small></a></li><li><a href="modules/approvals.html"><b>Approvals</b><small>Streamline approval flows</small></a></li><li><a href="modules/reports.html"><b>Reports</b><small>Insights &amp; analytics</small></a></li></ul></div><div><h5>Management</h5><ul><li><a href="modules/commercial.html"><b>Commercial</b><small>Business operations hub</small></a></li><li><a href="modules/project.html"><b>Project</b><small>Plan &amp; track milestones</small></a></li><li><a href="modules/human-resources.html"><b>Human Resources</b><small>People &amp; payroll management</small></a></li></ul></div><div class="mega-card"><h4>Built for growing businesses</h4><p>One integrated platform to run your entire business, from finance and procurement to people and projects, without the complexity of disconnected tools.</p><a class="link" href="index.html#modules">See all nine modules <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Industries <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Products</h5><ul><li><a href="index.html#industries"><b>Retail &amp; Trading</b><small>Sales, stock &amp; customers</small></a></li><li><a href="index.html#industries"><b>Distribution</b><small>Suppliers, orders &amp; deliveries</small></a></li><li><a href="index.html#industries"><b>Manufacturing</b><small>Materials &amp; operations</small></a></li></ul></div><div><h5>Services</h5><ul><li><a href="index.html#industries"><b>Professional Services</b><small>Clients, invoices &amp; expenses</small></a></li><li><a href="index.html#industries"><b>Growing SMEs</b><small>One platform for daily operations</small></a></li></ul></div><div class="mega-card"><h4>One platform, the way you do business</h4><p>Every business runs differently. wBizManager gives yours a connected foundation, whether you sell products, deliver services or manage a growing team.</p><a class="link" href="index.html#industries">Explore industries <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <a href="pricing.html">Pricing</a>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Resources <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Learn</h5><ul><li><a href="stories.html" aria-current="page"><b>Customer Stories</b><small>How businesses use wBizManager</small></a></li></ul></div><div><h5>Get help</h5><ul><li><a href="index.html#faq"><b>FAQs</b><small>Answers to common questions</small></a></li><li><a href="help.html"><b>Help &amp; Support</b><small>Guides, tutorials &amp; our team</small></a></li></ul></div><div class="mega-card"><h4>Need a hand getting set up?</h4><p>Our team can talk through your business requirements and help you get value from wBizManager from day one.</p><a class="link" href="contact.html">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Company <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>About</h5><ul><li><a href="#"><b>About Us</b><small>Who we are &amp; what we build</small></a></li><li><a href="#"><b>Partners</b><small>Bring wBizManager to your clients</small></a></li></ul></div><div><h5>Get in touch</h5><ul><li><a href="contact.html"><b>Contact Us</b><small>Talk to sales or support</small></a></li><li><a href="#"><b>Become a Partner</b><small>Join the partner programme</small></a></li></ul></div><div class="mega-card"><h4>Let’s talk about your business</h4><p>Explore wBizManager and see how a connected business management platform can support your day-to-day operations.</p><a class="link" href="pricing.html">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+    </nav>
+    <div class="hdr-cta">
+      <a class="login" href="login.html">Log in</a>
+      <a class="btn btn-primary" href="pricing.html">Get Started</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="mnav" id="mnav">
+  <details><summary>Modules <svg class="i"><use href="#i-down"/></svg></summary><div><a href="modules/accounting.html">Accounting</a><a href="modules/sales.html">Sales</a><a href="modules/purchases.html">Purchases</a><a href="modules/approvals.html">Approvals</a><a href="modules/inventory.html">Inventory</a><a href="modules/reports.html">Reports</a><a href="modules/commercial.html">Commercial</a><a href="modules/project.html">Project</a><a href="modules/human-resources.html">Human Resources</a></div></details>
+  <details><summary>Industries <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="index.html#industries">Retail &amp; Trading</a><a href="index.html#industries">Distribution</a><a href="index.html#industries">Manufacturing</a><a href="index.html#industries">Professional Services</a><a href="index.html#industries">Growing SMEs</a>
+  </div></details>
+  <a href="pricing.html">Pricing</a>
+  <details><summary>Resources <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="stories.html">Customer Stories</a><a href="index.html#faq">FAQs</a><a href="help.html">Help &amp; Support</a>
+  </div></details>
+  <details><summary>Company <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="#">About Us</a><a href="#">Partners</a><a href="contact.html">Contact Us</a>
+  </div></details>
+  <div class="mbtns">
+    <a class="btn btn-primary" href="pricing.html">Get Started</a>
+    <a class="btn btn-secondary" href="login.html">Log in</a>
+  </div>
+</div>
+<main>
+  <section class="st-hero" data-vs="Stories">
+    <div class="wave tl" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div><div class="wave br" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
+    <div class="wrap">
+      <div class="head-c">
+        <span class="eyebrow">Customer stories</span>
+        <h1 class="display">Businesses that run on wBizManager.</h1>
+        <p class="lead">Finance, operations and HR teams across oil and gas, energy, pharmaceuticals and distribution share how one connected system changed the way they work.</p>
+        <div class="chips" role="group" aria-label="Filter stories by industry"><button class="chip" type="button" data-f="all" aria-pressed="true">All stories</button><button class="chip" type="button" data-f="oil" aria-pressed="false">Oil & gas services</button><button class="chip" type="button" data-f="energy" aria-pressed="false">Energy & power</button><button class="chip" type="button" data-f="pharma" aria-pressed="false">Pharmaceuticals</button><button class="chip" type="button" data-f="dist" aria-pressed="false">Distribution</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="st-sec" aria-labelledby="st-v" data-vs="Watch">
+    <div class="wrap">
+      <h2 id="st-v">Watch their stories</h2>
+      <p class="sub">Short films from the teams behind the numbers.</p>
+      <div class="v-grid">
+      <article class="v-card" data-ind="oil" style="--tone:#0B5BD3">
+        <div class="thumb-box"><button class="thumb" type="button" data-v="0" aria-label="Play video: Deltaview Oilfield Services, Closing the month in three days, not three weeks"><span class="art"></span><span class="vtag">Oil & gas services</span><span class="play"><svg class="i"><use href="#i-play"/></svg></span><span class="mono"><b>Deltaview Oilfield Services</b><small>Chiamaka Obi</small></span><span class="dur">2:48</span></button></div>
+        <div class="v-body"><h3>Closing the month in three days, not three weeks</h3><blockquote class="q">“We used to wait on spreadsheets from four field bases before we could close. Now every invoice, purchase order and stock issue lands in one ledger, and month-end takes three days.”</blockquote><div class="who"><span class="av" aria-hidden="true">CO</span><div><b>Chiamaka Obi</b><small>Chief Financial Officer, Deltaview Oilfield Services</small></div></div></div>
+      </article>
+      <article class="v-card" data-ind="energy" style="--tone:#0E7C66">
+        <div class="thumb-box"><button class="thumb" type="button" data-v="1" aria-label="Play video: Harmattan Power, Keeping two power plants supplied without stock-outs"><span class="art"></span><span class="vtag">Energy & power</span><span class="play"><svg class="i"><use href="#i-play"/></svg></span><span class="mono"><b>Harmattan Power</b><small>Ibrahim Danjuma</small></span><span class="dur">3:12</span></button></div>
+        <div class="v-body"><h3>Keeping two power plants supplied without stock-outs</h3><blockquote class="q">“Turbine spares and diesel used to run out without warning. With reorder levels per warehouse and approvals on every requisition, we have not had a stock-out in nine months.”</blockquote><div class="who"><span class="av" aria-hidden="true">ID</span><div><b>Ibrahim Danjuma</b><small>Head of Operations, Harmattan Power</small></div></div></div>
+      </article>
+      <article class="v-card" data-ind="pharma" style="--tone:#6D3FC0">
+        <div class="thumb-box"><button class="thumb" type="button" data-v="2" aria-label="Play video: Kestrel Pharmaceuticals, Batch-level stock and faster distributor billing"><span class="art"></span><span class="vtag">Pharmaceuticals</span><span class="play"><svg class="i"><use href="#i-play"/></svg></span><span class="mono"><b>Kestrel Pharmaceuticals</b><small>Dr. Funmi Adeyemi</small></span><span class="dur">2:21</span></button></div>
+        <div class="v-body"><h3>Batch-level stock and faster distributor billing</h3><blockquote class="q">“Our distributors are billed the same day goods leave the warehouse, and every invoice ties back to the batch. Our auditors noticed the difference before we told them.”</blockquote><div class="who"><span class="av" aria-hidden="true">FA</span><div><b>Dr. Funmi Adeyemi</b><small>Managing Director, Kestrel Pharmaceuticals</small></div></div></div>
+      </article>
+      </div>
+      <p class="empty" id="v-empty" hidden>No video stories in this industry yet.</p>
+    </div>
+  </section>
+
+  <section class="st-sec" aria-labelledby="st-q" data-vs="In their words">
+    <div class="wrap">
+      <h2 id="st-q">In their words</h2>
+      <p class="sub">What customers tell us about day-to-day life on wBizManager.</p>
+      <div class="q-grid">
+      <figure class="q-card" data-ind="oil" style="--tone:#0B5BD3">
+        <span class="mk" aria-hidden="true">“</span>
+        <blockquote class="q">“Every purchase now goes through the same approval path, with the budget check built in. Vendors get paid on time and nobody chases signatures on paper.”</blockquote>
+        <figcaption><div class="who"><span class="av" aria-hidden="true">TB</span><div><b>Tunde Bakare</b><small>Procurement Manager, Okun Marine & Offshore</small></div></div></figcaption>
+      </figure>
+      <figure class="q-card" data-ind="dist" style="--tone:#0E7C66">
+        <span class="mk" aria-hidden="true">“</span>
+        <blockquote class="q">“We invoice 600 retailers a month. Seeing what each one owes, and who is overdue, on one screen changed how our collections team starts the day.”</blockquote>
+        <figcaption><div class="who"><span class="av" aria-hidden="true">NE</span><div><b>Ngozi Eze</b><small>Finance Lead, Lagoon Foods Distribution</small></div></div></figcaption>
+      </figure>
+      <figure class="q-card" data-ind="energy" style="--tone:#6D3FC0">
+        <span class="mk" aria-hidden="true">“</span>
+        <blockquote class="q">“Each installation is a project with its own budget, timesheets and costs. I can tell a client exactly where their money went without exporting anything.”</blockquote>
+        <figcaption><div class="who"><span class="av" aria-hidden="true">EN</span><div><b>Emeka Nwankwo</b><small>Project Controller, Savanna Solar Systems</small></div></div></figcaption>
+      </figure>
+      <figure class="q-card" data-ind="pharma" style="--tone:#B45309">
+        <span class="mk" aria-hidden="true">“</span>
+        <blockquote class="q">“Leave requests, appraisals and payroll inputs used to live in three tools. Our 240 staff now have one place, and payroll runs a day earlier each month.”</blockquote>
+        <figcaption><div class="who"><span class="av" aria-hidden="true">AM</span><div><b>Aisha Mohammed</b><small>HR Manager, Medivale Healthcare</small></div></div></figcaption>
+      </figure>
+      <figure class="q-card" data-ind="oil" style="--tone:#0369A1">
+        <span class="mk" aria-hidden="true">“</span>
+        <blockquote class="q">“Transfers between Onne and Warri used to go missing on paper. Now every movement is recorded the moment it happens, and cycle counts actually match.”</blockquote>
+        <figcaption><div class="who"><span class="av" aria-hidden="true">KA</span><div><b>Kelechi Amadi</b><small>Warehouse Supervisor, Ridgeline Drilling Supplies</small></div></div></figcaption>
+      </figure>
+      <figure class="q-card" data-ind="dist" style="--tone:#BE185D">
+        <span class="mk" aria-hidden="true">“</span>
+        <blockquote class="q">“Our tender pipeline sits next to our projects and invoices, so the board pack builds itself. I spend Monday mornings on decisions instead of numbers.”</blockquote>
+        <figcaption><div class="who"><span class="av" aria-hidden="true">FO</span><div><b>Folake Ojo</b><small>Commercial Director, Crestfield Trading Co.</small></div></div></figcaption>
+      </figure>
+      </div>
+      <p class="empty" id="q-empty" hidden>No written stories in this industry yet.</p>
+    </div>
+  </section>
+
+  <section class="cta-band" data-vs="Let's talk">
+    <div class="wave tr" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
+    <div class="wrap">
+      <h2 class="display">Write your own story.</h2>
+      <p>See how wBizManager can connect your finance, operations and people, and what it could change for your team.</p>
+      <div class="acts"><a class="btn btn-white btn-lg" href="pricing.html">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a><a class="btn btn-ghost-w btn-lg" href="contact.html">Talk to our team</a></div>
+    </div>
+  </section>
+</main>
+
+<dialog class="v-dlg" id="v-dlg" aria-labelledby="v-title">
+  <button class="x" type="button" aria-label="Close video"><svg class="i"><use href="#i-x"/></svg></button>
+  <div class="vstage" id="v-stage"></div>
+  <div class="info">
+    <div><h3 id="v-title"></h3><blockquote class="q" id="v-quote"></blockquote><div class="who"><span class="av" id="v-av" aria-hidden="true"></span><div><b id="v-person"></b><small id="v-role"></small></div></div></div>
+    <ul class="res" id="v-res" aria-label="Results"></ul>
+  </div>
+</dialog>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="top">
+      <div class="about">
+        <img src="assets/logo.png" alt="wBizManager" width="145" height="34">
+        <p>Integrated business management for growing businesses.</p>
+      </div>
+      <div><h4>Solutions</h4><ul>
+        <li><a href="modules/accounting.html">Accounting</a></li><li><a href="modules/sales.html">Sales</a></li><li><a href="modules/purchases.html">Purchases</a></li><li><a href="modules/approvals.html">Approvals</a></li><li><a href="modules/inventory.html">Inventory</a></li>
+        <li><a href="modules/reports.html">Reports</a></li><li><a href="modules/commercial.html">Commercial</a></li><li><a href="modules/project.html">Project</a></li><li><a href="modules/human-resources.html">Human Resources</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="stories.html">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="index.html#faq">FAQs</a></li><li><a href="help.html">Help &amp; Support</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
+    </div>
+    <div class="base"><span>© 2026 wBizManager. All rights reserved.</span><nav><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></nav></div>
+  </div>
+</footer>
+<script>
+(function () {
+  const STORIES = [{"company": "Deltaview Oilfield Services", "person": "Chiamaka Obi", "role": "Chief Financial Officer", "title": "Closing the month in three days, not three weeks", "quote": "We used to wait on spreadsheets from four field bases before we could close. Now every invoice, purchase order and stock issue lands in one ledger, and month-end takes three days.", "tone": "#0B5BD3", "results": [["3 days", "to close the month, down from 18"], ["4", "field bases on one ledger"], ["100%", "of POs approved in the system"]], "video": "", "av": "CO"}, {"company": "Harmattan Power", "person": "Ibrahim Danjuma", "role": "Head of Operations", "title": "Keeping two power plants supplied without stock-outs", "quote": "Turbine spares and diesel used to run out without warning. With reorder levels per warehouse and approvals on every requisition, we have not had a stock-out in nine months.", "tone": "#0E7C66", "results": [["0", "stock-outs in nine months"], ["2", "plants, one inventory view"], ["41%", "less emergency buying"]], "video": "", "av": "ID"}, {"company": "Kestrel Pharmaceuticals", "person": "Dr. Funmi Adeyemi", "role": "Managing Director", "title": "Batch-level stock and faster distributor billing", "quote": "Our distributors are billed the same day goods leave the warehouse, and every invoice ties back to the batch. Our auditors noticed the difference before we told them.", "tone": "#6D3FC0", "results": [["Same day", "distributor invoicing"], ["11", "distributors billed from one place"], ["2 weeks", "faster external audit"]], "video": "", "av": "FA"}];
+  /* Industry filter: applies to both the video and the written stories */
+  const chips = document.querySelectorAll('.chip');
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(o => o.setAttribute('aria-pressed', String(o === c)));
+    const f = c.dataset.f;
+    [['.v-card', 'v-empty'], ['.q-card', 'q-empty']].forEach(([sel, empty]) => {
+      let n = 0;
+      document.querySelectorAll(sel).forEach(el => { const on = f === 'all' || el.dataset.ind === f; el.hidden = !on; n += on; });
+      document.getElementById(empty).hidden = n > 0;
+    });
+  }));
+
+  /* Video player: plays the film when one is set, otherwise says it is on its way */
+  const dlg = document.getElementById('v-dlg'), stage = document.getElementById('v-stage');
+  const $ = id => document.getElementById(id);
+  document.querySelectorAll('.thumb').forEach(b => b.addEventListener('click', () => {
+    const s = STORIES[+b.dataset.v];
+    dlg.style.setProperty('--tone', s.tone);
+    stage.innerHTML = s.video
+      ? `<video src="${s.video}" controls autoplay playsinline></video>`
+      : `<div class="soon"><span class="play"><svg class="i"><use href="#i-play"/></svg></span><b>${s.company}</b><small>The film is being edited and will be available here soon.</small></div>`;
+    $('v-title').textContent = s.title;
+    $('v-quote').textContent = `“${s.quote}”`;
+    $('v-av').textContent = s.av; $('v-av').style.background = s.tone;
+    $('v-person').textContent = s.person; $('v-role').textContent = `${s.role}, ${s.company}`;
+    $('v-res').innerHTML = s.results.map(([v, l]) => `<li><b>${v}</b><small>${l}</small></li>`).join('');
+    dlg.showModal();
+  }));
+  const close = () => dlg.close();
+  dlg.querySelector('.x').addEventListener('click', close);
+  dlg.addEventListener('click', e => { if (e.target === dlg) close(); });
+  dlg.addEventListener('close', () => { stage.innerHTML = ''; });
+})();
+</script>
+<script>/* vslider */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vs = document.createElement('div');
+  vs.className = 'vs'; vs.tabIndex = 0;
+  vs.setAttribute('role', 'slider'); vs.setAttribute('aria-label', 'Page position'); vs.setAttribute('aria-orientation', 'vertical');
+  vs.setAttribute('aria-valuemin', '0'); vs.setAttribute('aria-valuemax', '100');
+  vs.innerHTML = '<div class="vs-t"><div class="vs-f"></div></div><span class="vs-k"></span><span class="vs-l"></span>';
+  document.body.appendChild(vs);
+  const track = vs.querySelector('.vs-t'), label = vs.querySelector('.vs-l');
+  const stops = [...document.querySelectorAll('[data-vs]')];
+  const max = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const top = el => el.getBoundingClientRect().top + scrollY;
+  const dots = stops.map(el => {
+    const d = document.createElement('button');
+    d.type = 'button'; d.className = 'vs-d'; d.tabIndex = -1;
+    d.setAttribute('aria-label', 'Go to ' + el.dataset.vs);
+    d.innerHTML = '<span class="vs-tip">' + el.dataset.vs + '</span>';
+    d.addEventListener('click', e => { e.stopPropagation(); scrollTo({ top: Math.max(0, top(el) - 72), behavior: reduce ? 'auto' : 'smooth' }); });
+    d.addEventListener('pointerdown', e => e.stopPropagation());
+    vs.insertBefore(d, label); return d;
+  });
+  /* Track runs between the padding, so positions are fractions of its own height */
+  const place = (el, p) => { el.style.top = (track.offsetTop + p * track.offsetHeight) + 'px'; };
+  function layout() {
+    vs.hidden = document.documentElement.scrollHeight - innerHeight < 120;
+    stops.forEach((el, i) => place(dots[i], Math.min(1, Math.max(0, (top(el) - 72) / max()))));
+    update();
+  }
+  function update() {
+    const p = Math.min(1, Math.max(0, scrollY / max()));
+    vs.style.setProperty('--p', p);
+    track.style.setProperty('--p', p);
+    place(vs.querySelector('.vs-k'), p); place(label, p);
+    vs.setAttribute('aria-valuenow', Math.round(p * 100));
+    let cur = -1;
+    stops.forEach((el, i) => { if (top(el) - innerHeight * .4 <= scrollY) cur = i; });
+    dots.forEach((d, i) => d.classList.toggle('on', i <= cur));
+    const name = cur >= 0 ? stops[cur].dataset.vs : (stops[0] ? stops[0].dataset.vs : '');
+    label.textContent = name || Math.round(p * 100) + '%';
+    vs.setAttribute('aria-valuetext', (name ? name + ', ' : '') + Math.round(p * 100) + '%');
+  }
+  const seek = y => { const r = track.getBoundingClientRect(); scrollTo({ top: Math.min(1, Math.max(0, (y - r.top) / r.height)) * max(), behavior: 'instant' }); };
+  vs.addEventListener('pointerdown', e => { e.preventDefault(); vs.setPointerCapture(e.pointerId); vs.classList.add('drag'); seek(e.clientY); });
+  vs.addEventListener('pointermove', e => { if (vs.classList.contains('drag')) seek(e.clientY); });
+  const end = () => vs.classList.remove('drag');
+  vs.addEventListener('pointerup', end); vs.addEventListener('pointercancel', end);
+  vs.addEventListener('keydown', e => {
+    const step = { ArrowDown: .05, ArrowRight: .05, ArrowUp: -.05, ArrowLeft: -.05, PageDown: .2, PageUp: -.2 }[e.key];
+    if (step != null) { e.preventDefault(); scrollBy(0, step * max()); }
+    else if (e.key === 'Home') { e.preventDefault(); scrollTo(0, 0); }
+    else if (e.key === 'End') { e.preventDefault(); scrollTo(0, max()); }
+  });
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', layout);
+  if ('ResizeObserver' in window) new ResizeObserver(layout).observe(document.body);
+  addEventListener('load', layout); layout();
+})();
+</script>
+</body>
+</html>

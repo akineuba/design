@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Help & Support · wBizManager</title>
+<meta name="description" content="Guides, step-by-step answers and ways to reach the wBizManager support team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>[hidden]{display:none!important}
+.hp-hero{position:relative;overflow:clip;padding-block:clamp(56px,7vw,96px) clamp(48px,6vw,72px);background:var(--canvas)}
+.hp-hero .wrap{position:relative;z-index:1}
+.hp-hero .head-c{margin-bottom:0}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-ink)}
+.hp-hero h1{font-size:clamp(40px,5.6vw,72px)}
+.hp-search{position:relative;width:min(640px,100%);margin-top:8px}
+.hp-search .i{position:absolute;left:18px;top:50%;translate:0 -50%;width:20px;height:20px;color:var(--muted)}
+.hp-search input{width:100%;height:58px;border:1px solid #CBD5E1;border-radius:14px;background:#fff;font:inherit;font-size:16px;color:var(--text);padding:0 20px 0 52px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 12px 32px -20px rgba(15,23,42,.18)}
+.hp-search input::placeholder{color:#94A3B8}
+.hp-search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(0,112,255,.15)}
+.pop{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.pop button{font:inherit;font-size:14px;color:var(--brand-ink);background:none;border:0;padding:2px 4px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(0,91,204,.3)}
+.hp-sec{padding-block:clamp(56px,7vw,88px)}
+.hp-sec h2{font-size:clamp(26px,2.6vw,34px);font-weight:600;letter-spacing:-.02em}
+.hp-sec .sub{margin-top:8px;color:var(--muted);font-size:16px}
+.tp-grid{margin-top:32px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.tp{display:grid;align-content:start;gap:10px;text-align:left;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:22px;cursor:pointer;transition:border-color .15s,box-shadow .2s,transform .2s}
+.tp:hover{border-color:#CBD5E1;box-shadow:var(--shadow-float);transform:translateY(-2px)}
+.tp[aria-pressed="true"]{border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,112,255,.12)}
+.tp .ic{width:40px;height:40px;border-radius:10px;background:var(--brand-subtle);color:var(--brand);display:grid;place-items:center}
+.tp .ic .i{width:20px;height:20px}
+.tp b{font-size:16px;font-weight:600;margin-top:4px}
+.tp span{font-size:14px;line-height:1.5;color:var(--muted)}
+.tp small{font-size:13px;font-weight:600;color:var(--brand-ink)}
+.ar-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.ar-head .clear{font:inherit;font-size:14px;color:var(--brand-ink);background:none;border:0;cursor:pointer;padding:0}
+.ar-wrap{margin-top:24px;display:grid;gap:36px}
+.ar-group h3{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-bottom:4px;border-bottom:1px solid var(--border)}
+.ar-group .qa summary{font-size:16.5px}
+.ar-group .qa p{font-size:15.5px}
+.hp-empty{border:1px dashed #CBD5E1;border-radius:var(--r-card);padding:32px;text-align:center;color:var(--muted);display:grid;gap:10px;justify-items:center}
+.hp-empty b{color:var(--text);font-size:17px}
+.ch-sec{background:var(--canvas)}
+.ch-grid{margin-top:32px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.ch{display:grid;align-content:start;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:28px}
+.ch .ic{width:44px;height:44px;border-radius:12px;background:var(--brand);color:#fff;display:grid;place-items:center}
+.ch .ic .i{width:21px;height:21px}
+.ch h3{font-size:18px;font-weight:600;margin-top:4px}
+.ch p{font-size:15px;line-height:1.6;color:var(--muted)}
+.ch .link{margin-top:4px;font-weight:600}
+.hours{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px 32px;font-size:14px;color:var(--muted)}
+.hours span{display:flex;align-items:center;gap:8px}
+.hours .i{width:16px;height:16px;color:var(--brand)}
+.faq-link{margin-top:40px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border:1px solid var(--border);border-radius:var(--r-card);background:var(--surface);padding:24px 28px}
+.faq-link b{font-size:17px}
+.faq-link p{color:var(--muted);font-size:15px;margin-top:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+mark{background:#FFF3B0;color:inherit;border-radius:3px;padding:0 1px}
+@media (max-width:1000px){.tp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ch-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.tp-grid{grid-template-columns:1fr}.hp-search input{height:52px;font-size:15px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M16 14v4M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12M3.3 7l7.7 4.73a2 2 0 0 0 2 0L20.7 7M7.5 4.27l9 5.15"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.66V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.66"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 17.5v-11"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M18 17V9M13 17V5M8 17v-3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65M22 12.65l-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M20 7h-9M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></symbol>
+    <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5l-5-5L2 17M16 7h6v6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9 4.5 3h15L21 9M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9M3 9h18M9 21v-6h6v6"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1M12 18h1M7 18h1"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8zM14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.7 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-2.2 3.2M6.6 6.6C3.9 8.4 2 12 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4m0 0h11l-1.5 4L16 12H5"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M8 11v4m4-4v4m4-4v4"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-x-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></symbol>
+<symbol id="i-plus-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8m-4-4h8"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9Z"/><circle cx="8" cy="8" r="1.5"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5Z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9m-3 3 3 3m-6 0 2 2"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+</defs>
+</svg>
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="wBizManager home"><img src="assets/logo.png" alt="wBizManager" width="136" height="32"></a>
+    <nav class="nav" aria-label="Main">
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Modules <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:3"><div><h5>Financial</h5><ul><li><a href="modules/accounting.html"><b>Accounting</b><small>Manage finances &amp; ledgers</small></a></li><li><a href="modules/sales.html"><b>Sales</b><small>Track deals &amp; customers</small></a></li><li><a href="modules/purchases.html"><b>Purchases</b><small>Manage orders &amp; suppliers</small></a></li></ul></div><div><h5>Operations</h5><ul><li><a href="modules/inventory.html"><b>Inventory</b><small>Monitor stock &amp; warehouses</small></a></li><li><a href="modules/approvals.html"><b>Approvals</b><small>Streamline approval flows</small></a></li><li><a href="modules/reports.html"><b>Reports</b><small>Insights &amp; analytics</small></a></li></ul></div><div><h5>Management</h5><ul><li><a href="modules/commercial.html"><b>Commercial</b><small>Business operations hub</small></a></li><li><a href="modules/project.html"><b>Project</b><small>Plan &amp; track milestones</small></a></li><li><a href="modules/human-resources.html"><b>Human Resources</b><small>People &amp; payroll management</small></a></li></ul></div><div class="mega-card"><h4>Built for growing businesses</h4><p>One integrated platform to run your entire business, from finance and procurement to people and projects, without the complexity of disconnected tools.</p><a class="link" href="index.html#modules">See all nine modules <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Industries <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Products</h5><ul><li><a href="index.html#industries"><b>Retail &amp; Trading</b><small>Sales, stock &amp; customers</small></a></li><li><a href="index.html#industries"><b>Distribution</b><small>Suppliers, orders &amp; deliveries</small></a></li><li><a href="index.html#industries"><b>Manufacturing</b><small>Materials &amp; operations</small></a></li></ul></div><div><h5>Services</h5><ul><li><a href="index.html#industries"><b>Professional Services</b><small>Clients, invoices &amp; expenses</small></a></li><li><a href="index.html#industries"><b>Growing SMEs</b><small>One platform for daily operations</small></a></li></ul></div><div class="mega-card"><h4>One platform, the way you do business</h4><p>Every business runs differently. wBizManager gives yours a connected foundation, whether you sell products, deliver services or manage a growing team.</p><a class="link" href="index.html#industries">Explore industries <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <a href="pricing.html">Pricing</a>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Resources <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Learn</h5><ul><li><a href="stories.html"><b>Customer Stories</b><small>How businesses use wBizManager</small></a></li></ul></div><div><h5>Get help</h5><ul><li><a href="index.html#faq"><b>FAQs</b><small>Answers to common questions</small></a></li><li><a href="help.html" aria-current="page"><b>Help &amp; Support</b><small>Guides, tutorials &amp; our team</small></a></li></ul></div><div class="mega-card"><h4>Need a hand getting set up?</h4><p>Our team can talk through your business requirements and help you get value from wBizManager from day one.</p><a class="link" href="contact.html">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Company <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>About</h5><ul><li><a href="#"><b>About Us</b><small>Who we are &amp; what we build</small></a></li><li><a href="#"><b>Partners</b><small>Bring wBizManager to your clients</small></a></li></ul></div><div><h5>Get in touch</h5><ul><li><a href="contact.html"><b>Contact Us</b><small>Talk to sales or support</small></a></li><li><a href="#"><b>Become a Partner</b><small>Join the partner programme</small></a></li></ul></div><div class="mega-card"><h4>Let’s talk about your business</h4><p>Explore wBizManager and see how a connected business management platform can support your day-to-day operations.</p><a class="link" href="pricing.html">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+    </nav>
+    <div class="hdr-cta">
+      <a class="login" href="login.html">Log in</a>
+      <a class="btn btn-primary" href="pricing.html">Get Started</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="mnav" id="mnav">
+  <details><summary>Modules <svg class="i"><use href="#i-down"/></svg></summary><div><a href="modules/accounting.html">Accounting</a><a href="modules/sales.html">Sales</a><a href="modules/purchases.html">Purchases</a><a href="modules/approvals.html">Approvals</a><a href="modules/inventory.html">Inventory</a><a href="modules/reports.html">Reports</a><a href="modules/commercial.html">Commercial</a><a href="modules/project.html">Project</a><a href="modules/human-resources.html">Human Resources</a></div></details>
+  <details><summary>Industries <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="index.html#industries">Retail &amp; Trading</a><a href="index.html#industries">Distribution</a><a href="index.html#industries">Manufacturing</a><a href="index.html#industries">Professional Services</a><a href="index.html#industries">Growing SMEs</a>
+  </div></details>
+  <a href="pricing.html">Pricing</a>
+  <details><summary>Resources <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="stories.html">Customer Stories</a><a href="index.html#faq">FAQs</a><a href="help.html">Help &amp; Support</a>
+  </div></details>
+  <details><summary>Company <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="#">About Us</a><a href="#">Partners</a><a href="contact.html">Contact Us</a>
+  </div></details>
+  <div class="mbtns">
+    <a class="btn btn-primary" href="pricing.html">Get Started</a>
+    <a class="btn btn-secondary" href="login.html">Log in</a>
+  </div>
+</div>
+<main>
+  <section class="hp-hero" data-vs="Help">
+    <div class="wave tl" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div><div class="wave br" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
+    <div class="wrap">
+      <div class="head-c">
+        <span class="eyebrow">Help &amp; Support</span>
+        <h1 class="display">How can we help?</h1>
+        <p class="lead">Search our guides, browse by topic, or get in touch with the support team.</p>
+        <label class="hp-search"><svg class="i"><use href="#i-search"/></svg><span class="sr">Search help articles</span><input type="search" id="hp-q" placeholder="Search for answers, e.g. “reconcile a bank account”" autocomplete="off"></label>
+        <div class="pop"><span>Popular:</span><button type="button" data-q="bank reconciliation">bank reconciliation</button><button type="button" data-q="approval workflow">approval workflow</button><button type="button" data-q="partial payment">partial payment</button><button type="button" data-q="leave">leave</button><button type="button" data-q="import">import</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hp-sec" aria-labelledby="hp-topics" data-vs="Topics">
+    <div class="wrap">
+      <h2 id="hp-topics">Browse by topic</h2>
+      <p class="sub">Step-by-step answers for every part of wBizManager.</p>
+      <div class="tp-grid">
+        <button class="tp" type="button" data-t="start" aria-pressed="false">
+          <span class="ic"><svg class="i"><use href="#i-spark"/></svg></span><b>Getting started</b><span>Set up your organisation, users and opening balances.</span><small>3 articles</small>
+        </button>
+        <button class="tp" type="button" data-t="acc" aria-pressed="false">
+          <span class="ic"><svg class="i"><use href="#i-calc"/></svg></span><b>Accounting</b><span>Journals, bank reconciliation, budgets and closing the month.</span><small>3 articles</small>
+        </button>
+        <button class="tp" type="button" data-t="sales" aria-pressed="false">
+          <span class="ic"><svg class="i"><use href="#i-cart"/></svg></span><b>Sales & invoicing</b><span>Customers, invoices, credit notes and receiving payments.</span><small>3 articles</small>
+        </button>
+        <button class="tp" type="button" data-t="buy" aria-pressed="false">
+          <span class="ic"><svg class="i"><use href="#i-bag"/></svg></span><b>Purchases & approvals</b><span>Requisitions, purchase orders, bills and approval rules.</span><small>3 articles</small>
+        </button>
+        <button class="tp" type="button" data-t="inv" aria-pressed="false">
+          <span class="ic"><svg class="i"><use href="#i-box"/></svg></span><b>Inventory</b><span>Items, warehouses, stock movements and reorder levels.</span><small>3 articles</small>
+        </button>
+        <button class="tp" type="button" data-t="rep" aria-pressed="false">
+          <span class="ic"><svg class="i"><use href="#i-chart"/></svg></span><b>Reports & dashboards</b><span>Financial statements, KPIs and scheduled reports.</span><small>2 articles</small>
+        </button>
+        <button class="tp" type="button" data-t="ppl" aria-pressed="false">
+          <span class="ic"><svg class="i"><use href="#i-users"/></svg></span><b>HR & payroll</b><span>Employees, leave, attendance and appraisals.</span><small>2 articles</small>
+        </button>
+        <button class="tp" type="button" data-t="acct" aria-pressed="false">
+          <span class="ic"><svg class="i"><use href="#i-key"/></svg></span><b>Account & billing</b><span>Your plan, users, invoices and security settings.</span><small>3 articles</small>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="hp-sec" id="articles" aria-labelledby="hp-art" style="padding-top:0" data-vs="Articles">
+    <div class="wrap">
+      <div class="ar-head"><div><h2 id="hp-art">Help articles</h2><p class="sub" id="ar-sub">All topics</p></div><button class="clear" type="button" id="ar-clear" hidden>Show all topics</button></div>
+      <div class="ar-wrap" id="ar-wrap">
+        <div class="ar-group" data-t="start">
+          <h3>Getting started</h3>
+          <details class="qa"><summary><span class="qt">How do I set up my organisation for the first time?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Go to Settings → Organisation and enter your company details, base currency, financial year and tax settings. The setup checklist on your dashboard walks you through the rest — chart of accounts, users and opening balances — and ticks each step off as you finish it.</p></details>
+          <details class="qa"><summary><span class="qt">How do I invite my team?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Open Settings → Users and choose Invite user. Enter their work email and pick a role such as Accountant, Storekeeper or HR Officer. They receive an email to set a password, and see only the modules and departments their role allows.</p></details>
+          <details class="qa"><summary><span class="qt">Can I import data from my old system or spreadsheets?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Yes. Customers, suppliers, items, opening balances and employees can all be imported from CSV or Excel. Use Bulk Upload on each list to download the template, fill it in and upload it — wBizManager checks every row and tells you exactly what to fix before anything is saved.</p></details>
+        </div>
+        <div class="ar-group" data-t="acc">
+          <h3>Accounting</h3>
+          <details class="qa"><summary><span class="qt">How do I reconcile a bank account?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Go to Accounting → Bank Accounts, choose the account and select Reconcile. Upload your bank statement or enter the closing balance, then match each statement line to a recorded transaction. Unmatched lines can be turned into new entries in one click.</p></details>
+          <details class="qa"><summary><span class="qt">How do I close a financial period?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Once every reconciliation is done, open Accounting → Period Close and choose the month. wBizManager lists anything still open, such as unposted journals or unreconciled accounts. Closing the period locks it so no back-dated entries can change your reported figures.</p></details>
+          <details class="qa"><summary><span class="qt">Can I post journals in another currency?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Yes. Enable multi-currency under Settings → Currencies, then choose the currency when you create the journal. Exchange rates can be entered manually or updated daily, and realised gains or losses are posted automatically on settlement.</p></details>
+        </div>
+        <div class="ar-group" data-t="sales">
+          <h3>Sales & invoicing</h3>
+          <details class="qa"><summary><span class="qt">How do I record a partial payment against an invoice?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Open Sales → Receive Payment, choose the customer and enter the amount received. Allocate it across one or more open invoices; any invoice not paid in full stays open with its remaining balance, and the customer statement updates straight away.</p></details>
+          <details class="qa"><summary><span class="qt">How do I issue a credit note?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Open the original invoice and choose Issue credit note, or go to Sales → Credit Notes → New. Select the lines being credited and a reason. Once posted, the credit is applied to the customer’s balance and can be used against future invoices or refunded.</p></details>
+          <details class="qa"><summary><span class="qt">Can I customise my invoice template?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Yes. Under Settings → Templates you can add your logo, colours, payment details and footer notes, and choose which columns appear. Every invoice, quote and credit note uses the template you set as default.</p></details>
+        </div>
+        <div class="ar-group" data-t="buy">
+          <h3>Purchases & approvals</h3>
+          <details class="qa"><summary><span class="qt">How do I set up an approval workflow?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Go to Approvals → Workflows and choose what it applies to — purchase orders, payments, leave or expenses. Add steps, set an approver or role for each, and add conditions such as amount limits or departments. Requests follow the workflow automatically from then on.</p></details>
+          <details class="qa"><summary><span class="qt">Why is my purchase order still pending?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Open the purchase order and look at the approval trail at the top. It shows which step it is waiting on and who needs to act. Approvers are reminded automatically, and an administrator can reassign the step if someone is away.</p></details>
+          <details class="qa"><summary><span class="qt">How do I match a supplier bill to a purchase order?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>When you record the bill, choose Match to PO and select the order. wBizManager compares quantities and prices with the goods received and flags any differences before the bill can be approved for payment.</p></details>
+        </div>
+        <div class="ar-group" data-t="inv">
+          <h3>Inventory</h3>
+          <details class="qa"><summary><span class="qt">How do I transfer stock between warehouses?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Go to Inventory → Stock Movements → New Transfer. Choose the source and destination warehouses, add the items and quantities, and post it. Stock leaves the source straight away and arrives at the destination when the transfer is received.</p></details>
+          <details class="qa"><summary><span class="qt">How do reorder levels work?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Set a minimum quantity for each item per warehouse. When stock falls below it, the item appears on your Running low list and the storekeeper is notified, and you can raise a purchase requisition from the alert.</p></details>
+          <details class="qa"><summary><span class="qt">How do I run a stock count?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Open Inventory → Adjustments → New Count, pick the warehouse and print or download the count sheet. Enter the counted quantities and wBizManager shows the differences, which you can review and post as an adjustment.</p></details>
+        </div>
+        <div class="ar-group" data-t="rep">
+          <h3>Reports & dashboards</h3>
+          <details class="qa"><summary><span class="qt">How do I schedule a report to be emailed?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Open the report, set your filters and choose Schedule. Pick how often it should run and who receives it. Recipients get a PDF or Excel copy on schedule, and only see data their role allows.</p></details>
+          <details class="qa"><summary><span class="qt">Can I build my own report?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Yes. Go to Reports → Report Library → New custom report. Choose a data source, pick columns, filters and grouping, and save it. Custom reports can be shared with your team, favourited and added to dashboards.</p></details>
+        </div>
+        <div class="ar-group" data-t="ppl">
+          <h3>HR & payroll</h3>
+          <details class="qa"><summary><span class="qt">How do employees request leave?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Employees choose Request leave from their dashboard, pick the leave type and dates, and submit. The request follows your leave approval workflow, and their balance updates as soon as it is approved.</p></details>
+          <details class="qa"><summary><span class="qt">How do I run an appraisal cycle?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Go to Human Resources → Appraisals → New cycle. Choose the review period, the employees included and the goals or competencies to rate. Employees complete a self review, managers add their ratings and HR signs off at the end.</p></details>
+        </div>
+        <div class="ar-group" data-t="acct">
+          <h3>Account & billing</h3>
+          <details class="qa"><summary><span class="qt">How do I add more users to my plan?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>An administrator can go to Settings → Subscription and increase the number of seats. The change takes effect immediately and the extra seats are charged pro rata on your next invoice.</p></details>
+          <details class="qa"><summary><span class="qt">How do I reset my password?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Choose Forgot password on the sign-in page and enter your work email. You will receive a link to set a new password. For security, the link expires after 30 minutes.</p></details>
+          <details class="qa"><summary><span class="qt">Can I turn on two-factor authentication?</span><span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Yes. Each user can enable it under My Profile → Security using an authenticator app. Administrators can also require it for everyone in the organisation under Settings → Security.</p></details>
+        </div>
+      </div>
+      <div class="hp-empty" id="ar-empty" hidden><b>No articles match your search.</b><span>Try different words, or ask the team — we reply within one business day.</span><a class="btn btn-secondary" href="mailto:support@wbizmanager.com">Email support</a></div>
+      <div class="faq-link"><div><b>Looking for general questions?</b><p>Pricing, setup time, security and more are answered in our FAQs.</p></div><a class="btn btn-secondary" href="index.html#faq">Read the FAQs</a></div>
+    </div>
+  </section>
+
+  <section class="hp-sec ch-sec" aria-labelledby="hp-ch" data-vs="Contact support">
+    <div class="wrap">
+      <h2 id="hp-ch">Still need help?</h2>
+      <p class="sub">Our support team is based in Lagos and knows the product inside out.</p>
+      <div class="ch-grid">
+        <div class="ch">
+          <span class="ic"><svg class="i"><use href="#i-mail"/></svg></span><h3>Email support</h3><p>Send us the details and a screenshot if you can. We reply within one business day.</p><a class="link" href="mailto:support@wbizmanager.com">support@wbizmanager.com <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="ch">
+          <span class="ic"><svg class="i"><use href="#i-phone"/></svg></span><h3>Call us</h3><p>Speak to the support team, Monday to Friday, 8am to 6pm WAT.</p><a class="link" href="tel:+23417000000">+234 1 700 0000 <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="ch">
+          <span class="ic"><svg class="i"><use href="#i-users"/></svg></span><h3>Talk to our team</h3><p>Planning a rollout, new module or integration? Our team will help you scope it.</p><a class="link" href="contact.html">Contact sales <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <div class="hours"><span><svg class="i"><use href="#i-clock"/></svg> Monday to Friday, 8am – 6pm WAT</span><span><svg class="i"><use href="#i-mail"/></svg> Email replies within 1 business day</span><span><svg class="i"><use href="#i-person"/></svg> Full ERP plans include a dedicated account manager</span></div>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="top">
+      <div class="about">
+        <img src="assets/logo.png" alt="wBizManager" width="145" height="34">
+        <p>Integrated business management for growing businesses.</p>
+      </div>
+      <div><h4>Solutions</h4><ul>
+        <li><a href="modules/accounting.html">Accounting</a></li><li><a href="modules/sales.html">Sales</a></li><li><a href="modules/purchases.html">Purchases</a></li><li><a href="modules/approvals.html">Approvals</a></li><li><a href="modules/inventory.html">Inventory</a></li>
+        <li><a href="modules/reports.html">Reports</a></li><li><a href="modules/commercial.html">Commercial</a></li><li><a href="modules/project.html">Project</a></li><li><a href="modules/human-resources.html">Human Resources</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="stories.html">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="index.html#faq">FAQs</a></li><li><a href="help.html">Help &amp; Support</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
+    </div>
+    <div class="base"><span>© 2026 wBizManager. All rights reserved.</span><nav><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></nav></div>
+  </div>
+</footer>
+<script>
+(function () {
+  const q = document.getElementById('hp-q'), groups = [...document.querySelectorAll('.ar-group')];
+  const tiles = document.querySelectorAll('.tp'), sub = document.getElementById('ar-sub');
+  const empty = document.getElementById('ar-empty'), clear = document.getElementById('ar-clear');
+  const names = {}; tiles.forEach(t => names[t.dataset.t] = t.querySelector('b').textContent);
+  let topic = '';
+  groups.forEach(g => g.querySelectorAll('.qa').forEach(d => { d._q = d.querySelector('.qt').textContent; d._a = d.querySelector('p').textContent; }));
+  const esc = s => s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]);
+  const mark = (txt, words) => { let h = esc(txt); words.forEach(w => { h = h.replace(new RegExp('(' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>'); }); return h; };
+  /* Filter by topic and search words; matching articles open when you search */
+  function apply() {
+    const words = q.value.trim().toLowerCase().split(/\s+/).filter(w => w.length > 1);
+    let shown = 0;
+    groups.forEach(g => {
+      let n = 0;
+      g.querySelectorAll('.qa').forEach(d => {
+        const hay = (d._q + ' ' + d._a).toLowerCase();
+        const ok = (!topic || g.dataset.t === topic) && words.every(w => hay.includes(w));
+        d.hidden = !ok; n += ok;
+        d.querySelector('.qt').innerHTML = words.length ? mark(d._q, words) : esc(d._q);
+        d.querySelector('p').innerHTML = words.length ? mark(d._a, words) : esc(d._a);
+        if (words.length && ok) d.open = true;
+      });
+      g.hidden = !n; shown += n;
+    });
+    empty.hidden = shown > 0;
+    sub.textContent = (topic ? names[topic] : 'All topics') + (words.length ? ` · ${shown} result${shown === 1 ? '' : 's'} for “${q.value.trim()}”` : '');
+    clear.hidden = !topic && !words.length;
+  }
+  q.addEventListener('input', apply);
+  q.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('articles').scrollIntoView({ behavior: 'smooth' }); });
+  document.querySelectorAll('.pop button').forEach(b => b.addEventListener('click', () => { q.value = b.dataset.q; apply(); document.getElementById('articles').scrollIntoView({ behavior: 'smooth' }); }));
+  tiles.forEach(t => t.addEventListener('click', () => {
+    topic = topic === t.dataset.t ? '' : t.dataset.t;
+    tiles.forEach(o => o.setAttribute('aria-pressed', String(o.dataset.t === topic)));
+    apply(); if (topic) document.getElementById('articles').scrollIntoView({ behavior: 'smooth' });
+  }));
+  clear.addEventListener('click', () => { topic = ''; q.value = ''; tiles.forEach(o => o.setAttribute('aria-pressed', 'false')); groups.forEach(g => g.querySelectorAll('.qa').forEach(d => d.open = false)); apply(); });
+})();
+</script>
+<script>/* vslider */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vs = document.createElement('div');
+  vs.className = 'vs'; vs.tabIndex = 0;
+  vs.setAttribute('role', 'slider'); vs.setAttribute('aria-label', 'Page position'); vs.setAttribute('aria-orientation', 'vertical');
+  vs.setAttribute('aria-valuemin', '0'); vs.setAttribute('aria-valuemax', '100');
+  vs.innerHTML = '<div class="vs-t"><div class="vs-f"></div></div><span class="vs-k"></span><span class="vs-l"></span>';
+  document.body.appendChild(vs);
+  const track = vs.querySelector('.vs-t'), label = vs.querySelector('.vs-l');
+  const stops = [...document.querySelectorAll('[data-vs]')];
+  const max = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const top = el => el.getBoundingClientRect().top + scrollY;
+  const dots = stops.map(el => {
+    const d = document.createElement('button');
+    d.type = 'button'; d.className = 'vs-d'; d.tabIndex = -1;
+    d.setAttribute('aria-label', 'Go to ' + el.dataset.vs);
+    d.innerHTML = '<span class="vs-tip">' + el.dataset.vs + '</span>';
+    d.addEventListener('click', e => { e.stopPropagation(); scrollTo({ top: Math.max(0, top(el) - 72), behavior: reduce ? 'auto' : 'smooth' }); });
+    d.addEventListener('pointerdown', e => e.stopPropagation());
+    vs.insertBefore(d, label); return d;
+  });
+  /* Track runs between the padding, so positions are fractions of its own height */
+  const place = (el, p) => { el.style.top = (track.offsetTop + p * track.offsetHeight) + 'px'; };
+  function layout() {
+    vs.hidden = document.documentElement.scrollHeight - innerHeight < 120;
+    stops.forEach((el, i) => place(dots[i], Math.min(1, Math.max(0, (top(el) - 72) / max()))));
+    update();
+  }
+  function update() {
+    const p = Math.min(1, Math.max(0, scrollY / max()));
+    vs.style.setProperty('--p', p);
+    track.style.setProperty('--p', p);
+    place(vs.querySelector('.vs-k'), p); place(label, p);
+    vs.setAttribute('aria-valuenow', Math.round(p * 100));
+    let cur = -1;
+    stops.forEach((el, i) => { if (top(el) - innerHeight * .4 <= scrollY) cur = i; });
+    dots.forEach((d, i) => d.classList.toggle('on', i <= cur));
+    const name = cur >= 0 ? stops[cur].dataset.vs : (stops[0] ? stops[0].dataset.vs : '');
+    label.textContent = name || Math.round(p * 100) + '%';
+    vs.setAttribute('aria-valuetext', (name ? name + ', ' : '') + Math.round(p * 100) + '%');
+  }
+  const seek = y => { const r = track.getBoundingClientRect(); scrollTo({ top: Math.min(1, Math.max(0, (y - r.top) / r.height)) * max(), behavior: 'instant' }); };
+  vs.addEventListener('pointerdown', e => { e.preventDefault(); vs.setPointerCapture(e.pointerId); vs.classList.add('drag'); seek(e.clientY); });
+  vs.addEventListener('pointermove', e => { if (vs.classList.contains('drag')) seek(e.clientY); });
+  const end = () => vs.classList.remove('drag');
+  vs.addEventListener('pointerup', end); vs.addEventListener('pointercancel', end);
+  vs.addEventListener('keydown', e => {
+    const step = { ArrowDown: .05, ArrowRight: .05, ArrowUp: -.05, ArrowLeft: -.05, PageDown: .2, PageUp: -.2 }[e.key];
+    if (step != null) { e.preventDefault(); scrollBy(0, step * max()); }
+    else if (e.key === 'Home') { e.preventDefault(); scrollTo(0, 0); }
+    else if (e.key === 'End') { e.preventDefault(); scrollTo(0, max()); }
+  });
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', layout);
+  if ('ResizeObserver' in window) new ResizeObserver(layout).observe(document.body);
+  addEventListener('load', layout); layout();
+})();
+</script>
+</body>
+</html>
