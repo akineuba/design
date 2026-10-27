@@ -70,7 +70,7 @@ Extracted by counting the values the product screens use (accounting `0:1`, inve
 | `fg-placeholder` / `fg-disabled` | #C1C4CB / #D0D5DD | Placeholders, disabled text |
 | `fg-inverse` | #FFFFFF | Text on primary |
 | `icon` / `icon-muted` | #292D32 / #475467 | Icon strokes / chevrons |
-| `line-subtle` / `line` / `line-strong` | #EAECF0 / #D0D5DD / #667085 | Dividers, cards, tables / control borders / hover border and the outline (Cancel) button |
+| `line-subtle` / `line` / `line-strong` | #EAECF0 / #D0D5DD / #667085 | Dividers, cards, tables / control borders / hover border |
 | `line-field` | #D1D5DB | Side-panel section borders |
 | `action-{view,edit,delete,link,positive}` | #667085 / #D4A003 / #E81E25 / #0070FF / #00C167 | Row action menu items |
 | `tile-{green,blue,amber,teal,red}-{bg,fg}` / `trend-up` / `trend-down` | derived from the live product | Summary card icon tiles and trend lines |
@@ -119,7 +119,7 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 
 | Component | Figma source | Key props / states |
 |---|---|---|
-| `Button` | `_Button base` frames (accounting) | `variant`: primary, secondary, outline (Cancel in panels), tertiary, destructive · `size`: sm, md, lg · `disabled`, `loading`, icons, `iconOnly`, `fullWidth` |
+| `Button` | `_Button base` frames (accounting) | `variant`: primary, secondary, outline (Cancel in panels; blue border and label), tertiary, destructive · `size`: sm, md, lg · `disabled`, `loading`, icons, `iconOnly`, `fullWidth` |
 | `Input` | Journal fields `6309:33026` (accounting) | `size` · `label`, `hint`, `error`, `success`, `required`, `disabled`, `readOnly`, `loading`, icons |
 | `Select` | dropdown-inner `7092:1508` (new features); open menu `5184:46439` (accounting) | menu is positioned against the viewport (works inside scrolling tables, cards and panels); **searchable by default**; `menuAction` ("Add New" → centred quick-add `Modal`, receives the search text); `options`, `value`/`defaultValue`, `placeholder`, `required`, `error`, `hint`, `disabled`, `size` |
 | `FilterDropdown` + `FilterField` | "Filters" on Customers `191:3274`; panel `7099:7787` | list pages · closed / open / `activeCount`, `onApply`, `onReset` |

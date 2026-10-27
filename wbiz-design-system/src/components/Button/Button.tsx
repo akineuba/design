@@ -7,7 +7,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual style. Figma: Button 9 (primary), Button 5 (secondary), Button 04 (tertiary), Button 6 (destructive),
-   * Button 5 in side panels (outline: the Cancel button with a grey #667085 border). */
+   * Button 5 in side panels (outline: the Cancel button, restyled blue by design: primary border and label). */
   variant?: ButtonVariant;
   /** Height: sm 34px, md 40px (default in Figma), lg 46px. */
   size?: ButtonSize;
@@ -38,7 +38,7 @@ const sizes: Record<ButtonSize, { box: string; square: string }> = {
 const variants: Record<ButtonVariant, string> = {
   primary: 'border-primary bg-primary text-fg-inverse shadow-xs hover:border-primary-hover hover:bg-primary-hover',
   secondary: 'border-line bg-surface text-fg hover:bg-surface-muted',
-  outline: 'border-line-strong bg-surface text-fg-muted hover:bg-surface-muted',
+  outline: 'border-primary bg-surface text-primary hover:bg-primary-subtle',
   tertiary: 'border-transparent bg-transparent text-fg-muted hover:bg-surface-muted hover:text-fg',
   destructive: 'border-error bg-surface text-error hover:bg-error-subtle',
 };

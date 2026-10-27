@@ -11,7 +11,7 @@ Buttons start an action: save, create, export, open a panel or modal. If it only
 |---|---|
 | `primary` | The main action of the page, panel or popup (Add New, Save, Apply, Publish). **One per area.** |
 | `secondary` | Supporting actions next to a primary (Export, Bulk Upload, Import, Settings). |
-| `outline` | **Cancel** in side panels, modals and popups. |
+| `outline` | **Cancel** in side panels, modals and popups. White with a blue border and blue label. |
 | `tertiary` | Low-emphasis actions inside content (Reset, Clear). |
 | `destructive` | Deletes or clears data. Always confirm in a centred `Modal` first. |
 
