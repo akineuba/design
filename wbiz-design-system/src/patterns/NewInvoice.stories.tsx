@@ -355,7 +355,7 @@ function NewInvoicePage({ filled = false, currency: startCurrency = 'NGN' }: Inv
           <Card
             title="Line items"
             description={`${realLines.length} line${realLines.length === 1 ? '' : 's'} · amounts in ${currency}`}
-            actions={!locked && <ColumnCustomizer label="Customize Invoice" variant="secondary" columns={OPTIONAL_COLUMNS} value={view} onChange={setView} />}
+            actions={!locked && <ColumnCustomizer label="Customize Invoice" columns={OPTIONAL_COLUMNS} value={view} onChange={setView} />}
           >
             <div className="-mx-6">
             <Table aria-label="Invoice lines" className="min-w-line-grid table-fixed">

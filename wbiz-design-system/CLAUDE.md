@@ -125,7 +125,7 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 | `FilterDropdown` + `FilterField` | "Filters" on Customers `191:3274`; panel `7099:7787` | list pages · closed / open / `activeCount`, `onApply`, `onReset` |
 | `FilterBar` + `FilterBarField` | filter, General ledger `1752:21749` | report pages · default / "More Filters" open / `applying` / Advanced |
 | `Table` primitives, `DataTable`, `TableCard`, `TableToolbar`, `TableToolbarGroup`, `SearchField`, `TableSectionRow`, `TableFooter`, `Pagination` | Customers `191:3274`, Bills `4183:23454`, Chart of Accounts `1871:19163`, Trial balance `845:8824` | `selectable`, `sortable` columns, `rowActions`, `getRowChildren` (tree), `visibleColumns`, `density`, `activeRowId`, `loading`, `empty`; cell `emphasis` strong / link, `tight`; pagination with page jump |
-| `ColumnCustomizer` + `ColumnCustomizerPanel` | Customize Columns `845:8824`, Edit Column `896:17474` | trigger `variant` / `iconOnly`; columns (`locked`), More Options; draft until Apply |
+| `ColumnCustomizer` + `ColumnCustomizerPanel` | Customize Columns `845:8824`, Edit Column `896:17474` | primary icon-only trigger (no text, no secondary); columns (`locked`), More Options; draft until Apply |
 | `ActionMenu` | actions `191:3853` | item `tone`: view, edit, delete, link, positive; disabled items; keyboard menu |
 | `SidePanel` + `SidePanelContent` | New Customer `209:4142`, New Account `1871:19941`, New Vendor `254:5423`, New Employee `4306:39199` | `size` sm / md / lg; create / edit / view footers; `showClose`, `closeOnBackdrop` |
 | `Checkbox` | `896:17613` | unticked / ticked / indeterminate / disabled |

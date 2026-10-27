@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
-import { Button, type ButtonVariant } from '../Button';
+import { Button } from '../Button';
 import { Checkbox } from '../Checkbox';
 import { CloseCircleIcon, ColumnsIcon, TickCircleIcon } from '../../icons';
 
@@ -95,23 +95,17 @@ export function ColumnCustomizerPanel({
 
 export interface ColumnCustomizerProps extends Omit<ColumnCustomizerPanelProps, 'onCancel' | 'onApply' | 'className'> {
   onChange: (value: ColumnCustomizerValue) => void;
-  /** Trigger label. Figma: "Customize Columns". */
+  /** Accessible name of the icon-only trigger and its popup. */
   label?: string;
-  /** Figma uses primary on reports (Trial balance). Use secondary next to another primary action. */
-  variant?: ButtonVariant;
-  /** Icon-only trigger for crowded toolbars. Keeps the label as its accessible name. */
-  iconOnly?: boolean;
   /** Which edge of the trigger the popup lines up with. */
   align?: 'start' | 'end';
   className?: string;
 }
 
-/** "Customize Columns" toolbar button that opens the column popup. Escape or an outside click cancels. */
+/** Icon-only primary "Customize Columns" toolbar button that opens the column popup. Escape or an outside click cancels. */
 export function ColumnCustomizer({
   onChange,
   label = 'Customize Columns',
-  variant = 'primary',
-  iconOnly = false,
   align = 'end',
   className,
   ...panel
@@ -134,16 +128,15 @@ export function ColumnCustomizer({
     <div ref={rootRef} className={cx('relative inline-flex h-fit', className)}>
       <Button
         ref={btnRef}
-        variant={variant}
-        iconOnly={iconOnly}
-        aria-label={iconOnly ? label : undefined}
+        iconOnly
+        aria-label={label}
+        title={label}
         aria-expanded={open}
         aria-controls={popupId}
         aria-haspopup="dialog"
-        leadingIcon={iconOnly ? undefined : <ColumnsIcon />}
         onClick={() => setOpen(!open)}
       >
-        {iconOnly ? <ColumnsIcon /> : label}
+        <ColumnsIcon />
       </Button>
       {open && (
         <div id={popupId} role="dialog" aria-label={label} className={cx('absolute top-full z-20 mt-2', align === 'end' ? 'right-0' : 'left-0')}>

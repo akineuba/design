@@ -302,8 +302,6 @@ function PayrollRunsPage() {
           <TableToolbarGroup>
             <Button variant="secondary" leadingIcon={<ExportIcon />}>{selected.length ? `Export (${selected.length})` : 'Export'}</Button>
             <ColumnCustomizer
-              variant="secondary"
-              iconOnly
               columns={columns.map((c, i) => ({ key: c.key, label: String(c.header), locked: i === 0 }))}
               value={view}
               onChange={setView}

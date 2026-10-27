@@ -2,8 +2,10 @@
 Let users choose which table columns they see, plus report options (Include Inactive Accounts, Hide Zero-Balance Accounts, Show Subtotals).
 
 ## Placement
-- **List pages:** icon-only secondary button in the toolbar's right group, just before Add New.
-- **Report pages:** primary "Customize Columns" button next to Export, top right of the table card.
+- One button everywhere: a **primary, icon-only** button showing the columns icon. No text label and no secondary version.
+- **List pages:** in the toolbar's right group, just before Add New.
+- **Report pages:** next to Export, top right of the table card.
+- Its accessible name and hover tooltip is "Customize Columns" (or the `label` you pass, e.g. "Customize Invoice").
 
 ## How it behaves
 - Opens a popup under the button, aligned to its right edge.

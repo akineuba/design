@@ -87,7 +87,7 @@ export function CustomersTable({ loading, empty, onAddNew, onView, onEdit, avata
         <TableToolbarGroup>
           <Button variant="secondary" leadingIcon={<ExportIcon />}>Export</Button>
           <Button variant="secondary" leadingIcon={<BulkUploadIcon />}>Bulk Upload</Button>
-          <ColumnCustomizer variant="secondary" iconOnly columns={columnOptions(customerColumns)} value={view} onChange={setView} />
+          <ColumnCustomizer columns={columnOptions(customerColumns)} value={view} onChange={setView} />
           <Button leadingIcon={<PlusIcon />} onClick={onAddNew}>Add New</Button>
         </TableToolbarGroup>
       </TableToolbar>
@@ -243,7 +243,7 @@ export function BillsTable() {
         </TableToolbarGroup>
         <TableToolbarGroup>
           <Button variant="secondary" leadingIcon={<ExportIcon />}>Export</Button>
-          <ColumnCustomizer variant="secondary" iconOnly columns={columns.map((c, i) => ({ key: c.key, label: String(c.header), locked: i === 2 }))} value={{ columns: columns.map((c) => c.key), options: [] }} onChange={() => {}} />
+          <ColumnCustomizer columns={columns.map((c, i) => ({ key: c.key, label: String(c.header), locked: i === 2 }))} value={{ columns: columns.map((c) => c.key), options: [] }} onChange={() => {}} />
           <Button leadingIcon={<PlusIcon />}>Add New</Button>
         </TableToolbarGroup>
       </TableToolbar>

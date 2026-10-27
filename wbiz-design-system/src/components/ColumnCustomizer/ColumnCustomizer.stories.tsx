@@ -24,7 +24,6 @@ const meta = {
   title: 'Components/ColumnCustomizer',
   component: ColumnCustomizer,
   args: { columns, options, value: initial, onChange: () => {} },
-  argTypes: { variant: { control: 'inline-radio', options: ['primary', 'secondary'] } },
   decorators: [(Story) => <div className="flex min-h-screen w-full justify-end p-4"><Story /></div>],
   parameters: {
     layout: 'fullscreen',
@@ -34,7 +33,7 @@ const meta = {
         component:
           '"Customize Columns" button and its popup. Tick the columns to show and any extra options, then Apply; Cancel, Escape or an outside click discards changes. ' +
           'Locked columns (the record name) stay visible, and the last visible column cannot be unticked. ' +
-          'Primary on report pages (Trial balance); secondary or icon-only next to another primary action (list pages).',
+          'The trigger is always a primary, icon-only button (columns icon); "Customize Columns" is its accessible name and tooltip.',
       },
     },
   },
@@ -43,8 +42,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Button: Story = {};
-export const Secondary: Story = { args: { variant: 'secondary' } };
-export const IconOnly: Story = { args: { variant: 'secondary', iconOnly: true } };
 export const Open: Story = {
   play: async ({ canvasElement }) => {
     const c = within(canvasElement);
