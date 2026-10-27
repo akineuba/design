@@ -28,7 +28,9 @@ body{background:var(--lg-bg);color:var(--text);transition:background .25s,color 
 .st-top p{margin-top:16px;font-size:17.5px;line-height:1.6;color:#334155;max-width:460px}
 .gcard{position:absolute;background:rgba(255,255,255,.96);border-radius:16px;box-shadow:0 18px 40px -18px rgba(8,20,48,.45);color:#0F172A;transition:opacity .45s,translate .45s}
 .avs{display:flex}.avs span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:9px;font-weight:700;box-shadow:0 0 0 2px #fff;margin-left:-7px}.avs span:first-child{margin-left:0}
-.st-mx{left:45px;bottom:21%;width:296px;padding:18px 18px 16px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:grid;gap:12px}
+.st-low{position:absolute;left:45px;right:56px;bottom:118px;display:flex;flex-direction:column;align-items:flex-start;gap:28px}
+.st-low .st-mx{position:relative}
+.st-mx{width:296px;padding:18px 18px 16px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:grid;gap:12px}
 .st-mx header{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#475569;font-weight:500}
 .st-mx header span{letter-spacing:0;text-transform:none;font-size:12px;font-weight:600;color:var(--success);background:#DCFCE7;padding:3px 9px;border-radius:999px}
 .st-mx .m{display:grid;gap:7px}
@@ -37,7 +39,7 @@ body{background:var(--lg-bg);color:var(--text);transition:background .25s,color 
 .st-mx .m i{display:block;height:6px;border-radius:999px;background:#D5DDE7;overflow:hidden}
 .st-mx .m i::before{content:"";display:block;height:100%;width:var(--v);border-radius:inherit;background:var(--c,var(--brand))}
 .st-mx > small{font-size:12.5px;color:#64748B}
-.st-cap{position:absolute;left:55px;right:56px;bottom:118px;display:flex;gap:18px;align-items:flex-start;color:#fff;transition:opacity .45s}
+.st-cap{position:relative;margin-left:10px;display:flex;gap:18px;align-items:flex-start;color:#fff;transition:opacity .45s}
 .st-cap .ico{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;flex:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .st-cap .ico .i{width:22px;height:22px}
 .st-cap b{display:block;font-size:21px;font-weight:600;letter-spacing:-.01em;margin-top:2px}
@@ -89,7 +91,7 @@ form{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:34px}
 .err{font-size:14px;color:var(--error);margin-top:-8px}
 .terms{font-size:14px;color:#64748B;text-align:center;margin-top:-20px}
 .terms a{color:var(--lg-text);font-weight:600}
-@media (max-width:1100px){.st-top{left:40px;right:40px;top:40px}.st-mx{left:28px}.st-cap{left:40px;right:40px}.st-bot{left:40px;right:40px}.trust{display:none}}
+@media (max-width:1100px){.st-top{left:40px;right:40px;top:40px}.st-low{left:28px;right:40px}.st-cap{margin-left:12px}.st-bot{left:40px;right:40px}.trust{display:none}}
 @media (max-width:900px){.lg{grid-template-columns:1fr;padding:0}.story{display:none}.auth{min-height:100vh;padding:88px 16px 40px}.card{padding:32px 22px}.brand img.lg-logo{height:54px}}
 @media (prefers-reduced-motion:reduce){.gcard,.st-cap,.dots button{transition:none}}
 </style>
@@ -171,8 +173,10 @@ form{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:34px}
       <h2>Your whole business, <span>one calm workspace.</span></h2>
       <p>People, money and operations — connected, approved and always up to date.</p>
     </div>
-    <div class="gcard st-mx" id="st-mx"><header>Office fit-out · Lekki<span>On track</span></header><div class="m"><div>Work complete<span>68%</span></div><i style="--v:68%;--c:#0070FF"></i></div><div class="m"><div>Budget spent<span>61%</span></div><i style="--v:61%;--c:#14B8A6"></i></div><small>₦62M of ₦101M budget used</small></div>
-    <div class="st-cap" id="st-cap" aria-live="polite"><span class="ico"><svg class="i"><use href="#i-folder"/></svg></span><div><b>Projects</b><p>Plan, budget and track delivery against what was actually spent.</p></div></div>
+    <div class="st-low">
+      <div class="gcard st-mx" id="st-mx"><header>Office fit-out · Lekki<span>On track</span></header><div class="m"><div>Work complete<span>68%</span></div><i style="--v:68%;--c:#0070FF"></i></div><div class="m"><div>Budget spent<span>61%</span></div><i style="--v:61%;--c:#14B8A6"></i></div><small>₦62M of ₦101M budget used</small></div>
+      <div class="st-cap" id="st-cap" aria-live="polite"><span class="ico"><svg class="i"><use href="#i-folder"/></svg></span><div><b>Projects</b><p>Plan, budget and track delivery against what was actually spent.</p></div></div>
+    </div>
     <div class="st-bot">
       <div class="dots" role="tablist" aria-label="Highlights"><button type="button" role="tab" aria-label="Accounting" aria-selected="false"></button><button type="button" role="tab" aria-label="Sales" aria-selected="false"></button><button type="button" role="tab" aria-label="Inventory" aria-selected="false"></button><button type="button" role="tab" aria-label="People" aria-selected="false"></button><button type="button" role="tab" aria-label="Projects" aria-selected="true"></button></div>
       <div class="trust"><span><svg class="i"><use href="#i-lock"/></svg>Encrypted sign-in</span><span><svg class="i"><use href="#i-check-c"/></svg>Role-based access</span></div>
