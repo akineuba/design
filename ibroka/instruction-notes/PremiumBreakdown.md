@@ -1,0 +1,1 @@
+Shows how a premium is built: sum insured × rate = basic premium, then discounts and loadings, VAT, total, and the brokerage commission. Use on quotes, policy pages and the New Policy panel so people can check the numbers before submitting.

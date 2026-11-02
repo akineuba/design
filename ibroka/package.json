@@ -1,0 +1,40 @@
+{
+  "name": "@ibroka/design-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "iBroka design system: tokens, React components and Storybook docs for the iBroka insurance broker platform.",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build -o storybook-static && node scripts/postbuild.mjs",
+    "typecheck": "tsc --noEmit",
+    "contrast": "node scripts/check-contrast.mjs",
+    "logo": "node scripts/build-logo.mjs"
+  },
+  "dependencies": {
+    "@fontsource/instrument-sans": "5.2.6",
+    "@phosphor-icons/react": "2.1.10",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "recharts": "2.15.4"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "8.6.14",
+    "@storybook/addon-designs": "8.2.1",
+    "@storybook/addon-essentials": "8.6.14",
+    "@storybook/blocks": "8.6.14",
+    "@storybook/react": "8.6.14",
+    "@storybook/react-vite": "8.6.14",
+    "@storybook/test": "8.6.14",
+    "@types/react": "18.3.23",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "4.7.0",
+    "autoprefixer": "10.4.21",
+    "opentype.js": "^1.3.4",
+    "postcss": "8.5.6",
+    "storybook": "8.6.14",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.8.3",
+    "vite": "6.3.5"
+  }
+}

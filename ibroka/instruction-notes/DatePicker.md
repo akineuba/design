@@ -1,0 +1,1 @@
+Date field with a calendar. `mode="range"` picks a from-to range and offers presets (This month, Last 30 days, This year). Use `min`/`max` to block impossible dates (end before start, loss date in the future). Dates display as `18 Oct 2026`. Keyboard: arrows move by day and week, Enter picks.

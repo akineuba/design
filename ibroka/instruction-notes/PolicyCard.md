@@ -1,0 +1,1 @@
+One policy in the grid view of the policy list (the list/grid toggle). Shows client, class and number, premium, insurer, period, status and days left. The client name opens the policy. Put the same ⋯ menu as the table row in `actions`.

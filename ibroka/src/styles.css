@@ -1,0 +1,71 @@
+@import '@fontsource/instrument-sans/400.css';
+@import '@fontsource/instrument-sans/500.css';
+@import '@fontsource/instrument-sans/600.css';
+@import '@fontsource/instrument-sans/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--ib-fontFamily-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-surface-page text-15 text-fg-strong;
+  }
+  :focus-visible {
+    outline: none;
+  }
+  dialog::backdrop {
+    background: var(--ib-color-overlay);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 1ms !important;
+      transition-duration: 1ms !important;
+    }
+  }
+}
+
+@layer components {
+  .ib-focus {
+    @apply focus-visible:shadow-focus;
+  }
+}
+
+/* Markdown inside instruction notes and the UI Rules page */
+.ib-note h1,
+.ib-note h2,
+.ib-note h3 {
+  font-weight: 700;
+  color: var(--ib-color-fg-strong);
+  margin: 1.25em 0 0.5em;
+}
+.ib-note h1 { font-size: 30px; line-height: 38px; margin-top: 0; }
+.ib-note h2 { font-size: 20px; line-height: 26px; }
+.ib-note h3 { font-size: 15px; line-height: 20px; }
+.ib-note p,
+.ib-note li { font-size: 15px; line-height: 24px; color: var(--ib-color-fg-strong); }
+.ib-note ul,
+.ib-note ol { padding-left: 1.25em; margin: 0.5em 0; }
+.ib-note ul { list-style: disc; }
+.ib-note ol { list-style: decimal; }
+.ib-note li { margin: 0.25em 0; }
+.ib-note p { margin: 0.5em 0; }
+.ib-note code { font-size: 13px; background: var(--ib-color-surface-sunken); padding: 1px 5px; border-radius: 5px; }
+.ib-note strong { font-weight: 600; }
+.ib-note a { color: var(--ib-color-primary); text-decoration: underline; }
+.ib-note hr { border-color: var(--ib-color-line-subtle); margin: 1.5em 0; }
+.ib-note table { border-collapse: collapse; margin: 0.75em 0; font-size: 13px; }
+.ib-note th,
+.ib-note td { border: 1px solid var(--ib-color-line-subtle); padding: 6px 10px; text-align: left; }
+.ib-note th { background: var(--ib-color-surface-header); font-weight: 600; }
+
+.ib-rte:empty::before {
+  content: attr(data-placeholder);
+  color: var(--ib-color-fg-placeholder);
+}

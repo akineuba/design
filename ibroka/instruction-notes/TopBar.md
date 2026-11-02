@@ -1,0 +1,1 @@
+Bar across the top of every page (UI rule 16): breadcrumb on the left with the current page in teal; notifications (unread count) and the theme toggle on the right. Notifications open a panel with Mark all as read.

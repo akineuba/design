@@ -1,0 +1,1 @@
+Pick exactly one of two to five options that are all visible (Transaction type: New business / Renewal / Endorsement). For more options use **Select**. Never use a single radio: use a Checkbox for one yes/no (wBiz B14).

@@ -1,0 +1,1 @@
+Message that stays on the page. Use for: an **error summary** at the top of a form after Save fails (list each field as a link), a **warning** about the record (policy expires in 12 days, KYC missing), or **info** that affects the page. For confirmation that something just happened, use a **Toast** instead.

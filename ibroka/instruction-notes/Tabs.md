@@ -1,0 +1,1 @@
+Underlined tabs under the page title. Use them to switch between sibling pages of one module (Policies / Renewals / Awaiting approval) or sections of one record (Overview / Claims / Documents). Don't use tabs as filters on a single list; use quick filters or the Filter panel (UI rule 19). Counts after a label are optional. Arrow keys move between tabs.
