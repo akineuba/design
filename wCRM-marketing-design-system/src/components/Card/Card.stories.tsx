@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { CalendarIcon, MailIcon, PencilIcon, SendIcon, UsersIcon } from '../../icons';
 import { Button } from '../Button';
-import { ActivityFeed, Card, CardHeader, MetricCard, ModuleCard, ProgressBar, StatCard, SummaryCard } from './Card';
+import { ActivityFeed, Card, CardHeader, MetricCard, ModuleCard, ProgressBar, StatCard, SummaryCard, type StatCardTone } from './Card';
 
 const meta = {
   title: 'Components/Card',
@@ -51,6 +51,65 @@ export const StatWithIconAndTrend: Story = {
       <StatCard icon={<MailIcon />} label="Open rate" value="51.4%" trend={{ value: '3.2%', direction: 'up', label: 'vs last month' }} />
       <StatCard icon={<UsersIcon />} label="Unsubscribes" value="184" trend={{ value: '8%', direction: 'down', label: 'vs last month', invert: true }} />
       <StatCard icon={<CalendarIcon />} label="Bounce rate" value="2.9%" trend={{ value: '0.4%', direction: 'up', label: 'vs last month', invert: true }} />
+    </div>
+  ),
+};
+
+const birthdayStats: { id: string; label: string; value: string; hint?: string; tone: StatCardTone }[] = [
+  { id: 'total', label: 'Total birthdays', value: '6', tone: 'navy' },
+  { id: 'upcoming', label: 'Upcoming', value: '3', hint: 'Next 30 days', tone: 'info' },
+  { id: 'contacts', label: 'Total contacts', value: '48', tone: 'navy' },
+  { id: 'with', label: 'With birthday', value: '6', tone: 'success' },
+  { id: 'without', label: 'Without birthday', value: '2', tone: 'brand' },
+];
+
+function BirthdayStatsRow({ initial = 'without' }: { initial?: string | null }) {
+  const [selected, setSelected] = useState<string | null>(initial);
+  return (
+    <div role="group" aria-label="Filter contacts by birthday" className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      {birthdayStats.map((s) => (
+        <StatCard
+          key={s.id}
+          label={s.label}
+          value={s.value}
+          hint={s.hint}
+          tone={s.tone}
+          selected={selected === s.id}
+          onClick={() => setSelected((cur) => (cur === s.id ? null : s.id))}
+        />
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Clickable stats row (Birthdays): each card filters the list below it. Click a card to select it, click again to clear.
+ * The selected fill matches what the card counts: green for "With birthday", red for "Without birthday",
+ * blue for "Upcoming", indigo for the totals.
+ */
+export const InteractiveStatsRow: Story = { render: () => <BirthdayStatsRow /> };
+
+/** Every state side by side: rest, selected in each tone, and disabled. Hover, pressed and focus are live. */
+export const StatCardStates: Story = {
+  render: () => (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <StatCard label="Rest" value="48" onClick={() => {}} selected={false} />
+      <StatCard label="Selected · brand" value="2" tone="brand" selected onClick={() => {}} />
+      <StatCard label="Selected · success" value="6" tone="success" selected onClick={() => {}} />
+      <StatCard label="Selected · info" value="3" hint="Next 30 days" tone="info" selected onClick={() => {}} />
+      <StatCard label="Selected · warning" value="5" tone="warning" selected onClick={() => {}} />
+      <StatCard label="Selected · navy" value="48" tone="navy" selected onClick={() => {}} />
+      <StatCard label="Disabled" value="0" onClick={() => {}} disabled />
+      <StatCard label="Disabled · selected" value="0" tone="success" selected onClick={() => {}} disabled />
+    </div>
+  ),
+};
+
+/** The same row on the dark theme, regardless of the toolbar theme. Card fill #1E1E2E, label #9C9FB5, hint #6B6D8C. */
+export const InteractiveStatsRowDark: Story = {
+  render: () => (
+    <div data-theme="dark" className="rounded-lg bg-surface-canvas p-6">
+      <BirthdayStatsRow initial="with" />
     </div>
   ),
 };

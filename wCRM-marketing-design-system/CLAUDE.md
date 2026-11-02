@@ -79,6 +79,30 @@ Every colour works with every colour utility (`bg-`, `text-`, `border-`, `fill-`
 | `copilot.*` | `#5B5FC7`, `rgba(91,95,199,.06/.07)`, `#F5F5F5`, `#3182CE`, `#22C55E` | Copilot chat panel |
 | `mobile.*` | `brand #F32135`, `brand-subtle #FFF0F1`, `text #151A33`, `text-secondary #66728F`, `caption #8F9BBA`, `border #DDE3ED`, `canvas #F5F7FB`, `chip #F8FAFD`, `selected-border #FFC8CF`, `navy #4268B5`, `icon #292D32`, `scrim rgba(17,24,42,.6)`, `scrim-v1`, `warning-text #B6780E`, `warning-text-alt #D99114`, `info-text #3976D4`, `info-bg #EDF4FF`, `success-text #179C6B`, `success-bg #EAF8F2`, `success-text-v1 #179C6E`, `warning-bg-v1 #FFF8E8` | Mobile V2-flow / V2-sections / V1 dialects — use the dialect of the frame you build |
 
+### Dark mode (tokens v0.3.0)
+
+Light is the default (`:root`). Put `data-theme="dark"` (or the `dark` class) on `<html>`, or on any subtree, to switch.
+Tokens with a `"dark"` field in `tokens.json` override their CSS variable there; `npm run tokens` emits both blocks and
+`cssVariablesDark` in `tokens.ts`. Components need no `dark:` classes: keep using the same utilities. Dark values are
+not drawn in Figma (marked derived), except the card fill `#1E1E2E`, label `#9C9FB5` and hint `#6B6D8C`, which were sampled
+from the stat-card reference. Brand red and status solids are the same in both themes.
+
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| `surface.default` · `canvas` · `subtle` · `sunken` | `#FFFFFF` · `#F4F6FA` · `#F8FAFC` · `#F1F5F9` | `#1E1E2E` · `#151521` · `#24243A` · `#2A2A40` | Cards · page · hover/info · disabled |
+| `border.default` · `strong` · `muted` | `#E2E8F0` · `#CBD5E1` · `#A3AED0` | `#2E2E45` · `#3D3D58` · `#4C4E69` | Outlines, dividers |
+| `text.primary` · `secondary` · `muted` · `faint` | `#1E2238` · `#64748B` · `#A3AED0` · `#94A3B8` | `#F4F5FA` · `#A3A6BC` · `#9C9FB5` · `#6B6D8C` | Body · supporting · labels · hints |
+| `action.secondary` / `-hover` / `-text` / `-subtle` | `#2B3674` / `#3D5A98` / `#2B3674` / `#F0F4FA` | `#4F46E5` / `#4338CA` / `#A5B4FC` / indigo 16% | `secondary` + `navy` buttons (label lightened for 4.5:1) |
+| `accent.navy` · `navy-hover` | `#3D5A98` · `#2B3674` | `#818CF8` · `#A5B4FC` | Links, navy text, KPI values |
+
+Storybook has a **Theme** toolbar switch (sun/moon); the docs pages follow it.
+
+### Stat-card selection
+
+`gradient.stat-{brand,success,info,warning,navy}` (`bg-stat-*`) and `border.stat-*` (`border-border-stat-*`) colour a
+selected interactive `StatCard`. Brand (`#EE1F2F` → `#8E141B`) and success (`#12B76A` → `#0A4B30`) were sampled from the
+reference; info, warning and navy are derived to match.
+
 ### Typography (`text-<name>` sets size, line height and default weight; Figma "auto" line height = CSS `normal`)
 
 Fonts: **Inter** (`font-sans`, default), **Roboto** (`font-data`: sidebar, tabs, settings, mobile), **Poppins** (`font-display`: mobile titles,
@@ -164,7 +188,7 @@ Interactive behaviour (focus trapping, keyboard navigation, ARIA) comes from **R
 | `Drawer` | `new contact` (808:6024), `create user` (1823:7659) | 462px right sheet, scrolling body, sticky footer |
 | `Table` (`TableCard`, `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableEmpty`, `TableSkeleton`, `TableExpandableRow`, `TableCellStack`) | Contacts (817:8972), Social accounts (1224:25339), `company-row-expanded` (817:8786), Email marketing, Campaigns, Social posts | toolbar, sortable headers, selection, selected/interactive rows, empty/no-results, loading skeleton, expandable rows, two-line cells, `density` default/compact |
 | `Pagination` | Contacts / User management footers | summary, ellipses, current page, page size |
-| `Card`, `CardHeader`, `StatCard`, `SummaryCard`, `MetricCard`, `ProgressBar`, `ModuleCard`, `ActivityFeed` | `stats-row` / `stat-card-*` (Social posts, Email), audience summaries, email performance, module picker, activity panel | stat: featured gradient, icon tile, trend up/down (`invert` when a drop is good); summary tones; metric details; progress tones; module selected/disabled |
+| `Card`, `CardHeader`, `StatCard`, `SummaryCard`, `MetricCard`, `ProgressBar`, `ModuleCard`, `ActivityFeed` | `stats-row` / `stat-card-*` (Social posts, Email), audience summaries, email performance, module picker, activity panel | stat: featured gradient, icon tile, trend up/down (`invert` when a drop is good); stat clickable (`onClick`/`selected`, toggle button) with hover, pressed, focus, selected `tone` gradient (brand/success/info/warning/navy), disabled, `hint`; summary tones; metric details; progress tones; module selected/disabled |
 | `RowActionsMenu`, `RowActionLink`, `RowActionButtons`, `TableLink` | `more-horizontal` + `context-menu`, Campaigns "View" link and code link | View/Edit/Delete from handlers or custom actions with separators; inline link (a or button); inline icon buttons with optional hover reveal |
 
 Icons live in `src/icons`. **Every icon is an exact SVG export from Figma** (`src/icons/figma.tsx`, 105 icons): the vuesax set

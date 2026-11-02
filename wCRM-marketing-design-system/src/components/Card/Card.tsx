@@ -1,4 +1,4 @@
-import { forwardRef, type ButtonHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type HTMLAttributes, type MouseEventHandler, type ReactNode, type Ref } from 'react';
 import { TrendDownIcon, TrendUpIcon } from '../../icons';
 import { cn } from '../../utils/cn';
 import { Avatar } from '../Avatar';
@@ -54,7 +54,10 @@ export interface StatTrend {
   invert?: boolean;
 }
 
-export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
+/** Selection colour of an interactive StatCard. Pick the one that matches what the card counts. */
+export type StatCardTone = 'brand' | 'success' | 'info' | 'warning' | 'navy';
+
+export interface StatCardProps extends Omit<HTMLAttributes<HTMLElement>, 'onClick'> {
   label: string;
   value: ReactNode;
   /** The highlighted first card of a stats row (blue → purple `gradient-feature`). */
@@ -62,50 +65,76 @@ export interface StatCardProps extends HTMLAttributes<HTMLDivElement> {
   /** 28px icon tile shown before the label. */
   icon?: ReactNode;
   trend?: StatTrend;
+  /** Muted line under the value, e.g. "Next 30 days". */
+  hint?: ReactNode;
+  /**
+   * Makes the card a toggle button, e.g. a stats row that filters the list below it.
+   * Passing `selected` alone also makes it interactive.
+   */
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  /** Selected state of an interactive card: fills with the `tone` gradient. Sets `aria-pressed`. */
+  selected?: boolean;
+  /** Selection colour: brand (red, e.g. "Without birthday"), success (green, "With birthday"), info, warning, navy. */
+  tone?: StatCardTone;
+  /** Interactive cards only. */
+  disabled?: boolean;
   /** Extra content under the value, e.g. a sparkline. */
   children?: ReactNode;
 }
 
+const statSelected: Record<StatCardTone, string> = {
+  brand: 'border-border-stat-brand bg-stat-brand',
+  success: 'border-border-stat-success bg-stat-success',
+  info: 'border-border-stat-info bg-stat-info',
+  warning: 'border-border-stat-warning bg-stat-warning',
+  navy: 'border-border-stat-navy bg-stat-navy',
+};
+
 /**
  * KPI tile from the Social posts and Email marketing headers (Figma `stats-row` / `stat-card-*`):
  * 12/600 uppercase muted label, 28/700 value, 12px gap. Lay them out in a responsive grid.
+ *
+ * Interactive (`onClick` or `selected`): renders a `<button aria-pressed>` with hover, pressed, focus,
+ * selected and disabled states. Selected fills with the `tone` gradient and turns the text white.
  */
-export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(function StatCard(
-  { label, value, featured, icon, trend, className, children, ...rest },
+export const StatCard = forwardRef<HTMLElement, StatCardProps>(function StatCard(
+  { label, value, featured, icon, trend, hint, onClick, selected, tone = 'brand', disabled, className, children, ...rest },
   ref,
 ) {
+  const interactive = onClick !== undefined || selected !== undefined;
+  const isSelected = interactive && Boolean(selected);
+  const inverse = Boolean(featured) || isSelected;
   const good = trend ? (trend.direction === 'up') !== Boolean(trend.invert) : false;
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        'flex min-w-0 flex-col gap-3 rounded-lg border p-5',
-        featured ? 'border-transparent bg-feature text-text-inverse' : 'border-border-default bg-surface-default',
-        className,
-      )}
-      {...rest}
-    >
-      <div className="flex items-center gap-2">
+
+  const surface = isSelected
+    ? statSelected[tone]
+    : featured
+      ? 'border-transparent bg-feature'
+      : cn('border-border-default bg-surface-default', interactive && !disabled && 'hover:border-border-strong hover:bg-surface-subtle active:bg-surface-sunken');
+
+  const content = (
+    <>
+      <span className="flex items-center gap-2">
         {icon && (
           <span
             className={cn(
               'inline-flex size-icon-tile shrink-0 items-center justify-center rounded-sm [&>svg]:size-4',
-              featured ? 'bg-surface-default text-accent-navy' : 'bg-surface-canvas text-accent-navy-hover',
+              inverse ? 'bg-surface-default text-accent-navy' : 'bg-surface-canvas text-accent-navy-hover',
             )}
             aria-hidden="true"
           >
             {icon}
           </span>
         )}
-        <p className={cn('truncate text-caption font-semibold uppercase', featured ? 'text-text-inverse' : 'text-text-muted')}>{label}</p>
-      </div>
-      <div className="flex flex-wrap items-end gap-x-2 gap-y-1">
-        <p className={cn('text-display tabular-nums', featured ? 'text-text-inverse' : 'text-text-primary')}>{value}</p>
+        <span className={cn('truncate text-caption font-semibold uppercase', inverse ? 'text-text-inverse' : 'text-text-muted')}>{label}</span>
+      </span>
+      <span className="flex flex-wrap items-end gap-x-2 gap-y-1">
+        <span className={cn('text-display tabular-nums', inverse ? 'text-text-inverse' : 'text-text-primary')}>{value}</span>
         {trend && (
-          <p
+          <span
             className={cn(
               'mb-1 inline-flex items-center gap-1 text-caption font-semibold [&>svg]:size-3.5',
-              featured ? 'text-text-inverse' : good ? 'text-status-success-text' : 'text-status-danger',
+              inverse ? 'text-text-inverse' : good ? 'text-status-success-text' : 'text-status-danger',
             )}
           >
             {trend.direction === 'up' ? <TrendUpIcon /> : <TrendDownIcon />}
@@ -113,12 +142,44 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(function StatC
               <span className="sr-only">{trend.direction === 'up' ? 'Up ' : 'Down '}</span>
               {trend.value}
             </span>
-            {trend.label && <span className={cn('font-normal', featured ? 'text-text-inverse' : 'text-text-secondary')}>{trend.label}</span>}
-          </p>
+            {trend.label && <span className={cn('font-normal', inverse ? 'text-text-inverse' : 'text-text-secondary')}>{trend.label}</span>}
+          </span>
         )}
-      </div>
+      </span>
+      {hint && <span className={cn('text-body', inverse ? 'text-text-inverse' : 'text-text-faint')}>{hint}</span>}
       {children}
-    </div>
+    </>
+  );
+
+  const box = cn('flex min-w-0 flex-col gap-3 rounded-lg border p-5', surface, className);
+
+  if (!interactive) {
+    return (
+      <div ref={ref as Ref<HTMLDivElement>} className={box} {...rest}>
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <button
+      ref={ref as Ref<HTMLButtonElement>}
+      type="button"
+      aria-pressed={isSelected}
+      disabled={disabled}
+      onClick={onClick}
+      data-tone={tone}
+      className={cn(
+        box,
+        'cursor-pointer text-left transition-[border-color,background-color,box-shadow,filter] duration-fast ease-standard',
+        'focus-visible:outline-none focus-visible:shadow-focus',
+        isSelected && !disabled && 'hover:brightness-110 active:brightness-95',
+        'disabled:cursor-not-allowed disabled:opacity-50',
+      )}
+      {...(rest as HTMLAttributes<HTMLButtonElement>)}
+    >
+      {content}
+    </button>
   );
 });
 

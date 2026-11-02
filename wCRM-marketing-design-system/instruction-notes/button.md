@@ -10,7 +10,7 @@ Buttons start an action: create, save, apply, send. If it only navigates, use a 
 | Variant | Use it when |
 |---|---|
 | `primary` | The main action of the page, drawer or modal. **One per area.** |
-| `secondary` | Supporting actions beside a primary (Connection history, Export). |
+| `secondary` | Supporting actions beside a primary (Connection history, Export). In dark mode it is a `#4F46E5` outline; `navy` is a solid `#4F46E5`. |
 | `outline` | Cancel / Clear all in footers and sheets. |
 | `ghost` | Low-emphasis text actions (Save as draft). |
 | `danger` | Deletes data. Always confirm first with `ConfirmDialog`. |

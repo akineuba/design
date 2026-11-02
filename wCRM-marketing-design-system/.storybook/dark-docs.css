@@ -1,0 +1,38 @@
+/* Docs pages under the dark token set. Storybook's docs theme is static (light), so its surfaces and
+   typography are pointed at the token variables when the toolbar theme is dark. */
+[data-theme='dark'] body,
+[data-theme='dark'] .sbdocs-wrapper {
+  background: var(--color-surface-canvas);
+}
+/* .sbdocs-content.sbdocs doubles the class so these beat Storybook's own h1/p/li rules. Story canvases and the
+   Instruction Note are .sb-unstyled and already use tokens, so they are left alone. */
+[data-theme='dark'] .sbdocs-content.sbdocs :is(h1, h2, h3, h4, h5, h6, p, li, blockquote, strong):not(.sb-unstyled *) {
+  color: var(--color-text-primary);
+}
+[data-theme='dark'] .sbdocs-content.sbdocs a:not(.sb-unstyled *) {
+  color: var(--color-text-link);
+}
+[data-theme='dark'] .sbdocs-content.sbdocs code:not(.docs-story *) {
+  background: var(--color-surface-sunken);
+  border-color: var(--color-border-default);
+  color: var(--color-text-primary);
+}
+[data-theme='dark'] .sbdocs-content.sbdocs .docs-story + div,
+[data-theme='dark'] .sbdocs-content.sbdocs .sbdocs-preview > div:first-child:not(.docs-story) {
+  background: var(--color-surface-default);
+  border-color: var(--color-border-default);
+}
+[data-theme='dark'] .docs-story,
+[data-theme='dark'] .docs-story > div:first-child {
+  background: var(--color-surface-canvas);
+}
+[data-theme='dark'] .sbdocs-content .docblock-argstable-body,
+[data-theme='dark'] .sbdocs-content .docblock-argstable-head th {
+  background: var(--color-surface-default);
+  color: var(--color-text-primary);
+}
+[data-theme='dark'] .sbdocs-content .docblock-argstable-body td {
+  background: var(--color-surface-default);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border-default);
+}

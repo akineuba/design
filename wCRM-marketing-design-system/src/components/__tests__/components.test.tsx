@@ -12,6 +12,7 @@ import { Table, TableBody, TableHead, TableHeader, TableRow } from '../Table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../Tabs';
 import { Tag } from '../Tag';
 import { Button } from '../Button';
+import { StatCard } from '../Card';
 
 describe('pageRange', () => {
   it('lists every page when there are 7 or fewer', () => {
@@ -136,5 +137,56 @@ describe('ConfirmDialog', () => {
     const dialog = await screen.findByRole('alertdialog', { name: 'Delete contact?' });
     await userEvent.click(within(dialog).getByRole('button', { name: 'Delete' }));
     expect(onConfirm).toHaveBeenCalled();
+  });
+});
+
+describe('StatCard', () => {
+  it('stays a plain tile without onClick or selected', () => {
+    render(<StatCard label="Total contacts" value="48" />);
+    expect(screen.queryByRole('button')).toBeNull();
+    expect(screen.getByText('48')).toBeInTheDocument();
+  });
+
+  it('acts as a toggle button with a tone-coloured selected state', async () => {
+    function Row() {
+      const [selected, setSelected] = useState<string | null>(null);
+      return (
+        <>
+          {['with', 'without'].map((id) => (
+            <StatCard
+              key={id}
+              label={id === 'with' ? 'With birthday' : 'Without birthday'}
+              value="6"
+              tone={id === 'with' ? 'success' : 'brand'}
+              selected={selected === id}
+              onClick={() => setSelected((cur) => (cur === id ? null : id))}
+            />
+          ))}
+        </>
+      );
+    }
+    render(<Row />);
+    const withCard = screen.getByRole('button', { name: /with birthday/i });
+    const withoutCard = screen.getByRole('button', { name: /without birthday/i });
+    expect(withCard).toHaveAttribute('aria-pressed', 'false');
+
+    await userEvent.click(withCard);
+    expect(withCard).toHaveAttribute('aria-pressed', 'true');
+    expect(withCard.className).toContain('bg-stat-success');
+
+    await userEvent.click(withoutCard);
+    expect(withCard).toHaveAttribute('aria-pressed', 'false');
+    expect(withoutCard.className).toContain('bg-stat-brand');
+
+    await userEvent.click(withoutCard);
+    expect(withoutCard).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  it('does not fire when disabled', async () => {
+    const onClick = vi.fn();
+    render(<StatCard label="Upcoming" value="3" hint="Next 30 days" onClick={onClick} disabled />);
+    await userEvent.click(screen.getByRole('button', { name: /upcoming/i }));
+    expect(onClick).not.toHaveBeenCalled();
+    expect(screen.getByText('Next 30 days')).toBeInTheDocument();
   });
 });
