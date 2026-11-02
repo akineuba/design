@@ -5,28 +5,31 @@ import '../src/styles/index.css';
 import './instruction-note.css';
 import './dark-docs.css';
 import { InstructionNote } from './InstructionNote';
+import { addons } from '@storybook/preview-api';
+
+const applyTheme = (globals?: Record<string, unknown>) => {
+  document.documentElement.dataset.theme = globals?.theme === 'dark' ? 'dark' : 'light';
+};
+
+// MDX pages (Introduction, UI Rules) render no story, so no decorator runs for them: follow the global directly.
+try {
+  const channel = addons.getChannel();
+  channel.on('setGlobals', ({ globals }) => applyTheme(globals));
+  channel.on('globalsUpdated', ({ globals }) => applyTheme(globals));
+} catch {
+  // No channel (e.g. tests); the decorator below still applies the theme per story.
+}
 
 const preview: Preview = {
-  // Toolbar switch for the light / dark token sets. It sets data-theme on the preview <html>, which is
-  // exactly what a consuming app does, so stories and docs pages render the real dark variables.
+  // The light / dark switch lives on the right of the toolbar (manager.tsx). It sets this global, and the
+  // decorator puts data-theme on the preview <html>, exactly as a consuming app does.
   globalTypes: {
-    theme: {
-      description: 'Colour theme',
-      toolbar: {
-        title: 'Theme',
-        icon: 'mirror',
-        items: [
-          { value: 'light', title: 'Light', icon: 'sun' },
-          { value: 'dark', title: 'Dark', icon: 'moon' },
-        ],
-        dynamicTitle: true,
-      },
-    },
+    theme: { description: 'Colour theme (light | dark)' },
   },
   initialGlobals: { theme: 'light' },
   decorators: [
     (Story, context) => {
-      document.documentElement.dataset.theme = context.globals.theme === 'dark' ? 'dark' : 'light';
+      applyTheme(context.globals);
       return <Story />;
     },
   ],

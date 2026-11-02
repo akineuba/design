@@ -123,6 +123,7 @@
   --color-calendar-chip-linkedin: #E6F0FA;
   --color-action-clone: #9747FF;
   --color-action-secondary: #2B3674;
+  --color-action-secondary-fill: transparent;
   --color-action-secondary-hover: #3D5A98;
   --color-action-secondary-text: #2B3674;
   --color-action-secondary-subtle: #F0F4FA;
@@ -565,9 +566,10 @@
   --color-calendar-today: rgba(64, 156, 255, 0.18);
   --color-calendar-chip-linkedin: rgba(10, 102, 194, 0.20);
   --color-action-secondary: #4F46E5;
+  --color-action-secondary-fill: #4F46E5;
   --color-action-secondary-hover: #4338CA;
-  --color-action-secondary-text: #A5B4FC;
-  --color-action-secondary-subtle: rgba(79, 70, 229, 0.16);
+  --color-action-secondary-text: #FFFFFF;
+  --color-action-secondary-subtle: #4338CA;
   --color-copilot-accent-subtle: rgba(91, 95, 199, 0.14);
   --color-copilot-bubble-user: rgba(91, 95, 199, 0.20);
   --color-copilot-surface: #24243A;

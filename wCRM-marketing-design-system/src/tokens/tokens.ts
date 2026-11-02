@@ -819,6 +819,12 @@ export const tokens = {
         "figma": "same as accent.navy-hover",
         "derived": "dark value from product spec (#4F46E5)"
       },
+      "secondary-fill": {
+        "value": "transparent",
+        "dark": "#4F46E5",
+        "usage": "Secondary button fill: outline (transparent) in light mode, solid #4F46E5 in dark mode.",
+        "derived": "dark value from product spec (#4F46E5)"
+      },
       "secondary-hover": {
         "value": "#3D5A98",
         "dark": "#4338CA",
@@ -827,15 +833,15 @@ export const tokens = {
       },
       "secondary-text": {
         "value": "#2B3674",
-        "dark": "#A5B4FC",
-        "usage": "Secondary (outline) button label. Dark value is lighter than the #4F46E5 border so the label passes 4.5:1 on dark surfaces.",
-        "derived": "dark value derived for contrast; #4F46E5 text on #1E1E2E is 2.6:1"
+        "dark": "#FFFFFF",
+        "usage": "Secondary button label: navy on the light outline, white on the dark-mode #4F46E5 fill.",
+        "derived": "dark value: white on the #4F46E5 fill (6.3:1)"
       },
       "secondary-subtle": {
         "value": "#F0F4FA",
-        "dark": "rgba(79, 70, 229, 0.16)",
-        "usage": "Secondary (outline) button hover fill. Same value as accent.navy-subtle in light mode.",
-        "derived": "dark value derived from #4F46E5"
+        "dark": "#4338CA",
+        "usage": "Secondary button hover fill. Same value as accent.navy-subtle in light mode; one step darker than #4F46E5 in dark mode.",
+        "derived": "dark value derived (hover of the #4F46E5 fill)"
       }
     },
     "copilot": {
@@ -2641,6 +2647,7 @@ export const cssVariables = {
   "color-calendar-chip-linkedin": "#E6F0FA",
   "color-action-clone": "#9747FF",
   "color-action-secondary": "#2B3674",
+  "color-action-secondary-fill": "transparent",
   "color-action-secondary-hover": "#3D5A98",
   "color-action-secondary-text": "#2B3674",
   "color-action-secondary-subtle": "#F0F4FA",
@@ -3082,9 +3089,10 @@ export const cssVariablesDark = {
   "color-calendar-today": "rgba(64, 156, 255, 0.18)",
   "color-calendar-chip-linkedin": "rgba(10, 102, 194, 0.20)",
   "color-action-secondary": "#4F46E5",
+  "color-action-secondary-fill": "#4F46E5",
   "color-action-secondary-hover": "#4338CA",
-  "color-action-secondary-text": "#A5B4FC",
-  "color-action-secondary-subtle": "rgba(79, 70, 229, 0.16)",
+  "color-action-secondary-text": "#FFFFFF",
+  "color-action-secondary-subtle": "#4338CA",
   "color-copilot-accent-subtle": "rgba(91, 95, 199, 0.14)",
   "color-copilot-bubble-user": "rgba(91, 95, 199, 0.20)",
   "color-copilot-surface": "#24243A",

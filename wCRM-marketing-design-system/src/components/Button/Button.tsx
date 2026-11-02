@@ -6,7 +6,7 @@ import { cn } from '../../utils/cn';
  * Visual style, named by where Figma uses it.
  * - primary: solid #EE1F2F ("Create Contact", "New Post", "Send Now")
  * - submit: solid #EF2D38 full-width drawer submit ("Create", "Apply", "Save")
- * - secondary: navy outline #2B3674 ("Save as Draft", "Save Draft", modal "Cancel"); dark: #4F46E5 outline
+ * - secondary: navy outline #2B3674 ("Save as Draft", "Save Draft", modal "Cancel"); dark: solid #4F46E5, white label
  * - accent-outline: #3D5A98 outline ("Connection History", fields "Preview")
  * - navy: solid #2B3674 ("Select Excluded List (Optional)"); dark: solid #4F46E5
  * - outline: neutral #E2E8F0 outline, Semi Bold #1E2238 ("Discard draft", "Cancel", "Clear all")
@@ -105,8 +105,8 @@ const brandOutline = 'border-brand-primary bg-transparent text-brand-primary hov
 const variants: Record<ButtonVariant, string> = {
   primary: 'border-brand-primary bg-brand-primary text-text-inverse hover:border-brand-primary-hover hover:bg-brand-primary-hover',
   submit: 'border-brand-primary-alt bg-brand-primary-alt text-text-inverse hover:border-brand-primary-hover hover:bg-brand-primary-hover',
-  // `action-secondary*` equal the navy accents in light mode and become #4F46E5 indigo in dark mode.
-  secondary: 'border-action-secondary bg-transparent text-action-secondary-text hover:bg-action-secondary-subtle',
+  // `action-secondary*` equal the navy accents in light mode (outline) and become a solid #4F46E5 in dark mode.
+  secondary: 'border-action-secondary bg-action-secondary-fill text-action-secondary-text hover:bg-action-secondary-subtle',
   'accent-outline': 'border-accent-navy bg-transparent text-accent-navy hover:bg-accent-navy-subtle',
   navy: 'border-action-secondary bg-action-secondary text-text-inverse hover:border-action-secondary-hover hover:bg-action-secondary-hover',
   outline: 'border-border-default bg-surface-default text-text-primary hover:border-border-strong hover:bg-surface-subtle',

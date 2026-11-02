@@ -92,10 +92,10 @@ from the stat-card reference. Brand red and status solids are the same in both t
 | `surface.default` · `canvas` · `subtle` · `sunken` | `#FFFFFF` · `#F4F6FA` · `#F8FAFC` · `#F1F5F9` | `#1E1E2E` · `#151521` · `#24243A` · `#2A2A40` | Cards · page · hover/info · disabled |
 | `border.default` · `strong` · `muted` | `#E2E8F0` · `#CBD5E1` · `#A3AED0` | `#2E2E45` · `#3D3D58` · `#4C4E69` | Outlines, dividers |
 | `text.primary` · `secondary` · `muted` · `faint` | `#1E2238` · `#64748B` · `#A3AED0` · `#94A3B8` | `#F4F5FA` · `#A3A6BC` · `#9C9FB5` · `#6B6D8C` | Body · supporting · labels · hints |
-| `action.secondary` / `-hover` / `-text` / `-subtle` | `#2B3674` / `#3D5A98` / `#2B3674` / `#F0F4FA` | `#4F46E5` / `#4338CA` / `#A5B4FC` / indigo 16% | `secondary` + `navy` buttons (label lightened for 4.5:1) |
+| `action.secondary` / `-fill` / `-hover` / `-text` / `-subtle` | `#2B3674` / `transparent` / `#3D5A98` / `#2B3674` / `#F0F4FA` | `#4F46E5` / `#4F46E5` / `#4338CA` / `#FFFFFF` / `#4338CA` | `secondary` (navy outline in light, solid #4F46E5 in dark) + `navy` buttons |
 | `accent.navy` · `navy-hover` | `#3D5A98` · `#2B3674` | `#818CF8` · `#A5B4FC` | Links, navy text, KPI values |
 
-Storybook has a **Theme** toolbar switch (sun/moon); the docs pages follow it.
+Storybook has a **Dark mode** switch on the right of the toolbar (story and docs pages); it sets the `theme` global.
 
 ### Stat-card selection
 
