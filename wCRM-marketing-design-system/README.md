@@ -1,6 +1,6 @@
-# wCRM Marketing design system
+# wCRM design system
 
-Design tokens, React components and Storybook for the Wragby wCRM **Marketing** module, extracted from the
+Design tokens and React components for the Wragby wCRM platform, with a Storybook that documents them. Extracted from the
 Figma page *marketing design updates*.
 
 ```bash

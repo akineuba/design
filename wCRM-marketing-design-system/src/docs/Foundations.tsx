@@ -106,8 +106,8 @@ export function Foundations({ logoSrc }: FoundationsProps) {
           </div>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="flex flex-col gap-2">
-              <h1 className="text-display text-text-primary">wCRM marketing design system</h1>
-              <p className="text-body text-text-secondary">Tokens and components for wCRM marketing design</p>
+              <h1 className="text-display text-text-primary">wCRM design system</h1>
+              <p className="text-body text-text-secondary">Design tokens and React components for the Wragby wCRM platform</p>
             </div>
             <span className="inline-flex h-8 items-center rounded-full bg-accent-navy-subtle px-3 text-label-sm text-accent-navy">Marketing · Light</span>
           </div>
