@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { CalendarIcon, MailIcon, PencilIcon, SendIcon, UsersIcon } from '../../icons';
 import { Button } from '../Button';
 import { ActivityFeed, Card, CardHeader, MetricCard, ModuleCard, ProgressBar, StatCard, SummaryCard, type StatCardTone } from './Card';
@@ -89,9 +89,8 @@ function BirthdayStatsRow({ initial = 'without' }: { initial?: string | null }) 
  */
 export const InteractiveStatsRow: Story = { render: () => <BirthdayStatsRow /> };
 
-/** Every state side by side: rest, selected in each tone, and disabled. Hover, pressed and focus are live. */
-export const StatCardStates: Story = {
-  render: () => (
+function StatCardStatesGrid() {
+  return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <StatCard label="Rest" value="48" onClick={() => {}} selected={false} />
       <StatCard label="Selected · brand" value="2" tone="brand" selected onClick={() => {}} />
@@ -102,15 +101,49 @@ export const StatCardStates: Story = {
       <StatCard label="Disabled" value="0" onClick={() => {}} disabled />
       <StatCard label="Disabled · selected" value="0" tone="success" selected onClick={() => {}} disabled />
     </div>
+  );
+}
+
+/** Pins its children to one theme, whatever the toolbar says, so light and dark can be reviewed side by side. */
+const ThemeFrame = ({ theme, children }: { theme: 'light' | 'dark'; children: ReactNode }) => (
+  <div data-theme={theme} className="rounded-lg bg-surface-canvas p-6">
+    {children}
+  </div>
+);
+
+/** Every interactive state on the light theme: rest, selected in each tone, disabled. Hover, pressed and focus are live. */
+export const StatCardStatesLight: Story = {
+  render: () => (
+    <ThemeFrame theme="light">
+      <StatCardStatesGrid />
+    </ThemeFrame>
   ),
 };
 
-/** The same row on the dark theme, regardless of the toolbar theme. Card fill #1E1E2E, label #9C9FB5, hint #6B6D8C. */
+/** Every interactive state on the dark theme. Card fill #1E1E2E, label #9C9FB5, hint #6B6D8C. */
+export const StatCardStatesDark: Story = {
+  render: () => (
+    <ThemeFrame theme="dark">
+      <StatCardStatesGrid />
+    </ThemeFrame>
+  ),
+};
+
+/** The birthday row on the light theme, regardless of the toolbar switch. */
+export const InteractiveStatsRowLight: Story = {
+  render: () => (
+    <ThemeFrame theme="light">
+      <BirthdayStatsRow initial="without" />
+    </ThemeFrame>
+  ),
+};
+
+/** The birthday row on the dark theme, regardless of the toolbar switch. */
 export const InteractiveStatsRowDark: Story = {
   render: () => (
-    <div data-theme="dark" className="rounded-lg bg-surface-canvas p-6">
+    <ThemeFrame theme="dark">
       <BirthdayStatsRow initial="with" />
-    </div>
+    </ThemeFrame>
   ),
 };
 

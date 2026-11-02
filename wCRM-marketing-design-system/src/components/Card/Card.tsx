@@ -82,12 +82,14 @@ export interface StatCardProps extends Omit<HTMLAttributes<HTMLElement>, 'onClic
   children?: ReactNode;
 }
 
+// Selected cards keep a transparent 1px border (no stroke, no layout shift). bg-origin-border starts the gradient
+// under that border, otherwise it tiles and shows a light sliver along the right edge.
 const statSelected: Record<StatCardTone, string> = {
-  brand: 'border-border-stat-brand bg-stat-brand',
-  success: 'border-border-stat-success bg-stat-success',
-  info: 'border-border-stat-info bg-stat-info',
-  warning: 'border-border-stat-warning bg-stat-warning',
-  navy: 'border-border-stat-navy bg-stat-navy',
+  brand: 'bg-stat-brand',
+  success: 'bg-stat-success',
+  info: 'bg-stat-info',
+  warning: 'bg-stat-warning',
+  navy: 'bg-stat-navy',
 };
 
 /**
@@ -107,9 +109,9 @@ export const StatCard = forwardRef<HTMLElement, StatCardProps>(function StatCard
   const good = trend ? (trend.direction === 'up') !== Boolean(trend.invert) : false;
 
   const surface = isSelected
-    ? statSelected[tone]
+    ? cn('border-transparent bg-origin-border', statSelected[tone])
     : featured
-      ? 'border-transparent bg-feature'
+      ? 'border-transparent bg-feature bg-origin-border'
       : cn('border-border-default bg-surface-default', interactive && !disabled && 'hover:border-border-strong hover:bg-surface-subtle active:bg-surface-sunken');
 
   const content = (

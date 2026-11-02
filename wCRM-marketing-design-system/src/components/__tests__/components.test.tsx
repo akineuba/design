@@ -173,6 +173,7 @@ describe('StatCard', () => {
     await userEvent.click(withCard);
     expect(withCard).toHaveAttribute('aria-pressed', 'true');
     expect(withCard.className).toContain('bg-stat-success');
+    expect(withCard.className).toContain('border-transparent');
 
     await userEvent.click(withoutCard);
     expect(withCard).toHaveAttribute('aria-pressed', 'false');

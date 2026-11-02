@@ -367,31 +367,6 @@ export const tokens = {
         "figma": "908:6066",
         "figmaUses": 1,
         "dark": "rgba(255, 255, 255, 0.06)"
-      },
-      "stat-brand": {
-        "value": "#8E141B",
-        "usage": "Selected StatCard border, brand (red) tone",
-        "derived": "sampled from the stat-card selected-state reference"
-      },
-      "stat-success": {
-        "value": "#0A4B30",
-        "usage": "Selected StatCard border, success (green) tone",
-        "derived": "sampled from the stat-card selected-state reference"
-      },
-      "stat-info": {
-        "value": "#1E4F9C",
-        "usage": "Selected StatCard border, info (blue) tone",
-        "derived": "derived to match the brand / success pair"
-      },
-      "stat-warning": {
-        "value": "#7A4F06",
-        "usage": "Selected StatCard border, warning (amber) tone",
-        "derived": "derived to match the brand / success pair"
-      },
-      "stat-navy": {
-        "value": "#2B2580",
-        "usage": "Selected StatCard border, navy (indigo) tone",
-        "derived": "derived to match the brand / success pair"
       }
     },
     "status": {
@@ -2578,11 +2553,6 @@ export const cssVariables = {
   "color-border-module": "#EDF2F7",
   "color-border-ai-panel": "#D1D6E0",
   "color-border-module-header": "rgba(193, 193, 193, 0.11)",
-  "color-border-stat-brand": "#8E141B",
-  "color-border-stat-success": "#0A4B30",
-  "color-border-stat-info": "#1E4F9C",
-  "color-border-stat-warning": "#7A4F06",
-  "color-border-stat-navy": "#2B2580",
   "color-status-success": "#05D38A",
   "color-status-success-text": "#16966A",
   "color-status-success-subtle": "#EAF9F3",

@@ -81,7 +81,8 @@ Every colour works with every colour utility (`bg-`, `text-`, `border-`, `fill-`
 
 ### Dark mode (tokens v0.3.0)
 
-Light is the default (`:root`). Put `data-theme="dark"` (or the `dark` class) on `<html>`, or on any subtree, to switch.
+Light is the default (`:root`). Put `data-theme="dark"` (or the `dark` class) on `<html>`, or on any subtree, to switch;
+`data-theme="light"` (or `light`) switches a subtree back, e.g. a light preview inside a dark page.
 Tokens with a `"dark"` field in `tokens.json` override their CSS variable there; `npm run tokens` emits both blocks and
 `cssVariablesDark` in `tokens.ts`. Components need no `dark:` classes: keep using the same utilities. Dark values are
 not drawn in Figma (marked derived), except the card fill `#1E1E2E`, label `#9C9FB5` and hint `#6B6D8C`, which were sampled
@@ -99,8 +100,8 @@ Storybook has a **Dark mode** switch on the right of the toolbar (story and docs
 
 ### Stat-card selection
 
-`gradient.stat-{brand,success,info,warning,navy}` (`bg-stat-*`) and `border.stat-*` (`border-border-stat-*`) colour a
-selected interactive `StatCard`. Brand (`#EE1F2F` → `#8E141B`) and success (`#12B76A` → `#0A4B30`) were sampled from the
+`gradient.stat-{brand,success,info,warning,navy}` (`bg-stat-*`) fill a selected interactive `StatCard` (no stroke:
+its border goes transparent). The gradients are the same in light and dark. Brand (`#EE1F2F` → `#8E141B`) and success (`#12B76A` → `#0A4B30`) were sampled from the
 reference; info, warning and navy are derived to match.
 
 ### Typography (`text-<name>` sets size, line height and default weight; Figma "auto" line height = CSS `normal`)
