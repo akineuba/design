@@ -137,6 +137,8 @@ a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
 .monitor > img{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 .monitor .scaler{position:absolute;left:1.54%;top:0;width:98.46%;height:72.2%!important;aspect-ratio:auto!important;overflow:hidden;border-radius:16px 16px 0 0}
 .monitor .frame{border-radius:16px;box-shadow:0 23px 61px -15px rgba(0,23,71,.45)}
+.monitor .shot-img{background:#fff}
+.monitor .shot-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:left top}
 .hero-art .float{position:absolute;z-index:3;zoom:var(--fz,1)}
 /* Float positions from the Figma hero, as a share of the panel width; divided by the card zoom so they hold as it scales */
 .hf1{left:calc(46.5cqw / var(--fz,1));top:calc(-4.66cqw / var(--fz,1))}
@@ -709,61 +711,7 @@ svg.chart text{font-family:var(--font);fill:var(--faint);font-size:10px}
         <div class="panel-blue">
           <div class="monitor">
           <img src="assets/device-monitor.webp" alt="" width="840" height="717">
-          <div class="scaler" data-w="1060" style="--w:1060;--h:700">
-            <div class="frame" aria-hidden="true">
-              <div class="app">
-                <aside class="sb">
-                  <div class="brand"><img src="assets/logo.png" alt=""><i><svg class="i"><use href="#i-left"/></svg></i></div>
-                  <h6>MAIN MENU</h6>
-                  <ul>
-                    <li><svg class="i"><use href="#i-calc"/></svg>Accounting<svg class="i chev"><use href="#i-down"/></svg></li>
-                    <li><svg class="i"><use href="#i-cart"/></svg>Sales<svg class="i chev"><use href="#i-down"/></svg></li>
-                    <li><svg class="i"><use href="#i-bag"/></svg>Purchases<svg class="i chev"><use href="#i-down"/></svg></li>
-                    <li><svg class="i"><use href="#i-clip"/></svg>Approvals</li>
-                    <li><svg class="i"><use href="#i-box"/></svg>Inventory<svg class="i chev"><use href="#i-down"/></svg></li>
-                    <li><svg class="i"><use href="#i-file"/></svg>Reports<svg class="i chev"><use href="#i-down"/></svg></li>
-                    <li><svg class="i"><use href="#i-brief"/></svg>Commercial<svg class="i chev"><use href="#i-down"/></svg></li>
-                    <li><svg class="i"><use href="#i-layers"/></svg>Project Module<svg class="i chev"><use href="#i-down"/></svg></li>
-                    <li><svg class="i"><use href="#i-person"/></svg>Human Resources<svg class="i chev"><use href="#i-down"/></svg></li>
-                    <li><svg class="i"><use href="#i-sliders"/></svg>Settings<svg class="i chev"><use href="#i-down"/></svg></li>
-                    <li><svg class="i"><use href="#i-buoy"/></svg>Help &amp; Support<svg class="i chev"><use href="#i-down"/></svg></li>
-                  </ul>
-                </aside>
-                <div class="main">
-                  <div class="topbar">
-                    <span class="tb-crumb">Dashboard</span>
-                    <span class="tb-ic"><svg class="i"><use href="#i-spark"/></svg>Tour</span>
-                    <span class="tb-moon g"><svg class="i"><use href="#i-moon"/></svg></span>
-                    <span class="tb-ic tb-bell"><svg class="i"><use href="#i-bell"/></svg><b>8</b></span>
-                    <span class="av" style="background:var(--brand);width:30px;height:30px">AO</span>
-                    <span class="who"><b>Ada</b><small>Super User</small></span>
-                    <span class="tb-ic tb-chev"><svg class="i"><use href="#i-down"/></svg></span>
-                    <span class="tb-ic"><svg class="i"><use href="#i-grid"/></svg></span>
-                  </div>
-                  <div class="page ad">
-                    <div class="ad-hello"><div><span class="greet">Good morning, Ada<i>.</i></span><span class="sub">Here's what matters across your work today.</span></div><span class="date"><svg class="i"><use href="#i-cal"/></svg>Saturday, 17 October 2026</span></div>
-                    <div class="ad-bar"><span class="ad-ico"><svg class="i"><use href="#i-grid"/></svg></span><b>Accounting overview · Default</b><svg class="i"><use href="#i-down"/></svg><span class="ad-dots">···</span><span class="ad-sp"></span><span class="ad-btn"><svg class="i"><use href="#i-grid"/></svg>Templates</span><span class="ad-btn pri"><svg class="i"><use href="#i-sliders"/></svg>Customize</span></div>
-                    <div class="ad-meta"><span class="ad-role"><svg class="i"><use href="#i-check-c"/></svg>Accountant</span><span>Department access</span><span class="ad-sp"></span><span>Sample data · 17 Oct 2026</span><span class="ad-rf"><svg class="i"><use href="#i-refresh"/></svg></span><span class="ad-sel">October 2026<svg class="i"><use href="#i-down"/></svg></span></div>
-                    <div class="ad-kpis num"><div class="ad-kpi on"><div class="ad-kh"><span class="ad-ki"><svg class="i"><use href="#i-receipt"/></svg></span>Outstanding invoices<span class="ad-dots">···</span></div><strong>₦810.4M</strong><div class="ad-kf"><small>Unpaid invoice balance</small><span class="ad-ne"><svg class="i"><use href="#i-arrow"/></svg></span></div></div><div class="ad-kpi"><div class="ad-kh"><span class="ad-ki"><svg class="i"><use href="#i-check-c"/></svg></span>Collected this period<span class="ad-dots">···</span></div><strong>₦1.09B</strong><div class="ad-kf"><small>Payments against invoices</small><span class="ad-ne"><svg class="i"><use href="#i-arrow"/></svg></span></div></div><div class="ad-kpi"><div class="ad-kh"><span class="ad-ki"><svg class="i"><use href="#i-file"/></svg></span>Open invoices<span class="ad-dots">···</span></div><strong>14</strong><div class="ad-kf"><small>With an unpaid balance</small><span class="ad-ne"><svg class="i"><use href="#i-arrow"/></svg></span></div></div><div class="ad-kpi"><div class="ad-kh"><span class="ad-ki"><svg class="i"><use href="#i-book"/></svg></span>Journal entries<span class="ad-dots">···</span></div><strong>38</strong><div class="ad-kf"><small>In your permitted scope</small><span class="ad-ne"><svg class="i"><use href="#i-arrow"/></svg></span></div></div></div>
-                    <div class="ad-row">
-                      <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-chart"/></svg></span>Invoice activity<span class="ad-dots">···</span></div>
-                        <div class="ad-leg"><span><i style="background:#0070FF"></i>Invoice value</span><span><i style="background:#E9A23B"></i>Collected</span><span class="ad-sp"></span><span>NGN</span></div>
-                        <svg class="chart ad-svg" id="inv-act" viewBox="0 0 600 176" width="572" height="168" preserveAspectRatio="xMidYMid meet"><line x1="40" x2="584" y1="152" y2="152" stroke="#EEF2F6" stroke-dasharray="3 4"></line><text x="32" y="155" text-anchor="end">0m</text><line x1="40" x2="584" y1="104.9795918367347" y2="104.9795918367347" stroke="#EEF2F6" stroke-dasharray="3 4"></line><text x="32" y="107.9795918367347" text-anchor="end">160m</text><line x1="40" x2="584" y1="55.0204081632653" y2="55.0204081632653" stroke="#EEF2F6" stroke-dasharray="3 4"></line><text x="32" y="58.0204081632653" text-anchor="end">330m</text><line x1="40" x2="584" y1="8" y2="8" stroke="#EEF2F6" stroke-dasharray="3 4"></line><text x="32" y="11" text-anchor="end">490m</text><text x="40" y="172" text-anchor="middle">Oct 01</text><text x="148.8" y="172" text-anchor="middle">Oct 04</text><text x="257.6" y="172" text-anchor="middle">Oct 07</text><text x="366.4" y="172" text-anchor="middle">Oct 10</text><text x="475.2" y="172" text-anchor="middle">Oct 13</text><text x="584" y="172" text-anchor="middle">Oct 16</text><polygon points="40,152 40.0,37.4 148.8,16.8 257.6,90.3 366.4,69.7 475.2,52.1 584.0,87.3 584,152" fill="#0070FF" fill-opacity="0.08"></polygon><polyline points="40.0,37.4 148.8,16.8 257.6,90.3 366.4,69.7 475.2,52.1 584.0,87.3" fill="none" stroke="#0070FF" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray=""></polyline><circle cx="40" cy="37.38775510204081" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="148.8" cy="16.81632653061226" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="257.6" cy="90.28571428571428" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="366.4" cy="69.71428571428571" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="475.2" cy="52.08163265306122" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="584" cy="87.34693877551021" r="2.6" fill="#fff" stroke="#0070FF" stroke-width="1.6"></circle><circle cx="584" cy="87.34693877551021" r="3.4" fill="#0070FF"></circle><polyline points="40.0,116.7 148.8,31.5 257.6,125.6 366.4,81.5 475.2,102.0 584.0,134.4" fill="none" stroke="#E9A23B" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray=""></polyline><circle cx="584" cy="134.3673469387755" r="3.4" fill="#E9A23B"></circle></svg>
-                        <div class="ad-cf"><span>Department scope · October 2026</span><a>View details<svg class="i"><use href="#i-arrow"/></svg></a></div></div>
-                      <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-target"/></svg></span>Invoice breakdown<span class="ad-dots">···</span></div>
-                        <div class="ad-donut"><svg id="inv-donut" viewBox="0 0 120 120" width="132" height="132" style="flex:none"><circle cx="60" cy="60" r="44" fill="none" stroke="#0070FF" stroke-width="14" stroke-dasharray="40.13233131013873 276.46015351590177" stroke-dashoffset="0" transform="rotate(-90 60 60)"></circle><circle cx="60" cy="60" r="44" fill="none" stroke="#E9A23B" stroke-width="14" stroke-dasharray="72.03157979274278 276.46015351590177" stroke-dashoffset="-42.53233131013873" transform="rotate(-90 60 60)"></circle><circle cx="60" cy="60" r="44" fill="none" stroke="#22C55E" stroke-width="14" stroke-dasharray="29.499248482604052 276.46015351590177" stroke-dashoffset="-116.96391110288151" transform="rotate(-90 60 60)"></circle><circle cx="60" cy="60" r="44" fill="none" stroke="#8B6CCB" stroke-width="14" stroke-dasharray="125.1969939304162 276.46015351590177" stroke-dashoffset="-148.86315958548556" transform="rotate(-90 60 60)"></circle><text x="60" y="63" text-anchor="middle" style="font-size:22px;font-weight:600;fill:#0F172A">26</text><text x="60" y="76" text-anchor="middle" style="font-size:6.5px;fill:#94A3B8">records</text></svg></div>
-                        <div class="ad-dl num" id="inv-legend"><div><i style="background:#0070FF"></i><span>Overdue</span><b>4</b></div><div><i style="background:#E9A23B"></i><span>Sent</span><b>7</b></div><div><i style="background:#22C55E"></i><span>Part-paid</span><b>3</b></div><div><i style="background:#8B6CCB"></i><span>Paid</span><b>12</b></div></div>
-                        <div class="ad-cf"><span>Department scope · October 2026</span><a>View details<svg class="i"><use href="#i-arrow"/></svg></a></div></div>
-                    </div>
-                    <div class="ad-row">
-                      <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-menu"/></svg></span>Invoices to follow up<span class="ad-dots">···</span></div><div class="ad-tbl"><div class="ad-tr"><b>INV-2026-0029</b><span>NNPC E&amp;P Limited</span><span class="num">₦210,700,000</span><span class="ad-st ov">Overdue · 12 days</span></div><div class="ad-tr"><b>INV-2026-0038</b><span>Shell (SPDC)</span><span class="num">₦126,000,000</span><span class="ad-st se">Sent · due 28 Oct</span></div><div class="ad-tr"><b>INV-2026-0035</b><span>Seplat Energy</span><span class="num">₦73,200,000</span><span class="ad-st pp">Part-paid · ₦40M left</span></div><div class="ad-tr"><b>INV-2026-0041</b><span>Emzor Pharmaceuticals</span><span class="num">₦18,950,000</span><span class="ad-st ov">Overdue · 4 days</span></div></div></div>
-                      <div class="ad-card"><div class="ad-ch"><span class="ad-ki"><svg class="i"><use href="#i-spark"/></svg></span>Quick actions<span class="ad-dots">···</span></div><div class="ad-qa"><span><svg class="i"><use href="#i-plus"/></svg>New invoice</span><span><svg class="i"><use href="#i-check-c"/></svg>Record payment</span><span><svg class="i"><use href="#i-book"/></svg>New journal</span><span><svg class="i"><use href="#i-chart"/></svg>Trial balance</span></div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="scaler shot-img"><img src="assets/hero-dashboard.png" alt="" width="1270" height="1004"></div>
           </div>
         </div>
         <div class="float hf1">
