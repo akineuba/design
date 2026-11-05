@@ -1,11 +1,12 @@
 /* App tile (Figma: Your applications) */
-.sso-app-tile { display: flex; flex-direction: column; gap: 2px; min-height: 140px; padding: var(--sso-space-5); background: var(--sso-color-surface); border: 1px solid var(--sso-color-line); border-radius: var(--sso-radius-lg); text-decoration: none; transition: border-color 150ms, background-color 150ms; }
+.sso-app-tile { display: flex; flex-direction: column; gap: 2px; min-height: 120px; padding: var(--sso-space-5); background: var(--sso-color-surface); border: 1px solid var(--sso-color-line); border-radius: var(--sso-radius-lg); text-decoration: none; transition: border-color 150ms, background-color 150ms; }
 .sso-app-tile:hover { border-color: var(--sso-color-primary); }
 .sso-app-tile__icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin-bottom: var(--sso-space-4); border-radius: var(--sso-radius-md); background: var(--sso-color-primary-subtle); color: var(--sso-color-primary); }
 .sso-app-tile__icon svg { width: 18px; height: 18px; }
 .sso-app-tile__name { font-size: 15px; font-weight: var(--sso-font-weight-semibold); color: var(--sso-color-fg-strong); }
-.sso-app-tile__desc { font-size: var(--sso-font-size-xs); color: var(--sso-color-fg-faint); }
-.sso-app-tile__arrow { width: var(--sso-size-icon-sm); height: var(--sso-size-icon-sm); margin-top: var(--sso-space-3); color: var(--sso-color-primary); }
+.sso-app-tile__desc { display: inline-flex; align-items: center; gap: var(--sso-space-1_5); font-size: var(--sso-font-size-xs); color: var(--sso-color-fg-faint); }
+.sso-app-tile__arrow { width: 14px; height: 14px; flex: none; color: var(--sso-color-primary); transition: transform 150ms; }
+.sso-app-tile:hover .sso-app-tile__arrow { transform: translateX(2px); }
 .sso-app-tile.is-disabled { cursor: not-allowed; background: var(--sso-color-surface-muted); }
 .sso-app-tile.is-disabled:hover { border-color: var(--sso-color-line); }
 .sso-app-tile.is-disabled .sso-app-tile__icon { background: var(--sso-color-surface-control); color: var(--sso-color-fg-faint); }

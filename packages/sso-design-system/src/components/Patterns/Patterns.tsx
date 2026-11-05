@@ -29,8 +29,10 @@ export function AppTile({ name, description = 'Open application', icon, href = '
     >
       <span className="sso-app-tile__icon" aria-hidden>{icon}</span>
       <span className="sso-app-tile__name">{name}</span>
-      <span className="sso-app-tile__desc">{disabled ? 'Not in your plan' : description}</span>
-      <ArrowRight className="sso-app-tile__arrow" aria-hidden />
+      <span className="sso-app-tile__desc">
+        {disabled ? 'Not in your plan' : description}
+        {!disabled && <ArrowRight className="sso-app-tile__arrow" aria-hidden />}
+      </span>
     </a>
   );
 }

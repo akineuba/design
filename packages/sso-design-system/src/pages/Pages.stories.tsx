@@ -70,15 +70,7 @@ export const Dashboard: StoryObj = {
         <SummaryCard label="Products" value={11} hint="Global product catalogue" />
         <SummaryCard label="Commercial profiles" value={45} hint="Subscription service" />
         <SummaryCard label="Subscription plans" value={13} hint="Draft + published" />
-        <SummaryCard label="Active users" value={5} hint="of 5 purchased seats" />
-        <SummaryCard label="Employee records" value={120} hint="Self-service included" />
-        <SummaryCard label="Open approvals" value={7} hint="3 require your attention" />
-        <SummaryCard label="Plan renewal" value="9 Aug" hint="2027 · Annual billing" />
       </Grid>
-      <div className="sso-two-col">
-        <SetupChecklist description="Complete your organisation setup" steps={setupSteps} />
-        <ActivityList title="Recent subscription activity" description="Changes across your account" items={activity} />
-      </div>
       <Card title="Quick links">
         <div className="sso-quick-links">
           <Button leadingIcon={<Building2 />}>Tenants</Button>
@@ -88,6 +80,10 @@ export const Dashboard: StoryObj = {
           <Button leadingIcon={<CreditCard />}>Subscriptions</Button>
         </div>
       </Card>
+      <div className="sso-two-col">
+        <SetupChecklist description="Complete your organisation setup" steps={setupSteps} />
+        <ActivityList title="Recent subscription activity" description="Changes across your account" items={activity} />
+      </div>
       <Card title="Your applications" description="Open the modules included in this organisation’s plan.">
         <Grid min={170} gap={4}>
           {apps.map((a) => <AppTile key={a.name} name={a.name} icon={a.icon} />)}
