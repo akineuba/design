@@ -8,7 +8,7 @@
 
 /* Sign in (Figma: log in) */
 .sso-signin { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 100vh; background: var(--sso-color-surface); }
-.sso-signin__image { margin: var(--sso-space-4); border-radius: var(--sso-radius-lg); background: linear-gradient(180deg, #DCE9F1 0%, #EAF2F7 100%); }
+.sso-signin__image { margin: var(--sso-space-4); border-radius: var(--sso-radius-lg); background: #E6EFF5 url('../assets/signin-building.svg') center / cover no-repeat; }
 .sso-signin__form-wrap { display: flex; align-items: center; justify-content: center; padding: var(--sso-space-12) var(--sso-space-6); }
 .sso-signin__form { display: flex; flex-direction: column; gap: var(--sso-space-5); width: 100%; max-width: 400px; }
 .sso-signin__logo { align-self: center; margin-bottom: var(--sso-space-6); }
