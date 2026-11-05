@@ -73,3 +73,8 @@
 .sso-pagination__gap { padding: 0 var(--sso-space-1); font-size: var(--sso-font-size-md); color: var(--sso-color-fg-muted); }
 .sso-pagination__jump { display: flex; align-items: center; gap: var(--sso-space-2); font-size: var(--sso-font-size-xs); color: var(--sso-color-fg-muted); }
 .sso-pagination__jump input { width: var(--sso-size-control-lg); height: var(--sso-size-page-btn); padding: 0 var(--sso-space-2); border: 1px solid var(--sso-color-line); border-radius: var(--sso-radius-xs); background: var(--sso-color-surface); font-size: var(--sso-font-size-md); color: var(--sso-color-fg-ink); }
+
+/* Single row action: shown inline, styled like an ActionMenu item. */
+.sso-row-action { display: inline-flex; align-items: center; gap: var(--sso-space-2); padding: var(--sso-space-1_5) var(--sso-space-2); border: 0; border-radius: var(--sso-radius-xs); background: none; font-size: var(--sso-font-size-md); white-space: nowrap; cursor: pointer; transition: background-color 150ms; }
+.sso-row-action:hover:not(:disabled) { background: var(--sso-color-surface-muted); }
+.sso-row-action:disabled { color: var(--sso-color-fg-disabled); cursor: not-allowed; }

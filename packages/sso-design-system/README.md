@@ -36,7 +36,7 @@ needs a wrapper with `className="sso-root"`.
 | Page header | ERP anatomy: 28px title, 14px muted subtitle, actions right, optional back link. No eyebrow |
 | Neutrals | Slate ramp (`#0F172A` → `#F8FAFC`), the main visual difference from the ERP's grey |
 | Radius | 8px controls · 12px cards/tables · 16px accordions/dialogs |
-| Components | Ported from the ERP design system with the same specs: Button (primary, secondary, outline, tertiary, destructive), Card, SummaryCard, Table kit with an Actions column (kebab ActionMenu, tone-coloured items) and footer ("Showing 1 to 10 of 93 entries", numbered pages, page jump), Input, Tabs, Modal, SidePanel, Alert, Accordion, Checkbox, Switch, StatusPill |
+| Components | Ported from the ERP design system with the same specs: Button (primary, secondary, outline, tertiary, destructive), Card, SummaryCard, Table kit with an Actions column (kebab ActionMenu with tone-coloured items when a row has 2+ actions; a single action shows inline) and footer ("Showing 1 to 10 of 93 entries", numbered pages, page jump), Input, Tabs, Modal, SidePanel, Alert, Accordion, Checkbox, Switch, StatusPill |
 | Sources | Only the ERP design system, the Figma SSO portal (page "new" › portal) and the nav v2 reference. Live SSO screenshots are used for content only |
 
 The active nav colour is a single token, `--sso-nav-active-bg`, if it ever needs to differ from primary.

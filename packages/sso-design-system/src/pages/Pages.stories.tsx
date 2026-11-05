@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useMemo, useState } from 'react';
-import { Building2, ClipboardCheck, CreditCard, Download, Eye, Layers, Package, Pencil, Plus, Power, ShieldCheck, Trash2, UserX, Users } from 'lucide-react';
+import { ArrowRight, Building2, ClipboardCheck, CreditCard, Download, Eye, Layers, Package, Pencil, Plus, Power, ShieldCheck, Trash2, UserX, Users } from 'lucide-react';
 import { PortalShell } from './PortalShell';
 import { PageHeader } from '../components/PageHeader/PageHeader';
 import { Button } from '../components/Button/Button';
@@ -238,7 +238,7 @@ const toolColumns: Column<Tool>[] = [
   { key: 'name', header: 'Tool', render: (t) => <a href="#" className="sso-cell-link">{t.name}</a> },
   { key: 'description', header: 'Description' },
 ];
-const toolActions = () => [{ id: 'open', label: 'Open', tone: 'link' as const, icon: <Eye /> }];
+const toolActions = () => [{ id: 'open', label: 'Open', tone: 'link' as const, icon: <ArrowRight /> }];
 
 export const SubscriptionsPage: StoryObj = {
   name: 'Subscriptions',

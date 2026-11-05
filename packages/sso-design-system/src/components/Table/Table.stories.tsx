@@ -56,6 +56,21 @@ export const FullTable: StoryObj = {
   },
 };
 
+export const SingleAction: StoryObj = {
+  name: 'Single row action (inline, no kebab)',
+  render: () => (
+    <TableCard>
+      <DataTable
+        caption="Tools"
+        columns={[{ key: 'name', header: 'Tool', emphasis: 'strong' }, { key: 'description', header: 'Description' }]}
+        rows={[{ name: 'Plans', description: 'List, edit drafts, publish.' }, { name: 'Billing tools', description: 'Invoices, payments, and proration preview.' }]}
+        getRowId={(r) => r.name}
+        rowActions={() => [{ label: 'Open', tone: 'link', icon: <Eye /> }]}
+      />
+    </TableCard>
+  ),
+};
+
 export const Loading: StoryObj = {
   render: () => <TableCard><DataTable columns={columns} rows={[]} getRowId={(t) => t.name} rowActions={actions} loading /></TableCard>,
 };

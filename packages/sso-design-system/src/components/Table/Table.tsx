@@ -28,7 +28,10 @@ export interface DataTableProps<T> {
   density?: 'default' | 'comfortable';
   sort?: SortState | null;
   onSortChange?: (sort: SortState | null) => void;
-  /** Items for the row's kebab menu. Adds an "Actions" column. */
+  /**
+   * Row actions. Adds an "Actions" column. Two or more items go in a kebab menu;
+   * a single item shows inline as a text button (no menu needed).
+   */
   rowActions?: (row: T) => ActionMenuItem[];
   actionsHeader?: string;
   selectable?: boolean;
@@ -124,7 +127,7 @@ export function DataTable<T>({
                   ))}
                   {rowActions && (
                     <td className="sso-table__actions" onClick={(e) => e.stopPropagation()}>
-                      {rowActions(row).length > 0 && <ActionMenu label={`Actions for ${id}`} items={rowActions(row)} />}
+                      <RowActionCell id={id} items={rowActions(row)} />
                     </td>
                   )}
                 </tr>
@@ -135,6 +138,26 @@ export function DataTable<T>({
       </table>
     </div>
   );
+}
+
+function RowActionCell({ id, items }: { id: string; items: ActionMenuItem[] }) {
+  if (items.length === 0) return null;
+  if (items.length === 1) {
+    const it = items[0]!;
+    return (
+      <button
+        type="button"
+        className={cx('sso-row-action', !it.disabled && `sso-menu__item--${it.tone ?? 'view'}`)}
+        disabled={it.disabled}
+        aria-label={`${it.label} ${id}`}
+        onClick={it.onSelect}
+      >
+        {it.icon && <span className="sso-menu__icon" aria-hidden>{it.icon}</span>}
+        {it.label}
+      </button>
+    );
+  }
+  return <ActionMenu label={`Actions for ${id}`} items={items} />;
 }
 
 /** White card that holds a table: 10px radius, 1px line-subtle border. */
