@@ -31,10 +31,12 @@ needs a wrapper with `className="sso-root"`.
 | Status set | Same as ERP: success `#00C167`, error `#FF2E3B`, warning `#D1C700`, info `#0070FF`, neutral `#667085` |
 | Signed-in logo | wBizManager · SSO Portal lockup (`<Logo variant="sso" />`) |
 | Sign-in logo | wBizManager wordmark (`<Logo variant="wordmark" />`) |
-| Navigation | White 272px rail; Dashboard, Tenants, Entities, Products, Users, Roles, Approval Admin, Subscriptions, SSO Config; solid blue active pill with chevron |
+| Navigation | ERP sizing (200px, 44px items, 14px text, 20px icons); white rail; Dashboard, Tenants, Entities, Products, Users, Roles, Approval Admin, Subscriptions, SSO Config; solid blue active pill with chevron |
+| Top bar | ERP metrics (64px, bell + red count badge, gradient avatar, name Bold 16 / role 12); Scope / Product / Entity selectors; Sign out in the profile menu |
+| Page header | ERP anatomy: 28px title, 14px muted subtitle, actions right, optional back link. No eyebrow |
 | Neutrals | Slate ramp (`#0F172A` → `#F8FAFC`), the main visual difference from the ERP's grey |
 | Radius | 8px controls · 12px cards/tables · 16px accordions/dialogs |
-| Density | Comfortable: 48px nav items, 56px table rows, 40px controls |
+| Density | 56px table rows, 40px controls |
 
 The active nav colour is a single token, `--sso-nav-active-bg`, if it ever needs to differ from primary.
 
@@ -55,4 +57,4 @@ src/
 Logo · Button / IconButton · StatusPill · Tag / Chip · Avatar · Input / SearchInput / Select / Checkbox / Switch ·
 Card / StatCard / KeyValueList · PageHeader · Alert · Tabs · Table / Pagination · Accordion ·
 SidePanel / Modal / ResultCard · ActionMenu · Sidebar · TopBar · AppShell / Stack / Grid ·
-AppTile · SetupChecklist · ActivityList · PlanSummary · EmptyState
+IconTile · LinkTile · SectionHeading · RowActions · AppTile · SetupChecklist · ActivityList · PlanSummary · EmptyState

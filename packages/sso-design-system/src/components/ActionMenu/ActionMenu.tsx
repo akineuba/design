@@ -16,10 +16,14 @@ export interface ActionMenuProps {
   label?: string;
   trigger?: ReactNode;
   align?: 'start' | 'end';
+  /** Replaces the default 32px ⋮ trigger styling (e.g. the top-bar profile button). */
+  triggerClassName?: string;
+  /** Optional header inside the menu (e.g. signed-in email). */
+  header?: ReactNode;
 }
 
 /** Row-level ⋮ menu. */
-export function ActionMenu({ items, label = 'More actions', trigger, align = 'end' }: ActionMenuProps) {
+export function ActionMenu({ items, label = 'More actions', trigger, align = 'end', triggerClassName, header }: ActionMenuProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const id = useId();
@@ -34,11 +38,12 @@ export function ActionMenu({ items, label = 'More actions', trigger, align = 'en
   }, [open]);
   return (
     <div className="sso-menu" ref={ref}>
-      <button type="button" className="sso-menu__trigger" aria-haspopup="menu" aria-expanded={open} aria-controls={id} aria-label={label} onClick={() => setOpen(!open)}>
+      <button type="button" className={triggerClassName ?? 'sso-menu__trigger'} aria-haspopup="menu" aria-expanded={open} aria-controls={id} aria-label={label} onClick={() => setOpen(!open)}>
         {trigger ?? <MoreVertical />}
       </button>
       {open && (
         <div id={id} role="menu" className={cx('sso-menu__list', `sso-menu__list--${align}`)}>
+          {header && <div className="sso-menu__header">{header}</div>}
           {items.map((it) => (
             <button
               key={it.label}

@@ -5,7 +5,7 @@ import { SSO_NAV_ITEMS } from './navItems';
 import { Logo } from '../Logo/Logo';
 import { TopBar } from '../TopBar/TopBar';
 import { Avatar } from '../Avatar/Avatar';
-import { currentUser } from '../../demo/data';
+import { contextOptions, currentUser } from '../../demo/data';
 
 const meta: Meta<typeof Sidebar> = { title: 'Components/Navigation', component: Sidebar, tags: ['autodocs'], parameters: { layout: 'fullscreen' } };
 export default meta;
@@ -27,7 +27,18 @@ export const TopBarStory: StoryObj = {
   name: 'Top bar',
   render: () => (
     <div className="sso-root">
-      <TopBar context="Wragby Group" user={currentUser} unreadNotifications />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+        <TopBar
+          contexts={[
+            { id: 'scope', label: 'Scope', value: 'GLOBAL', options: contextOptions.scope, width: 264 },
+            { id: 'product', label: 'Product', value: 'CORE', options: contextOptions.product, width: 180 },
+            { id: 'entity', label: 'Entity', value: '', options: contextOptions.entity, width: 150, disabled: true },
+          ]}
+          user={currentUser}
+          notificationCount={3}
+        />
+        <TopBar breadcrumbs={[{ label: 'Tenants', href: '#' }, { label: 'AIM Group' }]} user={currentUser} />
+      </div>
     </div>
   ),
 };
@@ -38,7 +49,7 @@ export const Logos: StoryObj = {
       <figure style={{ margin: 0 }}><Logo variant="sso" height={48} /><figcaption style={{ fontSize: 12, color: 'var(--sso-color-fg-muted)', marginTop: 8 }}>sso: signed-in portal</figcaption></figure>
       <figure style={{ margin: 0 }}><Logo variant="wordmark" height={44} /><figcaption style={{ fontSize: 12, color: 'var(--sso-color-fg-muted)', marginTop: 8 }}>wordmark: sign-in / public</figcaption></figure>
       <figure style={{ margin: 0 }}><Logo variant="mark" height={44} /><figcaption style={{ fontSize: 12, color: 'var(--sso-color-fg-muted)', marginTop: 8 }}>mark: collapsed sidebar</figcaption></figure>
-      <figure style={{ margin: 0, display: 'flex', gap: 8 }}><Avatar name="Adaola Johnson" size="sm" /><Avatar name="Adaola Johnson" /><Avatar name="Adam Smith" tone="neutral" size="lg" /></figure>
+      <figure style={{ margin: 0, display: 'flex', gap: 8 }}><Avatar name="Global Admin" size="sm" /><Avatar name="Global Admin" /><Avatar name="Adam Smith" tone="neutral" size="lg" /></figure>
     </div>
   ),
 };

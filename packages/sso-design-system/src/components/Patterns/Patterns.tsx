@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, ChevronRight } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { Card, CardHeader, KeyValueList } from '../Card/Card';
+import { Card, CardHeader, IconTile, KeyValueList, type TileTone } from '../Card/Card';
 import { Chip } from '../Tag/Tag';
 import { StatusPill, type StatusTone } from '../StatusPill/StatusPill';
 
@@ -136,6 +136,64 @@ export function EmptyState({ icon, title, description, action }: { icon?: ReactN
       <p className="sso-empty__title">{title}</p>
       {description && <p className="sso-empty__desc">{description}</p>}
       {action}
+    </div>
+  );
+}
+
+/* ---------------- Link tile ---------------- */
+
+export interface LinkTileProps {
+  title: string;
+  description?: string;
+  icon: ReactNode;
+  tone?: TileTone;
+  href?: string;
+  onClick?: () => void;
+}
+
+/** Icon + title + one-line description that navigates somewhere. Quick links and tool hubs. */
+export function LinkTile({ title, description, icon, tone = 'blue', href = '#', onClick }: LinkTileProps) {
+  return (
+    <a className={cx('sso-link-tile', !description && 'sso-link-tile--compact')} href={href} onClick={(e) => { if (onClick) { e.preventDefault(); onClick(); } }}>
+      <IconTile icon={icon} tone={tone} />
+      <span className="sso-link-tile__text">
+        <span className="sso-link-tile__title">{title}</span>
+        {description && <span className="sso-link-tile__desc">{description}</span>}
+      </span>
+      <ChevronRight className="sso-link-tile__chevron" aria-hidden />
+    </a>
+  );
+}
+
+/** Section heading + optional description above a group of tiles or cards. */
+export function SectionHeading({ title, description, action, label }: { title?: string; description?: string; action?: ReactNode; label?: string }) {
+  return (
+    <div className="sso-section-heading">
+      <div>
+        {label && <p className="sso-section-label" style={{ margin: 0 }}>{label}</p>}
+        {title && <h2 className="sso-section-heading__title">{title}</h2>}
+        {description && <p className="sso-section-heading__desc">{description}</p>}
+      </div>
+      {action}
+    </div>
+  );
+}
+
+/* ---------------- Row actions ---------------- */
+
+export interface RowAction { label: string; icon?: ReactNode; onClick?: () => void; href?: string }
+
+/** Inline, small text buttons for the 2–3 most used row actions. Put the rest in an ActionMenu. */
+export function RowActions({ actions, children }: { actions: RowAction[]; children?: ReactNode }) {
+  return (
+    <div className="sso-row-actions">
+      {actions.map((a) => (
+        <button key={a.label} type="button" className="sso-row-actions__btn" onClick={a.onClick}>
+          {a.icon}
+          {a.label}
+        </button>
+      ))}
+      {children}
     </div>
   );
 }

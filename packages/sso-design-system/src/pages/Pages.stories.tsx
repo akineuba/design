@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { ArrowRight, Building2, CheckCircle2, ClipboardCheck, Download, KeyRound, Pencil, Plus, ShieldCheck, SlidersHorizontal, Trash2, UserX, Users } from 'lucide-react';
+import { Activity, BellRing, Building2, CheckCircle2, ClipboardList, CreditCard, Download, Eye, FileText, Gauge, History, Inbox, KeyRound, Layers, Package, Pencil, Plus, Power, Radio, ScrollText, Search, ShieldCheck, Tag as TagIcon, Trash2, UserX, Users, Wallet, BadgeDollarSign } from 'lucide-react';
 import { PortalShell } from './PortalShell';
 import { PageHeader } from '../components/PageHeader/PageHeader';
 import { Button } from '../components/Button/Button';
 import { StatCard } from '../components/Card/Card';
 import { Grid } from '../components/AppShell/AppShell';
-import { ActivityList, AppTile, PlanSummary, SetupChecklist } from '../components/Patterns/Patterns';
+import { LinkTile, PlanSummary, RowActions, SectionHeading } from '../components/Patterns/Patterns';
 import { Alert } from '../components/Alert/Alert';
 import { Tabs } from '../components/Tabs/Tabs';
 import { Pagination, Table, type Column } from '../components/Table/Table';
@@ -15,10 +15,11 @@ import { Chip, Tag } from '../components/Tag/Tag';
 import { StatusPill } from '../components/StatusPill/StatusPill';
 import { ActionMenu } from '../components/ActionMenu/ActionMenu';
 import { Checkbox, Input, SearchInput, Select } from '../components/Field/Field';
+import { Card } from '../components/Card/Card';
 import { Accordion } from '../components/Accordion/Accordion';
 import { SidePanel } from '../components/Overlay/Overlay';
 import { Logo } from '../components/Logo/Logo';
-import { activity, apps, billing, plans, setupSteps, tenants, users, type DemoTenant, type DemoUser } from '../demo/data';
+import { billing, contextOptions, plans, tenants, users, type DemoTenant, type DemoUser } from '../demo/data';
 
 const meta: Meta = { title: 'Pages', parameters: { layout: 'fullscreen' } };
 export default meta;
@@ -68,29 +69,26 @@ export const SignIn: StoryObj = {
 export const Dashboard: StoryObj = {
   render: () => (
     <PortalShell active="dashboard">
-      <PageHeader
-        eyebrow="Good morning, Adaola"
-        title="Here’s what needs your attention"
-        subtitle="Wragby Group · Full ERP"
-        actions={<Button iconLeft={<ClipboardCheck />}>Finish setup</Button>}
-      />
-      <Grid min={200}>
-        <StatCard label="Active users" value={5} helper="of 5 purchased seats" icon={<Users />} />
-        <StatCard label="Entities" value={3} helper="3 of 3 used" icon={<Building2 />} />
-        <StatCard label="Open approvals" value={7} helper="3 need your attention" icon={<ShieldCheck />} />
-        <StatCard label="Plan renewal" value="9 Aug" helper="2027 · Annual billing" />
-      </Grid>
-      <div className="sso-two-col">
-        <SetupChecklist subtitle="Complete your tenant setup" steps={setupSteps} />
-        <ActivityList title="Recent activity" subtitle="Changes across your account" items={activity} />
-      </div>
+      <PageHeader title="Dashboard" subtitle="Welcome back, Platform Admin. Here is a snapshot of the platform." />
       <section>
-        <h2 className="sso-section-title">Your applications</h2>
-        <p className="sso-section-subtitle">Open the apps included in this tenant’s plan. You’re signed in to all of them.</p>
-        <Grid min={180}>
-          {apps.map((a) => <AppTile key={a.name} name={a.name} icon={a.icon} />)}
+        <SectionHeading label="Platform" />
+        <Grid min={220}>
+          <StatCard icon={<Building2 />} iconTone="blue" label="Tenants" description="Registered organisations" value={93} helper="91 active · 2 inactive" href="#tenants" />
+          <StatCard icon={<Package />} iconTone="teal" label="Products" description="Global product catalogue" value={11} href="#products" />
+          <StatCard icon={<CreditCard />} iconTone="green" label="Commercial profiles" description="Subscription service" value={45} href="#subscriptions" />
+          <StatCard icon={<Layers />} iconTone="amber" label="Subscription plans" description="Draft + published" value={13} href="#plans" />
         </Grid>
       </section>
+      <Card padding="lg">
+        <SectionHeading title="Quick links" />
+        <Grid min={220} gap={3}>
+          <LinkTile title="Tenants" icon={<Building2 />} tone="blue" />
+          <LinkTile title="Users" icon={<Users />} tone="blue" />
+          <LinkTile title="Roles" icon={<ShieldCheck />} tone="teal" />
+          <LinkTile title="Products" icon={<Activity />} tone="amber" />
+          <LinkTile title="Subscriptions" icon={<CreditCard />} tone="green" />
+        </Grid>
+      </Card>
     </PortalShell>
   ),
 };
@@ -118,7 +116,6 @@ export const UsersPage: StoryObj = {
     return (
       <PortalShell active="users">
         <PageHeader
-          eyebrow="Access control"
           title="Users"
           subtitle="4 of 5 purchased full-user seats assigned."
           actions={<Button iconLeft={<Plus />} onClick={() => setPanel(true)}>Add user</Button>}
@@ -160,44 +157,43 @@ export const UsersPage: StoryObj = {
 
 /* ------------------------------------------------------------------ */
 
-const tenantTone = { Active: 'success', Expired: 'error', Trial: 'info' } as const;
+const tenantTone = { Active: 'success', Inactive: 'neutral' } as const;
 
 export const TenantsPage: StoryObj = {
   name: 'Tenants',
   render: () => {
     const columns: Column<DemoTenant>[] = [
-      { key: 'name', header: 'Tenant', sortable: true, render: (t) => (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}><span className="sso-cell-primary">{t.name}</span>{t.primary && <Tag>Primary</Tag>}</div>
-      ) },
-      { key: 'plan', header: 'Plan', render: (t) => t.plan },
+      { key: 'name', header: 'Name', sortable: true, render: (t) => <a href="#" className="sso-cell-link">{t.name}</a> },
       { key: 'code', header: 'Code', render: (t) => <span className="sso-cell-code">{t.code}</span> },
-      { key: 'entities', header: 'Entities', align: 'center', render: (t) => <span className="sso-num">{t.entities}</span> },
       { key: 'status', header: 'Status', render: (t) => <StatusPill tone={tenantTone[t.status]}>{t.status}</StatusPill> },
-      { key: 'a', header: <span className="sso-visually-hidden">Actions</span>, align: 'right', width: 64, render: (t) => (
-        <ActionMenu label={`Actions for ${t.name}`} items={[{ label: 'View tenant', icon: <ArrowRight /> }, { label: 'Edit', icon: <Pencil /> }, { label: 'Delete', icon: <Trash2 />, tone: 'danger' }]} />
+      { key: 'product', header: 'Default product', render: (t) => t.defaultProduct ?? <span className="sso-cell-secondary">Not set</span> },
+      { key: 'a', header: <span className="sso-visually-hidden">Actions</span>, align: 'right', render: (t) => (
+        <RowActions actions={[{ label: 'Entities', icon: <Layers /> }, { label: 'View', icon: <Eye /> }, { label: 'Edit', icon: <Pencil /> }]}>
+          <ActionMenu label={`More actions for ${t.name}`} items={[{ label: t.status === 'Active' ? 'Deactivate' : 'Activate', icon: <Power />, tone: t.status === 'Active' ? 'danger' : 'default' }]} />
+        </RowActions>
       ) },
     ];
     return (
       <PortalShell active="tenants">
         <PageHeader
-          eyebrow="Organisation"
           title="Tenants"
-          badge={<Tag>4 / 5 used</Tag>}
-          subtitle="Each tenant is a customer account with its own entities, users and plan."
-          actions={<><Button variant="outline" iconLeft={<Plus />}>Buy tenant</Button><Button iconLeft={<Plus />}>Add tenant</Button></>}
+          subtitle="Manage tenants, enable products, and set the default product per tenant."
+          actions={<Button iconLeft={<Plus />}>Add tenant</Button>}
         />
         <Table
           caption="Tenants"
           columns={columns}
           rows={tenants}
           rowKey={(t) => t.id}
+          sort={{ key: 'name', direction: 'asc' }}
+          onSort={() => {}}
           toolbar={<>
-            <SearchInput placeholder="Search tenants…" style={{ width: 260 }} />
+            <SearchInput placeholder="Search by name or code…" style={{ width: 320 }} />
             <span style={{ flex: 1 }} />
+            <Checkbox label="Include inactive" />
             <Button variant="ghost" iconLeft={<Download />}>Export</Button>
-            <Button variant="ghost" iconLeft={<SlidersHorizontal />}>Columns</Button>
           </>}
-          footer={<Pagination page={1} pageCount={1} total={4} pageSize={10} noun="tenants" onPageChange={() => {}} />}
+          footer={<Pagination page={1} pageCount={10} total={93} pageSize={10} noun="tenants" onPageChange={() => {}} />}
         />
       </PortalShell>
     );
@@ -208,21 +204,78 @@ export const TenantsPage: StoryObj = {
 
 export const SubscriptionsPage: StoryObj = {
   name: 'Subscriptions',
+  render: () => {
+    const platformTools = [
+      { title: 'Commercial tenants', description: 'Subscription-side tenant profiles.', icon: <Building2 />, tone: 'blue' },
+      { title: 'Products & features', description: 'Product catalogue and feature keys.', icon: <Package />, tone: 'blue' },
+      { title: 'New plan', description: 'Draft a plan with pricing and limits.', icon: <Plus />, tone: 'blue' },
+      { title: 'Plans', description: 'List, edit drafts, publish.', icon: <Layers />, tone: 'amber' },
+      { title: 'Customer search', description: 'Find subscriptions by tenant, email, or status.', icon: <Search />, tone: 'blue' },
+      { title: 'Wallet review', description: 'Manual top-up approval queue.', icon: <Wallet />, tone: 'green' },
+      { title: 'Payment channels', description: 'Enable Paystack, Manual, and Wallet per purpose.', icon: <CreditCard />, tone: 'blue' },
+      { title: 'Billing tools', description: 'Invoices, payments, and proration preview.', icon: <BadgeDollarSign />, tone: 'green' },
+      { title: 'Lifecycle', description: 'Subscribe, trial, status changes.', icon: <ShieldCheck />, tone: 'green' },
+      { title: 'Approvals', description: 'Approval queue.', icon: <ClipboardList />, tone: 'blue' },
+      { title: 'Audit logs', description: 'Per-tenant commercial audit.', icon: <ScrollText />, tone: 'slate' },
+      { title: 'Auth integration', description: 'Inbound Auth sync event log (ops).', icon: <Radio />, tone: 'slate' },
+      { title: 'Outbox', description: 'Pending integration events.', icon: <Inbox />, tone: 'slate' },
+    ] as const;
+    const customerTools = [
+      { title: 'Overview', description: 'Status, billing, orgs, seats, invoice usage.', icon: <CreditCard />, tone: 'blue' },
+      { title: 'Invoice quotas', description: 'Per-organisation monthly invoice allowance.', icon: <FileText />, tone: 'blue' },
+      { title: 'Entitlements', description: 'Plan features and overrides.', icon: <Layers />, tone: 'blue' },
+      { title: 'Feature catalogue', description: 'Resolved feature list for the product.', icon: <TagIcon />, tone: 'green' },
+      { title: 'Usage & limits', description: 'Seats, entities, thresholds.', icon: <Gauge />, tone: 'amber' },
+      { title: 'Billing', description: 'History, contacts, invoices, payments.', icon: <History />, tone: 'green' },
+      { title: 'Wallet', description: 'Balance, top-up, transaction history.', icon: <Wallet />, tone: 'amber' },
+      { title: 'Notifications', description: 'Preferences, recipients, log.', icon: <BellRing />, tone: 'blue' },
+    ] as const;
+    return (
+      <PortalShell active="subscriptions">
+        <PageHeader title="Subscriptions" subtitle="Manage commercial plans, renewals, usage, billing, and notifications. Platform tools are for administrators only." />
+        <section>
+          <SectionHeading title="Platform administration" description="Catalogue, plans, lifecycle, approvals, and cross-tenant tools." />
+          <Grid min={280} gap={3}>
+            {platformTools.map((t) => <LinkTile key={t.title} {...t} />)}
+          </Grid>
+        </section>
+        <section>
+          <SectionHeading title="View one customer subscription" description="Choose a tenant and product, then open any customer subscription page." />
+          <Card padding="lg">
+            <div className="sso-form-row">
+              <Select label="Tenant" options={contextOptions.scope} defaultValue="WRAGBY" />
+              <Select label="Product" options={contextOptions.product} defaultValue="ERP" />
+            </div>
+          </Card>
+        </section>
+        <Alert tone="info" title="Wragby Group · wBiz ERP selected" description="Open the overview for status, usage, and plan details." action={<Button size="sm">Open subscription overview</Button>} />
+        <Grid min={280} gap={3}>
+          {customerTools.map((t) => <LinkTile key={t.title} {...t} />)}
+        </Grid>
+      </PortalShell>
+    );
+  },
+};
+
+/* ------------------------------------------------------------------ */
+
+export const SubscriptionOverviewPage: StoryObj = {
+  name: 'Subscription overview',
   render: () => (
     <PortalShell active="subscriptions">
       <PageHeader
-        eyebrow="Billing"
-        title="Subscriptions"
-        subtitle="Review plans, capacity, renewal and billing activity."
+        back={{ label: 'Subscriptions' }}
+        title="Wragby Group · Subscription overview"
+        subtitle="Status, plans, capacity, renewal and billing for this tenant."
         actions={<><Button variant="secondary">Transaction history</Button><Button variant="danger">Cancel renewal</Button></>}
       />
       <Grid min={240}>
-        <StatCard label="Tenants" value={3} helper="Managed from this account" actions={<Button iconLeft={<Plus />}>Add tenant</Button>} />
+        <StatCard label="Entities" value={3} helper="Managed under this tenant" actions={<Button iconLeft={<Plus />}>Add entity</Button>} />
         <StatCard label="Full seats" value={5} helper="1 seat available" actions={<Button iconLeft={<Plus />}>Add users</Button>} />
         <StatCard label="Employee records" value={100} helper="Self-service included" actions={<><Button iconLeft={<Plus />}>Employees</Button><Button variant="outline" iconLeft={<Plus />}>Self-service</Button></>} />
       </Grid>
       <Alert tone="warning" title="Wragby Finance renews in 7 days" description="₦600,000 will be charged to debit card ·· 4242 on 9 August 2027." />
-      <p className="sso-eyebrow" style={{ margin: 0 }}>Plans by tenant</p>
+      <SectionHeading title="Plans by entity" />
       {plans.map((p, i) => (
         <Accordion key={p.org} title={p.org} meta={p.primary && <Tag>Primary</Tag>} aside={i > 0 ? `${p.planName} · ${p.price}/yr` : undefined} defaultOpen={i === 0}>
           <PlanSummary

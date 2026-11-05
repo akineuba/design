@@ -9,20 +9,21 @@ const meta: Meta<typeof PageHeader> = {
   component: PageHeader,
   tags: ['autodocs'],
   args: {
-    eyebrow: 'Access control',
-    title: 'Users',
-    subtitle: '4 of 5 purchased full-user seats assigned.',
-    actions: <Button iconLeft={<Plus />}>Add user</Button>,
+    title: 'Tenants',
+    subtitle: 'Manage tenants, enable products, and set the default product per tenant.',
+    actions: <Button iconLeft={<Plus />}>Add tenant</Button>,
   },
 };
 export default meta;
 export const Default: StoryObj<typeof PageHeader> = {};
 export const WithBadge: StoryObj<typeof PageHeader> = {
   args: {
-    eyebrow: 'Organisation',
     title: 'Entities',
     badge: <Tag>3 / 3 used</Tag>,
     subtitle: 'Create and manage legal entities under this tenant.',
     actions: (<><Button variant="outline" iconLeft={<Plus />}>Buy entity</Button><Button iconLeft={<Plus />}>Add entity</Button></>),
   },
+};
+export const WithBackLink: StoryObj<typeof PageHeader> = {
+  args: { back: { label: 'Tenants', href: '#' }, title: 'AIM Group', subtitle: 'Code AIMGROUP · Default product PAYEET', actions: <Button variant="ghost">Edit tenant</Button> },
 };

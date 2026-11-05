@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Building2, Plus, Users } from 'lucide-react';
-import { Card, CardHeader, KeyValueList, StatCard } from './Card';
+import { Building2, CreditCard, Layers, Package, Plus, Users } from 'lucide-react';
+import { Card, CardHeader, IconTile, KeyValueList, StatCard } from './Card';
 import { Button } from '../Button/Button';
 import { StatusPill } from '../StatusPill/StatusPill';
 
@@ -10,11 +10,32 @@ type S = StoryObj<typeof StatCard>;
 
 export const Stat: S = { args: { label: 'Active users', value: 5, helper: 'of 5 purchased seats' } };
 
+export const StatWithIconTile: S = {
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+      <StatCard icon={<Building2 />} iconTone="blue" label="Tenants" description="Registered organisations" value={93} helper="91 active · 2 inactive" href="#" />
+      <StatCard icon={<Package />} iconTone="teal" label="Products" description="Global product catalogue" value={11} href="#" />
+      <StatCard icon={<CreditCard />} iconTone="green" label="Commercial profiles" description="Subscription service" value={45} href="#" />
+      <StatCard icon={<Layers />} iconTone="amber" label="Subscription plans" description="Draft + published" value={13} href="#" />
+    </div>
+  ),
+};
+
+export const IconTiles: S = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      {(['blue', 'teal', 'green', 'amber', 'red', 'slate'] as const).map((t) => <IconTile key={t} tone={t} icon={<Layers />} />)}
+      <IconTile tone="blue" size="sm" icon={<Layers />} />
+      <IconTile tone="blue" size="lg" icon={<Layers />} />
+    </div>
+  ),
+};
+
 export const StatWithActions: S = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
-      <StatCard label="Tenants" value={3} helper="Managed from this account" icon={<Building2 />} actions={<Button iconLeft={<Plus />}>Add tenant</Button>} />
-      <StatCard label="Full seats" value={5} helper="1 seat available" icon={<Users />} actions={<Button iconLeft={<Plus />}>Add users</Button>} />
+      <StatCard label="Entities" value={3} helper="Managed under this tenant" actions={<Button iconLeft={<Plus />}>Add entity</Button>} />
+      <StatCard label="Full seats" value={5} helper="1 seat available" actions={<Button iconLeft={<Plus />}>Add users</Button>} />
       <StatCard label="Employee records" value={100} helper="Self-service included" actions={<><Button iconLeft={<Plus />}>Employees</Button><Button variant="outline" iconLeft={<Plus />}>Self-service</Button></>} />
     </div>
   ),

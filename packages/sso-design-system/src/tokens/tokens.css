@@ -72,6 +72,18 @@
   --sso-nav-active-bg: var(--sso-color-primary);
   --sso-nav-active-fg: #FFFFFF;
 
+  /* Icon tiles (same pairs as ERP --wbiz-color-tile-*) */
+  --sso-tile-blue-bg: #E0F0FF;   --sso-tile-blue-fg: #0070FF;
+  --sso-tile-green-bg: #DCFCE7;  --sso-tile-green-fg: #16A34A;
+  --sso-tile-amber-bg: #FEF3C7;  --sso-tile-amber-fg: #D97706;
+  --sso-tile-teal-bg: #D5F5EC;   --sso-tile-teal-fg: #0D9488;
+  --sso-tile-red-bg: #FFEAEB;    --sso-tile-red-fg: #E81E25;
+  --sso-tile-slate-bg: #F1F5F9;  --sso-tile-slate-fg: #475569;
+
+  /* Avatar + badge (same as ERP) */
+  --sso-gradient-avatar: linear-gradient(135deg, #4361FE 0%, #1450EE 100%);
+  --sso-color-badge: #E52E40;
+
   /* ---------- Typography ---------- */
   --sso-font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --sso-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -80,7 +92,7 @@
   --sso-font-size-xs: 12px;
   --sso-font-size-sm: 13px;
   --sso-font-size-md: 14px;
-  --sso-font-size-nav: 15px;
+  --sso-font-size-nav: 14px;
   --sso-font-size-lg: 16px;
   --sso-font-size-xl: 18px;
   --sso-font-size-2xl: 20px;
@@ -133,10 +145,10 @@
   --sso-shadow-focus-error: 0 0 0 4px rgba(255, 46, 59, 0.2);
 
   /* ---------- Sizes ---------- */
-  --sso-size-sidebar: 272px;
-  --sso-size-sidebar-collapsed: 80px;
-  --sso-size-topbar: 68px;
-  --sso-size-nav-item: 48px;
+  --sso-size-sidebar: 200px;           /* same as ERP */
+  --sso-size-sidebar-collapsed: 72px;
+  --sso-size-topbar: 64px;             /* same as ERP */
+  --sso-size-nav-item: 44px;           /* same as ERP */
   --sso-size-control-sm: 32px;
   --sso-size-control-md: 40px;
   --sso-size-control-lg: 48px;
@@ -144,7 +156,7 @@
   --sso-size-row-head: 44px;
   --sso-size-icon-sm: 16px;
   --sso-size-icon: 20px;
-  --sso-size-icon-nav: 24px;
+  --sso-size-icon-nav: 20px;
   --sso-size-panel: 440px;
   --sso-size-dialog: 480px;
   --sso-size-content-max: 1200px;

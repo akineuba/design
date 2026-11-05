@@ -29,27 +29,45 @@ export function CardHeader({ title, subtitle, action }: CardHeaderProps) {
   );
 }
 
-export interface StatCardProps {
-  label: string;
-  value: ReactNode;
-  helper?: ReactNode;
-  /** Buttons rendered at the bottom (e.g. Add organisation). */
-  actions?: ReactNode;
-  icon?: ReactNode;
+export type TileTone = 'blue' | 'green' | 'amber' | 'teal' | 'red' | 'slate';
+
+/** Rounded square holding an icon, tinted by tone. Same colour pairs as the ERP tiles. */
+export function IconTile({ icon, tone = 'blue', size = 'md' }: { icon: ReactNode; tone?: TileTone; size?: 'sm' | 'md' | 'lg' }) {
+  return <span className={cx('sso-icon-tile', `sso-icon-tile--${tone}`, `sso-icon-tile--${size}`)} aria-hidden>{icon}</span>;
 }
 
-/** Headline number with optional action, used on Dashboard and Subscriptions. */
-export function StatCard({ label, value, helper, actions, icon }: StatCardProps) {
-  return (
-    <Card className="sso-stat">
-      <div className="sso-stat__top">
+export interface StatCardProps {
+  label: string;
+  /** Secondary line under the label, e.g. "Registered organisations". */
+  description?: string;
+  value: ReactNode;
+  /** Footnote under the value, e.g. "91 active · 2 inactive". */
+  helper?: ReactNode;
+  /** Buttons rendered at the bottom (e.g. Add tenant). */
+  actions?: ReactNode;
+  icon?: ReactNode;
+  iconTone?: TileTone;
+  href?: string;
+}
+
+/** Headline number. With an icon, the tinted tile sits on top (Dashboard). */
+export function StatCard({ label, description, value, helper, actions, icon, iconTone = 'blue', href }: StatCardProps) {
+  const body = (
+    <>
+      {icon && <IconTile icon={icon} tone={iconTone} size="lg" />}
+      <div className="sso-stat__head">
         <p className="sso-stat__label">{label}</p>
-        {icon && <span className="sso-stat__icon" aria-hidden>{icon}</span>}
+        {description && <p className="sso-stat__desc">{description}</p>}
       </div>
       <p className="sso-stat__value sso-num">{value}</p>
       {helper && <p className="sso-stat__helper">{helper}</p>}
       {actions && <div className="sso-stat__actions">{actions}</div>}
-    </Card>
+    </>
+  );
+  return href ? (
+    <a href={href} className="sso-card sso-card--raised sso-card--pad-md sso-stat sso-stat--link">{body}</a>
+  ) : (
+    <Card className="sso-stat">{body}</Card>
   );
 }
 

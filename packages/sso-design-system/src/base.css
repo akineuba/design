@@ -28,13 +28,6 @@
 }
 
 /* Text helpers */
-.sso-eyebrow {
-  font-size: var(--sso-font-size-xs);
-  font-weight: var(--sso-font-weight-bold);
-  letter-spacing: var(--sso-letter-spacing-eyebrow);
-  text-transform: uppercase;
-  color: var(--sso-color-primary);
-}
 .sso-section-label {
   font-size: var(--sso-font-size-xs);
   font-weight: var(--sso-font-weight-bold);

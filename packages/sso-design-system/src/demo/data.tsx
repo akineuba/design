@@ -1,7 +1,20 @@
 import { BookOpen, Box, Briefcase, Building2, CalendarClock, FileText, ShoppingCart, UserPlus, Users } from 'lucide-react';
 
-export const currentUser = { name: 'Adaola Johnson', role: 'Account owner' };
-export const currentTenant = 'Wragby Group';
+export const currentUser = { name: 'Global Admin', role: 'Platform Admin', email: 'global.admin@yourcompany.com' };
+
+export const contextOptions = {
+  scope: [
+    { value: 'GLOBAL', label: 'Global Administration (GLOBAL)' },
+    { value: 'WRAGBY', label: 'Wragby Group (WRAGBY_MAIN)' },
+    { value: 'AIM', label: 'AIM Group (AIMGROUP)' },
+  ],
+  product: [
+    { value: 'CORE', label: 'Core Access (CORE)' },
+    { value: 'ERP', label: 'wBiz ERP (ERP)' },
+    { value: 'PAYEET', label: 'Payeet (PAYEET)' },
+  ],
+  entity: [{ value: '', label: 'No entities' }],
+};
 
 export interface DemoUser { id: string; name: string; email: string; roles: string[]; entities: number; status: 'Active' | 'Inactive' | 'Invited' }
 export const users: DemoUser[] = [
@@ -12,12 +25,18 @@ export const users: DemoUser[] = [
   { id: 'u5', name: 'Bola Adeyemi', email: 'bola.adeyemi@company.com', roles: ['Approver'], entities: 2, status: 'Inactive' },
 ];
 
-export interface DemoTenant { id: string; name: string; primary?: boolean; plan: string; code: string; entities: number; status: 'Active' | 'Expired' | 'Trial' }
+export interface DemoTenant { id: string; name: string; code: string; status: 'Active' | 'Inactive'; defaultProduct?: string; primary?: boolean; plan?: string }
 export const tenants: DemoTenant[] = [
-  { id: 't1', name: 'Wragby Group (Head Office)', primary: true, plan: 'Full ERP', code: 'WRAGBY_MAIN', entities: 3, status: 'Active' },
-  { id: 't2', name: 'Wragby Services Limited', plan: 'HR Suite', code: 'WRAGBY_SVC', entities: 1, status: 'Active' },
-  { id: 't3', name: 'Wragby Finance', plan: 'Finance', code: 'WRAGBY_FIN', entities: 2, status: 'Trial' },
-  { id: 't4', name: 'Eko Logistics', plan: 'Inventory', code: 'EKO_LOG', entities: 1, status: 'Expired' },
+  { id: 't1', name: '1902 Inc', code: 'WB60DF4406520146F591', status: 'Active', defaultProduct: 'ERP' },
+  { id: 't2', name: 'A4 and T', code: 'AFOURANDT', status: 'Active', defaultProduct: 'ERP' },
+  { id: 't3', name: 'AA Limited', code: 'WB759C4A15D5C2403982', status: 'Active', defaultProduct: 'ERP' },
+  { id: 't4', name: 'AbidoShaker', code: 'ABIDOSHAKER42MX', status: 'Active', defaultProduct: 'ERP' },
+  { id: 't5', name: 'AIM Group', code: 'AIMGROUP', status: 'Active', defaultProduct: 'PAYEET' },
+  { id: 't6', name: 'Akosile', code: 'SAMUEL', status: 'Active', defaultProduct: 'PAYEET' },
+  { id: 't7', name: 'BEAM', code: 'BEA', status: 'Active' },
+  { id: 't8', name: 'BeamEnergy-fe969850', code: 'STE', status: 'Inactive', defaultProduct: 'ERP' },
+  { id: 't9', name: 'Caracal Group', code: 'CARACAL', status: 'Active', defaultProduct: 'PAYEET' },
+  { id: 't10', name: 'Clinton Approval', code: 'CLINAPP', status: 'Active', defaultProduct: 'ERP' },
 ];
 
 export const apps = [

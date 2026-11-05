@@ -21,14 +21,14 @@ export interface SidebarProps {
 }
 
 /**
- * SSO portal sidebar. White rail, flat list, the active item is a solid
- * primary-blue pill with a trailing chevron. Shows the SSO Portal logo.
+ * SSO portal sidebar. ERP dimensions (200px, 44px items, 14px text, 20px icons);
+ * white rail, flat list, the active item is a solid primary-blue pill with a chevron.
  */
 export function Sidebar({ items, activeId, onNavigate, collapsed = false, onToggleCollapsed, footer }: SidebarProps) {
   return (
     <aside className={cx('sso-sidebar', collapsed && 'is-collapsed')} aria-label="Main navigation">
       <div className="sso-sidebar__header">
-        <Logo variant={collapsed ? 'mark' : 'sso'} height={collapsed ? 32 : 40} />
+        <Logo variant={collapsed ? 'mark' : 'sso'} height={collapsed ? 28 : 32} />
         {onToggleCollapsed && (
           <button
             type="button"

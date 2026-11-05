@@ -10,3 +10,5 @@
 .sso-menu__item:hover:not(:disabled), .sso-menu__item:focus-visible { background: var(--sso-color-surface-inset); box-shadow: none; }
 .sso-menu__item--danger, .sso-menu__item--danger svg { color: var(--sso-color-danger); }
 .sso-menu__item:disabled { color: var(--sso-color-fg-disabled); cursor: not-allowed; }
+.sso-menu__header { padding: var(--sso-space-2) var(--sso-space-3) var(--sso-space-3); margin-bottom: var(--sso-space-1); border-bottom: 1px solid var(--sso-color-line); font-size: var(--sso-font-size-sm); color: var(--sso-color-fg-muted); }
+.sso-menu__header strong { display: block; color: var(--sso-color-fg-ink); font-weight: var(--sso-font-weight-semibold); }
