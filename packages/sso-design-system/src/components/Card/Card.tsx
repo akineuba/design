@@ -1,73 +1,64 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  /** `raised` (default) = white card with border + soft shadow. `inset` = slate panel inside another card. */
-  variant?: 'raised' | 'inset' | 'flat';
-  padding?: 'none' | 'sm' | 'md' | 'lg';
-}
-
-export function Card({ variant = 'raised', padding = 'md', className, ...rest }: CardProps) {
-  return <div className={cx('sso-card', `sso-card--${variant}`, `sso-card--pad-${padding}`, className)} {...rest} />;
-}
-
-export interface CardHeaderProps {
-  title: ReactNode;
-  subtitle?: ReactNode;
-  action?: ReactNode;
-}
-
-export function CardHeader({ title, subtitle, action }: CardHeaderProps) {
-  return (
-    <div className="sso-card__header">
-      <div>
-        <h3 className="sso-card__title">{title}</h3>
-        {subtitle && <p className="sso-card__subtitle">{subtitle}</p>}
-      </div>
-      {action}
-    </div>
-  );
-}
-
-export type TileTone = 'blue' | 'green' | 'amber' | 'teal' | 'red' | 'slate';
-
-/** Rounded square holding an icon, tinted by tone. Same colour pairs as the ERP tiles. */
-export function IconTile({ icon, tone = 'blue', size = 'md' }: { icon: ReactNode; tone?: TileTone; size?: 'sm' | 'md' | 'lg' }) {
-  return <span className={cx('sso-icon-tile', `sso-icon-tile--${tone}`, `sso-icon-tile--${size}`)} aria-hidden>{icon}</span>;
-}
-
-export interface StatCardProps {
-  label: string;
-  /** Secondary line under the label, e.g. "Registered organisations". */
-  description?: string;
-  value: ReactNode;
-  /** Footnote under the value, e.g. "91 active · 2 inactive". */
-  helper?: ReactNode;
-  /** Buttons rendered at the bottom (e.g. Add tenant). */
+export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
+  title?: ReactNode;
+  description?: ReactNode;
+  /** Controls in the header, aligned right. */
   actions?: ReactNode;
-  icon?: ReactNode;
-  iconTone?: TileTone;
-  href?: string;
+  /** Divider between header and body. */
+  divided?: boolean;
+  /** `inset` is the slate panel used inside another card (Figma billing block). */
+  variant?: 'default' | 'inset';
 }
 
-/** Headline number. With an icon, the tinted tile sits on top (Dashboard). */
-export function StatCard({ label, description, value, helper, actions, icon, iconTone = 'blue', href }: StatCardProps) {
-  const body = (
-    <>
-      {icon && <IconTile icon={icon} tone={iconTone} size="lg" />}
-      <div className="sso-stat__head">
-        <p className="sso-stat__label">{label}</p>
-        {description && <p className="sso-stat__desc">{description}</p>}
-      </div>
-      <p className="sso-stat__value sso-num">{value}</p>
-      {helper && <p className="sso-stat__helper">{helper}</p>}
-      {actions && <div className="sso-stat__actions">{actions}</div>}
-    </>
+/** Content section (ERP Card): white, 1px line-subtle border, 10px radius, 24px padding, title Semibold 16. */
+export function Card({ title, description, actions, divided, variant = 'default', className, children, ...rest }: CardProps) {
+  return (
+    <section className={cx('sso-card', variant === 'inset' && 'sso-card--inset', className)} {...rest}>
+      {(title || actions) && (
+        <div className={cx('sso-card__header', divided && 'is-divided')}>
+          <div className="sso-card__titles">
+            {title && <h2 className="sso-card__title">{title}</h2>}
+            {description && <p className="sso-card__desc">{description}</p>}
+          </div>
+          {actions}
+        </div>
+      )}
+      {children}
+    </section>
   );
-  return href ? (
-    <a href={href} className="sso-card sso-card--raised sso-card--pad-md sso-stat sso-stat--link">{body}</a>
-  ) : (
-    <Card className="sso-stat">{body}</Card>
+}
+
+export type SummaryTone = 'green' | 'blue' | 'amber' | 'teal' | 'red';
+
+export interface SummaryCardProps {
+  label: ReactNode;
+  value: ReactNode;
+  /** Context line under the value, e.g. "of 5 purchased seats". */
+  hint?: ReactNode;
+  /** Optional icon in a coloured tile on the left (ERP SummaryCard). Leave out for plain figures. */
+  icon?: ReactNode;
+  color?: SummaryTone;
+  /** Buttons under the figure (Figma subscription summary: Add organisation, Add users). */
+  actions?: ReactNode;
+  className?: string;
+}
+
+/** Headline figure (ERP SummaryCard). Label Medium 14 muted, value Bold 24, hint 13. */
+export function SummaryCard({ label, value, hint, icon, color = 'blue', actions, className }: SummaryCardProps) {
+  return (
+    <div className={cx('sso-summary', !!actions && 'has-actions', className)}>
+      <div className="sso-summary__main">
+        {icon && <span className={cx('sso-summary__tile', `sso-summary__tile--${color}`)} aria-hidden>{icon}</span>}
+        <div className="sso-summary__text">
+          <span className="sso-summary__label">{label}</span>
+          <span className="sso-summary__value sso-num">{value}</span>
+          {hint && <span className="sso-summary__hint">{hint}</span>}
+        </div>
+      </div>
+      {actions && <div className="sso-summary__actions">{actions}</div>}
+    </div>
   );
 }
 

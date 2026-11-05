@@ -1,67 +1,80 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useMemo, useState } from 'react';
-import { Download, Pencil, SlidersHorizontal, Trash2, UserX } from 'lucide-react';
-import { Pagination, Table, type Column } from './Table';
-import { Avatar } from '../Avatar/Avatar';
-import { Chip } from '../Tag/Tag';
+import { Download, Eye, Layers, Pencil, Plus, Power } from 'lucide-react';
+import { DataTable, Pagination, TableCard, TableFooter, TableSearch, TableToolbar, ToolbarGroup, entriesSummary, type Column, type SortState } from './Table';
 import { StatusPill } from '../StatusPill/StatusPill';
-import { ActionMenu } from '../ActionMenu/ActionMenu';
-import { SearchInput, Select, Checkbox } from '../Field/Field';
 import { Button } from '../Button/Button';
-import { users, type DemoUser } from '../../demo/data';
+import { Checkbox } from '../Field/Field';
+import { ActionMenu } from '../ActionMenu/ActionMenu';
+import { tenants, type DemoTenant } from '../../demo/data';
 
 const meta: Meta = { title: 'Components/Table', tags: ['autodocs'] };
 export default meta;
 
-const tone = { Active: 'success', Inactive: 'neutral', Invited: 'warning' } as const;
+const columns: Column<DemoTenant>[] = [
+  { key: 'name', header: 'Name', sortable: true, render: (t) => <a href="#" className="sso-cell-link">{t.name}</a> },
+  { key: 'code', header: 'Code', sortable: true, render: (t) => <span className="sso-cell-code">{t.code}</span> },
+  { key: 'status', header: 'Status', render: (t) => <StatusPill tone={t.status === 'Active' ? 'success' : 'neutral'}>{t.status}</StatusPill> },
+  { key: 'defaultProduct', header: 'Default product', render: (t) => t.defaultProduct ?? '—' },
+];
 
-export const UsersTable: StoryObj = {
+const actions = (t: DemoTenant) => [
+  { id: 'entities', label: 'Entities', tone: 'link' as const, icon: <Layers /> },
+  { id: 'view', label: 'View', tone: 'view' as const, icon: <Eye /> },
+  { id: 'edit', label: 'Edit', tone: 'edit' as const, icon: <Pencil /> },
+  { id: 'deactivate', label: t.status === 'Active' ? 'Deactivate' : 'Activate', tone: (t.status === 'Active' ? 'delete' : 'positive') as 'delete' | 'positive', icon: <Power /> },
+];
+
+export const FullTable: StoryObj = {
+  name: 'Table: toolbar, actions, footer',
   render: () => {
-    const [sort, setSort] = useState<{ key: string; direction: 'asc' | 'desc' }>({ key: 'name', direction: 'asc' });
-    const [q, setQ] = useState('');
-    const rows = useMemo(() => {
-      const r = users.filter((u) => (u.name + u.email).toLowerCase().includes(q.toLowerCase()));
-      const k = sort.key as keyof DemoUser;
-      return [...r].sort((a, b) => String(a[k]).localeCompare(String(b[k])) * (sort.direction === 'asc' ? 1 : -1));
-    }, [q, sort]);
-    const columns: Column<DemoUser>[] = [
-      { key: 'name', header: 'Name', sortable: true, render: (u) => (
-        <div className="sso-cell-person"><Avatar name={u.name} tone="neutral" /><span className="sso-cell-primary">{u.name}</span></div>
-      ) },
-      { key: 'email', header: 'Email', sortable: true, render: (u) => <span className="sso-cell-secondary">{u.email}</span> },
-      { key: 'roles', header: 'Roles', render: (u) => <div className="sso-cell-chips">{u.roles.map((r) => <Chip key={r} kind="removable">{r}</Chip>)}</div> },
-      { key: 'entities', header: 'Entities', align: 'center', render: (u) => <span className="sso-num">{u.entities}</span> },
-      { key: 'status', header: 'Status', sortable: true, render: (u) => <StatusPill tone={tone[u.status]}>{u.status}</StatusPill> },
-      { key: 'actions', header: <span className="sso-visually-hidden">Actions</span>, align: 'right', width: 64, render: (u) => (
-        <ActionMenu label={`Actions for ${u.name}`} items={[
-          { label: 'Edit user', icon: <Pencil /> },
-          { label: 'Deactivate', icon: <UserX /> },
-          { label: 'Delete', icon: <Trash2 />, tone: 'danger' },
-        ]} />
-      ) },
-    ];
+    const [sort, setSort] = useState<SortState | null>({ key: 'name', direction: 'asc' });
+    const [page, setPage] = useState(3);
+    const [selected, setSelected] = useState<string[]>([]);
+    const rows = useMemo(() => !sort ? tenants : [...tenants].sort((a, b) => {
+      const x = String(a[sort.key as keyof DemoTenant] ?? ''), y = String(b[sort.key as keyof DemoTenant] ?? '');
+      return sort.direction === 'asc' ? x.localeCompare(y) : y.localeCompare(x);
+    }), [sort]);
     return (
-      <Table
-        caption="Users"
-        columns={columns}
-        rows={rows}
-        rowKey={(u) => u.id}
-        sort={sort}
-        onSort={(key) => setSort((s) => ({ key, direction: s.key === key && s.direction === 'asc' ? 'desc' : 'asc' }))}
-        toolbar={<>
-          <SearchInput placeholder="Search by name or email…" value={q} onChange={(e) => setQ(e.target.value)} fieldClassName="sso-grow" style={{ width: 260 }} />
-          <Select aria-label="Status" options={[{ value: '', label: 'All statuses' }, { value: 'active', label: 'Active' }]} />
-          <Checkbox label="Include inactive" />
-          <span style={{ flex: 1 }} />
-          <Button variant="ghost" iconLeft={<Download />}>Export</Button>
-          <Button variant="ghost" iconLeft={<SlidersHorizontal />}>Columns</Button>
-        </>}
-        footer={<Pagination page={1} pageCount={5} total={50} pageSize={10} noun="users" onPageChange={() => {}} />}
-      />
+      <TableCard>
+        <TableToolbar>
+          <ToolbarGroup>
+            <TableSearch aria-label="Search tenants" placeholder="Search by name or code" />
+            <Checkbox label="Include inactive" />
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <Button variant="secondary" leadingIcon={<Download />}>Export</Button>
+            <Button leadingIcon={<Plus />}>Add tenant</Button>
+          </ToolbarGroup>
+        </TableToolbar>
+        <DataTable caption="Tenants" columns={columns} rows={rows} getRowId={(t) => t.name} sort={sort} onSortChange={setSort} rowActions={actions} selectable selectedIds={selected} onSelectedIdsChange={setSelected} />
+        <TableFooter summary={entriesSummary(page, 10, 93)}>
+          <Pagination page={page} pageCount={10} onPageChange={setPage} />
+        </TableFooter>
+      </TableCard>
     );
   },
 };
 
+export const Loading: StoryObj = {
+  render: () => <TableCard><DataTable columns={columns} rows={[]} getRowId={(t) => t.name} rowActions={actions} loading /></TableCard>,
+};
+
 export const Empty: StoryObj = {
-  render: () => <Table columns={[{ key: 'n', header: 'Name', render: () => null }, { key: 's', header: 'Status', render: () => null }]} rows={[]} rowKey={() => ''} empty="No users match your search." />,
+  render: () => <TableCard><DataTable columns={columns} rows={[]} getRowId={(t) => t.name} rowActions={actions} empty="No tenants match your search." /></TableCard>,
+};
+
+export const RowActionMenu: StoryObj = {
+  name: 'Action menu (row actions)',
+  render: () => (
+    <div style={{ height: 240 }}>
+      <ActionMenu label="Actions for AIM Group" items={[
+        { label: 'View', tone: 'view', icon: <Eye /> },
+        { label: 'Edit', tone: 'edit', icon: <Pencil /> },
+        { label: 'Entities', tone: 'link', icon: <Layers /> },
+        { label: 'Activate', tone: 'positive', icon: <Power /> },
+        { label: 'Deactivate', tone: 'delete', icon: <Power /> },
+      ]} />
+    </div>
+  ),
 };

@@ -36,39 +36,44 @@ function useOverlay(open: boolean, onClose: () => void) {
   return ref;
 }
 
-function Header({ id, title, description, onClose }: { id: string; title: ReactNode; description?: ReactNode; onClose: () => void }) {
+function Header({ id, title, description, onClose, className }: { id: string; title: ReactNode; description?: ReactNode; onClose?: () => void; className: string }) {
   return (
-    <div className="sso-overlay__header">
-      <div>
+    <div className={className}>
+      <div className="sso-overlay__titles">
         <h2 className="sso-overlay__title" id={`${id}-title`}>{title}</h2>
         {description && <p className="sso-overlay__desc">{description}</p>}
       </div>
-      <button type="button" className="sso-overlay__close" onClick={onClose} aria-label="Close">
-        <X />
-      </button>
+      {onClose && (
+        <button type="button" className="sso-overlay__close" onClick={onClose} aria-label="Close">
+          <X />
+        </button>
+      )}
     </div>
   );
 }
 
-/** Right-hand drawer for create/edit forms (Add user, Add tenant). */
-export function SidePanel({ open, onClose, title, description, footer, children, width }: BaseOverlayProps & { width?: number }) {
+/**
+ * Right-hand drawer for create/edit forms (ERP SidePanel): 541px, 30px padding,
+ * title Semibold 24, labels switch to the 14px form style, footer right-aligned.
+ */
+export function SidePanel({ open, onClose, title, description, footer, children, size = 'md', showClose = false }: BaseOverlayProps & { size?: 'sm' | 'md' | 'lg'; showClose?: boolean }) {
   const ref = useOverlay(open, onClose);
   const id = useId();
   if (!open) return null;
   return (
     <div className="sso-overlay sso-overlay--panel">
       <div className="sso-overlay__scrim" onClick={onClose} />
-      <div ref={ref} className="sso-panel" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} style={{ width }}>
-        <Header id={id} title={title} description={description} onClose={onClose} />
-        <div className="sso-overlay__body">{children}</div>
-        {footer && <div className="sso-overlay__footer">{footer}</div>}
+      <div ref={ref} className={cx('sso-panel', `sso-panel--${size}`)} role="dialog" aria-modal="true" aria-labelledby={`${id}-title`}>
+        <Header id={id} title={title} description={description} onClose={showClose ? onClose : undefined} className="sso-panel__header" />
+        <div className="sso-panel__body">{children}</div>
+        {footer && <div className="sso-panel__footer">{footer}</div>}
       </div>
     </div>
   );
 }
 
-/** Centred dialog for short confirmations and small edits. */
-export function Modal({ open, onClose, title, description, footer, children, size = 'md' }: BaseOverlayProps & { size?: 'sm' | 'md' | 'lg' }) {
+/** Centred dialog (ERP Modal): 515px (820 large), 8px radius, title Semibold 24. */
+export function Modal({ open, onClose, title, description, footer, children, size = 'md' }: BaseOverlayProps & { size?: 'md' | 'lg' }) {
   const ref = useOverlay(open, onClose);
   const id = useId();
   if (!open) return null;
@@ -76,9 +81,9 @@ export function Modal({ open, onClose, title, description, footer, children, siz
     <div className="sso-overlay sso-overlay--modal">
       <div className="sso-overlay__scrim" onClick={onClose} />
       <div ref={ref} className={cx('sso-modal', `sso-modal--${size}`)} role="dialog" aria-modal="true" aria-labelledby={`${id}-title`}>
-        <Header id={id} title={title} description={description} onClose={onClose} />
-        {children && <div className="sso-overlay__body">{children}</div>}
-        {footer && <div className="sso-overlay__footer">{footer}</div>}
+        <Header id={id} title={title} description={description} onClose={onClose} className="sso-modal__header" />
+        {children && <div className="sso-modal__body">{children}</div>}
+        {footer && <div className="sso-modal__footer">{footer}</div>}
       </div>
     </div>
   );
@@ -91,7 +96,7 @@ export interface ResultCardProps {
   actions?: ReactNode;
 }
 
-/** Outcome card for the end of a flow (plan changed, payment failed). */
+/** Outcome card at the end of a flow (Figma: Success-Card / payment failed). */
 export function ResultCard({ tone, title, description, actions }: ResultCardProps) {
   return (
     <div className={cx('sso-result', `sso-result--${tone}`)} role="status">

@@ -1,11 +1,12 @@
-.sso-avatar {
-  display: inline-flex; align-items: center; justify-content: center; flex: none;
-  border-radius: 50%; overflow: hidden;
-  font-weight: var(--sso-font-weight-bold);
-}
+/* ERP Avatar: blue gradient initials (neutral = grey gradient), Semibold, white. */
+.sso-avatar { display: inline-flex; align-items: center; justify-content: center; flex: none; overflow: hidden; border-radius: 50%; font-weight: var(--sso-font-weight-semibold); color: var(--sso-color-fg-inverse); }
 .sso-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.sso-avatar--sm { width: 28px; height: 28px; font-size: 11px; }
-.sso-avatar--md { width: 32px; height: 32px; font-size: var(--sso-font-size-xs); }
-.sso-avatar--lg { width: 40px; height: 40px; font-size: var(--sso-font-size-md); }
-.sso-avatar--brand { background: var(--sso-color-line); color: var(--sso-color-primary); }
-.sso-avatar--neutral { background: #94A3B8; color: var(--sso-color-fg-inverse); }
+.sso-avatar--sm { width: 28px; height: 28px; font-size: var(--sso-font-size-2xs); }
+.sso-avatar--md { width: 36px; height: 36px; font-size: var(--sso-font-size-sm); }
+.sso-avatar--lg { width: 36px; height: 36px; font-size: var(--sso-font-size-sm); }
+.sso-avatar--brand { background: var(--sso-gradient-avatar); }
+.sso-avatar--neutral { background: linear-gradient(117deg, #7E8FA8 0%, #55667E 100%); }
+.sso-person { display: inline-flex; align-items: center; gap: var(--sso-space-3); min-width: 0; }
+.sso-person__text { display: flex; flex-direction: column; min-width: 0; }
+.sso-person__name { font-size: var(--sso-font-size-md); font-weight: var(--sso-font-weight-medium); color: var(--sso-color-fg-ink); overflow: hidden; text-overflow: ellipsis; }
+.sso-person__desc { font-size: var(--sso-font-size-xs); color: var(--sso-color-fg-muted); overflow: hidden; text-overflow: ellipsis; }

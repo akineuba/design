@@ -36,3 +36,4 @@
   color: var(--sso-color-fg-faint);
 }
 .sso-num { font-variant-numeric: tabular-nums; }
+.sso-section-title { margin: 0; font-size: var(--sso-font-size-lg); font-weight: var(--sso-font-weight-semibold); color: var(--sso-color-fg-strong); }

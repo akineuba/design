@@ -2,68 +2,45 @@ import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 import { Spinner } from '../Spinner/Spinner';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'link';
+/** Same five variants as the ERP Button. */
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'tertiary' | 'destructive';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * `primary`: the one main action on a view. `secondary`: grey fill, neutral actions
-   * (e.g. Transaction History). `outline`: blue outline, companion to primary.
-   * `ghost`: low-emphasis, toolbars. `danger`: destructive. `link`: inline text action.
+   * `primary`: main action. `secondary`: white with a grey border (Export, Cancel).
+   * `outline`: blue border + label (side-panel Cancel, companion actions).
+   * `tertiary`: text only. `destructive`: red border + label (Cancel renewal, Delete).
    */
   variant?: ButtonVariant;
   size?: ButtonSize;
-  iconLeft?: ReactNode;
-  iconRight?: ReactNode;
+  leadingIcon?: ReactNode;
+  trailingIcon?: ReactNode;
+  /** Square icon button; pass the icon as children and an aria-label. */
+  iconOnly?: boolean;
   fullWidth?: boolean;
   loading?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = 'primary', size = 'md', iconLeft, iconRight, fullWidth, loading, disabled, className, children, type = 'button', ...rest },
+  { variant = 'primary', size = 'md', leadingIcon, trailingIcon, iconOnly, fullWidth, loading, disabled, className, children, type = 'button', onClick, ...rest },
   ref,
 ) {
+  const blocked = disabled || loading;
   return (
     <button
       ref={ref}
       type={type}
-      className={cx('sso-btn', `sso-btn--${variant}`, `sso-btn--${size}`, fullWidth && 'sso-btn--full', className)}
-      disabled={disabled || loading}
+      disabled={disabled}
+      aria-disabled={blocked || undefined}
       aria-busy={loading || undefined}
+      onClick={blocked ? (e) => e.preventDefault() : onClick}
+      className={cx('sso-btn', `sso-btn--${variant}`, `sso-btn--${size}`, iconOnly && 'sso-btn--icon', fullWidth && 'sso-btn--full', className)}
       {...rest}
     >
-      {loading ? <Spinner size={16} /> : iconLeft}
-      {children && <span className="sso-btn__label">{children}</span>}
-      {iconRight}
-    </button>
-  );
-});
-
-export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Accessible name; icon buttons have no visible text. */
-  label: string;
-  icon: ReactNode;
-  variant?: 'soft' | 'ghost' | 'outline';
-  size?: ButtonSize;
-  /** Show a small red dot (e.g. unread notifications). */
-  dot?: boolean;
-}
-
-export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
-  { label, icon, variant = 'soft', size = 'md', dot, className, type = 'button', ...rest },
-  ref,
-) {
-  return (
-    <button
-      ref={ref}
-      type={type}
-      aria-label={label}
-      title={label}
-      className={cx('sso-icon-btn', `sso-icon-btn--${variant}`, `sso-icon-btn--${size}`, className)}
-      {...rest}
-    >
-      {icon}
-      {dot && <span className="sso-icon-btn__dot" aria-hidden />}
+      {loading ? <Spinner size={16} /> : leadingIcon && <span className="sso-btn__icon" aria-hidden>{leadingIcon}</span>}
+      {iconOnly ? (!loading && <span className="sso-btn__icon" aria-hidden>{children}</span>) : children}
+      {!iconOnly && trailingIcon && !loading && <span className="sso-btn__icon" aria-hidden>{trailingIcon}</span>}
     </button>
   );
 });

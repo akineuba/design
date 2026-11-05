@@ -1,12 +1,12 @@
-.sso-tabs { display: flex; gap: var(--sso-space-6); border-bottom: 1px solid var(--sso-color-line); }
+/* ERP Tabs: 35px, 10/20 padding, 13px; active Semibold primary with a 2px underline. */
+.sso-tabs { display: flex; max-width: 100%; flex: none; overflow-x: auto; border-bottom: 1px solid var(--sso-color-line); }
 .sso-tabs__tab {
-  position: relative; display: inline-flex; align-items: center; gap: var(--sso-space-1_5);
-  height: 40px; padding: 0 2px; margin-bottom: -1px;
-  border: 0; border-bottom: 2px solid transparent; background: none;
-  font-size: var(--sso-font-size-md); font-weight: var(--sso-font-weight-medium);
-  color: var(--sso-color-fg-muted); cursor: pointer;
+  display: inline-flex; align-items: center; gap: var(--sso-space-1_5); flex: none;
+  height: 35px; padding: var(--sso-space-2_5) var(--sso-space-5); margin-bottom: -1px;
+  border: 0; border-bottom: 2px solid transparent; background: none; white-space: nowrap;
+  font-size: var(--sso-font-size-sm); font-weight: var(--sso-font-weight-medium); color: var(--sso-color-fg-muted); cursor: pointer;
+  transition: color 150ms;
 }
-.sso-tabs__tab:hover { color: var(--sso-color-fg-strong); }
-.sso-tabs__tab.is-active { color: var(--sso-color-primary); border-bottom-color: var(--sso-color-primary); font-weight: var(--sso-font-weight-semibold); }
-.sso-tabs__count { min-width: 20px; height: 20px; padding: 0 6px; border-radius: var(--sso-radius-full); background: var(--sso-color-surface-control); font-size: var(--sso-font-size-2xs); font-weight: var(--sso-font-weight-semibold); color: var(--sso-color-fg-muted); display: inline-flex; align-items: center; justify-content: center; }
-.sso-tabs__tab.is-active .sso-tabs__count { background: var(--sso-color-primary-subtle); color: var(--sso-color-primary); }
+.sso-tabs__tab:hover { color: var(--sso-color-fg); }
+.sso-tabs__tab.is-active { border-bottom-color: var(--sso-color-primary); font-weight: var(--sso-font-weight-semibold); color: var(--sso-color-primary); }
+.sso-tabs__count { font-weight: var(--sso-font-weight-regular); color: inherit; }

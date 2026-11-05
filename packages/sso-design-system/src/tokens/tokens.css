@@ -42,6 +42,7 @@
   --sso-color-surface-inset: #F8FAFC;    /* panels inside cards */
   --sso-color-surface-control: #F1F5F9;  /* org switcher, icon buttons */
   --sso-color-surface-sunken: #F4F5F7;
+  --sso-color-surface-muted: #F8F8F8;    /* hover fill (ERP) */
   --sso-color-surface-disabled: #F1F5F9;
   --sso-color-overlay: rgba(15, 23, 42, 0.5);
 
@@ -60,6 +61,13 @@
 
   /* Actions (matches ERP action colours) */
   --sso-color-danger: #E81E25;
+  --sso-color-action-view: #667085;
+  --sso-color-action-link: #0070FF;
+  --sso-color-action-positive: #00C167;
+  --sso-color-success-subtle: #EBF9EF;
+  --sso-color-error-subtle: #FFF0F1;
+  --sso-color-switch-on: #34C759;
+  --sso-color-switch-off: rgba(120, 120, 128, 0.16);
   --sso-color-danger-hover: #C9161C;
   --sso-color-action-edit: #D4A003;
 
@@ -136,8 +144,9 @@
   --sso-radius-xs: 4px;
   --sso-radius-sm: 6px;
   --sso-radius-md: 8px;    /* buttons, inputs, nav items */
-  --sso-radius-lg: 12px;   /* cards, inset panels */
-  --sso-radius-xl: 16px;   /* accordions, large cards, dialogs */
+  --sso-radius-lg: 10px;   /* cards, tables, summary cards (ERP rounded-xl) */
+  --sso-radius-xl: 12px;   /* accordions (ERP rounded-panel) */
+  --sso-radius-2xl: 16px;  /* sidebar panel */
   --sso-radius-full: 9999px;
 
   /* ---------- Elevation ---------- */
@@ -147,6 +156,7 @@
   --sso-shadow-md: 0 10px 24px rgba(15, 23, 42, 0.10);
   --sso-shadow-dialog: 0 20px 40px -8px rgba(15, 23, 42, 0.24);
   --sso-shadow-focus: 0 0 0 4px rgba(0, 112, 255, 0.24);
+  --sso-shadow-knob: 0 3px 1px rgba(0, 0, 0, 0.06), 0 3px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.04);
   --sso-shadow-focus-error: 0 0 0 4px rgba(255, 46, 59, 0.2);
 
   /* ---------- Sizes ---------- */
@@ -158,13 +168,19 @@
   --sso-size-control-sm: 32px;
   --sso-size-control-md: 40px;
   --sso-size-control-lg: 48px;
-  --sso-size-row: 56px;
+  --sso-size-row: 44px;               /* ERP default row */
   --sso-size-row-head: 44px;
   --sso-size-icon-sm: 16px;
   --sso-size-icon: 20px;
   --sso-size-icon-nav: 18px;
-  --sso-size-panel: 440px;
-  --sso-size-dialog: 480px;
+  --sso-size-panel: 541px;            /* ERP panel-md */
+  --sso-size-dialog: 515px;           /* ERP dialog */
+  --sso-size-dialog-lg: 820px;
+  --sso-size-tile: 44px;
+  --sso-size-page-btn: 30px;
+  --sso-size-search: 240px;
+  --sso-size-action-menu: 138px;
+  --sso-size-row-comfortable: 54px;
   --sso-size-content-max: 1200px;
 
   /* ---------- Motion ---------- */

@@ -1,11 +1,13 @@
 import type { ReactNode } from 'react';
-import { ArrowRight, Check, ChevronRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { Card, CardHeader, IconTile, KeyValueList, type TileTone } from '../Card/Card';
+import { Card, KeyValueList } from '../Card/Card';
 import { Chip } from '../Tag/Tag';
 import { StatusPill, type StatusTone } from '../StatusPill/StatusPill';
 
-/* ---------------- App tile ---------------- */
+/* Patterns from the Figma SSO portal (page "new" › portal), drawn with ERP card styling. */
+
+/* ---------------- App tile (Figma: Your applications) ---------------- */
 
 export interface AppTileProps {
   name: string;
@@ -17,14 +19,13 @@ export interface AppTileProps {
   disabled?: boolean;
 }
 
-/** Launches a wBiz product through SSO. */
 export function AppTile({ name, description = 'Open application', icon, href = '#', onOpen, disabled }: AppTileProps) {
   return (
     <a
       className={cx('sso-app-tile', disabled && 'is-disabled')}
       href={disabled ? undefined : href}
       aria-disabled={disabled || undefined}
-      onClick={(e) => { if (disabled) { e.preventDefault(); return; } onOpen?.(); }}
+      onClick={(e) => { if (disabled) { e.preventDefault(); return; } if (onOpen) { e.preventDefault(); onOpen(); } }}
     >
       <span className="sso-app-tile__icon" aria-hidden>{icon}</span>
       <span className="sso-app-tile__name">{name}</span>
@@ -34,19 +35,14 @@ export function AppTile({ name, description = 'Open application', icon, href = '
   );
 }
 
-/* ---------------- Setup checklist ---------------- */
+/* ---------------- Setup checklist (Figma: Get started) ---------------- */
 
 export interface ChecklistStep { id: string; label: string; done?: boolean; href?: string }
 
-export function SetupChecklist({ title = 'Get started', subtitle, steps }: { title?: string; subtitle?: string; steps: ChecklistStep[] }) {
-  const done = steps.filter((s) => s.done).length;
-  const pct = Math.round((done / steps.length) * 100);
+export function SetupChecklist({ title = 'Get started', description, steps }: { title?: string; description?: string; steps: ChecklistStep[] }) {
+  const pct = Math.round((steps.filter((s) => s.done).length / steps.length) * 100);
   return (
-    <Card padding="lg">
-      <CardHeader title={title} subtitle={subtitle} action={<span className="sso-checklist__pct sso-num">{pct}%</span>} />
-      <div className="sso-checklist__bar" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label="Setup progress">
-        <span style={{ width: `${pct}%` }} />
-      </div>
+    <Card title={title} description={description} actions={<span className="sso-checklist__pct sso-num">{pct}%</span>}>
       <ol className="sso-checklist">
         {steps.map((s, i) => (
           <li key={s.id}>
@@ -62,14 +58,13 @@ export function SetupChecklist({ title = 'Get started', subtitle, steps }: { tit
   );
 }
 
-/* ---------------- Activity list ---------------- */
+/* ---------------- Activity list (Figma: Recent subscription activity) ---------------- */
 
 export interface ActivityItem { id: string; icon: ReactNode; title: string; detail?: string; time: string }
 
-export function ActivityList({ title = 'Recent activity', subtitle, items }: { title?: string; subtitle?: string; items: ActivityItem[] }) {
+export function ActivityList({ title = 'Recent activity', description, items }: { title?: string; description?: string; items: ActivityItem[] }) {
   return (
-    <Card padding="lg">
-      <CardHeader title={title} subtitle={subtitle} />
+    <Card title={title} description={description}>
       <ul className="sso-activity">
         {items.map((it) => (
           <li key={it.id} className="sso-activity__item">
@@ -86,7 +81,7 @@ export function ActivityList({ title = 'Recent activity', subtitle, items }: { t
   );
 }
 
-/* ---------------- Plan summary (inside an org Accordion) ---------------- */
+/* ---------------- Plan summary (Figma: subscription per organisation) ---------------- */
 
 export interface PlanSummaryProps {
   status?: { label: string; tone: StatusTone };
@@ -113,87 +108,15 @@ export function PlanSummary({ status, planName, planDescription, price, priceLab
           </ul>
         </div>
         <div className="sso-plan__price">
-          <span className="sso-section-label">{priceLabel}</span>
+          <span className="sso-plan__price-label">{priceLabel}</span>
           <span className="sso-plan__amount sso-num">{price}</span>
           <span className="sso-plan__renews">Renews {renews}</span>
           {action}
         </div>
       </div>
-      <Card variant="inset" padding="md">
-        <p className="sso-plan__billing-title">Billing and renewal</p>
+      <Card variant="inset" title="Billing and renewal">
         <KeyValueList layout="columns" items={billing} />
       </Card>
-    </div>
-  );
-}
-
-/* ---------------- Empty state ---------------- */
-
-export function EmptyState({ icon, title, description, action }: { icon?: ReactNode; title: string; description?: string; action?: ReactNode }) {
-  return (
-    <div className="sso-empty">
-      {icon && <span className="sso-empty__icon" aria-hidden>{icon}</span>}
-      <p className="sso-empty__title">{title}</p>
-      {description && <p className="sso-empty__desc">{description}</p>}
-      {action}
-    </div>
-  );
-}
-
-/* ---------------- Link tile ---------------- */
-
-export interface LinkTileProps {
-  title: string;
-  description?: string;
-  icon: ReactNode;
-  tone?: TileTone;
-  href?: string;
-  onClick?: () => void;
-}
-
-/** Icon + title + one-line description that navigates somewhere. Quick links and tool hubs. */
-export function LinkTile({ title, description, icon, tone = 'blue', href = '#', onClick }: LinkTileProps) {
-  return (
-    <a className={cx('sso-link-tile', !description && 'sso-link-tile--compact')} href={href} onClick={(e) => { if (onClick) { e.preventDefault(); onClick(); } }}>
-      <IconTile icon={icon} tone={tone} />
-      <span className="sso-link-tile__text">
-        <span className="sso-link-tile__title">{title}</span>
-        {description && <span className="sso-link-tile__desc">{description}</span>}
-      </span>
-      <ChevronRight className="sso-link-tile__chevron" aria-hidden />
-    </a>
-  );
-}
-
-/** Section heading + optional description above a group of tiles or cards. */
-export function SectionHeading({ title, description, action, label }: { title?: string; description?: string; action?: ReactNode; label?: string }) {
-  return (
-    <div className="sso-section-heading">
-      <div>
-        {label && <p className="sso-section-label" style={{ margin: 0 }}>{label}</p>}
-        {title && <h2 className="sso-section-heading__title">{title}</h2>}
-        {description && <p className="sso-section-heading__desc">{description}</p>}
-      </div>
-      {action}
-    </div>
-  );
-}
-
-/* ---------------- Row actions ---------------- */
-
-export interface RowAction { label: string; icon?: ReactNode; onClick?: () => void; href?: string }
-
-/** Inline, small text buttons for the 2–3 most used row actions. Put the rest in an ActionMenu. */
-export function RowActions({ actions, children }: { actions: RowAction[]; children?: ReactNode }) {
-  return (
-    <div className="sso-row-actions">
-      {actions.map((a) => (
-        <button key={a.label} type="button" className="sso-row-actions__btn" onClick={a.onClick}>
-          {a.icon}
-          {a.label}
-        </button>
-      ))}
-      {children}
     </div>
   );
 }

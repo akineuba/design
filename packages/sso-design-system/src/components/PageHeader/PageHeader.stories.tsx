@@ -11,7 +11,7 @@ const meta: Meta<typeof PageHeader> = {
   args: {
     title: 'Tenants',
     subtitle: 'Manage tenants, enable products, and set the default product per tenant.',
-    actions: <Button iconLeft={<Plus />}>Add tenant</Button>,
+    actions: <Button leadingIcon={<Plus />}>Add tenant</Button>,
   },
 };
 export default meta;
@@ -21,9 +21,9 @@ export const WithBadge: StoryObj<typeof PageHeader> = {
     title: 'Entities',
     badge: <Tag>3 / 3 used</Tag>,
     subtitle: 'Create and manage legal entities under this tenant.',
-    actions: (<><Button variant="outline" iconLeft={<Plus />}>Buy entity</Button><Button iconLeft={<Plus />}>Add entity</Button></>),
+    actions: (<><Button variant="outline" leadingIcon={<Plus />}>Buy entity</Button><Button leadingIcon={<Plus />}>Add entity</Button></>),
   },
 };
 export const WithBackLink: StoryObj<typeof PageHeader> = {
-  args: { back: { label: 'Tenants', href: '#' }, title: 'AIM Group', subtitle: 'Code AIMGROUP · Default product PAYEET', actions: <Button variant="ghost">Edit tenant</Button> },
+  args: { back: { label: 'Tenants', href: '#' }, title: 'AIM Group', subtitle: 'Code AIMGROUP · Default product PAYEET', actions: <Button variant="secondary">Edit tenant</Button> },
 };

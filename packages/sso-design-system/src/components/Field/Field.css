@@ -1,75 +1,68 @@
-.sso-field { display: flex; flex-direction: column; gap: var(--sso-space-1_5); min-width: 0; }
-.sso-field__label { font-size: var(--sso-font-size-sm); font-weight: var(--sso-font-weight-semibold); color: var(--sso-color-fg-strong); }
-.sso-field__req { color: var(--sso-color-error); }
-.sso-field__msg { margin: 0; font-size: var(--sso-font-size-xs); color: var(--sso-color-fg-muted); }
+/* Mirrors the ERP Input: label Medium 12 muted (14 black inside side panels), 40px field, 8px radius. */
+.sso-field { display: flex; flex-direction: column; gap: var(--sso-space-1); width: 100%; min-width: 0; }
+.sso-field__label { font-size: var(--sso-font-size-xs); font-weight: var(--sso-font-weight-medium); color: var(--sso-color-fg-muted); }
+.sso-panel .sso-field__label { font-size: var(--sso-font-size-md); font-weight: var(--sso-font-weight-regular); color: var(--sso-color-fg-ink); }
+.sso-field__req { margin-left: 2px; color: var(--sso-color-error); }
+.sso-field__msg { margin: 0; font-size: var(--sso-font-size-md); color: var(--sso-color-fg-muted); }
 .sso-field__msg--error { color: var(--sso-color-error); }
 
 .sso-control {
-  display: flex; align-items: center; gap: var(--sso-space-2);
-  position: relative;
-  background: var(--sso-color-surface);
-  border: 1px solid var(--sso-color-line-field);
-  border-radius: var(--sso-radius-md);
-  padding: 0 var(--sso-space-3);
-  transition: border-color var(--sso-duration-fast) var(--sso-ease), box-shadow var(--sso-duration-fast) var(--sso-ease);
+  position: relative; display: flex; align-items: center; gap: var(--sso-space-2); width: 100%; min-width: 0;
+  padding: 0 var(--sso-space-4);
+  background: var(--sso-color-surface); border: 1px solid var(--sso-color-line-field); border-radius: var(--sso-radius-md);
+  transition: border-color 150ms, box-shadow 150ms;
 }
 .sso-control:hover { border-color: var(--sso-color-line-strong); }
 .sso-control:focus-within { border-color: var(--sso-color-primary); box-shadow: var(--sso-shadow-focus); }
-.sso-control--error { border-color: var(--sso-color-error); }
+.sso-control--error, .sso-control--error:hover { border-color: var(--sso-color-error); }
 .sso-control--error:focus-within { border-color: var(--sso-color-error); box-shadow: var(--sso-shadow-focus-error); }
-.sso-control--disabled { background: var(--sso-color-surface-disabled); }
-.sso-control--sm { height: var(--sso-size-control-sm); }
+.sso-control--disabled { border-color: var(--sso-color-line-subtle); background: var(--sso-color-surface-muted); }
+.sso-control--sm { height: var(--sso-size-control-sm); padding: 0 var(--sso-space-3); }
 .sso-control--md { height: var(--sso-size-control-md); }
 .sso-control--lg { height: var(--sso-size-control-lg); }
 
-.sso-control__input {
-  flex: 1; min-width: 0; height: 100%;
-  border: 0; outline: 0; background: transparent;
-  font-size: var(--sso-font-size-md); color: var(--sso-color-fg-ink);
-}
+.sso-control__input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: transparent; font-size: var(--sso-font-size-md); color: var(--sso-color-fg-strong); }
 .sso-root .sso-control__input:focus-visible { box-shadow: none; }
 .sso-control__input::placeholder { color: var(--sso-color-fg-placeholder); }
-.sso-control__input:disabled { color: var(--sso-color-fg-faint); cursor: not-allowed; }
+.sso-control__input:disabled { color: var(--sso-color-fg-disabled); cursor: not-allowed; }
 .sso-control__input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
-.sso-control__icon, .sso-control__trailing { display: inline-flex; color: var(--sso-color-fg-faint); }
-.sso-control__icon svg { width: 18px; height: 18px; }
+.sso-control__icon, .sso-control__trailing { display: inline-flex; flex: none; color: var(--sso-color-fg-muted); }
+.sso-control__icon svg, .sso-control__trailing svg { width: var(--sso-size-icon); height: var(--sso-size-icon); }
 
 .sso-control--select { padding-right: 0; }
-.sso-control--select select { appearance: none; padding-right: 36px; cursor: pointer; }
-.sso-control__chevron {
-  position: absolute; right: 12px; width: 16px; height: 16px;
-  color: var(--sso-color-fg-muted); pointer-events: none;
-}
+.sso-control--select select { appearance: none; padding-right: 40px; cursor: pointer; }
+.sso-control__chevron { position: absolute; right: 14px; width: var(--sso-size-icon-sm); height: var(--sso-size-icon-sm); color: var(--sso-color-fg-muted); pointer-events: none; }
 
-/* Checkbox */
-.sso-check { display: inline-flex; align-items: center; gap: var(--sso-space-2); cursor: pointer; font-size: var(--sso-font-size-md); color: var(--sso-color-fg); }
-.sso-check__input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.sso-check__box {
-  width: 18px; height: 18px; flex: none;
-  border: 1.5px solid var(--sso-color-line-strong); border-radius: var(--sso-radius-xs);
-  background: var(--sso-color-surface) center / 12px no-repeat;
-  transition: background-color var(--sso-duration-fast), border-color var(--sso-duration-fast);
+/* Checkbox (20px, 6px radius) */
+.sso-check { display: inline-flex; align-items: center; gap: var(--sso-space-4); vertical-align: middle; font-size: var(--sso-font-size-md); color: var(--sso-color-fg-ink); cursor: pointer; }
+.sso-check.is-disabled { color: var(--sso-color-fg-disabled); cursor: not-allowed; }
+.sso-check__box { position: relative; display: inline-flex; width: 20px; height: 20px; flex: none; }
+.sso-check__input {
+  appearance: none; width: 20px; height: 20px; margin: 0; cursor: inherit;
+  border: 1px solid var(--sso-color-line-field); border-radius: var(--sso-radius-sm); background: var(--sso-color-surface);
+  transition: background-color 150ms, border-color 150ms;
 }
-.sso-check__input:checked + .sso-check__box {
-  background-color: var(--sso-color-primary); border-color: var(--sso-color-primary);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
-}
-.sso-check__input:focus-visible + .sso-check__box { box-shadow: var(--sso-shadow-focus); }
-.sso-check__input:disabled + .sso-check__box { background-color: var(--sso-color-surface-disabled); border-color: var(--sso-color-line); }
+.sso-check__input:hover { border-color: var(--sso-color-primary); }
+.sso-check__input:checked { border-color: var(--sso-color-primary); background: var(--sso-color-primary); }
+.sso-check__input:indeterminate { border-color: var(--sso-color-primary); background: var(--sso-color-primary-subtle); }
+.sso-check__input:disabled { border-color: var(--sso-color-line-subtle); background: var(--sso-color-surface-muted); }
+.sso-check__tick, .sso-check__dash { position: absolute; inset: 0; display: none; pointer-events: none; }
+.sso-check__tick { color: var(--sso-color-fg-inverse); }
+.sso-check__dash { color: var(--sso-color-primary); }
+.sso-check__input:checked ~ .sso-check__tick { display: block; }
+.sso-check__input:indeterminate ~ .sso-check__dash { display: block; }
 
-/* Switch */
-.sso-switch { display: inline-flex; align-items: center; gap: var(--sso-space-2_5); cursor: pointer; font-size: var(--sso-font-size-md); color: var(--sso-color-fg); }
-.sso-switch__input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.sso-switch__track {
-  position: relative; width: 40px; height: 22px; flex: none;
-  border-radius: var(--sso-radius-full); background: var(--sso-color-line-strong);
-  transition: background-color var(--sso-duration-base) var(--sso-ease);
-}
-.sso-switch__knob {
-  position: absolute; top: 2px; left: 2px; width: 18px; height: 18px;
-  border-radius: 50%; background: var(--sso-color-surface); box-shadow: var(--sso-shadow-xs);
-  transition: transform var(--sso-duration-base) var(--sso-ease);
-}
-.sso-switch__input:checked + .sso-switch__track { background: var(--sso-color-primary); }
-.sso-switch__input:checked + .sso-switch__track .sso-switch__knob { transform: translateX(18px); }
+/* Switch (51×31, green on) */
+.sso-switch { display: inline-flex; align-items: center; gap: var(--sso-space-3); cursor: pointer; font-size: var(--sso-font-size-md); color: var(--sso-color-fg); }
+.sso-switch__input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.sso-switch__track { display: inline-flex; flex: none; align-items: center; padding: 2px; border-radius: var(--sso-radius-full); background: var(--sso-color-switch-off); transition: background-color 200ms; }
+.sso-switch--md .sso-switch__track { width: 51px; height: 31px; }
+.sso-switch--sm .sso-switch__track { width: 34px; height: 20px; }
+.sso-switch__knob { border-radius: 50%; background: var(--sso-color-surface); box-shadow: var(--sso-shadow-knob); transition: transform 200ms; }
+.sso-switch--md .sso-switch__knob { width: 27px; height: 27px; }
+.sso-switch--sm .sso-switch__knob { width: 16px; height: 16px; }
+.sso-switch__input:checked + .sso-switch__track { background: var(--sso-color-switch-on); }
+.sso-switch--md .sso-switch__input:checked + .sso-switch__track .sso-switch__knob { transform: translateX(20px); }
+.sso-switch--sm .sso-switch__input:checked + .sso-switch__track .sso-switch__knob { transform: translateX(14px); }
 .sso-switch__input:focus-visible + .sso-switch__track { box-shadow: var(--sso-shadow-focus); }
+.sso-switch__input:disabled + .sso-switch__track { opacity: 0.5; }

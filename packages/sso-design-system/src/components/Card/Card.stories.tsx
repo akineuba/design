@@ -1,55 +1,52 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Building2, CreditCard, Layers, Package, Plus, Users } from 'lucide-react';
-import { Card, CardHeader, IconTile, KeyValueList, StatCard } from './Card';
+import { Building2, Plus, Users, Wallet } from 'lucide-react';
+import { Card, KeyValueList, SummaryCard } from './Card';
 import { Button } from '../Button/Button';
 import { StatusPill } from '../StatusPill/StatusPill';
 
-const meta: Meta<typeof StatCard> = { title: 'Components/Card', component: StatCard, tags: ['autodocs'] };
+const meta: Meta<typeof SummaryCard> = { title: 'Components/Card', component: SummaryCard, tags: ['autodocs'] };
 export default meta;
-type S = StoryObj<typeof StatCard>;
+type S = StoryObj<typeof SummaryCard>;
 
-export const Stat: S = { args: { label: 'Active users', value: 5, helper: 'of 5 purchased seats' } };
-
-export const StatWithIconTile: S = {
+export const Summary: S = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
-      <StatCard icon={<Building2 />} iconTone="blue" label="Tenants" description="Registered organisations" value={93} helper="91 active · 2 inactive" href="#" />
-      <StatCard icon={<Package />} iconTone="teal" label="Products" description="Global product catalogue" value={11} href="#" />
-      <StatCard icon={<CreditCard />} iconTone="green" label="Commercial profiles" description="Subscription service" value={45} href="#" />
-      <StatCard icon={<Layers />} iconTone="amber" label="Subscription plans" description="Draft + published" value={13} href="#" />
+      <SummaryCard label="Tenants" value={93} hint="91 active · 2 inactive" />
+      <SummaryCard label="Products" value={11} hint="Global product catalogue" />
+      <SummaryCard label="Active users" value={5} hint="of 5 purchased seats" />
+      <SummaryCard label="Plan renewal" value="9 Aug" hint="2027 · Annual billing" />
     </div>
   ),
 };
 
-export const IconTiles: S = {
-  render: () => (
-    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-      {(['blue', 'teal', 'green', 'amber', 'red', 'slate'] as const).map((t) => <IconTile key={t} tone={t} icon={<Layers />} />)}
-      <IconTile tone="blue" size="sm" icon={<Layers />} />
-      <IconTile tone="blue" size="lg" icon={<Layers />} />
-    </div>
-  ),
-};
-
-export const StatWithActions: S = {
+export const SummaryWithIcon: S = {
+  name: 'Summary with icon (optional, ERP style)',
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
-      <StatCard label="Entities" value={3} helper="Managed under this tenant" actions={<Button iconLeft={<Plus />}>Add entity</Button>} />
-      <StatCard label="Full seats" value={5} helper="1 seat available" actions={<Button iconLeft={<Plus />}>Add users</Button>} />
-      <StatCard label="Employee records" value={100} helper="Self-service included" actions={<><Button iconLeft={<Plus />}>Employees</Button><Button variant="outline" iconLeft={<Plus />}>Self-service</Button></>} />
+      <SummaryCard icon={<Building2 />} color="blue" label="Tenants" value={93} hint="91 active · 2 inactive" />
+      <SummaryCard icon={<Users />} color="teal" label="Active users" value={5} hint="of 5 purchased seats" />
+      <SummaryCard icon={<Wallet />} color="green" label="Wallet balance" value="₦240,000" hint="Last top-up 3 Nov" />
     </div>
   ),
 };
 
-export const Variants: S = {
+export const SummaryWithActions: S = {
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+      <SummaryCard label="Organisations" value={3} hint="Managed from this account" actions={<Button leadingIcon={<Plus />}>Add organisation</Button>} />
+      <SummaryCard label="Full seats" value={5} hint="1 seat available" actions={<Button leadingIcon={<Plus />}>Add users</Button>} />
+      <SummaryCard label="Employee records" value={100} hint="Self-service included" actions={<><Button leadingIcon={<Plus />}>Employees</Button><Button variant="outline" leadingIcon={<Plus />}>Self-service</Button></>} />
+    </div>
+  ),
+};
+
+export const Cards: S = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
-      <Card>
-        <CardHeader title="Raised card" subtitle="Default. White, border, soft shadow." />
-        <p style={{ margin: 0 }}>Use for page-level content blocks.</p>
+      <Card title="Organisation details" description="Legal name, tax and registered address." actions={<Button variant="secondary" size="sm">Edit</Button>} divided>
+        <KeyValueList items={[{ label: 'Legal name', value: 'Wragby Group Ltd' }, { label: 'TIN', value: '12345678-0001' }]} />
       </Card>
-      <Card variant="inset">
-        <p style={{ margin: '0 0 12px', fontWeight: 700, color: 'var(--sso-color-fg-ink)' }}>Billing and renewal</p>
+      <Card variant="inset" title="Billing and renewal">
         <KeyValueList items={[
           { label: 'Started', value: '9 Aug 2026' },
           { label: 'Billing cycle', value: 'Annual' },

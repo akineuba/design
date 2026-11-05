@@ -1,111 +1,226 @@
-import type { ReactNode } from 'react';
-import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { forwardRef, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
+import { ChevronDown, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { ActionMenu, type ActionMenuItem } from '../ActionMenu/ActionMenu';
+import { Checkbox } from '../Field/Field';
+
+/* Mirrors the ERP table kit: TableCard › TableToolbar › DataTable › TableFooter + Pagination. */
+
+export type SortDirection = 'asc' | 'desc';
+export interface SortState { key: string; direction: SortDirection }
 
 export interface Column<T> {
   key: string;
   header: ReactNode;
-  render: (row: T) => ReactNode;
-  width?: number | string;
-  align?: 'left' | 'right' | 'center';
+  render?: (row: T) => ReactNode;
+  align?: 'left' | 'center' | 'right';
+  /** `none` = muted text, `strong` = medium ink (the row's name), `link` = primary. */
+  emphasis?: 'none' | 'strong' | 'link';
   sortable?: boolean;
+  width?: number | string;
 }
 
-export interface TableProps<T> {
+export interface DataTableProps<T> {
   columns: Column<T>[];
   rows: T[];
-  rowKey: (row: T) => string;
-  sort?: { key: string; direction: 'asc' | 'desc' };
-  onSort?: (key: string) => void;
-  /** Toolbar rendered inside the card, above the header row (search, filters, export). */
-  toolbar?: ReactNode;
-  /** Footer inside the card (usually <Pagination />). */
-  footer?: ReactNode;
+  getRowId: (row: T) => string;
+  /** default: 44px rows. comfortable: 54px rows. */
+  density?: 'default' | 'comfortable';
+  sort?: SortState | null;
+  onSortChange?: (sort: SortState | null) => void;
+  /** Items for the row's kebab menu. Adds an "Actions" column. */
+  rowActions?: (row: T) => ActionMenuItem[];
+  actionsHeader?: string;
+  selectable?: boolean;
+  selectedIds?: string[];
+  onSelectedIdsChange?: (ids: string[]) => void;
+  onRowClick?: (row: T) => void;
+  loading?: boolean;
   empty?: ReactNode;
   caption?: string;
 }
 
-/** Data table inside a rounded card. Comfortable 56px rows. */
-export function Table<T>({ columns, rows, rowKey, sort, onSort, toolbar, footer, empty, caption }: TableProps<T>) {
+const nextSort = (cur: SortState | null | undefined, key: string): SortState | null =>
+  cur?.key !== key ? { key, direction: 'desc' } : cur.direction === 'desc' ? { key, direction: 'asc' } : null;
+
+export function DataTable<T>({
+  columns, rows, getRowId, density = 'default', sort, onSortChange, rowActions, actionsHeader = 'Actions',
+  selectable, selectedIds = [], onSelectedIdsChange, onRowClick, loading, empty = 'No records yet.', caption,
+}: DataTableProps<T>) {
+  const colCount = columns.length + (selectable ? 1 : 0) + (rowActions ? 1 : 0);
+  const ids = rows.map(getRowId);
+  const selCount = ids.filter((i) => selectedIds.includes(i)).length;
+  const allSel = ids.length > 0 && selCount === ids.length;
   return (
-    <div className="sso-table-card">
-      {toolbar && <div className="sso-table-card__toolbar">{toolbar}</div>}
-      <div className="sso-table-scroll">
-        <table className="sso-table">
-          {caption && <caption className="sso-visually-hidden">{caption}</caption>}
-          <thead>
-            <tr>
-              {columns.map((c) => {
-                const active = sort?.key === c.key;
-                const SortIcon = !active ? ArrowUpDown : sort!.direction === 'asc' ? ArrowUp : ArrowDown;
-                return (
-                  <th
-                    key={c.key}
-                    style={{ width: c.width, textAlign: c.align }}
-                    aria-sort={active ? (sort!.direction === 'asc' ? 'ascending' : 'descending') : undefined}
-                  >
-                    {c.sortable && onSort ? (
-                      <button type="button" className={cx('sso-table__sort', active && 'is-active')} onClick={() => onSort(c.key)}>
-                        {c.header}
-                        <SortIcon aria-hidden />
-                      </button>
-                    ) : (
-                      c.header
-                    )}
-                  </th>
-                );
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.length === 0 ? (
-              <tr>
-                <td colSpan={columns.length} className="sso-table__empty">{empty ?? 'Nothing to show yet.'}</td>
-              </tr>
-            ) : (
-              rows.map((r) => (
-                <tr key={rowKey(r)}>
-                  {columns.map((c) => (
-                    <td key={c.key} style={{ textAlign: c.align }}>{c.render(r)}</td>
-                  ))}
-                </tr>
-              ))
+    <div className="sso-table-scroll">
+      <table className={cx('sso-table', density === 'comfortable' && 'sso-table--comfortable')} aria-busy={loading || undefined}>
+        {caption && <caption className="sso-visually-hidden">{caption}</caption>}
+        <thead>
+          <tr>
+            {selectable && (
+              <th className="sso-table__check">
+                <Checkbox
+                  aria-label={allSel ? 'Deselect all rows' : 'Select all rows'}
+                  checked={allSel}
+                  indeterminate={selCount > 0 && !allSel}
+                  onChange={() => onSelectedIdsChange?.(allSel ? selectedIds.filter((i) => !ids.includes(i)) : [...new Set([...selectedIds, ...ids])])}
+                />
+              </th>
             )}
-          </tbody>
-        </table>
-      </div>
-      {footer && <div className="sso-table-card__footer">{footer}</div>}
+            {columns.map((c) => {
+              const dir = sort?.key === c.key ? sort.direction : null;
+              return (
+                <th
+                  key={c.key}
+                  scope="col"
+                  style={{ width: c.width, textAlign: c.align }}
+                  aria-sort={c.sortable && onSortChange ? (dir === 'asc' ? 'ascending' : dir === 'desc' ? 'descending' : 'none') : undefined}
+                >
+                  {c.sortable && onSortChange ? (
+                    <button type="button" className={cx('sso-table__sort', dir && 'is-sorted')} onClick={() => onSortChange(nextSort(sort, c.key))}>
+                      {c.header}
+                      <ChevronDown aria-hidden className={cx(dir === 'asc' && 'is-asc')} />
+                    </button>
+                  ) : c.header}
+                </th>
+              );
+            })}
+            {rowActions && <th scope="col" style={{ textAlign: 'center' }}>{actionsHeader}</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {loading ? (
+            Array.from({ length: 4 }, (_, r) => (
+              <tr key={`sk-${r}`}>
+                {Array.from({ length: colCount }, (_, c) => <td key={c}><span className="sso-table__skeleton" /></td>)}
+              </tr>
+            ))
+          ) : rows.length === 0 ? (
+            <tr><td colSpan={colCount} className="sso-table__empty">{empty}</td></tr>
+          ) : (
+            rows.map((row) => {
+              const id = getRowId(row);
+              const selected = selectedIds.includes(id);
+              return (
+                <tr
+                  key={id}
+                  aria-selected={selected || undefined}
+                  className={cx(onRowClick && 'is-interactive', selected && 'is-selected')}
+                  onClick={onRowClick ? () => onRowClick(row) : undefined}
+                >
+                  {selectable && (
+                    <td onClick={(e) => e.stopPropagation()}>
+                      <Checkbox
+                        aria-label={`Select row ${id}`}
+                        checked={selected}
+                        onChange={() => onSelectedIdsChange?.(selected ? selectedIds.filter((i) => i !== id) : [...selectedIds, id])}
+                      />
+                    </td>
+                  )}
+                  {columns.map((c) => (
+                    <td key={c.key} style={{ textAlign: c.align }} className={`sso-table__cell--${c.emphasis ?? 'none'}`}>
+                      {c.render ? c.render(row) : String((row as Record<string, unknown>)[c.key] ?? '')}
+                    </td>
+                  ))}
+                  {rowActions && (
+                    <td className="sso-table__actions" onClick={(e) => e.stopPropagation()}>
+                      {rowActions(row).length > 0 && <ActionMenu label={`Actions for ${id}`} items={rowActions(row)} />}
+                    </td>
+                  )}
+                </tr>
+              );
+            })
+          )}
+        </tbody>
+      </table>
     </div>
   );
+}
+
+/** White card that holds a table: 10px radius, 1px line-subtle border. */
+export function TableCard({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cx('sso-table-card', className)} {...rest} />;
+}
+
+/** Row above the table: left group (search, filters) and right group (Export, Add New). */
+export function TableToolbar({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cx('sso-table-toolbar', className)} {...rest} />;
+}
+
+export function ToolbarGroup({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cx('sso-table-toolbar__group', className)} {...rest} />;
+}
+
+export const TableSearch = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(function TableSearch({ className, ...rest }, ref) {
+  return (
+    <label className={cx('sso-table-search', className)}>
+      <Search aria-hidden />
+      <input ref={ref} type="search" {...rest} />
+    </label>
+  );
+});
+
+/** Footer: "Showing 1 to 10 of 93 entries" then pagination, right-aligned. */
+export function TableFooter({ summary, children, className }: { summary: ReactNode; children?: ReactNode; className?: string }) {
+  return (
+    <div className={cx('sso-table-footer', className)}>
+      <p className="sso-table-footer__summary">{summary}</p>
+      {children}
+    </div>
+  );
+}
+
+/** Helper for the ERP summary wording. */
+export const entriesSummary = (page: number, pageSize: number, total: number) =>
+  `Showing ${total === 0 ? 0 : (page - 1) * pageSize + 1} to ${Math.min(page * pageSize, total)} of ${total} entries`;
+
+function pageList(page: number, count: number): Array<number | 'gap'> {
+  if (count <= 7) return Array.from({ length: count }, (_, i) => i + 1);
+  const keep = [...new Set([1, count, page - 1, page, page + 1].filter((p) => p >= 1 && p <= count))].sort((a, b) => a - b);
+  const out: Array<number | 'gap'> = [];
+  keep.forEach((p, i) => { if (i > 0 && p - keep[i - 1]! > 1) out.push('gap'); out.push(p); });
+  return out;
 }
 
 export interface PaginationProps {
   page: number;
   pageCount: number;
-  total: number;
-  pageSize: number;
-  /** Plural noun for the summary, e.g. "users". */
-  noun?: string;
   onPageChange: (page: number) => void;
+  /** "Page [n]" jump field. */
+  showJump?: boolean;
 }
 
-export function Pagination({ page, pageCount, total, pageSize, noun = 'results', onPageChange }: PaginationProps) {
-  const from = total === 0 ? 0 : (page - 1) * pageSize + 1;
-  const to = Math.min(page * pageSize, total);
+export function Pagination({ page, pageCount, onPageChange, showJump = true }: PaginationProps) {
+  const count = Math.max(pageCount, 1);
+  const go = (p: number) => onPageChange(Math.min(Math.max(p, 1), count));
   return (
-    <nav className="sso-pagination" aria-label="Pagination">
-      <p className="sso-pagination__summary">
-        Showing <strong>{from}–{to}</strong> of <strong>{total}</strong> {noun}
-      </p>
-      <div className="sso-pagination__controls">
-        <button type="button" className="sso-pagination__btn" onClick={() => onPageChange(page - 1)} disabled={page <= 1} aria-label="Previous page">
-          <ChevronLeft />
-        </button>
-        <span className="sso-pagination__page">Page {page} of {pageCount}</span>
-        <button type="button" className="sso-pagination__btn" onClick={() => onPageChange(page + 1)} disabled={page >= pageCount} aria-label="Next page">
-          <ChevronRight />
-        </button>
+    <nav aria-label="Pagination" className="sso-pagination">
+      <div className="sso-pagination__pages">
+        <button type="button" aria-label="Previous page" className="sso-page-btn" disabled={page <= 1} onClick={() => go(page - 1)}><ChevronLeft /></button>
+        {pageList(page, count).map((p, i) =>
+          p === 'gap' ? (
+            <span key={`gap-${i}`} className="sso-pagination__gap" aria-hidden>…</span>
+          ) : (
+            <button
+              key={p}
+              type="button"
+              aria-label={`Page ${p}`}
+              aria-current={p === page ? 'page' : undefined}
+              className={cx('sso-page-btn', p === page && 'is-current')}
+              onClick={() => go(p)}
+            >
+              {p}
+            </button>
+          ),
+        )}
+        <button type="button" aria-label="Next page" className="sso-page-btn" disabled={page >= count} onClick={() => go(page + 1)}><ChevronRight /></button>
       </div>
+      {showJump && (
+        <label className="sso-pagination__jump">
+          Page
+          <input type="number" min={1} max={count} value={page} onChange={(e) => { const n = Number(e.target.value); if (n) go(n); }} />
+        </label>
+      )}
     </nav>
   );
 }

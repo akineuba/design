@@ -10,7 +10,7 @@ export interface TabsProps {
   'aria-label'?: string;
 }
 
-/** Underline tabs. Arrow keys move between tabs. */
+/** Underlined section tabs (ERP). Arrow keys move between tabs. */
 export function Tabs({ items, value, onChange, ...aria }: TabsProps) {
   const base = useId();
   const refs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -40,7 +40,7 @@ export function Tabs({ items, value, onChange, ...aria }: TabsProps) {
             onKeyDown={(e) => onKey(e, i)}
           >
             {t.label}
-            {t.count !== undefined && <span className="sso-tabs__count">{t.count}</span>}
+            {t.count !== undefined && <span className="sso-tabs__count">({t.count})</span>}
           </button>
         );
       })}

@@ -50,16 +50,16 @@ export const apps = [
 export const activity = [
   { id: 'a1', icon: <FileText />, title: 'Invoice paid', detail: 'Full ERP annual subscription', time: '2h ago' },
   { id: 'a2', icon: <UserPlus />, title: '2 users added', detail: 'Wragby Group (Head Office)', time: 'Yesterday' },
-  { id: 'a3', icon: <Building2 />, title: 'Entity created', detail: 'Wragby Services Limited', time: '3 Nov' },
+  { id: 'a3', icon: <Building2 />, title: 'Organisation created', detail: 'Wragby Services Limited', time: '3 Nov' },
   { id: 'a4', icon: <CalendarClock />, title: 'Renewal scheduled', detail: '9 August 2027', time: '1 Nov' },
 ];
 
 export const setupSteps = [
   { id: 's1', label: 'Add tax and registered address', done: true },
   { id: 's2', label: 'Upload invoice logo', done: true },
-  { id: 's3', label: 'Connect your identity provider', done: true },
-  { id: 's4', label: 'Invite your team' },
-  { id: 's5', label: 'Assign roles and entity access' },
+  { id: 's3', label: 'Invite your team' },
+  { id: 's4', label: 'Assign organisation access' },
+  { id: 's5', label: 'Review approval workflows' },
 ];
 
 export const plans = [

@@ -24,6 +24,7 @@ export const All: S = {
       <SearchInput placeholder="Search by name or email…" />
       <Checkbox label="Include inactive" />
       <Switch label="Enforce SSO for all users" defaultChecked />
+      <Checkbox label="Indeterminate" indeterminate />
     </div>
   ),
 };

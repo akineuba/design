@@ -65,7 +65,7 @@ export function TopBar({ contexts, breadcrumbs, user, userMenuItems = [], onSign
             items={[
               { label: 'My profile', icon: <UserRound /> },
               ...userMenuItems,
-              { label: 'Sign out', icon: <LogOut />, onSelect: onSignOut, tone: 'danger' },
+              { label: 'Sign out', icon: <LogOut />, onSelect: onSignOut, tone: 'delete' },
             ]}
             trigger={
               <>

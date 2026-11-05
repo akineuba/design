@@ -1,16 +1,13 @@
-.sso-accordion { background: var(--sso-color-surface); border: 1px solid var(--sso-color-line); border-radius: var(--sso-radius-xl); box-shadow: var(--sso-shadow-card); }
+/* ERP Accordion (card variant): 12px radius, line-subtle border, header 15px Semibold. */
+.sso-accordion { width: 100%; overflow: hidden; background: var(--sso-color-surface); border: 1px solid var(--sso-color-line); border-radius: var(--sso-radius-xl); }
 .sso-accordion__heading { margin: 0; }
-.sso-accordion__trigger {
-  display: flex; align-items: center; gap: var(--sso-space-3); width: 100%;
-  padding: var(--sso-space-5) var(--sso-space-6);
-  border: 0; background: none; text-align: left; cursor: pointer;
-  border-radius: var(--sso-radius-xl);
-}
-.sso-accordion__title { font-size: var(--sso-font-size-xl); font-weight: var(--sso-font-weight-bold); color: var(--sso-color-fg-ink); letter-spacing: var(--sso-letter-spacing-title); }
+.sso-accordion__trigger { display: flex; align-items: center; gap: var(--sso-space-3); width: 100%; padding: var(--sso-space-4) var(--sso-space-6); border: 0; background: none; text-align: left; cursor: pointer; transition: background-color 150ms; }
+.sso-accordion__trigger:hover { background: var(--sso-color-surface-page); }
+.sso-accordion.is-open .sso-accordion__trigger { border-bottom: 1px solid var(--sso-color-line); }
+.sso-accordion__title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 15px; font-weight: var(--sso-font-weight-semibold); color: var(--sso-color-fg-strong); }
 .sso-accordion__meta { display: inline-flex; gap: var(--sso-space-2); }
 .sso-accordion__spacer { flex: 1; }
-.sso-accordion__aside { font-size: var(--sso-font-size-sm); color: var(--sso-color-fg-muted); }
-.sso-accordion__chevron { width: 18px; height: 18px; color: var(--sso-color-fg-strong); transition: transform var(--sso-duration-base) var(--sso-ease); flex: none; }
+.sso-accordion__aside { font-size: var(--sso-font-size-md); color: var(--sso-color-fg-muted); }
+.sso-accordion__chevron { flex: none; width: var(--sso-size-icon-sm); height: var(--sso-size-icon-sm); color: var(--sso-color-fg-subtle); transition: transform 200ms; }
 .sso-accordion.is-open .sso-accordion__chevron { transform: rotate(180deg); }
-.sso-accordion__panel { padding: 0 var(--sso-space-6) var(--sso-space-6); }
-.sso-accordion.is-open .sso-accordion__trigger { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.sso-accordion__panel { display: flex; flex-direction: column; gap: var(--sso-space-5); padding: var(--sso-space-6); }

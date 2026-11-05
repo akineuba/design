@@ -36,7 +36,8 @@ needs a wrapper with `className="sso-root"`.
 | Page header | ERP anatomy: 28px title, 14px muted subtitle, actions right, optional back link. No eyebrow |
 | Neutrals | Slate ramp (`#0F172A` → `#F8FAFC`), the main visual difference from the ERP's grey |
 | Radius | 8px controls · 12px cards/tables · 16px accordions/dialogs |
-| Density | 56px table rows, 40px controls |
+| Components | Ported from the ERP design system with the same specs: Button (primary, secondary, outline, tertiary, destructive), Card, SummaryCard, Table kit with an Actions column (kebab ActionMenu, tone-coloured items) and footer ("Showing 1 to 10 of 93 entries", numbered pages, page jump), Input, Tabs, Modal, SidePanel, Alert, Accordion, Checkbox, Switch, StatusPill |
+| Sources | Only the ERP design system, the Figma SSO portal (page "new" › portal) and the nav v2 reference. Live SSO screenshots are used for content only |
 
 The active nav colour is a single token, `--sso-nav-active-bg`, if it ever needs to differ from primary.
 
@@ -55,6 +56,6 @@ src/
 ## Components
 
 Logo · Button / IconButton · StatusPill · Tag / Chip · Avatar · Input / SearchInput / Select / Checkbox / Switch ·
-Card / StatCard / KeyValueList · PageHeader · Alert · Tabs · Table / Pagination · Accordion ·
+Card / SummaryCard / KeyValueList · PageHeader · Alert · Tabs · TableCard / TableToolbar / TableSearch / DataTable / TableFooter / Pagination · Accordion ·
 SidePanel / Modal / ResultCard · ActionMenu · Sidebar · TopBar · AppShell / Stack / Grid ·
-IconTile · LinkTile · SectionHeading · RowActions · AppTile · SetupChecklist · ActivityList · PlanSummary · EmptyState
+AppTile · SetupChecklist · ActivityList · PlanSummary (from the Figma portal)

@@ -1,4 +1,4 @@
-import { forwardRef, useId, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes } from 'react';
+import { forwardRef, useEffect, useId, useRef, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes } from 'react';
 import { ChevronDown, Search } from 'lucide-react';
 import { cx } from '../../utils/cx';
 
@@ -19,7 +19,7 @@ export function Field({ id, label, required, hint, error, children, className }:
       {label && (
         <label className="sso-field__label" htmlFor={id}>
           {label}
-          {required && <span className="sso-field__req" aria-hidden> *</span>}
+          {required && <span className="sso-field__req" aria-hidden>*</span>}
         </label>
       )}
       {children}
@@ -112,29 +112,44 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
 });
 
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
-  label: ReactNode;
+  /** Visible label. Omit in table cells and pass aria-label instead. */
+  label?: ReactNode;
+  indeterminate?: boolean;
 }
 
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox({ label, className, ...rest }, ref) {
+/** 20px checkbox (ERP): white with a line border and 6px radius; checked = primary fill + white tick. */
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox({ label, indeterminate = false, className, ...rest }, ref) {
+  const inner = useRef<HTMLInputElement | null>(null);
+  useEffect(() => { if (inner.current) inner.current.indeterminate = indeterminate; }, [indeterminate]);
   return (
-    <label className={cx('sso-check', className)}>
-      <input ref={ref} type="checkbox" className="sso-check__input" {...rest} />
-      <span className="sso-check__box" aria-hidden />
-      <span className="sso-check__label">{label}</span>
+    <label className={cx('sso-check', rest.disabled && 'is-disabled', className)}>
+      <span className="sso-check__box">
+        <input
+          ref={(el) => { inner.current = el; if (typeof ref === 'function') ref(el); else if (ref) ref.current = el; }}
+          type="checkbox"
+          className="sso-check__input"
+          {...rest}
+        />
+        <svg viewBox="0 0 20 20" className="sso-check__tick" aria-hidden><path d="m5.5 10.5 3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        <svg viewBox="0 0 20 20" className="sso-check__dash" aria-hidden><path d="M6 10h8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
+      </span>
+      {label}
     </label>
   );
 });
 
-export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
-  label: ReactNode;
+export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
+  label?: ReactNode;
+  size?: 'sm' | 'md';
 }
 
-export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch({ label, className, ...rest }, ref) {
+/** ERP switch: 51×31 track (34×20 small), green when on, white knob. */
+export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch({ label, size = 'md', className, ...rest }, ref) {
   return (
-    <label className={cx('sso-switch', className)}>
+    <label className={cx('sso-switch', `sso-switch--${size}`, className)}>
       <input ref={ref} type="checkbox" role="switch" className="sso-switch__input" {...rest} />
       <span className="sso-switch__track" aria-hidden><span className="sso-switch__knob" /></span>
-      <span className="sso-switch__label">{label}</span>
+      {label && <span className="sso-switch__label">{label}</span>}
     </label>
   );
 });

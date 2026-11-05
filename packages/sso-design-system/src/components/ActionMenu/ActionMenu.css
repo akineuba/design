@@ -1,14 +1,35 @@
-.sso-menu { position: relative; display: inline-flex; }
-.sso-menu__trigger { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: var(--sso-radius-md); background: none; color: var(--sso-color-fg-muted); cursor: pointer; }
-.sso-menu__trigger:hover, .sso-menu__trigger[aria-expanded="true"] { background: var(--sso-color-surface-control); color: var(--sso-color-fg-strong); }
-.sso-menu__trigger svg { width: 18px; height: 18px; }
-.sso-menu__list { position: absolute; top: calc(100% + 4px); z-index: var(--sso-z-dropdown); min-width: 180px; padding: var(--sso-space-1); background: var(--sso-color-surface); border: 1px solid var(--sso-color-line); border-radius: var(--sso-radius-lg); box-shadow: var(--sso-shadow-md); }
-.sso-menu__list--end { right: 0; }
-.sso-menu__list--start { left: 0; }
-.sso-menu__item { display: flex; align-items: center; gap: var(--sso-space-2); width: 100%; height: 36px; padding: 0 var(--sso-space-3); border: 0; border-radius: var(--sso-radius-md); background: none; font-size: var(--sso-font-size-md); color: var(--sso-color-fg-strong); text-align: left; cursor: pointer; }
-.sso-menu__item svg { width: 16px; height: 16px; color: var(--sso-color-fg-muted); }
-.sso-menu__item:hover:not(:disabled), .sso-menu__item:focus-visible { background: var(--sso-color-surface-inset); box-shadow: none; }
-.sso-menu__item--danger, .sso-menu__item--danger svg { color: var(--sso-color-danger); }
-.sso-menu__item:disabled { color: var(--sso-color-fg-disabled); cursor: not-allowed; }
-.sso-menu__header { padding: var(--sso-space-2) var(--sso-space-3) var(--sso-space-3); margin-bottom: var(--sso-space-1); border-bottom: 1px solid var(--sso-color-line); font-size: var(--sso-font-size-sm); color: var(--sso-color-fg-muted); }
+.sso-menu { display: inline-flex; vertical-align: middle; }
+.sso-menu__trigger {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--sso-size-control-sm); height: var(--sso-size-control-sm); padding: 0;
+  border: 0; border-radius: var(--sso-radius-md); background: none;
+  color: var(--sso-color-fg-muted); cursor: pointer; transition: background-color 150ms;
+}
+.sso-menu__trigger:hover, .sso-menu__trigger[aria-expanded="true"] { background: var(--sso-color-surface-muted); }
+.sso-menu__trigger svg { width: var(--sso-size-icon); height: var(--sso-size-icon); }
+
+.sso-menu__list {
+  z-index: var(--sso-z-dropdown); list-style: none; margin: 0;
+  display: flex; flex-direction: column; gap: var(--sso-space-1);
+  min-width: var(--sso-size-action-menu); padding: var(--sso-space-2);
+  background: var(--sso-color-surface); border: 1px solid var(--sso-color-line-subtle);
+  border-radius: var(--sso-radius-xs); box-shadow: var(--sso-shadow-md);
+}
+.sso-menu__item {
+  display: flex; align-items: center; gap: var(--sso-space-2); width: 100%;
+  padding: var(--sso-space-1_5) var(--sso-space-2);
+  border: 0; border-radius: var(--sso-radius-xs); background: none;
+  font-size: var(--sso-font-size-md); text-align: left; white-space: nowrap; cursor: pointer;
+  transition: background-color 150ms;
+}
+.sso-menu__item:hover, .sso-menu__item:focus { background: var(--sso-color-surface-muted); outline: none; box-shadow: none; }
+.sso-menu__icon { display: inline-flex; width: var(--sso-size-icon-sm); height: var(--sso-size-icon-sm); flex: none; }
+.sso-menu__icon svg { width: 100%; height: 100%; }
+.sso-menu__item--view { color: var(--sso-color-action-view); }
+.sso-menu__item--edit { color: var(--sso-color-action-edit); }
+.sso-menu__item--delete { color: var(--sso-color-danger); }
+.sso-menu__item--link { color: var(--sso-color-action-link); }
+.sso-menu__item--positive { color: var(--sso-color-action-positive); }
+.sso-menu__item[aria-disabled="true"] { color: var(--sso-color-fg-disabled); cursor: not-allowed; }
+.sso-menu__header { padding: var(--sso-space-1) var(--sso-space-2) var(--sso-space-2); margin-bottom: var(--sso-space-1); border-bottom: 1px solid var(--sso-color-line-subtle); font-size: var(--sso-font-size-sm); color: var(--sso-color-fg-muted); white-space: nowrap; }
 .sso-menu__header strong { display: block; color: var(--sso-color-fg-ink); font-weight: var(--sso-font-weight-semibold); }
