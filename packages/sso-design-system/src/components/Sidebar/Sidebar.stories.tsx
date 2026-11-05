@@ -82,8 +82,8 @@ export const TopBarStory: StoryObj = {
 export const Logos: StoryObj = {
   render: () => (
     <div className="sso-root" style={{ padding: 32, display: 'flex', gap: 48, alignItems: 'center', flexWrap: 'wrap' }}>
-      <figure style={{ margin: 0 }}><Logo variant="sso" height={48} /><figcaption style={{ fontSize: 12, color: 'var(--sso-color-fg-muted)', marginTop: 8 }}>sso: signed-in portal</figcaption></figure>
-      <figure style={{ margin: 0 }}><Logo variant="wordmark" height={44} /><figcaption style={{ fontSize: 12, color: 'var(--sso-color-fg-muted)', marginTop: 8 }}>wordmark: sign-in / public</figcaption></figure>
+      <figure style={{ margin: 0 }}><Logo variant="sso" height={48} /><figcaption style={{ fontSize: 12, color: 'var(--sso-color-fg-muted)', marginTop: 8 }}>sso: SSO Portal (sign-in + app)</figcaption></figure>
+      <figure style={{ margin: 0 }}><Logo variant="wordmark" height={44} /><figcaption style={{ fontSize: 12, color: 'var(--sso-color-fg-muted)', marginTop: 8 }}>wordmark: plain wBizManager</figcaption></figure>
       <figure style={{ margin: 0 }}><Logo variant="mark" height={44} /><figcaption style={{ fontSize: 12, color: 'var(--sso-color-fg-muted)', marginTop: 8 }}>mark: collapsed sidebar</figcaption></figure>
       <figure style={{ margin: 0, display: 'flex', gap: 8 }}><Avatar name="Global Admin" size="sm" /><Avatar name="Global Admin" /><Avatar name="Adam Smith" tone="neutral" size="lg" /></figure>
     </div>

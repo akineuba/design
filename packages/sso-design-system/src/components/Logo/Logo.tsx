@@ -7,8 +7,8 @@ export type LogoVariant = 'sso' | 'wordmark' | 'mark';
 
 export interface LogoProps {
   /**
-   * `sso` is the signed-in portal lockup (wBizManager + "SSO Portal").
-   * `wordmark` is the public wBizManager logo used before sign-in.
+   * `sso` is the SSO Portal lockup (wBizManager + "SSO Portal"), used on sign-in and in the app.
+   * `wordmark` is the plain wBizManager logo.
    * `mark` is the symbol alone, for the collapsed sidebar.
    */
   variant?: LogoVariant;

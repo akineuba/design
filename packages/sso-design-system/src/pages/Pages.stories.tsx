@@ -37,18 +37,18 @@ export const SignIn: StoryObj = {
       <aside className="sso-signin__image" aria-hidden />
       <main className="sso-signin__form-wrap">
         <form className="sso-signin__form" onSubmit={(e) => e.preventDefault()}>
-          <Logo variant="wordmark" height={56} className="sso-signin__logo" />
+          <Logo variant="sso" height={56} className="sso-signin__logo" />
           <div className="sso-signin__head">
-            <h1 className="sso-signin__title">Welcome back.</h1>
-            <p className="sso-signin__subtitle">Put in your details to log into your account.</p>
+            <h1 className="sso-signin__title">Admin sign in</h1>
+            <p className="sso-signin__subtitle">Manage tenants, users and access across wBiz.</p>
           </div>
-          <Input label="Email" type="email" placeholder="email@example.com" required />
+          <Input label="Work email" type="email" placeholder="admin@company.com" required />
           <div className="sso-signin__password">
             <Input label="Password" type="password" placeholder="Enter your password" required />
             <a href="#" className="sso-signin__link">Forgot password?</a>
           </div>
-          <Button type="submit" fullWidth>Submit</Button>
-          <p className="sso-signin__foot">Don’t have an account? <a href="#" className="sso-signin__link">Register</a></p>
+          <Button type="submit" fullWidth>Sign in</Button>
+          <p className="sso-signin__foot">Need admin access? <a href="#" className="sso-signin__link">Contact your platform administrator</a></p>
         </form>
       </main>
     </div>
