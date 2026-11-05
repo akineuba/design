@@ -31,7 +31,7 @@ needs a wrapper with `className="sso-root"`.
 | Status set | Same as ERP: success `#00C167`, error `#FF2E3B`, warning `#D1C700`, info `#0070FF`, neutral `#667085` |
 | Signed-in logo | wBizManager · SSO Portal lockup (`<Logo variant="sso" />`) |
 | Sign-in logo | wBizManager wordmark (`<Logo variant="wordmark" />`) |
-| Navigation | ERP sizing (200px, 44px items, 14px text, 20px icons); white rail; Dashboard, Tenants, Entities, Products, Users, Roles, Approval Admin, Subscriptions, SSO Config; solid blue active pill with chevron |
+| Navigation | ERP nav v2 style: soft #FAFAFA panel on a grey rail (224px), 40px items, 14px text, 18px grey outline icons; current page is a raised white pill with blue text; expandable groups with a guide line; amber count badges. Items: Dashboard, Tenants, Entities, Products, Users, Roles, Approval Admin, Subscriptions, SSO Config |
 | Top bar | ERP metrics (64px, bell + red count badge, gradient avatar, name Bold 16 / role 12); Scope / Product / Entity selectors; Sign out in the profile menu |
 | Page header | ERP anatomy: 28px title, 14px muted subtitle, actions right, optional back link. No eyebrow |
 | Neutrals | Slate ramp (`#0F172A` → `#F8FAFC`), the main visual difference from the ERP's grey |

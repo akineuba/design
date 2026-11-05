@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { CircleHelp, Settings } from 'lucide-react';
 import { Sidebar } from './Sidebar';
 import { SSO_NAV_ITEMS } from './navItems';
 import { Logo } from '../Logo/Logo';
@@ -18,6 +19,41 @@ export const SidebarNav: StoryObj<typeof Sidebar> = {
     return (
       <div className="sso-root" style={{ height: 760, display: 'flex', background: 'var(--sso-color-surface-page)' }}>
         <Sidebar items={SSO_NAV_ITEMS} activeId={active} onNavigate={(id, e) => { e.preventDefault(); setActive(id); }} collapsed={collapsed} onToggleCollapsed={() => setCollapsed(!collapsed)} />
+      </div>
+    );
+  },
+};
+
+const withGroups = SSO_NAV_ITEMS.map((i) =>
+  i.id === 'approval-admin'
+    ? { ...i, badge: 5 }
+    : i.id === 'subscriptions'
+      ? {
+          ...i,
+          children: [
+            { id: 'subs-overview', label: 'Overview' },
+            { id: 'subs-plans', label: 'Plans' },
+            { id: 'subs-tenants', label: 'Commercial tenants' },
+            { id: 'subs-billing', label: 'Billing tools' },
+            { id: 'subs-wallet', label: 'Wallet review', badge: 2 },
+            { id: 'subs-audit', label: 'Audit logs' },
+          ],
+        }
+      : i,
+);
+
+export const WithGroupsAndBadges: StoryObj<typeof Sidebar> = {
+  name: 'Sidebar: groups, badges, footer',
+  render: () => {
+    const [active, setActive] = useState('subs-plans');
+    return (
+      <div className="sso-root" style={{ height: 860, display: 'flex', background: 'var(--sso-color-surface-page)' }}>
+        <Sidebar
+          items={withGroups}
+          activeId={active}
+          onNavigate={(id, e) => { e.preventDefault(); setActive(id); }}
+          footerItems={[{ id: 'settings', label: 'Settings', icon: <Settings /> }, { id: 'help', label: 'Help', icon: <CircleHelp /> }]}
+        />
       </div>
     );
   },

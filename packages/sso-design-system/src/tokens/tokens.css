@@ -63,14 +63,19 @@
   --sso-color-danger-hover: #C9161C;
   --sso-color-action-edit: #D4A003;
 
-  /* ---------- Navigation ---------- */
-  --sso-nav-bg: #FFFFFF;
-  --sso-nav-border: #E9EDF2;
-  --sso-nav-fg: #475569;
-  --sso-nav-icon: #475569;
-  --sso-nav-hover-bg: #F1F5F9;
-  --sso-nav-active-bg: var(--sso-color-primary);
-  --sso-nav-active-fg: #FFFFFF;
+  /* ---------- Navigation (matches ERP nav v2 panel) ---------- */
+  --sso-nav-bg: #F4F5F7;                 /* rail behind the panel */
+  --sso-nav-panel-bg: #FAFAFA;
+  --sso-nav-panel-border: #E5E7EB;
+  --sso-nav-title: #101828;
+  --sso-nav-fg: #4A5565;
+  --sso-nav-icon: #99A1AF;
+  --sso-nav-guide: #E5E7EB;              /* vertical line beside sub-items */
+  --sso-nav-hover-bg: #F1F2F4;
+  --sso-nav-active-bg: #FFFFFF;          /* raised white pill */
+  --sso-nav-active-fg: var(--sso-color-primary);
+  --sso-nav-active-shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 0 0 1px rgba(16, 24, 40, 0.04);
+  --sso-nav-badge-bg: #FE9A00;
 
   /* Icon tiles (same pairs as ERP --wbiz-color-tile-*) */
   --sso-tile-blue-bg: #E0F0FF;   --sso-tile-blue-fg: #0070FF;
@@ -145,10 +150,11 @@
   --sso-shadow-focus-error: 0 0 0 4px rgba(255, 46, 59, 0.2);
 
   /* ---------- Sizes ---------- */
-  --sso-size-sidebar: 200px;           /* same as ERP */
+  --sso-size-sidebar: 224px;           /* 8px rail + 208px panel + 8px rail */
   --sso-size-sidebar-collapsed: 72px;
+  --sso-size-nav-subitem: 36px;
   --sso-size-topbar: 64px;             /* same as ERP */
-  --sso-size-nav-item: 44px;           /* same as ERP */
+  --sso-size-nav-item: 40px;
   --sso-size-control-sm: 32px;
   --sso-size-control-md: 40px;
   --sso-size-control-lg: 48px;
@@ -156,7 +162,7 @@
   --sso-size-row-head: 44px;
   --sso-size-icon-sm: 16px;
   --sso-size-icon: 20px;
-  --sso-size-icon-nav: 20px;
+  --sso-size-icon-nav: 18px;
   --sso-size-panel: 440px;
   --sso-size-dialog: 480px;
   --sso-size-content-max: 1200px;
