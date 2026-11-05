@@ -1,0 +1,7 @@
+.sso-shell { display: flex; height: 100vh; min-height: 640px; background: var(--sso-color-surface-page); overflow: hidden; }
+.sso-shell__main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.sso-shell__content { flex: 1; overflow-y: auto; }
+.sso-shell__inner { padding: var(--sso-space-8); display: flex; flex-direction: column; gap: var(--sso-space-6); }
+.sso-shell__inner.is-constrained { max-width: calc(var(--sso-size-content-max) + 2 * var(--sso-space-8)); }
+.sso-stack { display: flex; flex-direction: column; }
+.sso-grid { display: grid; }

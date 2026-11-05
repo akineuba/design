@@ -1,0 +1,6 @@
+/* Single stylesheet entry: import once at the app root. */
+@import '@fontsource-variable/inter';
+@import './tokens/tokens.css';
+@import './base.css';
+@import './components/components.css';
+@import './pages/pages.css';

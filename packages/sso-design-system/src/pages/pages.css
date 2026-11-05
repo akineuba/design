@@ -1,0 +1,31 @@
+/* Page-level layout helpers used by the reference pages. */
+.sso-two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: var(--sso-space-4); }
+.sso-section-title { margin: 0; font-size: var(--sso-font-size-xl); font-weight: var(--sso-font-weight-bold); color: var(--sso-color-fg-ink); letter-spacing: var(--sso-letter-spacing-title); }
+.sso-section-subtitle { margin: var(--sso-space-1) 0 var(--sso-space-4); color: var(--sso-color-fg-subtle); }
+
+/* Sign in */
+.sso-signin { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); min-height: 100vh; background: var(--sso-color-surface); }
+.sso-signin__brand {
+  margin: var(--sso-space-4); border-radius: var(--sso-radius-xl);
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(0, 112, 255, 0.55) 0%, rgba(0, 112, 255, 0) 60%),
+    radial-gradient(70% 50% at 0% 100%, rgba(232, 0, 27, 0.25) 0%, rgba(232, 0, 27, 0) 70%),
+    var(--sso-color-brand-navy);
+  color: #fff; display: flex; align-items: flex-end; padding: var(--sso-space-12);
+}
+.sso-signin__brand-inner { max-width: 420px; }
+.sso-signin__kicker { margin: 0 0 var(--sso-space-3); font-size: var(--sso-font-size-xs); font-weight: var(--sso-font-weight-bold); letter-spacing: var(--sso-letter-spacing-eyebrow); text-transform: uppercase; color: rgba(255, 255, 255, 0.7); }
+.sso-signin__headline { margin: 0 0 var(--sso-space-6); font-size: 36px; line-height: 1.15; font-weight: var(--sso-font-weight-bold); letter-spacing: -0.02em; }
+.sso-signin__points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sso-space-3); color: rgba(255, 255, 255, 0.85); }
+.sso-signin__points li { display: flex; gap: var(--sso-space-2_5); align-items: flex-start; }
+.sso-signin__points svg { width: 18px; height: 18px; flex: none; margin-top: 2px; color: #7DB5FF; }
+.sso-signin__form-wrap { display: flex; align-items: center; justify-content: center; padding: var(--sso-space-12) var(--sso-space-6); }
+.sso-signin__form { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: var(--sso-space-5); }
+.sso-signin__title { margin: var(--sso-space-4) 0 var(--sso-space-1); font-size: var(--sso-font-size-5xl); font-weight: var(--sso-font-weight-bold); letter-spacing: -0.02em; color: var(--sso-color-fg-ink); }
+.sso-signin__subtitle { margin: 0; color: var(--sso-color-fg-subtle); }
+.sso-signin__divider { display: flex; align-items: center; gap: var(--sso-space-3); font-size: var(--sso-font-size-xs); color: var(--sso-color-fg-faint); }
+.sso-signin__divider::before, .sso-signin__divider::after { content: ''; flex: 1; height: 1px; background: var(--sso-color-line); }
+.sso-signin__row { display: flex; align-items: center; justify-content: space-between; font-size: var(--sso-font-size-sm); }
+.sso-signin__foot { margin: 0; text-align: center; font-size: var(--sso-font-size-md); color: var(--sso-color-fg-subtle); }
+@media (max-width: 900px) { .sso-signin { grid-template-columns: 1fr; } .sso-signin__brand { display: none; } }
+.sso-signin__form .sso-logo { align-self: flex-start; }

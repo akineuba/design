@@ -1,0 +1,24 @@
+.sso-topbar {
+  display: flex; align-items: center; gap: var(--sso-space-4);
+  height: var(--sso-size-topbar); padding: 0 var(--sso-space-8); flex: none;
+  background: var(--sso-color-surface); border-bottom: 1px solid var(--sso-color-line);
+}
+.sso-topbar__context {
+  display: inline-flex; align-items: center; gap: var(--sso-space-2);
+  height: 34px; padding: 0 var(--sso-space-3);
+  border: 0; border-radius: var(--sso-radius-md);
+  background: var(--sso-color-surface-control);
+  font-size: var(--sso-font-size-md); font-weight: var(--sso-font-weight-semibold); color: var(--sso-color-fg-ink);
+  cursor: pointer;
+}
+.sso-topbar__context:hover { background: var(--sso-color-line); }
+.sso-topbar__context > svg:first-child { width: 16px; height: 16px; color: var(--sso-color-fg-subtle); }
+.sso-topbar__caret { width: 14px; height: 14px; color: var(--sso-color-fg-muted); }
+.sso-topbar__middle { flex: 1; min-width: 0; }
+.sso-topbar__right { display: flex; align-items: center; gap: var(--sso-space-4); }
+.sso-topbar__divider { width: 1px; height: 24px; background: var(--sso-color-line); }
+.sso-topbar__user { display: flex; align-items: center; gap: var(--sso-space-2_5); padding: var(--sso-space-1); border: 0; border-radius: var(--sso-radius-md); background: none; text-align: left; cursor: pointer; }
+.sso-topbar__user:hover { background: var(--sso-color-surface-inset); }
+.sso-topbar__user-text { display: flex; flex-direction: column; line-height: 1.25; }
+.sso-topbar__user-name { font-size: var(--sso-font-size-md); font-weight: var(--sso-font-weight-semibold); color: var(--sso-color-fg-ink); }
+.sso-topbar__user-role { font-size: var(--sso-font-size-2xs); color: var(--sso-color-fg-faint); }

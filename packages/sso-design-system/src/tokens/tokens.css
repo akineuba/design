@@ -1,0 +1,161 @@
+/*
+ * wBizManager SSO Portal: design tokens
+ * ------------------------------------------------------------
+ * Separate from the wBiz ERP library (--wbiz-*). The SSO portal
+ * shares the ERP's primary blue (#0070FF) and status set so the
+ * two products read as one family, but uses a slate neutral ramp,
+ * larger radii and a roomier density so it feels like an account
+ * console rather than a dense working tool.
+ */
+
+:root {
+  /* ---------- Brand ---------- */
+  --sso-color-brand-navy: #121F4B;
+  --sso-color-brand-red: #E8001B;
+
+  /* ---------- Primary (shared with ERP) ---------- */
+  --sso-color-primary: #0070FF;
+  --sso-color-primary-hover: #0062E0;
+  --sso-color-primary-active: #0055C2;
+  --sso-color-primary-subtle: #EBF3FE;   /* selected rows, hover fills */
+  --sso-color-primary-soft: #F0F4FF;     /* chips, tints */
+  --sso-color-primary-border: #B8D4FF;
+
+  /* ---------- Neutrals (slate) ---------- */
+  --sso-color-fg-ink: #0F172A;           /* titles, values */
+  --sso-color-fg-strong: #1E293B;
+  --sso-color-fg: #334155;               /* body copy */
+  --sso-color-fg-subtle: #475569;        /* subtitles, secondary copy */
+  --sso-color-fg-muted: #64748B;         /* labels, captions */
+  --sso-color-fg-faint: #94A3B8;         /* meta, helper text */
+  --sso-color-fg-placeholder: #94A3B8;
+  --sso-color-fg-disabled: #CBD5E1;
+  --sso-color-fg-inverse: #FFFFFF;
+
+  --sso-color-line-subtle: #F1F5F9;
+  --sso-color-line: #E2E8F0;
+  --sso-color-line-strong: #CBD5E1;
+  --sso-color-line-field: #D5DCE5;
+
+  --sso-color-surface: #FFFFFF;
+  --sso-color-surface-page: #FCFCFD;
+  --sso-color-surface-inset: #F8FAFC;    /* panels inside cards */
+  --sso-color-surface-control: #F1F5F9;  /* org switcher, icon buttons */
+  --sso-color-surface-sunken: #F4F5F7;
+  --sso-color-surface-disabled: #F1F5F9;
+  --sso-color-overlay: rgba(15, 23, 42, 0.5);
+
+  /* ---------- Status (matches the ERP status set) ---------- */
+  --sso-color-success: #00C167;
+  --sso-color-success-bg: rgba(95, 255, 175, 0.4);
+  --sso-color-error: #FF2E3B;
+  --sso-color-error-bg: rgba(255, 46, 59, 0.1);
+  --sso-color-warning: #D1C700;
+  --sso-color-warning-bg: rgba(209, 199, 0, 0.2);
+  --sso-color-warning-strong: #FF9500;   /* banner icon / border */
+  --sso-color-info: #0070FF;
+  --sso-color-info-bg: rgba(0, 112, 255, 0.06);
+  --sso-color-neutral: #667085;
+  --sso-color-neutral-bg: rgba(204, 204, 204, 0.41);
+
+  /* Actions (matches ERP action colours) */
+  --sso-color-danger: #E81E25;
+  --sso-color-danger-hover: #C9161C;
+  --sso-color-action-edit: #D4A003;
+
+  /* ---------- Navigation ---------- */
+  --sso-nav-bg: #FFFFFF;
+  --sso-nav-border: #E9EDF2;
+  --sso-nav-fg: #475569;
+  --sso-nav-icon: #475569;
+  --sso-nav-hover-bg: #F1F5F9;
+  --sso-nav-active-bg: var(--sso-color-primary);
+  --sso-nav-active-fg: #FFFFFF;
+
+  /* ---------- Typography ---------- */
+  --sso-font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --sso-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --sso-font-size-2xs: 11px;
+  --sso-font-size-xs: 12px;
+  --sso-font-size-sm: 13px;
+  --sso-font-size-md: 14px;
+  --sso-font-size-nav: 15px;
+  --sso-font-size-lg: 16px;
+  --sso-font-size-xl: 18px;
+  --sso-font-size-2xl: 20px;
+  --sso-font-size-3xl: 24px;
+  --sso-font-size-4xl: 28px;
+  --sso-font-size-5xl: 32px;
+
+  --sso-line-height-tight: 1.2;
+  --sso-line-height-snug: 1.35;
+  --sso-line-height-normal: 1.5;
+
+  --sso-font-weight-regular: 400;
+  --sso-font-weight-medium: 500;
+  --sso-font-weight-semibold: 600;
+  --sso-font-weight-bold: 700;
+
+  --sso-letter-spacing-eyebrow: 0.04em;
+  --sso-letter-spacing-title: -0.015em;
+
+  /* ---------- Spacing (4px grid) ---------- */
+  --sso-space-0: 0px;
+  --sso-space-0_5: 2px;
+  --sso-space-1: 4px;
+  --sso-space-1_5: 6px;
+  --sso-space-2: 8px;
+  --sso-space-2_5: 10px;
+  --sso-space-3: 12px;
+  --sso-space-4: 16px;
+  --sso-space-5: 20px;
+  --sso-space-6: 24px;
+  --sso-space-8: 32px;
+  --sso-space-10: 40px;
+  --sso-space-12: 48px;
+
+  /* ---------- Radius (one step larger than ERP) ---------- */
+  --sso-radius-xs: 4px;
+  --sso-radius-sm: 6px;
+  --sso-radius-md: 8px;    /* buttons, inputs, nav items */
+  --sso-radius-lg: 12px;   /* cards, inset panels */
+  --sso-radius-xl: 16px;   /* accordions, large cards, dialogs */
+  --sso-radius-full: 9999px;
+
+  /* ---------- Elevation ---------- */
+  --sso-shadow-none: none;
+  --sso-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --sso-shadow-card: 0 4px 10px rgba(15, 23, 42, 0.04);
+  --sso-shadow-md: 0 10px 24px rgba(15, 23, 42, 0.10);
+  --sso-shadow-dialog: 0 20px 40px -8px rgba(15, 23, 42, 0.24);
+  --sso-shadow-focus: 0 0 0 4px rgba(0, 112, 255, 0.24);
+  --sso-shadow-focus-error: 0 0 0 4px rgba(255, 46, 59, 0.2);
+
+  /* ---------- Sizes ---------- */
+  --sso-size-sidebar: 272px;
+  --sso-size-sidebar-collapsed: 80px;
+  --sso-size-topbar: 68px;
+  --sso-size-nav-item: 48px;
+  --sso-size-control-sm: 32px;
+  --sso-size-control-md: 40px;
+  --sso-size-control-lg: 48px;
+  --sso-size-row: 56px;
+  --sso-size-row-head: 44px;
+  --sso-size-icon-sm: 16px;
+  --sso-size-icon: 20px;
+  --sso-size-icon-nav: 24px;
+  --sso-size-panel: 440px;
+  --sso-size-dialog: 480px;
+  --sso-size-content-max: 1200px;
+
+  /* ---------- Motion ---------- */
+  --sso-duration-fast: 120ms;
+  --sso-duration-base: 180ms;
+  --sso-ease: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ---------- Layers ---------- */
+  --sso-z-dropdown: 30;
+  --sso-z-overlay: 40;
+  --sso-z-dialog: 50;
+}

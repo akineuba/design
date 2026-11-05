@@ -1,0 +1,8 @@
+.sso-spinner {
+  display: inline-block; flex: none;
+  border: 2px solid currentColor; border-right-color: transparent;
+  border-radius: 50%;
+  animation: sso-spin 0.7s linear infinite;
+}
+@keyframes sso-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .sso-spinner { animation-duration: 2s; } }

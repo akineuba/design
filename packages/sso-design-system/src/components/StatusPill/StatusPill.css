@@ -1,0 +1,14 @@
+.sso-pill {
+  display: inline-flex; align-items: center; gap: var(--sso-space-1_5);
+  height: 24px; padding: 0 var(--sso-space-2);
+  border-radius: var(--sso-radius-sm);
+  font-size: var(--sso-font-size-xs);
+  font-weight: var(--sso-font-weight-semibold);
+  white-space: nowrap;
+}
+.sso-pill__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.sso-pill--success { color: var(--sso-color-success); background: var(--sso-color-success-bg); }
+.sso-pill--error   { color: var(--sso-color-error);   background: var(--sso-color-error-bg); }
+.sso-pill--warning { color: var(--sso-color-warning); background: var(--sso-color-warning-bg); }
+.sso-pill--info    { color: var(--sso-color-info);    background: var(--sso-color-info-bg); }
+.sso-pill--neutral { color: var(--sso-color-neutral); background: var(--sso-color-neutral-bg); }

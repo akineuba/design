@@ -1,0 +1,52 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# wBizManager SSO Portal: Design System
+
+The component library for the **SSO Portal**: where an account owner signs in, manages tenants, entities,
+products, users and roles, configures SSO, and launches the wBiz ERP applications.
+
+It is a **separate library** from the wBiz ERP design system (`--wbiz-*`). The two share a family
+resemblance but are tuned for different jobs.
+
+## Shared with the ERP (do not diverge)
+
+| | Value |
+|---|---|
+| Typeface | **Inter**, for everything (headings, nav, body, tables, sign-in) |
+| Primary | **`#0070FF`**, the one blue for actions, links, focus and the active nav item |
+| Status set | success `#00C167`, error `#FF2E3B`, warning `#D1C700`, info `#0070FF`, neutral `#667085`, with the same tinted backgrounds |
+| Danger action | `#E81E25` |
+| Grid | 4px spacing base |
+
+## Where the SSO portal is different
+
+| | ERP | SSO portal |
+|---|---|---|
+| Logo (signed-in) | wBizManager wordmark | **wBizManager · SSO Portal** lockup |
+| Neutrals | Grey (`#101828` / `#344054` / `#667085`) | **Slate** (`#0F172A` / `#334155` / `#64748B`) |
+| Sidebar | 200px, tinted active row with indicator bar | **272px white rail, solid blue active pill with chevron** |
+| Density | Compact, 44px rows, 32–40px controls | **Comfortable**, 48px nav items, 56px rows, 40px controls |
+| Radius | 4–8px, 12px panels | **8px controls, 12px cards, 16px accordions/dialogs** |
+| Elevation | Flat | Flat + very soft card shadow |
+| Page header | Title + actions | **Blue uppercase eyebrow** + 28px title + subtitle |
+| Signature patterns | Dense data tables, forms | Stat cards with actions, per-org plan accordions, app launcher tiles, setup checklist |
+
+## Usage
+
+```tsx
+import '@wbiz/sso-design-system/src/styles.css';
+import { AppShell, Sidebar, SSO_NAV_ITEMS, TopBar, PageHeader, Button } from '@wbiz/sso-design-system';
+```
+
+`AppShell` adds the `sso-root` scope. For anything rendered outside it (e.g. the sign-in page),
+wrap it in an element with `className="sso-root"`.
+
+## Rules
+
+- One primary button per view. Secondary actions use `secondary`, `outline` or `ghost`.
+- Use `StatusPill` for state (Active, Expired), and `Tag` for labels (PRIMARY, 3 / 3 USED).
+- Never put text below 11px. Feature chips are 12px.
+- Spell it **organisation** (UK) everywhere. Dates read **9 Aug 2026** in tables, **9 August 2026** in prose.
+- Pluralise counts properly: "1 seat available", "3 seats available".

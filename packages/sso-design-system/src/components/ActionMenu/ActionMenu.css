@@ -1,0 +1,12 @@
+.sso-menu { position: relative; display: inline-flex; }
+.sso-menu__trigger { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: var(--sso-radius-md); background: none; color: var(--sso-color-fg-muted); cursor: pointer; }
+.sso-menu__trigger:hover, .sso-menu__trigger[aria-expanded="true"] { background: var(--sso-color-surface-control); color: var(--sso-color-fg-strong); }
+.sso-menu__trigger svg { width: 18px; height: 18px; }
+.sso-menu__list { position: absolute; top: calc(100% + 4px); z-index: var(--sso-z-dropdown); min-width: 180px; padding: var(--sso-space-1); background: var(--sso-color-surface); border: 1px solid var(--sso-color-line); border-radius: var(--sso-radius-lg); box-shadow: var(--sso-shadow-md); }
+.sso-menu__list--end { right: 0; }
+.sso-menu__list--start { left: 0; }
+.sso-menu__item { display: flex; align-items: center; gap: var(--sso-space-2); width: 100%; height: 36px; padding: 0 var(--sso-space-3); border: 0; border-radius: var(--sso-radius-md); background: none; font-size: var(--sso-font-size-md); color: var(--sso-color-fg-strong); text-align: left; cursor: pointer; }
+.sso-menu__item svg { width: 16px; height: 16px; color: var(--sso-color-fg-muted); }
+.sso-menu__item:hover:not(:disabled), .sso-menu__item:focus-visible { background: var(--sso-color-surface-inset); box-shadow: none; }
+.sso-menu__item--danger, .sso-menu__item--danger svg { color: var(--sso-color-danger); }
+.sso-menu__item:disabled { color: var(--sso-color-fg-disabled); cursor: not-allowed; }

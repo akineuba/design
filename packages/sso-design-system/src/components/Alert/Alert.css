@@ -1,0 +1,22 @@
+.sso-alert {
+  display: flex; align-items: center; gap: var(--sso-space-3);
+  padding: var(--sso-space-4) var(--sso-space-5);
+  border: 1px solid; border-radius: var(--sso-radius-lg);
+}
+.sso-alert__icon { display: inline-flex; flex: none; }
+.sso-alert__icon svg { width: 20px; height: 20px; }
+.sso-alert__body { flex: 1; min-width: 0; }
+.sso-alert__title { margin: 0; font-size: var(--sso-font-size-md); font-weight: var(--sso-font-weight-semibold); color: var(--sso-color-fg-ink); }
+.sso-alert__desc { margin: 2px 0 0; font-size: var(--sso-font-size-sm); color: var(--sso-color-fg-subtle); }
+.sso-alert__action { flex: none; font-weight: var(--sso-font-weight-semibold); }
+.sso-alert__dismiss { display: inline-flex; padding: 4px; border: 0; background: none; color: var(--sso-color-fg-muted); cursor: pointer; border-radius: var(--sso-radius-sm); }
+.sso-alert__dismiss svg { width: 16px; height: 16px; }
+
+.sso-alert--info    { background: var(--sso-color-primary-subtle); border-color: var(--sso-color-primary-border); }
+.sso-alert--info .sso-alert__icon { color: var(--sso-color-info); }
+.sso-alert--success { background: #ECFDF3; border-color: #ABEFC6; }
+.sso-alert--success .sso-alert__icon { color: var(--sso-color-success); }
+.sso-alert--warning { background: #FFFAEB; border-color: #FEDF89; }
+.sso-alert--warning .sso-alert__icon { color: var(--sso-color-warning-strong); }
+.sso-alert--error   { background: #FEF3F2; border-color: #FECDCA; }
+.sso-alert--error .sso-alert__icon { color: var(--sso-color-error); }
