@@ -39,7 +39,7 @@ export const SignIn: StoryObj = {
         <form className="sso-signin__form" onSubmit={(e) => e.preventDefault()}>
           <Logo variant="sso" height={56} className="sso-signin__logo" />
           <div className="sso-signin__head">
-            <h1 className="sso-signin__title">Admin sign in</h1>
+            <h1 className="sso-signin__title">Welcome back.</h1>
             <p className="sso-signin__subtitle">Manage tenants, users and access across wBiz.</p>
           </div>
           <Input label="Work email" type="email" placeholder="admin@company.com" required />
