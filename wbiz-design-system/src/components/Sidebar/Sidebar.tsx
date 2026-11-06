@@ -69,7 +69,7 @@ export function Sidebar({
 
   const rowBase =
     'relative flex w-full items-center gap-3 rounded-xl text-left font-sans transition-colors ' +
-    'focus-visible:outline-none focus-visible:shadow-focus';
+    'focus-visible:outline-hidden focus-visible:shadow-focus';
 
   // Per-level metrics. Level 0 = module, 1 = page, 2+ = sub-page.
   const level = (depth: number) =>
@@ -161,7 +161,7 @@ export function Sidebar({
           aria-label={collapsed ? 'Expand menu' : 'Collapse menu'}
           aria-expanded={!collapsed}
           onClick={() => setCollapsed(!collapsed)}
-          className="inline-flex size-6 shrink-0 items-center justify-center rounded-lg border border-fg text-fg hover:bg-surface-muted focus-visible:outline-none focus-visible:shadow-focus"
+          className="inline-flex size-6 shrink-0 items-center justify-center rounded-lg border border-fg text-fg hover:bg-surface-muted focus-visible:outline-hidden focus-visible:shadow-focus"
         >
           <span className={cx('size-icon-xs transition-transform duration-200', collapsed && 'rotate-180')}><ChevronLeftIcon /></span>
         </button>

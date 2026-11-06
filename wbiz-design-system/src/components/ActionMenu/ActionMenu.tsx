@@ -114,7 +114,7 @@ export function ActionMenu({ items, label, trigger, className }: ActionMenuProps
         }}
         className={cx(
           'inline-flex size-control-xs items-center justify-center rounded-lg text-fg-muted transition-colors',
-          'hover:bg-surface-muted focus-visible:outline-none focus-visible:shadow-focus',
+          'hover:bg-surface-muted focus-visible:outline-hidden focus-visible:shadow-focus',
           open && 'bg-surface-muted',
         )}
       >
@@ -140,7 +140,7 @@ export function ActionMenu({ items, label, trigger, className }: ActionMenuProps
                 onClick={() => select(item)}
                 className={cx(
                   'flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left font-data text-sm transition-colors',
-                  'hover:bg-surface-muted focus:bg-surface-muted focus:outline-none',
+                  'hover:bg-surface-muted focus:bg-surface-muted focus:outline-hidden',
                   item.disabled ? 'cursor-not-allowed text-fg-disabled' : toneClass[item.tone ?? 'view'],
                 )}
               >

@@ -59,7 +59,7 @@ export function Tabs({ items, value, onChange, idPrefix = 'wbiz-tabs', className
             onKeyDown={(e) => onKeyDown(e, i)}
             className={cx(
               'h-tab shrink-0 whitespace-nowrap border-b-2 px-5 py-2.5 font-data text-13 transition-colors',
-              'focus-visible:outline-none focus-visible:shadow-focus disabled:cursor-not-allowed disabled:text-fg-disabled',
+              'focus-visible:outline-hidden focus-visible:shadow-focus disabled:cursor-not-allowed disabled:text-fg-disabled',
               selected ? 'border-primary font-semibold text-primary' : 'border-transparent font-medium text-fg-muted hover:text-fg',
             )}
           >

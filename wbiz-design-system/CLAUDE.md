@@ -16,9 +16,10 @@
 | Path | Purpose |
 |---|---|
 | `tokens/tokens.json` | **Single source of truth** for every token. Edit tokens here only. |
-| `tokens/index.mjs` | Turns tokens into CSS variables and the Tailwind theme. |
+| `tokens/index.mjs` | Turns tokens into CSS variables and the Tailwind 4 `@theme`. |
 | `src/styles/tokens.css` | Generated `--wbiz-*` CSS variables. Never edit; run `npm run tokens`. |
-| `tailwind.config.js` | Replaces Tailwind's default palette, spacing, type, radius and shadow with tokens. |
+| `src/styles/theme.css` | Generated Tailwind 4 `@theme inline` block. Resets Tailwind's default palette, spacing, type, weight, radius and shadow and maps them to tokens. Never edit; run `npm run tokens`. |
+| `src/styles/index.css` | Tailwind entry: imports Tailwind, `tokens.css` and `theme.css`; base styles and custom utilities (`@utility`). There is no `tailwind.config.js`. |
 | `src/components/<Name>/` | `<Name>.tsx`, `<Name>.stories.tsx`, `index.ts`. One folder per component. |
 | `src/foundations/` | Storybook pages for tokens, plus story-only icons. |
 | `ui-rules/ui-rules.md` | **Platform-wide UI rules** (Part A agreed, Part B proposals to vet). Shown in Storybook as "UI Rules". **Follow Part A when building any screen.** Don't treat Part B as rules. |
@@ -31,7 +32,7 @@ Commands: `npm run storybook` (port 6006), `npm run build`, `npm run typecheck`,
 
 ## How the rules apply here
 
-**Rule 1: tokens only.** Tailwind's theme is *replaced*, so `bg-blue-500`, `p-7` or `rounded-md` from stock Tailwind do not exist. Use the token classes below. Arbitrary values (`w-[320px]`, `text-[#0070FF]`) are forbidden in components. If a value is missing, add a token to `tokens.json`, run `npm run tokens`, and mark it `"derived": true` if it is not in Figma.
+**Rule 1: tokens only.** The project uses **Tailwind CSS 4**. Tailwind's theme is *replaced*, so `bg-blue-500`, `p-7` or `rounded-md` from stock Tailwind do not exist. Use the token classes below. Use Tailwind 4 names: `outline-hidden` (not `outline-none`) to hide the focus outline, `shrink-0`/`grow`. Arbitrary values (`w-[320px]`, `text-[#0070FF]`) are forbidden in components. If a value is missing, add a token to `tokens.json`, run `npm run tokens`, and mark it `"derived": true` if it is not in Figma.
 
 **Rule 2: search before building.** Before writing a new component:
 1. Check `src/components/` for an existing component or variant.

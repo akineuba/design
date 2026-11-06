@@ -256,7 +256,7 @@ export function Select({
         onClick={() => (open ? setOpen(false) : openMenu())}
         onKeyDown={onKeyDown}
         className={cx(
-          'flex w-full min-w-0 items-center justify-between gap-2 rounded-lg border text-left font-sans text-sm outline-none transition-[border-color,box-shadow] duration-150',
+          'flex w-full min-w-0 items-center justify-between gap-2 rounded-lg border text-left font-sans text-sm outline-hidden transition-[border-color,box-shadow] duration-150',
           heights[size],
           fieldState,
         )}
@@ -286,7 +286,7 @@ export function Select({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={onSearchKey}
                 placeholder={searchPlaceholder}
-                className="min-w-0 flex-1 bg-transparent font-sans text-sm text-fg-strong outline-none placeholder:text-fg-placeholder"
+                className="min-w-0 flex-1 bg-transparent font-sans text-sm text-fg-strong outline-hidden placeholder:text-fg-placeholder"
               />
             </label>
           )}
@@ -330,7 +330,7 @@ export function Select({
                 triggerRef.current?.focus();
                 menuAction.onSelect(text);
               }}
-              className="flex w-full items-center gap-2.5 border-t border-line-subtle px-3 py-2 font-sans text-sm text-primary hover:bg-primary-tint focus-visible:outline-none focus-visible:bg-primary-tint"
+              className="flex w-full items-center gap-2.5 border-t border-line-subtle px-3 py-2 font-sans text-sm text-primary hover:bg-primary-tint focus-visible:outline-hidden focus-visible:bg-primary-tint"
             >
               <span className="size-icon shrink-0"><AddCircleIcon /></span>
               {query.trim() && visible.length === 0 ? `${menuAction.label}: "${query.trim()}"` : menuAction.label}

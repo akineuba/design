@@ -42,7 +42,7 @@ export function Alert({ tone = 'info', title, children, actions, onDismiss, clas
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
       {onDismiss && (
-        <button type="button" aria-label="Dismiss" onClick={onDismiss} className="inline-flex size-6 items-center justify-center rounded-md text-fg-muted hover:bg-surface focus-visible:outline-none focus-visible:shadow-focus">
+        <button type="button" aria-label="Dismiss" onClick={onDismiss} className="inline-flex size-6 items-center justify-center rounded-md text-fg-muted hover:bg-surface focus-visible:outline-hidden focus-visible:shadow-focus">
           <span className="size-icon-sm"><CloseIcon /></span>
         </button>
       )}

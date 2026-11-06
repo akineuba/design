@@ -19,10 +19,10 @@ const TaxRows = ({ rows = 1 }: { rows?: number }) => (
           <Input label={i === 0 ? 'Amount deducted' : undefined} aria-label={i === 0 ? undefined : 'Amount deducted'} placeholder="0.00" />
         </div>
         </div>
-        <button type="button" aria-label="Remove deduction" className="inline-flex size-control-md shrink-0 items-center justify-center rounded-lg text-error hover:bg-error-subtle focus-visible:outline-none focus-visible:shadow-focus"><span className="size-icon"><MinusCircleIcon /></span></button>
+        <button type="button" aria-label="Remove deduction" className="inline-flex size-control-md shrink-0 items-center justify-center rounded-lg text-error hover:bg-error-subtle focus-visible:outline-hidden focus-visible:shadow-focus"><span className="size-icon"><MinusCircleIcon /></span></button>
       </div>
     ))}
-    <button type="button" className="inline-flex items-center gap-2.5 self-start rounded-sm font-sans text-xs font-medium text-primary hover:underline focus-visible:outline-none focus-visible:shadow-focus">
+    <button type="button" className="inline-flex items-center gap-2.5 self-start rounded-sm font-sans text-xs font-medium text-primary hover:underline focus-visible:outline-hidden focus-visible:shadow-focus">
       <span className="size-icon"><AddCircleIcon /></span>New deduction
     </button>
   </div>

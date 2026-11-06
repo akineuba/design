@@ -102,7 +102,7 @@ export function AccordionItem({
           className={cx(
             'flex w-full items-center justify-between gap-4 text-left text-15 transition-colors',
             form ? 'px-2.5 py-4 font-data font-medium text-fg-black' : 'px-6 py-4 font-sans font-semibold text-fg-strong',
-            'focus-visible:outline-none focus-visible:shadow-focus disabled:cursor-not-allowed disabled:text-fg-disabled',
+            'focus-visible:outline-hidden focus-visible:shadow-focus disabled:cursor-not-allowed disabled:text-fg-disabled',
             !disabled && 'hover:bg-surface-page',
             open && !form && 'border-b border-line-subtle',
           )}

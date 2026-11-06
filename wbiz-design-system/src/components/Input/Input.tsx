@@ -104,7 +104,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           aria-describedby={message ? messageId : undefined}
           aria-busy={loading || undefined}
           className={cx(
-            'h-full min-w-0 flex-1 bg-transparent font-sans text-sm text-fg-strong outline-none',
+            'h-full min-w-0 flex-1 bg-transparent font-sans text-sm text-fg-strong outline-hidden',
             'placeholder:text-fg-placeholder disabled:cursor-not-allowed disabled:text-fg-disabled',
             className,
           )}

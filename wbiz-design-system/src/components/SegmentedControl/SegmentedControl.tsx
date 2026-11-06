@@ -63,7 +63,7 @@ export function SegmentedControl({ options, value, onChange, appearance = 'pill'
             onKeyDown={(e) => onKeyDown(e, i)}
             className={cx(
               'inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-data text-13 transition-colors',
-              'focus-visible:outline-none focus-visible:shadow-focus disabled:cursor-not-allowed disabled:text-fg-disabled',
+              'focus-visible:outline-hidden focus-visible:shadow-focus disabled:cursor-not-allowed disabled:text-fg-disabled',
               pill ? 'rounded-3xl px-5 py-0.5' : 'h-control-sm rounded-md px-3',
               checked ? 'bg-primary text-fg-inverse' : 'text-fg-muted hover:text-fg',
             )}

@@ -21,7 +21,7 @@ export function PageHeader({ title, description, actions, back, className, ...re
         <a
           href={back.href ?? '#'}
           onClick={(e) => { if (back.onClick) { e.preventDefault(); back.onClick(); } }}
-          className="self-start rounded-sm font-sans text-sm text-fg-muted hover:text-fg-strong focus-visible:outline-none focus-visible:shadow-focus"
+          className="self-start rounded-sm font-sans text-sm text-fg-muted hover:text-fg-strong focus-visible:outline-hidden focus-visible:shadow-focus"
         >
           &lt; Back to <span className="font-medium text-primary">{back.label}</span>
         </a>

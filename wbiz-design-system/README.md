@@ -16,7 +16,7 @@ npm run storybook        # http://localhost:6006
 | `npm run build-storybook` | Static Storybook in `storybook-static/` |
 | `npm run build` | Regenerates tokens, builds `dist/index.js`, `dist/style.css` and type declarations |
 | `npm run typecheck` | TypeScript check of components and stories |
-| `npm run tokens` | Rewrites `src/styles/tokens.css` from `tokens/tokens.json` |
+| `npm run tokens` | Rewrites `src/styles/tokens.css` and `src/styles/theme.css` from `tokens/tokens.json` |
 
 ## Using it in an app
 
@@ -28,19 +28,24 @@ import '@wbiz/design-system/styles.css';
 <Button leadingIcon={<PlusIcon />}>Create New</Button>
 ```
 
-Apps that use Tailwind can share the theme so their own markup uses the same tokens:
+Apps on Tailwind CSS 4 can share the theme so their own markup uses the same tokens.
+Import it after Tailwind in the app's stylesheet:
 
-```js
-// tailwind.config.js
-import wbiz from '@wbiz/design-system/tailwind.config';
-export default { presets: [wbiz], content: ['./src/**/*.{ts,tsx}'] };
+```css
+/* app.css */
+@import 'tailwindcss';
+@import '@wbiz/design-system/tokens.css'; /* --wbiz-* variables */
+@import '@wbiz/design-system/theme.css';  /* @theme mapping tokens to utilities */
 ```
+
+The library is built with Tailwind CSS 4 through the `@tailwindcss/vite` plugin. There is no
+`tailwind.config.js`: the theme is CSS, generated from `tokens/tokens.json`.
 
 ## Structure
 
 ```
 tokens/            tokens.json (source of truth) and the CSS/Tailwind mappers
-src/styles/        generated tokens.css + Tailwind entry
+src/styles/        generated tokens.css and theme.css + Tailwind entry (index.css)
 src/components/    Button, Input, Select, FilterDropdown, Table, StatusPill, Accordion, Modal,
                    Tabs, SegmentedControl, Switch, Sidebar, TopBar, PageHeader, Card, Spinner
 src/icons/         Vuesax-style line icons used by the components

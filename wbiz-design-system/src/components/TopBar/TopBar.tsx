@@ -35,7 +35,7 @@ const initialsOf = (name: string) =>
 
 const iconBtn =
   'inline-flex shrink-0 items-center justify-center text-fg-subtle transition-colors hover:text-fg-strong ' +
-  'focus-visible:outline-none focus-visible:shadow-focus rounded-lg';
+  'focus-visible:outline-hidden focus-visible:shadow-focus rounded-lg';
 
 /**
  * Page header bar. Figma: top-header (new features, 7053:5510) for the metrics (64px, white, 1px
@@ -71,7 +71,7 @@ export function TopBar({
                 <a
                   href={c.href ?? '#'}
                   onClick={(e) => { if (c.onClick) { e.preventDefault(); c.onClick(); } }}
-                  className="truncate rounded-sm hover:text-fg-strong focus-visible:outline-none focus-visible:shadow-focus"
+                  className="truncate rounded-sm hover:text-fg-strong focus-visible:outline-hidden focus-visible:shadow-focus"
                 >
                   {c.label}
                 </a>
@@ -124,7 +124,7 @@ export function TopBar({
             type="button"
             onClick={onUserMenuClick}
             aria-haspopup="menu"
-            className="flex items-center gap-3 rounded-lg text-left focus-visible:outline-none focus-visible:shadow-focus"
+            className="flex items-center gap-3 rounded-lg text-left focus-visible:outline-hidden focus-visible:shadow-focus"
           >
             <span className="inline-flex size-avatar shrink-0 items-center justify-center rounded-full bg-avatar font-sans text-sm font-semibold text-fg-inverse" aria-hidden>
               {user.initials ?? initialsOf(user.name)}

@@ -39,13 +39,13 @@ export function SidePanelContent({ title, description, footer, size = 'md', onCl
               type="button"
               aria-label="Close"
               onClick={onClose}
-              className="inline-flex size-control-xs shrink-0 items-center justify-center rounded-lg text-fg-muted hover:bg-surface-muted focus-visible:outline-none focus-visible:shadow-focus"
+              className="inline-flex size-control-xs shrink-0 items-center justify-center rounded-lg text-fg-muted hover:bg-surface-muted focus-visible:outline-hidden focus-visible:shadow-focus"
             >
               <span className="size-icon"><CloseIcon /></span>
             </button>
           )}
         </div>
-        <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-7.5 pb-5 outline-none">{children}</div>
+        <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-7.5 pb-5 outline-hidden">{children}</div>
         {footer && <div className="flex flex-wrap justify-end gap-5 px-7.5 pb-7.5 pt-2.5">{footer}</div>}
       </div>
     </FieldLabelContext.Provider>

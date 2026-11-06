@@ -1,6 +1,6 @@
 // Reads tokens.json and exposes it two ways:
 //   cssVariables()  -> the :root block written to src/styles/tokens.css
-//   tailwindTheme() -> Tailwind theme values that point at those CSS variables
+//   themeCss()      -> the Tailwind 4 @theme block written to src/styles/theme.css
 import { readFileSync } from 'node:fs';
 
 const tokens = JSON.parse(readFileSync(new URL('./tokens.json', import.meta.url), 'utf8'));
@@ -36,40 +36,58 @@ export function cssVariables() {
   return `:root {\n${lines.join('\n')}\n}\n`;
 }
 
-// Mirrors a token group as a nested object of var() references.
-function refs(group) {
-  const build = (node, path) => {
-    const out = {};
-    for (const [key, child] of Object.entries(node)) {
-      out[key] = isLeaf(child) ? `var(${varName([group, ...path, key])})` : build(child, [...path, key]);
-    }
-    return out;
-  };
-  return build(tokens[group], []);
-}
+// Tailwind 4 theme namespace for each token group, e.g. color.fg.muted -> --color-fg-muted.
+// Each namespace is reset first, so Tailwind's default palette and scale are unavailable:
+// only wBiz tokens can be used. Other namespaces (breakpoints, easing, line height and so on)
+// keep Tailwind's defaults.
+const NAMESPACES = [
+  ['color', 'color'],
+  ['space', 'spacing'],
+  ['size', 'spacing'],
+  ['fontSize', 'text'],
+  ['fontFamily', 'font'],
+  ['fontWeight', 'font-weight'],
+  ['radius', 'radius'],
+  ['shadow', 'shadow'],
+];
 
-export function tailwindTheme() {
-  const space = refs('space');
-  const size = refs('size');
-  const fontSize = Object.fromEntries(
-    Object.keys(tokens.fontSize).map((k) => [
-      k,
-      [`var(${varName(['fontSize', k])})`, { lineHeight: `var(${varName(['lineHeight', k])})` }],
-    ]),
-  );
-  const fontFamily = Object.fromEntries(
-    Object.keys(tokens.fontFamily).map((k) => [k, `var(${varName(['fontFamily', k])})`]),
-  );
-  return {
-    colors: { transparent: 'transparent', current: 'currentColor', inherit: 'inherit', ...refs('color') },
-    spacing: { ...space, ...size, px: '1px' },
-    fontSize,
-    fontFamily,
-    fontWeight: refs('fontWeight'),
-    borderRadius: { ...refs('radius'), DEFAULT: `var(${varName(['radius', 'lg'])})` },
-    boxShadow: { ...refs('shadow'), DEFAULT: `var(${varName(['shadow', 'xs'])})` },
-    backgroundImage: refs('gradient'),
-  };
+// Theme key for a token path: dots in keys are escaped (space.0.5 -> --spacing-0\.5) and
+// DEFAULT is dropped (color.primary.DEFAULT -> --color-primary).
+const themeKey = (ns, path) => {
+  const rest = path.filter((p) => p !== 'DEFAULT').map((p) => String(p).replace('.', '\\.'));
+  return `--${[ns, ...rest].join('-')}`;
+};
+
+// The `@theme inline` block written to src/styles/theme.css. `inline` makes utilities point
+// straight at the --wbiz-* variables, so overriding a token on any element restyles it.
+export function themeCss() {
+  const lines = [];
+  const reset = new Set();
+  for (const [group, ns] of NAMESPACES) {
+    if (!reset.has(ns)) {
+      lines.push(`${lines.length ? '\n' : ''}  --${ns}-*: initial;`);
+      reset.add(ns);
+    }
+    walk(tokens[group], [], (path) => {
+      const ref = `var(${varName([group, ...path])})`;
+      lines.push(`  ${themeKey(ns, path)}: ${ref};`);
+      if (group === 'fontSize') {
+        lines.push(`  ${themeKey(ns, path)}--line-height: var(${varName(['lineHeight', ...path])});`);
+      }
+    });
+    if (group === 'size') lines.push('  --spacing-px: 1px;');
+  }
+  // Bare `rounded` and `shadow` utilities.
+  lines.push('', `  --radius: var(${varName(['radius', 'lg'])});`, `  --shadow: var(${varName(['shadow', 'xs'])});`);
+
+  // Tailwind 4 has no theme namespace for background images, so gradients become utilities.
+  const utilities = [];
+  walk(tokens.gradient, [], (path) => {
+    const name = path.filter((p) => p !== 'DEFAULT').join('-');
+    utilities.push(`@utility bg-${name} {\n  background-image: var(${varName(['gradient', ...path])});\n}`);
+  });
+
+  return `@theme inline {\n${lines.join('\n')}\n}\n\n${utilities.join('\n\n')}\n`;
 }
 
 export default tokens;

@@ -18,6 +18,6 @@ Create Figma variables that match `tokens/tokens.json` (same names, e.g. `color/
 ## Updating tokens
 
 1. Change the value in `tokens/tokens.json` (keep the `note`, and set `"derived": true` if it isn't in Figma).
-2. Run `npm run tokens` to regenerate `src/styles/tokens.css`.
+2. Run `npm run tokens` to regenerate `src/styles/tokens.css` and the Tailwind theme `src/styles/theme.css`.
 3. Run `npm run storybook` and check **Foundations** and the component matrices.
 4. Update the token tables in `CLAUDE.md` if a name or value changed.

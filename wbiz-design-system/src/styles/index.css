@@ -1,32 +1,49 @@
+@import 'tailwindcss' source(none);
 @import './tokens.css';
+@import './theme.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Only components, stories and MDX pages are scanned for class names (not the docs). */
+@source '../../src';
+@source '../../.storybook';
 
 @layer base {
   body {
     @apply bg-surface-page font-sans text-sm text-fg-muted;
   }
+
+  /* Tailwind 4 preflight gives buttons the default cursor; keep the pointer wBiz has always used. */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
-@layer utilities {
-  /* Side panels slide in from the right edge. Respects reduced-motion settings. */
-  @keyframes wbiz-slide-in-right {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
-  }
-  .animate-slide-in-right {
-    animation: wbiz-slide-in-right 200ms ease-out;
-  }
+/* Side panels slide in from the right edge. Respects reduced-motion settings. */
+@keyframes wbiz-slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@utility animate-slide-in-right {
+  animation: wbiz-slide-in-right 200ms ease-out;
   @media (prefers-reduced-motion: reduce) {
-    .animate-slide-in-right { animation: none; }
+    animation: none;
   }
 }
 
-@layer components {
-  /* Lists inside the rich text field (Tailwind preflight removes list styles). */
-  .wbiz-rich ul { list-style: disc; padding-left: theme('spacing.5'); }
-  .wbiz-rich ol { list-style: decimal; padding-left: theme('spacing.5'); }
-  .wbiz-rich:empty::before { content: attr(data-placeholder); color: theme('colors.fg.placeholder'); pointer-events: none; }
+/* Lists inside the rich text field (Tailwind preflight removes list styles). */
+@utility wbiz-rich {
+  & ul {
+    list-style: disc;
+    padding-left: var(--wbiz-space-5);
+  }
+  & ol {
+    list-style: decimal;
+    padding-left: var(--wbiz-space-5);
+  }
+  &:empty::before {
+    content: attr(data-placeholder);
+    color: var(--wbiz-color-fg-placeholder);
+    pointer-events: none;
+  }
 }

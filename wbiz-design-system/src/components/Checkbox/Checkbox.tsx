@@ -43,7 +43,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
           className={cx(
             'peer size-checkbox shrink-0 cursor-[inherit] appearance-none rounded-md border border-line bg-surface transition-colors',
             'checked:border-primary checked:bg-primary indeterminate:border-primary indeterminate:bg-primary-subtle',
-            'hover:border-primary focus-visible:outline-none focus-visible:shadow-focus',
+            'hover:border-primary focus-visible:outline-hidden focus-visible:shadow-focus',
             'disabled:border-line-subtle disabled:bg-surface-muted disabled:checked:bg-surface-disabled',
           )}
           {...rest}

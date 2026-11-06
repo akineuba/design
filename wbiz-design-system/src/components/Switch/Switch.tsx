@@ -46,7 +46,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch
       className={cx(
         'inline-flex shrink-0 items-center rounded-full p-0.5 transition-colors duration-200',
         size === 'sm' ? 'h-switch-sm-h w-switch-sm-w' : 'h-switch-h w-switch-w',
-        'focus-visible:outline-none focus-visible:shadow-focus disabled:cursor-not-allowed disabled:opacity-50',
+        'focus-visible:outline-hidden focus-visible:shadow-focus disabled:cursor-not-allowed disabled:opacity-50',
         on ? 'bg-success' : 'bg-switch-off',
         className,
       )}

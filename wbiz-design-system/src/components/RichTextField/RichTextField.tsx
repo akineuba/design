@@ -62,7 +62,7 @@ export function RichTextField({ label, defaultValue = '', onChange, placeholder,
               disabled={disabled}
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => run(t.cmd)}
-              className="inline-flex size-control-xs items-center justify-center rounded-md text-icon-muted hover:bg-surface-muted hover:text-fg-strong focus-visible:outline-none focus-visible:shadow-focus disabled:cursor-not-allowed disabled:text-fg-disabled"
+              className="inline-flex size-control-xs items-center justify-center rounded-md text-icon-muted hover:bg-surface-muted hover:text-fg-strong focus-visible:outline-hidden focus-visible:shadow-focus disabled:cursor-not-allowed disabled:text-fg-disabled"
             >
               <span className="size-icon-sm">{t.icon}</span>
             </button>
@@ -79,7 +79,7 @@ export function RichTextField({ label, defaultValue = '', onChange, placeholder,
           suppressContentEditableWarning
           data-placeholder={placeholder}
           onInput={() => onChange?.(ref.current?.innerHTML ?? '')}
-          className="wbiz-rich min-h-editor px-3.5 py-2.5 font-sans text-sm text-fg-strong outline-none"
+          className="wbiz-rich min-h-editor px-3.5 py-2.5 font-sans text-sm text-fg-strong outline-hidden"
         />
       </div>
       {hint && <p id={`${id}-hint`} className="font-sans text-sm text-fg-muted">{hint}</p>}

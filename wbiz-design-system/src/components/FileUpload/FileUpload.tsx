@@ -75,7 +75,7 @@ export function FileUpload({ label, files, onFilesChange, accept, maxSizeMb = 10
             type="button"
             disabled={disabled}
             onClick={() => inputRef.current?.click()}
-            className="font-medium text-primary underline-offset-2 hover:underline focus-visible:outline-none focus-visible:shadow-focus disabled:text-fg-disabled"
+            className="font-medium text-primary underline-offset-2 hover:underline focus-visible:outline-hidden focus-visible:shadow-focus disabled:text-fg-disabled"
           >
             browse
           </button>
@@ -105,7 +105,7 @@ export function FileUpload({ label, files, onFilesChange, accept, maxSizeMb = 10
                   type="button"
                   aria-label={`Remove ${f.name}`}
                   onClick={() => onFilesChange(files.filter((x) => x.id !== f.id))}
-                  className="inline-flex size-6 items-center justify-center rounded-md text-fg-muted hover:bg-surface-muted hover:text-error focus-visible:outline-none focus-visible:shadow-focus"
+                  className="inline-flex size-6 items-center justify-center rounded-md text-fg-muted hover:bg-surface-muted hover:text-error focus-visible:outline-hidden focus-visible:shadow-focus"
                 >
                   <span className="size-icon-sm"><CloseIcon /></span>
                 </button>

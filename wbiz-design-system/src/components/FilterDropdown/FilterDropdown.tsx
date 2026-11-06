@@ -74,7 +74,7 @@ export function FilterDropdown({
         onClick={() => setOpen(!open)}
         className={cx(
           'inline-flex h-control-md items-center gap-2 rounded-lg px-4 font-sans text-sm transition-colors',
-          'focus-visible:outline-none focus-visible:shadow-focus',
+          'focus-visible:outline-hidden focus-visible:shadow-focus',
           active || open ? 'bg-primary-subtle text-primary' : 'bg-surface text-fg hover:bg-surface-muted',
         )}
       >

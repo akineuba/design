@@ -26,7 +26,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const base =
   'relative inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border ' +
   'font-sans text-sm font-medium transition-colors duration-150 ' +
-  'focus-visible:outline-none focus-visible:shadow-focus ' +
+  'focus-visible:outline-hidden focus-visible:shadow-focus ' +
   'disabled:cursor-not-allowed aria-busy:cursor-wait';
 
 const sizes: Record<ButtonSize, { box: string; square: string }> = {

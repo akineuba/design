@@ -32,7 +32,7 @@ export function ModalPanel({ title, description, footer, onClose, titleId, descr
             type="button"
             aria-label="Close"
             onClick={onClose}
-            className="inline-flex size-control-xs shrink-0 items-center justify-center rounded-lg text-fg-muted hover:bg-surface-muted focus-visible:outline-none focus-visible:shadow-focus"
+            className="inline-flex size-control-xs shrink-0 items-center justify-center rounded-lg text-fg-muted hover:bg-surface-muted focus-visible:outline-hidden focus-visible:shadow-focus"
           >
             <span className="size-icon"><CloseIcon /></span>
           </button>

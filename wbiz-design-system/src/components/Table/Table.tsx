@@ -107,7 +107,7 @@ export function TableHeaderCell({ align = 'left', sort, onSort, compact = false,
           type="button"
           onClick={onSort}
           className={cx(
-            'inline-flex items-center gap-1 rounded-sm hover:text-fg focus-visible:outline-none focus-visible:shadow-focus',
+            'inline-flex items-center gap-1 rounded-sm hover:text-fg focus-visible:outline-hidden focus-visible:shadow-focus',
             justifyClass[align],
             sort && 'text-fg',
           )}
@@ -175,7 +175,7 @@ export function TableSectionRow({ label, colSpan, expanded, onToggle, className 
             type="button"
             aria-expanded={expanded}
             onClick={onToggle}
-            className="inline-flex items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:shadow-focus"
+            className="inline-flex items-center gap-3 rounded-sm focus-visible:outline-hidden focus-visible:shadow-focus"
           >
             <span className={cx('size-icon text-icon transition-transform', !expanded && 'rotate-180')} aria-hidden><ChevronUpIcon /></span>
             {label}
@@ -240,7 +240,7 @@ export const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(functi
       <input
         ref={ref}
         type="search"
-        className="h-full min-w-0 flex-1 bg-transparent font-sans text-sm text-fg-ink outline-none placeholder:text-fg-placeholder"
+        className="h-full min-w-0 flex-1 bg-transparent font-sans text-sm text-fg-ink outline-hidden placeholder:text-fg-placeholder"
         {...rest}
       />
     </label>
@@ -290,7 +290,7 @@ function pageList(page: number, count: number): Array<number | 'gap'> {
 
 const pageBtn =
   'inline-flex size-page-btn items-center justify-center rounded-sm font-sans text-sm transition-colors ' +
-  'focus-visible:outline-none focus-visible:shadow-focus disabled:cursor-not-allowed disabled:text-fg-disabled';
+  'focus-visible:outline-hidden focus-visible:shadow-focus disabled:cursor-not-allowed disabled:text-fg-disabled';
 
 export function Pagination({ page, pageCount, onPageChange, showJump = true, className }: PaginationProps) {
   const count = Math.max(pageCount, 1);
@@ -331,7 +331,7 @@ export function Pagination({ page, pageCount, onPageChange, showJump = true, cla
             max={count}
             value={page}
             onChange={(e) => { const n = Number(e.target.value); if (n) go(n); }}
-            className="h-page-btn w-control-lg rounded-sm border border-line-subtle bg-surface px-2 font-sans text-sm text-fg-ink focus-visible:outline-none focus-visible:shadow-focus"
+            className="h-page-btn w-control-lg rounded-sm border border-line-subtle bg-surface px-2 font-sans text-sm text-fg-ink focus-visible:outline-hidden focus-visible:shadow-focus"
           />
         </label>
       )}
@@ -534,7 +534,7 @@ export function DataTable<Row>({
                               aria-expanded={isOpen}
                               aria-label={isOpen ? 'Collapse' : 'Expand'}
                               onClick={(e) => { e.stopPropagation(); toggleRow(id); }}
-                              className="inline-flex size-icon shrink-0 items-center justify-center rounded-sm text-icon focus-visible:outline-none focus-visible:shadow-focus"
+                              className="inline-flex size-icon shrink-0 items-center justify-center rounded-sm text-icon focus-visible:outline-hidden focus-visible:shadow-focus"
                             >
                               <span className={cx('size-icon transition-transform', !isOpen && 'rotate-180')}><ChevronUpIcon /></span>
                             </button>

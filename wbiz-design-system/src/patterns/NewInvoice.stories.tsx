@@ -501,7 +501,7 @@ function NewInvoicePage({ filled = false, currency: startCurrency = 'NGN' }: Inv
                     <dt className="flex items-center gap-1 text-fg-muted">
                       {t.label}
                       {!locked && (
-                        <button type="button" aria-label={`Remove ${t.label}`} onClick={() => { touch(); setExtraTaxes(extraTaxes.filter((x) => x !== t.key)); }} className="inline-flex size-5 items-center justify-center rounded-sm text-fg-muted hover:text-error focus-visible:outline-none focus-visible:shadow-focus">
+                        <button type="button" aria-label={`Remove ${t.label}`} onClick={() => { touch(); setExtraTaxes(extraTaxes.filter((x) => x !== t.key)); }} className="inline-flex size-5 items-center justify-center rounded-sm text-fg-muted hover:text-error focus-visible:outline-hidden focus-visible:shadow-focus">
                           <span className="size-icon-xs"><CloseCircleIcon /></span>
                         </button>
                       )}

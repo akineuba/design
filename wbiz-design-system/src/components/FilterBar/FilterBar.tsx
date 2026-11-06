@@ -25,7 +25,7 @@ export interface FilterBarProps {
 
 const tinted =
   'inline-flex h-control-sm shrink-0 items-center justify-between gap-3 rounded-lg border border-primary px-4 font-sans text-sm transition-colors ' +
-  'focus-visible:outline-none focus-visible:shadow-focus';
+  'focus-visible:outline-hidden focus-visible:shadow-focus';
 
 /**
  * Report filter bar. Figma: filter (General ledger, 1752:21749), two variants: Default shows the main
