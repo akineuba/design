@@ -110,7 +110,7 @@ Families: `font-sans` (Inter: controls, labels, sidebar, top bar) and `font-data
 ### Spacing, size, radius, shadow
 - Spacing (`p-*`, `gap-*`, `m-*`): `0.5`=2, `1`=4, `1.5`=6, `2`=8, `2.5`=10, `3`=12, `3.5`=14, `4`=16, `5`=20, `6`=24, `7.5`=30, `8`=32, `10`=40, `12`=48 px.
 - Controls: `control-xs` 32 (toolbar search, Filters, page buttons), `control-sm` 34, `control-md` 40 (default), `control-lg` 46. Icons: `icon` 20, `icon-sm` 16, `icon-xs` 14.
-- Layout: `sidebar` 200, `sidebar-collapsed` 72 (derived), `topbar` 64, `nav-item` 44, `nav-subitem` 40, `nav-leaf` 36, `tile` 44, `icon-md` 18, `tab` 35, `row` 44, `row-head` 44, `row-comfortable` 54, `dialog` 515, `menu` 240, `field` 320 (derived), `filter-field` 235.
+- Layout: `nav-rail` 84, `nav-rail-item` 56, `nav-panel` 200 (sidebar rail and panel, derived from the reference images), `sidebar` 200 and `sidebar-collapsed` 72 (old single-column menu, unused), `topbar` 64, `nav-item` 44, `nav-subitem` 40, `nav-leaf` 36, `tile` 44, `icon-md` 18, `tab` 35, `row` 44, `row-head` 44, `row-comfortable` 54, `dialog` 515, `menu` 240, `field` 320 (derived), `filter-field` 235.
 - Tables and panels: `search` 203, `page-btn` 30, `checkbox` 20, `radio` 16, `avatar-sm` 28, `action-menu` 138, `columns-popup` 354, `filter-control` 161, `panel-sm` 435, `panel-md` 541, `panel-lg` 562, `switch-sm-w`/`-h` 34×20, `knob-sm` 16.
 - Radius: `rounded-xs` 2, `-sm` 4, `-md` 6 (pills), `-lg` 8 (**default**: buttons, inputs, menus, modal), `-xl` 10 (cards, table card, sidebar items), `-panel` 12 (form accordion), `-2xl` 16, `-3xl` 20 (segmented pill), `-full`.
 - Shadow: `shadow-xs` (buttons), `shadow-md` (menus, popovers), `shadow-knob` (switch), `shadow-dialog`, `shadow-focus`, `shadow-focus-error` (last three derived).
@@ -142,7 +142,7 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 | `Tabs` + `TabPanel` | sub-menu-list `7053:5433` | selected / unselected / disabled; arrow-key navigation |
 | `SegmentedControl` | Inventory/Free Text `7053:5632`; List/Card `7053:5973` | `appearance`: pill, boxed; icons; disabled options |
 | `Switch` | "Toggle" instances (accounting) | `size` md / sm (table rows) · on / off / disabled; optional `label` and `description` |
-| `Sidebar` | live product reference (metrics: 14px text, 18/16/14px icons, deeper grey) + the unfolded menu reference (structure) | three levels, any can be a group; active page and module; `expandAll`; `collapsed` icon rail (derived) |
+| `Sidebar` | navigation reference images from design (Nov 2026): module rail + page panel; structure from the unfolded menu reference | `items` + `footerItems` (Settings, Help); `shortLabel` for rail labels; `activeId`; Home with `recentIds` and pins (`pinnedIds`/`onPinnedChange`); "Find in menu" search (`/`); drill-in for pages with sub-pages; `defaultView`; `collapsed` rail only |
 | `TopBar` | top-header `7053:5510` + the latest top-bar reference from design (blue avatar, Bold 16 name, grid launcher) | breadcrumb; Tour, theme toggle, notifications badge, user menu, app launcher (each shown when its handler is passed) |
 | `PageHeader` | action-row `7053:5433` | `title`, `description`, `actions`, `back` link |
 | `Card` | settings cards `7053:6444` | `title`, `description`, `actions`, `divided` |

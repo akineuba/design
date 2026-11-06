@@ -161,6 +161,9 @@
   --wbiz-size-col-md: 136px; /* derived: not in Figma */
   --wbiz-size-col-lg: 280px; /* derived: not in Figma */
   --wbiz-size-line-grid: 1120px; /* derived: not in Figma */
+  --wbiz-size-nav-rail: 84px; /* derived: not in Figma */
+  --wbiz-size-nav-rail-item: 56px; /* derived: not in Figma */
+  --wbiz-size-nav-panel: 200px; /* derived: not in Figma */
   --wbiz-radius-none: 0px;
   --wbiz-radius-xs: 2px;
   --wbiz-radius-sm: 4px;

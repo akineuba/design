@@ -10,7 +10,7 @@ import {
   DocumentIcon, EditIcon, FolderIcon, GlobeIcon, GridIcon, HelpIcon, HomeIcon, KeyIcon, LayersIcon, MoneyReceiveIcon,
   PrinterIcon, ProfileIcon, ReceiptIcon, ScanIcon, SettingIcon, ShieldIcon, SlidersIcon, TagIcon, TaskIcon,
   TrainingIcon, TransferIcon, UsersIcon, WalletIcon, FileChartIcon, BuildingIcon, BoxesIcon, ClipboardListIcon,
-  TargetIcon, DollarIcon, TrendUpIcon, TrendDownIcon, GiftIcon, UserCheckIcon,
+  TargetIcon, DollarIcon, TrendUpIcon, TrendDownIcon, GiftIcon, UserCheckIcon, LifeBuoyIcon, RepeatIcon,
 } from '../icons';
 
 const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -24,6 +24,7 @@ const build = (specs: Spec[], parent = ''): NavItem[] =>
   });
 
 const menu: Spec[] = [
+  ['Approvals', <ClipboardCheckIcon />],
   ['Accounting', <CalculatorIcon />, [
     ['Chart of Accounts', <BarChartIcon />],
     ['Journal', <BookIcon />],
@@ -49,12 +50,26 @@ const menu: Spec[] = [
   ]],
   ['Purchases', <BagIcon />, [
     ['Bills', <ReceiptIcon />],
+    ['Recurring Bills', <RepeatIcon />],
     ['Debit Notes', <DocumentIcon />],
     ['Vendors', <UsersIcon />],
-    ['RFQs', <ClipboardCheckIcon />],
-    ['Bills Settlement', <DocumentIcon />],
+    ['GRN', <ClipboardCheckIcon />],
+    ['Bills Settlement', <WalletIcon />],
+    // Procurement's sub-pages aren't shown in the reference; RFQs moved here from Purchases.
+    ['Procurement', <BoxIcon />, [
+      ['RFQs', <ClipboardListIcon />],
+    ]],
   ]],
-  ['Approvals', <ClipboardCheckIcon />],
+  ['Reports', <FileChartIcon />, [
+    ['General Ledger', <BookIcon />],
+    ['Trial Balance', <BarChartIcon />],
+    ['Statement of Profit or Loss', <ChartIcon />],
+    ['Statement of Financial Position', <DocumentIcon />],
+    ['Customer Aging', <UsersIcon />],
+    ['Vendor Aging', <UsersIcon />],
+    ['Asset Report', <DocumentIcon />],
+    ['Disposal Report', <DocumentIcon />],
+  ]],
   ['Inventory', <BoxIcon />, [
     ['Items', <BoxIcon />],
     ['Stock Update', <ClipboardCheckIcon />],
@@ -72,24 +87,6 @@ const menu: Spec[] = [
     ['Printing', <PrinterIcon />],
     ['Devices', <DeviceIcon />],
   ]],
-  ['Reports', <FileChartIcon />, [
-    ['General Ledger', <BookIcon />],
-    ['Trial Balance', <BarChartIcon />],
-    ['Statement of Profit or Loss', <ChartIcon />],
-    ['Statement of Financial Position', <DocumentIcon />],
-    ['Customer Aging', <UsersIcon />],
-    ['Vendor Aging', <UsersIcon />],
-    ['Asset Report', <DocumentIcon />],
-    ['Disposal Report', <DocumentIcon />],
-  ]],
-  ['Commercial', <BuildingIcon />, [
-    ['Dashboard', <BarChartIcon />],
-    ['Tender Register', <DocumentIcon />],
-    ['My Tasks', <TaskIcon />],
-    ['Clients', <UsersIcon />],
-    ['Documents', <FolderIcon />],
-    ['Admin', <SettingIcon />],
-  ]],
   ['Projects', <BoxesIcon />, [
     ['Portfolio Management', <BriefcaseIcon />],
     ['Project', <FolderIcon />],
@@ -98,6 +95,14 @@ const menu: Spec[] = [
     ['Profitability', <ChartIcon />],
     ['Project Reports', <DocumentIcon />],
     ['Manufacturing', <BoxIcon />],
+  ]],
+  ['Commercial', <BuildingIcon />, [
+    ['Dashboard', <BarChartIcon />],
+    ['Tender Register', <DocumentIcon />],
+    ['My Tasks', <TaskIcon />],
+    ['Clients', <UsersIcon />],
+    ['Documents', <FolderIcon />],
+    ['Admin', <SettingIcon />],
   ]],
   ['Human Resources', <ProfileIcon />, [
     ['Dashboard', <BarChartIcon />],
@@ -171,6 +176,10 @@ const menu: Spec[] = [
       ['My Learning', <BookIcon />],
     ]],
   ]],
+];
+
+// Shown at the bottom of the module rail.
+const footerMenu: Spec[] = [
   ['Settings', <SettingIcon />, [
     ['Admin Center', <HomeIcon />],
     ['Approval Settings', <ClipboardCheckIcon />, [
@@ -208,11 +217,18 @@ const menu: Spec[] = [
     ['Markup Settings', <TagIcon />],
     ['Number Series', <KeyIcon />],
   ]],
-  ['Help & Support', <HelpIcon />, [
+  ['Help & Support', <LifeBuoyIcon />, [
     ['Help Center', <HelpIcon />],
     ['FAQs', <ChatIcon />],
     ['Knowledge Base', <BookIcon />],
   ]],
 ];
 
-export const appNavigation: NavItem[] = build(menu);
+// Short names for the module rail, where labels sit under the icon (navigation reference, Nov 2026).
+const SHORT: Record<string, string> = { accounting: 'Accounts', 'human-resources': 'HR', 'help-and-support': 'Help' };
+const withShort = (items: NavItem[]) => items.map((i) => (SHORT[i.id] ? { ...i, shortLabel: SHORT[i.id] } : i));
+
+/** Main modules, in the order of the navigation reference. */
+export const appNavigation: NavItem[] = withShort(build(menu));
+/** Settings and Help, pinned to the bottom of the rail. */
+export const appFooterNavigation: NavItem[] = withShort(build(footerMenu));

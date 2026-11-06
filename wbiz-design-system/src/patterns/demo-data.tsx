@@ -3,7 +3,7 @@ import type { StatusTone } from '../components/StatusPill';
 
 export const FIGMA = 'https://www.figma.com/design/TJAupALP2AYuN7NXNlY33g/w-Biz?node-id=';
 
-export { appNavigation } from './navigation';
+export { appNavigation, appFooterNavigation } from './navigation';
 
 export const currentUser = { name: 'Ada Obi', role: 'Super User', initials: 'AO' };
 

@@ -5,7 +5,7 @@ import type { SVGProps } from 'react';
 import {
   Activity, ArrowDown, ArrowDownRight, ArrowLeftRight, ArrowUpRight, Award, Ban, Banknote, Bell, BookOpen, Boxes, BriefcaseBusiness, Building2, Calculator, Calendar, ChartColumn, ChartLine, Check, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, CircleCheck, CircleHelp, CircleMinus, CirclePlus, CircleUserRound, CircleX, ClipboardCheck, ClipboardList, Clock, CloudDownload, CloudUpload, Coins, Columns3, Copy, DollarSign, EllipsisVertical, Eye, FileChartColumn, FileInput, FileText, FileUp, FolderOpen, FolderPlus, Funnel, Gift, Globe, GraduationCap, Grid3x3, HandCoins, House, KeyRound, Landmark, Layers, LayoutGrid, List, ListFilter, ListTodo, MessageCircle, Moon, Package, PenLine, Plus, Printer, ReceiptText, RefreshCw, ScanBarcode, Search, Settings, ShieldCheck, ShoppingBag, ShoppingCart, SlidersHorizontal, Smartphone, Sparkles, SquarePen, Sun, Tag, Target, Trash2, TrendingDown, TrendingUp, UserCheck, UserLock, Users, Wallet, X,
   Bold, Italic, Underline, ListOrdered, Paperclip, Send, Save, File, Upload, Percent, CopyPlus, Download,
-  Info, TriangleAlert, CircleAlert,
+  Info, TriangleAlert, CircleAlert, Star, History, LifeBuoy, Repeat,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -130,3 +130,7 @@ const Base = ({ children, ...props }: IconProps) => (
 const icon = (paths: JSX.Element) => (props: IconProps) => <Base {...props}>{paths}</Base>;
 /** Funnel with a pen for "More Filters" (General ledger filter, Figma). Kept from Figma because Lucide has no match. */
 export const FilterEditIcon = icon(<><path d="M12.98 20.43 12 21.07c-1.33.82-3.18-.1-3.18-1.74v-5.25c0-.7-.4-1.6-.8-2.1L4.24 8.04c-.5-.5-.9-1.4-.9-2V3.73c0-1.2.9-2.1 2-2.1h13.33c1.1 0 2 .9 2 2v2.2c0 .8-.5 1.8-1 2.3" /><path d="m18.09 13.17-3.54 3.54c-.14.14-.27.4-.3.59l-.19 1.35c-.07.49.27.83.76.76l1.35-.19c.19-.03.46-.16.59-.3l3.54-3.54c.61-.61.9-1.32 0-2.22-.89-.89-1.6-.6-2.21.01ZM17.58 13.68c.3 1.08 1.14 1.92 2.22 2.22" /></>);
+export const StarIcon = wrap(Star);
+export const HistoryIcon = wrap(History);
+export const LifeBuoyIcon = wrap(LifeBuoy);
+export const RepeatIcon = wrap(Repeat);

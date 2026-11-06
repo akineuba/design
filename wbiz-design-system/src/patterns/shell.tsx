@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { Sidebar } from '../components/Sidebar';
 import { TopBar, type TopBarProps } from '../components/TopBar';
 import { Logo } from '../components/Logo';
-import { appNavigation, currentUser } from './demo-data';
+import { appFooterNavigation, appNavigation, currentUser } from './demo-data';
 // The top bar's theme button drives the same Storybook theme as the toggle on the right edge.
 import { setTheme, useTheme } from '../../.storybook/theme';
 
@@ -12,7 +12,7 @@ export function Shell({ activeId, breadcrumbs, children }: { activeId: string; b
   const theme = useTheme();
   return (
     <div className="flex h-screen w-full overflow-hidden bg-surface-page">
-      <Sidebar items={appNavigation} activeId={activeId} logo={<Logo />} logoCollapsed={<Logo variant="mark" />} />
+      <Sidebar items={appNavigation} footerItems={appFooterNavigation} activeId={activeId} logo={<Logo />} logoCollapsed={<Logo variant="mark" />} />
       <div className="flex min-w-0 flex-1 flex-col">
         <TopBar
           breadcrumbs={breadcrumbs}
