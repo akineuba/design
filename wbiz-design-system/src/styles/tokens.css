@@ -29,6 +29,7 @@
   --wbiz-color-surface-disabled: #D0D5DD;
   --wbiz-color-surface-control: #F1F4F9;
   --wbiz-color-surface-track: #E5E7EB;
+  --wbiz-color-surface-nav: #EEEEEE; /* derived: not in Figma */
   --wbiz-color-success: #34C759;
   --wbiz-color-success-strong: #00C167;
   --wbiz-color-success-subtle: color-mix(in srgb, #34C759 10%, #FFFFFF); /* derived: not in Figma */
@@ -216,6 +217,7 @@
   --wbiz-color-surface-disabled: #333333;
   --wbiz-color-surface-control: #1F1F1F;
   --wbiz-color-surface-track: #333333;
+  --wbiz-color-surface-nav: #0A0A0A;
   --wbiz-color-success: #32D583;
   --wbiz-color-success-strong: #47CD89;
   --wbiz-color-success-subtle: color-mix(in srgb, #32D583 14%, #141414);

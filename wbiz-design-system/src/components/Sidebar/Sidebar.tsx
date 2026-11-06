@@ -369,7 +369,7 @@ export function Sidebar({
           <nav
             id={panelId}
             aria-label={panelLabel}
-            className="flex w-nav-panel min-w-0 flex-col gap-4 overflow-y-auto rounded-2xl border border-line-subtle bg-surface-page p-2"
+            className="flex w-nav-panel min-w-0 flex-col gap-4 overflow-y-auto rounded-2xl border border-line-subtle bg-surface-nav p-2"
           >
             {panelBody()}
           </nav>

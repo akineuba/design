@@ -82,6 +82,7 @@ Every colour token has a `dark` value in `tokens.json` (all derived; Figma has n
 | `surface` / `surface-page` / `surface-muted` / `surface-sunken` | #FFFFFF / #FCFCFD / #F8F8F8 / #F3F3F3 | Cards / app background, table header / hover / sidebar, search |
 | `surface-control` / `surface-track` | #F1F4F9 / #E5E7EB | Theme toggle / segmented control track |
 | `surface-disabled` | #D0D5DD | Disabled primary button |
+| `surface-nav` | #EEEEEE (derived) | Sidebar page panel (secondary menu) |
 | `status-{warning,info,neutral,success,error}-{fg,bg}` | see tokens.json | Status pills (error is derived) |
 | `badge` | #E52E40 | Notification count |
 | `switch-off` | rgba(120,120,128,.16) | Switch track when off (on = `success`) |

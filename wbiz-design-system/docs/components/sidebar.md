@@ -7,7 +7,7 @@ About 312px wide in total, on `surface-sunken`, from the top:
 - Logo and a collapse button (32px, `fg-strong` border).
 - "Find in menu" search (34px, `surface`, `/` key hint).
 - **Rail** (`nav-rail`, 84px): Home, a divider, the modules (`items`), then Settings and Help (`footerItems`) pinned to the bottom. Each button is 56px (`nav-rail-item`): 20px icon over a 12px label. Modules can set a `shortLabel` for the rail (Accounts, HR, Help).
-- **Panel** (`nav-panel`, 200px): rounded `surface-page` card with a `line-subtle` border. The module title (Inter Bold 16), then its pages as text only, without icons (40px rows, Inter 14 `fg-strong`). Pages with sub-pages are Semibold with a › and open in place with a "‹ Module" back link.
+- **Panel** (`nav-panel`, 200px): rounded `surface-nav` card (grey #EEEEEE in light mode) with a `line-subtle` border. The module title (Inter Bold 16), then its pages as text only, without icons (40px rows, Inter 14 `fg-strong`). Pages with sub-pages are Semibold with a › and open in place with a "‹ Module" back link.
 - **Home** panel: Recent (`recentIds`) and Pinned pages, each with its module path; a dashed "Pin the pages you use most" card while nothing is pinned.
 
 ## States
