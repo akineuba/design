@@ -4,7 +4,7 @@ import { Sidebar } from '../components/Sidebar';
 import { TopBar, type TopBarProps } from '../components/TopBar';
 import { Logo } from '../components/Logo';
 import { appFooterNavigation, appNavigation, currentUser } from './demo-data';
-// The top bar's theme button drives the same Storybook theme as the toggle on the right edge.
+// The top bar's theme button drives the Storybook theme (patterns have no floating toggle).
 import { setTheme, useTheme } from '../../.storybook/theme';
 
 /** App frame: sidebar, top bar and a scrolling main area. Every page below uses it. */

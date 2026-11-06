@@ -55,7 +55,7 @@ Commands: `npm run storybook` (port 6006), `npm run build`, `npm run typecheck`,
 Extracted by counting the values the product screens use (accounting `0:1`, inventory `4651:44574`, new features `7004:31166`). The file has no Figma variables or styles.
 
 ### Dark mode
-Every colour token has a `dark` value in `tokens.json` (all derived; Figma has no dark designs). `data-theme="dark"` on an element switches it and its children; components need no theme-specific classes. Use `dark:` only for the rare exception (the Logo). Never add a colour token without a `dark` value. Storybook: toggle on the right edge of every page, or the toolbar Theme menu. Details and dark contrast: `docs/foundations/colors.md`.
+Every colour token has a `dark` value in `tokens.json` (all derived; Figma has no dark designs). `data-theme="dark"` on an element switches it and its children; components need no theme-specific classes. Use `dark:` only for the rare exception (the Logo). Never add a colour token without a `dark` value. Storybook: the toggle at the top right of Components pages, the top bar's theme button on Patterns, or the toolbar Theme menu on any page. Details and dark contrast: `docs/foundations/colors.md`.
 
 ### Colour (`bg-*`, `text-*`, `border-*`)
 | Token | Value | Use |

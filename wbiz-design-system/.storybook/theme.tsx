@@ -7,7 +7,7 @@ import { MoonIcon, SunIcon } from '../src/icons';
 import { cx } from '../src/utils/cx';
 
 // The light/dark theme lives in the Storybook global `theme`, so the toolbar, the URL
-// (?globals=theme:dark) and the toggle on each page stay in step across stories and docs.
+// (?globals=theme:dark) and the toggle on component pages stay in step across stories and docs.
 // It is applied as <html data-theme="dark">, which swaps the --wbiz-* tokens (tokens.css).
 
 export type Theme = 'light' | 'dark';
@@ -48,8 +48,12 @@ export function useTheme(): Theme {
   return theme;
 }
 
-/** Light/dark switch pinned to the right edge of every story and docs page. */
-export function ThemeToggle() {
+/**
+ * Light/dark switch at the top right of component stories and docs pages. `viewport` (stories)
+ * stays fixed in the corner; `page` (docs) sits at the top of the page and scrolls away with it,
+ * so it never floats over the examples.
+ */
+export function ThemeToggle({ placement = 'viewport' }: { placement?: 'viewport' | 'page' }) {
   const theme = useTheme();
   const next: Theme = theme === 'dark' ? 'light' : 'dark';
   return (
@@ -59,9 +63,10 @@ export function ThemeToggle() {
       aria-label={`Switch to ${next} mode`}
       title={`Switch to ${next} mode`}
       className={cx(
-        'sb-unstyled fixed right-0 top-1/2 z-50 flex -translate-y-1/2 flex-col items-center gap-1.5',
-        'rounded-l-xl border border-r-0 border-line bg-surface px-2 py-3 shadow-md',
-        'font-sans text-2xs font-medium text-fg-muted hover:text-fg-strong',
+        'sb-unstyled right-4 top-4 z-50 inline-flex h-control-xs items-center gap-1.5',
+        placement === 'viewport' ? 'fixed' : 'absolute',
+        'rounded-full border border-line bg-surface px-3 shadow-md',
+        'font-sans text-xs font-medium text-fg-muted hover:text-fg-strong',
         'focus-visible:outline-hidden focus-visible:shadow-focus',
       )}
     >

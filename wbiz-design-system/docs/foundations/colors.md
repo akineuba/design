@@ -40,7 +40,7 @@ Every colour token, and the shadows that need it, has a `dark` value in `tokens/
 
 The Figma file has no dark designs, so **all dark values are derived**: neutral greys for surfaces, lines and text (darkest `surface-page`, then `surface`, then `surface-muted`), and lighter tints of the brand, status and tile colours so they read on dark surfaces. `fg-inverse` stays white (text on primary) and `fg-black` turns white (it is "highest-contrast label", not literally black). Replace them with designed values when design produces a dark theme.
 
-In Storybook, switch with the Light/Dark tab on the right edge of every story and docs page, the Theme menu in the toolbar, or the moon/sun button in the pattern pages' top bar. The choice is kept in the URL (`&globals=theme:dark`).
+In Storybook, switch with the Light/Dark toggle at the top right of Components stories and docs pages, the moon/sun button in the pattern pages' top bar, or the Theme menu in the toolbar (any page). The choice is kept in the URL (`&globals=theme:dark`).
 
 The logo has no dark asset; in dark mode `Logo` inverts the PNG and rotates its hues back so the wordmark reads. Ask design for a proper dark logo.
 
