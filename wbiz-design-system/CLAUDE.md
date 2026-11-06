@@ -17,7 +17,7 @@
 |---|---|
 | `tokens/tokens.json` | **Single source of truth** for every token. Edit tokens here only. |
 | `tokens/index.mjs` | Turns tokens into CSS variables and the Tailwind 4 `@theme`. |
-| `src/styles/tokens.css` | Generated `--wbiz-*` CSS variables. Never edit; run `npm run tokens`. |
+| `src/styles/tokens.css` | Generated `--wbiz-*` CSS variables: `:root` (light) and `[data-theme='dark']`. Never edit; run `npm run tokens`. |
 | `src/styles/theme.css` | Generated Tailwind 4 `@theme inline` block. Resets Tailwind's default palette, spacing, type, weight, radius and shadow and maps them to tokens. Never edit; run `npm run tokens`. |
 | `src/styles/index.css` | Tailwind entry: imports Tailwind, `tokens.css` and `theme.css`; base styles and custom utilities (`@utility`). There is no `tailwind.config.js`. |
 | `src/components/<Name>/` | `<Name>.tsx`, `<Name>.stories.tsx`, `index.ts`. One folder per component. |
@@ -53,6 +53,9 @@ Commands: `npm run storybook` (port 6006), `npm run build`, `npm run typecheck`,
 ## Tokens
 
 Extracted by counting the values the product screens use (accounting `0:1`, inventory `4651:44574`, new features `7004:31166`). The file has no Figma variables or styles.
+
+### Dark mode
+Every colour token has a `dark` value in `tokens.json` (all derived; Figma has no dark designs). `data-theme="dark"` on an element switches it and its children; components need no theme-specific classes. Use `dark:` only for the rare exception (the Logo). Never add a colour token without a `dark` value. Storybook: toggle on the right edge of every page, or the toolbar Theme menu. Details and dark contrast: `docs/foundations/colors.md`.
 
 ### Colour (`bg-*`, `text-*`, `border-*`)
 | Token | Value | Use |

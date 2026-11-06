@@ -38,6 +38,9 @@ Import it after Tailwind in the app's stylesheet:
 @import '@wbiz/design-system/theme.css';  /* @theme mapping tokens to utilities */
 ```
 
+Dark mode: set `data-theme="dark"` on `<html>` (or any container). The `--wbiz-*` tokens switch
+and every component follows; `dark:` utilities use the same attribute.
+
 The library is built with Tailwind CSS 4 through the `@tailwindcss/vite` plugin. There is no
 `tailwind.config.js`: the theme is CSS, generated from `tokens/tokens.json`.
 

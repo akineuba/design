@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import tokens from '../../tokens/tokens.json';
 
-type Leaf = { value: string; note?: string; derived?: boolean; lineHeight?: string };
+type Leaf = { value: string; dark?: string; note?: string; derived?: boolean; lineHeight?: string };
 type Group = { [key: string]: Leaf | Group };
 
 const isLeaf = (x: unknown): x is Leaf => typeof x === 'object' && x !== null && 'value' in x;
@@ -34,7 +34,8 @@ export const Colors: Story = {
           <div className="size-control-lg shrink-0 rounded-md border border-line-subtle" style={{ background: `var(${varName(path)})` }} />
           <div className="flex min-w-0 flex-col gap-0.5">
             <code className="text-xs font-semibold text-fg-strong">{path.slice(1).filter((p) => p !== 'DEFAULT').join('-')}</code>
-            <code className="break-all text-2xs text-fg-muted">{leaf.value}</code>
+            <code className="break-all text-2xs text-fg-muted">Light {leaf.value}</code>
+            <code className="break-all text-2xs text-fg-muted">Dark {leaf.dark ?? leaf.value}</code>
             <Note leaf={leaf} />
           </div>
         </div>

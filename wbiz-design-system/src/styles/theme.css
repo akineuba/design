@@ -196,6 +196,8 @@
   --shadow: var(--wbiz-shadow-xs);
 }
 
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
 @utility bg-avatar {
   background-image: var(--wbiz-gradient-avatar);
 }

@@ -1,5 +1,5 @@
 // Reads tokens.json and exposes it two ways:
-//   cssVariables()  -> the :root block written to src/styles/tokens.css
+//   cssVariables()  -> the :root (light) and [data-theme='dark'] blocks in src/styles/tokens.css
 //   themeCss()      -> the Tailwind 4 @theme block written to src/styles/theme.css
 import { readFileSync } from 'node:fs';
 
@@ -23,17 +23,27 @@ function walk(node, path, visit) {
   }
 }
 
+// Dark mode applies to any element with data-theme="dark" and everything inside it, so a
+// whole app (on <html>) or a single region can switch.
+export const DARK_SELECTOR = "[data-theme='dark']";
+
 export function cssVariables() {
-  const lines = [];
+  const light = [];
+  const dark = [];
   walk(tokens, [], (path, leaf) => {
     if (path[0] === 'fontSize') {
-      lines.push(`  ${varName(path)}: ${leaf.value};`);
-      lines.push(`  ${varName(['lineHeight', ...path.slice(1)])}: ${leaf.lineHeight};`);
-    } else {
-      lines.push(`  ${varName(path)}: ${leaf.value};${leaf.derived ? ' /* derived: not in Figma */' : ''}`);
+      light.push(`  ${varName(path)}: ${leaf.value};`);
+      light.push(`  ${varName(['lineHeight', ...path.slice(1)])}: ${leaf.lineHeight};`);
+      return;
     }
+    light.push(`  ${varName(path)}: ${leaf.value};${leaf.derived ? ' /* derived: not in Figma */' : ''}`);
+    if (leaf.dark !== undefined) dark.push(`  ${varName(path)}: ${leaf.dark};`);
   });
-  return `:root {\n${lines.join('\n')}\n}\n`;
+  return (
+    `:root {\n  color-scheme: light;\n${light.join('\n')}\n}\n\n` +
+    `/* Dark mode: derived, not in Figma (the file has no dark designs). */\n` +
+    `${DARK_SELECTOR} {\n  color-scheme: dark;\n${dark.join('\n')}\n}\n`
+  );
 }
 
 // Tailwind 4 theme namespace for each token group, e.g. color.fg.muted -> --color-fg-muted.
@@ -87,7 +97,10 @@ export function themeCss() {
     utilities.push(`@utility bg-${name} {\n  background-image: var(${varName(['gradient', ...path])});\n}`);
   });
 
-  return `@theme inline {\n${lines.join('\n')}\n}\n\n${utilities.join('\n\n')}\n`;
+  // `dark:` utilities follow the same data-theme attribute as the dark tokens.
+  const variant = `@custom-variant dark (&:where(${DARK_SELECTOR}, ${DARK_SELECTOR} *));`;
+
+  return `@theme inline {\n${lines.join('\n')}\n}\n\n${variant}\n\n${utilities.join('\n\n')}\n`;
 }
 
 export default tokens;
