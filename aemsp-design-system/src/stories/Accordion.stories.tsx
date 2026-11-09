@@ -1,0 +1,12 @@
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Accordion } from '../components/layout';
+const meta: Meta<typeof Accordion> = { title: 'Components/Accordion', component: Accordion, tags: ['autodocs'], args: { title: 'Billing contact', children: 'Invoices for this organisation are sent to finance@northwind.co.uk on the 1st of each month.' } };
+export default meta;
+type S = StoryObj<typeof Accordion>;
+export const Open: S = { args: { defaultOpen: true } };
+export const Closed: S = {};
+export const WithMeta: S = { args: { meta: '3 contacts', icon: 'user' } };
+export const Disabled: S = { args: { disabled: true } };
+export const Group: S = { render: () => <div className="ae-acc-group"><Accordion title="Organisation details" defaultOpen>Name, type, region and tax details.</Accordion><Accordion title="Subscriptions" meta="4 active">Plans and seats.</Accordion><Accordion title="Documents" meta="12 files">Contracts and invoices.</Accordion></div> };
+export const Plain: S = { args: { plain: true, defaultOpen: true } };

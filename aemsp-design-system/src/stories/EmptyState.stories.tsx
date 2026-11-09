@@ -1,0 +1,11 @@
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { EmptyState } from '../components/data';
+import { Button } from '../components/primitives';
+const meta: Meta<typeof EmptyState> = { title: 'Components/EmptyState', component: EmptyState, tags: ['autodocs'], parameters: { surface: 'white' }, args: { icon: 'package', title: 'No subscriptions yet', text: 'Add a subscription to start tracking seats, renewals and spend for this organisation.', actions: <Button icon="add">Add subscription</Button> } };
+export default meta;
+type S = StoryObj<typeof EmptyState>;
+export const NothingYet: S = {};
+export const NoResults: S = { args: { icon: 'search', title: 'No matches', text: 'No organisations match “Kestral”. Check the spelling or clear filters.', actions: <Button variant="outline">Clear filters</Button> } };
+export const AllCaughtUp: S = { args: { icon: 'check-badge', title: 'No approvals waiting', text: 'New seat and plan requests will appear here.', actions: undefined } };
+export const Compact: S = { args: { compact: true, icon: 'file', title: 'No documents', text: 'Upload contracts or invoices.', actions: <Button size="sm" variant="outline" icon="upload">Upload</Button> } };

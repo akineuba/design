@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# AEMSP Design System
+
+Components, tokens and page patterns for **AEMSP**, the platform for managing licence subscriptions across OEMs, dealers, fleets and partners.
+
+Everything here is built from the AEMSP Figma file: the light-navy sidebar, the top bar with breadcrumb and page title, stat cards, filter dropdowns, tables, status pills and charts. Where the file didn't cover something (forms, overlays, empty states, approvals, roles), the gaps are filled in the same visual language.
+
+## How it's organised
+
+| Section | What's inside |
+| --- | --- |
+| **UI Rules** | The short list of rules every screen follows: buttons, colour, numbers, copy. |
+| **Foundations** | Colour tokens (light + dark), typography, spacing, radius, shadow and icons. |
+| **Components** | Generic building blocks: buttons, inputs, tables, sidebar, top bar, modals… |
+| **AEMSP** | Domain components: usage meters, subscription cards, licence keys, renewal badges, approvals, roles & permissions, organisation headers. |
+| **Patterns / Pages** | Full screens that show how the pieces fit together. |
+
+## Fonts
+
+- **LINE Seed JP** for the logo, page titles (top bar 20px, page H1 30px) and overlay titles.
+- **Inter** for everything else: 15px nav and breadcrumb, 13px UI text, 11px table heads and stat labels.
+
+## Theme
+
+Use the **Theme** toolbar button (top of the canvas) to switch between light and dark. Every colour is a CSS variable in `src/styles/tokens.css`, so dark mode applies to the whole app, not just the sidebar. The sidebar uses the Figma "nav – dark" colour (`#1e1f26`) in dark mode.
+
+## Using the components
+
+```tsx
+import { AppShell, StatCard, Table, Button } from '@aemsp/design-system';
+
+<AppShell active="dashboard" breadcrumb={['Overview', 'Dashboard']} title="Dashboard">
+  <StatCard label="Organisations" value="3,232" icon="hierarchy" tone="indigo" />
+</AppShell>
+```

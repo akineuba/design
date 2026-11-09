@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="UI Rules" />
+
+# UI Rules
+
+Short, opinionated rules. If a screen breaks one, it should have a good reason.
+
+## Layout
+
+1. **Top bar = breadcrumb + page title.** The breadcrumb (`Overview / Dashboard`) sits above the page title in the top bar. Earlier crumbs are links (grey); the current page is blue.
+2. **Page body opens with the H1 + subtext**, then content. Page gutters are 80px on desktop, 24px on tablet, 16px on mobile.
+3. **Cards** use 5px radius, a hairline border and the soft card shadow. Card titles are 20px Inter Semi Bold.
+4. **Sidebar stays as designed:** light navy (`#1f2f57`) by default, with a 3px blue left border and 20% blue fill on the active item and active sub-page. Sub-pages use the dot-circle icon. Log Out lives at the bottom of the sidebar **and** in the user menu.
+
+## Buttons
+
+5. **One primary button per area.** Navy primary for the main action; everything else is outline, secondary (grey) or ghost.
+6. **Red is only for destructive actions.** Red fill = irreversible (Delete, Revoke). Red outline = destructive but recoverable (Suspend, Reject).
+7. **Modal and side-panel confirm buttons are blue** (`#1a66ff`), paired with a white Cancel button. Both are equal width in modals.
+8. **Outline buttons use dark text** (`#54555a`), not pale grey, so they never look disabled.
+
+## Colour and status
+
+9. **Status pills stay exactly as in Figma:** *solid* (white text on green / red / yellow / grey) in list tables, *soft* (tinted) on dashboard widgets.
+10. **Stat-card numbers are neutral navy.** The colour lives on the icon tile, and a trend line explains the change.
+11. **Never use colour alone for meaning.** Negative numbers in tables get a ↓ icon and a tooltip as well as red.
+12. **Text contrast is AA.** Inactive tabs, table footers, stat labels and placeholders use the darker grey tokens.
+
+## Numbers
+
+13. **Below 10,000 show full numbers** (`3,232`). **From 10,000 abbreviate** (`12.4k`, `3.98M`) and show the exact value on hover.
+14. Money is always formatted with currency and two decimals in tables (`£2,208.00`); compact on stat cards (`£256.3k`).
+15. Use tabular numerals for any column of numbers, and right-align them.
+
+## Menus
+
+16. **Action-menu options and icons are black.** Only destructive options (Delete, Revoke, Log Out) are red, and they sit last, after a separator.
+
+## Charts
+
+17. Use the chart palette tokens (`--chart-1 … --chart-6`) in order. No grey "track" bars behind data bars.
+18. Prefer a **donut with a legend** for part-to-whole. Max five slices; group the rest as "Other". Every slice is labelled.
+
+## Copy
+
+19. Buttons say what they do: **Create Role**, **Approve request**, **Save changes**, not "Submit" or "OK".
+20. Empty states explain what will appear and offer the next step.

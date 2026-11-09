@@ -1,0 +1,11 @@
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Avatar, AvatarLabel, AvatarStack } from '../components/primitives';
+const meta: Meta<typeof Avatar> = { title: 'Components/Avatar', component: Avatar, tags: ['autodocs'], args: { name: 'Con Tent', size: 'lg' } };
+export default meta;
+type S = StoryObj<typeof Avatar>;
+export const Initials: S = {};
+export const WithLabel: S = { render: () => <AvatarLabel name="Ada Lovelace" sub="ada@northwind.co.uk" /> };
+export const Tones: S = { render: () => <div style={{ display: 'flex', gap: 10 }}><Avatar name="Con Tent" /><Avatar name="Northwind Motors" tone="navy" /><Avatar name="Mei Chen" tone="blue" /></div> };
+export const Sizes: S = { render: () => <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}><Avatar name="A E" size="sm" /><Avatar name="A E" size="md" /><Avatar name="A E" size="lg" /><Avatar name="A E" size="xl" /></div> };
+export const Stack: S = { render: () => <AvatarStack names={['Ada Lovelace', 'Tunde Bakare', 'Mei Chen', 'Grace Obi', 'Lars Nilsen', 'Priya Raman']} /> };

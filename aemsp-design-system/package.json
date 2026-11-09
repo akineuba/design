@@ -1,0 +1,52 @@
+{
+  "name": "aemsp-design-system",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "icons": "node scripts/build-icons.mjs",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "npm run icons && storybook build -o storybook-static"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/line-seed-jp": "^5.3.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.4"
+  },
+  "devDependencies": {
+    "@iconify-json/akar-icons": "^1.2.7",
+    "@iconify-json/ant-design": "^1.2.9",
+    "@iconify-json/bitcoin-icons": "^1.2.5",
+    "@iconify-json/boxicons": "^1.2.0",
+    "@iconify-json/carbon": "^1.2.29",
+    "@iconify-json/charm": "^1.2.3",
+    "@iconify-json/codex": "^1.2.2",
+    "@iconify-json/coolicons": "^1.2.2",
+    "@iconify-json/entypo": "^1.2.1",
+    "@iconify-json/eos-icons": "^1.2.4",
+    "@iconify-json/fa7-solid": "^1.2.5",
+    "@iconify-json/ic": "^1.2.4",
+    "@iconify-json/lucide": "^1.2.150",
+    "@iconify-json/oui": "^1.2.6",
+    "@iconify-json/solar": "^1.2.13",
+    "@iconify-json/streamline-flex": "^1.2.3",
+    "@iconify-json/tabler": "^1.2.43",
+    "@iconify-json/uil": "^1.2.3",
+    "@iconify/utils": "^2.3.0",
+    "@storybook/addon-a11y": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/manager-api": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
+    "@storybook/theming": "^8.6.14",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.5.2",
+    "storybook": "^8.6.14",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

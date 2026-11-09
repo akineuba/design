@@ -1,0 +1,239 @@
+/* AEMSP design tokens — values taken from the AEMSP Figma file.
+   Raw palette first, then semantic tokens. Components only use semantic tokens. */
+
+@font-face { font-family: 'LINE Seed JP'; font-weight: 400; font-display: swap;
+  src: url('@fontsource/line-seed-jp/files/line-seed-jp-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'LINE Seed JP'; font-weight: 700; font-display: swap;
+  src: url('@fontsource/line-seed-jp/files/line-seed-jp-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 400; font-display: swap;
+  src: url('@fontsource/inter/files/inter-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 500; font-display: swap;
+  src: url('@fontsource/inter/files/inter-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 600; font-display: swap;
+  src: url('@fontsource/inter/files/inter-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 700; font-display: swap;
+  src: url('@fontsource/inter/files/inter-latin-700-normal.woff2') format('woff2'); }
+
+:root {
+  /* ---------- Raw palette ---------- */
+  --navy-950: #112a46;   /* overlay header (modal / side panel) */
+  --navy-900: #1f2f57;   /* brand navy: sidebar, primary button */
+  --navy-800: #2b3d6b;
+  --indigo-700: #0d269b;
+  --blue-600: #1a66ff;   /* overlay confirm action */
+  --blue-500: #299bff;   /* accent: active nav, tabs, checkbox, breadcrumb */
+  --blue-400: #428eff;   /* link / chart primary */
+  --green-500: #39d27e;
+  --green-700: #17824a;
+  --red-600: #d50b23;    /* destructive button */
+  --red-500: #ff1934;    /* negative value / error status */
+  --amber-500: #ffa239;
+  --amber-700: #a85a00;
+  --yellow-400: #ffd563;
+  --purple-600: #aa04e1;
+  --gray-900: #1e2238;
+  --gray-800: #272728;
+  --gray-750: #3b3b3b;
+  --gray-700: #54555a;
+  --gray-600: #6b7591;   /* AA-safe replacement for #a3aed0 text */
+  --gray-500: #64748b;
+  --gray-450: #707787;   /* AA-safe replacement for #c2c2c2 labels */
+  --gray-400: #828282;
+  --gray-300: #a3aed0;
+  --gray-250: #c5cfdc;
+  --gray-200: #dbdee4;
+  --gray-150: #e2e8f0;
+  --gray-100: #eef1f6;
+  --gray-50:  #f3f4f8;
+  --white: #ffffff;
+  --dark-950: #15161b;
+  --dark-900: #1e1f26;   /* nav – dark */
+  --dark-850: #24262f;
+  --dark-800: #2c2e39;
+  --dark-700: #3a3d4b;
+
+  /* ---------- Semantic: surfaces ---------- */
+  --bg-page: var(--gray-50);
+  --bg-surface: var(--white);
+  --bg-surface-raised: var(--white);
+  --bg-subtle: var(--gray-100);
+  --bg-hover: #f6f8fb;
+  --bg-selected: rgba(41, 155, 255, 0.08);
+  --bg-sidebar: var(--navy-900);
+  --bg-overlay-header: var(--navy-950);
+  --bg-scrim: rgba(17, 25, 45, 0.45);
+
+  /* ---------- Semantic: text ---------- */
+  --text-strong: #000000;          /* page H1 */
+  --text-heading: var(--navy-900); /* top bar page title */
+  --text-primary: var(--gray-750); /* body, table cells, card titles */
+  --text-ink: var(--gray-900);     /* inputs, dropdown values */
+  --text-secondary: var(--gray-700);
+  --text-muted: var(--gray-600);
+  --text-label: var(--gray-450);   /* stat labels */
+  --text-table-head: var(--gray-400);
+  --text-breadcrumb: rgba(0, 0, 0, 0.5);
+  --text-placeholder: #8c93a8;
+  --text-on-dark: var(--white);
+  --text-on-dark-muted: #9fb3c8;
+  --text-accent: var(--blue-500);
+  --text-link: var(--blue-400);
+  --text-danger: var(--red-500);
+
+  /* ---------- Semantic: borders ---------- */
+  --border-default: var(--gray-150);
+  --border-card: rgba(164, 197, 206, 0.2);
+  --border-soft: rgba(197, 207, 220, 0.44);
+  --border-strong: var(--gray-300);
+  --border-checkbox: var(--gray-800);
+  --focus-ring: 0 0 0 3px rgba(41, 155, 255, 0.35);
+
+  /* ---------- Semantic: actions ---------- */
+  --action-primary: var(--navy-900);
+  --action-primary-hover: var(--navy-800);
+  --action-confirm: var(--blue-600);
+  --action-confirm-hover: #0f55e0;
+  --action-danger: var(--red-600);
+  --action-danger-hover: #b40a1e;
+  --action-secondary-bg: var(--gray-150);
+  --action-secondary-text: rgba(0, 0, 0, 0.6);
+
+  /* ---------- Status (as in Figma) ---------- */
+  --status-success: var(--green-500);
+  --status-error: var(--red-500);
+  --status-warning: var(--yellow-400);
+  --status-warning-text: var(--amber-500);
+  --status-neutral: var(--gray-250);
+  --status-info: var(--blue-500);
+  --status-success-soft: rgba(57, 210, 126, 0.2);
+  --status-error-soft: rgba(255, 25, 52, 0.2);
+  --status-warning-soft: rgba(255, 233, 64, 0.2);
+  --status-neutral-soft: rgba(197, 207, 220, 0.45);
+  --status-info-soft: rgba(41, 155, 255, 0.15);
+  --status-neutral-text: var(--gray-700);
+
+  /* Alert / toast text (AA on soft backgrounds) */
+  --tone-success-ink: var(--green-700);
+  --tone-error-ink: #b00d22;
+  --tone-warning-ink: var(--amber-700);
+  --tone-info-ink: #0b62b8;
+
+  /* ---------- Stat tile tones ---------- */
+  --tile-green: rgba(53, 243, 115, 0.1);   --tile-green-ink: var(--green-500);
+  --tile-indigo: rgba(13, 38, 155, 0.1);   --tile-indigo-ink: var(--indigo-700);
+  --tile-amber: rgba(255, 162, 57, 0.1);   --tile-amber-ink: var(--amber-500);
+  --tile-gray: rgba(0, 0, 0, 0.1);         --tile-gray-ink: var(--gray-750);
+  --tile-purple: rgba(170, 4, 225, 0.1);   --tile-purple-ink: var(--purple-600);
+  --tile-blue: rgba(41, 155, 255, 0.12);   --tile-blue-ink: var(--blue-500);
+
+  /* ---------- Charts ---------- */
+  --chart-1: #428eff;
+  --chart-2: #8979ff;
+  --chart-3: #3cc3df;
+  --chart-4: #ffae4c;
+  --chart-5: #ff928a;
+  --chart-6: #39d27e;
+  --chart-grid: #eceef3;
+  --chart-axis: var(--gray-700);
+
+  /* ---------- Sidebar ---------- */
+  --nav-text: var(--white);
+  --nav-active-bg: rgba(41, 155, 255, 0.2);
+  --nav-active-border: var(--blue-500);
+  --nav-active-text: var(--blue-500);
+  --nav-hover-bg: rgba(255, 255, 255, 0.06);
+
+  /* ---------- Type ---------- */
+  --font-display: 'LINE Seed JP', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fs-logo: 33px;
+  --fs-h1: 30px;
+  --fs-stat: 30px;
+  --fs-h2: 20px;   /* card titles, top-bar page title */
+  --fs-h3: 16px;
+  --fs-body-lg: 15px; /* nav, breadcrumb, subtext */
+  --fs-body: 13px;    /* default UI text: table cells, buttons, inputs */
+  --fs-sm: 12px;      /* chart axes, hints */
+  --fs-xs: 11px;      /* table heads, stat labels, email */
+
+  /* ---------- Space / radius / shadow ---------- */
+  --space-1: 4px; --space-2: 5px; --space-3: 8px; --space-4: 10px; --space-5: 12px;
+  --space-6: 16px; --space-7: 18px; --space-8: 20px; --space-9: 30px; --space-10: 80px;
+  --radius-sm: 4px;   /* checkbox */
+  --radius-md: 5px;   /* cards, buttons */
+  --radius-lg: 8px;   /* dropdowns, inputs */
+  --radius-xl: 10px;  /* nav active, modals */
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 4px 0 rgba(197, 207, 220, 0.44);
+  --shadow-bar: 0 1px 2px 0 rgba(197, 207, 220, 0.44);
+  --shadow-pop: 0 8px 24px rgba(31, 47, 87, 0.14), 0 2px 6px rgba(31, 47, 87, 0.08);
+  --shadow-modal: 0 24px 60px rgba(17, 25, 45, 0.28);
+  --shadow-cancel: 0 1px 3px rgba(17, 25, 45, 0.14);
+
+  --sidebar-w: 251px;
+  --sidebar-w-collapsed: 76px;
+  --page-gutter: 80px;
+  --ease: cubic-bezier(.2,.7,.3,1);
+
+  color-scheme: light;
+}
+
+/* ---------- Dark theme ---------- */
+[data-theme='dark'] {
+  --bg-page: var(--dark-950);
+  --bg-surface: var(--dark-850);
+  --bg-surface-raised: var(--dark-800);
+  --bg-subtle: var(--dark-800);
+  --bg-hover: #2a2c37;
+  --bg-selected: rgba(41, 155, 255, 0.14);
+  --bg-sidebar: var(--dark-900);
+  --bg-overlay-header: #0f1e33;
+  --bg-scrim: rgba(0, 0, 0, 0.6);
+
+  --text-strong: #f4f6fa;
+  --text-heading: #e9edf6;
+  --text-primary: #dfe3ea;
+  --text-ink: #eef1f6;
+  --text-secondary: #b7bdc9;
+  --text-muted: #9aa3b8;
+  --text-label: #9aa3b8;
+  --text-table-head: #9aa3b8;
+  --text-breadcrumb: rgba(255, 255, 255, 0.55);
+  --text-placeholder: #7d8599;
+  --text-accent: #5cb3ff;
+  --text-link: #6fa8ff;
+  --text-danger: #ff5a6c;
+
+  --border-default: var(--dark-700);
+  --border-card: rgba(255, 255, 255, 0.06);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-strong: #59607a;
+  --border-checkbox: #9aa3b8;
+
+  --action-primary: #3a5bb0;
+  --action-primary-hover: #4669c4;
+  --action-secondary-bg: var(--dark-700);
+  --action-secondary-text: #d6dae3;
+
+  --status-neutral: #5d6578;
+  --status-neutral-soft: rgba(197, 207, 220, 0.14);
+  --status-neutral-text: #c4cad6;
+  --tone-success-ink: #5fe39c;
+  --tone-error-ink: #ff7383;
+  --tone-warning-ink: #ffc46b;
+  --tone-info-ink: #7cc1ff;
+
+  --tile-gray: rgba(255, 255, 255, 0.1);  --tile-gray-ink: #e3e6ec;
+  --tile-indigo: rgba(110, 135, 255, 0.16); --tile-indigo-ink: #93a6ff;
+  --tile-purple: rgba(205, 90, 245, 0.16); --tile-purple-ink: #d98af5;
+
+  --chart-grid: #30333f;
+  --chart-axis: #a8afbf;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-bar: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-pop: 0 12px 28px rgba(0, 0, 0, 0.5);
+  --shadow-cancel: none;
+
+  color-scheme: dark;
+}
