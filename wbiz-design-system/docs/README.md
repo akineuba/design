@@ -19,6 +19,7 @@
 | [Component: Modal](components/modal.md) | Dialog from the accounting Tax Deduction popup |
 | [Component: Tabs](components/tabs.md) | Section tabs between sibling pages of a module |
 | [Component: SegmentedControl](components/segmented-control.md) | Single-choice toggles from the new features screens |
+| [Component: ViewToggle](components/view-toggle.md) | Icon swap buttons for list / calendar / grid views (from wCRM) |
 | [Component: Switch](components/switch.md) | On/off switch from the accounting settings screens |
 | [Component: NavMenu](components/nav-menu.md) | Main menu: module rail and page panel |
 | [Component: TopBar](components/top-bar.md) | Top bar from new features |

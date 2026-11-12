@@ -18,6 +18,7 @@ export * from './components/PageHeader';
 export * from './components/Radio';
 export * from './components/RichTextField';
 export * from './components/SegmentedControl';
+export * from './components/ViewToggle';
 export * from './components/Select';
 export * from './components/SidePanel';
 export * from './components/NavMenu';
