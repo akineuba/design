@@ -3,7 +3,7 @@
 // collapsed in the reference (e.g. Inventory Reports, Employee Records) are listed as single pages.
 // Payroll Management's pages come from the Payroll Generation screen (labels title-cased to match the menu).
 import type { ReactNode } from 'react';
-import type { NavItem } from '../components/Sidebar';
+import type { NavItem } from '../components/NavMenu';
 import {
   ActivityIcon, BagIcon, BankIcon, BarChartIcon, BookIcon, BoxIcon, BriefcaseIcon, CalculatorIcon,
   CalendarIcon, CartIcon, ChartIcon, ChatIcon, ClipboardCheckIcon, ClockIcon, CoinIcon, CopyIcon, DeviceIcon,
@@ -182,6 +182,8 @@ const menu: Spec[] = [
 const footerMenu: Spec[] = [
   ['Settings', <SettingIcon />, [
     ['Admin Center', <HomeIcon />],
+    ['Company Profile', <BuildingIcon />],
+    ['Document Templates', <DocumentIcon />],
     ['Approval Settings', <ClipboardCheckIcon />, [
       ['Dashboard', <BarChartIcon />],
       ['Approval Tracking', <ActivityIcon />],
@@ -216,6 +218,10 @@ const footerMenu: Spec[] = [
     ['Budget Enforcement', <ShieldIcon />],
     ['Markup Settings', <TagIcon />],
     ['Number Series', <KeyIcon />],
+    ['Receipt Settings', <ReceiptIcon />],
+    ['Invoice Reminders', <CalendarIcon />],
+    ['Reminder Policies', <ShieldIcon />],
+    ['Schedule Policies', <CalendarIcon />],
   ]],
   ['Help & Support', <LifeBuoyIcon />, [
     ['Help Center', <HelpIcon />],

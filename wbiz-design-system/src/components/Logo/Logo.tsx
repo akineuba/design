@@ -8,6 +8,8 @@ import logoMarkDark from '../../assets/wbizmanager-mark-dark.png';
 export interface LogoProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   /** full: mark and wordmark (sidebar). mark: the symbol alone (collapsed sidebar, favicons). */
   variant?: 'full' | 'mark';
+  /** md: 32px tall (default). sm: 24px, for the NavMenu header. */
+  size?: 'sm' | 'md';
 }
 
 /**
@@ -15,9 +17,9 @@ export interface LogoProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'sr
  * * Dark mode shows the white version supplied by design; only the image
  * for the current theme is displayed.
  */
-export function Logo({ variant = 'full', alt = 'wBizManager', className, ...rest }: LogoProps) {
+export function Logo({ variant = 'full', size = 'md', alt = 'wBizManager', className, ...rest }: LogoProps) {
   const full = variant === 'full';
-  const base = cx('h-control-xs w-auto', className);
+  const base = cx(size === 'sm' ? 'h-6' : 'h-control-xs', 'w-auto', className);
   return (
     <>
       <img src={full ? logoFull : logoMark} alt={alt} className={cx(base, 'block dark:hidden')} {...rest} />

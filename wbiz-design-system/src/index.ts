@@ -20,7 +20,7 @@ export * from './components/RichTextField';
 export * from './components/SegmentedControl';
 export * from './components/Select';
 export * from './components/SidePanel';
-export * from './components/Sidebar';
+export * from './components/NavMenu';
 export * from './components/Spinner';
 export * from './components/StageProgress';
 export * from './components/StatCard';

@@ -1,6 +1,6 @@
 // Story-only app frame shared by the page patterns.
 import type { ReactNode } from 'react';
-import { Sidebar } from '../components/Sidebar';
+import { NavMenu } from '../components/NavMenu';
 import { TopBar, type TopBarProps } from '../components/TopBar';
 import { Logo } from '../components/Logo';
 import { appFooterNavigation, appNavigation, currentUser } from './demo-data';
@@ -12,7 +12,7 @@ export function Shell({ activeId, breadcrumbs, children }: { activeId: string; b
   const theme = useTheme();
   return (
     <div className="flex h-screen w-full overflow-hidden bg-surface-page">
-      <Sidebar items={appNavigation} footerItems={appFooterNavigation} activeId={activeId} logo={<Logo />} logoCollapsed={<Logo variant="mark" />} />
+      <NavMenu items={appNavigation} footerItems={appFooterNavigation} activeId={activeId} logo={<Logo size="sm" />} logoCollapsed={<Logo variant="mark" size="sm" />} />
       <div className="flex min-w-0 flex-1 flex-col">
         <TopBar
           breadcrumbs={breadcrumbs}

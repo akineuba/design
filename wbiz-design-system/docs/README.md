@@ -20,7 +20,7 @@
 | [Component: Tabs](components/tabs.md) | Section tabs between sibling pages of a module |
 | [Component: SegmentedControl](components/segmented-control.md) | Single-choice toggles from the new features screens |
 | [Component: Switch](components/switch.md) | On/off switch from the accounting settings screens |
-| [Component: Sidebar](components/sidebar.md) | Main menu from new features |
+| [Component: NavMenu](components/nav-menu.md) | Main menu: module rail and page panel |
 | [Component: TopBar](components/top-bar.md) | Top bar from new features |
 | [Component: PageHeader](components/page-header.md) | Title block from the new features screens |
 | [Component: Card](components/card.md) | Settings section card |

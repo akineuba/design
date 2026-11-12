@@ -68,7 +68,7 @@ Every colour token has a `dark` value in `tokens.json` (all derived; Figma has n
 | `fg-strong` | #1D2939 | Headings, input values |
 | `fg-black` | #000000 | Side-panel titles, section headers and form labels (accounting) |
 | `fg-faint` | #979797 | Table footer summary |
-| `fg` | #344054 | Sidebar items, secondary button label |
+| `fg` | #344054 | NavMenu page rows, secondary button label |
 | `fg-muted` | #667085 | Body, labels, helper text, table headers |
 | `fg-subtle` | #626D7C | Top bar icons and secondary labels |
 | `fg-placeholder` / `fg-disabled` | #C1C4CB / #D0D5DD | Placeholders, disabled text |
@@ -82,7 +82,7 @@ Every colour token has a `dark` value in `tokens.json` (all derived; Figma has n
 | `surface` / `surface-page` / `surface-muted` / `surface-sunken` | #FFFFFF / #FCFCFD / #F8F8F8 / #F3F3F3 | Cards / app background, table header / hover / sidebar, search |
 | `surface-control` / `surface-track` | #F1F4F9 / #E5E7EB | Theme toggle / segmented control track |
 | `surface-disabled` | #D0D5DD | Disabled primary button |
-| `surface-nav` | #EEEEEE (derived) | Sidebar page panel (secondary menu) |
+| `surface-nav` | #FAFAFA (derived) | NavMenu page panel (secondary menu) |
 | `status-{warning,info,neutral,success,error}-{fg,bg}` | see tokens.json | Status pills (error is derived) |
 | `badge` | #E52E40 | Notification count |
 | `switch-off` | rgba(120,120,128,.16) | Switch track when off (on = `success`) |
@@ -101,7 +101,7 @@ Families: `font-sans` (Inter: controls, labels, sidebar, top bar) and `font-data
 | `text-xs` | 12 / 18 | Field labels, table headers, status pills |
 | `text-13` | 13 / 16 | Tabs, breadcrumb, pagination |
 | `text-sm` | 14 / 20 | Buttons, inputs, body, table cells |
-| `text-15` | 15 / 18 | Sidebar items, accordion titles |
+| `text-15` | 15 / 18 | NavMenu panel title, accordion titles |
 | `text-md` | 16 / 24 | Card titles |
 | `text-lg` | 20 / 28 | Section titles |
 | `text-xl` | 24 / 32 | Modal titles |
@@ -111,7 +111,7 @@ Families: `font-sans` (Inter: controls, labels, sidebar, top bar) and `font-data
 ### Spacing, size, radius, shadow
 - Spacing (`p-*`, `gap-*`, `m-*`): `0.5`=2, `1`=4, `1.5`=6, `2`=8, `2.5`=10, `3`=12, `3.5`=14, `4`=16, `5`=20, `6`=24, `7.5`=30, `8`=32, `10`=40, `12`=48 px.
 - Controls: `control-xs` 32 (toolbar search, Filters, page buttons), `control-sm` 34, `control-md` 40 (default), `control-lg` 46. Icons: `icon` 20, `icon-sm` 16, `icon-xs` 14.
-- Layout: `nav-rail` 84, `nav-rail-item` 56, `nav-panel` 200 (sidebar rail and panel, derived from the reference images), `sidebar` 200 and `sidebar-collapsed` 72 (old single-column menu, unused), `topbar` 64, `nav-item` 44, `nav-subitem` 40, `nav-leaf` 36, `tile` 44, `icon-md` 18, `tab` 35, `row` 44, `row-head` 44, `row-comfortable` 54, `dialog` 515, `menu` 240, `field` 320 (derived), `filter-field` 235.
+- Layout: `nav-rail` 60, `nav-rail-item` 48, `nav-panel` 184, `nav-row` 28 (NavMenu rail and panel, derived from the reference images), `sidebar` 200 and `sidebar-collapsed` 72 (old single-column menu, unused), `topbar` 64, `nav-item` 44, `nav-subitem` 40, `nav-leaf` 36, `tile` 44, `icon-md` 18, `tab` 35, `row` 44, `row-head` 44, `row-comfortable` 54, `dialog` 515, `menu` 240, `field` 320 (derived), `filter-field` 235.
 - Tables and panels: `search` 203, `page-btn` 30, `checkbox` 20, `radio` 16, `avatar-sm` 28, `action-menu` 138, `columns-popup` 354, `filter-control` 161, `panel-sm` 435, `panel-md` 541, `panel-lg` 562, `switch-sm-w`/`-h` 34×20, `knob-sm` 16.
 - Radius: `rounded-xs` 2, `-sm` 4, `-md` 6 (pills), `-lg` 8 (**default**: buttons, inputs, menus, modal), `-xl` 10 (cards, table card, sidebar items), `-panel` 12 (form accordion), `-2xl` 16, `-3xl` 20 (segmented pill), `-full`.
 - Shadow: `shadow-xs` (buttons), `shadow-md` (menus, popovers), `shadow-knob` (switch), `shadow-dialog`, `shadow-focus`, `shadow-focus-error` (last three derived).
@@ -136,14 +136,14 @@ All live in `src/components/<Name>/` with stories. Figma node IDs are in each st
 | `Checkbox` | `896:17613` | unticked / ticked / indeterminate / disabled |
 | `Radio` + `RadioGroup` | Customer Type `209:4142` | horizontal / vertical / disabled |
 | `Avatar` + `AvatarLabel` | top bar avatar `7075:190`; blue reference image | `tone` blue / neutral · `size` sm / md · `description` line |
-| `Logo` | brand PNG supplied by design | `variant` full / mark |
+| `Logo` | brand PNG supplied by design | `variant` full / mark · `size` md (32) / sm (24, NavMenu) |
 | `StatusPill` | Status column `7053:5433` | `tone`: warning (Pending Approval), info (Ready for Issue), neutral (Partially Issued), success (Completed), error (derived) |
 | `Accordion` + `AccordionItem` | block-basic-info `7092:1482`; panel sections `209:4142` | `variant` card / form · open / closed / `disabled` / `meta`; group `type`: single or multiple |
 | `Modal` + `ModalPanel` | tax popup `3564:23503` (accounting) | native `<dialog>`; `size` md (515) / lg (820, previews and bulk pickers); `title`, `description`, `footer`, `closeOnBackdrop` |
 | `Tabs` + `TabPanel` | sub-menu-list `7053:5433` | selected / unselected / disabled; arrow-key navigation |
 | `SegmentedControl` | Inventory/Free Text `7053:5632`; List/Card `7053:5973` | `appearance`: pill, boxed; icons; disabled options |
 | `Switch` | "Toggle" instances (accounting) | `size` md / sm (table rows) · on / off / disabled; optional `label` and `description` |
-| `Sidebar` | navigation reference images from design (Nov 2026): module rail + page panel; structure from the unfolded menu reference | `items` + `footerItems` (Settings, Help); `shortLabel` for rail labels; `activeId`; Home with `recentIds` and pins (`pinnedIds`/`onPinnedChange`); "Find in menu" search (`/`); drill-in for pages with sub-pages; `defaultView`; `collapsed` rail only |
+| `NavMenu` (was `Sidebar`) | navigation reference images from design (Nov 2026): module rail + page panel; compact Settings reference for sizes and colours; structure from the unfolded menu reference | `items` + `footerItems` (Settings, Help); `shortLabel` for rail labels; `activeId`; Home with `recentIds` and pins (`pinnedIds`/`onPinnedChange`); "Find in menu" search (`/`); drill-in for pages with sub-pages; `defaultView`; `collapsed` rail only |
 | `TopBar` | top-header `7053:5510` + the latest top-bar reference from design (blue avatar, Bold 16 name, grid launcher) | breadcrumb; Tour, theme toggle, notifications badge, user menu, app launcher (each shown when its handler is passed) |
 | `PageHeader` | action-row `7053:5433` | `title`, `description`, `actions`, `back` link |
 | `Card` | settings cards `7053:6444` | `title`, `description`, `actions`, `divided` |

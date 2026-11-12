@@ -139,6 +139,7 @@
   --spacing-nav-rail: var(--wbiz-size-nav-rail);
   --spacing-nav-rail-item: var(--wbiz-size-nav-rail-item);
   --spacing-nav-panel: var(--wbiz-size-nav-panel);
+  --spacing-nav-row: var(--wbiz-size-nav-row);
   --spacing-px: 1px;
 
   --text-*: initial;

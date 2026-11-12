@@ -3,7 +3,8 @@ The app's main navigation, on every screen. There is one menu for the whole plat
 
 ## How it behaves
 - The **rail** on the left lists the modules; Settings and Help sit at the bottom. Clicking a module shows its pages in the **panel** without leaving the current page.
-- The selected module looks like a primary button: blue, with a white icon and label. Only the module being browsed is selected; in the collapsed rail, the module holding the current page is selected instead.
+- The selected module is a raised white card with a blue icon and label; the others are grey. Only the module being browsed is selected; in the collapsed rail, the module holding the current page is selected instead.
+- The current page is blue on a light blue row.
 - The page list in the panel is text only, without icons.
 - Pages with sub-pages show a › and open in place; "‹ Back" returns.
 - **Home** lists recently visited pages and the user's pinned pages. Hover any page and click the star to pin or unpin it. Save pins per user.

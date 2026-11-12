@@ -12,7 +12,7 @@ export interface NavItem {
   children?: NavItem[];
 }
 
-export interface SidebarProps {
+export interface NavMenuProps {
   /** Modules, top to bottom in the rail. Their children are the pages shown in the panel. */
   items: NavItem[];
   /** Modules pinned to the bottom of the rail (Settings, Help). */
@@ -64,12 +64,13 @@ const hasPages = (item: NavItem) => !!item.children?.length;
  * App navigation: a module rail and a page panel. Layout from the navigation reference images
  * supplied by design (Nov 2026): logo and collapse button, "Find in menu" search, then the rail
  * (icon over a short label; Settings and Help at the bottom) beside a rounded panel listing the
- * selected module's pages (text only, no icons). Home lists recent and pinned pages. Only the module
- * being viewed is highlighted, styled like the primary button (blue fill, white icon and label); in
- * the collapsed rail the module holding the current page gets that style instead. Pages with sub-pages
+ * selected module's pages (text only, no icons). Home lists recent and pinned pages. Compact metrics
+ * and colours follow the Settings reference (Nov 2026): the module being viewed is a raised white card
+ * with a primary icon and label, other modules are fg-muted; the current page is primary on
+ * primary-muted. In the collapsed rail the module holding the current page gets the selected style. Pages with sub-pages
  * open in place with a back link. Hovering a page shows a star that pins it to Home.
  */
-export function Sidebar({
+export function NavMenu({
   items,
   footerItems = [],
   activeId,
@@ -86,7 +87,7 @@ export function Sidebar({
   onPinnedChange,
   searchPlaceholder = 'Find in menu',
   className,
-}: SidebarProps) {
+}: NavMenuProps) {
   const panelId = useId();
   const searchRef = useRef<HTMLInputElement>(null);
   const index = useMemo(() => indexItems([...items, ...footerItems]), [items, footerItems]);
@@ -153,15 +154,15 @@ export function Sidebar({
     // marked only when nothing is viewed (collapsed rail) or when it is a page itself (Approvals).
     const holdsActive = !opts.home && (collapsed || leafModule) && containsActive(item, activeId);
     const cls = cx(
-      'relative flex h-nav-rail-item w-full flex-col items-center justify-center gap-1 rounded-xl font-sans text-xs font-medium transition-colors',
+      'relative flex h-nav-rail-item w-full flex-col items-center justify-center gap-0.5 rounded-xl font-sans text-11 font-medium transition-colors',
       focusRing,
-      // Selected and active modules look like the primary button: blue fill, white icon and label.
-      viewed || holdsActive ? 'bg-primary text-fg-inverse shadow-xs hover:bg-primary-hover' : 'text-fg-muted hover:bg-surface-muted hover:text-fg-strong',
+      // Selected: raised white card, primary icon and label. Others: fg-muted icon and label.
+      viewed || holdsActive ? 'bg-surface text-primary shadow-xs' : 'text-fg-muted hover:bg-surface-muted hover:text-fg-strong',
     );
     const content = (
       <>
-        <span className={cx('size-icon', viewed || holdsActive ? 'text-fg-inverse' : 'text-icon')} aria-hidden>{item.icon}</span>
-        <span className="max-w-full truncate px-1">{item.shortLabel ?? item.label}</span>
+        <span className="size-icon-md" aria-hidden>{item.icon}</span>
+        <span className="max-w-full truncate px-0.5">{item.shortLabel ?? item.label}</span>
       </>
     );
     const title = item.shortLabel && item.shortLabel !== item.label ? item.label : undefined;
@@ -187,18 +188,18 @@ export function Sidebar({
     const isPinned = pinned.includes(item.id);
     const pinnable = opts.pinnable !== false && !group;
     const cls = cx(
-      'flex min-h-nav-subitem w-full items-center gap-3 rounded-xl px-2.5 py-2 text-left font-sans text-sm transition-colors',
+      'flex min-h-nav-row w-full items-center gap-2 rounded-lg px-2 py-1 text-left font-sans text-13 transition-colors',
       focusRing,
       // Only pinned rows keep room for the star; otherwise it floats over the row end on hover.
-      pinnable && isPinned && 'pr-8',
-      active ? 'bg-primary-tint font-medium text-primary' : cx(holdsActive ? 'text-primary' : 'text-fg-strong', 'hover:bg-surface-muted'),
+      pinnable && isPinned && 'pr-7',
+      active ? 'bg-primary-muted font-medium text-primary' : cx(holdsActive ? 'text-primary' : group ? 'text-fg-strong' : 'text-fg', 'hover:bg-surface-muted'),
       group && 'font-semibold',
     );
     const content = (
       <>
         <span className="flex min-w-0 flex-1 flex-col">
-          <span className="truncate" title={item.label.length > 22 ? item.label : undefined}>{item.label}</span>
-          {opts.path && <span className="truncate text-11 font-regular text-fg-muted">{opts.path}</span>}
+          <span className="truncate" title={item.label.length > 20 ? item.label : undefined}>{item.label}</span>
+          {opts.path && <span className="truncate text-2xs font-regular text-fg-muted">{opts.path}</span>}
         </span>
         {group && <span className="size-icon-xs shrink-0 text-icon-muted" aria-hidden><ChevronRightIcon /></span>}
       </>
@@ -219,12 +220,12 @@ export function Sidebar({
             aria-pressed={isPinned}
             onClick={() => togglePin(item.id)}
             className={cx(
-              'absolute right-1.5 top-1/2 inline-flex size-6 -translate-y-1/2 items-center justify-center rounded-md transition-opacity',
+              'absolute right-1 top-1/2 inline-flex size-5 -translate-y-1/2 items-center justify-center rounded-md transition-opacity',
               focusRing,
               isPinned ? 'text-warning' : 'bg-surface text-icon-muted opacity-0 shadow-xs hover:text-warning group-hover/row:opacity-100 focus-visible:opacity-100',
             )}
           >
-            <span className="size-icon-sm"><StarIcon fill={isPinned ? 'currentColor' : 'none'} /></span>
+            <span className="size-icon-xs"><StarIcon fill={isPinned ? 'currentColor' : 'none'} /></span>
           </button>
         )}
       </li>
@@ -239,20 +240,20 @@ export function Sidebar({
         type="button"
         aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className={cx('flex items-center gap-2 rounded-md px-1 py-1 font-sans text-xs font-semibold uppercase text-fg-muted hover:text-fg-strong', focusRing)}
+        className={cx('flex items-center gap-1.5 rounded-md px-1 py-0.5 font-sans text-11 font-semibold uppercase text-fg-muted hover:text-fg-strong', focusRing)}
       >
-        <span className="size-icon-sm" aria-hidden>{icon}</span>
+        <span className="size-icon-xs" aria-hidden>{icon}</span>
         <span className="flex-1 text-left">{title}</span>
         <span className={cx('size-icon-xs transition-transform duration-200', !open && '-rotate-90')} aria-hidden><ChevronDownIcon /></span>
       </button>
-      {open && <ul className="flex flex-col gap-0.5">{rows}</ul>}
+      {open && <ul className="flex flex-col gap-1">{rows}</ul>}
     </div>
   );
 
   const lookup = (ids: string[]) => ids.map((id) => index.get(id)?.item).filter((i): i is NavItem => !!i && !hasPages(i));
   const pathOf = (id: string) => index.get(id)?.path.map((p) => p.shortLabel ?? p.label).join(' › ');
 
-  const title = (text: string) => <h2 className="px-1 font-sans text-md font-bold text-fg-ink">{text}</h2>;
+  const title = (text: string) => <h2 className="px-2 pt-1 font-sans text-15 font-semibold text-fg-ink">{text}</h2>;
 
   const panelBody = () => {
     if (query.trim()) {
@@ -262,9 +263,9 @@ export function Sidebar({
         <>
           {title('Results')}
           {results.length ? (
-            <ul className="flex flex-col gap-0.5">{results.map(({ item }) => pageRow(item, { path: pathOf(item.id) }))}</ul>
+            <ul className="flex flex-col gap-1.5">{results.map(({ item }) => pageRow(item, { path: pathOf(item.id) }))}</ul>
           ) : (
-            <p className="px-1 font-sans text-sm text-fg-muted">No pages match “{query.trim()}”.</p>
+            <p className="px-2 font-sans text-13 text-fg-muted">No pages match “{query.trim()}”.</p>
           )}
         </>
       );
@@ -280,10 +281,10 @@ export function Sidebar({
           {pins.length > 0 ? (
             section('Pinned', <StarIcon />, pinnedOpen, setPinnedOpen, pins.map((i) => pageRow(i, { path: pathOf(i.id) })))
           ) : (
-            <div className="flex flex-col items-center gap-1 rounded-xl border border-dashed border-line px-4 py-5 text-center font-sans">
-              <span className="mb-1 size-icon text-warning" aria-hidden><StarIcon /></span>
-              <p className="text-sm font-medium text-fg-strong">Pin the pages you use most</p>
-              <p className="text-13 text-fg-muted">Pick a module on the left, hover a page and click the star.</p>
+            <div className="flex flex-col items-center gap-1 rounded-lg border border-dashed border-line px-3 py-4 text-center font-sans">
+              <span className="mb-0.5 size-icon-sm text-warning" aria-hidden><StarIcon /></span>
+              <p className="text-13 font-medium text-fg-strong">Pin the pages you use most</p>
+              <p className="text-xs text-fg-muted">Pick a module on the left, hover a page and click the star.</p>
             </div>
           )}
         </>
@@ -300,14 +301,14 @@ export function Sidebar({
           <button
             type="button"
             onClick={() => setDrill((d) => d.slice(0, -1))}
-            className={cx('-mb-2 inline-flex items-center gap-1 self-start rounded-md px-1 font-sans text-13 text-fg-muted hover:text-fg-strong', focusRing)}
+            className={cx('-mb-1.5 inline-flex items-center gap-1 self-start rounded-md px-1.5 font-sans text-xs text-fg-muted hover:text-fg-strong', focusRing)}
           >
             <span className="size-icon-xs" aria-hidden><ChevronLeftIcon /></span>
             {parent.label}
           </button>
         )}
         {title(current.label)}
-        <ul className="flex flex-col gap-0.5">{current.children?.map((c) => pageRow(c))}</ul>
+        <ul className="flex flex-col gap-1.5">{current.children?.map((c) => pageRow(c))}</ul>
       </>
     );
   };
@@ -315,7 +316,7 @@ export function Sidebar({
   const panelLabel = query.trim() ? 'Search results' : view === HOME ? 'Home' : index.get(view)?.item.label;
 
   return (
-    <aside className={cx('flex h-full w-fit shrink-0 flex-col gap-4 bg-surface-sunken px-3 py-5', className)}>
+    <aside className={cx('flex h-full w-fit shrink-0 flex-col gap-3 bg-surface-sunken px-2 py-4', className)}>
       <div className={cx('flex gap-2 px-1', collapsed ? 'flex-col items-center' : 'items-center justify-between')}>
         <div className="min-w-0">{collapsed ? logoCollapsed ?? logo : logo}</div>
         <button
@@ -323,14 +324,14 @@ export function Sidebar({
           aria-label={collapsed ? 'Expand menu' : 'Collapse menu'}
           aria-expanded={!collapsed}
           onClick={() => setCollapsed(!collapsed)}
-          className={cx('inline-flex size-control-xs shrink-0 items-center justify-center rounded-lg border border-fg-strong text-fg-strong hover:bg-surface-muted', focusRing)}
+          className={cx('inline-flex size-6 shrink-0 items-center justify-center rounded-md border border-fg-strong text-fg-strong hover:bg-surface-muted', focusRing)}
         >
-          <span className={cx('size-icon-sm transition-transform duration-200', collapsed && 'rotate-180')}><ChevronLeftIcon /></span>
+          <span className={cx('size-icon-xs transition-transform duration-200', collapsed && 'rotate-180')}><ChevronLeftIcon /></span>
         </button>
       </div>
 
       {!collapsed && (
-        <label className="flex h-control-sm items-center gap-2 rounded-xl border border-line-subtle bg-surface px-3 focus-within:shadow-focus">
+        <label className="flex h-control-xs items-center gap-2 rounded-lg border border-line-subtle bg-surface px-2.5 focus-within:shadow-focus">
           <span className="size-icon-sm shrink-0 text-icon-muted" aria-hidden><SearchIcon /></span>
           <input
             ref={searchRef}
@@ -341,25 +342,25 @@ export function Sidebar({
             placeholder={searchPlaceholder}
             aria-label={searchPlaceholder}
             aria-controls={panelId}
-            className="h-full w-0 min-w-0 flex-1 bg-transparent font-sans text-sm text-fg-strong outline-hidden placeholder:text-fg-placeholder"
+            className="h-full w-0 min-w-0 flex-1 bg-transparent font-sans text-13 text-fg-strong outline-hidden placeholder:text-fg-placeholder"
           />
-          <kbd className="rounded-sm border border-line px-1.5 font-sans text-xs text-fg-muted" aria-hidden>/</kbd>
+          <kbd className="rounded-sm border border-line px-1 font-sans text-11 text-fg-muted" aria-hidden>/</kbd>
         </label>
       )}
 
       <div className="flex min-h-0 flex-1 gap-1">
-        <nav aria-label="Modules" className="flex w-nav-rail shrink-0 flex-col gap-2">
-          <ul className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto">
+        <nav aria-label="Modules" className="flex w-nav-rail shrink-0 flex-col gap-1">
+          <ul className="flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto">
             {showHome && (
               <>
                 <li>{railButton({ id: HOME, label: 'Home', icon: <HomeIcon /> }, { home: true })}</li>
-                <li className="mx-3 my-1 h-px shrink-0 bg-line" aria-hidden />
+                <li className="mx-2 my-1 h-px shrink-0 bg-line" aria-hidden />
               </>
             )}
             {items.map((item) => <li key={item.id}>{railButton(item)}</li>)}
           </ul>
           {footerItems.length > 0 && (
-            <ul className="flex flex-col gap-1">
+            <ul className="flex flex-col gap-0.5">
               {footerItems.map((item) => <li key={item.id}>{railButton(item)}</li>)}
             </ul>
           )}
@@ -369,7 +370,7 @@ export function Sidebar({
           <nav
             id={panelId}
             aria-label={panelLabel}
-            className="flex w-nav-panel min-w-0 flex-col gap-4 overflow-y-auto rounded-2xl border border-line-subtle bg-surface-nav p-2"
+            className="flex w-nav-panel min-w-0 flex-col gap-3 overflow-y-auto rounded-xl border border-line-subtle bg-surface-nav p-2"
           >
             {panelBody()}
           </nav>

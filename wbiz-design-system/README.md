@@ -50,7 +50,7 @@ The library is built with Tailwind CSS 4 through the `@tailwindcss/vite` plugin.
 tokens/            tokens.json (source of truth) and the CSS/Tailwind mappers
 src/styles/        generated tokens.css and theme.css + Tailwind entry (index.css)
 src/components/    Button, Input, Select, FilterDropdown, Table, StatusPill, Accordion, Modal,
-                   Tabs, SegmentedControl, Switch, Sidebar, TopBar, PageHeader, Card, Spinner
+                   Tabs, SegmentedControl, Switch, NavMenu, TopBar, PageHeader, Card, Spinner
 src/icons/         Vuesax-style line icons used by the components
 src/patterns/      full-screen reference layouts (Storybook only)
 src/foundations/   Storybook token pages
