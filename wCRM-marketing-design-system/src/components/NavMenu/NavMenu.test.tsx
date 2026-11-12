@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Sidebar } from './Sidebar';
-import { businessSections, businessSettings } from './Sidebar.fixtures';
+import { NavMenu } from './NavMenu';
+import { businessSections, businessSettings } from './NavMenu.fixtures';
 
-describe('Sidebar', () => {
+describe('NavMenu', () => {
   it('marks the active page and calls onNavigate', async () => {
     const onNavigate = vi.fn();
-    render(<Sidebar sections={businessSections} activeId="dashboard" onNavigate={onNavigate} />);
+    render(<NavMenu sections={businessSections} activeId="dashboard" onNavigate={onNavigate} />);
     expect(screen.getByRole('navigation', { name: 'Main' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Dashboard' })).toHaveAttribute('aria-current', 'page');
     await userEvent.click(screen.getByRole('button', { name: 'Deals' }));
@@ -14,7 +14,11 @@ describe('Sidebar', () => {
   });
 
   it('opens a group that holds the active page and toggles groups', async () => {
-    render(<Sidebar sections={businessSections} activeId="report-birthdays" />);
+    const closed = businessSections.map((s) => ({ ...s, items: s.items.map((i) => ({ ...i, defaultOpen: false })) }));
+    const { unmount } = render(<NavMenu sections={closed} activeId="dashboard" />);
+    expect(screen.getByRole('button', { name: 'Reports' })).toHaveAttribute('aria-expanded', 'false');
+    unmount();
+    render(<NavMenu sections={closed} activeId="report-birthdays" />);
     const reports = screen.getByRole('button', { name: 'Reports' });
     expect(reports).toHaveAttribute('aria-expanded', 'true');
     expect(screen.getByRole('button', { name: 'Birthdays' })).toHaveAttribute('aria-current', 'page');
@@ -25,7 +29,7 @@ describe('Sidebar', () => {
 
   it('renders the Settings dropdown and Log Out', async () => {
     const onLogout = vi.fn();
-    render(<Sidebar sections={businessSections} settings={{ ...businessSettings, defaultOpen: false }} onLogout={onLogout} />);
+    render(<NavMenu sections={businessSections} settings={{ ...businessSettings, defaultOpen: false }} onLogout={onLogout} />);
     const settings = screen.getByRole('button', { name: 'Settings' });
     expect(settings).toHaveAttribute('aria-expanded', 'false');
     expect(document.getElementById(settings.getAttribute('aria-controls')!)!.className).toContain('hidden');
@@ -37,7 +41,7 @@ describe('Sidebar', () => {
   });
 
   it('renders links when items have an href', () => {
-    render(<Sidebar sections={[{ id: 's', items: [{ id: 'home', label: 'Home', href: '/home' }] }]} activeId="home" />);
+    render(<NavMenu sections={[{ id: 's', items: [{ id: 'home', label: 'Home', href: '/home' }] }]} activeId="home" />);
     expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page');
   });
 });

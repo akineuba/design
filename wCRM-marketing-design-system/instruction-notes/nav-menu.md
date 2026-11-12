@@ -1,5 +1,5 @@
 ## When to use
-The main navigation down the left of every desktop screen, under the `Navbar`. One section per module ("Marketing", "Business Development").
+The main navigation down the left of every desktop screen, under the `TopBar`. One section per module ("Marketing", "Business Development").
 
 ## Structure
 | Part | Use it for |
@@ -12,6 +12,6 @@ The main navigation down the left of every desktop screen, under the `Navbar`. O
 
 ## How it behaves
 - `activeId` marks the current page: light navy fill, red bar on the left, `aria-current="page"`.
-- A group (Reports, Settings) starts open when it contains the active page.
+- A group (Reports, Settings) starts open when it contains the active page, or when you set `defaultOpen`.
 - Items with `href` are links; without it they are buttons that call `onNavigate`.
 - Groups are buttons with `aria-expanded`; Tab and Enter work throughout.

@@ -13,7 +13,7 @@ import { initials } from '../Avatar';
  * Hover and focus states are derived; Figma draws only the resting bar.
  */
 
-export interface NavbarProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
+export interface TopBarProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /** Page title, e.g. "Settings - Social Media". */
   title: ReactNode;
   /** Small line above the title, e.g. "Hi Akinola". */
@@ -45,7 +45,7 @@ const headerButton =
   'focus-visible:outline-none focus-visible:shadow-focus';
 const hoverFill = 'hover:bg-surface-subtle';
 
-export const Navbar = forwardRef<HTMLElement, NavbarProps>(function Navbar(
+export const TopBar = forwardRef<HTMLElement, TopBarProps>(function TopBar(
   {
     title,
     greeting,

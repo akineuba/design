@@ -1,5 +1,5 @@
 ## When to use
-The app header across the top of every desktop screen. One per page, above the `Sidebar`.
+The app header across the top of every desktop screen. One per page, above the `NavMenu`.
 
 ## Content
 - **Greeting:** "Hi {first name}".

@@ -6,15 +6,16 @@ import { cn } from '../../utils/cn';
  * Desktop sidebar navigation, Figma sidebar instance (1514:7196, component 808:7459): 217px white column with a right
  * border, 35px top/bottom and 13px side inset, so items are 191px wide. Section label: Inter Semi Bold 12 uppercase
  * #667085. Items: 40px rows, 6px apart, 15px left inset, 20px icon (#A3AED0) then a 12px gap and the label (Roboto
- * Medium 14, #4F5966). Active: #F0F4FA fill (radius 8) and a 2×21 #EE1F2F bar on the left edge. Footer above a 0.5px
- * #A3AED0 rule: the Settings group and Log Out (Roboto Medium 14, lh 28, −0.02em, #A3AED0 for Log Out).
+ * Medium 14, #4F5966). Active: #F0F4FA fill (radius 8) and a 2×21 #EE1F2F bar on the left edge.
  *
- * The Settings group follows the product reference rather than the older Figma group: a chevron-down caret, and
- * Semi Bold sub-items with a right chevron (they open settings pages). Nested items under a regular entry (e.g.
- * Reports) are Roboto Regular 14 with no chevron. Hover and focus states are derived.
+ * Footer (Settings dropdown + Log Out) follows the product reference screenshot, not the older Figma group: a 1px
+ * #E2E8F0 rule; "Settings" (Medium 14, #4B5563) with an #A3AED0 gear and a chevron-down caret (rotates right when
+ * closed); sub-items Semi Bold 13, #667085, 34px apart, each with a 16px #A3AED0 right chevron (they open settings
+ * pages); then Log Out (#A3AED0 icon, #4B5563 label) straight after. Nested items under a regular entry (e.g. Reports)
+ * are Roboto Regular 14 with no chevron. Hover and focus states are derived.
  */
 
-export interface SidebarNavItem {
+export interface NavMenuItem {
   id: string;
   label: string;
   /** 20px glyph; top-level items only. */
@@ -22,32 +23,34 @@ export interface SidebarNavItem {
   /** Renders a link; without it the item is a button that calls onNavigate. */
   href?: string;
   /** Sub-items: the item becomes an expandable group with a chevron. */
-  children?: SidebarNavItem[];
+  children?: NavMenuItem[];
+  /** Groups only: open on first render. A group also opens when it contains the active item. */
+  defaultOpen?: boolean;
 }
 
-export interface SidebarSection {
+export interface NavMenuSection {
   id: string;
   /** Uppercase heading, e.g. "Marketing" or "Business Development". */
   label?: string;
-  items: SidebarNavItem[];
+  items: NavMenuItem[];
 }
 
-export interface SidebarSettings {
+export interface NavMenuSettings {
   /** Defaults to "Settings". */
   label?: string;
-  items: SidebarNavItem[];
+  items: NavMenuItem[];
   /** Open on first render. It also opens when the active item is one of its items. */
   defaultOpen?: boolean;
 }
 
-export interface SidebarProps extends Omit<HTMLAttributes<HTMLElement>, 'onSelect'> {
-  sections: SidebarSection[];
+export interface NavMenuProps extends Omit<HTMLAttributes<HTMLElement>, 'onSelect'> {
+  sections: NavMenuSection[];
   /** id of the current page's item; it gets the active fill, the red bar and aria-current="page". */
   activeId?: string;
   /** Called when any item (top level, nested or settings) is chosen. */
-  onNavigate?: (item: SidebarNavItem, event: MouseEvent<HTMLElement>) => void;
+  onNavigate?: (item: NavMenuItem, event: MouseEvent<HTMLElement>) => void;
   /** The Settings group in the footer. Omit to hide it. */
-  settings?: SidebarSettings;
+  settings?: NavMenuSettings;
   /** Shows Log Out in the footer. */
   onLogout?: () => void;
   logoutLabel?: string;
@@ -55,7 +58,7 @@ export interface SidebarProps extends Omit<HTMLAttributes<HTMLElement>, 'onSelec
   'aria-label'?: string;
 }
 
-const containsActive = (item: SidebarNavItem, activeId?: string): boolean =>
+const containsActive = (item: NavMenuItem, activeId?: string): boolean =>
   !!activeId && (item.id === activeId || !!item.children?.some((c) => containsActive(c, activeId)));
 
 const focusRing = 'focus-visible:outline-none focus-visible:shadow-focus';
@@ -66,10 +69,10 @@ const ActiveBar = () => (
 );
 
 interface RowProps {
-  item: SidebarNavItem;
+  item: NavMenuItem;
   active: boolean;
   className: string;
-  onNavigate?: SidebarProps['onNavigate'];
+  onNavigate?: NavMenuProps['onNavigate'];
   children: ReactNode;
 }
 
@@ -101,8 +104,8 @@ const topLabel = (active: boolean) =>
 const subRow = (active: boolean) =>
   cn('rounded-nav pl-10 pr-6', active ? 'bg-accent-navy-subtle' : 'hover:bg-surface-subtle');
 
-function NavGroup({ item, activeId, onNavigate }: { item: SidebarNavItem; activeId?: string; onNavigate?: SidebarProps['onNavigate'] }) {
-  const [open, setOpen] = useState(() => containsActive(item, activeId));
+function NavGroup({ item, activeId, onNavigate }: { item: NavMenuItem; activeId?: string; onNavigate?: NavMenuProps['onNavigate'] }) {
+  const [open, setOpen] = useState(() => Boolean(item.defaultOpen) || containsActive(item, activeId));
   const panelId = useId();
   return (
     <li className="flex flex-col gap-1.5">
@@ -141,7 +144,7 @@ function NavGroup({ item, activeId, onNavigate }: { item: SidebarNavItem; active
   );
 }
 
-function SettingsGroup({ settings, activeId, onNavigate }: { settings: SidebarSettings; activeId?: string; onNavigate?: SidebarProps['onNavigate'] }) {
+function SettingsGroup({ settings, activeId, onNavigate }: { settings: NavMenuSettings; activeId?: string; onNavigate?: NavMenuProps['onNavigate'] }) {
   const [open, setOpen] = useState(() => Boolean(settings.defaultOpen) || settings.items.some((i) => containsActive(i, activeId)));
   const panelId = useId();
   return (
@@ -158,7 +161,7 @@ function SettingsGroup({ settings, activeId, onNavigate }: { settings: SidebarSe
       >
         <span className="flex items-center gap-3.5">
           <Setting2Icon aria-hidden="true" className="size-5 shrink-0 text-text-muted" />
-          <span className="font-data text-nav text-text-nav">{settings.label ?? 'Settings'}</span>
+          <span className="font-data text-nav text-text-icon-strong">{settings.label ?? 'Settings'}</span>
         </span>
         <LucideChevronDownIcon
           aria-hidden="true"
@@ -172,10 +175,10 @@ function SettingsGroup({ settings, activeId, onNavigate }: { settings: SidebarSe
             <li key={item.id}>
               <NavRow item={item} active={active} onNavigate={onNavigate} className={cn('justify-between', subRow(active))}>
                 {active && <ActiveBar />}
-                <span className={cn('truncate font-data text-label leading-nav tracking-tight', active ? 'text-text-primary' : 'text-text-nav')}>
+                <span className={cn('truncate font-data text-label-sm leading-nav tracking-tight', active ? 'text-text-strong' : 'text-text-tertiary')}>
                   {item.label}
                 </span>
-                <LucideChevronRightIcon aria-hidden="true" className="size-3.5 shrink-0 text-text-muted" />
+                <LucideChevronRightIcon aria-hidden="true" className="size-4 shrink-0 text-text-muted" />
               </NavRow>
             </li>
           );
@@ -185,7 +188,7 @@ function SettingsGroup({ settings, activeId, onNavigate }: { settings: SidebarSe
   );
 }
 
-export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
+export const NavMenu = forwardRef<HTMLElement, NavMenuProps>(function NavMenu(
   { sections, activeId, onNavigate, settings, onLogout, logoutLabel = 'Log Out', className, 'aria-label': ariaLabel = 'Main', ...rest },
   ref,
 ) {
@@ -226,19 +229,19 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
       </div>
 
       {hasFooter && (
-        <div className="mt-auto flex flex-col gap-3.75 border-t-0.5 border-border-muted pt-2.5">
+        <div className="mt-auto flex flex-col gap-1.5 border-t border-border-default pt-2.5">
           {settings && <SettingsGroup settings={settings} activeId={activeId} onNavigate={onNavigate} />}
           {onLogout && (
             <button
               type="button"
               onClick={onLogout}
               className={cn(
-                'flex w-full items-center gap-3.5 rounded-nav py-2.5 pl-3.75 pr-6 text-left transition-colors duration-fast ease-standard hover:bg-surface-subtle',
+                'flex w-full items-center gap-3.5 rounded-nav py-1.5 pl-3.75 pr-6 text-left transition-colors duration-fast ease-standard hover:bg-surface-subtle',
                 focusRing,
               )}
             >
               <LoginIcon aria-hidden="true" className="size-6 shrink-0 -scale-x-100 text-text-muted" />
-              <span className="font-data text-nav text-text-muted">{logoutLabel}</span>
+              <span className="font-data text-nav text-text-icon-strong">{logoutLabel}</span>
             </button>
           )}
         </div>

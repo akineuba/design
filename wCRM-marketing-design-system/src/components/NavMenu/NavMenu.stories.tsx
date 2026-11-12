@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { Sidebar, type SidebarSection, type SidebarSettings } from './Sidebar';
-import { businessSections, businessSettings, marketingSections, marketingSettings } from './Sidebar.fixtures';
+import { NavMenu, type NavMenuSection, type NavMenuSettings } from './NavMenu';
+import { businessSections, businessSettings, marketingSections, marketingSettings } from './NavMenu.fixtures';
 
 const meta = {
-  title: 'Components/Sidebar',
-  component: Sidebar,
+  title: 'Components/NavMenu',
+  component: NavMenu,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -25,14 +25,14 @@ const meta = {
     ),
   ],
   args: { sections: marketingSections },
-} satisfies Meta<typeof Sidebar>;
+} satisfies Meta<typeof NavMenu>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function Interactive({ sections, settings, initial }: { sections: SidebarSection[]; settings: SidebarSettings; initial: string }) {
+function Interactive({ sections, settings, initial }: { sections: NavMenuSection[]; settings: NavMenuSettings; initial: string }) {
   const [active, setActive] = useState(initial);
   return (
-    <Sidebar
+    <NavMenu
       sections={sections}
       settings={settings}
       activeId={active}
@@ -50,14 +50,4 @@ export const Marketing: Story = {
 /** Business Development reference: Dashboard active, Reports and Settings open. */
 export const BusinessDevelopment: Story = {
   render: () => <Interactive sections={businessSections} settings={businessSettings} initial="dashboard" />,
-};
-
-/** A nested page active: its group opens and the sub-item gets the red bar. */
-export const NestedItemActive: Story = {
-  render: () => <Interactive sections={businessSections} settings={{ ...businessSettings, defaultOpen: false }} initial="report-birthdays" />,
-};
-
-/** Without the footer: no Settings group and no Log Out. */
-export const NavigationOnly: Story = {
-  args: { sections: marketingSections, activeId: 'dashboard' },
 };

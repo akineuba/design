@@ -1,4 +1,4 @@
-/* Example navigation data shared by the Sidebar and Navbar stories. */
+/* Example navigation data for the NavMenu stories and tests. */
 import {
   Buildings2OutlineIcon,
   CallCallingOutlineIcon,
@@ -12,10 +12,10 @@ import {
   Profile2UserOutlineIcon,
   SolarPlanetLinearIcon,
 } from '../../icons';
-import type { SidebarSection, SidebarSettings } from './Sidebar';
+import type { NavMenuSection, NavMenuSettings } from './NavMenu';
 
 /** Figma marketing sidebar (1514:7196). */
-export const marketingSections: SidebarSection[] = [
+export const marketingSections: NavMenuSection[] = [
   {
     id: 'marketing',
     label: 'Marketing',
@@ -31,7 +31,7 @@ export const marketingSections: SidebarSection[] = [
   },
 ];
 
-export const marketingSettings: SidebarSettings = {
+export const marketingSettings: NavMenuSettings = {
   items: [
     { id: 'settings-organisation', label: 'Organisation' },
     { id: 'settings-notifications', label: 'Notifications' },
@@ -44,7 +44,7 @@ export const marketingSettings: SidebarSettings = {
 };
 
 /** Business Development sidebar from the product reference: an expandable Reports group and the Settings dropdown. */
-export const businessSections: SidebarSection[] = [
+export const businessSections: NavMenuSection[] = [
   {
     id: 'business',
     label: 'Business Development',
@@ -54,6 +54,7 @@ export const businessSections: SidebarSection[] = [
       {
         id: 'reports',
         label: 'Reports',
+        defaultOpen: true,
         icon: <LucideInboxIcon />,
         children: [
           { id: 'report-performance', label: 'Performance Report' },
@@ -72,7 +73,7 @@ export const businessSections: SidebarSection[] = [
   },
 ];
 
-export const businessSettings: SidebarSettings = {
+export const businessSettings: NavMenuSettings = {
   defaultOpen: true,
   items: [
     { id: 'settings-organization', label: 'Organization' },
