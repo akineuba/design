@@ -76,3 +76,11 @@ Derived (not in Figma): focus (navy border + `shadow-focus`), hover border, disa
 | Tabs `dot` | `subtabs` (All / Drafts / Scheduled / Sent) | Roboto 14, 8px dot, active red underline. Inactive labels use the `-text` status tokens instead of Figma's bright #E9BB2B / #05D38A for contrast. |
 | RowActions | `more-horizontal` (54×22, r4, 14px icon), `context-menu`, Campaigns "View" (eye + 13/500 #409CFF), code link #3366E5 | Trigger is 24px (WCAG 2.2 target size) instead of 22. "View" uses `text.link` (#3366E5) because #409CFF fails 4.5:1 on white. |
 | Table (email style) | Email marketing `table-content` | Two-line "Last updated" cell (date `text.secondary` over author `accent.navy-hover`), rows ≈ 61px, numeric columns right-aligned (Figma left-aligns them). |
+
+## Navbar and Sidebar
+
+| Component | Figma | Notes |
+|---|---|---|
+| Navbar | `navbar` 1514:7170, `Application header` 2518:57355 | 63px (`h-header`), 23px inset. Greeting Roboto Semi Bold 13 `text.greeting`, title Roboto Bold 20 `text.tertiary`. Right group 16px apart: bell 30 (`text.muted`, red dot is the icon's last path), apps 26, theme circle 30 on `surface.toggle` (sun 13 / moon `status.theme-moon` #FACC15, 1823:7423), avatar 36 on `surface.avatar-tint`. Hover fills and focus ring are derived. |
+| Sidebar | instance 1514:7196 (component 808:7459) | 217px, 35/13px inset, 40px items 6px apart, icon 20 → 12px → Roboto Medium 14 `text.nav`; active `accent.navy-subtle` + 2×21 `brand.primary` bar. Footer above a 0.5px `border.muted` rule. **Settings group follows the product reference, not 782:4607**: chevron-down caret (rotates closed), Semi Bold 14 sub-items with a 14px right chevron, indented 40px. Expandable regular items (Reports) are derived from the same reference. Active label weight/colour (Semi Bold `text.primary`) and hover fills are derived. |
+

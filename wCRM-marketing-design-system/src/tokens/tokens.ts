@@ -443,6 +443,11 @@ export const tokens = {
         "figma": "1101:14769, 1126:16406, 1150:18057, 1287:29996, 1446:33294",
         "figmaUses": 50
       },
+      "theme-moon": {
+        "value": "#FACC15",
+        "usage": "Header theme toggle moon glyph, dark state",
+        "figma": "1823:7423"
+      },
       "success-strong": {
         "value": "#059669",
         "usage": "KPI trend up (arrow, text, sparkline); success checkbox (YouTube \"Made for kids\")",
@@ -2565,6 +2570,7 @@ export const cssVariables = {
   "color-status-info-subtle": "#EDF3FF",
   "color-status-toggle-off": "#9CA3AF",
   "color-status-warning-bright": "#E9BB2B",
+  "color-status-theme-moon": "#FACC15",
   "color-status-success-strong": "#059669",
   "color-status-danger-strong": "#DC2626",
   "color-status-success-dark": "#05A86E",

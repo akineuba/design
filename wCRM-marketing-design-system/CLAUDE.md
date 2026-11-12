@@ -190,6 +190,8 @@ Interactive behaviour (focus trapping, keyboard navigation, ARIA) comes from **R
 | `Table` (`TableCard`, `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`, `TableEmpty`, `TableSkeleton`, `TableExpandableRow`, `TableCellStack`) | Contacts (817:8972), Social accounts (1224:25339), `company-row-expanded` (817:8786), Email marketing, Campaigns, Social posts | toolbar, sortable headers, selection, selected/interactive rows, empty/no-results, loading skeleton, expandable rows, two-line cells, `density` default/compact |
 | `Pagination` | Contacts / User management footers | summary, ellipses, current page, page size |
 | `Card`, `CardHeader`, `StatCard`, `SummaryCard`, `MetricCard`, `ProgressBar`, `ModuleCard`, `ActivityFeed` | `stats-row` / `stat-card-*` (Social posts, Email), audience summaries, email performance, module picker, activity panel | stat: featured gradient, icon tile, trend up/down (`invert` when a drop is good); stat clickable (`onClick`/`selected`, toggle button) with hover, pressed, focus, selected `tone` gradient (brand/success/info/warning/navy), disabled, `hint`; summary tones; metric details; progress tones; module selected/disabled |
+| `Navbar` | `navbar` (1514:7170), `Application header` (2518:57355) | menu toggle (`sidebarOpen`/`sidebarId`), logo, greeting + title (truncates), bell with/without unread dot, app switcher, theme toggle (sun/moon, `role="switch"`), initials or photo avatar |
+| `Sidebar` | sidebar instance 1514:7196 (component 808:7459); Settings group from the product reference | sections with labels, items (link or button), expandable groups (`children`), active fill + red bar + `aria-current`, Settings dropdown (chevron, Semi Bold sub-items with right chevrons), Log Out |
 | `RowActionsMenu`, `RowActionLink`, `RowActionButtons`, `TableLink` | `more-horizontal` + `context-menu`, Campaigns "View" link and code link | View/Edit/Delete from handlers or custom actions with separators; inline link (a or button); inline icon buttons with optional hover reveal |
 
 Icons live in `src/icons`. **Every icon is an exact SVG export from Figma** (`src/icons/figma.tsx`, 105 icons): the vuesax set
@@ -203,7 +205,7 @@ and replace the icon colour with `currentColor`.
 
 Figma does not draw focus, hover, disabled or loading states for most of these; those were derived and are listed in
 `docs/figma-mapping.md`. Patterns in Figma that are still not components: date/time pickers, the frequency
-day-picker, sidebar navigation, app header, charts.
+day-picker, charts.
 
 ### Conventions for new components
 
