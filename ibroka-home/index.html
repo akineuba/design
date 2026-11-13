@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>iBroka Home page</title>
+<meta name="description" content="iBroka brings clients, policies, claims, premium collection, insurer remittance and reporting together in one cloud platform for insurance brokers.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap">
+<style>
+/* Same layout concept as the wBizManager home page: huge, quiet type on white; the product
+   lives inside solid colour and soft grey panels; real fragments of broking life (renewals,
+   claims, premium receipts, remittances) carry the story between sections.
+   Colours, type, radii and status styles come from the iBroka Design System tokens. */
+:root{
+  color-scheme: light;
+  /* iBroka tokens */
+  --brand:#36A59E;          /* --ib-color-brand: logo dot, accents, charts */
+  --primary:#247A75;        /* --ib-color-primary: buttons, links, highlighted words */
+  --primary-hover:#1F6A66;
+  --brand-subtle:#EBF6F5;
+  --brand-glow:#5CC7C0;     /* dark-theme primary-hover */
+  --text:#272728; --text-2:#3B3B3B; --muted:#666B73; --faint:#8A8F98; --subtle:#54555A;
+  --surface:#FFFFFF; --canvas:#F4F6F9; --panel:#F0F2F5; --page:#F2F4F8; --chrome:#FBFCFE; --header:#F6F8FA;
+  --border:#E3E3E3; --line-subtle:#E2E8F0; --line-row:#EEF4F6;
+  --night:#121417; --night-2:#1B1E23; --night-line:#2A2F37; --night-text:#E2E6EE; --night-muted:#A3AAB7;
+  --ok-fg:#157A47; --ok-bg:#D7F6E5; --ok-dot:#39D27E;
+  --warn-fg:#8A5300; --warn-bg:#FFFBD9; --warn-dot:#FFA239;
+  --bad-fg:#B0091D; --bad-bg:#FFD1D6; --bad-dot:#FF1934;
+  --info-fg:#1A65AD; --info-bg:#E3F1FF; --info-dot:#299BFF;
+  --neu-fg:#54555A; --neu-bg:#ECEEF1; --neu-dot:#8A8F98;
+  --danger:#D50B23;
+  --tile-teal-bg:#EBF6F5; --tile-teal-fg:#247A75; --tile-green-bg:#E1F7EB; --tile-green-fg:#17804A;
+  --tile-purple-bg:#F6E6FB; --tile-purple-fg:#A21CAF; --tile-blue-bg:#E3F1FF; --tile-blue-fg:#1A73C4;
+  --tile-amber-bg:#FFF4E2; --tile-amber-fg:#B25E00; --tile-red-bg:#FDECEE; --tile-red-fg:#D50B23;
+  --tile-ink-bg:#ECEEF1; --tile-ink-fg:#272728;
+  --chart-1:#0E9C90; --chart-2:#5A5FD0; --chart-3:#D98A00; --chart-4:#D6406C; --chart-5:#1C8BDB;
+  --avatar:#5C6BB5;
+  --font:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --r-ctl:8px; --r-card:20px; --r-panel:32px;
+  --shadow-card:0px 1px 4px 0px rgba(197,207,220,.44);
+  --shadow-float:0 1px 2px rgba(39,39,40,.06), 0 14px 36px -10px rgba(39,39,40,.22);
+  --gutter:clamp(16px, 4vw, 40px);
+  --bleed:max(var(--gutter), calc((100vw - 1240px) / 2 + var(--gutter)));
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip;padding-bottom:env(safe-area-inset-bottom,0px)}
+h1,h2,h3,h4,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(54,165,158,.45);border-radius:6px}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--gutter)}
+
+/* Type: one display voice, large and tight */
+.display{font-weight:600;letter-spacing:-.04em;line-height:.98}
+.h2{font-size:clamp(34px,4.6vw,60px);font-weight:600;letter-spacing:-.035em;line-height:1.02}
+.lead{font-size:18px;line-height:1.6;color:var(--muted);max-width:46ch}
+.teal{color:var(--primary)}
+
+/* Context chip */
+.ctx{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.ctx b{color:var(--text);font-weight:600}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:11px;font-weight:600;flex:none;letter-spacing:0;background:var(--primary)}
+.av.ind{background:var(--avatar)}
+.stack{display:flex}
+.stack > *{margin-left:-8px;box-shadow:0 0 0 2px var(--surface)}
+.stack > *:first-child{margin-left:0}
+.stack .av .i{width:14px;height:14px;stroke-width:2}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding-inline:20px;border-radius:var(--r-ctl);font-size:15px;font-weight:600;white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-hover)}
+.btn-secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:#C2C2C2;background:var(--canvas)}
+.btn-dark{background:var(--text);color:#fff}
+.btn-dark:hover{background:#3B3B3C}
+.btn-lg{height:52px;padding-inline:24px;font-size:16px}
+.btn .i{width:18px;height:18px}
+.arrow{transition:transform .15s}
+a:hover .arrow,.btn:hover .arrow{transform:translateX(2px)}
+.link{display:inline-flex;align-items:center;gap:6px;color:var(--primary);font-weight:600;font-size:15px}
+.link .i{width:16px;height:16px}
+
+/* Status pills (iBroka StatusPill: dot + label) */
+.pill{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-ok{background:var(--ok-bg);color:var(--ok-fg)}.p-ok::before{background:var(--ok-dot)}
+.p-warn{background:var(--warn-bg);color:var(--warn-fg)}.p-warn::before{background:var(--warn-dot)}
+.p-bad{background:var(--bad-bg);color:var(--bad-fg)}.p-bad::before{background:var(--bad-dot)}
+.p-info{background:var(--info-bg);color:var(--info-fg)}.p-info::before{background:var(--info-dot)}
+.p-neu{background:var(--neu-bg);color:var(--neu-fg)}.p-neu::before{background:var(--neu-dot)}
+.pill.plain::before{display:none}
+.t-teal{background:var(--tile-teal-bg);color:var(--tile-teal-fg)} .t-green{background:var(--tile-green-bg);color:var(--tile-green-fg)}
+.t-purple{background:var(--tile-purple-bg);color:var(--tile-purple-fg)} .t-blue{background:var(--tile-blue-bg);color:var(--tile-blue-fg)}
+.t-amber{background:var(--tile-amber-bg);color:var(--tile-amber-fg)} .t-red{background:var(--tile-red-bg);color:var(--tile-red-fg)}
+.t-ink{background:var(--tile-ink-bg);color:var(--tile-ink-fg)}
+
+/* ───────── Header ───────── */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(255,255,255,.9);backdrop-filter:saturate(1.6) blur(12px);-webkit-backdrop-filter:saturate(1.6) blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
+.hdr.scrolled{border-bottom-color:var(--border)}
+.hdr .wrap{display:flex;align-items:center;gap:24px;height:68px}
+.logo img{height:28px;width:auto;display:block}
+.nav{display:flex;align-items:center;gap:2px;margin-inline:auto}
+.nav > a,.dd > button{display:inline-flex;align-items:center;gap:4px;height:38px;padding-inline:12px;border-radius:var(--r-ctl);font-size:15px;font-weight:500;color:var(--text-2)}
+.nav > a:hover,.dd > button:hover,.dd.open > button{color:var(--text);background:var(--panel)}
+.dd{position:static}
+.dd > button .i{width:15px;height:15px;transition:transform .2s}
+.dd.open > button .i{transform:rotate(180deg)}
+.menu{position:absolute;left:0;right:0;top:100%;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);box-shadow:0 24px 48px -24px rgba(39,39,40,.18);display:none}
+.dd.open .menu{display:block;animation:menu-in .18s ease-out}
+@keyframes menu-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.mega{max-width:1240px;margin-inline:auto;padding-inline:var(--gutter);display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr)) minmax(0,380px);gap:32px;padding-block:40px 44px}
+.mega h5{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin:0 0 18px}
+.mega ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.mega li a{display:flex;gap:12px;align-items:flex-start;padding:8px 10px;margin-inline:-10px;border-radius:10px}
+.mega li a:hover{background:var(--canvas)}
+.mega li .tile{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;flex:none}
+.mega li .tile .i{width:17px;height:17px}
+.mega li b{display:block;font-size:16px;font-weight:500;color:var(--text)}
+.mega li small{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+.mega-card{border:1px solid var(--border);border-radius:var(--r-card);padding:28px 30px;display:flex;flex-direction:column;gap:12px;align-self:start;background:linear-gradient(180deg,var(--brand-subtle),#fff 70%)}
+.mega-card h4{font-size:20px;font-weight:600;letter-spacing:-.015em}
+.mega-card p{font-size:14.5px;line-height:1.6;color:var(--muted)}
+.mega-card .link{margin-top:6px;font-size:14.5px}
+@media (max-width:1180px){.mega{gap:24px}.mega-card{padding:22px}}
+.hdr-cta{display:flex;align-items:center;gap:6px}
+.login{font-size:15px;font-weight:500;color:var(--text-2);padding-inline:12px;height:38px;display:inline-flex;align-items:center;border-radius:var(--r-ctl)}
+.login:hover{color:var(--text);background:var(--panel)}
+.hdr .btn{height:40px;font-size:15px;padding-inline:16px}
+.burger{display:none;width:40px;height:40px;border-radius:var(--r-ctl);place-items:center;border:1px solid var(--border)}
+.mnav{display:none}
+@media (max-width:1060px){
+  .nav,.login{display:none}
+  .hdr-cta{margin-left:auto}
+  .burger{display:grid}
+  .mnav{position:fixed;inset:calc(68px + env(safe-area-inset-top,0px)) 0 0 0;background:var(--surface);z-index:49;overflow:auto;padding:8px var(--gutter) 32px;border-top:1px solid var(--border)}
+  .mnav.open{display:block}
+  .mnav details{border-bottom:1px solid var(--border)}
+  .mnav summary,.mnav > a{display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-size:17px;font-weight:600;list-style:none;cursor:pointer}
+  .mnav > a{border-bottom:1px solid var(--border)}
+  .mnav summary::-webkit-details-marker{display:none}
+  .mnav details[open] summary .i{transform:rotate(180deg)}
+  .mnav details a{display:block;padding:10px 0 10px 12px;color:var(--muted);font-weight:500}
+  .mnav details > div{padding-bottom:12px}
+  .mnav .mbtns{display:grid;gap:10px;margin-top:24px}
+  .mnav .mbtns .btn{height:48px}
+}
+
+/* ───────── Hero ───────── */
+.hero{padding-block:80px;overflow:clip}
+.hero .wrap,.report .wrap{max-width:calc(1240px + var(--gutter) * 2)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,520fr) minmax(0,686fr);gap:35px;align-items:start}
+.hero-copy{display:flex;flex-direction:column;gap:20px;min-width:0;padding-top:12px}
+.hero h1{font-size:clamp(46px,5.4vw,80px)}
+.hero h1 .hl{color:var(--primary)}
+@media (max-width:1060px){.br-d{display:none}}
+.hero-act{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.proof{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--muted)}
+.hero-art{position:relative;min-width:0;container-type:inline-size}
+.panel-teal{position:relative;aspect-ratio:686/631;background:var(--primary);border-radius:var(--r-panel);overflow:hidden}
+.panel-teal::before{content:"";position:absolute;width:560px;height:560px;right:-160px;top:-200px;border-radius:50%;background:radial-gradient(closest-side, rgba(92,199,192,.55), transparent)}
+.panel-teal::after{content:"";position:absolute;width:420px;height:420px;left:-180px;bottom:-220px;border-radius:50%;background:radial-gradient(closest-side, rgba(255,255,255,.14), transparent)}
+/* Browser window that bleeds off the panel's right and bottom edges */
+.win{position:absolute;left:8%;top:9%;width:118%;border-radius:14px;background:#fff;box-shadow:0 30px 70px -18px rgba(5,40,38,.55);overflow:hidden;z-index:1}
+.win-bar{height:30px;display:flex;align-items:center;gap:6px;padding-inline:12px;background:#F6F8FA;border-bottom:1px solid var(--line-subtle)}
+.win-bar i{width:9px;height:9px;border-radius:50%;background:#D9DDE5}
+.win-bar span{margin-left:14px;height:18px;width:38%;border-radius:6px;background:#fff;border:1px solid var(--line-subtle);font-size:10px;color:var(--faint);display:flex;align-items:center;padding-inline:8px}
+.hero-art .float{position:absolute;z-index:3;zoom:var(--fz,1)}
+.hf1{left:calc(44cqw / var(--fz,1));top:calc(-4.6cqw / var(--fz,1))}
+.hf2{left:calc(-5cqw / var(--fz,1));top:calc(14cqw / var(--fz,1))}
+.hf3{left:calc(42cqw / var(--fz,1));top:calc(70cqw / var(--fz,1))}
+.hf4{left:calc(-9cqw / var(--fz,1));top:calc(50cqw / var(--fz,1))}
+.float .spark-s{display:flex;align-items:flex-end;gap:3px;height:26px;margin-left:4px}
+.float .spark-s i{width:5px;border-radius:2px;background:#BFE3E0}
+.float .spark-s i:last-child{background:var(--brand)}
+.float .num-up{display:flex;align-items:baseline;gap:8px}
+@media (max-width:1060px){
+  .hero{padding-block:32px 56px}
+  .hero .wrap{grid-template-columns:1fr;gap:56px}
+  .hero-art{width:min(88%,686px);margin-inline:auto}
+}
+@media (max-width:560px){.hero-act .btn{width:100%}}
+
+/* ───────── Scaled HTML recreations of iBroka screens ───────── */
+.scaler{--s:.6;position:relative;height:calc(var(--h) * var(--s) * 1px)}
+.frame{position:absolute;top:0;left:0;transform-origin:0 0;transform:scale(var(--s));width:calc(var(--w) * 1px);height:calc(var(--h) * 1px);overflow:hidden;background:var(--page);font-size:13px;color:var(--text)}
+.app{display:grid;grid-template-columns:251px 1fr;height:100%}
+.sb{background:var(--chrome);box-shadow:0 4px 4px 0 rgba(197,207,220,.44);padding:20px;display:flex;flex-direction:column;gap:18px;position:relative;z-index:1}
+.sb .brand{display:flex;align-items:center;justify-content:space-between}
+.sb .brand img{height:26px}
+.sb .brand .i{width:18px;height:18px;color:var(--text)}
+.sb .search{height:44px;border-radius:10px;background:var(--panel);display:flex;align-items:center;gap:10px;padding-inline:16px;color:var(--faint);font-size:14px}
+.sb .search .i{width:17px;height:17px;color:var(--muted)}
+.sb ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.sb li{display:flex;align-items:center;gap:10px;height:42px;padding:0 10px 0 18px;border-radius:8px;font-size:14.5px;color:var(--text)}
+.sb li .i{width:18px;height:18px}
+.sb li .chev{margin-left:auto;width:14px;height:14px;color:var(--muted)}
+.sb li.mod{font-weight:500}
+.sb li.mod .i:first-child{color:var(--primary)}
+.sb li.sub{height:38px;padding-left:46px}
+.sb li.on{background:var(--brand-subtle);color:var(--primary);font-weight:500}
+.sb .user{margin-top:auto;display:flex;align-items:center;gap:10px;border-top:1px solid var(--line-subtle);padding-top:14px}
+.sb .user .av{width:36px;height:36px;font-size:13px;background:var(--avatar)}
+.sb .user b{display:block;font-size:14px;font-weight:500;line-height:1.2}.sb .user small{font-size:11.5px;color:var(--muted)}
+.main{display:flex;flex-direction:column;min-width:0}
+.topbar{display:flex;align-items:center;gap:12px;height:72px;padding:0 40px;background:var(--surface);box-shadow:0 4px 4px 0 rgba(197,207,220,.30)}
+.crumb{margin-right:auto;font-size:14px;color:#737373}
+.crumb b{color:var(--primary);font-weight:500}
+.rbtn{width:42px;height:42px;border-radius:50%;background:var(--canvas);display:grid;place-items:center;color:var(--text);position:relative}
+.rbtn .i{width:19px;height:19px}
+.rbtn b{position:absolute;top:6px;right:7px;width:9px;height:9px;border-radius:50%;background:var(--danger);box-shadow:0 0 0 2px var(--canvas)}
+.page{padding:26px 40px;display:grid;gap:18px;align-content:start}
+.ph{display:flex;justify-content:space-between;align-items:flex-end}
+.ph h3{font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.ph p{color:var(--muted);font-size:14px;margin-top:4px}
+.ph .acts{display:flex;gap:8px}
+.abtn{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;border-radius:8px;font-size:13.5px;font-weight:600;background:var(--primary);color:#fff}
+.abtn.dk{background:var(--text)}
+.abtn .i{width:15px;height:15px}
+.sums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.sum{background:var(--surface);border-radius:10px;box-shadow:var(--shadow-card);padding:16px;display:flex;gap:12px;align-items:flex-start}
+.sum .tile{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;flex:none}
+.sum .tile .i{width:20px;height:20px}
+.sum small{display:block;font-size:12.5px;color:var(--muted)}
+.sum strong{display:block;font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.25}
+.sum .d{font-size:11.5px;font-weight:500}.sum .d.up{color:var(--ok-fg)}.sum .d.dn{color:var(--bad-fg)}
+.cardx{background:var(--surface);border-radius:10px;box-shadow:var(--shadow-card);overflow:hidden;min-width:0}
+.cardx-h{display:flex;align-items:center;gap:10px;padding:14px 18px}
+.cardx-h b{font-size:16px;font-weight:600;margin-right:auto}
+.qf{display:flex;align-items:center;gap:6px;height:32px;padding:0 10px;border:1px solid var(--border);border-radius:8px;font-size:12.5px;color:var(--subtle)}
+.qf .i{width:13px;height:13px}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{height:38px;background:var(--header);color:var(--muted);font-weight:600;text-align:left;padding:0 14px;font-size:12.5px;white-space:nowrap}
+.tbl td{height:42px;padding:0 14px;border-top:1px solid var(--line-row);white-space:nowrap}
+.tbl td.nm{font-weight:500}
+.tbl td.lk{color:var(--primary);font-weight:500}
+.tbl .r{text-align:right}
+.tbl .dots{color:var(--faint);font-weight:700;letter-spacing:1px}
+svg.chart text{font-family:var(--font);fill:var(--muted);font-size:10px}
+
+/* Floating UI cards */
+.float{background:var(--surface);border-radius:16px;box-shadow:var(--shadow-float);padding:12px 14px;display:flex;gap:12px;align-items:center;font-size:13px;animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.float .ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none}
+.float .ico .i{width:18px;height:18px}
+.float b{display:block;font-size:13.5px;font-weight:600;white-space:nowrap}
+.float small{color:var(--muted);font-size:12px;white-space:nowrap}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero-art .float{animation:rise .7s cubic-bezier(.2,.7,.2,1) both,breathe 4.2s ease-in-out infinite}
+.hf1{animation-delay:.3s,1.2s}.hf2{animation-delay:.45s,2.3s}.hf3{animation-delay:.6s,1.7s}.hf4{animation-delay:.75s,2.9s}
+@keyframes breathe{0%,100%{scale:1;box-shadow:var(--shadow-float)}50%{scale:1.035;box-shadow:0 1px 2px rgba(39,39,40,.06),0 22px 44px -12px rgba(18,90,86,.32)}}
+
+/* ───────── Statement ───────── */
+.noise{position:relative;padding-block:110px;overflow:clip}
+.wave{position:absolute;width:clamp(150px,20.6vw,297px);aspect-ratio:297/287;pointer-events:none}
+.wave svg{display:block;width:100%;height:100%}
+.wave.w1{left:0;top:0}
+.wave.w2{right:0;bottom:0;rotate:180deg}
+.wave.tr{right:0;top:0;scale:-1 1}
+.wave.bl{left:0;bottom:0;scale:1 -1}
+.noise .statement{position:relative;z-index:1;font-size:clamp(30px,3.8vw,50px);font-weight:600;letter-spacing:-.03em;line-height:1.1;text-align:center;max-width:22ch;margin-inline:auto}
+.noise .statement span{color:var(--primary)}
+.noise .after{position:relative;z-index:1;text-align:center;margin:22px auto 0;color:var(--muted);font-size:18px;max-width:46ch}
+@media (max-width:960px){.noise{padding-block:72px}}
+
+/* ───────── Modules carousel ───────── */
+.mods{padding-block:clamp(72px,9vw,120px);overflow:clip;background:var(--canvas)}
+.head-c{display:grid;justify-items:center;text-align:center;gap:18px;margin-bottom:56px}
+.head-c .lead{text-align:center}
+.stage{position:relative;height:260px;perspective:1400px;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.mcard{position:absolute;left:50%;top:50%;width:210px;height:190px;margin:-95px 0 0 -105px;border-radius:24px;background:#E4E9EF;color:var(--subtle);display:grid;place-items:center;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .5s,background-color .35s,color .35s,box-shadow .35s}
+.mcard .i{width:68px;height:68px;stroke-width:1.6}
+.mcard.on{background:var(--primary);color:#fff;box-shadow:0 24px 48px -16px rgba(36,122,117,.6)}
+.mcard:not(.on):hover{color:var(--text)}
+.mod-name{text-align:center;font-size:clamp(24px,3vw,32px);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-top:28px;min-height:1.2em}
+.mod-ctrl{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
+.dashes{display:flex;gap:8px;align-items:center}
+.dashes button{width:28px;height:20px;display:grid;place-items:center}
+.dashes button::before{content:"";width:22px;height:5px;border-radius:999px;background:#D3D9E1;transition:width .3s,background .3s}
+.dashes button[aria-selected="true"]{width:52px}
+.dashes button[aria-selected="true"]::before{width:48px;background:var(--brand)}
+.arw{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;color:var(--text-2);background:var(--surface)}
+.arw:hover{border-color:#C2C2C2;color:var(--text)}
+.arw .i{width:18px;height:18px}
+.arw.dark{background:var(--text);color:#fff;border-color:var(--text)}
+.mod-body{max-width:720px;margin:36px auto 0;text-align:center;display:grid;gap:14px;justify-items:center;transition:opacity .25s,transform .25s}
+.mod-body.swap{opacity:0;transform:translateY(6px)}
+.mod-body h3{font-size:clamp(20px,2.2vw,24px);font-weight:600;color:var(--primary);letter-spacing:-.015em}
+.mod-body p{font-size:18px;line-height:1.65;color:var(--text-2)}
+.mod-body .btn{margin-top:10px}
+@media (max-width:640px){
+  .stage{height:190px}
+  .mcard{width:136px;height:126px;margin:-63px 0 0 -68px;border-radius:20px}
+  .mcard .i{width:44px;height:44px}
+  .mod-body p{font-size:16px}
+  .dashes{gap:2px}
+  .dashes button{width:20px}.dashes button::before{width:14px}
+  .dashes button[aria-selected="true"]{width:34px}.dashes button[aria-selected="true"]::before{width:30px}
+}
+
+/* ───────── Reporting ───────── */
+.report{padding-block:clamp(72px,9vw,120px);overflow:clip}
+.report .wrap{display:grid;grid-template-columns:minmax(0,661fr) minmax(0,544fr);gap:35px;align-items:center}
+.sec-cta{display:flex}
+.report .sec-cta{justify-content:flex-end;margin-top:-4px}
+.inds .sec-cta{margin-top:6px}
+.report-art{position:relative;min-width:0;container-type:inline-size}
+.panel-grey{position:relative;background:var(--panel);border-radius:var(--r-panel);aspect-ratio:661/620;overflow:hidden}
+/* CSS laptop: dark lid with the screen inside, a thin base below. Bleeds off the panel's left edge. */
+.laptop{position:absolute;left:-26cqw;top:9cqw;width:118cqw}
+.lid{background:#1B1E23;border-radius:22px 22px 6px 6px;padding:2.2% 2.2% 3%;box-shadow:0 30px 60px -24px rgba(39,39,40,.45)}
+.lid .screen{border-radius:8px;overflow:hidden;background:#fff}
+.base{height:2.4cqw;margin:0 -5%;background:linear-gradient(#D5D9DF,#AEB4BD);border-radius:0 0 18px 18px;position:relative}
+.base::before{content:"";position:absolute;left:50%;top:0;translate:-50% 0;width:16%;height:40%;background:#9AA1AB;border-radius:0 0 8px 8px}
+.report-copy{display:grid;gap:24px;min-width:0}
+.insight{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;display:grid;gap:16px;box-shadow:0 1px 2px rgba(39,39,40,.04)}
+.ins-top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted);font-weight:500}
+.ins-num{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.ins-num strong{font-size:60px;line-height:1;font-weight:600;letter-spacing:-.045em}
+.ins-num span{color:var(--muted);font-size:15px}
+.spark{display:flex;align-items:flex-end;gap:4px;height:56px}
+.spark i{flex:1;border-radius:3px;background:#BFE3E0}
+.spark i.hot{background:var(--brand)}
+.ins-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--border);font-size:13.5px;color:var(--muted)}
+.ins-foot .link{font-size:13.5px}
+.minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mini{border:1px solid var(--border);border-radius:16px;padding:16px;display:grid;gap:12px;align-content:start}
+.mini .vis{height:52px;border-radius:10px;background:var(--canvas);display:flex;align-items:center;justify-content:center;gap:6px;padding:8px}
+.mini h4{font-size:15px;font-weight:600}
+.mini p{font-size:13.5px;color:var(--muted);line-height:1.5}
+.vbars{display:flex;align-items:flex-end;gap:4px;height:100%}
+.vbars i{width:8px;border-radius:2px;background:var(--brand)}
+.ring{width:36px;height:36px}
+.aging{display:flex;width:80%;height:10px;border-radius:999px;overflow:hidden}
+.aging i{height:100%}
+@media (max-width:1000px){
+  .report .wrap{grid-template-columns:1fr;gap:40px}
+  .report-art{order:2}
+  .panel-grey{aspect-ratio:auto;height:min(66cqw,460px)}
+  .laptop{left:-4cqw;top:6cqw;width:min(104cqw,720px)}
+}
+@media (max-width:560px){.minis{grid-template-columns:1fr}.panel-grey{height:min(72cqw,340px)}}
+
+/* ───────── Who it's for (card row) ───────── */
+.inds{padding-block:clamp(72px,9vw,120px);overflow:clip;border-top:1px solid var(--border)}
+.inds-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px}
+.inds-head > div{display:grid;gap:14px}
+.inds-head .lead{font-size:16px}
+.inds-nav{display:flex;gap:10px}
+.track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:calc(var(--bleed) * -1);padding-right:var(--bleed)}
+.track::-webkit-scrollbar{display:none}
+.track.drift{scroll-snap-type:none}
+.ind{flex:0 0 min(400px,84vw);scroll-snap-align:start;border:1px solid var(--border);border-radius:24px;padding:28px 28px 0;display:flex;flex-direction:column;gap:10px;overflow:hidden;background:var(--surface)}
+.ind h3{font-size:22px;font-weight:600;letter-spacing:-.02em}
+.ind > p{font-size:15px;color:var(--muted);max-width:34ch}
+.ind .link{font-size:14px;margin-top:4px}
+.scene{margin-top:18px;background:var(--panel);border-radius:18px 18px 0 0;height:240px;position:relative;overflow:hidden;padding:28px 24px 0}
+.ui{background:var(--surface);border-radius:14px;box-shadow:0 12px 30px -12px rgba(39,39,40,.25);padding:14px 16px;font-size:13px;display:grid;gap:10px}
+.ui header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ui header b{font-size:13.5px}
+.ui header small{color:var(--muted);font-size:11.5px}
+.ui .li{display:flex;align-items:center;gap:10px}
+.ui .li .grow{flex:1;min-width:0}
+.ui .li .grow b{display:block;font-weight:500;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ui .li .grow small{color:var(--muted);font-size:11.5px}
+.ui .amt{font-weight:600;font-size:13px}
+.ui .tot{display:flex;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border);font-weight:600}
+.thumb{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none}
+.thumb .i{width:16px;height:16px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.steps div{display:grid;gap:6px;font-size:11px;color:var(--muted)}
+.steps i{height:6px;border-radius:999px;background:var(--border)}
+.steps .done i{background:var(--brand)} .steps .now i{background:linear-gradient(90deg,var(--warn-dot) 60%,var(--border) 60%)}
+.mat{display:grid;gap:5px;font-size:12px}
+.mat span{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.bar{height:6px;border-radius:999px;background:var(--panel);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:inherit;background:var(--brand)}
+.tog{width:34px;height:20px;border-radius:999px;background:var(--primary);position:relative;flex:none}
+.tog::after{content:"";position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+.tog.off{background:#C2C2C2}.tog.off::after{right:auto;left:2px}
+.chipi{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px 0 4px;border:1px solid var(--border);border-radius:999px;font-size:11.5px;font-weight:500;white-space:nowrap}
+.chipi i{width:16px;height:16px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:8px;font-weight:700;color:#fff}
+
+/* ───────── Night: our approach ───────── */
+.night{background:var(--night);color:var(--night-text);padding-block:clamp(80px,10vw,136px);overflow:clip}
+.night .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:center}
+.night .ctx{color:var(--night-muted)}
+.night .ctx .av{background:var(--primary)}
+.night h2{font-size:clamp(44px,6vw,88px);margin-top:20px}
+.night h2 span{color:var(--brand-glow)}
+.night .lead{color:var(--night-muted);margin-top:24px}
+.points{display:grid;gap:12px;margin-top:36px;max-width:440px}
+.points div{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--night-text);padding:12px 14px;border:1px solid var(--night-line);border-radius:12px}
+.points .i{width:18px;height:18px;color:var(--brand-glow)}
+.orb{position:relative;width:100%;max-width:600px;aspect-ratio:1;margin-inline:auto;container-type:inline-size}
+.orb-rings{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.orb-rings circle{fill:none}
+.ring-outer{stroke:#2F6E6A;stroke-width:.3}
+.orb-rings .dot{fill:var(--brand)}
+.core{position:absolute;left:50%;top:50%;translate:-50% -50%;width:36%;aspect-ratio:1;display:grid;place-items:center}
+.core::before{content:"";position:absolute;inset:-10%;border-radius:50%;background:radial-gradient(closest-side,rgba(54,165,158,.35),transparent)}
+.core-mark{position:relative;width:78%;aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 1.67cqw 5cqw rgba(0,0,0,.35),0 3cqw 7cqw -1.5cqw rgba(36,122,117,.6)}
+.core-mark img{width:56%;height:auto}
+.sat{position:absolute;translate:-50% -50%;width:15%;aspect-ratio:1;border-radius:50%;background:#fff;box-shadow:0 2cqw 6cqw -1.5cqw rgba(0,0,0,.5);display:grid;place-items:center;transition:box-shadow .4s;animation:bob 6s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes bob{50%{translate:-50% calc(-50% - 1cqw)}}
+.sat .sl{position:absolute;left:50%;top:calc(100% + .9cqw);translate:-50% 0;font-size:max(8px,1.84cqw);font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--brand-glow);line-height:1;white-space:nowrap}
+.sat .si{width:8.6cqw;aspect-ratio:1;display:grid;place-items:center;color:var(--primary)}
+.sat .si .i{width:100%;height:100%;stroke-width:1.75}
+.sat.lit{box-shadow:0 0 0 .6cqw var(--brand),0 2cqw 6cqw -1.5cqw rgba(54,165,158,.6)}
+@media (max-width:1000px){.night .wrap{grid-template-columns:1fr;gap:56px}}
+
+/* ───────── Pricing ───────── */
+.pricing{position:relative;overflow:clip;padding-block:clamp(72px,9vw,120px);background:var(--canvas)}
+.pricing > .wrap{position:relative;z-index:1}
+.billing{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;margin-top:8px}
+.toggle{display:inline-flex;padding:5px;border:1px solid var(--border);border-radius:999px;background:var(--surface);box-shadow:0 1px 2px rgba(39,39,40,.04)}
+.toggle button{height:40px;padding-inline:22px;border-radius:999px;font-size:15px;font-weight:500;color:var(--text-2);transition:background .2s,color .2s}
+.toggle button[aria-pressed="true"]{background:var(--primary);color:#fff;font-weight:600}
+.save{font-size:13px;font-weight:500;color:var(--ok-fg);background:var(--ok-bg);padding:5px 10px;border-radius:999px}
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:8px}
+.plan{display:flex;flex-direction:column;padding:28px 26px 26px;background:var(--surface);border:1px solid var(--border);border-radius:20px;position:relative;min-width:0;box-shadow:0 1px 2px rgba(39,39,40,.04)}
+.plan.rec{border:2px solid var(--primary);padding:27px 25px 25px;box-shadow:0 24px 56px -24px rgba(36,122,117,.45)}
+.plan .flag{position:absolute;top:-14px;left:16px;background:var(--primary);color:#fff;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.plan h3{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.plan .desc{font-size:15.5px;line-height:1.45;color:var(--muted);margin-top:12px;min-height:4.4em}
+.price{display:flex;align-items:baseline;gap:6px;margin-top:22px;white-space:nowrap}
+.price strong{font-size:clamp(28px,2.25vw,32px);font-weight:700;letter-spacing:-.04em;line-height:1}
+.price span{font-size:15px;color:var(--muted)}
+.plan .from{font-size:13px;color:var(--muted);margin-top:8px}
+.plan ul{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:14px;font-size:15px;color:var(--text);flex:1;align-content:start}
+.plan li{display:flex;gap:12px;align-items:flex-start}
+.plan li .i{width:18px;height:18px;color:var(--faint);stroke-width:2.2;margin-top:2px}
+.plan.rec li .i{color:var(--primary)}
+.plan .note{display:flex;gap:10px;align-items:flex-start;margin-top:26px;padding:12px 14px;background:var(--canvas);border-radius:12px;font-size:12.5px;line-height:1.5;color:var(--muted);min-height:82px}
+.plan .note .i{width:16px;height:16px;flex:none;margin-top:1px}
+.plan .btn{width:100%;margin-top:22px}
+.btn-outline{background:var(--surface);color:var(--primary);border:1.5px solid var(--primary)}
+.btn-outline:hover{background:var(--brand-subtle)}
+.plans-foot{display:grid;justify-items:center;gap:22px;margin-top:40px;text-align:center}
+.plans-foot p{font-size:16px;color:var(--text-2)}
+.plans-foot p a{color:var(--primary);font-weight:600}
+@media (max-width:1060px){.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.plan .note{min-height:0}}
+@media (max-width:560px){.plans{grid-template-columns:1fr}.plan .desc{min-height:0}}
+
+/* ───────── FAQ ───────── */
+.faq{padding-block:clamp(72px,9vw,120px)}
+.faq .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
+.faq-side{display:grid;gap:18px;position:sticky;top:110px}
+.qa{border-bottom:1px solid var(--border)}
+.qa:first-child{border-top:1px solid var(--border)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-size:17px;font-weight:500}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .pm{width:28px;height:28px;border-radius:50%;background:var(--panel);display:grid;place-items:center;flex:none;transition:transform .25s,background .2s,color .2s}
+.qa summary .pm .i{width:15px;height:15px;stroke-width:2.2}
+.qa[open] summary .pm{transform:rotate(180deg);background:var(--primary);color:#fff}
+.qa p{padding:0 44px 22px 0;color:var(--muted);font-size:16px;line-height:1.65}
+.faq-more{margin-top:32px}
+@media (max-width:900px){.faq .wrap{grid-template-columns:1fr;gap:32px}.faq-side{position:static}}
+
+/* ───────── Start (full-bleed teal) ───────── */
+.start{background:var(--primary);color:#fff;overflow:clip;padding-block:clamp(72px,9vw,112px);position:relative}
+.start::before{content:"";position:absolute;width:720px;height:720px;right:-220px;top:-300px;border-radius:50%;background:radial-gradient(closest-side, rgba(92,199,192,.5), transparent)}
+.start .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center;position:relative}
+.start-copy{display:flex;flex-direction:column;gap:28px;position:relative;z-index:1}
+.start h2{font-size:clamp(56px,8.4vw,124px);letter-spacing:-.045em;line-height:.98;color:#fff}
+.start p{font-size:18px;line-height:1.6;color:rgba(255,255,255,.9);max-width:42ch}
+.btn-white{background:#fff;color:var(--primary)}
+.btn-white:hover{background:var(--brand-subtle)}
+.partner{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:14.5px;color:rgba(255,255,255,.88);padding-top:24px;border-top:1px solid rgba(255,255,255,.25);max-width:520px}
+.partner a{color:#fff;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.partner a .i{width:16px;height:16px}
+/* Fanned policy cards (iBroka PolicyCard) */
+.start-art{position:relative;height:440px;min-width:0}
+.pc{position:absolute;width:360px;background:#fff;color:var(--text);border-radius:16px;padding:18px;box-shadow:0 30px 60px -20px rgba(5,40,38,.55);display:grid;gap:14px;font-size:13px}
+.pc-1{right:4%;top:0;rotate:6deg;opacity:.6}
+.pc-2{right:12%;top:40px;rotate:-3deg;opacity:.85}
+.pc-3{right:20%;top:96px;rotate:0deg}
+.pc header{display:flex;align-items:center;gap:12px}
+.pc header .tile{width:40px;height:40px;border-radius:10px;display:grid;place-items:center}
+.pc header .tile .i{width:20px;height:20px}
+.pc header b{display:block;font-size:15px;font-weight:600}
+.pc header small{color:var(--muted)}
+.pc header .pill{margin-left:auto}
+.pc dl{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin:0}
+.pc dt{font-size:11.5px;color:var(--muted)}
+.pc dd{margin:2px 0 0;font-weight:500}
+.pc .pc-f{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--line-subtle)}
+.pc .pc-f strong{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.pc .exp{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--warn-fg);background:var(--warn-bg);padding:4px 9px;border-radius:999px}
+.pc .exp .i{width:13px;height:13px}
+@media (max-width:1100px){.start .wrap{grid-template-columns:1fr;gap:40px}.start-art{height:380px;max-width:520px;width:100%;margin-inline:auto}}
+@media (max-width:560px){.pc{width:300px}.pc-1{right:0}.pc-2{right:4%}.pc-3{right:8%}.start-art{height:360px}}
+
+/* ───────── Footer ───────── */
+.ftr{padding-block:56px 32px;font-size:14px}
+.ftr .top{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(4,minmax(0,1fr));gap:32px}
+.ftr .about{display:grid;gap:14px;align-content:start}
+.ftr .about img{height:30px;width:auto}
+.ftr .about p{color:var(--muted);max-width:30ch}
+.ftr h4{font-size:14px;font-weight:600;margin-bottom:14px}
+.ftr ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ftr ul a{color:var(--muted)}
+.ftr ul a:hover{color:var(--primary)}
+.ftr .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+.ftr .base nav{display:flex;gap:20px}
+@media (max-width:900px){.ftr .top{grid-template-columns:repeat(2,minmax(0,1fr))}.ftr .about{grid-column:1 / -1}}
+@media (max-width:640px){.inds-head{flex-direction:column;align-items:flex-start}}
+
+/* Scroll reveal (added by JS only) */
+.rv{opacity:0;translate:0 36px;transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--rd,0s),translate 1s cubic-bezier(.2,.7,.2,1) var(--rd,0s)}
+.rv[data-rv="left"]{translate:-48px 0}
+.rv[data-rv="right"]{translate:48px 0}
+.rv[data-rv="zoom"]{translate:none;scale:.94;transition-property:opacity,scale}
+.rv[data-rv="fade"]{translate:none}
+.rv.in{opacity:1;translate:none;scale:none}
+@media (max-width:900px){.rv[data-rv="left"],.rv[data-rv="right"]{translate:0 28px}}
+/* Page slider */
+.vs{position:fixed;right:14px;top:50%;translate:0 -50%;z-index:60;height:min(36vh,280px);width:16px;touch-action:none;user-select:none;-webkit-user-select:none;opacity:.55;transition:opacity .25s}
+.vs:hover,.vs.drag,.vs:focus-visible{opacity:1}
+.vs[hidden]{display:none}
+.vs .vs-t{position:absolute;left:50%;top:0;bottom:0;width:2px;translate:-50% 0;border-radius:2px;background:rgba(102,107,115,.28);cursor:pointer}
+.vs .vs-t::before{content:"";position:absolute;inset:0 -7px}
+.vs .vs-f{position:absolute;left:0;top:0;width:100%;height:calc(var(--p,0) * 100%);border-radius:2px;background:var(--brand)}
+.vs .vs-k{position:absolute;z-index:2;left:50%;width:8px;height:8px;translate:-50% -50%;border-radius:50%;background:var(--brand);box-shadow:0 0 0 3px rgba(54,165,158,.2);cursor:grab;transition:scale .15s}
+.vs:hover .vs-k,.vs.drag .vs-k{scale:1.3}
+.vs.drag .vs-k{cursor:grabbing}
+.vs:focus-visible{outline:none;box-shadow:none}
+.vs:focus-visible .vs-k{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--brand)}
+.vs .vs-d{position:absolute;z-index:1;left:50%;width:4px;height:4px;translate:-50% -50%;border-radius:50%;background:rgba(102,107,115,.5);border:0;padding:0;cursor:pointer}
+.vs .vs-d::before{content:"";position:absolute;inset:-4px}
+.vs .vs-d.on{background:var(--brand)}
+.vs .vs-l,.vs .vs-d .vs-tip{position:absolute;right:calc(100% + 10px);translate:0 -50%;white-space:nowrap;font-size:12px;font-weight:500;color:var(--text-2);background:var(--surface);border:1px solid var(--border);padding:3px 8px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s}
+.vs .vs-d .vs-tip{right:calc(100% + 12px);top:50%}
+.vs:hover .vs-l,.vs.drag .vs-l{opacity:1}
+.vs .vs-d:hover .vs-tip{opacity:1}
+.vs:has(.vs-d:hover) .vs-l{opacity:0}
+@media (max-width:640px){.vs{right:3px;width:10px;height:min(30vh,220px)}.vs .vs-k{width:7px;height:7px}.vs .vs-d{width:3px;height:3px}.vs .vs-l,.vs .vs-d .vs-tip{display:none}}
+@media print{.vs{display:none}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*:not(.rv),*::before,*::after{animation:none!important;transition:none!important}.rv{translate:none!important;scale:none!important}}
+.nav > a[aria-current="page"],.nav > a[aria-current="page"]:hover{color:var(--primary);background:none}
+.mnav > a[aria-current="page"]{color:var(--primary)}
+</style>
+</head>
+<body>
+<!-- Icon sprite (Lucide-style outlines) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+    <symbol id="i-shield-c" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.66V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.66"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M16 14v4M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M18 17V9M13 17V5M8 17v-3"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M16 15l-3-3 3-3"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65M22 12.65l-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54Z"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5l-5-5L2 17M16 7h6v6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></symbol>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8zM14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  </defs>
+</svg>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="iBroka home"><img src="assets/ibroka-logo.svg" alt="iBroka" width="112" height="30"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#top" aria-current="page">Home</a>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Platform <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:3">
+          <div><h5>Broking</h5><ul>
+            <li><a href="#modules" data-mod="0"><span class="tile t-teal"><svg class="i"><use href="#i-users"/></svg></span><span><b>Clients</b><small>Individuals, companies &amp; KYC</small></span></a></li>
+            <li><a href="#modules" data-mod="1"><span class="tile t-teal"><svg class="i"><use href="#i-shield"/></svg></span><span><b>Policies</b><small>Quotes, cover &amp; renewals</small></span></a></li>
+            <li><a href="#modules" data-mod="3"><span class="tile t-teal"><svg class="i"><use href="#i-alert"/></svg></span><span><b>Claims</b><small>Notification to settlement</small></span></a></li>
+          </ul></div>
+          <div><h5>Money</h5><ul>
+            <li><a href="#modules" data-mod="5"><span class="tile t-green"><svg class="i"><use href="#i-wallet"/></svg></span><span><b>Receive Premium</b><small>Receipts, debit notes &amp; balances</small></span></a></li>
+            <li><a href="#modules" data-mod="6"><span class="tile t-green"><svg class="i"><use href="#i-send"/></svg></span><span><b>Remittance</b><small>Pay insurers, net of commission</small></span></a></li>
+            <li><a href="#modules" data-mod="7"><span class="tile t-green"><svg class="i"><use href="#i-calc"/></svg></span><span><b>Accounting</b><small>Ledgers, journals &amp; bank rec</small></span></a></li>
+          </ul></div>
+          <div><h5>Control</h5><ul>
+            <li><a href="#modules" data-mod="2"><span class="tile t-blue"><svg class="i"><use href="#i-clip"/></svg></span><span><b>Approvals</b><small>Sign-off before cover is bound</small></span></a></li>
+            <li><a href="#modules" data-mod="8"><span class="tile t-blue"><svg class="i"><use href="#i-chart"/></svg></span><span><b>Reports</b><small>Production, aging &amp; exposure</small></span></a></li>
+            <li><a href="#modules" data-mod="9"><span class="tile t-blue"><svg class="i"><use href="#i-person"/></svg></span><span><b>Human Resources</b><small>Staff, leave &amp; payroll</small></span></a></li>
+          </ul></div>
+          <div class="mega-card"><h4>Built for insurance brokers</h4><p>One platform for the whole broking cycle: the client, the policy, the premium you collect and the remittance you owe each insurer, all on the same record.</p><a class="link" href="#modules">See every module <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+        </div></div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Who it's for <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2">
+          <div><h5>By book of business</h5><ul>
+            <li><a href="#industries"><span class="tile t-amber"><svg class="i"><use href="#i-building"/></svg></span><span><b>Corporate &amp; Commercial</b><small>Fire, all risk &amp; large accounts</small></span></a></li>
+            <li><a href="#industries"><span class="tile t-amber"><svg class="i"><use href="#i-car"/></svg></span><span><b>Motor &amp; Retail</b><small>High volume, fast renewals</small></span></a></li>
+            <li><a href="#industries"><span class="tile t-amber"><svg class="i"><use href="#i-heart"/></svg></span><span><b>Employee Benefits</b><small>Group life &amp; health schemes</small></span></a></li>
+          </ul></div>
+          <div><h5>By firm</h5><ul>
+            <li><a href="#industries"><span class="tile t-purple"><svg class="i"><use href="#i-plane"/></svg></span><span><b>Specialty Risks</b><small>Aviation, energy &amp; transit</small></span></a></li>
+            <li><a href="#industries"><span class="tile t-purple"><svg class="i"><use href="#i-sprout"/></svg></span><span><b>Growing Brokerages</b><small>Start lean, add modules later</small></span></a></li>
+          </ul></div>
+          <div class="mega-card"><h4>Your book, your way</h4><p>Whether you place one large energy risk or a thousand motor policies a month, iBroka keeps every client, policy and naira traceable.</p><a class="link" href="#industries">Explore who it's for <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+        </div></div>
+      </div>
+      <a href="#pricing">Pricing</a>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Resources <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2">
+          <div><h5>Learn</h5><ul><li><a href="#"><span class="tile t-ink"><svg class="i"><use href="#i-quote"/></svg></span><span><b>Customer Stories</b><small>How brokers use iBroka</small></span></a></li></ul></div>
+          <div><h5>Get help</h5><ul><li><a href="#faq"><span class="tile t-ink"><svg class="i"><use href="#i-info"/></svg></span><span><b>FAQs</b><small>Answers to common questions</small></span></a></li><li><a href="#"><span class="tile t-ink"><svg class="i"><use href="#i-buoy"/></svg></span><span><b>Help &amp; Support</b><small>Guides, tutorials &amp; our team</small></span></a></li></ul></div>
+          <div class="mega-card"><h4>Moving off spreadsheets?</h4><p>Our team helps you bring over clients, open policies and opening balances, so you start on iBroka with a clean book.</p><a class="link" href="#">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+        </div></div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Company <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2">
+          <div><h5>About</h5><ul><li><a href="#"><span class="tile t-ink"><svg class="i"><use href="#i-building"/></svg></span><span><b>About Us</b><small>Who we are &amp; what we build</small></span></a></li><li><a href="#"><span class="tile t-ink"><svg class="i"><use href="#i-layers"/></svg></span><span><b>Partners</b><small>Bring iBroka to your network</small></span></a></li></ul></div>
+          <div><h5>Get in touch</h5><ul><li><a href="#"><span class="tile t-ink"><svg class="i"><use href="#i-quote"/></svg></span><span><b>Contact Us</b><small>Talk to sales or support</small></span></a></li></ul></div>
+          <div class="mega-card"><h4>Let's talk about your brokerage</h4><p>See how iBroka can run your clients, policies, premiums and remittances from one connected platform.</p><a class="link" href="#pricing">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+        </div></div>
+      </div>
+    </nav>
+    <div class="hdr-cta">
+      <a class="login" href="#">Log in</a>
+      <a class="btn btn-primary" href="#pricing">Get Started</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <a href="#top" aria-current="page">Home</a>
+  <details><summary>Platform <svg class="i"><use href="#i-down"/></svg></summary><div id="mnav-mods"></div></details>
+  <details><summary>Who it's for <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="#industries">Corporate &amp; Commercial</a><a href="#industries">Motor &amp; Retail</a><a href="#industries">Employee Benefits</a><a href="#industries">Specialty Risks</a><a href="#industries">Growing Brokerages</a>
+  </div></details>
+  <a href="#pricing">Pricing</a>
+  <details><summary>Resources <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="#">Customer Stories</a><a href="#faq">FAQs</a><a href="#">Help &amp; Support</a>
+  </div></details>
+  <details><summary>Company <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="#">About Us</a><a href="#">Partners</a><a href="#">Contact Us</a>
+  </div></details>
+  <div class="mbtns">
+    <a class="btn btn-primary" href="#pricing">Get Started</a>
+    <a class="btn btn-secondary" href="#">Log in</a>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" data-vs="Overview">
+    <div class="wrap">
+      <div class="hero-copy">
+        <h1 class="display">Run your brokerage from <span class="hl">one<br class="br-d"> connected platform.</span></h1>
+        <p class="lead">iBroka brings clients, policies, claims, premium collection and insurer remittance into one cloud system, so every policy and every naira can be traced from quote to settlement.</p>
+        <div class="hero-act">
+          <a class="btn btn-primary btn-lg" href="#pricing">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+          <a class="link" href="#modules">See the platform <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="proof">
+          <span class="stack">
+            <span class="av"><svg class="i"><use href="#i-users"/></svg></span>
+            <span class="av"><svg class="i"><use href="#i-shield"/></svg></span>
+            <span class="av"><svg class="i"><use href="#i-wallet"/></svg></span>
+            <span class="av"><svg class="i"><use href="#i-send"/></svg></span>
+          </span>
+          Free trial. Cloud-based. Built for insurance brokers.
+        </div>
+      </div>
+
+      <div class="hero-art" role="img" aria-label="The iBroka Policies screen, shown with sample data">
+        <div class="panel-teal">
+          <div class="win">
+            <div class="win-bar"><i></i><i></i><i></i><span>app.ibroka.ng/insurance/policies</span></div>
+            <div class="scaler" data-w="1180" style="--w:1180;--h:820">
+              <div class="frame" aria-hidden="true">
+                <div class="app">
+                  <aside class="sb">
+                    <div class="brand"><img src="assets/ibroka-logo.svg" alt=""><svg class="i"><use href="#i-panel"/></svg></div>
+                    <div class="search"><svg class="i"><use href="#i-search"/></svg>Search menu</div>
+                    <ul>
+                      <li><svg class="i"><use href="#i-grid"/></svg>Dashboard</li>
+                      <li><svg class="i"><use href="#i-person"/></svg>Human Resources<svg class="i chev"><use href="#i-down"/></svg></li>
+                      <li class="mod"><svg class="i"><use href="#i-shield"/></svg>Insurance<svg class="i chev" style="rotate:180deg"><use href="#i-down"/></svg></li>
+                      <li class="sub">Clients</li>
+                      <li class="sub on">Policies</li>
+                      <li class="sub">Approval Management</li>
+                      <li class="sub">Claims</li>
+                      <li class="sub">Insurers</li>
+                      <li><svg class="i"><use href="#i-calc"/></svg>Accounting<svg class="i chev"><use href="#i-down"/></svg></li>
+                      <li><svg class="i"><use href="#i-send"/></svg>Account Broker<svg class="i chev"><use href="#i-down"/></svg></li>
+                      <li><svg class="i"><use href="#i-chart"/></svg>Reports<svg class="i chev"><use href="#i-down"/></svg></li>
+                    </ul>
+                    <div class="user"><span class="av">AO</span><span><b>Ada Obi</b><small>ada.obi@ibroka.ng</small></span></div>
+                  </aside>
+                  <div class="main">
+                    <div class="topbar">
+                      <span class="crumb">Insurance / <b>Policies</b></span>
+                      <span class="rbtn"><svg class="i"><use href="#i-bell"/></svg><b></b></span>
+                      <span class="rbtn"><svg class="i"><use href="#i-moon"/></svg></span>
+                    </div>
+                    <div class="page">
+                      <div class="ph">
+                        <div><h3>Policies</h3><p>Every policy you've placed, with its insurer, premium and renewal date.</p></div>
+                        <div class="acts"><span class="abtn"><svg class="i"><use href="#i-plus"/></svg>Add policy</span><span class="abtn dk"><svg class="i"><use href="#i-upload"/></svg>Export</span></div>
+                      </div>
+                      <div class="sums num">
+                        <div class="sum"><span class="tile t-teal"><svg class="i"><use href="#i-wallet"/></svg></span><div><small>Total premium</small><strong>₦48.6M</strong><span class="d up">↑ 12.4% vs 2025</span></div></div>
+                        <div class="sum"><span class="tile t-green"><svg class="i"><use href="#i-shield-c"/></svg></span><div><small>In force</small><strong>1,284</strong><span class="d up">↑ 38 this month</span></div></div>
+                        <div class="sum"><span class="tile t-amber"><svg class="i"><use href="#i-clock"/></svg></span><div><small>Expiring in 30 days</small><strong>46</strong><span class="d dn">12 not yet contacted</span></div></div>
+                        <div class="sum"><span class="tile t-purple"><svg class="i"><use href="#i-alert"/></svg></span><div><small>Open claims</small><strong>17</strong><span class="d up">↓ 3 vs Sep</span></div></div>
+                      </div>
+                      <div class="cardx">
+                        <div class="cardx-h"><b>All policies</b><span class="qf"><svg class="i"><use href="#i-search"/></svg>Search</span><span class="qf">Status: All <svg class="i"><use href="#i-down"/></svg></span><span class="qf"><svg class="i"><use href="#i-filter"/></svg>Filter</span></div>
+                        <table class="tbl num">
+                          <thead><tr><th>Policy no.</th><th>Client</th><th>Class</th><th>Insurer</th><th class="r">Premium (₦)</th><th>End date</th><th>Status</th><th></th></tr></thead>
+                          <tbody>
+                            <tr><td class="lk">POL-2026-00975</td><td class="nm">Kestrel Oil &amp; Gas Ltd</td><td>All Risk</td><td>Harbor General</td><td class="r">1,845,000.00</td><td>30 Oct 2026</td><td><span class="pill p-warn">Expiring</span></td><td class="dots">···</td></tr>
+                            <tr><td class="lk">POL-2026-00990</td><td class="nm">Chidi Okafor</td><td>Motor Comprehensive</td><td>Lagoon Mutual</td><td class="r">162,500.00</td><td>11 Jan 2027</td><td><span class="pill p-ok">Active</span></td><td class="dots">···</td></tr>
+                            <tr><td class="lk">POL-2026-00982</td><td class="nm">Northgate Technologies</td><td>Group Life</td><td>Savannah Life</td><td class="r">2,880,000.00</td><td>31 May 2027</td><td><span class="pill p-info">Pending approval</span></td><td class="dots">···</td></tr>
+                            <tr><td class="lk">POL-2026-00906</td><td class="nm">Bamidele Farms</td><td>Agric Insurance</td><td>Harbor General</td><td class="r">450,000.00</td><td>28 Feb 2027</td><td><span class="pill p-ok">Active</span></td><td class="dots">···</td></tr>
+                            <tr><td class="lk">POL-2026-00987</td><td class="nm">Adaeze Nwosu</td><td>Aviation Hull</td><td>Crestline Re</td><td class="r">6,164,000.00</td><td>25 Sep 2026</td><td><span class="pill p-bad">Expired</span></td><td class="dots">···</td></tr>
+                            <tr><td class="lk">POL-2026-00991</td><td class="nm">Tobi Logistics</td><td>Goods in Transit</td><td>Harbor General</td><td class="r">720,000.00</td><td>31 Jan 2027</td><td><span class="pill p-ok">Renewed</span></td><td class="dots">···</td></tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="float hf1">
+          <span class="ico t-amber"><svg class="i"><use href="#i-clock"/></svg></span>
+          <div><b class="num">POL-2026-00975 · renewal due</b><small>Kestrel Oil &amp; Gas · expires in 17 days</small></div>
+          <span class="pill p-warn">Expiring</span>
+        </div>
+        <div class="float hf2">
+          <span class="ico t-green"><svg class="i"><use href="#i-wallet"/></svg></span>
+          <div><b>Premium received</b><small class="num">Northgate Technologies · ₦2,880,000</small></div>
+        </div>
+        <div class="float hf3">
+          <span class="ico t-teal"><svg class="i"><use href="#i-trend"/></svg></span>
+          <div><small>Commission · October</small><span class="num-up"><b class="num">₦9.7M</b><span class="pill p-ok plain">↑ 12%</span></span></div>
+          <span class="spark-s" aria-hidden="true"><i style="height:35%"></i><i style="height:50%"></i><i style="height:42%"></i><i style="height:64%"></i><i style="height:58%"></i><i style="height:100%"></i></span>
+        </div>
+        <div class="float hf4">
+          <span class="ico t-blue"><svg class="i"><use href="#i-check-c"/></svg></span>
+          <div><b class="num">Claim CLM-0412 approved</b><small>Lagoon Mutual · ₦1,250,000</small></div>
+          <span class="pill p-info plain">Claims</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="noise" id="why" data-vs="Why iBroka">
+    <div class="wave w1" aria-hidden="true"></div>
+    <div class="wave w2" aria-hidden="true"></div>
+    <div class="wrap">
+      <h2 class="statement">A brokerage runs on trust and paperwork. <span>iBroka keeps the paperwork in one place.</span></h2>
+      <p class="after">The debit note, the premium receipt, the insurer's remittance and the renewal reminder are all the same policy record.</p>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section class="mods" id="modules" data-vs="Platform">
+    <div class="wrap">
+      <div class="head-c">
+        <span class="ctx"><span class="stack">
+          <span class="av"><svg class="i"><use href="#i-users"/></svg></span>
+          <span class="av"><svg class="i"><use href="#i-shield"/></svg></span>
+          <span class="av"><svg class="i"><use href="#i-wallet"/></svg></span>
+        </span><b>10 modules</b> <span class="teal">· one login</span></span>
+        <h2 class="h2">The whole broking cycle. <span class="teal">Connected.</span></h2>
+        <p class="lead">From the first quote to the insurer's remittance, every step happens on the same record.</p>
+      </div>
+      <div class="carousel" id="carousel" aria-roledescription="carousel" aria-label="iBroka modules">
+        <div class="stage" id="stage"></div>
+        <div class="mod-name" id="mod-name" aria-live="polite"></div>
+        <div class="mod-ctrl">
+          <button class="arw" type="button" id="prev" aria-label="Previous module"><svg class="i"><use href="#i-left"/></svg></button>
+          <div class="dashes" id="dashes" role="tablist" aria-label="Choose a module"></div>
+          <button class="arw" type="button" id="next" aria-label="Next module"><svg class="i"><use href="#i-right"/></svg></button>
+        </div>
+        <div class="mod-body" id="mod-body" role="tabpanel">
+          <h3 id="mod-tag"></h3>
+          <p id="mod-text"></p>
+          <a class="btn btn-primary" id="mod-learn" href="#">Learn more <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPORTING -->
+  <section class="report" data-vs="Reports">
+    <div class="wrap">
+      <div class="report-art" role="img" aria-label="The iBroka Insurance Reports screen, shown with sample data">
+        <div class="panel-grey">
+          <div class="laptop">
+            <div class="lid"><div class="screen">
+              <div class="scaler" data-w="1100" style="--w:1100;--h:700">
+                <div class="frame" aria-hidden="true">
+                  <div class="app">
+                    <aside class="sb">
+                      <div class="brand"><img src="assets/ibroka-logo.svg" alt=""><svg class="i"><use href="#i-panel"/></svg></div>
+                      <div class="search"><svg class="i"><use href="#i-search"/></svg>Search menu</div>
+                      <ul>
+                        <li><svg class="i"><use href="#i-grid"/></svg>Dashboard</li>
+                        <li><svg class="i"><use href="#i-shield"/></svg>Insurance<svg class="i chev"><use href="#i-down"/></svg></li>
+                        <li><svg class="i"><use href="#i-calc"/></svg>Accounting<svg class="i chev"><use href="#i-down"/></svg></li>
+                        <li><svg class="i"><use href="#i-send"/></svg>Account Broker<svg class="i chev"><use href="#i-down"/></svg></li>
+                        <li class="mod"><svg class="i"><use href="#i-chart"/></svg>Reports<svg class="i chev" style="rotate:180deg"><use href="#i-down"/></svg></li>
+                        <li class="sub">Profit &amp; Loss</li>
+                        <li class="sub">Receivables Aging</li>
+                        <li class="sub">Remittance Exposure</li>
+                        <li class="sub on">Insurance Reports</li>
+                      </ul>
+                    </aside>
+                    <div class="main">
+                      <div class="topbar"><span class="crumb">Reports / <b>Insurance Reports</b></span><span class="rbtn"><svg class="i"><use href="#i-bell"/></svg><b></b></span><span class="rbtn"><svg class="i"><use href="#i-moon"/></svg></span></div>
+                      <div class="page">
+                        <div class="ph"><div><h3>Insurance Reports</h3><p>Production and commission for October 2026.</p></div><span class="abtn dk"><svg class="i"><use href="#i-upload"/></svg>Export</span></div>
+                        <div class="sums num">
+                          <div class="sum"><span class="tile t-teal"><svg class="i"><use href="#i-wallet"/></svg></span><div><small>Premium YTD</small><strong>₦412M</strong><span class="d up">↑ 9.1% vs 2025</span></div></div>
+                          <div class="sum"><span class="tile t-green"><svg class="i"><use href="#i-trend"/></svg></span><div><small>Commission</small><strong>₦82.4M</strong><span class="d up">↑ 12% vs 2025</span></div></div>
+                          <div class="sum"><span class="tile t-blue"><svg class="i"><use href="#i-refresh"/></svg></span><div><small>Renewal rate</small><strong>87%</strong><span class="d up">↑ 4 pts</span></div></div>
+                          <div class="sum"><span class="tile t-red"><svg class="i"><use href="#i-alert"/></svg></span><div><small>Claims YTD</small><strong>₦31M</strong><span class="d dn">↑ 2.3%</span></div></div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:16px">
+                          <div class="cardx" style="padding:14px 18px"><b style="font-size:15px">Premium vs commission, this week</b><svg class="chart" id="pvc" viewBox="0 0 420 190" width="100%"></svg></div>
+                          <div class="cardx" style="padding:14px 18px"><b style="font-size:15px">Premium by class</b><svg class="chart" id="mix" viewBox="0 0 240 190" width="100%"></svg></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+            <div class="base"></div>
+          </div>
+        </div>
+      </div>
+      <div class="report-copy">
+        <span class="ctx"><span class="av"><svg class="i" style="width:14px;height:14px;stroke-width:2"><use href="#i-chart"/></svg></span><b>Reports</b> · updated 2 minutes ago</span>
+        <h2 class="h2">Know what you've earned, and what you owe.</h2>
+        <div class="insight num">
+          <div class="ins-top"><span>Commission earned · October</span><span class="pill p-ok plain"><svg class="i" style="width:12px;height:12px;stroke-width:2.4"><use href="#i-trend"/></svg>+12%</span></div>
+          <div class="ins-num"><strong>₦9.7M</strong><span>up from ₦8.6M in September</span></div>
+          <span class="spark" aria-hidden="true"><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:50%"></i><i style="height:46%"></i><i style="height:58%"></i><i style="height:55%"></i><i style="height:64%"></i><i style="height:60%"></i><i style="height:72%"></i><i style="height:70%"></i><i style="height:84%"></i><i class="hot" style="height:100%"></i></span>
+          <div class="ins-foot"><span>Top classes: Fire &amp; Special Perils, Group Life</span><a class="link" href="#">Open report <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+        </div>
+        <div class="minis">
+          <div class="mini">
+            <div class="vis"><span class="aging" aria-hidden="true"><i style="width:52%;background:var(--brand)"></i><i style="width:24%;background:var(--warn-dot)"></i><i style="width:14%;background:#FF8A97"></i><i style="width:10%;background:var(--danger)"></i></span></div>
+            <div><h4>Receivables aging</h4><p>Unpaid premium by client and age, from current to over 90 days.</p></div>
+          </div>
+          <div class="mini">
+            <div class="vis"><span class="pill p-info plain num">₦18.2M</span><span class="pill p-neu plain">Owed</span></div>
+            <div><h4>Remittance exposure</h4><p>What you hold for each insurer, and when it is due to them.</p></div>
+          </div>
+          <div class="mini">
+            <div class="vis"><svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="14" fill="none" stroke="#D5ECEA" stroke-width="5"/><circle cx="18" cy="18" r="14" fill="none" stroke="#36A59E" stroke-width="5" stroke-linecap="round" stroke-dasharray="76.5 88" transform="rotate(-90 18 18)"/></svg><b class="num" style="font-size:13px">87%</b></div>
+            <div><h4>Renewal rate</h4><p>How much of last year's book you kept, by class and account officer.</p></div>
+          </div>
+        </div>
+        <div class="sec-cta"><a class="btn btn-primary btn-lg" href="#pricing">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="inds" id="industries" data-vs="Who it's for">
+    <div class="wrap">
+      <div class="inds-head">
+        <div>
+          <h2 class="h2">One platform, the way <span class="teal">you</span> broke.</h2>
+          <p class="lead">Every book of business is different. iBroka gives yours a connected foundation, whether you place large corporate risks, high-volume motor or employee benefit schemes.</p>
+          <div class="sec-cta"><a class="btn btn-primary btn-lg" href="#pricing">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+        </div>
+        <div class="inds-nav">
+          <button class="arw" type="button" id="ind-prev" aria-label="Previous"><svg class="i"><use href="#i-left"/></svg></button>
+          <button class="arw dark" type="button" id="ind-next" aria-label="Next"><svg class="i"><use href="#i-right"/></svg></button>
+        </div>
+      </div>
+      <div class="track" id="track">
+        <article class="ind">
+          <h3>Corporate &amp; Commercial</h3>
+          <p>Place fire, all risk and liability for large accounts, with every endorsement and debit note on the policy.</p>
+          <a class="link" href="#">Explore Corporate &amp; Commercial <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+          <div class="scene" aria-hidden="true"><div class="ui num">
+            <header><b>Kestrel Oil &amp; Gas Ltd</b><small>4 policies</small></header>
+            <div class="li"><span class="thumb t-red"><svg class="i"><use href="#i-flame"/></svg></span><span class="grow"><b>Fire &amp; Special Perils</b><small>Harbor General · to 15 Nov</small></span><span class="amt">₦3,000,000</span></div>
+            <div class="li"><span class="thumb t-amber"><svg class="i"><use href="#i-building"/></svg></span><span class="grow"><b>All Risk</b><small>Harbor General · to 30 Oct</small></span><span class="amt">₦1,845,000</span></div>
+            <div class="tot"><span>Total premium</span><span>₦6,920,000</span></div>
+          </div></div>
+        </article>
+        <article class="ind">
+          <h3>Motor &amp; Retail</h3>
+          <p>Issue and renew motor policies at volume, and chase every renewal before cover lapses.</p>
+          <a class="link" href="#">Explore Motor &amp; Retail <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+          <div class="scene" aria-hidden="true"><div class="ui num">
+            <header><b>Renewals this week</b><span class="pill p-warn">5 due</span></header>
+            <div class="li"><span class="av ind">CO</span><span class="grow"><b>Chidi Okafor</b><small>Motor Comprehensive · LND-482-KJ</small></span><span class="pill p-ok plain">Notified</span></div>
+            <div class="li"><span class="av ind">GE</span><span class="grow"><b>Grace Eze</b><small>Motor Comprehensive · ABJ-119-XA</small></span><span class="pill p-warn plain">Due Fri</span></div>
+            <div class="li"><span class="av ind">OA</span><span class="grow"><b>Ola Adeyemi</b><small>Motor Third Party · KJA-310-LP</small></span><span class="pill p-bad plain">Lapsed</span></div>
+          </div></div>
+        </article>
+        <article class="ind">
+          <h3>Employee Benefits</h3>
+          <p>Run group life and health schemes with member counts, premiums and claims kept per employer.</p>
+          <a class="link" href="#">Explore Employee Benefits <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+          <div class="scene" aria-hidden="true"><div class="ui num">
+            <header><b>Northgate Technologies</b><small>Group Life</small></header>
+            <div class="steps"><div class="done"><i></i>Quoted</div><div class="done"><i></i>Approved</div><div class="now"><i></i>Premium</div><div><i></i>Bound</div></div>
+            <div class="li"><span class="thumb t-purple"><svg class="i"><use href="#i-heart"/></svg></span><span class="grow"><b>214 members covered</b><small>Savannah Life · ₦2,880,000 a year</small></span></div>
+          </div></div>
+        </article>
+        <article class="ind">
+          <h3>Specialty Risks</h3>
+          <p>Handle aviation, energy and goods-in-transit placements, often across several insurers on one risk.</p>
+          <a class="link" href="#">Explore Specialty Risks <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+          <div class="scene" aria-hidden="true"><div class="ui num">
+            <header><b>Aviation Hull · 5N-BQK</b><small>Co-insured</small></header>
+            <div class="mat"><span><span class="chipi"><i style="background:#5A5FD0">CR</i>Crestline Re</span><b>60%</b></span><div class="bar"><i style="width:60%"></i></div></div>
+            <div class="mat"><span><span class="chipi"><i style="background:#0E9C90">HG</i>Harbor General</span><b>40%</b></span><div class="bar"><i style="width:40%;background:var(--chart-2)"></i></div></div>
+          </div></div>
+        </article>
+        <article class="ind">
+          <h3>Growing Brokerages</h3>
+          <p>Start with clients, policies and premium collection, then switch on accounting, remittance and HR as you grow.</p>
+          <a class="link" href="#">Explore Growing Brokerages <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+          <div class="scene" aria-hidden="true"><div class="ui">
+            <header><b>Your modules</b><small>Add more any time</small></header>
+            <div class="li"><span class="thumb t-teal"><svg class="i"><use href="#i-shield"/></svg></span><span class="grow"><b>Insurance</b></span><span class="tog"></span></div>
+            <div class="li"><span class="thumb t-green"><svg class="i"><use href="#i-calc"/></svg></span><span class="grow"><b>Accounting</b></span><span class="tog"></span></div>
+            <div class="li"><span class="thumb t-ink"><svg class="i"><use href="#i-person"/></svg></span><span class="grow"><b>Human Resources</b></span><span class="tog off"></span></div>
+          </div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- NIGHT -->
+  <section class="night" data-vs="Our approach">
+    <div class="wrap">
+      <div>
+        <span class="ctx"><span class="av"><svg class="i" style="width:14px;height:14px;stroke-width:2"><use href="#i-check"/></svg></span>Our approach</span>
+        <h2 class="display">Every naira, <span>accounted for.</span></h2>
+        <p class="lead">Brokers hold other people's money. iBroka is built around the trail that money takes, from the client's premium to the insurer's remittance, with ongoing support to help you get value from it.</p>
+        <div class="points">
+          <div><svg class="i"><use href="#i-layers"/></svg>Policies, premiums and remittances on one record</div>
+          <div><svg class="i"><use href="#i-clip"/></svg>Approvals and an audit trail on every change</div>
+          <div><svg class="i"><use href="#i-buoy"/></svg>Onboarding, data migration and ongoing support</div>
+        </div>
+      </div>
+      <div class="orb-panel">
+        <div class="orb" id="orb" role="img" aria-label="iBroka at the centre, surrounded by Clients, Policies, Approvals, Claims, Insurers, Premium, Remittance, Accounting, Reports and HR">
+          <svg class="orb-rings" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="38.5" class="ring-outer"/></svg>
+          <div class="core"><span class="core-mark"><img src="assets/ibroka-mark.svg" alt="" width="22" height="78"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING (prices are placeholders until iBroka pricing is confirmed) -->
+  <section class="pricing" id="pricing" data-vs="Pricing">
+    <div class="wave tr" aria-hidden="true"></div>
+    <div class="wave bl" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="head-c">
+        <h2 class="h2">Plans that fit your brokerage.</h2>
+        <p class="lead">Start with what you need today and choose a plan that supports your team as your book grows.</p>
+        <div class="billing">
+          <div class="toggle" role="group" aria-label="Billing period">
+            <button type="button" aria-pressed="false" data-bill="m">Monthly</button>
+            <button type="button" aria-pressed="true" data-bill="y">Yearly</button>
+          </div>
+          <span class="save">2 months free on yearly</span>
+        </div>
+      </div>
+      <div class="plans">
+        <div class="plan trial">
+          <h3>Free Trial</h3><p class="desc">Try iBroka with your own clients and policies before choosing a plan.</p>
+          <div class="price num"><strong>Free</strong><span>/14 days</span></div>
+          <p class="from">No commitment or card required</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Clients, policies &amp; claims</li><li><svg class="i"><use href="#i-check"/></svg>Team access &amp; permissions</li><li><svg class="i"><use href="#i-check"/></svg>Try approval workflows</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 users</p>
+          <a class="btn btn-outline" href="#">Start free trial</a>
+        </div>
+        <div class="plan rec">
+          <span class="flag">Most complete</span><h3>Full Brokerage</h3><p class="desc">Brokers who want the whole cycle, from quote to remittance, in one system</p>
+          <div class="price num"><strong data-y="₦1,500,000" data-m="₦150,000">₦1,500,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one brokerage</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Clients, policies &amp; claims</li><li><svg class="i"><use href="#i-check"/></svg>Approval management</li><li><svg class="i"><use href="#i-check"/></svg>Receive premium &amp; remittance</li><li><svg class="i"><use href="#i-check"/></svg>Accounting &amp; bank reconciliation</li><li><svg class="i"><use href="#i-check"/></svg>All reports</li><li><svg class="i"><use href="#i-check"/></svg>Human resources &amp; payroll</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 users · Data migration included</p>
+          <a class="btn btn-primary" href="#">Choose Full Brokerage</a>
+        </div>
+        <div class="plan">
+          <h3>Broking</h3><p class="desc">Teams that need clients, policies and premium collection</p>
+          <div class="price num"><strong data-y="₦700,000" data-m="₦70,000">₦700,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one brokerage</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Clients, policies &amp; claims</li><li><svg class="i"><use href="#i-check"/></svg>Approval management</li><li><svg class="i"><use href="#i-check"/></svg>Receive premium</li><li><svg class="i"><use href="#i-check"/></svg>Insurance reports</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 users</p>
+          <a class="btn btn-outline" href="#">Choose Broking</a>
+        </div>
+        <div class="plan">
+          <h3>Broking + Finance</h3><p class="desc">Brokers who also keep their books and pay insurers from iBroka</p>
+          <div class="price num"><strong data-y="₦1,100,000" data-m="₦110,000">₦1,100,000</strong><span class="per">/year</span></div>
+          <p class="from">Starting price for one brokerage</p>
+          <ul><li><svg class="i"><use href="#i-check"/></svg>Everything in Broking</li><li><svg class="i"><use href="#i-check"/></svg>Remittance to insurers</li><li><svg class="i"><use href="#i-check"/></svg>Chart of accounts &amp; journals</li><li><svg class="i"><use href="#i-check"/></svg>Bank reconciliation</li><li><svg class="i"><use href="#i-check"/></svg>Financial reports</li></ul>
+          <p class="note"><svg class="i"><use href="#i-info"/></svg>Minimum 3 users</p>
+          <a class="btn btn-outline" href="#">Choose Broking + Finance</a>
+        </div>
+      </div>
+      <div class="plans-foot">
+        <a class="btn btn-primary btn-lg" href="#">Compare every feature <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+        <p>Several branches, more seats, or a scoped migration? <a href="#">Talk to sales</a> and we will size it with you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq" data-vs="FAQ">
+    <div class="wrap">
+      <div class="faq-side">
+        <h2 class="h2">Questions, answered.</h2>
+        <p class="lead" style="font-size:17px">Can't find what you're looking for? Our team can talk through how your brokerage works today.</p>
+        <a class="link" href="#">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div>
+        <details class="qa" open><summary>What is iBroka?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary>
+          <p>iBroka is a cloud platform for insurance brokers. It manages clients, policies, approvals, claims, insurers, premium collection, remittance to insurers, accounting, reporting and HR in one system.</p></details>
+        <details class="qa"><summary>Who is iBroka for?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary>
+          <p>Insurance brokerages of any size, from small teams placing motor and retail cover to firms handling large corporate, specialty and employee benefit accounts.</p></details>
+        <details class="qa"><summary>Does iBroka handle remittance to insurers?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary>
+          <p>Yes. Premium you receive is matched to the policy, your commission is worked out, and the balance owed to each insurer shows in the remittance schedule until you pay it.</p></details>
+        <details class="qa"><summary>Can it remind us about renewals?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary>
+          <p>Yes. Policies coming up for renewal are flagged ahead of their end date, and you can send renewal notices to clients from the policy itself.</p></details>
+        <details class="qa"><summary>Can we bring our existing book over?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary>
+          <p>Yes. Our team helps you import clients, open policies and opening balances, so you start on iBroka with your full book in place.</p></details>
+        <div class="faq-more"><a class="btn btn-secondary" href="#">View more questions <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- START -->
+  <section class="start" data-vs="Let's talk">
+    <div class="wrap">
+      <div class="start-copy">
+        <h2 class="display">Let's talk about your brokerage.</h2>
+        <p>See how iBroka can run your clients, policies, premiums and remittances from one connected platform.</p>
+        <div><a class="btn btn-white btn-lg" href="#pricing">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+        <div class="partner">Want to bring iBroka to your network? <a href="#">Become a Partner <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+      </div>
+      <div class="start-art" aria-hidden="true">
+        <div class="pc pc-1"><header><span class="tile t-blue"><svg class="i"><use href="#i-heart"/></svg></span><div><b>Group Life</b><small>POL-2026-00982</small></div><span class="pill p-info">Pending approval</span></header></div>
+        <div class="pc pc-2"><header><span class="tile t-teal"><svg class="i"><use href="#i-car"/></svg></span><div><b>Motor Comprehensive</b><small>POL-2026-00990</small></div><span class="pill p-ok">Active</span></header></div>
+        <div class="pc pc-3 num">
+          <header><span class="tile t-red"><svg class="i"><use href="#i-flame"/></svg></span><div><b>Fire &amp; Special Perils</b><small>POL-2026-00984</small></div><span class="pill p-warn">Expiring</span></header>
+          <dl><div><dt>Client</dt><dd>Ifeoma Bello</dd></div><div><dt>Insurer</dt><dd><span class="chipi"><i style="background:#0E9C90">LM</i>Lagoon Mutual</span></dd></div><div><dt>Start date</dt><dd>15 Nov 2025</dd></div><div><dt>End date</dt><dd>15 Nov 2026</dd></div></dl>
+          <div class="pc-f"><div><small style="color:var(--muted);font-size:11.5px">Premium</small><strong style="display:block">₦3,000,000.00</strong></div><span class="exp"><svg class="i"><use href="#i-clock"/></svg>Expires in 2 days</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="top">
+      <div class="about">
+        <img src="assets/ibroka-logo.svg" alt="iBroka" width="112" height="30">
+        <p>Insurance broking, premium collection and remittance in one platform.</p>
+      </div>
+      <div><h4>Platform</h4><ul id="ftr-mods"></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="#">Contact Us</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="#faq">FAQs</a></li><li><a href="#">Help &amp; Support</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
+    </div>
+    <div class="base"><span>© 2026 iBroka. All rights reserved.</span><nav><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></nav></div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const icon = id => `<svg class="i"><use href="#i-${id}"/></svg>`;
+
+  /* Decorative wave corners (teal), drawn once and reused */
+  const waveSVG = (() => {
+    let p = '';
+    for (let k = 0; k < 22; k++) {
+      const t = k / 21, op = (0.35 + 0.48 * (1 - Math.abs(t - .5) * 2)).toFixed(2);
+      const y0 = 34 + 206 * t, c1x = 70 + 30 * t, c1y = 40 + 90 * t, c2x = 150 + 40 * t, c2y = 300 - 40 * t, ex = 150 + 125 * t;
+      p += `<path d="M0 ${y0.toFixed(1)} C${c1x.toFixed(1)} ${c1y.toFixed(1)} ${c2x.toFixed(1)} ${c2y.toFixed(1)} ${ex.toFixed(1)} 0" stroke-opacity="${op}"/>`;
+    }
+    return `<svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#5CC7C0" stroke-width="1">${p}</svg>`;
+  })();
+  document.querySelectorAll('.wave').forEach(w => w.innerHTML = waveSVG);
+
+  /* Modules, from the iBroka menu */
+  const MODS = [
+    { name: 'Clients', icon: 'users', tag: 'Every client, one complete record.',
+      text: 'Keep individuals and companies with their contacts, KYC documents, account officer and every policy they hold. Add a client from any form without leaving the screen, and see their full history, premiums and claims in one place.' },
+    { name: 'Policies', icon: 'shield', tag: 'From quote to renewal.',
+      text: 'Capture cover by class of business, insurer, sum insured and premium, and track each policy from draft to active, expiring and renewed. Policies due for renewal are flagged ahead of time, and renewal notices go out from the policy itself.' },
+    { name: 'Approvals', icon: 'clip', tag: 'Nothing is bound without sign-off.',
+      text: 'New policies, endorsements and cancellations move through one approval queue. Approvers see what is waiting for them, and every decision is recorded against the policy it belongs to.' },
+    { name: 'Claims', icon: 'alert', tag: 'Stay on top of every claim.',
+      text: 'Log a claim against the policy, follow it from notification through the insurer\'s decision to settlement, and keep the client informed with every document in the same record.' },
+    { name: 'Insurers', icon: 'building', tag: 'Your panel of insurers, organised.',
+      text: 'Keep each insurer\'s details, commission rates and contacts together, and see the premium you have placed with them, the claims in progress and what you owe them at a glance.' },
+    { name: 'Receive Premium', short: 'Premium', icon: 'wallet', tag: 'Collect premium, see what is outstanding.',
+      text: 'Receipt premium against the policy\'s debit note, take part payments and see each client\'s outstanding balance. Receivables aging shows who to chase before cover is at risk.' },
+    { name: 'Remittance', icon: 'send', tag: 'Pay insurers, net of commission.',
+      text: 'Premium you collect builds up a remittance due to each insurer, with your commission worked out. Create a remittance, pay it, and keep the full history for reconciliation.' },
+    { name: 'Accounting', icon: 'calc', tag: 'Books that match the broking.',
+      text: 'Your chart of accounts, journals and bank reconciliation sit alongside the broking, so receipts, remittances and cancellations post straight to the ledger instead of being re-keyed.' },
+    { name: 'Reports', icon: 'chart', tag: 'Decisions backed by real numbers.',
+      text: 'Production by class and insurer, commission earned, receivables aging, remittance exposure, profit and loss and balance sheet, all built from the same records your team works in every day.' },
+    { name: 'Human Resources', short: 'HR', icon: 'person', tag: 'Your team, organised.',
+      text: 'Keep employee records, leave, recruitment, appraisals and payroll in the same system, so the people running the brokerage are managed as carefully as its clients.' },
+  ];
+  document.getElementById('mnav-mods').innerHTML = MODS.map((m, i) => `<a href="#modules" data-mod="${i}">${m.name}</a>`).join('');
+  document.getElementById('ftr-mods').innerHTML = MODS.map((m, i) => `<li><a href="#modules" data-mod="${i}">${m.name}</a></li>`).join('');
+
+  /* Carousel */
+  const stage = document.getElementById('stage'), dashes = document.getElementById('dashes');
+  const nameEl = document.getElementById('mod-name'), body = document.getElementById('mod-body');
+  const tagEl = document.getElementById('mod-tag'), textEl = document.getElementById('mod-text');
+  const n = MODS.length;
+  let cur = 0, timer = null, stopped = false, resumeT = null, inView = false;
+  const cards = MODS.map((m, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'mcard'; b.setAttribute('aria-label', m.name);
+    b.innerHTML = icon(m.icon); b.addEventListener('click', () => { stopAuto(); go(i); });
+    stage.appendChild(b); return b;
+  });
+  const tabs = MODS.map((m, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-label', m.name);
+    b.addEventListener('click', () => { stopAuto(); go(i); });
+    dashes.appendChild(b); return b;
+  });
+  function layout() {
+    const small = innerWidth <= 640, gap = small ? 152 : 240, reach = small ? 1 : 2;
+    cards.forEach((c, k) => {
+      let o = k - cur; if (o > n / 2) o -= n; if (o < -n / 2) o += n;
+      const a = Math.abs(o), vis = a <= reach;
+      const sk = o === 0 ? 0 : (o < 0 ? -7 : 7);
+      const sc = o === 0 ? 1.14 : (a === 1 ? (small ? .82 : .9) : .78);
+      c.style.transform = `translateX(${o * gap}px) translateZ(${-a * 40}px) skewX(${sk}deg) scale(${sc})`;
+      c.style.opacity = vis ? (a === 2 ? .55 : 1) : 0;
+      c.style.pointerEvents = vis ? '' : 'none';
+      c.style.zIndex = 10 - a; c.tabIndex = vis ? 0 : -1;
+      c.classList.toggle('on', o === 0);
+      c.setAttribute('aria-hidden', vis ? 'false' : 'true');
+    });
+  }
+  function go(i, first) {
+    cur = (i + n) % n; layout();
+    tabs.forEach((t, k) => t.setAttribute('aria-selected', k === cur ? 'true' : 'false'));
+    const m = MODS[cur]; nameEl.textContent = m.name;
+    const fill = () => { tagEl.textContent = m.tag; textEl.textContent = m.text; body.classList.remove('swap'); };
+    if (first || reduce) fill(); else { body.classList.add('swap'); setTimeout(fill, 180); }
+  }
+  function stopAuto() { clearInterval(timer); clearTimeout(resumeT); resumeT = setTimeout(startAuto, 4000); }
+  function startAuto() { if (stopped || !inView || reduce) return; clearInterval(timer); timer = setInterval(() => go(cur + 1), 5000); }
+  document.getElementById('prev').addEventListener('click', () => { stopAuto(); go(cur - 1); });
+  document.getElementById('next').addEventListener('click', () => { stopAuto(); go(cur + 1); });
+  const car = document.getElementById('carousel');
+  car.addEventListener('focusin', e => { if (e.target.matches(':focus-visible')) { stopped = true; clearInterval(timer); } });
+  car.addEventListener('focusout', () => { stopped = false; startAuto(); });
+  car.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') { stopAuto(); go(cur - 1); }
+    if (e.key === 'ArrowRight') { stopAuto(); go(cur + 1); }
+  });
+  let sx = null;
+  stage.addEventListener('pointerdown', e => { sx = e.clientX; });
+  stage.addEventListener('pointerup', e => {
+    if (sx === null) return; const dx = e.clientX - sx; sx = null;
+    if (Math.abs(dx) > 40) { stopAuto(); go(cur + (dx < 0 ? 1 : -1)); }
+  });
+  addEventListener('resize', layout);
+  go(cur, true);
+  if (!('IntersectionObserver' in window)) { inView = true; startAuto(); }
+  else new IntersectionObserver(([e]) => { inView = e.isIntersecting; inView ? startAuto() : clearInterval(timer); }, { threshold: .3 }).observe(car);
+
+  /* Who it's for: slow drift with arrows */
+  const track = document.getElementById('track');
+  const step = () => (track.querySelector('.ind')?.offsetWidth || 400) + 20;
+  const originals = [...track.children];
+  originals.forEach(c => { const d = c.cloneNode(true); d.setAttribute('aria-hidden', 'true'); d.setAttribute('inert', ''); d.querySelectorAll('a').forEach(a => a.tabIndex = -1); track.appendChild(d); });
+  track.classList.add('drift');
+  const loopW = () => track.children[originals.length].offsetLeft - track.children[0].offsetLeft;
+  let paused = reduce, holdT = null, pos = 0, last = 0;
+  const hold = ms => { paused = true; clearTimeout(holdT); if (ms && !reduce) holdT = setTimeout(() => { paused = false; }, ms); };
+  const frame = t => {
+    const dt = last ? Math.min(t - last, 64) : 0; last = t;
+    if (!paused) { pos += dt * 0.035; const w = loopW(); if (pos >= w) pos -= w; track.scrollLeft = pos; }
+    else pos = track.scrollLeft;
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+  track.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hold(0); });
+  track.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') hold(600); });
+  track.addEventListener('touchstart', () => hold(0), { passive: true });
+  track.addEventListener('touchend', () => hold(3000), { passive: true });
+  track.addEventListener('focusin', e => { if (e.target.matches(':focus-visible')) hold(0); });
+  track.addEventListener('focusout', () => hold(1500));
+  const nudge = dir => {
+    hold(2500); const w = loopW();
+    if (dir < 0 && track.scrollLeft < step()) track.scrollLeft += w;
+    if (dir > 0 && track.scrollLeft > w) track.scrollLeft -= w;
+    track.scrollBy({ left: dir * step(), behavior: 'smooth' });
+  };
+  document.getElementById('ind-prev').addEventListener('click', () => nudge(-1));
+  document.getElementById('ind-next').addEventListener('click', () => nudge(1));
+
+  /* Scroll reveal */
+  if ('IntersectionObserver' in window) {
+    const REVEAL = [
+      ['.hero-copy > *', 'up', .08], ['.hero-art', 'right', 0],
+      ['.noise .statement, .noise .after', 'up', .12],
+      ['.mods .head-c > *', 'up', .08], ['.mods .carousel', 'zoom', 0],
+      ['.report-art', 'left', 0], ['.report-copy > *', 'up', .08],
+      ['.inds-head > *', 'up', .1], ['.track', 'up', .15],
+      ['.night .wrap > div:first-child > *', 'up', .08], ['.orb-panel', 'zoom', 0],
+      ['.pricing .head-c > *', 'up', .08], ['.plans .plan', 'up', .09], ['.plans-foot > *', 'up', .1],
+      ['.faq-side', 'left', 0], ['.faq .qa', 'up', .06],
+      ['.start-copy > *', 'up', .08], ['.start-art', 'right', .15],
+      ['.ftr .top > *', 'up', .06], ['.ftr .base', 'fade', 0]
+    ];
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -40px 0px', threshold: .12 });
+    REVEAL.forEach(([sel, dir, st]) => document.querySelectorAll(sel).forEach((el, i) => {
+      el.classList.add('rv'); el.dataset.rv = reduce ? 'fade' : dir;
+      if (st) el.style.setProperty('--rd', Math.min(i * st, .6).toFixed(2) + 's');
+      io.observe(el);
+    }));
+    const lastProp = { up: 'translate', left: 'translate', right: 'translate', zoom: 'scale', fade: 'opacity' };
+    document.addEventListener('transitionend', e => { const t = e.target; if (t.classList && t.classList.contains('in') && e.propertyName === lastProp[t.dataset.rv]) { t.classList.remove('rv'); t.removeAttribute('data-rv'); t.style.removeProperty('--rd'); } });
+  }
+
+  /* Pricing: monthly / yearly */
+  const billBtns = document.querySelectorAll('[data-bill]');
+  billBtns.forEach(btn => btn.addEventListener('click', () => {
+    const p = btn.dataset.bill;
+    billBtns.forEach(x => x.setAttribute('aria-pressed', x === btn));
+    document.querySelectorAll('.plan .price').forEach(pr => {
+      const st = pr.querySelector('strong[data-y]'); if (!st) return; st.textContent = st.dataset[p];
+      pr.querySelector('.per').textContent = p === 'y' ? '/year' : '/month';
+    });
+  }));
+
+  /* Scale the HTML screen recreations to their containers */
+  const scalers = document.querySelectorAll('.scaler[data-w]');
+  const rescale = () => scalers.forEach(s => s.style.setProperty('--s', (s.clientWidth / +s.dataset.w).toFixed(4)));
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(rescale); scalers.forEach(s => ro.observe(s)); }
+  rescale(); addEventListener('resize', rescale);
+
+  /* Charts (iBroka demo data) */
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+  (function pvc(svg) {
+    const data = [['Mon',1.9,.38],['Tue',3.05,.61],['Wed',2.3,.46],['Thu',.75,.15],['Fri',2.08,.416],['Sat',2.12,.424],['Sun',2.15,.43]];
+    const x0 = 34, x1 = 414, y0 = 22, y1 = 166, max = 3.5;
+    el('circle', { cx: 40, cy: 10, r: 4, fill: '#0E9C90' }, svg); el('text', { x: 48, y: 13 }, svg).textContent = 'Premium';
+    el('circle', { cx: 110, cy: 10, r: 4, fill: '#5A5FD0' }, svg); el('text', { x: 118, y: 13 }, svg).textContent = 'Commission';
+    [0, 1, 2, 3].forEach(t => { const y = y1 - (y1 - y0) * t / max; el('line', { x1: x0, x2: x1, y1: y, y2: y, stroke: '#E2E8F0' }, svg); el('text', { x: x0 - 6, y: y + 3, 'text-anchor': 'end' }, svg).textContent = '₦' + t + 'M'; });
+    const bw = (x1 - x0) / data.length;
+    data.forEach(([l, p, c], i) => {
+      const x = x0 + i * bw + bw * .2, w = bw * .28;
+      const hp = (y1 - y0) * p / max, hc = (y1 - y0) * c / max;
+      el('rect', { x, y: y1 - hp, width: w, height: hp, rx: 3, fill: '#0E9C90' }, svg);
+      el('rect', { x: x + w + 2, y: y1 - hc, width: w, height: hc, rx: 3, fill: '#5A5FD0' }, svg);
+      el('text', { x: x + w + 1, y: 182, 'text-anchor': 'middle' }, svg).textContent = l;
+    });
+  })(document.getElementById('pvc'));
+  (function mix(svg) {
+    const data = [['Fire', 34, '#0E9C90'], ['Motor', 24, '#5A5FD0'], ['Life', 20, '#D98A00'], ['Aviation', 12, '#D6406C'], ['Other', 10, '#1C8BDB']];
+    const cx = 70, cy = 92, r = 52, sw = 18, C = 2 * Math.PI * r; let off = 0;
+    data.forEach(([, v, c]) => { const len = C * v / 100; el('circle', { cx, cy, r, fill: 'none', stroke: c, 'stroke-width': sw, 'stroke-dasharray': `${Math.max(len - 2, 0)} ${C}`, 'stroke-dashoffset': -off, transform: `rotate(-90 ${cx} ${cy})` }, svg); off += len; });
+    el('text', { x: cx, y: cy - 2, 'text-anchor': 'middle', style: 'font-size:15px;font-weight:600;fill:#272728' }, svg).textContent = '₦412M';
+    el('text', { x: cx, y: cy + 13, 'text-anchor': 'middle' }, svg).textContent = 'YTD';
+    data.forEach(([l, v, c], i) => { const y = 50 + i * 20; el('rect', { x: 142, y: y - 7, width: 8, height: 8, rx: 2, fill: c }, svg); el('text', { x: 156, y }, svg).textContent = l; el('text', { x: 234, y, 'text-anchor': 'end', style: 'fill:#272728;font-weight:600' }, svg).textContent = v + '%'; });
+  })(document.getElementById('mix'));
+
+  /* Orbit: modules circle the platform */
+  (function orbit() {
+    const box = document.getElementById('orb'), rings = box.querySelector('.orb-rings');
+    const sats = MODS.map((m, i) => {
+      const a = (-90 + i * 360 / n) * Math.PI / 180;
+      const x = 50 + 38.5 * Math.cos(a), y = 50 + 38.5 * Math.sin(a);
+      const b = (-90 + (i + .5) * 360 / n) * Math.PI / 180;
+      el('circle', { cx: 50 + 38.5 * Math.cos(b), cy: 50 + 38.5 * Math.sin(b), r: .55, class: 'dot' }, rings);
+      const s = document.createElement('div');
+      s.className = 'sat'; s.style.left = x + '%'; s.style.top = y + '%'; s.style.setProperty('--d', (-i * .7) + 's');
+      s.title = m.name; s.innerHTML = `<span class="si">${icon(m.icon)}</span><span class="sl">${m.short || m.name}</span>`;
+      box.appendChild(s); return s;
+    });
+    if (reduce) return;
+    let k = 0;
+    setInterval(() => { sats.forEach((s, i) => s.classList.toggle('lit', i === k % sats.length)); k++; }, 1600);
+  })();
+
+  /* Hero cards keep their desktop size relative to the panel */
+  const heroArt = document.querySelector('.hero-art');
+  const fit = () => heroArt.style.setProperty('--fz', Math.min(1, heroArt.clientWidth / 686).toFixed(3));
+  if ('ResizeObserver' in window) new ResizeObserver(fit).observe(heroArt);
+  fit();
+
+  /* Header: mega menus, mobile menu, scrolled border */
+  const dds = [...document.querySelectorAll('.dd')];
+  const mnav = document.getElementById('mnav'), burger = document.querySelector('.burger');
+  function closeAll(except) {
+    dds.forEach(d => { if (d !== except) { d.classList.remove('open'); d.querySelector('button').setAttribute('aria-expanded', 'false'); } });
+    if (!except) { mnav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.innerHTML = icon('menu'); }
+  }
+  const hoverable = matchMedia('(hover: hover)').matches;
+  dds.forEach(d => {
+    const b = d.querySelector('button');
+    b.addEventListener('click', e => { e.stopPropagation(); const open = hoverable && d.dataset.hovered ? true : !d.classList.contains('open'); delete d.dataset.hovered; closeAll(d); d.classList.toggle('open', open); b.setAttribute('aria-expanded', open); });
+    if (hoverable) {
+      let t;
+      d.addEventListener('mouseenter', () => { clearTimeout(t); if (!d.classList.contains('open')) d.dataset.hovered = 1; closeAll(d); d.classList.add('open'); b.setAttribute('aria-expanded', 'true'); });
+      d.addEventListener('mouseleave', () => { t = setTimeout(() => { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); }, 120); });
+    }
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('.dd')) dds.forEach(d => { d.classList.remove('open'); d.querySelector('button').setAttribute('aria-expanded', 'false'); }); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+  burger.addEventListener('click', () => {
+    const open = !mnav.classList.contains('open');
+    mnav.classList.toggle('open', open); burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); burger.innerHTML = icon(open ? 'x' : 'menu');
+  });
+  mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeAll()));
+  /* Any link to a module opens it in the carousel */
+  document.querySelectorAll('[data-mod]').forEach(a => a.addEventListener('click', () => { stopAuto(); go(+a.dataset.mod); closeAll(); }));
+  const hdr = document.getElementById('hdr');
+  const onScroll = () => hdr.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+})();
+</script>
+<script>/* Page slider: a quiet vertical scroll control with section stops */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vs = document.createElement('div');
+  vs.className = 'vs'; vs.tabIndex = 0;
+  vs.setAttribute('role', 'slider'); vs.setAttribute('aria-label', 'Page position'); vs.setAttribute('aria-orientation', 'vertical');
+  vs.setAttribute('aria-valuemin', '0'); vs.setAttribute('aria-valuemax', '100');
+  vs.innerHTML = '<div class="vs-t"><div class="vs-f"></div></div><span class="vs-k"></span><span class="vs-l"></span>';
+  document.body.appendChild(vs);
+  const track = vs.querySelector('.vs-t'), label = vs.querySelector('.vs-l');
+  const stops = [...document.querySelectorAll('[data-vs]')];
+  const max = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const top = el => el.getBoundingClientRect().top + scrollY;
+  const dots = stops.map(el => {
+    const d = document.createElement('button');
+    d.type = 'button'; d.className = 'vs-d'; d.tabIndex = -1;
+    d.setAttribute('aria-label', 'Go to ' + el.dataset.vs);
+    d.innerHTML = '<span class="vs-tip">' + el.dataset.vs + '</span>';
+    d.addEventListener('click', e => { e.stopPropagation(); scrollTo({ top: Math.max(0, top(el) - 72), behavior: reduce ? 'auto' : 'smooth' }); });
+    d.addEventListener('pointerdown', e => e.stopPropagation());
+    vs.insertBefore(d, label); return d;
+  });
+  const place = (el, p) => { el.style.top = (track.offsetTop + p * track.offsetHeight) + 'px'; };
+  function layout() {
+    vs.hidden = document.documentElement.scrollHeight - innerHeight < 120;
+    stops.forEach((el, i) => place(dots[i], Math.min(1, Math.max(0, (top(el) - 72) / max()))));
+    update();
+  }
+  function update() {
+    const p = Math.min(1, Math.max(0, scrollY / max()));
+    track.style.setProperty('--p', p);
+    place(vs.querySelector('.vs-k'), p); place(label, p);
+    vs.setAttribute('aria-valuenow', Math.round(p * 100));
+    let cur = -1;
+    stops.forEach((el, i) => { if (top(el) - innerHeight * .4 <= scrollY) cur = i; });
+    dots.forEach((d, i) => d.classList.toggle('on', i <= cur));
+    const name = cur >= 0 ? stops[cur].dataset.vs : (stops[0] ? stops[0].dataset.vs : '');
+    label.textContent = name || Math.round(p * 100) + '%';
+    vs.setAttribute('aria-valuetext', (name ? name + ', ' : '') + Math.round(p * 100) + '%');
+  }
+  const seek = y => { const r = track.getBoundingClientRect(); scrollTo({ top: Math.min(1, Math.max(0, (y - r.top) / r.height)) * max(), behavior: 'instant' }); };
+  vs.addEventListener('pointerdown', e => { e.preventDefault(); vs.setPointerCapture(e.pointerId); vs.classList.add('drag'); seek(e.clientY); });
+  vs.addEventListener('pointermove', e => { if (vs.classList.contains('drag')) seek(e.clientY); });
+  const end = () => vs.classList.remove('drag');
+  vs.addEventListener('pointerup', end); vs.addEventListener('pointercancel', end);
+  vs.addEventListener('keydown', e => {
+    const st = { ArrowDown: .05, ArrowRight: .05, ArrowUp: -.05, ArrowLeft: -.05, PageDown: .2, PageUp: -.2 }[e.key];
+    if (st != null) { e.preventDefault(); scrollBy(0, st * max()); }
+    else if (e.key === 'Home') { e.preventDefault(); scrollTo(0, 0); }
+    else if (e.key === 'End') { e.preventDefault(); scrollTo(0, max()); }
+  });
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', layout);
+  if ('ResizeObserver' in window) new ResizeObserver(layout).observe(document.body);
+  addEventListener('load', layout); layout();
+})();
+</script>
+</body>
+</html>
