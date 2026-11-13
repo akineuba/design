@@ -41,6 +41,8 @@ export interface NavMenuSettings {
   items: NavMenuItem[];
   /** Open on first render. It also opens when the active item is one of its items. */
   defaultOpen?: boolean;
+  /** Right chevron on each sub-item (default true). The Marketing menu turns them off. */
+  showChevrons?: boolean;
 }
 
 export interface NavMenuProps extends Omit<HTMLAttributes<HTMLElement>, 'onSelect'> {
@@ -178,7 +180,7 @@ function SettingsGroup({ settings, activeId, onNavigate }: { settings: NavMenuSe
                 <span className={cn('truncate font-data text-label-sm leading-nav tracking-tight', active ? 'text-text-strong' : 'text-text-tertiary')}>
                   {item.label}
                 </span>
-                <LucideChevronRightIcon aria-hidden="true" className="size-4 shrink-0 text-text-muted" />
+                {settings.showChevrons !== false && <LucideChevronRightIcon aria-hidden="true" className="size-4 shrink-0 text-text-muted" />}
               </NavRow>
             </li>
           );

@@ -1,5 +1,6 @@
 /* Example navigation data for the NavMenu stories and tests. */
 import {
+  Buildings2Icon,
   Buildings2OutlineIcon,
   CallCallingOutlineIcon,
   CarbonEmailIcon,
@@ -9,6 +10,7 @@ import {
   LucideInboxIcon,
   MessagesOutlineIcon,
   PeopleIcon,
+  Profile2UserIcon,
   Profile2UserOutlineIcon,
   SolarPlanetLinearIcon,
 } from '../../icons';
@@ -32,6 +34,7 @@ export const marketingSections: NavMenuSection[] = [
 ];
 
 export const marketingSettings: NavMenuSettings = {
+  showChevrons: false,
   items: [
     { id: 'settings-organisation', label: 'Organisation' },
     { id: 'settings-notifications', label: 'Notifications' },
@@ -50,11 +53,10 @@ export const businessSections: NavMenuSection[] = [
     label: 'Business Development',
     items: [
       { id: 'dashboard', label: 'Dashboard', icon: <CategoryIcon /> },
-      { id: 'budgets', label: 'Budgets', icon: <LucideChartLineIcon /> },
+      { id: 'budgets', label: 'Budgets', icon: <LucideChartLineIcon className="stroke-1" /> },
       {
         id: 'reports',
         label: 'Reports',
-        defaultOpen: true,
         icon: <LucideInboxIcon />,
         children: [
           { id: 'report-performance', label: 'Performance Report' },
@@ -65,16 +67,15 @@ export const businessSections: NavMenuSection[] = [
         ],
       },
       { id: 'deals', label: 'Deals', icon: <PeopleIcon /> },
-      { id: 'companies', label: 'Companies', icon: <Buildings2OutlineIcon /> },
-      { id: 'contacts', label: 'Contacts', icon: <Profile2UserOutlineIcon /> },
-      { id: 'activity', label: 'Activity', icon: <LucideCalendarIcon /> },
-      { id: 'orbit', label: 'Orbit AI', icon: <SolarPlanetLinearIcon /> },
+      { id: 'companies', label: 'Companies', icon: <Buildings2Icon /> },
+      { id: 'contacts', label: 'Contacts', icon: <Profile2UserIcon /> },
+      { id: 'activity', label: 'Activity', icon: <LucideCalendarIcon className="stroke-1" /> },
+      { id: 'orbit', label: 'Orbit AI', icon: <SolarPlanetLinearIcon className="stroke-1.5" /> },
     ],
   },
 ];
 
 export const businessSettings: NavMenuSettings = {
-  defaultOpen: true,
   items: [
     { id: 'settings-organization', label: 'Organization' },
     { id: 'settings-access', label: 'Users & access' },

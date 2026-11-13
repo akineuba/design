@@ -45,3 +45,18 @@ describe('NavMenu', () => {
     expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page');
   });
 });
+
+describe('NavMenu settings chevrons', () => {
+  it('starts closed and shows sub-item chevrons unless showChevrons is false', async () => {
+    const items = [{ id: 'org', label: 'Organization' }];
+    const { container, unmount } = render(<NavMenu sections={[]} settings={{ items }} />);
+    const toggle = screen.getByRole('button', { name: 'Settings' });
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await userEvent.click(toggle);
+    expect(screen.getByRole('button', { name: 'Organization' }).querySelector('svg')).not.toBeNull();
+    unmount();
+    render(<NavMenu sections={[]} settings={{ items, showChevrons: false, defaultOpen: true }} />);
+    expect(screen.getByRole('button', { name: 'Organization' }).querySelector('svg')).toBeNull();
+    expect(container).toBeTruthy();
+  });
+});

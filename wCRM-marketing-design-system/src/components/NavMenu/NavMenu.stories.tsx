@@ -42,12 +42,12 @@ function Interactive({ sections, settings, initial }: { sections: NavMenuSection
   );
 }
 
-/** Figma marketing sidebar with Settings › Social Media active. Click any item to move the active state. */
+/** Figma marketing menu, Dashboard active. Settings sub-items have no chevrons. Groups start closed; click to open. */
 export const Marketing: Story = {
-  render: () => <Interactive sections={marketingSections} settings={marketingSettings} initial="settings-social" />,
+  render: () => <Interactive sections={marketingSections} settings={marketingSettings} initial="dashboard" />,
 };
 
-/** Business Development reference: Dashboard active, Reports and Settings open. */
+/** Business Development reference: Dashboard active, Reports and Settings closed until clicked. */
 export const BusinessDevelopment: Story = {
   render: () => <Interactive sections={businessSections} settings={businessSettings} initial="dashboard" />,
 };
