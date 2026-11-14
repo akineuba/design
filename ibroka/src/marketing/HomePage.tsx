@@ -11,7 +11,6 @@ import {
   MoneyDisplay,
   MoneyInput,
   PolicyCard,
-  PremiumBreakdown,
   SegmentedControl,
   Select,
   StageProgress,
@@ -234,27 +233,33 @@ function Calculator() {
   const [cls, setCls] = useState('motor');
   const [sum, setSum] = useState<number | null>(12500000);
   const c = CLASSES.find((x) => x.value === cls)!;
-  const sumInsured = sum ?? 0;
-  const net = (sumInsured * c.rate) / 100;
-  const remit = net - (net * c.commission) / 100;
+  const premium = ((sum ?? 0) * c.rate) / 100;
+  const commission = (premium * c.commission) / 100;
+  const rows: Array<[string, number, boolean?]> = [
+    [`Premium at ${c.rate}%`, premium],
+    [`Your commission (${c.commission}%)`, commission, true],
+    ['Remit to insurer', premium - commission],
+  ];
   return (
-    <div className="flex flex-col gap-4 rounded-2xl bg-surface p-6 shadow-dialog">
-      <div>
-        <h2 className="text-18 font-bold text-fg-strong">What does this policy earn you?</h2>
-        <p className="text-13 text-fg-muted">Pick a class and a sum insured. Sample rates.</p>
+    <div className="flex flex-col gap-4 rounded-xl bg-surface p-5 text-fg-strong shadow-dialog">
+      <div className="flex flex-col gap-3">
+        <Select label="Class of business" options={CLASSES.map(({ value, label }) => ({ value, label }))} value={cls} onChange={setCls} searchable={false} />
+        <MoneyInput label="Sum insured" value={sum} onChange={setSum} />
       </div>
-      <Select label="Class of business" options={CLASSES.map(({ value, label }) => ({ value, label }))} value={cls} onChange={setCls} searchable={false} />
-      <MoneyInput label="Sum insured" value={sum} onChange={setSum} />
-      <PremiumBreakdown sumInsured={sumInsured} rate={c.rate} taxRate={7.5} commissionRate={c.commission} />
-      <div className="flex items-center justify-between rounded-lg bg-surface-muted px-4.5 py-3 text-13">
-        <span className="font-medium text-fg-strong">You remit to the insurer</span>
-        <span className="text-15 font-bold text-fg-strong">
-          <MoneyDisplay amount={remit} />
-        </span>
-      </div>
-      <Button fullWidth size="lg" trailingIcon={<ArrowRightIcon />}>
-        Try for free
+      <dl className="flex flex-col divide-y divide-line-row rounded-lg border border-line-subtle px-4">
+        {rows.map(([label, amount, accent]) => (
+          <div key={label} className="flex items-baseline justify-between gap-4 py-2.5 text-13">
+            <dt className={accent ? 'font-medium text-primary' : 'text-fg-muted'}>{label}</dt>
+            <dd className={cx('tabular-nums', accent ? 'font-semibold text-primary' : 'font-semibold text-fg-strong')}>
+              <MoneyDisplay amount={amount} />
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <Button fullWidth trailingIcon={<ArrowRightIcon />}>
+        Quote this in iBroka
       </Button>
+      <p className="text-center text-12 text-fg-muted">Sample rates for illustration. VAT not included.</p>
     </div>
   );
 }
@@ -263,14 +268,11 @@ function Hero() {
   return (
     <div id="top" className="bg-brand-subtle">
       <Header />
-      <Container className="flex flex-col items-center gap-6 pb-30 pt-12 text-center md:pt-16">
-        <StatusPill tone="success">Built for insurance brokers</StatusPill>
-        <Heading as="h1" size="hero" className="max-w-4xl text-fg-strong">
-          Run your brokerage on one connected platform
+      <Container className="flex flex-col items-center gap-6 pb-60 pt-16 text-center md:pt-20">
+        <Heading as="h1" size="hero" className="max-w-4xl tracking-tighter text-fg-strong">
+          The operating system for insurance brokers
         </Heading>
-        <Lead className="max-w-2xl">
-          Clients, leads, policies, claims, premium collection and insurer remittance. Fully integrated, easy to manage, and paid for in naira.
-        </Lead>
+        <Lead className="max-w-xl">Clients, policies, claims, premium and insurer remittance, on one platform built for brokerages in Nigeria.</Lead>
         <div className="flex flex-wrap justify-center gap-3">
           <Button size="lg">Get started</Button>
           <Button size="lg" variant="outline">
@@ -282,59 +284,87 @@ function Hero() {
   );
 }
 
+/** One of the three equal cards that straddle the hero band. */
+function HeroCard({ tone, title, body, link, children }: { tone: 'teal' | 'ink'; title: string; body: string; link: string; children: ReactNode }) {
+  return (
+    <article className={cx('flex min-h-96 flex-col gap-3 rounded-2xl p-6 text-fg-inverse md:p-7.5', tone === 'teal' ? 'bg-primary' : 'bg-secondary')}>
+      <h2 className="text-20 font-bold">{title}</h2>
+      <p className="text-13 opacity-85">{body}</p>
+      <a href="#features" className="inline-flex items-center gap-1.5 self-start rounded text-13 font-semibold underline decoration-white/40 underline-offset-4 hover:decoration-white ib-focus">
+        {link}
+        <span className="size-icon-sm" aria-hidden>
+          <ArrowRightIcon />
+        </span>
+      </a>
+      <div className="mt-auto pt-6">{children}</div>
+    </article>
+  );
+}
+
 function HeroCards() {
   const due = REMITTANCE.week.filter((r) => r.due !== 'Paid');
+  const total = due.reduce((s, r) => s + r.amount, 0);
   return (
-    <Container className="relative -mt-24 grid items-start gap-5 lg:grid-cols-3">
-      <div className="flex flex-col gap-5 rounded-2xl bg-primary p-6 text-fg-inverse lg:mt-16">
-        <div>
-          <h2 className="text-18 font-bold">Every class of business</h2>
-          <p className="text-13 opacity-90">Motor to aviation, placed with the insurers you already use.</p>
-        </div>
-        <ul className="grid grid-cols-2 gap-2.5">
-          {CLASS_STRIP.slice(0, 6).map((c) => (
-            <li key={c.label} className="flex items-center gap-2 rounded-lg bg-surface px-3 py-2.5 text-13 font-medium text-fg-strong">
-              <span className="size-icon-sm text-primary" aria-hidden>
-                {c.icon}
-              </span>
-              {c.label}
-            </li>
-          ))}
-        </ul>
-        <div className="flex flex-wrap gap-2">
-          <InsurerChip name="Harbor General" lead share={60} />
-          <InsurerChip name="Crestline Re" share={40} />
-        </div>
-      </div>
-      <Calculator />
-      <div className="flex flex-col gap-4 rounded-2xl bg-secondary p-6 text-fg-inverse lg:mt-16">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h2 className="text-18 font-bold">Remittance due this week</h2>
-            <p className="text-13 opacity-80">Net of your commission.</p>
+    <Container className="relative -mt-44 grid gap-5 lg:grid-cols-3">
+      <HeroCard tone="teal" title="Every class of business" body="Motor to aviation, placed and co-insured with the insurers you already use." link="See classes">
+        <div className="flex flex-col gap-4 rounded-xl bg-surface p-5 text-fg-strong">
+          <div className="flex items-center justify-between gap-3">
+            <span>
+              <span className="block text-13 font-semibold">Aviation hull · 5N-BQK</span>
+              <span className="text-12 text-fg-muted">Co-insured placement</span>
+            </span>
+            <StatusPill tone="success">Bound</StatusPill>
           </div>
-          <StatusPill tone="warning">3 due</StatusPill>
-        </div>
-        <ul className="flex flex-col divide-y divide-white/15">
-          {due.map((r) => (
-            <li key={r.insurer} className="flex items-center justify-between gap-3 py-3 text-13">
-              <span>
-                <span className="block font-semibold">{r.insurer}</span>
-                <span className="opacity-80">{r.due}</span>
+          {[
+            ['Crestline Re', 60, true],
+            ['Harbor General Assurance', 40, false],
+          ].map(([name, share, lead]) => (
+            <div key={name as string} className="flex flex-col gap-2">
+              <InsurerChip name={name as string} share={share as number} lead={lead as boolean} className="self-start" />
+              <span className="h-1.5 overflow-hidden rounded-full bg-surface-track" aria-hidden>
+                <span className="block h-full rounded-full bg-primary" style={{ width: `${share}%` }} />
               </span>
-              <span className="font-semibold">
-                <MoneyDisplay amount={r.amount} />
-              </span>
-            </li>
+            </div>
           ))}
-        </ul>
-        <div className="flex items-center justify-between border-t border-white/25 pt-3">
-          <span className="text-13 font-medium">Total due</span>
-          <span className="text-20 font-bold">
-            <MoneyDisplay amount={due.reduce((s, r) => s + r.amount, 0)} />
-          </span>
+          <ul className="grid grid-cols-6 gap-2 border-t border-line-row pt-4" aria-label="Classes of business">
+            {CLASS_STRIP.slice(0, 6).map((c) => (
+              <li key={c.label} title={c.label} className="inline-flex aspect-square items-center justify-center rounded-lg bg-brand-subtle text-primary">
+                <span className="size-icon" aria-hidden>
+                  {c.icon}
+                </span>
+                <span className="sr-only">{c.label}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
+      </HeroCard>
+      <HeroCard tone="ink" title="Know what a policy earns" body="Premium, commission and the amount due to the insurer, worked out as you quote." link="How quoting works">
+        <Calculator />
+      </HeroCard>
+      <HeroCard tone="teal" title="Pay insurers on time" body="Every naira you collect is matched to a policy and queued for remittance." link="See remittance">
+        <div className="flex flex-col gap-3 rounded-xl bg-surface p-5 text-fg-strong">
+          <div className="flex items-center justify-between">
+            <span className="text-13 text-fg-muted">Due this week</span>
+            <StatusPill tone="warning">{due.length} insurers</StatusPill>
+          </div>
+          <span className="text-30 font-bold tracking-tight">
+            <MoneyDisplay amount={total} format="short" />
+          </span>
+          <ul className="flex flex-col gap-2">
+            {due.map((r) => (
+              <li key={r.insurer} className="flex items-center gap-3 text-12">
+                <span className="w-24 shrink-0 truncate text-fg-muted">{r.insurer.split(' ')[0]}</span>
+                <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-surface-track" aria-hidden>
+                  <span className="block h-full rounded-full bg-primary" style={{ width: `${(r.amount / due[0].amount) * 100}%` }} />
+                </span>
+                <span className="w-14 shrink-0 text-right font-semibold tabular-nums">
+                  <MoneyDisplay amount={r.amount} format="short" />
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </HeroCard>
     </Container>
   );
 }
@@ -346,12 +376,9 @@ function TrustRow() {
     { icon: <CoinsIcon />, title: 'Zero CAPEX to set up', body: 'No servers, no installation.' },
   ];
   return (
-    <Section className="pb-0">
-      <Container className="flex flex-col items-center gap-10">
-        <Heading size="card" className="text-center text-fg-strong">
-          Trusted to hold the money that matters
-        </Heading>
-        <ul className="grid w-full gap-6 md:grid-cols-3">
+    <Section className="!pb-0 !pt-16">
+      <Container>
+        <ul className="grid gap-6 border-b border-line-subtle pb-12 md:grid-cols-3">
           {items.map((i) => (
             <li key={i.title} className="flex items-center gap-4">
               <IconBadge icon={i.icon} />
@@ -372,7 +399,7 @@ function RemittancePanel() {
   const rows = REMITTANCE[period];
   const max = Math.max(...rows.map((r) => r.amount));
   return (
-    <Section id="features">
+    <Section id="features" className="!pt-12">
       <Container>
         <div className="flex flex-col items-center gap-6 rounded-3xl bg-brand-subtle px-5 py-12 text-center md:px-16 md:py-16">
           <Heading size="section" className="text-fg-strong">
@@ -425,7 +452,7 @@ function ClassStrip() {
         <ul className="flex w-max animate-marquee gap-8 group-hover:[animation-play-state:paused] motion-reduce:animate-none" aria-label="Classes of business iBroka handles">
           {items.map((c, i) => (
             <li key={i} aria-hidden={i >= CLASS_STRIP.length} className="flex w-30 flex-col items-center gap-3 text-center">
-              <span className="inline-flex size-20 items-center justify-center rounded-full bg-primary text-fg-inverse">
+              <span className="inline-flex size-20 items-center justify-center rounded-full bg-brand-subtle text-primary">
                 <span className="size-8">{c.icon}</span>
               </span>
               <span className="text-13 font-medium text-fg-strong">{c.label}</span>
