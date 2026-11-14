@@ -1,6 +1,6 @@
 # iBroka marketing page: positioning, outline and copy (draft 2)
 
-Status: built as `marketing/site/index.html`. Draft 2 applies the decisions below.
+Status: built as `ibroka-website/site/index.html`. Draft 2 applies the decisions below.
 
 ## Decisions (14 Nov 2026)
 
