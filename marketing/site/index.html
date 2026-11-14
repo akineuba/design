@@ -61,23 +61,22 @@ p{margin:0}
 .num{font-weight:600;white-space:nowrap}.lnk{color:var(--primary);font-weight:500}
 .meter{height:8px;border-radius:99px;background:var(--row);overflow:hidden}.meter i{display:block;height:100%;background:var(--brand);border-radius:99px}
 /* nav */
-.nav{position:sticky;top:0;z-index:20;background:var(--deep);color:#fff}
+.nav{position:sticky;top:0;z-index:20;background:var(--page);color:var(--ink);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:24px;height:64px}
-.nav .logo{height:26px;width:auto;color:#fff;--dot:#7FDCD5}
+.nav .logo{height:26px;width:auto;color:var(--primary);--dot:var(--brand)}
 .nav ul{display:flex;gap:22px;list-style:none;margin:0 0 0 12px;padding:0;font-size:15px}
 .nav ul a{text-decoration:none;opacity:.88}.nav ul a:hover{opacity:1}
 .nav .right{margin-left:auto;display:flex;gap:10px;align-items:center}
 .nav .signin{text-decoration:none;font-size:15px;padding:10px}
-.menu{display:none;background:none;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:10px;width:44px;height:44px;font-size:20px}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--ink);border-radius:10px;width:44px;height:44px;font-size:20px}
 .drawer{display:none}
 /* hero */
-.hero-top{background:linear-gradient(180deg,var(--deep) 0%,var(--deep2) 55%,light-dark(#7FD3CC,#1A4744) 100%);padding:clamp(12px,2vw,28px) 0 clamp(24px,4vw,56px)}
-.giant{display:block;width:100%;height:auto;color:#fff;--dot:#7FDCD5}
-.hero{background:linear-gradient(180deg,light-dark(#7FD3CC,#1A4744) 0%,light-dark(#E2F4F2,#16302E) 45%,var(--page) 100%)}
+.hero-top{background:var(--page);padding:clamp(12px,2vw,28px) 0 clamp(24px,4vw,56px)}
+.giant{display:block;width:100%;height:auto;color:var(--primary);--dot:var(--brand)}
+.hero{background:var(--page)}
 .hero .copy{padding:clamp(16px,3vw,40px) 0 0;text-align:center}
-.hero h1{color:light-dark(#10302E,#F2F4F8);max-width:860px;margin:0 auto}
-.hero .lede{color:light-dark(#2B4744,#C2C7D0);margin:16px auto 0}
-.hero .small{color:light-dark(#2B4744,#C2C7D0)}
+.hero h1{color:var(--ink);max-width:860px;margin:0 auto}
+.hero .lede{color:var(--mute);margin:16px auto 0}
 .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
 .trust{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 32px;margin-top:44px;color:var(--mute);font-weight:600;font-size:15px}
 .trust span{opacity:.85}
@@ -90,10 +89,7 @@ p{margin:0}
 /* statement */
 .stmt{position:relative;padding:clamp(80px,12vw,160px) 0}
 .stmt h2{font-size:clamp(34px,5.6vw,68px);max-width:900px;margin:0 auto}
-.chip{position:absolute;background:var(--surface);border-radius:12px;box-shadow:var(--sh-pop);padding:10px 12px;font-size:13px;display:flex;gap:10px;align-items:center;animation:bob 6s ease-in-out infinite}
-.chip b{font-weight:600}.c1{top:8%;left:4%}.c2{top:14%;right:5%;animation-delay:-2s}.c3{bottom:10%;left:9%;animation-delay:-4s}.c4{bottom:6%;right:8%;animation-delay:-1s}
-@keyframes bob{50%{transform:translateY(-10px)}}
-@media(prefers-reduced-motion:reduce){.chip{animation:none}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 /* bento */
 .bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;margin-top:48px}
 .bento .card{padding:24px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
@@ -156,11 +152,11 @@ footer{background:#10302E;color:#CDEDEA;margin-top:clamp(56px,8vw,112px);padding
 .fcols{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:32px;font-size:14px}
 .fcols h4{margin:0 0 12px;color:#fff;font-size:14px}
 .fcols ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}.fcols a{text-decoration:none}.fcols a:hover{color:#fff}
-footer .giant{margin-top:56px;opacity:.14;--dot:#fff}
+footer .giant{margin-top:56px;opacity:.14;color:#fff;--dot:#fff}
 .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;padding:20px 0;border-top:1px solid rgba(255,255,255,.12)}
 /* narrow */
-@media(max-width:1000px){.strip,.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.b-wide,.b-side{grid-column:span 6}.b-third{grid-column:span 3}.b-third:last-child{grid-column:span 6}.roles,.quotes{grid-template-columns:minmax(0,1fr)}.figs{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}.faq{grid-template-columns:minmax(0,1fr);gap:24px}.chip{display:none}}
-@media(max-width:860px){.nav ul,.nav .signin{display:none}.menu{display:inline-grid;place-items:center}.drawer.open{display:grid;gap:4px;padding:8px max(4vw,16px) 16px;background:var(--deep)}.drawer a{color:#fff;text-decoration:none;padding:12px 0;border-top:1px solid rgba(255,255,255,.15)}.nav .right .pri{display:none}}
+@media(max-width:1000px){.strip,.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.b-wide,.b-side{grid-column:span 6}.b-third{grid-column:span 3}.b-third:last-child{grid-column:span 6}.roles,.quotes{grid-template-columns:minmax(0,1fr)}.figs{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}.faq{grid-template-columns:minmax(0,1fr);gap:24px}}
+@media(max-width:860px){.nav ul,.nav .signin{display:none}.menu{display:inline-grid;place-items:center}.drawer.open{display:grid;gap:4px;padding:8px max(4vw,16px) 16px;background:var(--page)}.drawer a{color:var(--ink);text-decoration:none;padding:12px 0;border-top:1px solid var(--line)}.nav .right .pri{display:none}}
 @media(max-width:600px){.strip,.plans,.split{grid-template-columns:minmax(0,1fr)}.b-third{grid-column:span 6}.cta{grid-template-columns:minmax(0,1fr)}.cta .mark{display:none}.fcols{grid-template-columns:repeat(2,minmax(0,1fr))}.fcols>div:first-child{grid-column:span 2}.figs{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
@@ -181,7 +177,7 @@ footer .giant{margin-top:56px;opacity:.14;--dot:#fff}
     </ul>
     <div class="right">
       <a class="signin" href="#top">Sign in</a>
-      <a class="btn inv" href="#pricing">Start free trial</a>
+      <a class="btn pri" href="#pricing">Start free trial</a>
       <button class="menu" id="menu" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">☰</button>
     </div>
   </div>
@@ -200,12 +196,9 @@ footer .giant{margin-top:56px;opacity:.14;--dot:#fff}
       <h1>Every policy, every naira, every insurer. One record.</h1>
       <p class="lede">iBroka runs the whole brokerage: clients, policies, claims, premium collection and insurer remittance, with accounting and reports built on the same records. No spreadsheets, no servers.</p>
       <div class="ctas"><a class="btn pri" href="#pricing">Start free trial</a><a class="btn out" href="#pricing">See pricing</a></div>
-      <p class="small" style="margin-top:12px">30 days free for one user.</p>
       <div class="trust">
-        <span>Crestline Brokers</span><span>Okafor &amp; Partners</span><span>Harbourview</span><span>Northgate Risk</span>
         <span class="az"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 2h6.5v6.5H2zM9.5 2H16v6.5H9.5zM2 9.5h6.5V16H2zM9.5 9.5H16V16H9.5z" fill="currentColor" opacity=".8"/></svg>Hosted on Microsoft Azure</span>
       </div>
-      <p class="small" style="margin-top:10px">Brokerage names are samples.</p>
     </div>
 
     <div class="strip">
@@ -226,10 +219,6 @@ footer .giant{margin-top:56px;opacity:.14;--dot:#fff}
     <h2 id="stmt">Spreadsheets don't send renewal reminders.</h2>
     <p class="lede">Since the 2025 reform act, premium you collect has to reach the insurer on time or interest is added. Brokerages need to see every policy, receipt and remittance in one place.</p>
   </div>
-  <div class="chip c1" aria-hidden="true"><span class="pill warn">12 days left</span><b>Motor comprehensive</b></div>
-  <div class="chip c2" aria-hidden="true"><span class="pill ok">Remitted</span><b>₦2,310,000</b></div>
-  <div class="chip c3" aria-hidden="true"><span class="av">AO</span><b>Claim approved</b></div>
-  <div class="chip c4" aria-hidden="true"><span class="pill info">Quoted</span><b>Goods in transit</b></div>
 </section>
 
 <section class="band" id="product" style="padding-top:0">
