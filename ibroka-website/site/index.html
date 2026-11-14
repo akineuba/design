@@ -496,12 +496,12 @@ document.documentElement.classList.add("js");
   document.fonts&&document.fonts.ready.then(moveKnob);
 
   const root=document.documentElement,themeBtn=document.getElementById("themeBtn"),mq=matchMedia("(prefers-color-scheme: dark)");
-  let choice=null;try{choice=localStorage.getItem("ib-theme")}catch(e){}
+  let choice=null;try{choice=localStorage.getItem("ib-theme-choice")}catch(e){}
   if(choice!=="light"&&choice!=="dark")choice=null;
   const current=()=>choice||(mq.matches?"dark":"light");
   const syncTheme=()=>{const t=current();root.setAttribute("data-ib-theme",t);root.classList.toggle("dk",t==="dark");
     themeBtn.setAttribute("aria-label",t==="dark"?"Switch to light theme":"Switch to dark theme");themeBtn.title=choice?"":"Following your system theme"};
-  themeBtn.addEventListener("click",()=>{choice=current()==="dark"?"light":"dark";try{localStorage.setItem("ib-theme",choice)}catch(e){}syncTheme()});
+  themeBtn.addEventListener("click",()=>{choice=current()==="dark"?"light":"dark";try{localStorage.setItem("ib-theme-choice",choice)}catch(e){}syncTheme()});
   mq.addEventListener?mq.addEventListener("change",syncTheme):mq.addListener&&mq.addListener(syncTheme);
   syncTheme();
 
