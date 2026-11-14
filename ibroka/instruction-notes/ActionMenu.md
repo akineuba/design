@@ -1,0 +1,1 @@
+The ⋯ button at the end of a table row or card (UI rule 14). Order: **View, Edit, Delete**, then related actions (Receive premium, Renew, Open claims). Tone by meaning: Edit amber, Delete red, navigation blue, money-in green. Delete must open a confirmation Modal. The `aria-label` names the row: "Actions for POL-2026-00975".

@@ -1,0 +1,1 @@
+The iBroka wordmark: black "iBroka" with the brand-teal dot on the i. Use `full` in the sidebar (Figma 40px tall area), `mark` when the sidebar is collapsed and as the favicon, `inverse` on dark backgrounds. This is a vector rebuild of the Figma bitmap; swap in the master SVG when design supplies it (UI Rules B15).

@@ -1,0 +1,21 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { Input, Textarea } from '../components/Input';
+import { SearchIcon } from '../icons';
+import { figma } from '../docs/links';
+
+const meta = { title: 'Components/Input', component: Input, args: { label: 'Policy number', placeholder: 'POL-2026-00000' }, decorators: [(S) => <div className="w-[320px]"><S /></div>], parameters: { design: { type: 'figma', url: figma('3:427') } } } satisfies Meta<typeof Input>;
+export default meta;
+type S = StoryObj<typeof meta>;
+export const Default: S = {};
+export const Filled: S = { args: { defaultValue: 'POL-2026-00975' } };
+export const Required: S = { args: { required: true } };
+export const WithHint: S = { args: { hint: 'Printed on the policy schedule.' } };
+export const Error: S = { args: { defaultValue: 'POL-26', error: 'Use the full number, e.g. POL-2026-00975.' } };
+export const Success: S = { args: { defaultValue: 'POL-2026-00975', success: true, hint: 'Policy found.' } };
+export const Loading: S = { args: { defaultValue: 'POL-2026-00975', loading: true } };
+export const Disabled: S = { args: { disabled: true, defaultValue: 'POL-2026-00975' } };
+export const ReadOnly: S = { args: { readOnly: true, defaultValue: 'POL-2026-00975' } };
+export const Search: S = { args: { label: undefined, 'aria-label': 'Search clients', placeholder: 'Search clients', leadingIcon: <SearchIcon /> } };
+export const Rate: S = { args: { label: 'Rate', trailing: '%', defaultValue: '2.5', inputMode: 'decimal' } };
+export const FilterSize: S = { args: { size: 'filter', label: 'Client' } };
+export const Multiline: S = { render: () => <Textarea label="Remarks" placeholder="Anything the underwriter should know" /> };

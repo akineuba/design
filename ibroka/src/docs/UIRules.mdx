@@ -1,0 +1,12 @@
+import { Meta, Markdown } from '@storybook/blocks';
+import rules from '../../ui-rules/ui-rules.md?raw';
+import { REPO_EDIT_BASE } from './links';
+
+<Meta title="UI Rules" />
+
+<div className="sb-unstyled ib-note font-sans">
+  <p className="text-12 text-fg-muted">
+    Source: <code>ui-rules/ui-rules.md</code> · <a href={`${REPO_EDIT_BASE}ui-rules/ui-rules.md`} target="_blank" rel="noreferrer">Edit these rules</a>
+  </p>
+  <Markdown>{rules}</Markdown>
+</div>

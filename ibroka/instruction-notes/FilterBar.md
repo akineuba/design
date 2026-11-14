@@ -1,0 +1,1 @@
+Filter card on **report** pages, under the summary cards (UI rule 20). Period comes first. Extra filters go in `more` behind "More filters". Nothing reloads until **Apply**; show `applying` while the report loads.

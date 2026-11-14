@@ -1,0 +1,1 @@
+Drag-and-drop or browse for files: policy schedules, KYC documents, claim evidence. State the allowed types and size in `hint`. Each file shows progress while uploading and an error that says how to fix it (wrong type, too big).

@@ -1,0 +1,1 @@
+Initials avatar for people in tables, the sidebar and assignee fields (UI rule 25). Pass the full name; initials come from the first and last words. Use `label` and `sublabel` to show the name beside it. Use `tone="neutral"` for system users or unknown people.

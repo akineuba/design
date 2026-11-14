@@ -1,0 +1,24 @@
+import { Meta } from '@storybook/blocks';
+import { FIGMA_FILE } from './links';
+
+<Meta title="Introduction" />
+
+<div className="sb-unstyled ib-note font-sans">
+<img src="./ibroka-logo.svg" alt="iBroka" style={{ height: 44, marginBottom: 16 }} />
+
+# iBroka Design System
+
+Design tokens and React components for **iBroka**, the ERP for insurance brokers, taken from the <a href={FIGMA_FILE}>iBroka v2 Figma file</a>. It is built the same way as the wBiz design system and shares its UI rules.
+
+- **Foundations** shows every token: colours (light and dark), type scale, spacing, radius, shadows and the icon set. Tokens tagged *derived* are not in Figma: they cover states the file doesn't draw (hover, focus, dark theme) or replace a Figma colour that fails contrast.
+- **Components** has one page per component, with a story for each state. Each story links to its Figma frame in the Design tab.
+- **Insurance** holds the broker-specific pieces: policy cards, expiry badges, money display and input, insurer chips, premium breakdown and document lists.
+- **Patterns** rebuilds the four Figma screens (dashboard, two policy lists, report) from library components only, adds the grid view and a policy record page.
+- **UI Rules** lists the platform-wide rules (shared with wBiz) and, at the bottom, every change made while building the library and the questions still open.
+
+Each component's Docs tab starts with an **Instruction note**: when to use it, how it behaves and which state to pick. Notes are Markdown files in `instruction-notes/`, editable without touching code.
+
+Every value comes from `tokens/tokens.json` through CSS variables (`--ib-*`) and the Tailwind theme. Icons come from `src/icons.tsx` (Phosphor, filled). See `CLAUDE.md` in the repository for the building rules.
+
+Use the **Theme** button in the toolbar to switch between light and dark.
+</div>

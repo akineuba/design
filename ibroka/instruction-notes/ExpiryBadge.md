@@ -1,0 +1,1 @@
+Days left on a policy in words, coloured by urgency (UI rule 39): grey when there's time, amber within `warnDays` (30 by default), red once passed ("Expired 28 days ago"). Use in tables, cards and record headers. Never show a bare negative number.

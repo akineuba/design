@@ -1,0 +1,1 @@
+White container for every block of content on a page. `radius="xl"` (20px) for dashboard and chart cards; `radius="lg"` (10px) for cards that hold a table. The header holds the title (Bold 18), optional `titleAddon` (quick filters or search) and `actions` on the right (one primary at most). Use `flush` to let a table or bulk bar run edge to edge, and `footer` for pagination.

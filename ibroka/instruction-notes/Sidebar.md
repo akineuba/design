@@ -1,0 +1,1 @@
+The one menu for the platform (UI rule 18): modules with filled icons, pages under them, sub-pages at most one level deeper. The current page is teal with a teal bar on modules. The search box filters the whole tree. Collapsing shows icons only (76px) with the "i" mark; clicking a module in collapsed mode expands the menu. The signed-in user and sign-out sit at the bottom.
