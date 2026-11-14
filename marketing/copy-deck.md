@@ -1,6 +1,19 @@
-# iBroka marketing page: positioning, outline and copy (draft 1)
+# iBroka marketing page: positioning, outline and copy (draft 2)
 
-Status: for approval. Nothing is built yet. Anything marked **[dummy]** is placeholder proof to be
+Status: built as `marketing/site/index.html`. Draft 2 applies the decisions below.
+
+## Decisions (14 Nov 2026)
+
+- Layout follows the reference site's section order. Kept: wordmark hero, value strip, statement, product bento, stats band, roles, testimonials, FAQ, CTA card, dark footer. Dropped: integration-partner cards, ratings row, resources/blog. Pricing added.
+- Headline: **Every policy, every naira, every insurer. One record.**
+- Annual billing = 11 × monthly, described as **1 month free**.
+- Prices rounded to the nearest ₦100, **excluding VAT**, no plan highlighted: Plus ₦14,600/mo (₦160,600/yr), Premium ₦23,100/mo (₦254,100/yr), Platinum ₦43,800/mo (₦481,800/yr).
+- Buttons: Start free trial, Choose Plus, Choose Premium, Choose Platinum.
+- Claims marked [verify] are kept as written. Testimonials and brokerage names stay as samples, labelled on the page.
+
+---
+
+Original draft 1 follows. Where it disagrees with the decisions above, the decisions win. Anything marked **[dummy]** is placeholder proof to be
 replaced with real data before launch. Anything marked **[verify]** is a factual claim someone at
 iBroka must confirm.
 

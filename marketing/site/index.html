@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iBroka · Brokerage software</title>
+<meta name="description" content="iBroka keeps every client, policy, claim, premium and insurer remittance on one record, for insurance brokerages in Nigeria.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+/*
+VOICE: plain-spoken and confident, written for Nigerian brokerage owners, operations leads and finance teams.
+IDEA: the broker's single record. Every block on the page is a piece of the product: badges, ledgers, remittance rows.
+PICTURE: a giant white iBroka wordmark on a deep-teal band, then real-looking product pieces built from the design system.
+COLOUR and TYPE: iBroka tokens. Teal leads, ink supports, amber expiry badges are the sharp accent. Instrument Sans throughout.
+LAYOUT: section order taken from the reference site: wordmark hero, value strip, statement, product bento, stats band, roles, pricing, proof, FAQ, CTA card, dark footer.
+*/
+@font-face{font-family:"Instrument Sans";font-weight:400;font-display:swap;src:url(fonts/instrument-sans-400.woff2) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-weight:500;font-display:swap;src:url(fonts/instrument-sans-500.woff2) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-weight:600;font-display:swap;src:url(fonts/instrument-sans-600.woff2) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-weight:700;font-display:swap;src:url(fonts/instrument-sans-700.woff2) format("woff2")}
+:root{color-scheme:light dark;
+--page:light-dark(#F2F4F8,#121417);--surface:light-dark(#FFFFFF,#1B1E23);--sunk:light-dark(#F4F6F9,#23272E);--head:light-dark(#F6F8FA,#20242A);
+--ink:light-dark(#272728,#E2E6EE);--mute:light-dark(#666B73,#A3AAB7);--line:light-dark(#E3E3E3,#343A44);--row:light-dark(#EEF4F6,#262B32);
+--primary:light-dark(#247A75,#3FB8B0);--primary-h:light-dark(#1F6A66,#5CC7C0);--on-primary:light-dark(#FFFFFF,#141618);
+--brand:light-dark(#36A59E,#3FB8B0);--brand-s:light-dark(#EBF6F5,#173634);--dot:#36A59E;
+--ok-bg:light-dark(#D7F6E5,#163324);--ok-fg:light-dark(#157A47,#6EE0A3);--ok-dot:#39D27E;
+--warn-bg:light-dark(#FFFBD9,#332C12);--warn-fg:light-dark(#8A5300,#FFC77A);--warn-dot:#FFA239;
+--err-bg:light-dark(#FFD1D6,#3A1A1F);--err-fg:light-dark(#B0091D,#FF8A97);--err-dot:#FF1934;
+--info-bg:light-dark(#E3F1FF,#15283A);--info-fg:light-dark(#1A65AD,#8CC4F5);--info-dot:#299BFF;
+--avatar:#5C6BB5;--deep:light-dark(#1F6A66,#0F2E2C);--deep2:light-dark(#247A75,#173634);
+--sh-card:0 1px 4px light-dark(rgba(197,207,220,.44),rgba(0,0,0,.4));--sh-pop:0 8px 24px -4px light-dark(rgba(39,39,40,.16),rgba(0,0,0,.6));
+--focus:0 0 0 3px light-dark(rgba(54,165,158,.45),rgba(63,184,176,.55))}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.55 "Instrument Sans",ui-sans-serif,system-ui,sans-serif;overflow-x:clip;font-variant-numeric:tabular-nums}
+a{color:inherit}
+h1,h2,h3{margin:0;line-height:1.08;text-wrap:balance;font-weight:700;letter-spacing:-.02em}
+h1{font-size:clamp(36px,5.4vw,60px)}h2{font-size:clamp(28px,3.6vw,44px)}h3{font-size:18px;letter-spacing:-.01em;line-height:1.25}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(4vw,16px)}
+.band{padding:clamp(56px,8vw,112px) 0}
+.center{text-align:center}.lede{color:var(--mute);font-size:17px;max-width:620px}.center .lede{margin:16px auto 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:10px;font:600 15px/1 inherit;text-decoration:none;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:background .15s}
+.btn:focus-visible,a:focus-visible,summary:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus)}
+.pri{background:var(--primary);color:var(--on-primary)}.pri:hover{background:var(--primary-h)}
+.out{background:var(--surface);color:var(--ink);border-color:var(--line)}.out:hover{background:var(--sunk)}
+.inv{background:#fff;color:#1F6A66}.inv:hover{background:#EBF6F5}
+.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}.ghost:hover{background:rgba(255,255,255,.1)}
+.card{background:var(--surface);border-radius:20px;box-shadow:var(--sh-card)}
+.small{font-size:13px;color:var(--mute)}
+/* design-system pieces */
+.pill{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--d)}
+.ok{background:var(--ok-bg);color:var(--ok-fg);--d:var(--ok-dot)}.warn{background:var(--warn-bg);color:var(--warn-fg);--d:var(--warn-dot)}
+.err{background:var(--err-bg);color:var(--err-fg);--d:var(--err-dot)}.info{background:var(--info-bg);color:var(--info-fg);--d:var(--info-dot)}
+.av{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--avatar);color:#fff;font-size:12px;font-weight:600;flex:none}
+.rows{display:grid;gap:0;font-size:13px}
+.rows>div{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--row)}
+.rows>div:first-child{border-top:0}
+.num{font-weight:600;white-space:nowrap}.lnk{color:var(--primary);font-weight:500}
+.meter{height:8px;border-radius:99px;background:var(--row);overflow:hidden}.meter i{display:block;height:100%;background:var(--brand);border-radius:99px}
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:var(--deep);color:#fff}
+.nav .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.nav .logo{height:26px;width:auto;color:#fff;--dot:#7FDCD5}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0 0 0 12px;padding:0;font-size:15px}
+.nav ul a{text-decoration:none;opacity:.88}.nav ul a:hover{opacity:1}
+.nav .right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.nav .signin{text-decoration:none;font-size:15px;padding:10px}
+.menu{display:none;background:none;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:10px;width:44px;height:44px;font-size:20px}
+.drawer{display:none}
+/* hero */
+.hero-top{background:linear-gradient(180deg,var(--deep) 0%,var(--deep2) 55%,light-dark(#7FD3CC,#1A4744) 100%);padding:clamp(12px,2vw,28px) 0 clamp(24px,4vw,56px)}
+.giant{display:block;width:100%;height:auto;color:#fff;--dot:#7FDCD5}
+.hero{background:linear-gradient(180deg,light-dark(#7FD3CC,#1A4744) 0%,light-dark(#E2F4F2,#16302E) 45%,var(--page) 100%)}
+.hero .copy{padding:clamp(16px,3vw,40px) 0 0;text-align:center}
+.hero h1{color:light-dark(#10302E,#F2F4F8);max-width:860px;margin:0 auto}
+.hero .lede{color:light-dark(#2B4744,#C2C7D0);margin:16px auto 0}
+.hero .small{color:light-dark(#2B4744,#C2C7D0)}
+.ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 32px;margin-top:44px;color:var(--mute);font-weight:600;font-size:15px}
+.trust span{opacity:.85}
+.trust .az{display:inline-flex;gap:8px;align-items:center;color:var(--ink)}
+/* value strip */
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:56px}
+.strip .card{padding:20px;display:flex;flex-direction:column;gap:8px}
+.strip p{font-size:14px;color:var(--mute)}
+.strip .viz{margin-top:auto;padding-top:14px}
+/* statement */
+.stmt{position:relative;padding:clamp(80px,12vw,160px) 0}
+.stmt h2{font-size:clamp(34px,5.6vw,68px);max-width:900px;margin:0 auto}
+.chip{position:absolute;background:var(--surface);border-radius:12px;box-shadow:var(--sh-pop);padding:10px 12px;font-size:13px;display:flex;gap:10px;align-items:center;animation:bob 6s ease-in-out infinite}
+.chip b{font-weight:600}.c1{top:8%;left:4%}.c2{top:14%;right:5%;animation-delay:-2s}.c3{bottom:10%;left:9%;animation-delay:-4s}.c4{bottom:6%;right:8%;animation-delay:-1s}
+@keyframes bob{50%{transform:translateY(-10px)}}
+@media(prefers-reduced-motion:reduce){.chip{animation:none}html{scroll-behavior:auto}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;margin-top:48px}
+.bento .card{padding:24px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.bento .card>p{color:var(--mute);font-size:15px}
+.b-wide{grid-column:span 4}.b-side{grid-column:span 2}.b-third{grid-column:span 2}
+.shot{margin-top:auto;padding-top:16px}
+.panel{background:var(--sunk);border-radius:12px;padding:6px 14px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:20px;align-items:end}
+.split ul{margin:6px 0 0;padding-left:18px;color:var(--mute);font-size:14px}
+.stages{display:flex;gap:6px;margin:8px 0}.stages i{flex:1;height:6px;border-radius:9px;background:var(--brand)}.stages i.off{background:var(--row)}
+.bars{display:flex;align-items:flex-end;gap:8px;height:96px}.bars i{flex:1;background:var(--brand);border-radius:6px 6px 0 0}.bars i:nth-child(2n){background:#5A5FD0}
+/* stats */
+.stats{background:linear-gradient(180deg,var(--page),light-dark(#CDEDEA,#16302E) 30%,light-dark(#7FD3CC,#1A4744))}
+.tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:24px}
+.tags span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500}
+.figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:64px;border-top:1px solid light-dark(rgba(16,48,46,.25),rgba(255,255,255,.2))}
+.figs div{padding:24px 20px 0 0}
+.figs b{display:block;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-.03em}
+.figs span{display:block;margin-top:10px;font-size:14px;color:light-dark(#2B4744,#C2C7D0);max-width:220px}
+/* roles */
+.roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:48px}
+.roles .card{padding:24px}
+.roles ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px;font-size:15px}
+.roles li{display:flex;gap:10px}.roles li::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--brand-s) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.5l2.5 2.5L13 6.5' fill='none' stroke='%2336A59E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--brand-s);color:var(--primary);margin-bottom:16px}
+/* pricing */
+.toggle{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:4px;margin-top:28px}
+.toggle button{border:0;background:none;color:var(--mute);font:600 14px/1 inherit;min-height:38px;padding:0 16px;border-radius:7px;cursor:pointer}
+.toggle button[aria-pressed=true]{background:var(--primary);color:var(--on-primary)}
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:36px;text-align:left}
+.plan{padding:28px 24px;display:flex;flex-direction:column;gap:6px}
+.plan .price{font-size:clamp(30px,2.6vw,38px);font-weight:700;letter-spacing:-.02em;margin-top:10px;white-space:nowrap}
+.plan .price small{font-size:15px;font-weight:500;color:var(--mute);letter-spacing:0}
+.plan .alt{font-size:13px;color:var(--mute);min-height:20px}
+.plan ul{list-style:none;padding:16px 0 0;margin:14px 0 22px;border-top:1px solid var(--row);display:grid;gap:8px;font-size:14px}
+.plan .btn{margin-top:auto;width:100%}
+.save{display:inline-block;margin-left:6px;font-size:12px;font-weight:600;color:var(--ok-fg);background:var(--ok-bg);border-radius:99px;padding:2px 8px}
+/* proof */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.quotes .card{padding:28px;display:flex;flex-direction:column;gap:18px}
+.quotes blockquote{margin:0;font-size:17px;line-height:1.5}
+.who{display:flex;gap:10px;align-items:center;font-size:14px}.who span{display:block;color:var(--mute);font-size:13px}
+.quotes .big{margin-top:auto;padding-top:18px;border-top:1px solid var(--row)}
+.quotes .big b{font-size:32px;letter-spacing:-.02em;display:block;line-height:1.1}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+/* faq */
+.faq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:48px}
+details{background:var(--surface);border-radius:12px;box-shadow:var(--sh-card);margin-bottom:10px}
+summary{list-style:none;cursor:pointer;padding:18px 52px 18px 20px;font-weight:600;position:relative;border-radius:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--primary);font-weight:500}
+details[open] summary::after{content:"−"}
+details p{padding:0 20px 18px;color:var(--mute)}
+/* cta + footer */
+.cta{background:radial-gradient(120% 140% at 100% 0%,#36A59E 0%,#1F6A66 45%,#10302E 100%);color:#fff;border-radius:24px;padding:clamp(36px,6vw,72px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:32px;align-items:center;overflow:hidden;position:relative}
+.cta p{color:#CDEDEA;margin-top:14px;font-size:17px}
+.cta .ctas{justify-content:flex-start}
+.cta .mark{justify-self:end;height:200px;width:auto;color:#fff;--dot:#7FDCD5;opacity:.95}
+footer{background:#10302E;color:#CDEDEA;margin-top:clamp(56px,8vw,112px);padding:64px 0 0;overflow:hidden}
+.fcols{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:32px;font-size:14px}
+.fcols h4{margin:0 0 12px;color:#fff;font-size:14px}
+.fcols ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}.fcols a{text-decoration:none}.fcols a:hover{color:#fff}
+footer .giant{margin-top:56px;opacity:.14;--dot:#fff}
+.legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;padding:20px 0;border-top:1px solid rgba(255,255,255,.12)}
+/* narrow */
+@media(max-width:1000px){.strip,.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.b-wide,.b-side{grid-column:span 6}.b-third{grid-column:span 3}.b-third:last-child{grid-column:span 6}.roles,.quotes{grid-template-columns:minmax(0,1fr)}.figs{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}.faq{grid-template-columns:minmax(0,1fr);gap:24px}.chip{display:none}}
+@media(max-width:860px){.nav ul,.nav .signin{display:none}.menu{display:inline-grid;place-items:center}.drawer.open{display:grid;gap:4px;padding:8px max(4vw,16px) 16px;background:var(--deep)}.drawer a{color:#fff;text-decoration:none;padding:12px 0;border-top:1px solid rgba(255,255,255,.15)}.nav .right .pri{display:none}}
+@media(max-width:600px){.strip,.plans,.split{grid-template-columns:minmax(0,1fr)}.b-third{grid-column:span 6}.cta{grid-template-columns:minmax(0,1fr)}.cta .mark{display:none}.fcols{grid-template-columns:repeat(2,minmax(0,1fr))}.fcols>div:first-child{grid-column:span 2}.figs{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wm" viewBox="2.57 -76.43 301.53 79.43"><path fill="currentColor" d="M21 0L6 0L6-51L21-51L21 0ZM66.80 0L32 0L32-72L65.50-72Q75.10-72 81-67.10Q86.90-62.20 86.90-53.80L86.90-53.80Q86.90-48.50 84.40-44.70Q81.90-40.90 77.70-38.90L77.70-38.90Q76.60-38.40 75.50-38L75.50-38Q77.30-37.50 79-36.60L79-36.60Q83.50-34.20 86.20-29.85Q88.90-25.50 88.90-19.60Q88.90-13.70 86.15-9.25Q83.40-4.80 78.45-2.40Q73.50 0 66.80 0L66.80 0ZM62.70-32.20L47.40-32.20L47.40-11L63.20-11Q68.20-11 70.75-13.75Q73.30-16.50 73.30-21.40L73.30-21.40Q73.30-26.40 70.55-29.30Q67.80-32.20 62.70-32.20L62.70-32.20ZM62.20-61L47.40-61L47.40-43.20L61.90-43.20Q66.60-43.20 69.05-45.45Q71.50-47.70 71.50-52.10Q71.50-56.50 69.15-58.75Q66.80-61 62.20-61L62.20-61ZM112.90 0L97.90 0L97.90-51L112.60-51L112.60-41.70Q114.40-46 117.50-48.60L117.50-48.60Q121.60-52 127.70-52L127.70-52Q129.60-52 130.50-51.60L130.50-51.60L130.50-37.60Q130-37.80 129.10-37.85Q128.20-37.90 126.90-37.90L126.90-37.90Q119.70-37.90 116.30-35.35Q112.90-32.80 112.90-26.60L112.90-26.60L112.90 0ZM161.90 1L161.90 1Q153.50 1 147.15-2.35Q140.80-5.70 137.25-11.75Q133.70-17.80 133.70-25.70L133.70-25.70Q133.70-33.60 137.25-39.50Q140.80-45.40 147.15-48.70Q153.50-52 161.90-52L161.90-52Q170.40-52 176.75-48.70Q183.10-45.40 186.60-39.50Q190.10-33.60 190.10-25.70L190.10-25.70Q190.10-17.80 186.55-11.75Q183.00-5.70 176.65-2.35Q170.30 1 161.90 1ZM161.90-10.80L161.90-10.80Q165.40-10.80 168.25-12.60Q171.10-14.40 172.80-17.75Q174.50-21.10 174.50-25.80L174.50-25.80Q174.50-32.70 170.85-36.45Q167.20-40.20 161.90-40.20L161.90-40.20Q156.60-40.20 152.95-36.40Q149.30-32.60 149.30-25.80L149.30-25.80Q149.30-21.10 151.00-17.75Q152.70-14.40 155.55-12.60Q158.40-10.80 161.90-10.80ZM213.10 0L198.10 0L198.10-72L213.10-72L213.10-30.60L230.30-51L247.60-51L225.70-26.90L248.60 0L230.80 0L213.10-22.10L213.10 0ZM302.10 0L287.10 0Q286.50-2.20 286.30-4.70L286.30-4.70Q286.10-6.30 286-8.30L286-8.30Q283.90-4.20 280.30-1.90L280.30-1.90Q275.80 1 269.30 1L269.30 1Q261.70 1 257.20-2.85Q252.70-6.70 252.70-13.10L252.70-13.10Q252.70-20.20 258.05-24.55Q263.40-28.90 273-30.20L273-30.20L285.60-32L285.60-34.60Q285.60-37.70 283.55-39.45Q281.50-41.20 277.50-41.20L277.50-41.20Q273.70-41.20 271.45-39.90Q269.20-38.60 268.50-36.10L268.50-36.10L254.20-36.10Q255.20-43 261.30-47.50Q267.40-52 278-52L278-52Q289-52 294.80-47.10Q300.60-42.20 300.60-33L300.60-33L300.60-10.50Q300.60-8 300.95-5.45Q301.30-2.90 302.10 0L302.10 0ZM285.60-18.50L285.60-23.20L275.50-21.70Q271.50-21.10 269.60-19.50Q267.70-17.90 267.70-15.10L267.70-15.10Q267.70-12.60 269.50-11.30Q271.30-10 274.30-10L274.30-10Q279-10 282.30-12.55Q285.60-15.10 285.60-18.50L285.60-18.50Z"/><circle style="fill:var(--dot)" cx="13.5" cy="-65.5" r="8.93"/></symbol>
+  <symbol id="mk" viewBox="2.57 -76.43 21.86 78.43"><path fill="currentColor" d="M21 0L6 0L6-51L21-51L21 0Z"/><circle style="fill:var(--dot)" cx="13.5" cy="-65.5" r="8.93"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#top" aria-label="iBroka home"><svg class="logo" viewBox="0 0 301.53 79.43" role="img" aria-label="iBroka"><use href="#wm"/></svg></a>
+    <ul>
+      <li><a href="#product">Product</a></li>
+      <li><a href="#roles">Who it's for</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="right">
+      <a class="signin" href="#top">Sign in</a>
+      <a class="btn inv" href="#pricing">Start free trial</a>
+      <button class="menu" id="menu" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+  <nav class="drawer" id="drawer" aria-label="Mobile">
+    <a href="#product">Product</a><a href="#roles">Who it's for</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#top">Sign in</a>
+  </nav>
+</header>
+
+<main id="top">
+<div class="hero-top"><div class="wrap">
+    <svg class="giant" viewBox="0 0 301.53 79.43" role="img" aria-label="iBroka"><use href="#wm"/></svg>
+  </div></div>
+<section class="hero">
+  <div class="wrap">
+    <div class="copy">
+      <h1>Every policy, every naira, every insurer. One record.</h1>
+      <p class="lede">iBroka runs the whole brokerage: clients, policies, claims, premium collection and insurer remittance, with accounting and reports built on the same records. No spreadsheets, no servers.</p>
+      <div class="ctas"><a class="btn pri" href="#pricing">Start free trial</a><a class="btn out" href="#pricing">See pricing</a></div>
+      <p class="small" style="margin-top:12px">30 days free for one user.</p>
+      <div class="trust">
+        <span>Crestline Brokers</span><span>Okafor &amp; Partners</span><span>Harbourview</span><span>Northgate Risk</span>
+        <span class="az"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 2h6.5v6.5H2zM9.5 2H16v6.5H9.5zM2 9.5h6.5V16H2zM9.5 9.5H16V16H9.5z" fill="currentColor" opacity=".8"/></svg>Hosted on Microsoft Azure</span>
+      </div>
+      <p class="small" style="margin-top:10px">Brokerage names are samples.</p>
+    </div>
+
+    <div class="strip">
+      <div class="card"><h3>Renewals flagged early</h3><p>Every expiry is shown in words, so nothing lapses quietly.</p>
+        <div class="viz rows"><div><span>MTR-0912</span><span class="pill warn">12 days left</span></div><div><span>FIR-0377</span><span class="pill err">Expired 3 days ago</span></div></div></div>
+      <div class="card"><h3>Remittance on schedule</h3><p>See what you owe each insurer today, net of commission.</p>
+        <div class="viz"><div class="rows"><div><span>Crown Assurance</span><span class="num">₦4.8M</span></div></div><div class="meter"><i style="width:72%"></i></div></div></div>
+      <div class="card"><h3>Commission worked out</h3><p>Taken off as premium comes in, so you always know what a policy earns.</p>
+        <div class="viz rows"><div><span>Premium</span><span class="num">₦1,250,000</span></div><div><span>Commission 15%</span><span class="num lnk">₦187,500</span></div></div></div>
+      <div class="card"><h3>Reports ready to share</h3><p>Management and regulator reports come straight from the records.</p>
+        <div class="viz bars" style="height:56px" aria-hidden="true"><i style="height:40%"></i><i style="height:62%"></i><i style="height:48%"></i><i style="height:80%"></i><i style="height:70%"></i><i style="height:95%"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="stmt center" aria-labelledby="stmt">
+  <div class="wrap">
+    <h2 id="stmt">Spreadsheets don't send renewal reminders.</h2>
+    <p class="lede">Since the 2025 reform act, premium you collect has to reach the insurer on time or interest is added. Brokerages need to see every policy, receipt and remittance in one place.</p>
+  </div>
+  <div class="chip c1" aria-hidden="true"><span class="pill warn">12 days left</span><b>Motor comprehensive</b></div>
+  <div class="chip c2" aria-hidden="true"><span class="pill ok">Remitted</span><b>₦2,310,000</b></div>
+  <div class="chip c3" aria-hidden="true"><span class="av">AO</span><b>Claim approved</b></div>
+  <div class="chip c4" aria-hidden="true"><span class="pill info">Quoted</span><b>Goods in transit</b></div>
+</section>
+
+<section class="band" id="product" style="padding-top:0">
+  <div class="wrap">
+    <div class="center"><h2>Everything a brokerage runs on</h2><p class="lede">Each module works on the same client and policy records, so nothing is typed twice.</p></div>
+    <div class="bento">
+      <article class="card b-wide">
+        <div class="split">
+          <div><h3>Policies and renewals</h3><p class="small" style="font-size:15px;margin-top:8px">Every class of business in one book, from quote to renewal. Co-insured placements split by insurer.</p>
+            <ul><li>Motor, fire, marine, aviation, agric and life</li><li>Renewals flagged before they lapse</li><li>Fields lock once a policy is bound</li></ul></div>
+          <div class="panel rows">
+            <div><span class="lnk">POL-2026-00975</span><span>Motor comprehensive</span><span class="pill ok">Active</span></div>
+            <div><span class="lnk">POL-2026-00981</span><span>Fire &amp; special perils</span><span class="pill warn">Expiring</span></div>
+            <div><span class="lnk">POL-2026-01002</span><span>Marine cargo</span><span class="pill info">Quoted</span></div>
+            <div><span class="lnk">POL-2026-01017</span><span>Aviation hull</span><span class="pill ok">Active</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="card b-side">
+        <h3>Premium and remittance</h3><p>Record what comes in and get a remittance schedule for every insurer.</p>
+        <div class="shot panel rows">
+          <div><span>Received</span><span class="num">₦48.2M</span></div>
+          <div><span>Commission</span><span class="num">₦6.4M</span></div>
+          <div><span>Due to insurers</span><span class="num lnk">₦31.7M</span></div>
+        </div>
+      </article>
+      <article class="card b-third">
+        <h3>Claims</h3><p>Follow each claim from notification to settlement, with documents and who acted when.</p>
+        <div class="shot"><div class="stages" aria-hidden="true"><i></i><i></i><i></i><i class="off"></i></div><p class="small">CLM-0412 · Motor accident · Approved by insurer</p></div>
+      </article>
+      <article class="card b-third">
+        <h3>Accounting and reports</h3><p>Invoices, receipts and ledgers come straight from your policies, with Power BI reports.</p>
+        <div class="shot bars" aria-hidden="true"><i style="height:45%"></i><i style="height:60%"></i><i style="height:52%"></i><i style="height:74%"></i><i style="height:66%"></i><i style="height:90%"></i></div>
+      </article>
+      <article class="card b-third">
+        <h3>Leads and client portal</h3><p>Capture leads in bulk, quote and convert them, and give clients a portal under your brand.</p>
+        <div class="shot rows"><div><span style="display:flex;gap:8px;align-items:center"><span class="av">TB</span>Tunde Bello</span><span class="pill info">Quoted</span></div><div><span style="display:flex;gap:8px;align-items:center"><span class="av">CE</span>Chioma Eze</span><span class="pill ok">Converted</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band stats center">
+  <div class="wrap">
+    <h2>One system of record for your brokerage</h2>
+    <p class="lede">Built and hosted on Microsoft Azure. Nothing to install, nothing to maintain.</p>
+    <div class="tags"><span>Hosted on Microsoft Azure</span><span>Encrypted in transit and at rest</span><span>Role-based access</span><span>Daily backups</span><span>Power BI reporting</span></div>
+    <div class="figs" style="text-align:left">
+      <div><b>60%</b><span>less processing time and effort, from an iBroka customer case study</span></div>
+      <div><b>0</b><span>servers to buy, run or upgrade</span></div>
+      <div><b>2019</b><span>serving Nigerian insurance brokers since</span></div>
+      <div><b>24/7</b><span>access from any browser, at the office or on the road</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="roles">
+  <div class="wrap">
+    <h2 style="max-width:620px">Built for everyone in the brokerage</h2>
+    <div class="roles">
+      <div class="card"><div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M4 20V10h4v10H4zm6 0V4h4v16h-4zm6 0v-7h4v7h-4z" fill="currentColor"/></svg></div>
+        <h3>For owners</h3><ul><li>See the whole book by class, insurer and account officer</li><li>Know what every policy earns</li><li>Add people and branches without new servers or IT staff</li></ul></div>
+      <div class="card"><div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6V3zm2 6h8v2H8V9zm0 4h8v2H8v-2zm0 4h5v2H8v-2z" fill="currentColor"/></svg></div>
+        <h3>For operations</h3><ul><li>Every policy from quote to renewal on one record</li><li>Renewals flagged before they lapse</li><li>Claims tracked to settlement, documents attached</li></ul></div>
+      <div class="card"><div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 6h18v12H3V6zm9 9a3 3 0 100-6 3 3 0 000 6zM5 8v2a2 2 0 002-2H5zm12 0a2 2 0 002 2V8h-2zM5 16h2a2 2 0 00-2-2v2zm14 0v-2a2 2 0 00-2 2h2z" fill="currentColor"/></svg></div>
+        <h3>For finance</h3><ul><li>Premium matched to the policy as it comes in</li><li>Commission taken off, so the amount due to each insurer is always current</li><li>Ledgers and reports built on the same data</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="band center" id="pricing" style="background:var(--surface)">
+  <div class="wrap">
+    <h2>Plans that grow with your brokerage</h2>
+    <p class="lede">Every plan includes the full platform. Choose by team size.</p>
+    <div class="toggle" role="group" aria-label="Billing period"><button type="button" data-p="m" aria-pressed="true">Monthly</button><button type="button" data-p="y" aria-pressed="false">Annual · 1 month free</button></div>
+    <div class="plans" id="plans"></div>
+    <p class="small" style="margin-top:20px">Prices in naira, excluding VAT.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="head"><h2 style="max-width:620px">Brokerages that left the spreadsheet behind</h2><p class="small">Sample quotes, to be replaced with real customer stories.</p></div>
+    <div class="quotes">
+      <figure class="card" style="margin:0"><blockquote>“Renewals used to live in three spreadsheets. Now nothing expires without us knowing.”</blockquote>
+        <figcaption class="who"><span class="av">AO</span><div>Adaeze O.<span>Head of Operations, Lagos</span></div></figcaption><div class="big"><b>0</b><span class="small">missed renewals last quarter</span></div></figure>
+      <figure class="card" style="margin:0"><blockquote>“I can see what we owe every insurer on any day of the month. Month-end went from a week to an afternoon.”</blockquote>
+        <figcaption class="who"><span class="av">TB</span><div>Tunde B.<span>Finance Manager, Abuja</span></div></figcaption><div class="big"><b>1 day</b><span class="small">to close the month, down from 5</span></div></figure>
+      <figure class="card" style="margin:0"><blockquote>“We opened a second branch without buying a single server.”</blockquote>
+        <figcaption class="who"><span class="av">IN</span><div>Ifeoma N.<span>Managing Director, Port Harcourt</span></div></figcaption><div class="big"><b>2 branches</b><span class="small">on one platform</span></div></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="faq" style="padding-top:0">
+  <div class="wrap faq">
+    <div><h2>Frequently asked questions</h2><p class="lede" style="margin-top:14px">Anything else? <a class="lnk" href="#start">Talk to our team</a>.</p></div>
+    <div>
+      <details open><summary>Who is iBroka for?</summary><p>Licensed insurance brokerages in Nigeria, from one-person firms to teams with several branches.</p></details>
+      <details><summary>What happens after the 30-day trial?</summary><p>Choose a plan to keep going. Everything you set up during the trial stays in place.</p></details>
+      <details><summary>Can I bring my existing spreadsheets?</summary><p>Yes. Import your clients and policies, and we'll help with the first import.</p></details>
+      <details><summary>Does iBroka help with the 2025 reform act?</summary><p>iBroka tracks premium received and remittance due for every insurer and policy, so you can see your obligations and meet them on time.</p></details>
+      <details><summary>Do I need servers or IT staff?</summary><p>No. iBroka runs in the cloud on Microsoft Azure and works in any modern browser.</p></details>
+      <details><summary>Can I add users later?</summary><p>Yes. Move up a plan at any time; your data stays where it is.</p></details>
+      <details><summary>Which classes of business are supported?</summary><p>All of them, including motor, fire and special perils, marine, aviation, agric and life.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <div class="cta">
+      <div><h2>Your whole brokerage, on one record.</h2><p>Start free for 30 days. No servers, no spreadsheets.</p>
+        <div class="ctas" style="margin-top:28px"><a class="btn inv" href="#pricing">Start free trial</a><a class="btn ghost" href="#faq">Read the FAQ</a></div></div>
+      <svg class="mark" viewBox="0 0 21.86 78.43" aria-hidden="true"><use href="#mk"/></svg>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcols">
+      <div><svg viewBox="0 0 301.53 79.43" style="height:28px;width:auto;color:#fff;--dot:#7FDCD5" role="img" aria-label="iBroka"><use href="#wm"/></svg>
+        <p style="margin-top:14px;max-width:300px">Brokerage software for insurance brokers in Nigeria. Hosted on Microsoft Azure.</p></div>
+      <div><h4>Product</h4><ul><li><a href="#product">Modules</a></li><li><a href="#roles">Who it's for</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#faq">FAQ</a></li><li><a href="#start">Contact sales</a></li><li><a href="#top">Sign in</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="#top">Privacy policy</a></li><li><a href="#top">Terms &amp; conditions</a></li></ul></div>
+    </div>
+    <svg class="giant" viewBox="0 0 301.53 79.43" aria-hidden="true"><use href="#wm"/></svg>
+    <div class="legal"><span>© 2026 Wragby Solutions. All rights reserved.</span><span>Made for Nigerian brokers</span></div>
+  </div>
+</footer>
+
+<script>
+{
+  const plans=[
+    {n:"Trial",m:0,users:"1 user",note:"30 days, full platform",cta:"Start free trial",pri:true},
+    {n:"Plus",m:14600,users:"3 users (1 admin, 2 users)",cta:"Choose Plus"},
+    {n:"Premium",m:23100,users:"5 users (1 admin, 4 users)",cta:"Choose Premium"},
+    {n:"Platinum",m:43800,users:"10 users (2 admins, 8 users)",cta:"Choose Platinum"}
+  ];
+  const fmt=v=>"₦"+v.toLocaleString("en-NG");
+  const box=document.getElementById("plans");
+  const render=p=>{
+    box.innerHTML=plans.map(x=>{
+      const free=x.m===0, y=x.m*11;
+      const price=free?fmt(0):p==="y"?fmt(y)+"<small>/yr</small>":fmt(x.m)+"<small>/mo</small>";
+      const alt=free?"No payment during the trial":p==="y"?fmt(x.m)+"/mo, billed yearly <span class='save'>1 month free</span>":"or "+fmt(y)+"/yr with 1 month free";
+      return `<div class="card plan"><h3>${x.n}</h3><div class="price">${price}</div><p class="alt">${alt}</p>
+        <ul><li>${x.users}</li><li>${free?x.note:"Full platform, every module"}</li><li>${free?"Upgrade at any time":"Import help included"}</li></ul>
+        <a class="btn ${x.pri?"pri":"out"}" href="#start">${x.cta}</a></div>`;
+    }).join("");
+  };
+  document.querySelectorAll(".toggle button").forEach(b=>b.addEventListener("click",()=>{
+    document.querySelectorAll(".toggle button").forEach(o=>o.setAttribute("aria-pressed",o===b));
+    render(b.dataset.p);
+  }));
+  render("m");
+  const menu=document.getElementById("menu"),drawer=document.getElementById("drawer");
+  menu.addEventListener("click",()=>{const o=drawer.classList.toggle("open");menu.setAttribute("aria-expanded",o);menu.setAttribute("aria-label",o?"Close menu":"Open menu")});
+  drawer.addEventListener("click",e=>{if(e.target.tagName==="A"){drawer.classList.remove("open");menu.setAttribute("aria-expanded","false")}});
+}
+</script>
+</body>
+</html>
