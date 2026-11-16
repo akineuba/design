@@ -29,8 +29,10 @@ app's `node_modules`.
 | `/checkout/review` | `wcrm-review` (372:2692) + `edit-modal` (372:3262) |
 | `/checkout/payment` | `wcrm-payment`: methods (372:2780), card (372:2925), transfer (372:3444) + `Success-Card` (372:3555) |
 
-Header "Features" opens the module menu from Figma (`feature-list-card`, 364:8564): Business Development scrolls to
-this page's features, and Service Desk, Marketing and Orbit AI open Contact Sales with the module named in the message.
+Header "Features" lists the site's four features (Contact Management, Deal Management, Activities & Reporting,
+Budget & Targets) in the layout of Figma's `feature-list-card` (364:8564), with design-system icons and a "Learn more"
+cue; each scrolls to its card on the homepage. A "Back to top" button appears lower right once a page is scrolled.
+The hero leaderboard uses the design-system `Avatar` (initials).
 The sun button switches the dark theme (`data-theme="dark"`), which every design-system and site token follows; in
 dark mode the navy outline buttons ("Sign In", "Learn More") become the design system's solid #4F46E5 secondary button.
 

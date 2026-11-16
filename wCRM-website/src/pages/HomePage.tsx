@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { Avatar } from '@ds';
 import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteButtonLink } from '../components/SiteButton';
@@ -12,7 +13,6 @@ import partnerAws from '../assets/home/partner-aws.png';
 import partnerHuawei from '../assets/home/partner-huawei.png';
 import partnerSap from '../assets/home/partner-sap.png';
 import arrowUpRight from '../assets/home/arrow-up-right.svg';
-import leaderAvatar from '../assets/home/leader-avatar.svg';
 import sparkline from '../assets/home/sparkline.svg';
 import indicatorDot from '../assets/home/indicator-dot.svg';
 import indicatorLine from '../assets/home/indicator-line.png';
@@ -83,7 +83,7 @@ function HeroArtwork() {
           {LEADERS.map((l, i) => (
             <li key={l.name} className="flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <img src={leaderAvatar} alt="" className="size-6" />
+                <Avatar name={l.name} size="sm" />
                 <span className="flex flex-col whitespace-nowrap">
                   <span className="text-caption-sm font-semibold text-site-ink">{l.name}</span>
                   <span className="text-micro text-text-icon-strong">{l.messages} Messages</span>

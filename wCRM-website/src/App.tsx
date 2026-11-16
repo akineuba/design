@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { CheckoutProvider } from './checkout/CheckoutContext';
+import { BackToTop } from './components/BackToTop';
 import { HomePage } from './pages/HomePage';
 import { PricingPage } from './pages/PricingPage';
 import { ContactPage } from './pages/ContactPage';
@@ -38,6 +39,7 @@ export function App() {
         <Route path="/checkout/payment" element={<PaymentPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <BackToTop />
     </CheckoutProvider>
   );
 }
