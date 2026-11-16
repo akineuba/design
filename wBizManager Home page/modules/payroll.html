@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Payroll · wBizManager</title>
+<meta name="description" content="Salary structures, additions and deductions, pro-rating, statutory deductions and remittances, branded payslips, bank payments and accounting entries, in one payroll.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+/* ───────── Module pages ───────── */
+.crumb-nav{display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;color:var(--muted);margin-bottom:28px}
+.crumb-nav a:hover{color:var(--brand-ink)}
+.crumb-nav .i{width:14px;height:14px;color:var(--faint)}
+.mhero{padding-top:clamp(48px,6vw,80px);overflow:clip}
+.mhero-copy{display:grid;justify-items:center;text-align:center;gap:24px;max-width:820px;margin-inline:auto}
+.mhero-copy .ctx .av{width:28px;height:28px;background:var(--brand)}
+.mhero-copy .ctx .av .i{width:15px;height:15px}
+.mhero h1{font-size:clamp(44px,6vw,84px)}
+.mhero h1 .hl{color:var(--brand)}
+.mhero .lead{text-align:center;max-width:52ch;margin-inline:auto}
+.mhero-act{display:flex;gap:24px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:4px}
+.mshot-panel{margin-top:clamp(48px,6vw,72px);background:var(--brand);border-radius:var(--r-panel) var(--r-panel) 0 0;padding:clamp(20px,4.5vw,64px) clamp(16px,4.5vw,64px) 0;position:relative;overflow:hidden}
+.mshot-panel::before{content:"";position:absolute;width:640px;height:640px;right:-200px;top:-320px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.22),transparent)}
+.mshot-panel .shot{position:relative;border-radius:16px 16px 0 0;box-shadow:0 30px 80px -20px rgba(0,24,72,.45)}
+/* Screenshot placeholder: swap .shot-ph for an <img> when the real screenshot arrives */
+.shot{background:var(--surface);border:1px solid rgba(15,23,42,.08);border-radius:16px;overflow:hidden}
+.shot-bar{display:flex;align-items:center;gap:6px;height:34px;padding-inline:14px;border-bottom:1px solid var(--border);background:var(--canvas)}
+.shot-bar i{width:9px;height:9px;border-radius:50%;background:#D7DEE8}
+.shot-bar span{margin-left:10px;font-size:12px;color:var(--faint)}
+.shot-ph{aspect-ratio:16/10;display:grid;place-content:center;justify-items:center;gap:10px;text-align:center;padding:24px;color:var(--muted);
+  background:repeating-linear-gradient(135deg,#F8FAFC 0 14px,#F1F5F9 14px 28px);outline:2px dashed #CBD5E1;outline-offset:-14px}
+.shot-ph .ph-ic{width:52px;height:52px;border-radius:14px;background:var(--surface);display:grid;place-items:center;color:var(--brand);box-shadow:0 1px 2px rgba(15,23,42,.06),0 8px 20px -10px rgba(15,23,42,.25)}
+.shot-ph .ph-ic .i{width:24px;height:24px}
+.shot-ph b{font-size:15px;color:var(--text);font-weight:600}
+.shot-ph small{font-size:13px}
+.shot img{display:block;width:100%;height:auto}
+.feats{padding-block:clamp(72px,9vw,120px);display:grid;gap:clamp(72px,9vw,120px)}
+.feat{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,6vw,88px);align-items:center}
+.feat.flip .feat-copy{order:2}
+.feat-copy{display:grid;gap:16px;align-content:center}
+.feat-copy .num{font-size:14px;font-weight:600;color:var(--brand-ink);letter-spacing:.06em}
+.feat-copy h2{font-size:clamp(28px,3vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.08}
+.feat-copy p{font-size:17px;line-height:1.7;color:var(--text-2);max-width:46ch}
+.rel{position:relative;overflow:clip}
+.rel > .wrap{position:relative;z-index:1}
+.feat-art{background:var(--panel);border-radius:28px;padding:clamp(16px,3vw,40px)}
+.rel{padding-block:clamp(72px,9vw,112px);background:var(--canvas)}
+.rel .head-c{margin-bottom:40px}
+.rel-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.rel-card{display:grid;gap:12px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:20px;transition:border-color .2s,box-shadow .2s,translate .2s}
+.rel-card:hover{border-color:#BFD6FF;box-shadow:0 18px 40px -24px rgba(0,112,255,.45);translate:0 -2px}
+.rel-card .ic{width:44px;height:44px;border-radius:12px;background:var(--brand-subtle);color:var(--brand);display:grid;place-items:center}
+.rel-card .ic .i{width:21px;height:21px}
+.rel-card h3{font-size:18px;font-weight:600}
+.rel-card p{font-size:14.5px;color:var(--muted);line-height:1.55}
+.rel-card .link{font-size:14.5px;margin-top:4px}
+.pn{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:28px;border-top:1px solid var(--border)}
+.pn a{display:grid;gap:4px;font-size:14px;color:var(--muted)}
+.pn a b{font-size:17px;color:var(--text);display:inline-flex;align-items:center;gap:8px}
+.pn a b .i{width:17px;height:17px}
+.pn a:hover b{color:var(--brand-ink)}
+.pn .next{text-align:right;justify-items:end}
+.cta-band{background:var(--brand);color:#fff;padding-block:clamp(72px,9vw,112px);overflow:hidden;position:relative}
+.cta-band .wrap{display:grid;justify-items:center;text-align:center;gap:24px}
+.cta-band h2{font-size:clamp(40px,6vw,84px);color:#fff}
+.cta-band p{font-size:18px;line-height:1.6;color:rgba(255,255,255,.88);max-width:48ch}
+.cta-band .acts{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.btn-ghost-w{color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+.btn-ghost-w:hover{background:rgba(255,255,255,.1)}
+.menu li a[aria-current="page"] b{color:var(--brand-ink)}
+/* Real ERP screens (HTML), placed as in the Figma module pages */
+.shot.screen{background:#fff;border:1px solid rgba(15,23,42,.08)}
+.shot.screen .scaler{width:100%}
+.shot.screen .frame{border-radius:0;box-shadow:none}
+.mshot-panel.has-screen{padding:0;aspect-ratio:1160/726;container-type:inline-size}
+.mshot-panel.has-screen .shot{position:absolute;left:3.19%;width:93.62%;top:6.55cqw}
+.feat-art.bleed{position:relative;overflow:hidden;padding:0;aspect-ratio:617/433;container-type:inline-size}
+.feat-art.bleed .shot{position:absolute;left:9.4%;top:15.9%;width:99.7%;border-radius:16px;box-shadow:0 22px 50px -22px rgba(15,23,42,.35)}
+.feat.flip .feat-art.bleed .shot{left:auto;right:7.8%;width:106.6%}
+.feat.flip.wide{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
+.feat.flip:not(.wide) .feat-art.bleed{aspect-ratio:456/400}
+.feat.flip:not(.wide) .feat-art.bleed .shot{left:8%;right:auto;width:135%;top:14%}
+@media (max-width:900px){.feat.flip.wide{grid-template-columns:1fr}.feat.flip .feat-art.bleed{aspect-ratio:617/433}.feat.flip .feat-art.bleed .shot,.feat.flip:not(.wide) .feat-art.bleed .shot{left:9.4%;right:auto;top:15.9%;width:99.7%}}
+
+@media (max-width:900px){.feat{grid-template-columns:1fr;gap:28px}.feat.flip .feat-copy{order:0}.rel-grid{grid-template-columns:1fr}}
+@media (max-width:560px){.pn a b{font-size:15px}.mhero-act .btn{width:100%}}
+
+/* ───────── ERP screen recreations ───────── */
+.erp{display:grid;grid-template-columns:52px minmax(0,1fr);font-family:Inter,sans-serif;color:#0F172A;font-size:12.5px;background:#fff;letter-spacing:0}
+.erp svg.i{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.erp .rail{background:#F3F4F6;border-right:1px solid #ECEEF2;display:flex;flex-direction:column;align-items:center;gap:7px;padding-top:15px}
+.erp .rail span{width:34px;height:32px;border-radius:8px;display:grid;place-items:center;color:#374151}
+.erp .rail span.e-tog{margin-bottom:12px}
+.erp .rail span.on{background:#E3EDFD;color:#1D6FE8}
+.erp .e-main{display:flex;flex-direction:column;min-width:0}
+.erp .e-top{height:52px;flex:none;display:flex;align-items:center;justify-content:flex-end;gap:16px;padding:0 24px;border-bottom:1px solid #F1F3F5}
+.erp .e-pill{display:flex;align-items:center;gap:7px;border:1px solid #EEF0F3;border-radius:9px;padding:6px 10px;font-weight:600;font-size:12px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.erp .e-pill .sp{color:#E11D48}.erp .e-pill .i:last-child{width:12px;height:12px;color:#64748B}
+.erp .tour{display:flex;align-items:center;gap:6px;color:#475569;font-size:11.5px}
+.erp .moon{width:28px;height:28px;border-radius:8px;background:#EEF2F7;display:grid;place-items:center;color:#334155}
+.erp .bell{color:#475569}
+.erp .e-who{display:flex;align-items:center;gap:8px}
+.erp .e-av{width:26px;height:26px;border-radius:50%;background:#5B6B82;color:#fff;display:grid;place-items:center;font-size:10px;font-weight:600}
+.erp .e-who b{display:block;font-size:11.5px;line-height:1.1}.erp .e-who small{font-size:9.5px;color:#94A3B8}
+.erp .grid-ic{margin-left:16px;color:#475569}
+.erp .e-crumb{padding:14px 26px 0;font-size:12px;color:#4B5563}
+.erp .e-crumb em{font-style:normal;color:#94A3B8;margin:0 4px}.erp .e-crumb b{font-weight:400;color:#1D6FE8}
+.erp .e-tabs{display:flex;gap:26px;padding:0 26px;margin-top:14px;border-bottom:1px solid #ECEEF2;font-size:12.5px;color:#4B5563}
+.erp .e-tabs span{padding:4px 3px 11px;position:relative}
+.erp .e-tabs span.on{color:#1D6FE8}.erp .e-tabs span.on::after{content:"";position:absolute;left:-2px;right:-2px;bottom:-1px;height:2px;background:#1D6FE8;border-radius:2px}
+.erp .e-body{flex:1;min-height:0;padding:20px 26px 0;overflow:hidden}
+.erp .e-card{border:1px solid #EEF0F3;border-radius:10px;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.03);overflow:hidden}
+.erp .e-bar{display:flex;align-items:center;gap:10px;padding:14px 18px}
+.erp .e-bar .sp{flex:1}
+.erp .e-srch{display:flex;align-items:center;gap:8px;width:210px;height:32px;border:1px solid #E5E7EB;border-radius:8px;padding:0 10px;color:#94A3B8;font-size:12px}
+.erp .e-srch .i{width:14px;height:14px;color:#334155}
+.erp .e-btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:1px solid #E5E7EB;border-radius:8px;font-size:12px;font-weight:500;color:#111827;background:#fff;white-space:nowrap}
+.erp .e-btn .i{width:14px;height:14px}
+.erp .e-btn.pri{background:#1D6FE8;border-color:#1D6FE8;color:#fff}
+.erp .e-btn.ghost{border:0;padding:0 4px}
+.erp table{width:100%;border-collapse:collapse}
+.erp th{background:#FAFAFB;text-align:left;font-size:11px;font-weight:600;color:#4B5563;padding:10px 14px;border-top:1px solid #F0F2F5;border-bottom:1px solid #F0F2F5;white-space:nowrap;letter-spacing:.02em}
+.erp th .i{width:11px;height:11px;vertical-align:-1px;margin-left:3px}
+.erp td{padding:0 14px;height:38px;border-bottom:1px solid #F3F4F6;color:#4B5563;white-space:nowrap}
+.erp td.k{color:#0F172A;font-weight:500}.erp td.r,.erp th.r{text-align:right}
+.erp td a{color:#1D6FE8}
+.erp .e-cb{width:13px;height:13px;border:1px solid #D1D5DB;border-radius:4px;display:inline-block;vertical-align:middle}
+.erp .e-dots{width:22px;height:22px;border:1px solid #EEF0F3;border-radius:6px;display:inline-grid;place-items:center;color:#6B7280}
+.erp .e-dots .i{width:12px;height:12px}
+.erp .e-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em}
+.erp .t-draft{background:#FECACA;color:#DC2626}.erp .t-posted{background:#BBF7D0;color:#15803D}
+.erp .t-blue{background:#DBEAFE;color:#1D4ED8}.erp .t-amber{background:#FEF3C7;color:#B45309}.erp .t-grey{background:#E5E7EB;color:#4B5563}
+.erp .t-active{background:#DCFCE7;color:#15803D;text-transform:none;font-size:10.5px;font-weight:500;letter-spacing:0}
+.erp .t-active::before{content:"";width:5px;height:5px;border-radius:50%;background:#16A34A}
+.erp .e-lock{color:#F59E0B}.erp .e-lock .i{width:13px;height:13px}
+.erp .e-pg{display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:12px 18px;font-size:11px;color:#6B7280}
+.erp .e-pg .n{width:24px;height:24px;border-radius:6px;background:#1D6FE8;color:#fff;display:grid;place-items:center;font-weight:600}
+.erp .e-pg .e-sel{border:1px solid #EEF0F3;border-radius:6px;padding:4px 8px;display:flex;align-items:center;gap:14px;color:#111827}
+.erp .e-pg .i{width:12px;height:12px}
+.erp .neg{color:#DC2626}.erp .pos{color:#16A34A}
+.erp h2{margin:0;font-size:22px;font-weight:700;letter-spacing:-.01em}
+.erp h3{margin:0;font-size:15px;font-weight:600}
+.erp .muted{color:#94A3B8}
+.erp .e-ttl{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.erp .e-lbl{font-size:10.5px;font-weight:600;letter-spacing:.09em;color:#4B5563;text-transform:uppercase}
+.erp .e-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+.erp .e-kpi{border:1px solid #EEF0F3;border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.erp .e-kpi strong{display:block;font-size:20px;font-weight:700;margin-top:8px}
+.erp .e-kpi .ic{width:30px;height:30px;border-radius:50%;background:#EEF4FF;color:#1D6FE8;display:grid;place-items:center}
+.erp .e-kpi .ic.g{background:#DCFCE7;color:#16A34A}
+.erp .who-c{display:flex;align-items:center;gap:10px}
+.erp .who-c i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:10px;font-weight:600;color:#fff}
+.erp .who-c b{display:block;font-weight:500;color:#0F172A}.erp .who-c small{font-size:10.5px;color:#94A3B8}
+.erp .due small{display:block;font-size:10px;color:#DC2626;margin-top:2px}
+.erp .due{color:#DC2626;line-height:1.25}
+.erp .e-fld{display:grid;gap:6px;font-size:11px;color:#4B5563;font-weight:500}
+.erp .e-fld span{height:34px;border:1px solid #E5E7EB;border-radius:8px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:12px;color:#0F172A;font-weight:400}
+.erp .e-fld span .i{width:13px;height:13px;color:#64748B}
+.erp .e-in{display:inline-block;min-width:110px;border:1px solid #BFD6FF;border-radius:6px;padding:5px 8px;text-align:right;color:#0F172A;background:#F8FBFF}
+
+.erp .e-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
+.erp .e-row{display:flex;align-items:center;gap:10px}
+.erp .e-cardh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px 10px}
+.erp .e-cardh h3{font-size:13.5px}
+.erp .e-note{font-size:11px;color:#94A3B8;font-weight:400}
+.erp .e-prog{display:block;height:6px;border-radius:99px;background:#EEF2F7;overflow:hidden}
+.erp .e-prog i{display:block;height:100%;border-radius:inherit;background:#1D6FE8}
+.erp .e-kpi small{display:block;font-size:10.5px;margin-top:4px;color:#94A3B8}
+.erp .e-kpi small.pos{color:#16A34A}.erp .e-kpi small.neg{color:#DC2626}
+.erp .e-kpi .ic.a{background:#FEF3C7;color:#B45309}.erp .e-kpi .ic.r{background:#FEE2E2;color:#DC2626}.erp .e-kpi .ic.p{background:#F3E8FF;color:#9333EA}
+.erp .e-ini{width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;font-style:normal;font-size:9px;font-weight:600;color:#fff;flex:none;letter-spacing:0}
+.erp .e-stack{display:inline-flex}.erp .e-stack .e-ini{margin-left:-4px;box-shadow:0 0 0 2px #fff}.erp .e-stack .e-ini:first-child{margin-left:0}
+.erp .e-chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border:1px solid #E5E7EB;border-radius:999px;font-size:11.5px;color:#4B5563;background:#fff;white-space:nowrap}
+.erp .e-chip.e-on{background:#EEF4FF;border-color:#BFD6FF;color:#1D6FE8;font-weight:500}
+.erp .e-seg{display:inline-flex;border:1px solid #E5E7EB;border-radius:8px;padding:2px;background:#F8FAFC}
+.erp .e-seg span{padding:5px 12px;border-radius:6px;font-size:11.5px;color:#4B5563}
+.erp .e-seg span.e-on{background:#fff;color:#0F172A;font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.1)}
+.erp .e-dl{display:grid;grid-template-columns:118px minmax(0,1fr);gap:9px 12px;font-size:11.5px;margin:0}
+.erp .e-dl dt{color:#94A3B8}.erp .e-dl dd{margin:0;color:#0F172A}
+.erp .e-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;flex:none}
+.erp .e-li{display:flex;align-items:center;gap:10px;padding:9px 18px;border-top:1px solid #F3F4F6;font-size:11.5px;color:#4B5563}
+.erp .e-li .e-grow{flex:1;min-width:0}
+.erp .e-li b{font-weight:500;color:#0F172A}
+.erp .e-li small{display:block;font-size:10.5px;color:#94A3B8;margin-top:1px}
+.erp .e-grow{flex:1;min-width:0}
+.erp .e-sw{display:inline-block;width:30px;height:17px;border-radius:99px;background:#1D6FE8;position:relative;flex:none}
+.erp .e-sw::after{content:"";position:absolute;top:2px;right:2px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.erp .e-sw.e-off{background:#D1D5DB}.erp .e-sw.e-off::after{right:auto;left:2px}
+.erp .e-kcol{background:#F8FAFC;border:1px solid #EEF0F3;border-radius:10px;padding:10px;display:grid;gap:8px;align-content:start;min-width:0}
+.erp .e-khd{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;padding:2px 2px 2px;color:#0F172A}
+.erp .e-khd em{font-style:normal;font-size:10.5px;font-weight:600;color:#64748B;background:#EEF0F3;border-radius:99px;padding:1px 7px}
+.erp .e-khd span{margin-left:auto;font-size:11px;font-weight:500;color:#64748B}
+.erp .e-kcard{background:#fff;border:1px solid #EEF0F3;border-radius:8px;padding:10px 12px;box-shadow:0 1px 2px rgba(15,23,42,.04);display:grid;gap:6px;font-size:11.5px;color:#4B5563;min-width:0}
+.erp .e-kcard b{font-weight:600;color:#0F172A;font-size:12px;line-height:1.35;white-space:normal}
+.erp .e-kcard .e-cl{font-size:10.5px;color:#64748B;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.erp .e-kft{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:2px}
+.erp .e-kft strong{font-weight:600;color:#0F172A;font-size:12px}
+.erp .e-tl{position:relative;display:grid;gap:0;padding:4px 18px 8px}
+.erp .e-tli{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:12px;position:relative;padding:10px 0}
+.erp .e-tli::before{content:"";position:absolute;left:13px;top:34px;bottom:-10px;width:2px;background:#EEF0F3}
+.erp .e-tli:last-child::before{display:none}
+.erp .e-tlm{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;position:relative;z-index:1}
+.erp .e-tlm .i{width:14px;height:14px}
+.erp .e-tli b{font-weight:600;color:#0F172A;font-size:12px}
+.erp .e-tli p{font-size:11.5px;color:#4B5563;margin-top:3px;line-height:1.45;white-space:normal}
+.erp .e-tli .e-q{margin-top:7px;padding:8px 10px;border-radius:8px;background:#F8FAFC;border:1px solid #EEF0F3;font-size:11.5px;color:#334155}
+.erp .e-tli time{font-size:10.5px;color:#94A3B8;white-space:nowrap}
+.erp .e-step{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid #EEF0F3;border-radius:10px;padding:10px 14px;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.03)}
+.erp .e-step .e-n{width:30px;height:30px;border-radius:8px;background:#EEF4FF;color:#1D6FE8;display:grid;place-items:center;font-weight:700;font-size:12px}
+.erp .e-step b{font-weight:600;color:#0F172A;font-size:12.5px}
+.erp .e-step small{display:block;font-size:11px;color:#64748B;margin-top:2px}
+.erp .e-link{width:2px;height:12px;background:#D6E4FB;margin-left:30px}
+.erp .e-cond{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;color:#B45309;background:#FFFBEB;border:1px solid #FDE68A;border-radius:6px;padding:2px 7px;margin-left:30px;margin-block:-4px}
+.erp .e-gh{display:grid;font-size:10.5px;color:#64748B;font-weight:600}
+.erp .e-gbar{position:absolute;top:14px;height:16px;border-radius:5px;background:#BFD6FF;overflow:hidden}
+.erp .e-gbar i{display:block;height:100%;background:#1D6FE8}
+.erp .e-gms{position:absolute;top:15px;width:13px;height:13px;transform:rotate(45deg);border-radius:2px;background:#1D6FE8;margin-left:-6px}
+.erp .e-cal{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:5px;font-size:9.5px;font-weight:600}
+.erp .e-c-p{background:#DCFCE7;color:#15803D}.erp .e-c-r{background:#DBEAFE;color:#1D4ED8}.erp .e-c-l{background:#F3E8FF;color:#9333EA}
+.erp .e-c-a{background:#FEE2E2;color:#DC2626}.erp .e-c-h{background:#E5E7EB;color:#6B7280}.erp .e-c-w{background:transparent;color:#CBD5E1}.erp .e-c-f{background:#FFF;border:1px dashed #E2E8F0;color:#CBD5E1}
+.erp .e-stars{display:inline-flex;gap:3px}.erp .e-stars i{width:9px;height:9px;border-radius:2px;background:#E5E7EB}.erp .e-stars i.e-y{background:#F59E0B}
+.erp .e-rc{display:grid;gap:8px;padding:14px;border:1px solid #EEF0F3;border-radius:10px;background:#fff}
+.erp .e-rc b{font-weight:600;color:#0F172A;font-size:12.5px}
+.erp .e-rc p{font-size:11px;color:#64748B;line-height:1.45;white-space:normal}
+.erp .e-rci{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:#EEF4FF;color:#1D6FE8}
+.erp .e-rci .i{width:15px;height:15px}
+.erp .e-live{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;color:#16A34A}
+.erp .e-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 3px #DCFCE7}
+.erp .e-pstep{display:flex;align-items:center;gap:0}
+.erp .e-pstep span{display:flex;align-items:center;gap:7px;font-size:11.5px;color:#94A3B8;white-space:nowrap}
+.erp .e-pstep span i{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:10px;font-weight:700;border:1.5px solid #CBD5E1;color:#94A3B8;background:#fff}
+.erp .e-pstep span.e-ok{color:#0F172A}.erp .e-pstep span.e-ok i{background:#16A34A;border-color:#16A34A;color:#fff}
+.erp .e-pstep span.e-cur{color:#1D6FE8;font-weight:600}.erp .e-pstep span.e-cur i{border-color:#1D6FE8;color:#1D6FE8;box-shadow:0 0 0 3px #DBEAFE}
+.erp .e-pstep em{flex:1;height:2px;background:#E5E7EB;margin:0 10px;min-width:20px}.erp .e-pstep em.e-ok{background:#16A34A}
+.erp .e-ta{border:1px solid #E5E7EB;border-radius:8px;padding:9px 10px;font-size:11.5px;color:#94A3B8;height:58px}
+.erp .e-ck{width:15px;height:15px;border-radius:4px;display:inline-grid;place-items:center;flex:none;border:1px solid #D1D5DB;background:#fff}
+.erp .e-ck.e-y{background:#16A34A;border-color:#16A34A;color:#fff}.erp .e-ck .i{width:10px;height:10px;stroke-width:3}
+.erp .e-sel-row{background:#F5F9FF;box-shadow:inset 3px 0 0 #1D6FE8}
+
+/* ───────── HR sub-pages ───────── */
+.pains{padding-block:clamp(72px,9vw,112px) 0}
+.pains .head-c{margin-bottom:40px}
+.pain{display:grid;gap:10px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:20px}
+.pain .ic{width:44px;height:44px;border-radius:12px;background:var(--error-bg);color:var(--error);display:grid;place-items:center}
+.pain .ic .i,.flow .st .ic .i,.aud .ic .i{width:21px;height:21px}
+.pain h3,.aud h3{font-size:18px;font-weight:600}
+.pain p,.aud p{font-size:14.5px;color:var(--muted);line-height:1.55}
+.feats.wide-gap{padding-top:clamp(72px,9vw,112px)}
+.feat-copy ul{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:10px;font-size:15px;color:var(--text-2)}
+.feat-copy li{display:flex;gap:10px;align-items:flex-start;line-height:1.5}
+.feat-copy li .i{width:18px;height:18px;color:var(--brand);stroke-width:2.2;margin-top:2px;flex:none}
+.flow-sec{padding-block:clamp(72px,9vw,112px);background:var(--canvas)}
+.flow-sec .head-c{margin-bottom:44px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;position:relative}
+.flow .st{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;display:grid;gap:8px;align-content:start}
+.flow .st:not(:last-child)::after{content:"";position:absolute;right:-12px;top:42px;width:10px;height:10px;border-top:2px solid #9DBFFF;border-right:2px solid #9DBFFF;rotate:45deg;z-index:1}
+.flow .st .ic{width:42px;height:42px;border-radius:12px;background:var(--brand-subtle);color:var(--brand);display:grid;place-items:center}
+.flow .st b{font-size:16px;font-weight:600}
+.flow .st small{font-size:13.5px;color:var(--muted);line-height:1.5}
+.flow .st .k{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.flow .st.opt{border-style:dashed;border-color:#9DBFFF;background:#F7FAFF}
+.flow .st.opt .k{color:var(--brand-ink)}
+.opt-band{margin-top:28px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px;align-items:center;padding:22px 26px;border-radius:20px;background:var(--surface);border:1px solid #BFD6FF;box-shadow:0 18px 40px -28px rgba(0,112,255,.45)}
+.opt-band .ic{width:48px;height:48px;border-radius:14px;background:var(--brand);color:#fff;display:grid;place-items:center}
+.opt-band .ic .i{width:22px;height:22px}
+.opt-band b{display:block;font-size:17px;font-weight:600;margin-bottom:4px}
+.opt-band p{font-size:14.5px;color:var(--muted);line-height:1.55;max-width:70ch}
+.fl-sec{padding-block:clamp(72px,9vw,112px)}
+.fl-sec .head-c{margin-bottom:40px}
+.fl-groups{display:grid;gap:36px}
+.fl-group h3{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-ink);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.fl-group h3 .i{width:18px;height:18px}
+.fl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.fl{padding:16px 18px;border:1px solid var(--border);border-radius:14px;display:grid;gap:4px;background:var(--surface)}
+.fl b{font-size:15px;font-weight:600}
+.fl span{font-size:13.5px;color:var(--muted);line-height:1.5}
+.aud-sec{padding-block:clamp(72px,9vw,112px);background:var(--canvas)}
+.aud-sec .head-c{margin-bottom:40px}
+.aud{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.aud > div{display:grid;gap:10px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:20px;align-content:start}
+.aud .ic{width:44px;height:44px;border-radius:12px;background:var(--brand-subtle);color:var(--brand);display:grid;place-items:center}
+.faq{padding-block:clamp(72px,9vw,120px)}
+.faq .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
+.faq-side{display:grid;gap:18px;position:sticky;top:110px}
+.qa{border-bottom:1px solid var(--border)}
+.qa:first-child{border-top:1px solid var(--border)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-size:17px;font-weight:500}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .pm{width:28px;height:28px;border-radius:50%;background:var(--panel);display:grid;place-items:center;flex:none;transition:transform .25s,background .2s,color .2s}
+.qa summary .pm .i{width:15px;height:15px;stroke-width:2.2}
+.qa[open] summary .pm{transform:rotate(180deg);background:var(--brand);color:#fff}
+.qa p{padding:0 44px 22px 0;color:var(--muted);font-size:16px;line-height:1.65}
+.crumb-nav span[aria-current]{color:var(--text)}
+.crumb-nav{flex-wrap:wrap;row-gap:4px}.crumb-nav > *{white-space:nowrap}
+.mhero-copy .ctx{flex-wrap:wrap;justify-content:center;row-gap:2px}.mhero-copy .ctx > *{white-space:nowrap}
+/* Screens on the left keep their left edge (names, projects) in view and bleed off the right instead */
+.feat.flip .feat-art.bleed .shot{left:9.4%;right:auto;width:99.7%}
+@media (max-width:1060px){.flow{grid-template-columns:1fr 1fr}.flow .st::after{display:none}.aud{grid-template-columns:1fr 1fr}.fl-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.faq .wrap{grid-template-columns:1fr;gap:32px}.faq-side{position:static}.opt-band{grid-template-columns:1fr}}
+@media (max-width:560px){.flow,.aud,.fl-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M16 14v4M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12M3.3 7l7.7 4.73a2 2 0 0 0 2 0L20.7 7M7.5 4.27l9 5.15"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.66V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.66"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8M12 17.5v-11"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M18 17V9M13 17V5M8 17v-3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65M22 12.65l-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M20 7h-9M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></symbol>
+    <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5l-5-5L2 17M16 7h6v6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9 4.5 3h15L21 9M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9M3 9h18M9 21v-6h6v6"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1M12 18h1M7 18h1"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8zM14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+
+<symbol id="i-dots" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2" fill="currentColor"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 6h18M7 12h10M10 18h4"/></symbol>
+<symbol id="i-cloud-up" viewBox="0 0 24 24"><path d="M12 13v8M8 17l4-4 4 4"/><path d="M20.4 15.6A5 5 0 0 0 18 7h-1.3A8 8 0 1 0 4 15.3"/></symbol>
+<symbol id="i-cloud-down" viewBox="0 0 24 24"><path d="M12 13v8M8 17l4 4 4-4"/><path d="M20.4 15.6A5 5 0 0 0 18 7h-1.3A8 8 0 1 0 4 15.3"/></symbol>
+<symbol id="i-sort" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
+<symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m10 9 3 3-3 3"/></symbol>
+<symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
+<symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7z"/></symbol>
+
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+<symbol id="i-xc" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+<symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></symbol>
+<symbol id="i-paper" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-cloud-down" viewBox="0 0 24 24"><path d="M12 13v8M8 17l4 4 4-4"/><path d="M20.4 15.6A5 5 0 0 0 18 7h-1.3A8 8 0 1 0 4 15.3"/></symbol>
+</defs>
+</svg>
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="../index.html" aria-label="wBizManager home"><img src="../assets/logo.png" alt="wBizManager" width="136" height="32"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Modules <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:3"><div><h5>Financial</h5><ul><li><a href="accounting.html"><b>Accounting</b><small>Manage finances &amp; ledgers</small></a></li><li><a href="sales.html"><b>Sales</b><small>Track deals &amp; customers</small></a></li><li><a href="purchases.html"><b>Purchases</b><small>Manage orders &amp; suppliers</small></a></li></ul></div><div><h5>Operations</h5><ul><li><a href="inventory.html"><b>Inventory</b><small>Monitor stock &amp; warehouses</small></a></li><li><a href="approvals.html"><b>Approvals</b><small>Streamline approval flows</small></a></li><li><a href="reports.html"><b>Reports</b><small>Insights &amp; analytics</small></a></li></ul></div><div><h5>Management</h5><ul><li><a href="commercial.html"><b>Commercial</b><small>Business operations hub</small></a></li><li><a href="project.html"><b>Project</b><small>Plan &amp; track milestones</small></a></li><li><a href="human-resources.html" aria-current="page"><b>Human Resources</b><small>People &amp; payroll management</small></a></li></ul></div><div class="mega-card"><h4>Built for growing businesses</h4><p>One integrated platform to run your entire business, from finance and procurement to people and projects, without the complexity of disconnected tools.</p><a class="link" href="../index.html#modules">See all nine modules <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Industries <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Products</h5><ul><li><a href="../industries/retail-trading.html"><b>Retail &amp; Trading</b><small>Sales, stock &amp; customers</small></a></li><li><a href="../industries/distribution.html"><b>Distribution</b><small>Suppliers, orders &amp; deliveries</small></a></li><li><a href="../industries/manufacturing.html"><b>Manufacturing</b><small>Materials &amp; operations</small></a></li></ul></div><div><h5>Services</h5><ul><li><a href="../industries/professional-services.html"><b>Professional Services</b><small>Clients, invoices &amp; expenses</small></a></li><li><a href="../industries/growing-smes.html"><b>Growing SMEs</b><small>One platform for daily operations</small></a></li></ul></div><div class="mega-card"><h4>One platform, the way you do business</h4><p>Every business runs differently. wBizManager gives yours a connected foundation, whether you sell products, deliver services or manage a growing team.</p><a class="link" href="../index.html#industries">Explore industries <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <a href="../pricing.html">Pricing</a>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Resources <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>Learn</h5><ul><li><a href="../stories.html"><b>Customer Stories</b><small>How businesses use wBizManager</small></a></li></ul></div><div><h5>Get help</h5><ul><li><a href="../faq.html"><b>FAQs</b><small>Answers to common questions</small></a></li><li><a href="../help.html"><b>Help &amp; Support</b><small>Guides, tutorials &amp; our team</small></a></li></ul></div><div class="mega-card"><h4>Need a hand getting set up?</h4><p>Our team can talk through your business requirements and help you get value from wBizManager from day one.</p><a class="link" href="../contact.html">Talk to our team <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Company <svg class="i"><use href="#i-down"/></svg></button>
+        <div class="menu"><div class="mega" style="--cols:2"><div><h5>About</h5><ul><li><a href="#"><b>About Us</b><small>Who we are &amp; what we build</small></a></li><li><a href="#"><b>Partners</b><small>Bring wBizManager to your clients</small></a></li></ul></div><div><h5>Get in touch</h5><ul><li><a href="../contact.html"><b>Contact Us</b><small>Talk to sales or support</small></a></li><li><a href="#"><b>Become a Partner</b><small>Join the partner programme</small></a></li></ul></div><div class="mega-card"><h4>Let’s talk about your business</h4><p>Explore wBizManager and see how a connected business management platform can support your day-to-day operations.</p><a class="link" href="../pricing.html">Get Started <svg class="i arrow"><use href="#i-arrow"/></svg></a></div></div></div>
+      </div>
+    </nav>
+    <div class="hdr-cta">
+      <a class="login" href="../login.html">Log in</a>
+      <a class="btn btn-primary" href="../pricing.html">Get Started</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="mnav" id="mnav">
+  <a href="../index.html">Home</a>
+  <details><summary>Modules <svg class="i"><use href="#i-down"/></svg></summary><div><a href="accounting.html">Accounting</a><a href="sales.html">Sales</a><a href="purchases.html">Purchases</a><a href="approvals.html">Approvals</a><a href="inventory.html">Inventory</a><a href="reports.html">Reports</a><a href="commercial.html">Commercial</a><a href="project.html">Project</a><a href="human-resources.html">Human Resources</a></div></details>
+  <details><summary>Industries <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="../industries/retail-trading.html">Retail &amp; Trading</a><a href="../industries/distribution.html">Distribution</a><a href="../industries/manufacturing.html">Manufacturing</a><a href="../industries/professional-services.html">Professional Services</a><a href="../industries/growing-smes.html">Growing SMEs</a>
+  </div></details>
+  <a href="../pricing.html">Pricing</a>
+  <details><summary>Resources <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="../stories.html">Customer Stories</a><a href="../faq.html">FAQs</a><a href="../help.html">Help &amp; Support</a>
+  </div></details>
+  <details><summary>Company <svg class="i"><use href="#i-down"/></svg></summary><div>
+    <a href="#">About Us</a><a href="#">Partners</a><a href="../contact.html">Contact Us</a>
+  </div></details>
+  <div class="mbtns">
+    <a class="btn btn-primary" href="../pricing.html">Get Started</a>
+    <a class="btn btn-secondary" href="../login.html">Log in</a>
+  </div>
+</div>
+<main>
+  <section class="mhero" data-vs="Overview">
+    <div class="wrap">
+      <div class="mhero-copy">
+        <nav class="crumb-nav" aria-label="Breadcrumb"><a href="../index.html#modules">Modules</a><svg class="i"><use href="#i-right"/></svg><a href="human-resources.html">Human Resources</a><svg class="i"><use href="#i-right"/></svg><span aria-current="page">Payroll</span></nav>
+        <span class="ctx"><span class="av"><svg class="i"><use href="#i-card"/></svg></span><b>Payroll</b><span>· part of Human Resources</span></span>
+        <h1 class="display">Pay everyone correctly, <span class="hl">on time, every time.</span></h1>
+        <p class="lead">Run payroll from one set of employee records, with statutory deductions worked out for you, payslips your staff can see themselves, and entries posted straight to Accounting.</p>
+        <div class="mhero-act"><a class="btn btn-primary btn-lg" href="../contact.html">Book a demo <svg class="i arrow"><use href="#i-arrow"/></svg></a><a class="link" href="#features">See every feature <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+      </div>
+      <div class="mshot-panel has-screen"><figure class="shot screen" aria-label="Payroll: Payroll run screen in wBizManager"><div class="scaler" data-w="1400" style="--w:1400;--h:826"><div class="frame" aria-hidden="true"><div class="erp" style="height:826px"><aside class="rail"><span class="e-tog"><svg class="i"><use href="#i-panel"/></svg></span><span><svg class="i"><use href="#i-calc"/></svg></span><span><svg class="i"><use href="#i-cart"/></svg></span><span><svg class="i"><use href="#i-bag"/></svg></span><span><svg class="i"><use href="#i-clip"/></svg></span><span><svg class="i"><use href="#i-box"/></svg></span><span><svg class="i"><use href="#i-file"/></svg></span><span><svg class="i"><use href="#i-brief"/></svg></span><span><svg class="i"><use href="#i-layers"/></svg></span><span class="on"><svg class="i"><use href="#i-person"/></svg></span><span><svg class="i"><use href="#i-gear"/></svg></span><span><svg class="i"><use href="#i-buoy"/></svg></span></aside><div class="e-main"><div class="e-top"><span class="e-pill"><svg class="i sp"><use href="#i-spark"/></svg> Super User <svg class="i"><use href="#i-down"/></svg></span><span class="tour"><svg class="i"><use href="#i-spark"/></svg> Tour</span><span class="moon"><svg class="i"><use href="#i-moon"/></svg></span><span class="bell"><svg class="i"><use href="#i-bell"/></svg></span><span class="e-who"><span class="e-av">AO</span><span><b>Adaeze</b><small>Super User</small></span><svg class="i"><use href="#i-down"/></svg></span><span class="grid-ic"><svg class="i"><use href="#i-grid"/></svg></span></div><div class="e-crumb">Human Resources<em>/</em>Payroll<em>/</em><b>October 2026</b></div><div class="e-tabs"><span class="on">Payroll runs</span><span>Employees</span><span>Additions & deductions</span><span>Statutory</span><span>Payslips</span><span>Payments</span><span>Settings</span></div><div class="e-body"><div class="e-h"><h2>October 2026 payroll · Monthly staff</h2><div class="e-row"><span class="e-tag t-amber">Awaiting approval</span><span class="e-btn"><svg class="i"><use href="#i-file"/></svg> Payroll summary</span><span class="e-btn pri"><svg class="i"><use href="#i-send"/></svg> Send for approval</span></div></div><div class="e-card" style="padding:14px 18px;margin-bottom:14px"><div class="e-pstep"><span class="e-ok"><i>✓</i>Inputs collected</span><em class="e-ok"></em><span class="e-ok"><i>✓</i>Calculated</span><em class="e-ok"></em><span class="e-cur"><i>3</i>Review</span><em class=""></em><span class=""><i>4</i>Approval</span><em class=""></em><span class=""><i>5</i>Pay &amp; post</span></div></div><div class="e-kpis" style="grid-template-columns:repeat(4,1fr);margin-top:0"><div class="e-kpi"><div><span class="e-lbl">Employees</span><strong>472</strong><small class="">6 starters · 2 leavers pro-rated</small></div><span class="ic "><svg class="i"><use href="#i-users"/></svg></span></div><div class="e-kpi"><div><span class="e-lbl">Gross pay</span><strong>₦284.6M</strong><small class="">▲ 1.8% vs September</small></div><span class="ic "><svg class="i"><use href="#i-trend"/></svg></span></div><div class="e-kpi"><div><span class="e-lbl">Deductions</span><strong>₦71.2M</strong><small class="">PAYE, pension, NHF, loans</small></div><span class="ic a"><svg class="i"><use href="#i-receipt"/></svg></span></div><div class="e-kpi"><div><span class="e-lbl">Net pay</span><strong>₦213.4M</strong><small class="pos">Pay date 28 Oct 2026</small></div><span class="ic g"><svg class="i"><use href="#i-card"/></svg></span></div></div><div class="e-row" style="margin-bottom:12px;flex-wrap:wrap"><span class="e-chip e-on"><svg class="i"><use href="#i-check-c"/></svg> Approved overtime · 1,284 h</span><span class="e-chip"><svg class="i"><use href="#i-cal"/></svg> Unpaid leave · 18 days</span><span class="e-chip"><svg class="i"><use href="#i-card"/></svg> Loan repayments · 37</span><span class="e-chip"><svg class="i"><use href="#i-receipt"/></svg> Expense refunds · 22</span><span class="e-chip"><svg class="i"><use href="#i-users"/></svg> 8 people off-payroll</span></div><div class="e-card" style=""><table><thead><tr><th>Employee</th><th class="r">Basic</th><th class="r">Allowances</th><th class="r">Overtime</th><th class="r">Gross</th><th class="r">PAYE</th><th class="r">Pension 8%</th><th class="r">NHF &amp; loans</th><th class="r">Net pay</th></tr></thead><tbody><tr class="e-sel-row"><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#0EA5E9">CE</span><span><b style="display:block;font-weight:500;color:#0F172A">Chukwuemeka Eze</b><small style="font-size:10.5px;color:#94A3B8">Grade M3</small></span></span></td><td class="r">620,000</td><td class="r">530,000</td><td class="r">84,000</td><td class="r"><b style="color:#0F172A">1,234,000</b></td><td class="r">185,183</td><td class="r">84,320</td><td class="r">60,500</td><td class="r"><b style="color:#0F172A">903,997</b></td></tr><tr><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#A855F7">NO</span><span><b style="display:block;font-weight:500;color:#0F172A">Ngozi Okonkwo</b><small style="font-size:10.5px;color:#94A3B8">Grade M4</small></span></span></td><td class="r">780,000</td><td class="r">666,000</td><td class="r">—</td><td class="r"><b style="color:#0F172A">1,446,000</b></td><td class="r">225,133</td><td class="r">106,080</td><td class="r">19,500</td><td class="r"><b style="color:#0F172A">1,095,287</b></td></tr><tr><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#EC4899">YO</span><span><b style="display:block;font-weight:500;color:#0F172A">Yetunde Ogunleye</b><small style="font-size:10.5px;color:#94A3B8">Grade P2</small></span></span></td><td class="r">410,000</td><td class="r">347,000</td><td class="r">51,000</td><td class="r"><b style="color:#0F172A">808,000</b></td><td class="r">110,703</td><td class="r">55,760</td><td class="r">10,250</td><td class="r"><b style="color:#0F172A">631,287</b></td></tr><tr><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#22C55E">SE</span><span><b style="display:block;font-weight:500;color:#0F172A">Samuel Etuk</b><small style="font-size:10.5px;color:#94A3B8">Grade S3</small></span></span></td><td class="r">260,000</td><td class="r">220,000</td><td class="r">72,000</td><td class="r"><b style="color:#0F172A">552,000</b></td><td class="r">70,995</td><td class="r">35,360</td><td class="r">26,500</td><td class="r"><b style="color:#0F172A">419,145</b></td></tr><tr><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#F59E0B">FA</span><span><b style="display:block;font-weight:500;color:#0F172A">Folake Adebayo</b><small style="font-size:10.5px;color:#94A3B8">Grade P3</small></span></span></td><td class="r">480,000</td><td class="r">406,000</td><td class="r">—</td><td class="r"><b style="color:#0F172A">886,000</b></td><td class="r">122,730</td><td class="r">65,280</td><td class="r">12,000</td><td class="r"><b style="color:#0F172A">685,990</b></td></tr><tr><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#8B5CF6">ZA</span><span><b style="display:block;font-weight:500;color:#0F172A">Zainab Abdullahi <span class="e-tag t-blue" style="margin-left:4px">Pro-rated 20/31</span></b><small style="font-size:10.5px;color:#94A3B8">Grade P1</small></span></span></td><td class="r">219,355</td><td class="r">185,806</td><td class="r">—</td><td class="r"><b style="color:#0F172A">405,161</b></td><td class="r">44,659</td><td class="r">29,832</td><td class="r">5,484</td><td class="r"><b style="color:#0F172A">325,186</b></td></tr></tbody></table></div></div></div></div></div></div></figure></div>
+    </div>
+  </section>
+
+  <section class="wrap pains" data-vs="The problem">
+    <div class="head-c"><h2 class="h2">Sound familiar?</h2><p class="lead">What finance and payroll teams tell us before they move payroll to wBizManager.</p></div>
+    <div class="rel-grid"><div class="pain"><span class="ic"><svg class="i"><use href="#i-alert"/></svg></span><h3>Deductions worked out by hand</h3><p>Allowances, loans and recoveries live in spreadsheets, so every run needs checking twice.</p></div><div class="pain"><span class="ic"><svg class="i"><use href="#i-alert"/></svg></span><h3>Statutory remittances are stressful</h3><p>PAYE, pension and NHF have different rates, recipients and deadlines to track.</p></div><div class="pain"><span class="ic"><svg class="i"><use href="#i-alert"/></svg></span><h3>Payroll waits for everything else</h3><p>Hours, overtime, leave and loans arrive from different people at the last minute.</p></div></div>
+  </section>
+
+  <section class="wrap feats wide-gap" aria-label="Payroll features">
+      <div class="feat" data-vs="Salary structures and pay grades">
+        <div class="feat-copy"><span class="num">01</span><h2>Salary structures and pay grades</h2><p>Keep each employee’s salary, components and pay grade in one place, and set benefits once so they apply every period.</p><ul><li><svg class="i"><use href="#i-check"/></svg><span>Earnings marked as taxable or pensionable</span></li><li><svg class="i"><use href="#i-check"/></svg><span>Pay grades and bands for every role</span></li><li><svg class="i"><use href="#i-check"/></svg><span>Recurring benefits such as pension and health cover</span></li></ul></div>
+        <div class="feat-art bleed"><figure class="shot screen" aria-label="Payroll: Salary structure screen in wBizManager"><div class="scaler" data-w="1400" style="--w:1400;--h:826"><div class="frame" aria-hidden="true"><div class="erp" style="height:826px"><aside class="rail"><span class="e-tog"><svg class="i"><use href="#i-panel"/></svg></span><span><svg class="i"><use href="#i-calc"/></svg></span><span><svg class="i"><use href="#i-cart"/></svg></span><span><svg class="i"><use href="#i-bag"/></svg></span><span><svg class="i"><use href="#i-clip"/></svg></span><span><svg class="i"><use href="#i-box"/></svg></span><span><svg class="i"><use href="#i-file"/></svg></span><span><svg class="i"><use href="#i-brief"/></svg></span><span><svg class="i"><use href="#i-layers"/></svg></span><span class="on"><svg class="i"><use href="#i-person"/></svg></span><span><svg class="i"><use href="#i-gear"/></svg></span><span><svg class="i"><use href="#i-buoy"/></svg></span></aside><div class="e-main"><div class="e-top"><span class="e-pill"><svg class="i sp"><use href="#i-spark"/></svg> Super User <svg class="i"><use href="#i-down"/></svg></span><span class="tour"><svg class="i"><use href="#i-spark"/></svg> Tour</span><span class="moon"><svg class="i"><use href="#i-moon"/></svg></span><span class="bell"><svg class="i"><use href="#i-bell"/></svg></span><span class="e-who"><span class="e-av">AO</span><span><b>Adaeze</b><small>Super User</small></span><svg class="i"><use href="#i-down"/></svg></span><span class="grid-ic"><svg class="i"><use href="#i-grid"/></svg></span></div><div class="e-crumb">Human Resources<em>/</em>Payroll<em>/</em>Employees<em>/</em><b>Chukwuemeka Eze</b></div><div class="e-tabs"><span>Payroll runs</span><span class="on">Employees</span><span>Additions & deductions</span><span>Statutory</span><span>Payslips</span><span>Payments</span><span>Settings</span></div><div class="e-body"><div class="e-h"><h2>Chukwuemeka Eze</h2><div class="e-row"><span class="e-tag t-active">On payroll</span><span class="e-btn"><svg class="i"><use href="#i-clock"/></svg> Salary history</span><span class="e-btn pri"><svg class="i"><use href="#i-sliders"/></svg> Edit structure</span></div></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:14px;align-items:start"><div class="e-card" style=""><div class="e-cardh"><div><h3>Monthly salary structure</h3></div><div class="e-row"><span class="e-note">Effective 01 Jan 2026</span></div></div><table><thead><tr><th>Component</th><th>Type</th><th>Taxable</th><th>Pensionable</th><th class="r">Monthly (₦)</th></tr></thead><tbody><tr><td>Basic salary</td><td><span class="e-tag t-blue">Earning</span></td><td>Yes</td><td>Yes</td><td class="r">620,000</td></tr><tr><td>Housing allowance</td><td><span class="e-tag t-blue">Earning</span></td><td>Yes</td><td>Yes</td><td class="r">310,000</td></tr><tr><td>Transport allowance</td><td><span class="e-tag t-blue">Earning</span></td><td>Yes</td><td>Yes</td><td class="r">124,000</td></tr><tr><td>Field allowance</td><td><span class="e-tag t-blue">Earning</span></td><td>Yes</td><td>No</td><td class="r">96,000</td></tr><tr><td>Leave allowance</td><td><span class="e-tag t-grey">Annual</span></td><td>Yes</td><td>No</td><td class="r"><span class="muted">Paid in March</span></td></tr><tr><td><b style="color:#0F172A">Monthly gross</b></td><td></td><td></td><td></td><td class="r"><b style="color:#0F172A">1,150,000</b></td></tr></tbody></table></div><div style="display:grid;gap:14px"><div class="e-card" style=""><div class="e-cardh"><div><h3>Pay grade · M3</h3></div><div class="e-row"><span class="e-tag t-blue">Engineering</span></div></div><div style="padding:0 18px 16px"><dl class="e-dl"><dt>Band</dt><dd>₦1.05M – ₦1.45M a month</dd><dt>Position in band</dt><dd>25%</dd><dt>Next review</dt><dd>January 2027</dd></dl><span class="e-prog" style="margin-top:12px"><i style="width:25%"></i></span></div></div><div class="e-card" style=""><div class="e-cardh"><div><h3>Recurring benefits</h3></div><div class="e-row"><span class="e-note">Every pay period</span></div></div><div class="e-li"><div class="e-grow"><b>Employer pension · 10%</b><small>To PFA, alongside the 8% employee share</small></div>₦105,400</div><div class="e-li"><div class="e-grow"><b>Health insurance (HMO)</b><small>Family plan · employer paid</small></div>₦38,500</div><div class="e-li"><div class="e-grow"><b>Group life cover</b><small>Statutory · employer paid</small></div>₦6,200</div></div></div></div></div></div></div></div></div></figure></div>
+      </div>
+      <div class="feat flip wide" data-vs="Additions, deductions and loans">
+        <div class="feat-copy"><span class="num">02</span><h2>Additions, deductions and loans</h2><p>Add allowances, bonuses and other earnings, and apply deductions such as loan repayments and recoveries. Leave, loans and expenses feed the run automatically.</p><ul><li><svg class="i"><use href="#i-check"/></svg><span>Recurring or one-off items, added singly or in bulk</span></li><li><svg class="i"><use href="#i-check"/></svg><span>Loan repayments deducted on schedule</span></li><li><svg class="i"><use href="#i-check"/></svg><span>Expense refunds and unpaid leave carried in</span></li></ul></div>
+        <div class="feat-art bleed"><figure class="shot screen" aria-label="Payroll: Additions and deductions screen in wBizManager"><div class="scaler" data-w="1400" style="--w:1400;--h:826"><div class="frame" aria-hidden="true"><div class="erp" style="height:826px"><aside class="rail"><span class="e-tog"><svg class="i"><use href="#i-panel"/></svg></span><span><svg class="i"><use href="#i-calc"/></svg></span><span><svg class="i"><use href="#i-cart"/></svg></span><span><svg class="i"><use href="#i-bag"/></svg></span><span><svg class="i"><use href="#i-clip"/></svg></span><span><svg class="i"><use href="#i-box"/></svg></span><span><svg class="i"><use href="#i-file"/></svg></span><span><svg class="i"><use href="#i-brief"/></svg></span><span><svg class="i"><use href="#i-layers"/></svg></span><span class="on"><svg class="i"><use href="#i-person"/></svg></span><span><svg class="i"><use href="#i-gear"/></svg></span><span><svg class="i"><use href="#i-buoy"/></svg></span></aside><div class="e-main"><div class="e-top"><span class="e-pill"><svg class="i sp"><use href="#i-spark"/></svg> Super User <svg class="i"><use href="#i-down"/></svg></span><span class="tour"><svg class="i"><use href="#i-spark"/></svg> Tour</span><span class="moon"><svg class="i"><use href="#i-moon"/></svg></span><span class="bell"><svg class="i"><use href="#i-bell"/></svg></span><span class="e-who"><span class="e-av">AO</span><span><b>Adaeze</b><small>Super User</small></span><svg class="i"><use href="#i-down"/></svg></span><span class="grid-ic"><svg class="i"><use href="#i-grid"/></svg></span></div><div class="e-crumb">Human Resources<em>/</em>Payroll<em>/</em><b>Additions &amp; deductions</b></div><div class="e-tabs"><span>Payroll runs</span><span>Employees</span><span class="on">Additions & deductions</span><span>Statutory</span><span>Payslips</span><span>Payments</span><span>Settings</span></div><div class="e-body"><div class="e-h"><h2>Additions &amp; deductions · October 2026</h2><div class="e-row"><span class="e-btn"><svg class="i"><use href="#i-cloud-up"/></svg> Bulk upload</span><span class="e-btn pri"><svg class="i"><use href="#i-plus"/></svg> Add item</span></div></div><div class="e-card" style=""><div class="e-bar"><span class="e-chip e-on">All · 214</span><span class="e-chip">Earnings · 131</span><span class="e-chip">Deductions · 83</span><span class="e-chip">Recurring · 96</span><span class="sp"></span><span class="e-srch"><svg class="i"><use href="#i-search"/></svg> Search employees...</span></div><table><thead><tr><th>Type</th><th>Employee</th><th>Detail</th><th>Source</th><th>Recurring</th><th class="r">Amount (₦)</th></tr></thead><tbody><tr><td><b style="color:#0F172A;font-weight:500">Overtime</b></td><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#0EA5E9">CE</span><span><b style="display:block;font-weight:500;color:#0F172A">Chukwuemeka Eze</b><small style="font-size:10.5px;color:#94A3B8"></small></span></span></td><td>From approved timesheet · 4 h at 1.5×</td><td><span class="e-tag t-blue">From Timesheets</span></td><td><span class="e-sw e-off"></span></td><td class="r"><b class="" style="color:#0F172A">84,000</b></td></tr><tr><td><b style="color:#0F172A;font-weight:500">Bonus</b></td><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#A855F7">NO</span><span><b style="display:block;font-weight:500;color:#0F172A">Ngozi Okonkwo</b><small style="font-size:10.5px;color:#94A3B8"></small></span></span></td><td>Q3 procurement savings bonus</td><td><span class="e-tag t-grey">Added by HR</span></td><td><span class="e-sw e-off"></span></td><td class="r"><b class="" style="color:#0F172A">250,000</b></td></tr><tr><td><b style="color:#0F172A;font-weight:500">Allowance</b></td><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#EC4899">YO</span><span><b style="display:block;font-weight:500;color:#0F172A">Yetunde Ogunleye</b><small style="font-size:10.5px;color:#94A3B8"></small></span></span></td><td>Offshore allowance · 6 days</td><td><span class="e-tag t-grey">Added by HR</span></td><td><span class="e-sw"></span></td><td class="r"><b class="" style="color:#0F172A">90,000</b></td></tr><tr><td><b style="color:#0F172A;font-weight:500">Loan repayment</b></td><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#0EA5E9">CE</span><span><b style="display:block;font-weight:500;color:#0F172A">Chukwuemeka Eze</b><small style="font-size:10.5px;color:#94A3B8"></small></span></span></td><td>Car loan LN-0142 · 14 of 24</td><td><span class="e-tag t-amber">From Loans</span></td><td><span class="e-sw"></span></td><td class="r"><b class="neg" style="">−45,000</b></td></tr><tr><td><b style="color:#0F172A;font-weight:500">Salary advance</b></td><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#22C55E">SE</span><span><b style="display:block;font-weight:500;color:#0F172A">Samuel Etuk</b><small style="font-size:10.5px;color:#94A3B8"></small></span></span></td><td>Advance recovery · 2 of 3</td><td><span class="e-tag t-amber">From Loans</span></td><td><span class="e-sw"></span></td><td class="r"><b class="neg" style="">−20,000</b></td></tr><tr><td><b style="color:#0F172A;font-weight:500">Expense refund</b></td><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#8B5CF6">ZA</span><span><b style="display:block;font-weight:500;color:#0F172A">Zainab Abdullahi</b><small style="font-size:10.5px;color:#94A3B8"></small></span></span></td><td>Abuja client visit · EX/2026/0812</td><td><span class="e-tag t-active">From Expenses</span></td><td><span class="e-sw e-off"></span></td><td class="r"><b class="" style="color:#0F172A">96,400</b></td></tr><tr><td><b style="color:#0F172A;font-weight:500">Unpaid leave</b></td><td><span class="e-row" style="gap:10px"><span class="e-ini" style="background:#0891B2">OB</span><span><b style="display:block;font-weight:500;color:#0F172A">Olumide Bakare</b><small style="font-size:10.5px;color:#94A3B8"></small></span></span></td><td>2 days unpaid · from approved leave</td><td><span class="e-tag t-blue">From Leave</span></td><td><span class="e-sw e-off"></span></td><td class="r"><b class="neg" style="">−31,800</b></td></tr></tbody></table></div></div></div></div></div></div></figure></div>
+      </div>
+      <div class="feat" data-vs="Statutory compliance and remittance">
+        <div class="feat-copy"><span class="num">03</span><h2>Statutory compliance and remittance</h2><p>Statutory deductions are calculated with every run, and remittances to the authorities are tracked to the due date. Rent relief is captured and applied to PAYE.</p><ul><li><svg class="i"><use href="#i-check"/></svg><span>PAYE, pension, NHF, NSITF and ITF</span></li><li><svg class="i"><use href="#i-check"/></svg><span>Due dates and receipts for every remittance</span></li><li><svg class="i"><use href="#i-check"/></svg><span>Rent relief applications checked and applied</span></li></ul></div>
+        <div class="feat-art bleed"><figure class="shot screen" aria-label="Payroll: Statutory compliance screen in wBizManager"><div class="scaler" data-w="1400" style="--w:1400;--h:826"><div class="frame" aria-hidden="true"><div class="erp" style="height:826px"><aside class="rail"><span class="e-tog"><svg class="i"><use href="#i-panel"/></svg></span><span><svg class="i"><use href="#i-calc"/></svg></span><span><svg class="i"><use href="#i-cart"/></svg></span><span><svg class="i"><use href="#i-bag"/></svg></span><span><svg class="i"><use href="#i-clip"/></svg></span><span><svg class="i"><use href="#i-box"/></svg></span><span><svg class="i"><use href="#i-file"/></svg></span><span><svg class="i"><use href="#i-brief"/></svg></span><span><svg class="i"><use href="#i-layers"/></svg></span><span class="on"><svg class="i"><use href="#i-person"/></svg></span><span><svg class="i"><use href="#i-gear"/></svg></span><span><svg class="i"><use href="#i-buoy"/></svg></span></aside><div class="e-main"><div class="e-top"><span class="e-pill"><svg class="i sp"><use href="#i-spark"/></svg> Super User <svg class="i"><use href="#i-down"/></svg></span><span class="tour"><svg class="i"><use href="#i-spark"/></svg> Tour</span><span class="moon"><svg class="i"><use href="#i-moon"/></svg></span><span class="bell"><svg class="i"><use href="#i-bell"/></svg></span><span class="e-who"><span class="e-av">AO</span><span><b>Adaeze</b><small>Super User</small></span><svg class="i"><use href="#i-down"/></svg></span><span class="grid-ic"><svg class="i"><use href="#i-grid"/></svg></span></div><div class="e-crumb">Human Resources<em>/</em>Payroll<em>/</em><b>Statutory</b></div><div class="e-tabs"><span>Payroll runs</span><span>Employees</span><span>Additions & deductions</span><span class="on">Statutory</span><span>Payslips</span><span>Payments</span><span>Settings</span></div><div class="e-body"><div class="e-h"><h2>Statutory deductions · October 2026</h2><div class="e-row"><span class="e-btn"><svg class="i"><use href="#i-file"/></svg> Schedules</span><span class="e-btn pri"><svg class="i"><use href="#i-plus"/></svg> Record remittance</span></div></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:14px;align-items:start"><div class="e-card" style=""><table><thead><tr><th>Deduction</th><th>Paid to</th><th>Amount</th><th>Due</th><th>Status</th><th></th></tr></thead><tbody><tr><td><b style="color:#0F172A;font-weight:500">PAYE</b></td><td>State tax authorities (3 states)</td><td>₦38,914,200</td><td>10 Nov 2026</td><td><span class="e-tag t-posted">Remitted</span></td><td><span class="e-btn ghost"><svg class="i"><use href="#i-file"/></svg> Receipt</span></td></tr><tr><td><b style="color:#0F172A;font-weight:500">Pension · 18%</b></td><td>6 pension fund administrators</td><td>₦29,476,800</td><td>06 Nov 2026</td><td><span class="e-tag t-posted">Remitted</span></td><td><span class="e-btn ghost"><svg class="i"><use href="#i-file"/></svg> Receipt</span></td></tr><tr><td><b style="color:#0F172A;font-weight:500">NHF · 2.5%</b></td><td>Federal Mortgage Bank</td><td>₦3,612,500</td><td>30 Nov 2026</td><td><span class="e-tag t-amber">Due</span></td><td><span class="e-btn">Remit</span></td></tr><tr><td><b style="color:#0F172A;font-weight:500">NSITF · 1%</b></td><td>Employer contribution</td><td>₦2,846,000</td><td>15 Nov 2026</td><td><span class="e-tag t-draft">Overdue</span></td><td><span class="e-btn">Remit</span></td></tr><tr><td><b style="color:#0F172A;font-weight:500">ITF · 1%</b></td><td>Annual, from payroll cost</td><td>₦34,152,000</td><td>01 Apr 2027</td><td><span class="e-tag t-grey">Scheduled</span></td><td><span class="e-btn ghost"><svg class="i"><use href="#i-file"/></svg> Receipt</span></td></tr></tbody></table><div class="e-pg"><span>Calculated from the approved October payroll · 472 employees</span></div></div><div class="e-card" style=""><div class="e-cardh"><div><h3>Rent relief</h3><div class=e-note style=margin-top:2px>Capped at 20% of annual rent, up to ₦500,000</div></div><div class="e-row"><span class="e-tag t-blue">2026 tax year</span></div></div><div class="e-li"><div class="e-grow"><b>Applications received</b><small>312 employees · documents checked</small></div><b style="color:#0F172A">312</b></div><div class="e-li"><div class="e-grow"><b>Approved and applied</b><small>Reduces taxable income in PAYE</small></div><b style="color:#0F172A">298</b></div><div class="e-li"><div class="e-grow"><b>Waiting for documents</b><small>Tenancy agreement or rent receipt</small></div><span class="e-tag t-amber">14</span></div><div style="padding:12px 18px 16px"><span class="e-btn pri"><svg class="i"><use href="#i-check-c"/></svg> Review applications</span></div></div></div></div></div></div></div></div></figure></div>
+      </div>
+      <div class="feat flip wide" data-vs="Payslips your team can see themselves">
+        <div class="feat-copy"><span class="num">04</span><h2>Payslips your team can see themselves</h2><p>Generate branded payslips from a template you control. Employees view their payslips, year-to-date totals and tax summary through self-service.</p><ul><li><svg class="i"><use href="#i-check"/></svg><span>Your logo, layout and wording</span></li><li><svg class="i"><use href="#i-check"/></svg><span>Published to the app and the web</span></li><li><svg class="i"><use href="#i-check"/></svg><span>Download or email as PDF</span></li></ul></div>
+        <div class="feat-art bleed"><figure class="shot screen" aria-label="Payroll: Payslip screen in wBizManager"><div class="scaler" data-w="1400" style="--w:1400;--h:826"><div class="frame" aria-hidden="true"><div class="erp" style="height:826px"><aside class="rail"><span class="e-tog"><svg class="i"><use href="#i-panel"/></svg></span><span><svg class="i"><use href="#i-calc"/></svg></span><span><svg class="i"><use href="#i-cart"/></svg></span><span><svg class="i"><use href="#i-bag"/></svg></span><span><svg class="i"><use href="#i-clip"/></svg></span><span><svg class="i"><use href="#i-box"/></svg></span><span><svg class="i"><use href="#i-file"/></svg></span><span><svg class="i"><use href="#i-brief"/></svg></span><span><svg class="i"><use href="#i-layers"/></svg></span><span class="on"><svg class="i"><use href="#i-person"/></svg></span><span><svg class="i"><use href="#i-gear"/></svg></span><span><svg class="i"><use href="#i-buoy"/></svg></span></aside><div class="e-main"><div class="e-top"><span class="e-pill"><svg class="i sp"><use href="#i-spark"/></svg> Super User <svg class="i"><use href="#i-down"/></svg></span><span class="tour"><svg class="i"><use href="#i-spark"/></svg> Tour</span><span class="moon"><svg class="i"><use href="#i-moon"/></svg></span><span class="bell"><svg class="i"><use href="#i-bell"/></svg></span><span class="e-who"><span class="e-av">AO</span><span><b>Adaeze</b><small>Super User</small></span><svg class="i"><use href="#i-down"/></svg></span><span class="grid-ic"><svg class="i"><use href="#i-grid"/></svg></span></div><div class="e-crumb">Human Resources<em>/</em>Payroll<em>/</em>Payslips<em>/</em><b>October 2026</b></div><div class="e-tabs"><span>Payroll runs</span><span>Employees</span><span>Additions & deductions</span><span>Statutory</span><span class="on">Payslips</span><span>Payments</span><span>Settings</span></div><div class="e-body"><div style="display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start"><div class="e-card" style="padding:26px 30px"><div style="display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:16px;border-bottom:2px solid #0F172A"><div><div style="display:flex;align-items:center;gap:10px"><span style="width:30px;height:30px;border-radius:8px;background:#0F172A;color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px">B</span><span style="font-size:15px;font-weight:700;letter-spacing:.02em;color:#0F172A">BELMONT ENERGY</span></div><div class="muted" style="margin-top:8px;font-size:11px">Belmont Energy Services Ltd · Onne Oil &amp; Gas Free Zone, Rivers State</div></div><div style="text-align:right"><div class="e-lbl">Payslip</div><div style="font-size:18px;font-weight:700;margin-top:4px">October 2026</div><div class="muted" style="font-size:11px">Paid 28 Oct 2026</div></div></div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:14px 0;font-size:11px"><div><span class="muted">Employee</span><div style="font-weight:600;color:#0F172A;margin-top:3px">Chukwuemeka Eze</div></div><div><span class="muted">Staff ID</span><div style="font-weight:600;color:#0F172A;margin-top:3px">BES-0142</div></div><div><span class="muted">Grade</span><div style="font-weight:600;color:#0F172A;margin-top:3px">M3 · Operations</div></div><div><span class="muted">Bank</span><div style="font-weight:600;color:#0F172A;margin-top:3px">Account ••3381</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start"><div><div class="e-lbl" style="margin-bottom:6px">Earnings</div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;color:#4B5563"><span>Basic salary</span><span>620,000</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;color:#4B5563"><span>Housing allowance</span><span>310,000</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;color:#4B5563"><span>Transport allowance</span><span>124,000</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;color:#4B5563"><span>Field allowance</span><span>96,000</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;color:#4B5563"><span>Overtime · 4 h</span><span>84,000</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;font-weight:700;color:#0F172A"><span>Gross pay</span><span>1,234,000</span></div></div><div><div class="e-lbl" style="margin-bottom:6px">Deductions</div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;color:#4B5563"><span>PAYE</span><span>185,183</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;color:#4B5563"><span>Pension · 8%</span><span>84,320</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;color:#4B5563"><span>NHF · 2.5%</span><span>15,500</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;color:#4B5563"><span>Car loan LN-0142</span><span>45,000</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F3F4F6;font-size:11.5px;font-weight:700;color:#0F172A"><span>Total deductions</span><span>330,003</span></div></div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding:14px 16px;border-radius:10px;background:#EEF4FF"><span style="font-weight:600;color:#1D4ED8">Net pay</span><span style="font-size:22px;font-weight:700;color:#0F172A">₦903,997</span></div></div><div style="display:grid;gap:14px"><div class="e-card" style=""><div class="e-cardh"><div><h3>Employee self-service</h3></div><div class="e-row"><span class="e-tag t-active">Published</span></div></div><div style="padding:0 18px 16px;font-size:11.5px;color:#4B5563;line-height:1.55">472 payslips are available in the wBizManager app and on the web. Employees see their own payslip, year-to-date totals and tax summary.</div></div><div class="e-card" style=""><div class="e-cardh"><div><h3>Year to date</h3></div><div class="e-row"></div></div><div class="e-li"><div class="e-grow"><b>Gross pay</b><small>Jan – Oct 2026</small></div><b style="color:#0F172A">₦11.6M</b></div><div class="e-li"><div class="e-grow"><b>PAYE</b><small>After rent relief</small></div><b style="color:#0F172A">₦2.1M</b></div><div class="e-li"><div class="e-grow"><b>Pension</b><small>Employee share</small></div><b style="color:#0F172A">₦843K</b></div></div><div class="e-row"><span class="e-btn"><svg class="i"><use href="#i-printer"/></svg> Download PDF</span><span class="e-btn"><svg class="i"><use href="#i-send"/></svg> Email payslip</span></div></div></div></div></div></div></div></div></figure></div>
+      </div>
+      <div class="feat" data-vs="Pay salaries and post to Accounting">
+        <div class="feat-copy"><span class="num">05</span><h2>Pay salaries and post to Accounting</h2><p>Pay salaries through a bank payment integration, and post payroll and loan entries to your accounting records without re-keying them.</p><ul><li><svg class="i"><use href="#i-check"/></svg><span>Payment batches by payroll group</span></li><li><svg class="i"><use href="#i-check"/></svg><span>Bank files for your corporate accounts</span></li><li><svg class="i"><use href="#i-check"/></svg><span>Journals posted to Accounting automatically</span></li></ul></div>
+        <div class="feat-art bleed"><figure class="shot screen" aria-label="Payroll: Payments and accounting screen in wBizManager"><div class="scaler" data-w="1400" style="--w:1400;--h:826"><div class="frame" aria-hidden="true"><div class="erp" style="height:826px"><aside class="rail"><span class="e-tog"><svg class="i"><use href="#i-panel"/></svg></span><span><svg class="i"><use href="#i-calc"/></svg></span><span><svg class="i"><use href="#i-cart"/></svg></span><span><svg class="i"><use href="#i-bag"/></svg></span><span><svg class="i"><use href="#i-clip"/></svg></span><span><svg class="i"><use href="#i-box"/></svg></span><span><svg class="i"><use href="#i-file"/></svg></span><span><svg class="i"><use href="#i-brief"/></svg></span><span><svg class="i"><use href="#i-layers"/></svg></span><span class="on"><svg class="i"><use href="#i-person"/></svg></span><span><svg class="i"><use href="#i-gear"/></svg></span><span><svg class="i"><use href="#i-buoy"/></svg></span></aside><div class="e-main"><div class="e-top"><span class="e-pill"><svg class="i sp"><use href="#i-spark"/></svg> Super User <svg class="i"><use href="#i-down"/></svg></span><span class="tour"><svg class="i"><use href="#i-spark"/></svg> Tour</span><span class="moon"><svg class="i"><use href="#i-moon"/></svg></span><span class="bell"><svg class="i"><use href="#i-bell"/></svg></span><span class="e-who"><span class="e-av">AO</span><span><b>Adaeze</b><small>Super User</small></span><svg class="i"><use href="#i-down"/></svg></span><span class="grid-ic"><svg class="i"><use href="#i-grid"/></svg></span></div><div class="e-crumb">Human Resources<em>/</em>Payroll<em>/</em><b>Payments</b></div><div class="e-tabs"><span>Payroll runs</span><span>Employees</span><span>Additions & deductions</span><span>Statutory</span><span>Payslips</span><span class="on">Payments</span><span>Settings</span></div><div class="e-body"><div class="e-h"><h2>Salary payments · October 2026</h2><div class="e-row"><span class="e-btn"><svg class="i"><use href="#i-cloud-down"/></svg> Bank file</span><span class="e-btn pri"><svg class="i"><use href="#i-plus"/></svg> New payment batch</span></div></div><div class="e-card" style=""><table><thead><tr><th>Batch</th><th>Employees</th><th>Amount</th><th>Paid from</th><th>Status</th></tr></thead><tbody><tr><td><b style="color:#0F172A;font-weight:500">Monthly staff</b></td><td>472</td><td>₦213,418,600</td><td>Corporate account ••4821</td><td><span class="e-tag t-posted">Paid</span></td></tr><tr><td><b style="color:#0F172A;font-weight:500">Contract crew · fortnight 2</b></td><td>96</td><td>₦21,860,000</td><td>Corporate account ••4821</td><td><span class="e-tag t-blue">Processing</span></td></tr><tr><td><b style="color:#0F172A;font-weight:500">Loan disbursements</b></td><td>4</td><td>₦6,200,000</td><td>Staff loans account ••0917</td><td><span class="e-tag t-amber">Awaiting approval</span></td></tr></tbody></table></div><div style="height:14px"></div><div class="e-card" style=""><div class="e-cardh"><div><h3>Journal posted to Accounting</h3><div class=e-note style=margin-top:2px>STE/JOU/0052 · 28 Oct 2026 · October payroll</div></div><div class="e-row"><span class="e-btn ghost"><svg class="i"><use href="#i-calc"/></svg> Open in Accounting</span></div></div><table><thead><tr><th>Account</th><th>Cost centre</th><th class="r">Debit (₦)</th><th class="r">Credit (₦)</th></tr></thead><tbody><tr><td>601001 · Salaries and wages</td><td>All departments</td><td class="r">284,612,400</td><td class="r"></td></tr><tr><td>601006 · Employer pension · 10%</td><td>All departments</td><td class="r">16,376,000</td><td class="r"></td></tr><tr><td>211004 · PAYE payable</td><td></td><td class="r"></td><td class="r">38,914,200</td></tr><tr><td>211005 · Pension payable</td><td></td><td class="r"></td><td class="r">29,476,800</td></tr><tr><td>211006 · NHF payable</td><td></td><td class="r"></td><td class="r">3,612,500</td></tr><tr><td>211007 · Other staff deductions</td><td>Cooperative, union dues, advances</td><td class="r"></td><td class="r">14,069,700</td></tr><tr><td>112003 · Staff loans receivable</td><td></td><td class="r"></td><td class="r">1,496,600</td></tr><tr><td>1000 · Cash and bank</td><td></td><td class="r"></td><td class="r">213,418,600</td></tr><tr><td><b style="color:#0F172A">Total</b></td><td></td><td class="r"><b style="color:#0F172A">300,988,400</b></td><td class="r"><b style="color:#0F172A">300,988,400</b></td></tr></tbody></table></div></div></div></div></div></div></figure></div>
+      </div>
+  </section>
+
+  <section class="flow-sec" data-vs="How it flows">
+    <div class="wrap">
+      <div class="head-c"><h2 class="h2">From inputs to payslip.</h2><p class="lead">Payroll works on its own. Connect Attendance &amp; Timesheets and approved hours arrive in the run by themselves.</p></div>
+      <div class="flow"><div class="st opt"><span class="ic"><svg class="i"><use href="#i-clock"/></svg></span><span class="k">Optional</span><b>Approved hours and overtime</b><small>From Attendance &amp; Timesheets, if you use it</small></div><div class="st"><span class="ic"><svg class="i"><use href="#i-cal"/></svg></span><span class="k">Step 1</span><b>Collect inputs</b><small>Leave, loans, expenses and changes</small></div><div class="st"><span class="ic"><svg class="i"><use href="#i-calc"/></svg></span><span class="k">Step 2</span><b>Calculate and review</b><small>Pro-rating and statutory deductions</small></div><div class="st"><span class="ic"><svg class="i"><use href="#i-check"/></svg></span><span class="k">Step 3</span><b>Approve</b><small>Through your approval workflow</small></div><div class="st"><span class="ic"><svg class="i"><use href="#i-send"/></svg></span><span class="k">Step 4</span><b>Pay, post and publish</b><small>Bank payment, journal and payslips</small></div></div>
+      <div class="opt-band"><span class="ic"><svg class="i"><use href="#i-clock"/></svg></span><div><b>Optionally, connect Attendance &amp; Timesheets</b><p>Payroll works with salaries and inputs you enter. Add Attendance &amp; Timesheets and approved hours, overtime and unpaid absence come into each run automatically, with no retyping and fewer disputes.</p></div><a class="btn btn-primary" href="attendance-timesheets.html">Explore Attendance &amp; Timesheets <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+    </div>
+  </section>
+
+  <section class="fl-sec" id="features" data-vs="Every feature">
+    <div class="wrap">
+      <div class="head-c"><h2 class="h2">Everything in Payroll.</h2><p class="lead">The full list, plus the HR features that feed it.</p></div>
+      <div class="fl-groups"><div class="fl-group"><h3><svg class="i"><use href="#i-card"/></svg>Payroll</h3><div class="fl-grid"><div class="fl"><b>Salary structure</b><span>Each employee’s salary, components and pay grade.</span></div><div class="fl"><b>Salary additions</b><span>Allowances, bonuses and other earnings.</span></div><div class="fl"><b>Salary deductions</b><span>Loan repayments and other recoveries.</span></div><div class="fl"><b>Recurring employee benefits</b><span>Benefits that repeat every pay period.</span></div><div class="fl"><b>Payroll groups and off-payroll groups</b><span>Run payroll by group, and keep selected people outside the run.</span></div><div class="fl"><b>Payroll run</b><span>Calculate pay for the period and process it for review and approval.</span></div><div class="fl"><b>Pro-rating</b><span>Pay part-month starters and leavers fairly.</span></div><div class="fl"><b>Statutory compliance and remittance</b><span>Statutory deductions calculated and remittances tracked.</span></div><div class="fl"><b>Rent relief</b><span>Capture and apply rent relief applications for tax purposes.</span></div><div class="fl"><b>Templates and settings</b><span>Configure how payroll is calculated and presented.</span></div><div class="fl"><b>Payslips</b><span>Generated from a configurable template and available to employees.</span></div><div class="fl"><b>Salary payments and bank integration</b><span>Pay salaries through a payment integration.</span></div><div class="fl"><b>Payroll reports</b><span>Payroll summaries, statutory reports and cost reports.</span></div><div class="fl"><b>Accounting integration</b><span>Payroll and loan entries posted to the accounting records.</span></div></div></div><div class="fl-group"><h3><svg class="i"><use href="#i-users"/></svg>Leave, loans and expenses</h3><div class="fl-grid"><div class="fl"><b>Leave</b><span>Requests, two-level approval, balances and a team calendar. Approved leave flows into pay.</span></div><div class="fl"><b>Loans</b><span>Online application, guarantors and three-level approval, with repayment from salary.</span></div><div class="fl"><b>Expenses</b><span>Claims with receipts, approval, and reimbursement singly or in batches.</span></div></div></div></div>
+    </div>
+  </section>
+
+  <section class="aud-sec" data-vs="Who it is for">
+    <div class="wrap">
+      <div class="head-c"><h2 class="h2">Made for everyone who touches <span class="blue">time and pay.</span></h2></div>
+      <div class="aud"><div><span class="ic"><svg class="i"><use href="#i-chart"/></svg></span><h3>Finance and payroll</h3><p>Run payroll from approved inputs, with statutory figures you can trust.</p></div><div><span class="ic"><svg class="i"><use href="#i-users"/></svg></span><h3>HR teams</h3><p>Keep salaries, grades and benefits with each employee record.</p></div><div><span class="ic"><svg class="i"><use href="#i-person"/></svg></span><h3>Business owners</h3><p>Approve the run and see payroll cost without checking every sheet.</p></div><div><span class="ic"><svg class="i"><use href="#i-check-c"/></svg></span><h3>Employees</h3><p>See your own payslips and tax summary, whenever you need them.</p></div></div>
+    </div>
+  </section>
+
+  <section class="faq" data-vs="FAQ">
+    <div class="wrap">
+      <div class="faq-side"><h2 class="h2">Questions, answered.</h2><p class="lead" style="font-size:17px">Want to see it with your own policies and pay rules? Our team can walk you through it.</p><a class="link" href="../contact.html">Book a demo <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+      <div><details class="qa" open><summary>Does it handle statutory deductions?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Yes. PAYE, pension, NHF and other statutory deductions are calculated with every run, and remittances are tracked to their due dates.</p></details><details class="qa"><summary>Can employees see their own payslips?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Yes. Payslips are published to self-service in the wBizManager app and on the web.</p></details><details class="qa"><summary>Can I use Payroll without Attendance and Timesheets?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Yes. Payroll works on its own. If you also use Attendance and Timesheets, approved hours and overtime flow into the run automatically.</p></details><details class="qa"><summary>How are part-month starters and leavers paid?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Their pay is pro-rated for the days they worked in the period.</p></details><details class="qa"><summary>Does it support more than one company or branch?<span class="pm"><svg class="i"><use href="#i-down"/></svg></span></summary><p>Yes. Run payroll for several company entities and branches, each with its own groups and rules.</p></details></div>
+    </div>
+  </section>
+
+  <section class="rel" data-vs="Related">
+    <div class="wave tl" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
+    <div class="wave br" aria-hidden="true"><svg viewBox="0 0 297 287" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#4C9AFF" stroke-width="1"><path d="M0 34.0 C70.0 40.0 150.0 300.0 150.0 0" stroke-opacity="0.35"/><path d="M0 43.8 C71.4 44.3 151.9 298.1 156.0 0" stroke-opacity="0.40"/><path d="M0 53.6 C72.9 48.6 153.8 296.2 161.9 0" stroke-opacity="0.45"/><path d="M0 63.4 C74.3 52.9 155.7 294.3 167.9 0" stroke-opacity="0.49"/><path d="M0 73.2 C75.7 57.1 157.6 292.4 173.8 0" stroke-opacity="0.54"/><path d="M0 83.0 C77.1 61.4 159.5 290.5 179.8 0" stroke-opacity="0.59"/><path d="M0 92.9 C78.6 65.7 161.4 288.6 185.7 0" stroke-opacity="0.64"/><path d="M0 102.7 C80.0 70.0 163.3 286.7 191.7 0" stroke-opacity="0.68"/><path d="M0 112.5 C81.4 74.3 165.2 284.8 197.6 0" stroke-opacity="0.73"/><path d="M0 122.3 C82.9 78.6 167.1 282.9 203.6 0" stroke-opacity="0.78"/><path d="M0 132.1 C84.3 82.9 169.0 281.0 209.5 0" stroke-opacity="0.83"/><path d="M0 141.9 C85.7 87.1 171.0 279.0 215.5 0" stroke-opacity="0.83"/><path d="M0 151.7 C87.1 91.4 172.9 277.1 221.4 0" stroke-opacity="0.78"/><path d="M0 161.5 C88.6 95.7 174.8 275.2 227.4 0" stroke-opacity="0.73"/><path d="M0 171.3 C90.0 100.0 176.7 273.3 233.3 0" stroke-opacity="0.68"/><path d="M0 181.1 C91.4 104.3 178.6 271.4 239.3 0" stroke-opacity="0.64"/><path d="M0 191.0 C92.9 108.6 180.5 269.5 245.2 0" stroke-opacity="0.59"/><path d="M0 200.8 C94.3 112.9 182.4 267.6 251.2 0" stroke-opacity="0.54"/><path d="M0 210.6 C95.7 117.1 184.3 265.7 257.1 0" stroke-opacity="0.49"/><path d="M0 220.4 C97.1 121.4 186.2 263.8 263.1 0" stroke-opacity="0.45"/><path d="M0 230.2 C98.6 125.7 188.1 261.9 269.0 0" stroke-opacity="0.40"/><path d="M0 240.0 C100.0 130.0 190.0 260.0 275.0 0" stroke-opacity="0.35"/></svg></div>
+    <div class="wrap">
+      <div class="head-c"><h2 class="h2">Works with the rest of <span class="blue">Human Resources.</span></h2><p class="lead">Every HR feature works from the same employee records, so information is entered once and used everywhere.</p></div>
+      <div class="rel-grid"><a class="rel-card" href="attendance-timesheets.html"><span class="ic"><svg class="i"><use href="#i-clock"/></svg></span><h3>Attendance &amp; Timesheets</h3><p>Know who is at work, and every hour they give.</p><span class="link">Explore Attendance &amp; Timesheets <svg class="i arrow"><use href="#i-arrow"/></svg></span></a><a class="rel-card" href="human-resources.html"><span class="ic"><svg class="i"><use href="#i-person"/></svg></span><h3>Human Resources</h3><p>Your people, organised.</p><span class="link">Explore Human Resources <svg class="i arrow"><use href="#i-arrow"/></svg></span></a><a class="rel-card" href="accounting.html"><span class="ic"><svg class="i"><use href="#i-calc"/></svg></span><h3>Accounting</h3><p>Payroll journals posted automatically.</p><span class="link">Explore Accounting <svg class="i arrow"><use href="#i-arrow"/></svg></span></a></div>
+      <nav class="pn" aria-label="Human Resources pages">
+        <a class="prev" href="attendance-timesheets.html">Previous<b><svg class="i"><use href="#i-left"/></svg>Attendance &amp; Timesheets</b></a>
+        <a class="next" href="human-resources.html">Back to<b>Human Resources<svg class="i"><use href="#i-right"/></svg></b></a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="cta-band" data-vs="Book a demo">
+    <div class="wrap">
+      <h2 class="display">See it with your own team.</h2>
+      <p>Book a demo and we will set up wBizManager with your shifts, policies and pay rules, so you can see exactly how it works for your business.</p>
+      <div class="acts"><a class="btn btn-white btn-lg" href="../contact.html">Book a demo <svg class="i arrow"><use href="#i-arrow"/></svg></a></div>
+    </div>
+  </section>
+</main>
+
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="top">
+      <div class="about">
+        <img src="../assets/logo.png" alt="wBizManager" width="145" height="34">
+        <p>Integrated business management for growing businesses.</p>
+      </div>
+      <div><h4>Solutions</h4><ul>
+        <li><a href="accounting.html">Accounting</a></li><li><a href="sales.html">Sales</a></li><li><a href="purchases.html">Purchases</a></li><li><a href="approvals.html">Approvals</a></li><li><a href="inventory.html">Inventory</a></li>
+        <li><a href="reports.html">Reports</a></li><li><a href="commercial.html">Commercial</a></li><li><a href="project.html">Project</a></li><li><a href="human-resources.html">Human Resources</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="../stories.html">Customer Stories</a></li><li><a href="#">Partners</a></li><li><a href="../contact.html">Contact Us</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="../faq.html">FAQs</a></li><li><a href="../help.html">Help &amp; Support</a></li><li><a href="../pricing.html">Pricing</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
+    </div>
+    <div class="base"><span>© 2026 wBizManager. All rights reserved.</span><nav><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></nav></div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const icon = id => `<svg class="i"><use href="#i-${id}"/></svg>`;
+  if ('IntersectionObserver' in window) {
+    const REVEAL = [
+      ['.mhero-copy > *', 'up', .08], ['.mshot-panel', 'zoom', .1],
+      ['.feat-copy', 'up', 0], ['.pain', 'up', .09], ['.flow .st', 'up', .08], ['.opt-band', 'up', 0], ['.fl', 'up', .03], ['.aud > div', 'up', .08], ['.faq-side', 'left', 0], ['.faq .qa', 'up', .06], ['.feat:not(.flip) .feat-art', 'right', 0], ['.feat.flip .feat-art', 'left', 0],
+      ['.rel .head-c > *', 'up', .08], ['.rel-card', 'up', .09], ['.pn', 'fade', 0],
+      ['.cta-band .wrap > *', 'up', .08], ['.ftr .top > *', 'up', .06], ['.ftr .base', 'fade', 0]
+    ];
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -40px 0px', threshold: .12 });
+    REVEAL.forEach(([sel, dir, step]) => document.querySelectorAll(sel).forEach((el, i) => {
+      el.classList.add('rv'); el.dataset.rv = reduce ? 'fade' : dir;
+      if (step) el.style.setProperty('--rd', Math.min(i * step, .6).toFixed(2) + 's');
+      io.observe(el);
+    }));
+    const lastProp = { up: 'translate', left: 'translate', right: 'translate', zoom: 'scale', fade: 'opacity' };
+    document.addEventListener('transitionend', e => { const t = e.target; if (t.classList && t.classList.contains('in') && e.propertyName === lastProp[t.dataset.rv]) { t.classList.remove('rv'); t.removeAttribute('data-rv'); t.style.removeProperty('--rd'); } });
+  }
+  /* Scale the HTML screen recreations */
+  const scalers = document.querySelectorAll('.scaler[data-w]');
+  const rescale = () => scalers.forEach(s => s.style.setProperty('--s', (s.clientWidth / +s.dataset.w).toFixed(4)));
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(rescale); scalers.forEach(s => ro.observe(s)); }
+  rescale(); addEventListener('resize', rescale);
+  /* Header */
+  const dds = [...document.querySelectorAll('.dd')];
+  const mnav = document.getElementById('mnav'), burger = document.querySelector('.burger');
+  function closeAll(except) {
+    dds.forEach(d => { if (d !== except) { d.classList.remove('open'); d.querySelector('button').setAttribute('aria-expanded', 'false'); } });
+    if (!except) { mnav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.innerHTML = icon('menu'); }
+  }
+  const hoverable = matchMedia('(hover: hover)').matches;
+  dds.forEach(d => {
+    const b = d.querySelector('button');
+    b.addEventListener('click', e => { e.stopPropagation(); const open = hoverable && d.dataset.hovered ? true : !d.classList.contains('open'); delete d.dataset.hovered; closeAll(d); d.classList.toggle('open', open); b.setAttribute('aria-expanded', open); });
+    if (matchMedia('(hover: hover)').matches) {
+      let t;
+      d.addEventListener('mouseenter', () => { clearTimeout(t); if (!d.classList.contains('open')) d.dataset.hovered = 1; closeAll(d); d.classList.add('open'); b.setAttribute('aria-expanded', 'true'); });
+      d.addEventListener('mouseleave', () => { t = setTimeout(() => { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); }, 120); });
+    }
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('.dd')) dds.forEach(d => { d.classList.remove('open'); d.querySelector('button').setAttribute('aria-expanded', 'false'); }); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+  burger.addEventListener('click', () => {
+    const open = !mnav.classList.contains('open');
+    mnav.classList.toggle('open', open); burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); burger.innerHTML = icon(open ? 'x' : 'menu');
+  });
+  mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeAll()));
+  const hdr = document.getElementById('hdr');
+  const onScroll = () => hdr.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+})();
+</script>
+<script>/* vslider */
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vs = document.createElement('div');
+  vs.className = 'vs'; vs.tabIndex = 0;
+  vs.setAttribute('role', 'slider'); vs.setAttribute('aria-label', 'Page position'); vs.setAttribute('aria-orientation', 'vertical');
+  vs.setAttribute('aria-valuemin', '0'); vs.setAttribute('aria-valuemax', '100');
+  vs.innerHTML = '<div class="vs-t"><div class="vs-f"></div></div><span class="vs-k"></span><span class="vs-l"></span>';
+  document.body.appendChild(vs);
+  const track = vs.querySelector('.vs-t'), label = vs.querySelector('.vs-l');
+  const stops = [...document.querySelectorAll('[data-vs]')];
+  const max = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const top = el => el.getBoundingClientRect().top + scrollY;
+  const dots = stops.map(el => {
+    const d = document.createElement('button');
+    d.type = 'button'; d.className = 'vs-d'; d.tabIndex = -1;
+    d.setAttribute('aria-label', 'Go to ' + el.dataset.vs);
+    d.innerHTML = '<span class="vs-tip">' + el.dataset.vs + '</span>';
+    d.addEventListener('click', e => { e.stopPropagation(); scrollTo({ top: Math.max(0, top(el) - 72), behavior: reduce ? 'auto' : 'smooth' }); });
+    d.addEventListener('pointerdown', e => e.stopPropagation());
+    vs.insertBefore(d, label); return d;
+  });
+  /* Track runs between the padding, so positions are fractions of its own height */
+  const place = (el, p) => { el.style.top = (track.offsetTop + p * track.offsetHeight) + 'px'; };
+  function layout() {
+    vs.hidden = document.documentElement.scrollHeight - innerHeight < 120;
+    stops.forEach((el, i) => place(dots[i], Math.min(1, Math.max(0, (top(el) - 72) / max()))));
+    update();
+  }
+  function update() {
+    const p = Math.min(1, Math.max(0, scrollY / max()));
+    vs.style.setProperty('--p', p);
+    track.style.setProperty('--p', p);
+    place(vs.querySelector('.vs-k'), p); place(label, p);
+    vs.setAttribute('aria-valuenow', Math.round(p * 100));
+    let cur = -1;
+    stops.forEach((el, i) => { if (top(el) - innerHeight * .4 <= scrollY) cur = i; });
+    dots.forEach((d, i) => d.classList.toggle('on', i <= cur));
+    const name = cur >= 0 ? stops[cur].dataset.vs : (stops[0] ? stops[0].dataset.vs : '');
+    label.textContent = name || Math.round(p * 100) + '%';
+    vs.setAttribute('aria-valuetext', (name ? name + ', ' : '') + Math.round(p * 100) + '%');
+  }
+  const seek = y => { const r = track.getBoundingClientRect(); scrollTo({ top: Math.min(1, Math.max(0, (y - r.top) / r.height)) * max(), behavior: 'instant' }); };
+  vs.addEventListener('pointerdown', e => { e.preventDefault(); vs.setPointerCapture(e.pointerId); vs.classList.add('drag'); seek(e.clientY); });
+  vs.addEventListener('pointermove', e => { if (vs.classList.contains('drag')) seek(e.clientY); });
+  const end = () => vs.classList.remove('drag');
+  vs.addEventListener('pointerup', end); vs.addEventListener('pointercancel', end);
+  vs.addEventListener('keydown', e => {
+    const step = { ArrowDown: .05, ArrowRight: .05, ArrowUp: -.05, ArrowLeft: -.05, PageDown: .2, PageUp: -.2 }[e.key];
+    if (step != null) { e.preventDefault(); scrollBy(0, step * max()); }
+    else if (e.key === 'Home') { e.preventDefault(); scrollTo(0, 0); }
+    else if (e.key === 'End') { e.preventDefault(); scrollTo(0, max()); }
+  });
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', layout);
+  if ('ResizeObserver' in window) new ResizeObserver(layout).observe(document.body);
+  addEventListener('load', layout); layout();
+})();
+</script>
+</body>
+</html>
