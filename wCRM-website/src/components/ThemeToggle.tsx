@@ -5,11 +5,22 @@ const STORAGE_KEY = 'wcrm-site-theme';
 
 /** Light / dark switch (Figma `light`, 349:6007). Sets data-theme on <html>, which every token follows. */
 export function ThemeToggle() {
-  const [dark, setDark] = useState(() => typeof window !== 'undefined' && localStorage.getItem(STORAGE_KEY) === 'dark');
+  const [dark, setDark] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? saved === 'dark' : document.documentElement.dataset.theme === 'dark';
+    } catch {
+      return document.documentElement.dataset.theme === 'dark';
+    }
+  });
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-    localStorage.setItem(STORAGE_KEY, dark ? 'dark' : 'light');
+    try {
+      localStorage.setItem(STORAGE_KEY, dark ? 'dark' : 'light');
+    } catch {
+      /* storage unavailable (private mode, sandboxed preview): the theme still applies for this visit */
+    }
   }, [dark]);
 
   return (

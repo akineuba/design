@@ -9,6 +9,7 @@
     "tokens:check": "node scripts/build-site-tokens.mjs --check",
     "dev": "vite",
     "build": "npm run tokens:check && tsc --noEmit && vite build",
+    "build:artifact": "npm run tokens:check && tsc --noEmit && vite build --mode artifact --outDir dist-artifact",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },

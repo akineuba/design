@@ -6,7 +6,9 @@ const ds = fileURLToPath(new URL('../wCRM-marketing-design-system/src', import.m
 
 // The design system is consumed from source (sibling folder), so its bare imports
 // (React, Radix, clsx) must resolve to this app's node_modules: `dedupe` does that.
-export default defineConfig({
+// `npm run build:artifact` emits relative asset paths so the site can be hosted from any folder (claude.ai artifact).
+export default defineConfig(({ mode }) => ({
+  base: mode === 'artifact' ? './' : '/',
   plugins: [react()],
   resolve: {
     alias: [
@@ -28,4 +30,4 @@ export default defineConfig({
     ],
   },
   server: { fs: { allow: ['..'] } },
-});
+}));
