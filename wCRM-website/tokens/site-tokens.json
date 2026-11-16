@@ -1,0 +1,528 @@
+{
+  "$meta": {
+    "version": "0.1.0",
+    "description": "Website-only tokens for the wCRM marketing site and plan checkout. They extend the wCRM design system (../wCRM-marketing-design-system/tokens/tokens.json); every value here is one the design system does not already have. Source: Figma file EIQlA9M6mP2KlskFFy2X2U, section 'homepage x subsciption' (2621:4227).",
+    "rule": "Use a design-system token when its value equals the Figma value; add a value here only when none does. Run `npm run tokens` after editing.",
+    "dark": "Tokens with a `dark` value override their variable under [data-theme='dark'] (derived, not drawn in Figma)."
+  },
+  "color": {
+    "site": {
+      "ink": {
+        "value": "#090D26",
+        "usage": "Homepage headings, FAQ questions, leaderboard names",
+        "figma": "691:4904, 1894:7919",
+        "dark": "#F4F5FA"
+      },
+      "red": {
+        "value": "#EA001B",
+        "usage": "Active nav link, pricing CTAs, Most Popular badge, contact submit, 'Request sent!'",
+        "figma": "691:4901, 691:5155, 231:1143"
+      },
+      "red-tint": {
+        "value": "rgba(238, 31, 47, 0.14)",
+        "usage": "Check-circle chips, '3 months free' pill, open FAQ border",
+        "figma": "691:5071, 691:5126, 1894:7921"
+      },
+      "midnight": {
+        "value": "#000021",
+        "usage": "Pro pricing card fill",
+        "figma": "691:5157"
+      },
+      "on-dark-muted": {
+        "value": "#8F9CAE",
+        "usage": "Pro card description and /year, 'or' divider, address placeholder",
+        "figma": "691:5162, 372:2595"
+      },
+      "divider-on-dark": {
+        "value": "rgba(255, 255, 255, 0.125)",
+        "usage": "Divider inside the Pro card",
+        "figma": "691:5165"
+      },
+      "heading": {
+        "value": "#1D1E23",
+        "usage": "Checkout headings, labels and values",
+        "figma": "372:2584, 372:2587",
+        "dark": "#F4F5FA"
+      },
+      "label": {
+        "value": "#334155",
+        "usage": "Contact form labels and benefit rows",
+        "figma": "231:1109, 231:1087",
+        "dark": "#A3A6BC"
+      },
+      "metric": {
+        "value": "#111129",
+        "usage": "Hero dashboard card values",
+        "figma": "691:4923, 691:4978",
+        "dark": "#F4F5FA"
+      },
+      "amber": {
+        "value": "#F59E0B",
+        "usage": "Starter plan dot and allocation bar",
+        "figma": "698:2429, 698:2446"
+      },
+      "success-subtle": {
+        "value": "#E6F4EA",
+        "usage": "'Same configuration will be copied' banner, ACTIVE pill",
+        "figma": "372:2350, 372:3565",
+        "dark": "rgba(16, 185, 129, 0.16)"
+      },
+      "notice-bg": {
+        "value": "#FEFCE8",
+        "usage": "Bank transfer expiry notice fill",
+        "figma": "372:3494",
+        "dark": "rgba(254, 240, 138, 0.10)"
+      },
+      "notice-border": {
+        "value": "#FEF08A",
+        "usage": "Bank transfer expiry notice border",
+        "figma": "372:3494"
+      },
+      "notice-text": {
+        "value": "#854D0E",
+        "usage": "Bank transfer expiry notice text and icon",
+        "figma": "372:3498",
+        "dark": "#FDE68A"
+      },
+      "discount": {
+        "value": "#219959",
+        "usage": "'Discount applied' line in the order summary",
+        "figma": "367:16774"
+      },
+      "visa": {
+        "value": "#1A1F71",
+        "usage": "VISA wordmark on the card number field",
+        "figma": "372:2981",
+        "dark": "#A5B4FC"
+      },
+      "plan-bg": {
+        "value": "#F4F5F7",
+        "usage": "Current active plan row on the success card",
+        "figma": "372:3561",
+        "dark": "#24243A"
+      },
+      "trash": {
+        "value": "#FF4D4F",
+        "usage": "Remove-organisation icon in the edit modal",
+        "figma": "367:16506"
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "outfit": {
+        "value": "'Outfit', 'Inter', ui-sans-serif, system-ui, sans-serif",
+        "usage": "Feature and need card titles",
+        "figma": "775:4579, 691:5055"
+      },
+      "onest": {
+        "value": "'Onest', 'Inter', ui-sans-serif, system-ui, sans-serif",
+        "usage": "Stats bar numbers, 'Streamline Your Sales Workflow'",
+        "figma": "691:5037, 691:5050"
+      },
+      "figtree": {
+        "value": "'Figtree', 'Inter', ui-sans-serif, system-ui, sans-serif",
+        "usage": "Footer contact and address",
+        "figma": "I691:5239;349:6051"
+      }
+    }
+  },
+  "typography": {
+    "site-hero": {
+      "size": "45px",
+      "lineHeight": "1.15",
+      "weight": "800",
+      "usage": "Homepage hero headline (Poppins ExtraBold)",
+      "figma": "691:4904"
+    },
+    "site-section": {
+      "size": "36px",
+      "lineHeight": "normal",
+      "weight": "800",
+      "usage": "Homepage section headings",
+      "figma": "691:5010, 691:5068"
+    },
+    "site-title": {
+      "size": "36px",
+      "lineHeight": "normal",
+      "weight": "700",
+      "usage": "Page titles: pricing, contact, checkout (Poppins Bold)",
+      "figma": "364:10099, 231:1080, 372:2584"
+    },
+    "site-stat": {
+      "size": "40px",
+      "lineHeight": "normal",
+      "weight": "800",
+      "usage": "Stats bar numbers (Onest)",
+      "figma": "691:5037"
+    },
+    "site-price": {
+      "size": "32px",
+      "lineHeight": "normal",
+      "weight": "700",
+      "usage": "Plan price and checkout review title",
+      "figma": "691:5125, 372:2737"
+    },
+    "site-success": {
+      "size": "50px",
+      "lineHeight": "normal",
+      "weight": "700",
+      "usage": "'Success!' popup title",
+      "figma": "372:3591"
+    },
+    "site-lead": {
+      "size": "16px",
+      "lineHeight": "normal",
+      "weight": "400",
+      "usage": "16px body copy (combine with leading-150 / leading-site-24)",
+      "figma": "691:4905, 1894:7927"
+    },
+    "site-body-lg": {
+      "size": "15px",
+      "lineHeight": "normal",
+      "weight": "400",
+      "usage": "15px body copy (combine with leading-site-22)",
+      "figma": "698:2418, 231:1087"
+    },
+    "site-logo-suffix": {
+      "size": "12.257px",
+      "lineHeight": "normal",
+      "weight": "600",
+      "usage": "'CRM' next to the Wragby logo (Poppins SemiBold)",
+      "figma": "I691:4901;349:5995"
+    }
+  },
+  "lineHeight": {
+    "site-115": {
+      "value": "1.15",
+      "figma": "691:4904"
+    },
+    "site-16": {
+      "value": "16px",
+      "figma": "367:16492"
+    },
+    "site-18": {
+      "value": "18px",
+      "figma": "691:5123"
+    },
+    "site-20": {
+      "value": "20px",
+      "figma": "231:1141"
+    },
+    "site-22": {
+      "value": "22px",
+      "figma": "698:2418"
+    },
+    "site-24": {
+      "value": "24px",
+      "figma": "364:10100"
+    },
+    "site-44": {
+      "value": "44px",
+      "figma": "364:10099"
+    },
+    "site-52": {
+      "value": "52px",
+      "figma": "231:1080"
+    }
+  },
+  "space": {
+    "11.5": {
+      "value": "46px",
+      "usage": "Success popup stack gap",
+      "figma": "372:3584"
+    },
+    "15": {
+      "value": "60px",
+      "usage": "Pricing hero bottom padding, footer gap",
+      "figma": "231:653"
+    },
+    "25": {
+      "value": "100px",
+      "usage": "Checkout header and pricing compare inset",
+      "figma": "367:11362, 231:784"
+    },
+    "27.5": {
+      "value": "110px",
+      "usage": "Hero right inset",
+      "figma": "691:4902"
+    },
+    "30": {
+      "value": "120px",
+      "usage": "Pricing hero side inset",
+      "figma": "231:653"
+    }
+  },
+  "radius": {
+    "site-24": {
+      "value": "24px",
+      "usage": "Payment method cards",
+      "figma": "372:2821"
+    }
+  },
+  "size": {
+    "site-hero-h": {
+      "value": "620px",
+      "figma": "691:4902"
+    },
+    "site-logo": {
+      "value": "131px",
+      "figma": "I691:4901;349:5994"
+    },
+    "site-logo-h": {
+      "value": "30.643px",
+      "figma": "I691:4901;349:5994"
+    },
+    "site-logo-img": {
+      "value": "97.425px",
+      "figma": "I691:4901;349:5996"
+    },
+    "site-logo-img-h": {
+      "value": "27.759px",
+      "figma": "I691:4901;349:5996"
+    },
+    "site-nav": {
+      "value": "415px",
+      "figma": "I691:4901;349:5997"
+    },
+    "site-hero-copy": {
+      "value": "435px",
+      "figma": "691:4903"
+    },
+    "site-hero-media": {
+      "value": "616px",
+      "figma": "691:4918"
+    },
+    "site-partner": {
+      "value": "108.5px",
+      "figma": "691:4914"
+    },
+    "site-partner-h": {
+      "value": "26.04px",
+      "figma": "691:4914"
+    },
+    "site-acq-card": {
+      "value": "280px",
+      "figma": "691:5002"
+    },
+    "site-stat-card": {
+      "value": "320px",
+      "figma": "691:4976"
+    },
+    "site-spark": {
+      "value": "272px",
+      "figma": "691:4980"
+    },
+    "site-spark-h": {
+      "value": "100px",
+      "figma": "691:4980"
+    },
+    "site-spark-area": {
+      "value": "140px",
+      "figma": "691:4979"
+    },
+    "site-progress-fill": {
+      "value": "180px",
+      "figma": "691:5007"
+    },
+    "site-section-head": {
+      "value": "600px",
+      "figma": "691:5009"
+    },
+    "site-feature-wide": {
+      "value": "724px",
+      "figma": "775:4581"
+    },
+    "site-feature-h": {
+      "value": "328.964px",
+      "figma": "775:4576"
+    },
+    "site-feature-h-lg": {
+      "value": "349px",
+      "figma": "775:4592"
+    },
+    "site-need-card": {
+      "value": "294px",
+      "figma": "691:5053"
+    },
+    "site-need-img": {
+      "value": "120px",
+      "figma": "691:5054"
+    },
+    "site-need-img-h": {
+      "value": "128px",
+      "figma": "691:5054"
+    },
+    "site-lead": {
+      "value": "640px",
+      "figma": "691:5051"
+    },
+    "site-split-media": {
+      "value": "600px",
+      "figma": "691:5112"
+    },
+    "site-split-media-h": {
+      "value": "480px",
+      "figma": "691:5112"
+    },
+    "site-plan-card-h": {
+      "value": "620px",
+      "figma": "691:5120"
+    },
+    "site-faq": {
+      "value": "1040px",
+      "figma": "1894:7920"
+    },
+    "site-compare": {
+      "value": "1240px",
+      "figma": "364:10073"
+    },
+    "site-footer-brand": {
+      "value": "300px",
+      "figma": "I691:5239;349:6016"
+    },
+    "site-footer-address": {
+      "value": "260px",
+      "figma": "I691:5239;349:6056"
+    },
+    "site-contact-copy": {
+      "value": "460px",
+      "figma": "231:1076"
+    },
+    "site-contact-form": {
+      "value": "520px",
+      "figma": "231:1104"
+    },
+    "site-contact-form-h": {
+      "value": "605px",
+      "figma": "231:1104"
+    },
+    "site-thumbs-up": {
+      "value": "307px",
+      "figma": "367:10598"
+    },
+    "site-textarea": {
+      "value": "100px",
+      "figma": "231:1140, 372:2687"
+    },
+    "site-checkout-main": {
+      "value": "640px",
+      "figma": "698:2414, 372:2581"
+    },
+    "site-summary": {
+      "value": "360px",
+      "figma": "231:1023"
+    },
+    "site-review-h": {
+      "value": "487px",
+      "figma": "372:2733"
+    },
+    "site-modal-add": {
+      "value": "614px",
+      "figma": "372:2334"
+    },
+    "site-modal-edit": {
+      "value": "580px",
+      "figma": "372:3262"
+    },
+    "site-modal-edit-list": {
+      "value": "419px",
+      "figma": "367:16481"
+    },
+    "site-seat-stepper": {
+      "value": "240px",
+      "figma": "372:2342"
+    },
+    "site-success-card": {
+      "value": "514px",
+      "figma": "372:3555"
+    },
+    "site-success-popup": {
+      "value": "518px",
+      "figma": "372:3583"
+    },
+    "site-success-stack": {
+      "value": "262px",
+      "figma": "372:3584"
+    },
+    "site-success-icon": {
+      "value": "150px",
+      "figma": "372:3556"
+    },
+    "site-dashboard-btn": {
+      "value": "204px",
+      "figma": "372:3581"
+    }
+  },
+  "shadow": {
+    "site-header": {
+      "value": "0 -5px 20px 0 rgba(0, 0, 0, 0.25)",
+      "usage": "Site header",
+      "figma": "691:4901"
+    },
+    "site-float": {
+      "value": "0 12px 12px 0 rgba(30, 30, 47, 0.10)",
+      "usage": "Hero dashboard cards",
+      "figma": "691:4920, 691:4976"
+    },
+    "site-float-soft": {
+      "value": "0 6px 6px 0 rgba(30, 30, 47, 0.04)",
+      "usage": "Hero acquisition card",
+      "figma": "691:5002"
+    },
+    "site-leaderboard": {
+      "value": "0 12px 12px 0 rgba(0, 0, 0, 0.08)",
+      "usage": "Hero leaderboard card",
+      "figma": "691:4936"
+    },
+    "site-tooltip": {
+      "value": "0 4px 4px 0 rgba(0, 0, 0, 0.06)",
+      "usage": "Sparkline tooltip",
+      "figma": "691:4990"
+    },
+    "site-plan": {
+      "value": "0 8px 12px 0 rgba(0, 0, 0, 0.03)",
+      "usage": "Standard and Custom plan cards, contact form card",
+      "figma": "691:5120, 231:1104"
+    },
+    "site-plan-pro": {
+      "value": "0 12px 16px 0 rgba(0, 112, 255, 0.13)",
+      "usage": "Pro plan card",
+      "figma": "691:5157"
+    },
+    "site-checkout": {
+      "value": "0 12px 16px 0 rgba(15, 23, 42, 0.07)",
+      "usage": "Checkout cards and order summary",
+      "figma": "698:2419, 231:1023"
+    },
+    "site-payment": {
+      "value": "0 12px 16px 0 rgba(15, 23, 42, 0.08)",
+      "usage": "Payment method cards",
+      "figma": "372:2821"
+    },
+    "site-modal": {
+      "value": "0 16px 16px 0 rgba(0, 0, 0, 0.15)",
+      "usage": "Edit organisation modal",
+      "figma": "372:3262"
+    },
+    "site-success": {
+      "value": "0 8px 12px 0 rgba(0, 0, 0, 0.06)",
+      "usage": "Plan upgrade success card",
+      "figma": "372:3555"
+    }
+  },
+  "gradient": {
+    "site-stats": {
+      "value": "linear-gradient(103.18deg, #FF6472 11.855%, #B10001 102.68%)",
+      "usage": "Stats bar",
+      "figma": "691:5035"
+    }
+  },
+  "scale": {
+    "site-mini-card": {
+      "value": "0.643",
+      "usage": "Customer / Revenue hero cards are the 280px acquisition card drawn at 180px",
+      "figma": "691:4920, 691:4928"
+    }
+  }
+}

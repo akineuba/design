@@ -1,0 +1,52 @@
+/* Design-system tokens first, then the website extension (both are CSS custom properties). */
+@import '../../../wCRM-marketing-design-system/src/styles/tokens.css';
+@import './site-tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-surface-default font-sans text-body text-text-primary antialiased;
+  }
+  /* Hide native number spinners; steppers draw their own buttons. */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type='number'] { -moz-appearance: textfield; }
+}
+
+/*
+ * Decorative ribbon photos behind the pricing cards. Figma places them with rotate/skew transforms that have no
+ * token equivalent; the numbers below are copied from the nodes so the crop matches the design.
+ */
+@layer components {
+  /* Homepage pricing (Figma 1894:7914 › image 368): 2257×722, rotate −17.68°, scaleY .95, skewX −17.53°. */
+  .site-ribbon-home {
+    position: absolute;
+    left: calc(50% + 0.14px);
+    top: calc(50% + 58.77px);
+    width: 2257px;
+    height: 722px;
+    transform: translate(-50%, -50%) rotate(-17.68deg) scaleY(0.95) skewX(-17.53deg);
+    pointer-events: none;
+  }
+  /* Pricing page (Figma 367:10619 › image 346): the node's 1440×1440 render, at (0, 11) of the 1440 frame,
+     i.e. 50px above <main>, which starts under the 61px header. */
+  .site-ribbon-pricing {
+    position: absolute;
+    left: calc(50% - 720px);
+    top: -50px;
+    width: 1440px;
+    height: 1440px;
+    max-width: none;
+    pointer-events: none;
+  }
+}
+
+/* Partner wordmarks are black artwork; flip them so they stay visible on the dark theme. */
+[data-theme='dark'] .site-invert-dark { filter: invert(1); }

@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="273.248" height="100" viewBox="0 0 273.248 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="sparkline-wrapper">
+<line id="spark-segment-0" x1="0.621831" y1="95.2168" x2="34.6263" y2="68.2169" stroke-width="2" stroke="#4F46E5"/>
+<line id="spark-segment-1" x1="35.7116" y1="68.1162" x2="69.7101" y2="86.1175" stroke-width="2" stroke="#4F46E5"/>
+<line id="spark-segment-2" x1="68.5264" y1="86.3032" x2="102.53" y2="51.3002" stroke-width="2" stroke="#4F46E5"/>
+<line id="spark-segment-3" x1="103.5" y1="51.0333" x2="137.498" y2="60.0351" stroke-width="2" stroke="#4F46E5"/>
+<line id="spark-segment-4" x1="136.622" y1="60.2168" x2="170.626" y2="33.2169" stroke-width="2" stroke="#4F46E5"/>
+<line id="spark-segment-5" x1="171.5" y1="33.0333" x2="205.498" y2="42.0351" stroke-width="2" stroke="#4F46E5"/>
+<line id="spark-segment-6" x1="204.622" y1="42.2168" x2="238.626" y2="15.2169" stroke-width="2" stroke="#4F46E5"/>
+<line id="spark-segment-7" x1="238.911" y1="15.057" x2="272.915" y2="3.05554" stroke-width="2" stroke="#4F46E5"/>
+<rect id="spark-area-gradient" opacity="0.08" x="1.24366" y="50" width="272" height="50" fill="#4F46E5"/>
+</g>
+</svg>
