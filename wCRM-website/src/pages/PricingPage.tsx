@@ -1,4 +1,5 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import { cn } from '@ds';
 import { SiteHeader } from '../components/SiteHeader';
@@ -72,9 +73,15 @@ const COMPARISON = (() => {
 
 /** "Compare every included feature" bar (Figma `CompareHeaderBar`, 364:10073); opens a feature table. */
 function CompareSection() {
+  // Arriving from "View comparisons" (/pricing#compare) opens the table straight away.
+  const { hash } = useLocation();
+  const [open, setOpen] = useState(hash === '#compare' ? 'compare' : '');
+  useEffect(() => {
+    if (hash === '#compare') setOpen('compare');
+  }, [hash]);
   return (
-    <section className="relative flex flex-col items-center px-25 py-5">
-      <RadixAccordion.Root type="single" collapsible className="w-site-compare">
+    <section id="compare" className="relative flex scroll-mt-20 flex-col items-center px-25 py-5">
+      <RadixAccordion.Root type="single" collapsible value={open} onValueChange={setOpen} className="w-site-compare">
         <RadixAccordion.Item value="compare" className="group rounded-md border border-border-default bg-surface-subtle">
           <RadixAccordion.Header>
             <RadixAccordion.Trigger className="flex w-full items-center justify-between rounded-md p-5 text-left focus-visible:outline-none focus-visible:shadow-focus">

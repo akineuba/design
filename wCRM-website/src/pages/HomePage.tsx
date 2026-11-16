@@ -313,6 +313,11 @@ function Pricing() {
         </p>
       </div>
       <PlanCards />
+      {/* Opens the Pricing page with the full feature comparison expanded and in view. */}
+      <SiteButtonLink to="/pricing#compare" variant="header-outline" className="group/compare relative">
+        View comparisons
+        <span aria-hidden="true" className="transition-transform duration-base ease-standard group-hover/compare:translate-x-1">→</span>
+      </SiteButtonLink>
     </section>
   );
 }

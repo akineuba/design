@@ -20,7 +20,7 @@ app's `node_modules`.
 | Route | Figma frame |
 |---|---|
 | `/` | `wCRM business dev home page` (691:4900): hero, features grid, stats bar, workflow cards, why choose us, plans, FAQ |
-| `/pricing` | `crm-pricing-page` (231:636): Monthly / Annual switch, plan cards, "Compare every included feature" table |
+| `/pricing` | `crm-pricing-page` (231:636): Monthly / Annual switch, plan cards, "Compare every included feature" table (`/pricing#compare` opens it; the homepage "View comparisons" button links there) |
 | `/contact` | `crm-contact-sales` (231:1058) → sent state (367:10351) |
 | `/checkout/configure` | `crm-configure-plan` (231:956, several organisations 367:10622) + `wcrm-add-orgs-modal` (372:2334) |
 | `/checkout/account` | `wcrm-create-account` (372:2542) + `successful popup` (372:3583) |
