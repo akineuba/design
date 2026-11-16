@@ -8,8 +8,8 @@ const radius = parseInt(tokens.radius.md.value, 10);
 
 export default create({
   base: 'light',
-  brandTitle: 'wCRM design system',
-  brandImage: './wragby-logo.png',
+  brandTitle: 'wCRM Component Library',
+  brandImage: './wragby-crm-logo.png',
   brandTarget: '_self',
   colorPrimary: c.brand.primary.value,
   colorSecondary: c.accent.navy.value,
