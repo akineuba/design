@@ -14,6 +14,27 @@
   body {
     @apply bg-surface-default font-sans text-body text-text-primary antialiased;
   }
+  /*
+   * Motion baseline for every control: colours, borders and shadows ease on hover/focus (DS base duration), and
+   * buttons and button-links dip slightly while pressed. Element-specific animations live with the components.
+   */
+  button, a, input, select, textarea, summary {
+    transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+    transition-duration: var(--motion-duration-base);
+    transition-timing-function: var(--motion-easing);
+  }
+  button:not(:disabled):active, a[class*='rounded']:active {
+    transform: scale(var(--scale-site-press));
+    transition-duration: var(--motion-duration-fast);
+  }
+  /* Set for a moment by the theme toggle so the whole page cross-fades between light and dark. */
+  html.theme-fade *, html.theme-fade *::before, html.theme-fade *::after {
+    transition: background-color var(--motion-site-duration-slow) var(--motion-easing),
+      color var(--motion-site-duration-slow) var(--motion-easing),
+      border-color var(--motion-site-duration-slow) var(--motion-easing),
+      fill var(--motion-site-duration-slow) var(--motion-easing),
+      stroke var(--motion-site-duration-slow) var(--motion-easing) !important;
+  }
   /* Hide native number spinners; steppers draw their own buttons. */
   input[type='number']::-webkit-outer-spin-button,
   input[type='number']::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
@@ -37,13 +58,15 @@
   }
   /* Pricing page (Figma 367:10619 › image 346): the node's 1440×1440 render, at (0, 11) of the 1440 frame,
      i.e. 50px above <main>, which starts under the 61px header. */
+  /* It spans the full window: 1440px at the design width, scaled up (keeping its shape) on wider screens. */
   .site-ribbon-pricing {
     position: absolute;
-    left: calc(50% - 720px);
-    top: -50px;
-    width: 1440px;
-    height: 1440px;
+    left: 50%;
+    top: min(-50px, -3.472vw);
+    width: max(100%, 1440px);
+    height: auto;
     max-width: none;
+    transform: translateX(-50%);
     pointer-events: none;
   }
 }

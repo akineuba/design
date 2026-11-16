@@ -172,7 +172,7 @@ const FEATURES: { id: string; title: string; body: string; wide: boolean; screen
 
 function FeatureCard({ f, height }: { f: (typeof FEATURES)[number]; height: string }) {
   return (
-    <article id={f.id} className={`flex scroll-mt-20 flex-col items-center gap-4 rounded-xl border border-border-default bg-surface-subtle p-6 ${height} ${f.wide ? 'w-site-feature-wide shrink-0' : 'min-w-0 flex-1'}`}>
+    <article id={f.id} className={`flex scroll-mt-20 flex-col items-center gap-4 rounded-xl border border-border-default bg-surface-subtle p-6 transition duration-base ease-standard hover:-translate-y-1 hover:shadow-md ${height} ${f.wide ? 'w-site-feature-wide shrink-0' : 'min-w-0 flex-1'}`}>
       <div className="relative min-h-0 w-full flex-1 overflow-hidden rounded-t-lg">
         <ScaledScreen width={f.screen.width} height={f.screen.height} fit={f.screen.fit} label={`${f.title} screen in wCRM`}>
           {f.screen.node}
@@ -248,8 +248,8 @@ function Needs() {
       </div>
       <div className="flex w-full items-stretch justify-between">
         {NEEDS.map((n) => (
-          <article key={n.title} className="flex w-site-need-card flex-col items-center gap-4 rounded-xl border border-border-default bg-surface-default p-8 text-center">
-            <img src={n.img} alt="" className="h-site-need-img-h w-site-need-img object-cover" />
+          <article key={n.title} className="group flex w-site-need-card flex-col items-center gap-4 rounded-xl border border-border-default bg-surface-default p-8 text-center transition duration-base ease-standard hover:-translate-y-1 hover:shadow-md">
+            <img src={n.img} alt="" className="h-site-need-img-h w-site-need-img object-cover transition-transform duration-site-slow ease-standard group-hover:scale-105" />
             <h3 className="font-outfit text-heading-2 text-text-ink">{n.title}</h3>
             <p className="text-body leading-140 text-text-slate">{n.body}</p>
           </article>
@@ -286,7 +286,7 @@ function WhyChooseUs() {
         </ul>
       </div>
       <div className="h-site-split-media-h w-site-split-media shrink-0 overflow-hidden rounded-pill bg-surface-default">
-        <img src={whyHandshake} alt="Two colleagues shaking hands outside an office building" className="size-full object-cover" />
+        <img src={whyHandshake} alt="Two colleagues shaking hands outside an office building" className="size-full object-cover transition-transform duration-site-slow ease-standard hover:scale-105" />
       </div>
     </section>
   );
@@ -312,7 +312,7 @@ export function HomePage() {
   return (
     <>
       <SiteHeader />
-      <main>
+      <main className="animate-page-in">
         <Hero />
         <Features />
         <StatsBar />

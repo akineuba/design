@@ -12,7 +12,7 @@ function Wrapper({ id, label, error, children }: { id: string; label: string; er
     <div className="flex w-full flex-col gap-1.5">
       <label htmlFor={id} className="text-label-sm text-site-label">{label}</label>
       {children}
-      {error && <p id={`${id}-error`} className="text-caption text-status-danger">{error}</p>}
+      {error && <p id={`${id}-error`} className="animate-value-in text-caption text-status-danger">{error}</p>}
     </div>
   );
 }

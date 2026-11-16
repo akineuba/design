@@ -29,8 +29,23 @@ app's `node_modules`.
 | `/checkout/review` | `wcrm-review` (372:2692) + `edit-modal` (372:3262) |
 | `/checkout/payment` | `wcrm-payment`: methods (372:2780), card (372:2925), transfer (372:3444) + `Success-Card` (372:3555) |
 
-Header "Features" opens a menu that scrolls to each feature card; the sun button switches the dark theme
-(`data-theme="dark"`), which every design-system and site token follows.
+Header "Features" opens the module menu from Figma (`feature-list-card`, 364:8564): Business Development scrolls to
+this page's features, and Service Desk, Marketing and Orbit AI open Contact Sales with the module named in the message.
+The sun button switches the dark theme (`data-theme="dark"`), which every design-system and site token follows; in
+dark mode the navy outline buttons ("Sign In", "Learn More") become the design system's solid #4F46E5 secondary button.
+
+## Motion
+
+Durations and easing are the design-system motion tokens (120ms fast, 200ms base, `cubic-bezier(0.2, 0, 0, 1)`) plus a
+320ms `duration-site-slow`; keyframes live in `tailwind.config.js`. All motion is switched off under
+`prefers-reduced-motion`.
+
+* Every button and link eases its colours and dips slightly while pressed; cards lift on hover.
+* Pages fade up on navigation; the Features menu drops in with its items staggered; dialogs fade and scale in and out.
+* The Monthly / Annual pill slides and prices ease in; FAQ rows expand with the chevron turning over; the compare table expands.
+* Checkout: the current step pops in the stepper, seat amounts and totals ease in when they change, new organisation
+  cards slide in, the payment views slide between method list and method, and success icons pop.
+* Invalid forms shake and their messages fade in; the theme switch cross-fades the whole page.
 
 ## Styling
 

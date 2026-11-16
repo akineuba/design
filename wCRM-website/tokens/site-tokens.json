@@ -116,6 +116,18 @@
         "usage": "Target backdrop series in the Activities & Reporting screen",
         "figma": "775:4588",
         "dark": "rgba(254, 205, 211, 0.35)"
+      },
+      "menu-title": {
+        "value": "#1B253D",
+        "usage": "Features menu module titles",
+        "figma": "364:8570",
+        "dark": "#F4F5FA"
+      },
+      "menu-text": {
+        "value": "#5E718D",
+        "usage": "Features menu module descriptions",
+        "figma": "364:8571",
+        "dark": "#A3A6BC"
       }
     }
   },
@@ -491,6 +503,10 @@
     "site-donut": {
       "value": "176px",
       "figma": "rebuilt from the feature screenshots (775:4588)"
+    },
+    "site-menu": {
+      "value": "359px",
+      "figma": "364:8564"
     }
   },
   "shadow": {
@@ -548,6 +564,11 @@
       "value": "0 8px 12px 0 rgba(0, 0, 0, 0.06)",
       "usage": "Plan upgrade success card",
       "figma": "372:3555"
+    },
+    "site-menu": {
+      "value": "0 16px 16px 0 rgba(0, 0, 0, 0.05)",
+      "usage": "Features menu card",
+      "figma": "364:8564"
     }
   },
   "gradient": {
@@ -562,6 +583,16 @@
       "value": "0.643",
       "usage": "Customer / Revenue hero cards are the 280px acquisition card drawn at 180px",
       "figma": "691:4920, 691:4928"
+    },
+    "site-press": {
+      "value": "0.98",
+      "usage": "Pressed buttons shrink slightly (derived; not drawn in Figma)"
+    }
+  },
+  "motion": {
+    "duration-slow": {
+      "value": "320ms",
+      "usage": "Page entrances, theme cross-fade, sliding toggle pill (derived). Fast/base come from the design system (120/200ms)."
     }
   }
 }

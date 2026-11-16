@@ -32,7 +32,9 @@ function Stepper({ current }: { current: number }) {
           const circle = (
             <span
               className={cn(
-                'flex size-6 shrink-0 items-center justify-center rounded-lg text-badge-lg',
+                'flex size-6 shrink-0 items-center justify-center rounded-lg text-badge-lg transition-colors duration-base',
+                // The current step and the one just finished pop in as each page opens.
+                (active || n === current - 1) && 'animate-pop-bounce',
                 done ? 'bg-status-connected' : active ? 'bg-brand-primary text-text-inverse' : 'bg-border-default text-text-tertiary',
               )}
             >
@@ -74,7 +76,7 @@ export function CheckoutLayout({ step, backTo, children }: { step: number; backT
     <div className="min-h-screen bg-surface-subtle">
       <CheckoutHeader backTo={backTo} />
       <Stepper current={step} />
-      <main>{children}</main>
+      <main className="animate-page-in">{children}</main>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import { cn } from '@ds';
 import { SiteHeader } from '../components/SiteHeader';
@@ -9,24 +9,46 @@ import checkRed from '../assets/shared/check-red.svg';
 import chevronDown from '../assets/shared/chevron-down-sm.svg';
 import ribbon from '../assets/pricing/ribbon.png';
 
-/** Monthly / Annual pill switch (Figma `Toggle-Container`, 231:657). */
+/** Monthly / Annual pill switch (Figma `Toggle-Container`, 231:657). The red pill slides to the chosen option. */
 function BillingToggle({ value, onChange }: { value: Billing; onChange: (b: Billing) => void }) {
+  const refs = useRef<Record<Billing, HTMLButtonElement | null>>({ monthly: null, annual: null });
+  const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
+
+  useLayoutEffect(() => {
+    const place = () => {
+      const el = refs.current[value];
+      if (el) setPill({ left: el.offsetLeft, width: el.offsetWidth });
+    };
+    place();
+    document.fonts?.ready.then(place);
+    window.addEventListener('resize', place);
+    return () => window.removeEventListener('resize', place);
+  }, [value]);
+
   const option = (b: Billing, label: string) => (
     <button
+      ref={(el) => (refs.current[b] = el)}
       type="button"
       role="radio"
       aria-checked={value === b}
       onClick={() => onChange(b)}
       className={cn(
-        'rounded-full px-4 py-2 font-instrument text-body transition-colors focus-visible:outline-none focus-visible:shadow-focus',
-        value === b ? 'bg-brand-primary font-semibold text-text-inverse' : 'font-medium text-text-tertiary hover:text-text-strong',
+        'relative z-10 rounded-full px-4 py-2 font-instrument text-body focus-visible:outline-none focus-visible:shadow-focus',
+        value === b ? 'font-semibold text-text-inverse' : 'font-medium text-text-tertiary hover:text-text-strong',
       )}
     >
       {label}
     </button>
   );
   return (
-    <div role="radiogroup" aria-label="Billing period" className="flex items-center gap-2 rounded-full border border-border-default bg-surface-subtle p-1">
+    <div role="radiogroup" aria-label="Billing period" className="relative flex items-center gap-2 rounded-full border border-border-default bg-surface-subtle p-1">
+      {pill && (
+        <span
+          aria-hidden="true"
+          className="absolute bottom-1 top-1 rounded-full bg-brand-primary transition-all duration-site-slow ease-standard"
+          style={{ left: pill.left, width: pill.width }}
+        />
+      )}
       {option('monthly', 'Monthly')}
       {option('annual', 'Annual')}
     </div>
@@ -99,7 +121,7 @@ export function PricingPage() {
   return (
     <>
       <SiteHeader />
-      <main className="relative overflow-hidden">
+      <main className="animate-page-in relative overflow-hidden">
         <img src={ribbon} alt="" className="site-ribbon-pricing" />
         <section className="relative flex flex-col items-center gap-6 px-30 pb-15 pt-20">
           <div className="flex flex-col gap-4 text-center">

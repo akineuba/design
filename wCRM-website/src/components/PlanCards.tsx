@@ -24,8 +24,11 @@ function Price({ plan, billing, dark }: { plan: PlanCard; billing: Billing; dark
   if (!plan.price) return <p className="font-display text-site-price text-text-strong">Let&apos;s talk</p>;
   return (
     <p className={cn('whitespace-nowrap font-display', dark ? 'text-text-inverse' : 'text-text-strong')}>
-      <span className="text-site-price">{formatNaira(plan.price[billing])}</span>
-      <span className={cn('text-body', dark ? 'text-site-on-dark-muted' : 'text-text-tertiary')}> /{billing === 'annual' ? 'year' : 'month'}</span>
+      {/* Keyed on the billing period so the new price eases in when the toggle changes. */}
+      <span key={billing} className="inline-block animate-value-in">
+        <span className="text-site-price">{formatNaira(plan.price[billing])}</span>
+        <span className={cn('text-body', dark ? 'text-site-on-dark-muted' : 'text-text-tertiary')}> /{billing === 'annual' ? 'year' : 'month'}</span>
+      </span>
     </p>
   );
 }
@@ -65,6 +68,7 @@ export function PlanCards({ billing = 'annual' }: { billing?: Billing }) {
             aria-labelledby={`plan-${plan.id}`}
             className={cn(
               'relative flex h-site-plan-card-h min-w-0 flex-1 flex-col justify-between rounded-xl px-6 py-8',
+              'transition duration-base ease-standard hover:-translate-y-1 hover:shadow-lg',
               dark ? 'bg-site-midnight shadow-site-plan-pro' : 'border border-border-default bg-surface-default shadow-site-plan',
             )}
           >
@@ -79,7 +83,7 @@ export function PlanCards({ billing = 'annual' }: { billing?: Billing }) {
               <div className="flex flex-col gap-1">
                 <Price plan={plan} billing={billing} dark={dark} />
                 {plan.id === 'standard' && billing === 'annual' && (
-                  <span className="self-start rounded-full bg-site-red-tint px-2 py-0.5 text-caption-sm font-semibold text-site-red">3 months free</span>
+                  <span className="animate-pop-bounce self-start rounded-full bg-site-red-tint px-2 py-0.5 text-caption-sm font-semibold text-site-red">3 months free</span>
                 )}
               </div>
               <hr className={cn('border-t', dark ? 'border-site-divider-on-dark' : 'border-border-default')} />

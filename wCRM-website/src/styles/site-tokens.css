@@ -20,6 +20,8 @@
   --color-site-trash: #FF4D4F;
   --color-site-chart-green: #22C55E;
   --color-site-chart-target: #FECDD3;
+  --color-site-menu-title: #1B253D;
+  --color-site-menu-text: #5E718D;
   --font-outfit: 'Outfit', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-onest: 'Onest', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-figtree: 'Figtree', 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -119,6 +121,7 @@
   --size-site-chart-legend: 8px;
   --size-site-screen-toolbar: 62px;
   --size-site-donut: 176px;
+  --size-site-menu: 359px;
   --shadow-site-header: 0 -5px 20px 0 rgba(0, 0, 0, 0.25);
   --shadow-site-float: 0 12px 12px 0 rgba(30, 30, 47, 0.10);
   --shadow-site-float-soft: 0 6px 6px 0 rgba(30, 30, 47, 0.04);
@@ -130,8 +133,11 @@
   --shadow-site-payment: 0 12px 16px 0 rgba(15, 23, 42, 0.08);
   --shadow-site-modal: 0 16px 16px 0 rgba(0, 0, 0, 0.15);
   --shadow-site-success: 0 8px 12px 0 rgba(0, 0, 0, 0.06);
+  --shadow-site-menu: 0 16px 16px 0 rgba(0, 0, 0, 0.05);
   --gradient-site-stats: linear-gradient(103.18deg, #FF6472 11.855%, #B10001 102.68%);
   --scale-site-mini-card: 0.643;
+  --scale-site-press: 0.98;
+  --motion-site-duration-slow: 320ms;
 }
 
 [data-theme='dark'],
@@ -146,4 +152,6 @@
   --color-site-visa: #A5B4FC;
   --color-site-plan-bg: #24243A;
   --color-site-chart-target: rgba(254, 205, 211, 0.35);
+  --color-site-menu-title: #F4F5FA;
+  --color-site-menu-text: #A3A6BC;
 }

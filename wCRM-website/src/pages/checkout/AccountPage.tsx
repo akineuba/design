@@ -89,15 +89,15 @@ export function AccountPage() {
               checked={agreed}
               onCheckedChange={(v) => setAgreed(v === true)}
               aria-invalid={!!errors.terms}
-              className="flex size-4 shrink-0 items-center justify-center rounded-xs border border-border-strong bg-surface-default data-[state=checked]:border-status-connected data-[state=checked]:bg-status-connected focus-visible:outline-none focus-visible:shadow-focus"
+              className="flex size-4 shrink-0 items-center justify-center rounded-xs border border-border-strong bg-surface-default transition-colors duration-fast data-[state=checked]:border-status-connected data-[state=checked]:bg-status-connected focus-visible:outline-none focus-visible:shadow-focus"
             >
               <RadixCheckbox.Indicator>
-                <img src={checkboxCheck} alt="" className="size-2.5" />
+                <img src={checkboxCheck} alt="" className="size-2.5 animate-pop-bounce" />
               </RadixCheckbox.Indicator>
             </RadixCheckbox.Root>
             I agree to the terms of service and privacy notice.
           </label>
-          {errors.terms && <p className="text-caption text-status-danger">{errors.terms}</p>}
+          {errors.terms && <p className="animate-value-in text-caption text-status-danger">{errors.terms}</p>}
         </div>
         <p className="text-center text-caption-sm text-text-tertiary">Your checkout will be linked to this account.</p>
       </CheckoutFormCard>

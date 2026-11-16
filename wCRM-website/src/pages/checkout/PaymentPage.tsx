@@ -32,7 +32,8 @@ const METHODS: { id: Method; title: string; body: string; icon: string }[] = [
   { id: 'wallet', title: 'Pay with Wallet', body: 'Make secure payments using third-party payment solutions', icon: payShield },
 ];
 
-const paymentCard = 'flex min-w-0 flex-1 flex-col rounded-site-24 bg-surface-default p-8 shadow-site-payment';
+/** Every payment view slides in as the buyer moves between the method list and a method. */
+const paymentCard = 'flex min-w-0 flex-1 animate-swap-in flex-col rounded-site-24 bg-surface-default p-8 shadow-site-payment';
 
 function Headline({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -65,7 +66,7 @@ function MethodList({ onPick }: { onPick: (m: Method) => void }) {
                 type="button"
                 onClick={() => onPick(m.id)}
                 className={cn(
-                  'flex w-full items-center gap-4 rounded-lg border p-4 text-left transition-colors focus-visible:outline-none focus-visible:shadow-focus',
+                  'group flex w-full items-center gap-4 rounded-lg border p-4 text-left focus-visible:outline-none focus-visible:shadow-focus',
                   featured ? 'border-status-connected bg-badge-success-tint' : 'border-transparent hover:bg-surface-subtle',
                 )}
               >
@@ -76,7 +77,7 @@ function MethodList({ onPick }: { onPick: (m: Method) => void }) {
                   <span className="text-site-body-lg font-semibold text-text-charcoal">{m.title}</span>
                   <span className="text-caption leading-140 text-text-secondary">{m.body}</span>
                 </span>
-                <img src={chevronRight} alt="" className="size-4" />
+                <img src={chevronRight} alt="" className="size-4 transition-transform duration-base ease-standard group-hover:translate-x-1" />
               </button>
             </li>
           );
@@ -186,7 +187,7 @@ function TransferDetails({ onBack }: { onBack: () => void }) {
             <button type="button" onClick={copyAccount} aria-label="Copy account number" className="rounded-xs focus-visible:outline-none focus-visible:shadow-focus">
               <img src={copy} alt="" className="size-4" />
             </button>
-            <span aria-live="polite" className="text-caption font-medium text-status-connected">{copied ? 'Copied' : ''}</span>
+            <span aria-live="polite" className="text-caption font-medium text-status-connected">{copied && <span className="animate-value-in">Copied</span>}</span>
           </>,
         )}
         {row('Beneficiary Name', BANK.beneficiary)}
@@ -234,7 +235,7 @@ function SuccessDialog({ receipt }: { receipt: { last4: string; reference: strin
         className="w-site-success-card items-center gap-6 p-12 font-instrument shadow-site-success"
         description="Your payment was received and your plan is active."
       >
-        <img src={successTick} alt="" className="size-site-success-icon" />
+        <img src={successTick} alt="" style={{ animationDelay: '80ms' }} className="size-site-success-icon animate-pop-bounce" />
         <div className="flex w-full flex-col items-center gap-2 text-center">
           <SiteDialogTitle className="text-heading-xl text-text-ink">Plan Upgrade Successful!</SiteDialogTitle>
           <p className="text-body text-text-slate">

@@ -15,6 +15,7 @@ export function VerifyPage() {
   const [digits, setDigits] = useState<string[]>(Array(LENGTH).fill(''));
   const [error, setError] = useState('');
   const [resent, setResent] = useState(false);
+  const [shake, setShake] = useState(false);
   const cells = useRef<(HTMLInputElement | null)[]>([]);
 
   const focus = (i: number) => cells.current[Math.max(0, Math.min(LENGTH - 1, i))]?.focus();
@@ -45,6 +46,7 @@ export function VerifyPage() {
     e.preventDefault();
     if (digits.join('').length < LENGTH) {
       setError('Enter all 6 digits of the code.');
+      setShake(true);
       focus(digits.findIndex((d) => !d));
       return;
     }
@@ -59,7 +61,7 @@ export function VerifyPage() {
           We sent a 6-digit code to {email ? <strong className="font-semibold text-site-heading">{email}</strong> : 'your email address'}. Enter it below to verify your account.
         </FormHeader>
         <div className="flex flex-col items-center gap-4">
-          <fieldset className="flex w-full justify-center gap-3">
+          <fieldset className={cn('flex w-full justify-center gap-3', shake && 'animate-shake')} onAnimationEnd={(e) => e.target === e.currentTarget && setShake(false)}>
             <legend className="sr-only">Verification code</legend>
             {digits.map((d, i) => (
               <input
@@ -76,16 +78,17 @@ export function VerifyPage() {
                 onKeyDown={(e) => onKeyDown(i, e)}
                 onPaste={(e) => onPaste(i, e)}
                 className={cn(
-                  'size-16 rounded-md border bg-surface-default text-center text-heading-xl text-site-heading caret-text-muted',
+                  'size-16 rounded-md border bg-surface-default text-center text-heading-xl text-site-heading caret-text-muted focus:scale-105',
+                  d && 'animate-value-in',
                   'border-border-default focus:border-2 focus:border-site-heading focus:outline-none aria-[invalid=true]:border-status-danger',
                 )}
               />
             ))}
           </fieldset>
-          {error && <p role="alert" className="text-caption text-status-danger">{error}</p>}
+          {error && <p role="alert" className="animate-value-in text-caption text-status-danger">{error}</p>}
           <p className="flex gap-1 pt-2 text-body" aria-live="polite">
             {resent ? (
-              <span className="text-site-discount">A new code is on its way.</span>
+              <span className="animate-value-in text-site-discount">A new code is on its way.</span>
             ) : (
               <>
                 <span className="text-text-tertiary">Didn&apos;t receive the code?</span>

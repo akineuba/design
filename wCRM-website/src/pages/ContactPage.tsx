@@ -32,17 +32,24 @@ function validate(data: FormData): Errors {
 function ContactForm({ onSent }: { onSent: () => void }) {
   const [params] = useSearchParams();
   const [errors, setErrors] = useState<Errors>({});
+  const [shake, setShake] = useState(false);
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const found = validate(new FormData(e.currentTarget));
     setErrors(found);
-    if (Object.keys(found).length === 0) onSent();
-    else e.currentTarget.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+    if (Object.keys(found).length === 0) return onSent();
+    setShake(true);
+    e.currentTarget.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
   };
 
   return (
-    <form noValidate onSubmit={submit} className="flex h-site-contact-form-h w-site-contact-form shrink-0 flex-col gap-7 rounded-xl border border-border-default bg-surface-default p-10 shadow-site-plan">
+    <form
+      noValidate
+      onSubmit={submit}
+      onAnimationEnd={(e) => e.target === e.currentTarget && setShake(false)}
+      className={`${shake ? 'animate-shake ' : ''}flex h-site-contact-form-h w-site-contact-form shrink-0 flex-col gap-7 rounded-xl border border-border-default bg-surface-default p-10 shadow-site-plan`}
+    >
       <h2 className="font-display text-heading-xl text-text-strong">Get in touch</h2>
       <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto border-b border-border-strong pb-5 pr-2">
         <div className="flex gap-4">
@@ -59,7 +66,11 @@ function ContactForm({ onSent }: { onSent: () => void }) {
             <option key={r}>{r}</option>
           ))}
         </ContactSelect>
-        <ContactTextarea label="Tell us about your needs" name="needs" placeholder="What processes or tools would you like to integrate? Let us know here..." />
+        <ContactTextarea
+          label="Tell us about your needs"
+          name="needs"
+          defaultValue={params.get('module') ? `I'd like to learn more about the ${params.get('module')} module.` : undefined}
+          placeholder="What processes or tools would you like to integrate? Let us know here..." />
       </div>
       <div className="flex flex-col items-center gap-4">
         <button type="submit" className={siteButtonClass('plan', 'px-6 text-site-body-lg font-semibold')}>
@@ -73,8 +84,8 @@ function ContactForm({ onSent }: { onSent: () => void }) {
 
 function RequestSent() {
   return (
-    <div role="status" className="flex h-site-contact-form-h w-site-contact-form shrink-0 flex-col items-center gap-7 rounded-xl border border-border-default bg-surface-default p-10 shadow-site-plan">
-      <img src={thumbsUp} alt="" className="size-site-thumbs-up object-cover" />
+    <div role="status" className="flex h-site-contact-form-h w-site-contact-form shrink-0 animate-swap-in flex-col items-center gap-7 rounded-xl border border-border-default bg-surface-default p-10 shadow-site-plan">
+      <img src={thumbsUp} alt="" style={{ animationDelay: '120ms' }} className="size-site-thumbs-up animate-pop-bounce object-cover" />
       <p className="w-full text-center font-display text-site-title leading-site-52 text-site-red">Request sent!</p>
       <p className="text-site-lead leading-site-24 text-text-tertiary">
         Keep an eye on your inbox — our team will review your submission and follow up with tailored feedback shortly.
@@ -89,7 +100,7 @@ export function ContactPage() {
   return (
     <>
       <SiteHeader />
-      <main className="flex items-start justify-between bg-surface-subtle px-50 py-20">
+      <main className="animate-page-in flex items-start justify-between bg-surface-subtle px-50 py-20">
         <div className="flex w-site-contact-copy flex-col gap-8">
           <div className="flex flex-col gap-4">
             <h1 className="font-display text-site-title leading-site-52 text-text-strong">Let&apos;s build your perfect CRM</h1>

@@ -35,7 +35,7 @@ function Field({ id, label, required, error, children }: { id: string; label: st
         {required && <span aria-hidden="true" className="text-brand-primary">*</span>}
       </label>
       {children}
-      {error && <p id={`${id}-error`} className="text-caption text-status-danger">{error}</p>}
+      {error && <p id={`${id}-error`} className="animate-value-in text-caption text-status-danger">{error}</p>}
     </div>
   );
 }

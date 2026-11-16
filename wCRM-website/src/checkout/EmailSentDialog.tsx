@@ -8,7 +8,7 @@ export function EmailSentDialog({ open, onOpenChange }: { open: boolean; onOpenC
       <SiteDialogContent className="size-site-success-popup items-center justify-center border-0" description="We emailed you a sign-in link and a verification code.">
         <div className="flex w-site-success-stack flex-col items-center gap-11.5">
           <div className="relative size-site-success-icon overflow-hidden">
-            <img src={check3d} alt="" className="absolute" style={{ inset: '13.49% 6.96% 13.5% 6.95%' }} />
+            <img src={check3d} alt="" className="absolute animate-pop-bounce" style={{ animationDelay: '80ms', inset: '13.49% 6.96% 13.5% 6.95%' }} />
           </div>
           <div className="flex flex-col items-center gap-2.5 whitespace-nowrap capitalize">
             <SiteDialogTitle className="text-site-success text-text-link-bright">Success!</SiteDialogTitle>

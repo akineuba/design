@@ -26,19 +26,28 @@ export function SiteDialogContent({
 }) {
   return (
     <RadixDialog.Portal>
-      <RadixDialog.Overlay className="fixed inset-0 z-50 bg-surface-overlay data-[state=open]:animate-fade-in" />
+      <RadixDialog.Overlay className="fixed inset-0 z-50 bg-surface-overlay data-[state=closed]:animate-fade-out data-[state=open]:animate-fade-in" />
+      {/*
+        Content is a transparent full-screen layer that centres the card with flexbox, so the card's scale animation
+        never fights a centring transform. Clicks pass through it to the overlay, which still closes the dialog.
+      */}
       <RadixDialog.Content
         aria-label={label}
         {...(description ? {} : { 'aria-describedby': undefined })}
         onOpenAutoFocus={focusFirstField}
-        className={cn(
-          'fixed left-1/2 top-1/2 z-50 flex max-h-screen max-w-full -translate-x-1/2 -translate-y-1/2 flex-col overflow-y-auto rounded-xl border border-border-default bg-surface-default focus-visible:outline-none data-[state=open]:animate-pop-in',
-          className,
-        )}
+        className="group pointer-events-none fixed inset-0 z-50 flex items-center justify-center focus-visible:outline-none data-[state=closed]:animate-fade-out data-[state=open]:animate-fade-in"
       >
-        {description && <RadixDialog.Description className="sr-only">{description}</RadixDialog.Description>}
-        {children}
-        {showClose && <DialogCloseButton className="absolute right-5.75 top-5.75" />}
+        <div
+          className={cn(
+            'pointer-events-auto relative flex max-h-screen max-w-full flex-col overflow-y-auto rounded-xl border border-border-default bg-surface-default',
+            'group-data-[state=closed]:animate-pop-out group-data-[state=open]:animate-pop-in',
+            className,
+          )}
+        >
+          {description && <RadixDialog.Description className="sr-only">{description}</RadixDialog.Description>}
+          {children}
+          {showClose && <DialogCloseButton className="absolute right-5.75 top-5.75" />}
+        </div>
       </RadixDialog.Content>
     </RadixDialog.Portal>
   );

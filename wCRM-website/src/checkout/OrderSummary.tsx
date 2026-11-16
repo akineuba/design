@@ -36,10 +36,10 @@ export function OrderSummary({ variant, onEdit, footer }: OrderSummaryProps) {
         <h2 className="text-heading-2 text-site-heading">Order summary</h2>
         <ul className={cn('flex flex-col', compact ? 'gap-4' : 'gap-4')}>
           {orgs.map((org) => (
-            <li key={org.id} className="flex flex-col gap-1 whitespace-nowrap">
+            <li key={org.id} className="flex animate-value-in flex-col gap-1 whitespace-nowrap">
               <span className="flex items-center justify-between text-label-sm text-text-strong">
                 <span>{org.name}</span>
-                <span>{formatNaira(costOf(org))}</span>
+                <span key={costOf(org)} className="animate-value-in">{formatNaira(costOf(org))}</span>
               </span>
               <span className="text-caption-sm text-text-tertiary">
                 {mainPlanOf(org).label} · {seatsOf(org)} seats
@@ -68,14 +68,14 @@ export function OrderSummary({ variant, onEdit, footer }: OrderSummaryProps) {
           />
           {!compact && <p id={`${discountId}-help`} className="text-caption-sm text-text-tertiary">{helper}</p>}
           {totals.discountValid && variant !== 'payment' && (
-            <p className="text-caption-sm text-site-discount">Code applied: 10% off</p>
+            <p className="animate-value-in text-caption-sm text-site-discount">Code applied: 10% off</p>
           )}
         </div>
         {rule}
         <div className="flex flex-col gap-1 whitespace-nowrap">
           <p className={cn('text-text-tertiary', compact ? 'text-caption' : 'text-body-sm')}>Total due</p>
           <p className="flex items-end gap-1 text-site-heading">
-            <span className={compact ? 'text-heading-xl' : 'text-display'}>{formatNaira(due)}</span>
+            <span key={due} className={cn('animate-value-in', compact ? 'text-heading-xl' : 'text-display')}>{formatNaira(due)}</span>
             <span className="text-body">per year</span>
           </p>
           {variant === 'review' && <p className="text-caption-sm text-text-tertiary">taxes calculated at checkout</p>}
@@ -100,9 +100,9 @@ export function OrderSummary({ variant, onEdit, footer }: OrderSummaryProps) {
         <button
           type="button"
           onClick={onEdit}
-          className="absolute right-5.5 top-5.5 flex items-center gap-1 rounded-sm bg-brand-primary px-3 py-1.5 text-label-sm text-text-inverse hover:bg-brand-primary-hover focus-visible:outline-none focus-visible:shadow-focus"
+          className="group absolute right-5.5 top-5.5 flex items-center gap-1 rounded-sm bg-brand-primary px-3 py-1.5 text-label-sm text-text-inverse hover:bg-brand-primary-hover focus-visible:outline-none focus-visible:shadow-focus"
         >
-          <img src={pencil} alt="" className="size-3" />
+          <img src={pencil} alt="" className="size-3 transition-transform duration-base ease-standard group-hover:-rotate-12" />
           Edit
         </button>
       )}

@@ -7,7 +7,7 @@ export function OrgAllocationCard({ org, index }: { org: Organisation; index: nu
   const { setSeats } = useCheckout();
   const total = seatsOf(org);
   return (
-    <section aria-labelledby={`${org.id}-name`} className="flex w-full flex-col gap-6 rounded-xl border border-border-default bg-surface-default p-8 shadow-site-checkout">
+    <section aria-labelledby={`${org.id}-name`} className="flex w-full animate-page-in flex-col gap-6 rounded-xl border border-border-default bg-surface-default p-8 shadow-site-checkout">
       <header className="flex flex-col gap-2 whitespace-nowrap">
         <p className="text-badge uppercase text-brand-primary">Organisation {index + 1}</p>
         <h2 id={`${org.id}-name`} className="text-heading-1 text-text-strong">{org.name}</h2>
@@ -34,7 +34,7 @@ export function OrgAllocationCard({ org, index }: { org: Organisation; index: nu
             <span className="flex items-center gap-4">
               <SeatStepper label={`${p.label} seats for ${org.name}`} value={org.allocations[p.id]} onChange={(v) => setSeats(org.id, p.id, v)} />
               <span className="w-20 text-right text-label font-bold text-text-strong" title={`${formatNaira(SEAT_PRICE[p.id])} per seat per year`}>
-                {formatNaira(org.allocations[p.id] * SEAT_PRICE[p.id])}
+                <span key={org.allocations[p.id]} className="inline-block animate-value-in">{formatNaira(org.allocations[p.id] * SEAT_PRICE[p.id])}</span>
               </span>
             </span>
           </li>
@@ -43,7 +43,7 @@ export function OrgAllocationCard({ org, index }: { org: Organisation; index: nu
       <hr className="border-t border-border-default" />
       <p className="flex items-center justify-between whitespace-nowrap text-body text-text-strong">
         <span className="font-semibold">Total cost</span>
-        <span className="font-bold">{formatNaira(costOf(org))}</span>
+        <span key={costOf(org)} className="animate-value-in font-bold">{formatNaira(costOf(org))}</span>
       </p>
     </section>
   );

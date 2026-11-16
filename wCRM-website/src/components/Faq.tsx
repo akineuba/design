@@ -30,13 +30,16 @@ export function Faq() {
           <RadixAccordion.Item
             key={f.q}
             value={`faq-${i}`}
-            className="group rounded-xl border border-border-modal bg-surface-default data-[state=open]:border-site-red-tint"
+            className="group rounded-xl border border-border-modal bg-surface-default transition-colors duration-base hover:border-border-strong data-[state=open]:border-site-red-tint"
           >
             <RadixAccordion.Header>
               <RadixAccordion.Trigger className="flex w-full items-center gap-3 rounded-xl p-5 text-left group-data-[state=open]:pb-4 text-site-lead font-semibold text-site-ink focus-visible:outline-none focus-visible:shadow-focus">
                 <span className="flex-1">{f.q}</span>
-                <img src={chevronUp} alt="" className="hidden size-5 group-data-[state=open]:block" />
-                <img src={chevronDown} alt="" className="block size-5 group-data-[state=open]:hidden" />
+                {/* The grey down-chevron turns over into the red up-chevron as the row opens. */}
+                <span className="relative size-5 shrink-0">
+                  <img src={chevronDown} alt="" className="absolute inset-0 size-5 transition duration-base ease-standard group-data-[state=open]:rotate-180 group-data-[state=open]:opacity-0" />
+                  <img src={chevronUp} alt="" className="absolute inset-0 size-5 -rotate-180 opacity-0 transition duration-base ease-standard group-data-[state=open]:rotate-0 group-data-[state=open]:opacity-100" />
+                </span>
               </RadixAccordion.Trigger>
             </RadixAccordion.Header>
             <RadixAccordion.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">

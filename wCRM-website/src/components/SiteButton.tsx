@@ -5,7 +5,8 @@ import { cn } from '@ds';
 /**
  * Website buttons that the design-system Button does not draw (marketing radius, #EA001B pricing red).
  * - header: solid #EE1F2F, radius 10 (Header "Get Started", hero "Get Started")
- * - header-outline: navy #2B3674 outline, Medium, radius 10 ("Sign In", "Learn More")
+ * - header-outline: navy #2B3674 outline, Medium, radius 10 ("Sign In", "Learn More"). Uses the design-system
+ *   `action-secondary` tokens, so in dark mode it becomes the DS secondary button: solid #4F46E5 with a white label.
  * - plan: solid #EA001B, radius 8, full width ("Choose Pro", "Submit request")
  * - plan-outline: #EA001B outline, radius 8, full width ("Choose Standard", "Contact Sales")
  * - checkout: solid #EE1F2F, radius 8, 14px block inset, full width ("Continue →", "Verify →")
@@ -15,12 +16,12 @@ import { cn } from '@ds';
 export type SiteButtonVariant = 'header' | 'header-outline' | 'plan' | 'plan-outline' | 'checkout' | 'pay' | 'quiet';
 
 const base =
-  'inline-flex select-none items-center justify-center gap-1.5 whitespace-nowrap border transition-colors duration-fast ease-standard ' +
+  'inline-flex select-none items-center justify-center gap-1.5 whitespace-nowrap border ' +
   'focus-visible:outline-none focus-visible:shadow-focus disabled:cursor-not-allowed disabled:border-border-default disabled:bg-surface-sunken disabled:text-text-muted';
 
 const variants: Record<SiteButtonVariant, string> = {
   header: 'rounded-callout border-brand-primary bg-brand-primary px-6 py-3 text-label text-text-inverse hover:border-brand-primary-hover hover:bg-brand-primary-hover',
-  'header-outline': 'rounded-callout border-accent-navy-hover bg-transparent px-6 py-3 text-body font-medium text-accent-navy-hover hover:bg-accent-navy-subtle',
+  'header-outline': 'rounded-callout border-action-secondary bg-action-secondary-fill px-6 py-3 text-body font-medium text-action-secondary-text hover:bg-action-secondary-subtle',
   plan: 'w-full rounded-md border-site-red bg-site-red py-3 text-label text-text-inverse hover:border-brand-primary-hover hover:bg-brand-primary-hover',
   'plan-outline': 'w-full rounded-md border-site-red bg-transparent py-3 text-label text-site-red hover:bg-brand-primary-subtle',
   checkout: 'w-full rounded-md border-brand-primary bg-brand-primary py-3.5 text-label text-text-inverse hover:border-brand-primary-hover hover:bg-brand-primary-hover',
