@@ -9,7 +9,7 @@ import { ThemeToggle } from './ThemeToggle';
 
 /**
  * The Features menu lists this site's four features, in the layout of Figma `feature-list-card` (364:8564): icon,
- * title, one-line description, plus a "Learn more" cue. Each item scrolls to its card on the homepage.
+ * title and one-line description. Each item scrolls to its card on the homepage, where "Learn more" lives.
  * Icons are design-system glyphs (currentColor), so they follow the theme; `stroke` evens out the 16px lucide and
  * 24px vuesax drawings at the 24px display size (about 1.5px).
  */
@@ -54,16 +54,12 @@ export function SiteHeader() {
                       key={f.id}
                       onSelect={() => navigate(`/#${f.id}`)}
                       style={{ animationDelay: `${40 + i * 30}ms` }}
-                      className="group/item -m-2 flex animate-value-in cursor-pointer items-start gap-2.5 rounded-md p-2 outline-none transition-colors duration-fast data-[highlighted]:bg-surface-subtle"
+                      className="-m-2 flex animate-value-in cursor-pointer items-start gap-2.5 rounded-md p-2 outline-none transition-colors duration-fast data-[highlighted]:bg-surface-subtle"
                     >
                       <f.Icon aria-hidden="true" strokeWidth={f.stroke} className="size-6 shrink-0 text-site-menu-title" />
                       <span className="flex flex-1 flex-col gap-1">
                         <span className="text-label leading-site-22 text-site-menu-title">{f.title}</span>
                         <span className="text-body-sm leading-site-18 text-site-menu-text">{f.body}</span>
-                        <span className="flex items-center gap-1 text-label-sm text-site-red">
-                          Learn more
-                          <span aria-hidden="true" className="transition-transform duration-base ease-standard group-data-[highlighted]/item:translate-x-1">→</span>
-                        </span>
                       </span>
                     </RadixMenu.Item>
                   ))}

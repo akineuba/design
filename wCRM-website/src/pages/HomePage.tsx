@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { Avatar } from '@ds';
 import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
@@ -181,6 +182,15 @@ function FeatureCard({ f, height }: { f: (typeof FEATURES)[number]; height: stri
       <div className="flex w-full flex-col gap-2">
         <h3 className="font-outfit text-heading-2 text-text-ink">{f.title}</h3>
         <p className="text-body leading-150 text-text-slate">{f.body}</p>
+        {/* No feature pages exist yet, so "Learn more" asks sales about this feature. */}
+        <Link
+          to={`/contact?topic=${encodeURIComponent(f.title)}`}
+          aria-label={`Learn more about ${f.title}`}
+          className="group/learn flex items-center gap-1 self-start rounded-xs text-label-sm text-site-red hover:text-brand-primary-hover focus-visible:outline-none focus-visible:shadow-focus"
+        >
+          Learn more
+          <span aria-hidden="true" className="transition-transform duration-base ease-standard group-hover/learn:translate-x-1">→</span>
+        </Link>
       </div>
     </article>
   );

@@ -69,7 +69,7 @@ function ContactForm({ onSent }: { onSent: () => void }) {
         <ContactTextarea
           label="Tell us about your needs"
           name="needs"
-          defaultValue={params.get('module') ? `I'd like to learn more about the ${params.get('module')} module.` : undefined}
+          defaultValue={params.get('topic') ? `I'd like to learn more about ${params.get('topic')}.` : undefined}
           placeholder="What processes or tools would you like to integrate? Let us know here..." />
       </div>
       <div className="flex flex-col items-center gap-4">

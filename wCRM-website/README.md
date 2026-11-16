@@ -30,8 +30,9 @@ app's `node_modules`.
 | `/checkout/payment` | `wcrm-payment`: methods (372:2780), card (372:2925), transfer (372:3444) + `Success-Card` (372:3555) |
 
 Header "Features" lists the site's four features (Contact Management, Deal Management, Activities & Reporting,
-Budget & Targets) in the layout of Figma's `feature-list-card` (364:8564), with design-system icons and a "Learn more"
-cue; each scrolls to its card on the homepage. A "Back to top" button appears lower right once a page is scrolled.
+Budget & Targets) in the layout of Figma's `feature-list-card` (364:8564), with design-system icons; each scrolls to its
+card on the homepage. Each "Built for Business Development" card has a "Learn more" link that opens Contact Sales with
+that feature named in the message (there are no feature pages yet). A "Back to top" button appears lower right once a page is scrolled.
 The hero leaderboard uses the design-system `Avatar` (initials).
 The sun button switches the dark theme (`data-theme="dark"`), which every design-system and site token follows; in
 dark mode the navy outline buttons ("Sign In", "Learn More") become the design system's solid #4F46E5 secondary button.
