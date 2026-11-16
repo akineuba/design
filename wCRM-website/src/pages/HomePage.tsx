@@ -305,7 +305,7 @@ function WhyChooseUs() {
 function Pricing() {
   return (
     <section id="pricing" className="relative flex scroll-mt-16 flex-col items-center justify-center gap-10 overflow-hidden px-50 py-20">
-      <img src={ribbon} alt="" className="site-ribbon-home object-cover" />
+      <img src={ribbon} alt="" className="site-ribbon-home" />
       <div className="relative flex w-full flex-col gap-4 text-center">
         <h2 className="font-display text-site-title leading-site-44 text-text-strong">Choose the right plan for your team</h2>
         <p className="font-display text-site-lead leading-site-24 text-text-tertiary">

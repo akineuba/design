@@ -46,13 +46,20 @@
  * token equivalent; the numbers below are copied from the nodes so the crop matches the design.
  */
 @layer components {
-  /* Homepage pricing (Figma 1894:7914 › image 368): 2257×722, rotate −17.68°, scaleY .95, skewX −17.53°. */
+  /*
+   * Homepage pricing (Figma 1894:7914 › image 368): 2257×722, rotate −17.68°, scaleY .95, skewX −17.53°.
+   * It always runs edge to edge: the height stays at Figma's 722px (so the ribbon keeps its thickness and stays
+   * behind the cards, clear of the heading) while the width stretches with the window. At 1440px it is 6% wider
+   * than Figma, because the photo's cut ends otherwise stop ~30px short of each edge.
+   */
   .site-ribbon-home {
     position: absolute;
     left: calc(50% + 0.14px);
     top: calc(50% + 58.77px);
-    width: 2257px;
+    width: max(2392px, 166.1vw);
     height: 722px;
+    max-width: none;
+    object-fit: fill;
     transform: translate(-50%, -50%) rotate(-17.68deg) scaleY(0.95) skewX(-17.53deg);
     pointer-events: none;
   }
