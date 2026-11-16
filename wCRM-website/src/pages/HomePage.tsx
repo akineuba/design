@@ -1,10 +1,11 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteButtonLink } from '../components/SiteButton';
 import { CheckChip } from '../components/CheckChip';
 import { PlanCards } from '../components/PlanCards';
 import { Faq } from '../components/Faq';
+import { ActivitiesScreen, BudgetScreen, ContactsScreen, DealsScreen, ScaledScreen, type ScreenFit } from '../components/app-screens';
 import heroPhoto from '../assets/home/hero-photo.png';
 import partnerMicrosoft from '../assets/home/partner-microsoft.png';
 import partnerAws from '../assets/home/partner-aws.png';
@@ -15,10 +16,6 @@ import leaderAvatar from '../assets/home/leader-avatar.svg';
 import sparkline from '../assets/home/sparkline.svg';
 import indicatorDot from '../assets/home/indicator-dot.svg';
 import indicatorLine from '../assets/home/indicator-line.png';
-import featureContacts from '../assets/home/feature-contacts.png';
-import featureDeals from '../assets/home/feature-deals.png';
-import featureActivities from '../assets/home/feature-activities.png';
-import featureBudget from '../assets/home/feature-budget.png';
 import needPipeline from '../assets/home/need-pipeline.png';
 import needTracking from '../assets/home/need-tracking.png';
 import needLogging from '../assets/home/need-logging.png';
@@ -162,18 +159,24 @@ function Hero() {
   );
 }
 
-const FEATURES = [
-  { id: 'contact-management', title: 'Contact Management', body: 'Store and search customer profiles, import contact lists, and keep every relationship detail at your fingertips.', img: featureContacts, fit: 'object-cover', wide: false },
-  { id: 'deal-management', title: 'Deal Management', body: 'Track every opportunity from qualification to closure with pipelines, deal stages, and ownership controls.', img: featureDeals, fit: 'object-cover object-top', wide: true },
-  { id: 'activities-reporting', title: 'Activities & Reporting', body: 'Log emails, calls, meetings, and tasks in a unified timeline with performance trends and exportable reports.', img: featureActivities, fit: 'object-cover object-top', wide: true },
-  { id: 'budget-targets', title: 'Budget & Targets', body: 'Plan sales budgets, distribute targets across teams, and measure achievement against closed deals.', img: featureBudget, fit: 'object-cover object-left', wide: false },
-] as const;
+/*
+ * Feature cards. The product screens were PNG screenshots in Figma (images 363, 364, 367, 366); they are rebuilt in
+ * HTML on design-system tokens so they follow the theme, and scaled into the card with the screenshot's crop.
+ */
+const FEATURES: { id: string; title: string; body: string; wide: boolean; screen: { node: ReactNode; width: number; height: number; fit: ScreenFit } }[] = [
+  { id: 'contact-management', title: 'Contact Management', body: 'Store and search customer profiles, import contact lists, and keep every relationship detail at your fingertips.', wide: false, screen: { node: <ContactsScreen />, width: 1400, height: 659, fit: 'cover' } },
+  { id: 'deal-management', title: 'Deal Management', body: 'Track every opportunity from qualification to closure with pipelines, deal stages, and ownership controls.', wide: true, screen: { node: <DealsScreen />, width: 1400, height: 681, fit: 'top' } },
+  { id: 'activities-reporting', title: 'Activities & Reporting', body: 'Log emails, calls, meetings, and tasks in a unified timeline with performance trends and exportable reports.', wide: true, screen: { node: <ActivitiesScreen />, width: 1400, height: 725, fit: 'top' } },
+  { id: 'budget-targets', title: 'Budget & Targets', body: 'Plan sales budgets, distribute targets across teams, and measure achievement against closed deals.', wide: false, screen: { node: <BudgetScreen />, width: 1400, height: 382, fit: 'left' } },
+];
 
 function FeatureCard({ f, height }: { f: (typeof FEATURES)[number]; height: string }) {
   return (
     <article id={f.id} className={`flex scroll-mt-20 flex-col items-center gap-4 rounded-xl border border-border-default bg-surface-subtle p-6 ${height} ${f.wide ? 'w-site-feature-wide shrink-0' : 'min-w-0 flex-1'}`}>
       <div className="relative min-h-0 w-full flex-1 overflow-hidden rounded-t-lg">
-        <img src={f.img} alt={`${f.title} screen in wCRM`} className={`absolute inset-0 size-full ${f.fit}`} />
+        <ScaledScreen width={f.screen.width} height={f.screen.height} fit={f.screen.fit} label={`${f.title} screen in wCRM`}>
+          {f.screen.node}
+        </ScaledScreen>
       </div>
       <div className="flex w-full flex-col gap-2">
         <h3 className="font-outfit text-heading-2 text-text-ink">{f.title}</h3>

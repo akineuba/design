@@ -18,6 +18,8 @@
   --color-site-visa: #1A1F71;
   --color-site-plan-bg: #F4F5F7;
   --color-site-trash: #FF4D4F;
+  --color-site-chart-green: #22C55E;
+  --color-site-chart-target: #FECDD3;
   --font-outfit: 'Outfit', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-onest: 'Onest', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-figtree: 'Figtree', 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -110,6 +112,13 @@
   --size-site-success-stack: 262px;
   --size-site-success-icon: 150px;
   --size-site-dashboard-btn: 204px;
+  --size-site-stage-select: 116px;
+  --size-site-deal-stat: 92px;
+  --size-site-year-select: 96px;
+  --size-site-budget-stat: 84px;
+  --size-site-chart-legend: 8px;
+  --size-site-screen-toolbar: 62px;
+  --size-site-donut: 176px;
   --shadow-site-header: 0 -5px 20px 0 rgba(0, 0, 0, 0.25);
   --shadow-site-float: 0 12px 12px 0 rgba(30, 30, 47, 0.10);
   --shadow-site-float-soft: 0 6px 6px 0 rgba(30, 30, 47, 0.04);
@@ -136,4 +145,5 @@
   --color-site-notice-text: #FDE68A;
   --color-site-visa: #A5B4FC;
   --color-site-plan-bg: #24243A;
+  --color-site-chart-target: rgba(254, 205, 211, 0.35);
 }

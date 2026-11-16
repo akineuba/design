@@ -105,6 +105,17 @@
         "value": "#FF4D4F",
         "usage": "Remove-organisation icon in the edit modal",
         "figma": "367:16506"
+      },
+      "chart-green": {
+        "value": "#22C55E",
+        "usage": "Achieved / MSP series in the Activities & Reporting screen (rebuilt from feature screenshot image 367)",
+        "figma": "775:4588"
+      },
+      "chart-target": {
+        "value": "#FECDD3",
+        "usage": "Target backdrop series in the Activities & Reporting screen",
+        "figma": "775:4588",
+        "dark": "rgba(254, 205, 211, 0.35)"
       }
     }
   },
@@ -452,6 +463,34 @@
     "site-dashboard-btn": {
       "value": "204px",
       "figma": "372:3581"
+    },
+    "site-stage-select": {
+      "value": "116px",
+      "figma": "rebuilt from the feature screenshots (775:4577 / 4582 / 4588 / 4593)"
+    },
+    "site-deal-stat": {
+      "value": "92px",
+      "figma": "rebuilt from the feature screenshots (775:4577 / 4582 / 4588 / 4593)"
+    },
+    "site-year-select": {
+      "value": "96px",
+      "figma": "rebuilt from the feature screenshots (775:4577 / 4582 / 4588 / 4593)"
+    },
+    "site-budget-stat": {
+      "value": "84px",
+      "figma": "rebuilt from the feature screenshots (775:4577 / 4582 / 4588 / 4593)"
+    },
+    "site-chart-legend": {
+      "value": "8px",
+      "figma": "rebuilt from the feature screenshots (775:4577 / 4582 / 4588 / 4593)"
+    },
+    "site-screen-toolbar": {
+      "value": "62px",
+      "figma": "rebuilt from the feature screenshots (775:4593)"
+    },
+    "site-donut": {
+      "value": "176px",
+      "figma": "rebuilt from the feature screenshots (775:4588)"
     }
   },
   "shadow": {

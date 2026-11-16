@@ -46,7 +46,12 @@ Header "Features" opens a menu that scrolls to each feature card; the sun button
   `ModalClose` (dialog behaviour), `cn`, `focusFirstField`, plus Radix Accordion and Checkbox for the FAQ, compare
   table and terms box. Website-only pieces (`SiteButton`, `PlanCards`, `OrderSummary`, `SeatStepper`, form fields)
   sit in `src/components` and `src/checkout`.
-* All images and icons are the exported Figma assets in `src/assets` (no redrawn glyphs).
+* All images and icons are the exported Figma assets in `src/assets` (no redrawn glyphs), with one exception: the four
+  product screenshots in the homepage feature cards (Figma images 363, 364, 367, 366) are **rebuilt in HTML** in
+  `src/components/app-screens` (contacts register, deals register, reports charts, budget allocations) so they follow
+  the dark theme. Each screen is laid out at its native 1400px width on design-system tokens (`Button`, `Avatar`,
+  `Badge`, Figma icons) and `ScaledScreen` scales it into the card with the same crop the PNG used. The screens are
+  `inert` illustrations, announced as one image each.
 
 ## Behaviour and data
 
