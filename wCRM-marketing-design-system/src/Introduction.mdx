@@ -1,14 +1,28 @@
 import { Meta } from '@storybook/blocks';
 import logo from './assets/wragby-crm-logo.png';
+import logoDark from './assets/wragby-crm-logo-dark.png';
 
 <Meta title="Introduction" />
 
-<img src={logo} alt="Wragby CRM" width="240" height="70" />
-
-# wCRM Component Library
+<h1
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: 'var(--space-3)',
+    margin: '0 0 var(--space-4)',
+    fontFamily: 'var(--font-sans)',
+    fontSize: 'var(--text-display-size)',
+    fontWeight: 'var(--text-display-weight)',
+    lineHeight: 'var(--text-display-line-height)',
+    color: 'var(--color-text-primary)',
+  }}
+>
+  <img className="wcrm-logo-light" src={logo} alt="wCRM" width="192" height="56" />
+  <img className="wcrm-logo-dark" src={logoDark} alt="wCRM" width="192" height="56" />
+  {'Component Library'}
+</h1>
 
 Design tokens and React components for the Wragby wCRM platform.
-Source: [wCRM updates Figma file → marketing design updates](https://www.figma.com/design/EIQlA9M6mP2KlskFFy2X2U/wCRM-updates?node-id=782-4598).
 
 - **Foundations** shows every token: colours, type scale, spacing, radius, shadows, sizes and icons.
   Tokens tagged *derived* are not drawn in Figma; they cover states the file doesn't show (hover, focus, loading).

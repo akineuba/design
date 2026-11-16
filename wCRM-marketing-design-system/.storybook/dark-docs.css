@@ -36,3 +36,14 @@
   color: var(--color-text-secondary);
   border-color: var(--color-border-default);
 }
+
+/* Introduction logo: the dark-mode file has the black mark and "CRM" in white so they show on dark surfaces. */
+.wcrm-logo-dark {
+  display: none;
+}
+[data-theme='dark'] .wcrm-logo-light {
+  display: none;
+}
+[data-theme='dark'] .wcrm-logo-dark {
+  display: inline;
+}
