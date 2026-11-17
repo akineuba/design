@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
-import { AppsIcon, BellIcon, ChevronDownIcon, MoonIcon, SparkleIcon, SunIcon } from '../../icons';
+import { BellIcon, ChevronDownIcon, CompassIcon, MoonIcon, SunIcon } from '../../icons';
+import { Button } from '../Button';
 
 export interface Crumb {
   label: string;
@@ -19,12 +20,13 @@ export interface TopBarProps {
   breadcrumbs: Crumb[];
   user?: TopBarUser;
   onUserMenuClick?: () => void;
+  /** Panel opened by the user button, usually a `UserMenu`. Closes on Escape, outside click or a choice. */
+  userMenu?: ReactNode;
   notificationCount?: number;
   onNotificationsClick?: () => void;
   theme?: 'light' | 'dark';
   onThemeToggle?: () => void;
   onTourClick?: () => void;
-  onAppsClick?: () => void;
   /** Extra controls placed before the Tour button. */
   actions?: ReactNode;
   className?: string;
@@ -40,24 +42,37 @@ const iconBtn =
 /**
  * Page header bar. Figma: top-header (new features, 7053:5510) for the metrics (64px, white, 1px
  * line-subtle bottom border, 32px side padding) and the latest top-bar reference from the design team
- * for the details: current page in primary Semibold 14; Tour in Inter 14; theme toggle (38px on
- * surface-control); bell with a red count badge; blue initials avatar, name in Bold 16 and role in 12;
- * chevron; outlined grid app launcher.
+ * for the details: current page in primary Semibold 14; Tour as a small tertiary Button with a compass;
+ * theme toggle (38px on surface-control); bell with a red count badge; neutral grey initials avatar,
+ * name in Bold 16 and role in 12; chevron.
  */
 export function TopBar({
   breadcrumbs,
   user,
   onUserMenuClick,
+  userMenu,
   notificationCount = 0,
   onNotificationsClick,
   theme = 'light',
   onThemeToggle,
   onTourClick,
-  onAppsClick,
   actions,
   className,
 }: TopBarProps) {
   const last = breadcrumbs.length - 1;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const userRef = useRef<HTMLDivElement>(null);
+  const userBtn = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    userRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
+    const outside = (e: MouseEvent) => { if (!userRef.current?.contains(e.target as Node)) setMenuOpen(false); };
+    const esc = (e: globalThis.KeyboardEvent) => { if (e.key === 'Escape') { setMenuOpen(false); userBtn.current?.focus(); } };
+    document.addEventListener('mousedown', outside);
+    document.addEventListener('keydown', esc);
+    return () => { document.removeEventListener('mousedown', outside); document.removeEventListener('keydown', esc); };
+  }, [menuOpen]);
   return (
     <header className={cx('flex h-topbar w-full items-center justify-between gap-6 border-b border-line-subtle bg-surface px-8', className)}>
       <nav aria-label="Breadcrumb" className="min-w-0">
@@ -86,10 +101,9 @@ export function TopBar({
       <div className="flex shrink-0 items-center gap-5">
         {actions}
         {onTourClick && (
-          <button type="button" onClick={onTourClick} className={cx(iconBtn, 'gap-3 px-1 font-sans text-sm')}>
-            <span className="size-6"><SparkleIcon /></span>
+          <Button variant="tertiary" size="sm" leadingIcon={<CompassIcon />} onClick={onTourClick}>
             Tour
-          </button>
+          </Button>
         )}
         {onThemeToggle && (
           <button
@@ -120,26 +134,30 @@ export function TopBar({
           </button>
         )}
         {user && (
+          <div ref={userRef} className="relative">
           <button
+            ref={userBtn}
             type="button"
-            onClick={onUserMenuClick}
+            onClick={() => { onUserMenuClick?.(); if (userMenu) setMenuOpen((o) => !o); }}
             aria-haspopup="menu"
+            aria-expanded={userMenu ? menuOpen : undefined}
             className="flex items-center gap-3 rounded-lg text-left focus-visible:outline-hidden focus-visible:shadow-focus"
           >
-            <span className="inline-flex size-avatar shrink-0 items-center justify-center rounded-full bg-avatar font-sans text-sm font-semibold text-fg-inverse" aria-hidden>
+            <span className="inline-flex size-avatar shrink-0 items-center justify-center rounded-full bg-avatar-neutral font-sans text-sm font-semibold text-fg-inverse" aria-hidden>
               {user.initials ?? initialsOf(user.name)}
             </span>
             <span className="flex flex-col">
               <span className="font-sans text-md font-bold text-fg-ink">{user.name}</span>
               {user.role && <span className="font-sans text-xs text-fg-subtle">{user.role}</span>}
             </span>
-            <span className="ml-4 size-icon-sm text-fg-strong" aria-hidden><ChevronDownIcon /></span>
+            <span className={cx('ml-4 size-icon-sm text-fg-strong transition-transform', menuOpen && 'rotate-180')} aria-hidden><ChevronDownIcon /></span>
           </button>
-        )}
-        {onAppsClick && (
-          <button type="button" aria-label="All apps" onClick={onAppsClick} className={cx(iconBtn, 'size-6')}>
-            <AppsIcon />
-          </button>
+          {userMenu && menuOpen && (
+            <div className="absolute right-0 top-full z-50 mt-3" onClick={(e) => { if ((e.target as HTMLElement).closest('[role="menuitem"]')) setMenuOpen(false); }}>
+              {userMenu}
+            </div>
+          )}
+          </div>
         )}
       </div>
     </header>

@@ -15,13 +15,12 @@ const meta = {
     onNotificationsClick: noop,
     onThemeToggle: noop,
     onTourClick: noop,
-    onAppsClick: noop,
     onUserMenuClick: noop,
   },
   parameters: {
     layout: 'fullscreen',
     design: { url: FIGMA + '7053-5510' },
-    docs: { description: { component: 'Top bar from the latest reference: breadcrumb on the left (current page in blue); Tour, theme toggle, notifications with a red count, user (blue initials avatar, name, role, chevron) and the grid app launcher on the right. Each control appears only when its handler is passed.' } },
+    docs: { description: { component: 'Top bar from the latest reference: breadcrumb on the left (current page in blue); Tour (small tertiary button with a compass), theme toggle, notifications with a red count and the user (neutral grey initials avatar, name, role, chevron) on the right. Each control appears only when its handler is passed.' } },
   },
 } satisfies Meta<typeof TopBar>;
 export default meta;
@@ -32,7 +31,7 @@ export const DeepBreadcrumb: Story = { args: { breadcrumbs: [{ label: 'Accountin
 export const NoUnreadNotifications: Story = { args: { notificationCount: 0 } };
 export const ManyNotifications: Story = { args: { notificationCount: 128 } };
 export const DarkThemeSelected: Story = { args: { theme: 'dark' } };
-export const Minimal: Story = { args: { onTourClick: undefined, onThemeToggle: undefined, onAppsClick: undefined } };
+export const Minimal: Story = { args: { onTourClick: undefined, onThemeToggle: undefined } };
 
 export const Interactive: Story = {
   render: (args) => {

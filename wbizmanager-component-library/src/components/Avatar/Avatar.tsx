@@ -11,7 +11,7 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   src?: string;
   /** sm 28px for table cells, md 36px for the top bar. */
   size?: AvatarSize;
-  /** blue: people everywhere, including the signed-in user in the top bar. neutral: system or unknown users. */
+  /** blue: people in tables and lists. neutral: the signed-in user in the top bar, and system or unknown users. */
   tone?: AvatarTone;
 }
 

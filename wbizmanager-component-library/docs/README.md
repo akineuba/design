@@ -23,6 +23,7 @@
 | [Component: Switch](components/switch.md) | On/off switch from the accounting settings screens |
 | [Component: NavMenu](components/nav-menu.md) | Main menu: module rail and page panel |
 | [Component: TopBar](components/top-bar.md) | Top bar from new features |
+| [Component: UserMenu](components/user-menu.md) | Account menu under the top bar user button |
 | [Component: PageHeader](components/page-header.md) | Title block from the new features screens |
 | [Component: Card](components/card.md) | Settings section card |
 | [Figma sync](figma-sync.md) | Where tokens came from and how to update them |

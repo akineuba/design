@@ -3,9 +3,9 @@
 // here, never from lucide-react directly, so the set and stroke stay consistent.
 import type { SVGProps } from 'react';
 import {
-  Activity, ArrowDown, ArrowDownRight, ArrowLeftRight, ArrowUpRight, Award, Ban, Banknote, Bell, BookOpen, Boxes, BriefcaseBusiness, Building2, Calculator, Calendar, ChartColumn, ChartLine, Check, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, CircleCheck, CircleHelp, CircleMinus, CirclePlus, CircleUserRound, CircleX, ClipboardCheck, ClipboardList, Clock, CloudDownload, CloudUpload, Coins, Columns3, Copy, DollarSign, EllipsisVertical, Eye, FileChartColumn, FileInput, FileText, FileUp, FolderOpen, FolderPlus, Funnel, Gift, Globe, GraduationCap, Grid3x3, HandCoins, House, KeyRound, Landmark, Layers, LayoutGrid, List, ListFilter, ListTodo, MessageCircle, Moon, Package, PenLine, Plus, Printer, ReceiptText, RefreshCw, ScanBarcode, Search, Settings, ShieldCheck, ShoppingBag, ShoppingCart, SlidersHorizontal, Smartphone, Sparkles, SquarePen, Sun, Tag, Target, Trash2, TrendingDown, TrendingUp, UserCheck, UserLock, Users, Wallet, X,
+  Activity, ArrowDown, ArrowDownRight, ArrowLeftRight, ArrowUpRight, Award, Ban, Banknote, Bell, BookOpen, Boxes, BriefcaseBusiness, Building2, Calculator, Calendar, ChartColumn, ChartLine, Check, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, CircleCheck, CircleHelp, CircleMinus, CirclePlus, CircleUserRound, CircleX, ClipboardCheck, ClipboardList, Clock, Compass, CloudDownload, CloudUpload, Coins, Columns3, Copy, DollarSign, EllipsisVertical, Eye, FileChartColumn, FileInput, FileText, FileUp, FolderOpen, FolderPlus, Funnel, Gift, Globe, GraduationCap, Grid3x3, HandCoins, House, KeyRound, Landmark, Layers, LayoutGrid, List, ListFilter, ListTodo, MessageCircle, Moon, Package, PenLine, Plus, Printer, ReceiptText, RefreshCw, ScanBarcode, Search, Settings, ShieldCheck, ShoppingBag, ShoppingCart, SlidersHorizontal, Smartphone, Sparkles, SquarePen, Sun, Tag, Target, Trash2, TrendingDown, TrendingUp, UserCheck, UserLock, Users, Wallet, X,
   Bold, Italic, Underline, ListOrdered, Paperclip, Send, Save, File, Upload, Percent, CopyPlus, Download,
-  Info, TriangleAlert, CircleAlert, Star, History, LifeBuoy, Repeat,
+  Info, TriangleAlert, ExternalLink, LogOut, UserRound, CircleAlert, Star, History, LifeBuoy, Repeat,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -43,6 +43,10 @@ export const MoonIcon = wrap(Moon);
 export const SunIcon = wrap(Sun);
 export const SparkleIcon = wrap(Sparkles);
 export const AppsIcon = wrap(Grid3x3);
+export const CompassIcon = wrap(Compass);
+export const ExternalLinkIcon = wrap(ExternalLink);
+export const LogOutIcon = wrap(LogOut);
+export const UserIcon = wrap(UserRound);
 export const CalculatorIcon = wrap(Calculator);
 export const CartIcon = wrap(ShoppingCart);
 export const BagIcon = wrap(ShoppingBag);

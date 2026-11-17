@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 import { NavMenu } from '../components/NavMenu';
 import { TopBar, type TopBarProps } from '../components/TopBar';
 import { Logo } from '../components/Logo';
+import { UserMenu } from '../components/UserMenu';
+import { demoUserMenu } from './demo-user-menu';
 import { appFooterNavigation, appNavigation, currentUser } from './demo-data';
 // The top bar's theme button drives the Storybook theme (sample screens have no floating toggle).
 import { setTheme, useTheme } from '../../.storybook/theme';
@@ -22,7 +24,7 @@ export function Shell({ activeId, breadcrumbs, children }: { activeId: string; b
           theme={theme}
           onThemeToggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           onTourClick={() => {}}
-          onAppsClick={() => {}}
+          userMenu={<UserMenu {...demoUserMenu} />}
         />
         <main className="relative min-w-0 flex-1 overflow-y-auto p-8">
           <div className="flex flex-col gap-6">{children}</div>

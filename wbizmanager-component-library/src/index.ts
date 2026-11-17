@@ -31,6 +31,7 @@ export * from './components/Switch';
 export * from './components/Table';
 export * from './components/Tabs';
 export * from './components/TopBar';
+export * from './components/UserMenu';
 export * from './icons';
 export { cx } from './utils/cx';
 export { FieldLabelContext, type FieldLabelStyle } from './utils/field-label';
