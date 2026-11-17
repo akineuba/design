@@ -167,6 +167,9 @@
   --wbiz-size-line-grid: 1120px; /* derived: not in Figma */
   --wbiz-size-nav-rail: 60px; /* derived: not in Figma */
   --wbiz-size-nav-rail-item: 48px; /* derived: not in Figma */
+  --wbiz-size-notifications-panel: 384px; /* derived: not in Figma */
+  --wbiz-size-notifications-list: 420px; /* derived: not in Figma */
+  --wbiz-size-avatar-topbar: 32px; /* derived: not in Figma */
   --wbiz-size-user-menu: 288px; /* derived: not in Figma */
   --wbiz-size-nav-panel: 184px; /* derived: not in Figma */
   --wbiz-size-nav-row: 28px; /* derived: not in Figma */

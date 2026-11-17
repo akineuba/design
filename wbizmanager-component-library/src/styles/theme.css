@@ -141,6 +141,9 @@
   --spacing-line-grid: var(--wbiz-size-line-grid);
   --spacing-nav-rail: var(--wbiz-size-nav-rail);
   --spacing-nav-rail-item: var(--wbiz-size-nav-rail-item);
+  --spacing-notifications-panel: var(--wbiz-size-notifications-panel);
+  --spacing-notifications-list: var(--wbiz-size-notifications-list);
+  --spacing-avatar-topbar: var(--wbiz-size-avatar-topbar);
   --spacing-user-menu: var(--wbiz-size-user-menu);
   --spacing-nav-panel: var(--wbiz-size-nav-panel);
   --spacing-nav-row: var(--wbiz-size-nav-row);

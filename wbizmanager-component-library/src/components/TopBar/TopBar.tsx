@@ -24,6 +24,8 @@ export interface TopBarProps {
   userMenu?: ReactNode;
   notificationCount?: number;
   onNotificationsClick?: () => void;
+  /** Panel opened by the bell, usually a `NotificationsPanel`. Closes on Escape or an outside click. */
+  notificationsPanel?: ReactNode;
   theme?: 'light' | 'dark';
   onThemeToggle?: () => void;
   onTourClick?: () => void;
@@ -43,7 +45,8 @@ const iconBtn =
  * Page header bar. Figma: top-header (new features, 7053:5510) for the metrics (64px, white, 1px
  * line-subtle bottom border, 32px side padding) and the latest top-bar reference from the design team
  * for the details: current page in primary Semibold 14; Tour as a small tertiary Button with a compass;
- * theme toggle (38px on surface-control); bell with a red count badge; neutral grey initials avatar,
+ * theme toggle (38px on surface-control); bell with a red count badge that can open a NotificationsPanel;
+ * 32px neutral grey initials avatar,
  * name in Bold 16 and role in 12; chevron.
  */
 export function TopBar({
@@ -53,6 +56,7 @@ export function TopBar({
   userMenu,
   notificationCount = 0,
   onNotificationsClick,
+  notificationsPanel,
   theme = 'light',
   onThemeToggle,
   onTourClick,
@@ -60,19 +64,26 @@ export function TopBar({
   className,
 }: TopBarProps) {
   const last = breadcrumbs.length - 1;
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState<'user' | 'notifications' | null>(null);
+  const menuOpen = open === 'user';
+  const bellOpen = open === 'notifications';
   const userRef = useRef<HTMLDivElement>(null);
   const userBtn = useRef<HTMLButtonElement>(null);
+  const bellRef = useRef<HTMLDivElement>(null);
+  const bellBtn = useRef<HTMLButtonElement>(null);
 
+  // One popover at a time. Focus moves into it; Escape or an outside click closes it.
   useEffect(() => {
-    if (!menuOpen) return;
-    userRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
-    const outside = (e: MouseEvent) => { if (!userRef.current?.contains(e.target as Node)) setMenuOpen(false); };
-    const esc = (e: globalThis.KeyboardEvent) => { if (e.key === 'Escape') { setMenuOpen(false); userBtn.current?.focus(); } };
+    if (!open) return;
+    const wrap = open === 'user' ? userRef.current : bellRef.current;
+    const btn = open === 'user' ? userBtn.current : bellBtn.current;
+    wrap?.querySelector<HTMLElement>('[role="menuitem"], [role="tab"][aria-selected="true"]')?.focus();
+    const outside = (e: MouseEvent) => { if (!wrap?.contains(e.target as Node)) setOpen(null); };
+    const esc = (e: globalThis.KeyboardEvent) => { if (e.key === 'Escape') { setOpen(null); btn?.focus(); } };
     document.addEventListener('mousedown', outside);
     document.addEventListener('keydown', esc);
     return () => { document.removeEventListener('mousedown', outside); document.removeEventListener('keydown', esc); };
-  }, [menuOpen]);
+  }, [open]);
   return (
     <header className={cx('flex h-topbar w-full items-center justify-between gap-6 border-b border-line-subtle bg-surface px-8', className)}>
       <nav aria-label="Breadcrumb" className="min-w-0">
@@ -115,12 +126,16 @@ export function TopBar({
             <span className="size-icon-sm">{theme === 'dark' ? <SunIcon /> : <MoonIcon />}</span>
           </button>
         )}
-        {onNotificationsClick && (
+        {(onNotificationsClick || notificationsPanel) && (
+          <div ref={bellRef} className="relative">
           <button
+            ref={bellBtn}
             type="button"
             aria-label={notificationCount > 0 ? `Notifications, ${notificationCount} unread` : 'Notifications'}
-            onClick={onNotificationsClick}
-            className={cx(iconBtn, 'relative size-control-xs')}
+            aria-haspopup={notificationsPanel ? 'dialog' : undefined}
+            aria-expanded={notificationsPanel ? bellOpen : undefined}
+            onClick={() => { onNotificationsClick?.(); if (notificationsPanel) setOpen(bellOpen ? null : 'notifications'); }}
+            className={cx(iconBtn, 'relative size-control-xs', bellOpen && 'text-fg-strong')}
           >
             <span className="size-icon"><BellIcon /></span>
             {notificationCount > 0 && (
@@ -132,18 +147,20 @@ export function TopBar({
               </span>
             )}
           </button>
+          {notificationsPanel && bellOpen && <div className="absolute -right-4 top-full z-50 mt-4">{notificationsPanel}</div>}
+          </div>
         )}
         {user && (
           <div ref={userRef} className="relative">
           <button
             ref={userBtn}
             type="button"
-            onClick={() => { onUserMenuClick?.(); if (userMenu) setMenuOpen((o) => !o); }}
+            onClick={() => { onUserMenuClick?.(); if (userMenu) setOpen(menuOpen ? null : 'user'); }}
             aria-haspopup="menu"
             aria-expanded={userMenu ? menuOpen : undefined}
             className="flex items-center gap-3 rounded-lg text-left focus-visible:outline-hidden focus-visible:shadow-focus"
           >
-            <span className="inline-flex size-avatar shrink-0 items-center justify-center rounded-full bg-avatar-neutral font-sans text-sm font-semibold text-fg-inverse" aria-hidden>
+            <span className="inline-flex size-avatar-topbar shrink-0 items-center justify-center rounded-full bg-avatar-neutral font-sans text-xs font-semibold text-fg-inverse" aria-hidden>
               {user.initials ?? initialsOf(user.name)}
             </span>
             <span className="flex flex-col">
@@ -153,7 +170,7 @@ export function TopBar({
             <span className={cx('ml-4 size-icon-sm text-fg-strong transition-transform', menuOpen && 'rotate-180')} aria-hidden><ChevronDownIcon /></span>
           </button>
           {userMenu && menuOpen && (
-            <div className="absolute right-0 top-full z-50 mt-3" onClick={(e) => { if ((e.target as HTMLElement).closest('[role="menuitem"]')) setMenuOpen(false); }}>
+            <div className="absolute right-0 top-full z-50 mt-3" onClick={(e) => { if ((e.target as HTMLElement).closest('[role="menuitem"]')) setOpen(null); }}>
               {userMenu}
             </div>
           )}

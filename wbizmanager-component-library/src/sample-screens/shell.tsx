@@ -4,6 +4,8 @@ import { NavMenu } from '../components/NavMenu';
 import { TopBar, type TopBarProps } from '../components/TopBar';
 import { Logo } from '../components/Logo';
 import { UserMenu } from '../components/UserMenu';
+import { NotificationsPanel } from '../components/NotificationsPanel';
+import { demoNotifications } from './demo-notifications';
 import { demoUserMenu } from './demo-user-menu';
 import { appFooterNavigation, appNavigation, currentUser } from './demo-data';
 // The top bar's theme button drives the Storybook theme (sample screens have no floating toggle).
@@ -19,8 +21,8 @@ export function Shell({ activeId, breadcrumbs, children }: { activeId: string; b
         <TopBar
           breadcrumbs={breadcrumbs}
           user={currentUser}
-          notificationCount={8}
-          onNotificationsClick={() => {}}
+          notificationCount={demoNotifications.filter((n) => n.unread).length}
+          notificationsPanel={<NotificationsPanel items={demoNotifications} onMarkAllRead={() => {}} onSettings={() => {}} onClearRead={() => {}} onViewAll={() => {}} />}
           theme={theme}
           onThemeToggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           onTourClick={() => {}}
