@@ -5,7 +5,7 @@ import { Markdown, useOf } from '@storybook/blocks';
 const files = import.meta.glob('../instruction-notes/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 
 /** Where the "Edit this note" link points. Change the branch here once the work is merged. */
-export const EDIT_BASE = 'https://github.com/akineuba/design/edit/claude/beautiful-pasteur-5d0hgq/wCRM-marketing-design-system/';
+export const EDIT_BASE = 'https://github.com/akineuba/design/edit/wCRM-component-library/wCRM-component-library/';
 
 const kebab = (s: string) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/\s+/g, '-').toLowerCase();
 
