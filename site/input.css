@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@source "./index.html";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink: #161415;
+  --color-ink-2: #57534F;
+  --color-ink-3: #737070;
+  --color-paper: #FAFAF9;
+  --color-mist: #EEF1F2;
+  --color-line: #E1E4E6;
+  --color-red: #E7001A;
+  --color-red-700: #C8001A;
+  --color-red-800: #B8001A;
+  --color-blush: #FFF1F1;
+  --color-blush-2: #FFE0E2;
+  --color-wbiz: #161415;
+  --color-wbiz-50: #EEF1F2;
+  --color-einv: #1C4AAF;
+  --color-einv-50: #EEF1F2;
+  --color-ok: #161415;
+  --color-ok-50: #EEF1F2;
+  --color-warn: #57534F;
+  --color-warn-50: #FFFFFF;
+
+  --shadow-float: 0 14px 30px -12px rgb(22 20 21 / 0.25);
+  --shadow-lift: 0 30px 60px -24px rgb(22 20 21 / 0.28);
+  --shadow-red: 0 8px 18px -8px rgb(231 0 26 / 0.6);
+}
+
+@layer base {
+  body { @apply bg-paper text-ink font-sans antialiased; }
+  .accent { @apply italic text-red; }
+  h1, h2, h3 { font-feature-settings: "ss01", "cv11"; }
+}
+
+@utility arch { border-radius: 999px 999px 0 0; }
+@utility marker {
+  @apply absolute grid size-8 place-items-center rounded-full bg-red text-[14px] font-bold text-white;
+  box-shadow: 0 0 0 6px rgb(231 0 26 / 0.15);
+}
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-ink-2;
+  &::before { content: ""; @apply size-[7px] rounded-full bg-red; }
+}
