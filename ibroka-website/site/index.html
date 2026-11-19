@@ -19,7 +19,7 @@ LAYOUT: section order taken from the reference site: wordmark hero, value strip,
 @font-face{font-family:"Instrument Sans";font-weight:600;font-display:swap;src:url(fonts/instrument-sans-600.woff2) format("woff2")}
 @font-face{font-family:"Instrument Sans";font-weight:700;font-display:swap;src:url(fonts/instrument-sans-700.woff2) format("woff2")}
 :root{color-scheme:light dark;
---page:light-dark(#F2F4F8,#121417);--surface:light-dark(#FFFFFF,#1B1E23);--sunk:light-dark(#F4F6F9,#23272E);--head:light-dark(#F6F8FA,#20242A);
+--page:light-dark(#FFFFFF,#121417);--band:light-dark(#F2F4F8,#171A1E);--ring:light-dark(#E6E9EE,#262B32);--surface:light-dark(#FFFFFF,#1B1E23);--sunk:light-dark(#F4F6F9,#23272E);--head:light-dark(#F6F8FA,#20242A);
 --ink:light-dark(#272728,#E2E6EE);--mute:light-dark(#666B73,#A3AAB7);--line:light-dark(#E3E3E3,#343A44);--row:light-dark(#EEF4F6,#262B32);
 --primary:light-dark(#247A75,#3FB8B0);--primary-h:light-dark(#1F6A66,#5CC7C0);--on-primary:light-dark(#FFFFFF,#141618);
 --brand:light-dark(#36A59E,#3FB8B0);--brand-s:light-dark(#EBF6F5,#173634);--dot:#36A59E;
@@ -51,8 +51,9 @@ p{margin:0}
 .ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}.ghost:hover{background:rgba(255,255,255,.1)}
 .rv{transition:opacity .7s var(--ease),translate .7s var(--ease)}
 .js .rv:not(.in){opacity:0;translate:0 18px}
-.card{background:var(--surface);border-radius:20px;box-shadow:var(--sh-card);transition:transform .3s var(--ease),box-shadow .3s var(--ease),opacity .7s var(--ease),translate .7s var(--ease)}
-.card:hover{transform:translateY(-4px);box-shadow:var(--sh-pop)}
+.alt{background:var(--band)}
+.card{background:var(--surface);border-radius:20px;box-shadow:var(--sh-card),0 0 0 1px var(--ring);transition:transform .3s var(--ease),box-shadow .3s var(--ease),opacity .7s var(--ease),translate .7s var(--ease)}
+.card:hover{transform:translateY(-4px);box-shadow:var(--sh-pop),0 0 0 1px var(--ring)}
 a.lnk{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s var(--ease)}a.lnk:hover{background-size:100% 1px}
 .small{font-size:13px;color:var(--mute)}
 /* design-system pieces */
@@ -150,7 +151,7 @@ a.lnk{text-decoration:none;background:linear-gradient(currentColor,currentColor)
 .bars{display:flex;align-items:flex-end;gap:8px;height:96px}.bars i{flex:1;background:var(--brand);border-radius:6px 6px 0 0;transform-origin:bottom;transition:transform .9s var(--ease)}.bars i:nth-child(2){transition-delay:.06s}.bars i:nth-child(3){transition-delay:.12s}.bars i:nth-child(4){transition-delay:.18s}.bars i:nth-child(5){transition-delay:.24s}.bars i:nth-child(6){transition-delay:.3s}
 .js .rv:not(.in) .bars i,.js .rv:not(.in).bars i{transform:scaleY(0)}.bars i:nth-child(2n){background:#5A5FD0}
 /* stats */
-.stats{background:linear-gradient(180deg,var(--page),light-dark(#CDEDEA,#16302E) 30%,light-dark(#7FD3CC,#1A4744))}
+.stats{background:linear-gradient(180deg,var(--band),light-dark(#CDEDEA,#16302E) 30%,light-dark(#7FD3CC,#1A4744))}
 .figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid light-dark(rgba(16,48,46,.25),rgba(255,255,255,.2))}
 .figs div{padding:24px 20px 0 0}
 .figs b{display:block;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-.03em}
@@ -184,7 +185,7 @@ a.lnk{text-decoration:none;background:linear-gradient(currentColor,currentColor)
 .who{display:flex;gap:10px;align-items:center;font-size:14px;margin-top:auto}.who span{display:block;color:var(--mute);font-size:13px}
 /* faq */
 .faq{max-width:820px;margin:0 auto}.faq>div:first-child{text-align:center;margin-bottom:36px}.faq .lede{margin:14px auto 0}
-details{background:var(--surface);border-radius:12px;box-shadow:var(--sh-card);margin-bottom:10px;overflow:hidden;transition:box-shadow .3s var(--ease),opacity .7s var(--ease),translate .7s var(--ease)}details:hover{box-shadow:var(--sh-pop)}
+details{background:var(--surface);border-radius:12px;box-shadow:var(--sh-card),0 0 0 1px var(--ring);margin-bottom:10px;overflow:hidden;transition:box-shadow .3s var(--ease),opacity .7s var(--ease),translate .7s var(--ease)}details:hover{box-shadow:var(--sh-pop),0 0 0 1px var(--ring)}
 summary{list-style:none;cursor:pointer;padding:18px 52px 18px 20px;font-weight:600;position:relative;border-radius:12px;transition:color .2s var(--ease)}summary:hover{color:var(--primary)}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:24px;line-height:1;color:var(--primary);font-weight:500;transition:transform .35s var(--ease)}
@@ -334,7 +335,7 @@ footer .giant{margin-top:56px;opacity:.14;color:#fff;--dot:#fff}
   </div>
 </section>
 
-<section class="band" id="product" style="padding-top:0">
+<section class="band alt" id="product">
   <div class="wrap">
     <div class="center rv"><h2>Everything a brokerage runs on</h2><p class="lede">Each module works on the same client and policy records, so nothing is typed twice.</p></div>
     <div class="bento">
@@ -418,7 +419,7 @@ footer .giant{margin-top:56px;opacity:.14;color:#fff;--dot:#fff}
   </div>
 </section>
 
-<section class="band" id="roles">
+<section class="band alt" id="roles">
   <div class="wrap">
     <div class="hero-band rv"><img src="images/team.jpg" width="1762" height="1018" loading="lazy" alt="A brokerage team gathered around a colleague's laptop in a meeting room">
       <div class="txt"><h2>Built for everyone in the brokerage</h2><p>Owners, operations and finance work from the same record, each with the view they need.</p></div></div>
@@ -441,7 +442,7 @@ footer .giant{margin-top:56px;opacity:.14;color:#fff;--dot:#fff}
   </div>
 </section>
 
-<section class="band center" id="pricing" style="background:var(--surface)">
+<section class="band center" id="pricing">
   <div class="wrap">
     <h2>Plans that grow with your brokerage</h2>
     <p class="lede">Every plan includes the full platform. Choose by team size.</p>
@@ -451,7 +452,7 @@ footer .giant{margin-top:56px;opacity:.14;color:#fff;--dot:#fff}
   </div>
 </section>
 
-<section class="band">
+<section class="band alt">
   <div class="wrap">
     <h2 class="rv" style="max-width:620px">Brokerages that left the spreadsheet behind</h2>
     <div class="quotes">
@@ -465,7 +466,7 @@ footer .giant{margin-top:56px;opacity:.14;color:#fff;--dot:#fff}
   </div>
 </section>
 
-<section class="band" id="faq" style="padding-top:0">
+<section class="band" id="faq">
   <div class="wrap faq">
     <div><h2>Frequently asked questions</h2><p class="lede">Anything else? <a class="lnk" href="#start">Talk to our team</a>.</p></div>
     <div>
