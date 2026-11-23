@@ -32,7 +32,7 @@ export interface FeatureDetail {
 }
 
 /**
- * Feature pages (preview). Copy is drawn from the homepage and the product screens; no figures or quotes are invented.
+ * Feature pages. Copy is drawn from the homepage and the product screens; no figures or quotes are invented.
  */
 export const FEATURE_DETAILS: FeatureDetail[] = [
   {

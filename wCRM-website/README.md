@@ -22,6 +22,7 @@ app's `node_modules`.
 | `/` | `wCRM business dev home page` (691:4900): hero, features grid, stats bar, workflow cards, why choose us, plans, FAQ |
 | `/pricing` | `crm-pricing-page` (231:636): Monthly / Annual switch, plan cards, "Compare every included feature" table (`/pricing#compare` opens it; the homepage "View comparisons" button links there) |
 | `/contact` | `crm-contact-sales` (231:1058) → sent state (367:10351) |
+| `/features/:id` | Not in Figma; built in the site's style. One page per homepage feature (`contact-management`, `deal-management`, `activities-reporting`, `budget-targets`): hero with the product screen, capabilities, how it works, related features, call-to-action band. Content lives in `src/data/features.ts` |
 | `/checkout/configure` | `crm-configure-plan` (231:956, several organisations 367:10622) + `wcrm-add-orgs-modal` (372:2334) |
 | `/checkout/account` | `wcrm-create-account` (372:2542) + `successful popup` (372:3583) |
 | `/checkout/verify` | `otp-verification` (372:3189) |
@@ -30,9 +31,8 @@ app's `node_modules`.
 | `/checkout/payment` | `wcrm-payment`: methods (372:2780), card (372:2925), transfer (372:3444) + `Success-Card` (372:3555) |
 
 Header "Features" lists the site's four features (Contact Management, Deal Management, Activities & Reporting,
-Budget & Targets) in the layout of Figma's `feature-list-card` (364:8564), with design-system icons; each scrolls to its
-card on the homepage. Each "Built for Business Development" card has a "Learn more" link that opens Contact Sales with
-that feature named in the message (there are no feature pages yet). A "Back to top" button appears lower right once a page is scrolled.
+Budget & Targets) in the layout of Figma's `feature-list-card` (364:8564), with design-system icons; each opens its
+feature page. Each "Built for Business Development" card has a "Learn more" link to its feature page. A "Back to top" button appears lower right once a page is scrolled.
 The hero leaderboard uses the design-system `Avatar` (initials).
 The sun button switches the dark theme (`data-theme="dark"`), which every design-system and site token follows; in
 dark mode the navy outline buttons ("Sign In", "Learn More") become the design system's solid #4F46E5 secondary button.

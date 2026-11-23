@@ -9,7 +9,7 @@ import { ThemeToggle } from './ThemeToggle';
 
 /**
  * The Features menu lists this site's four features, in the layout of Figma `feature-list-card` (364:8564): icon,
- * title and one-line description. Each item scrolls to its card on the homepage, where "Learn more" lives.
+ * title and one-line description. Each item opens that feature's page (/features/:id).
  * Icons are design-system glyphs (currentColor), so they follow the theme; `stroke` evens out the 16px lucide and
  * 24px vuesax drawings at the 24px display size (about 1.5px).
  */
@@ -52,7 +52,7 @@ export function SiteHeader() {
                   {FEATURE_LINKS.map((f, i) => (
                     <RadixMenu.Item
                       key={f.id}
-                      onSelect={() => navigate(`/#${f.id}`)}
+                      onSelect={() => navigate(`/features/${f.id}`)}
                       style={{ animationDelay: `${40 + i * 30}ms` }}
                       className="-m-2 flex animate-value-in cursor-pointer items-start gap-2.5 rounded-md p-2 outline-none transition-colors duration-fast data-[highlighted]:bg-surface-subtle"
                     >

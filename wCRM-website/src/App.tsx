@@ -18,7 +18,8 @@ function ScrollManager() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
     if (hash) document.getElementById(hash.slice(1))?.scrollIntoView();
-    else window.scrollTo(0, 0);
+    // A new page starts at the top at once; the site-wide smooth scrolling is for in-page jumps only.
+    else window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname, hash]);
   return null;
 }

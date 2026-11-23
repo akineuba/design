@@ -16,7 +16,6 @@ const SCREENS: Record<FeatureDetail['id'], { node: ReactNode; height: number }> 
 };
 
 function Hero({ f }: { f: FeatureDetail }) {
-  const link = FEATURE_LINKS.find((l) => l.id === f.id)!;
   const screen = SCREENS[f.id];
   return (
     <section className="bg-surface-subtle px-50 pt-16">
@@ -27,10 +26,6 @@ function Hero({ f }: { f: FeatureDetail }) {
       </nav>
       <div className="mt-6 flex items-end justify-between gap-16">
         <div className="flex w-site-split-media flex-col gap-4">
-          <p className="flex items-center gap-2 self-start rounded-full bg-site-red-tint px-3 py-1 text-label-sm text-site-red">
-            <link.Icon aria-hidden="true" strokeWidth={link.stroke} className="size-4" />
-            {f.title}
-          </p>
           <h1 className="font-display text-site-hero text-site-ink">
             {f.headline[0]}
             <span className="text-brand-primary">{f.headline[1]}</span>
@@ -146,7 +141,7 @@ function CtaBand({ f }: { f: FeatureDetail }) {
   );
 }
 
-/** Feature detail page (preview, not in Figma): /features/:id. */
+/** Feature detail page (not in Figma; built in the site's style): /features/:id. */
 export function FeaturePage() {
   const { id } = useParams();
   const f = FEATURE_DETAILS.find((d) => d.id === id);
