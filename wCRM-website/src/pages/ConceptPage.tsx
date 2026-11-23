@@ -2,7 +2,6 @@ import type { ComponentType, ReactNode, SVGProps } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Avatar,
-  Setting2Icon,
   Buildings2Icon,
   LucideSearchIcon,
   LucideAwardIcon,
@@ -27,7 +26,10 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteButtonLink } from '../components/SiteButton';
 import { PlanCards } from '../components/PlanCards';
 import { CropShot, FullShot, InsetShot, type ShotId } from '../components/MarketingShots';
-import { Icon3D } from '../components/Icon3D';
+import streamlineHandshake from '../assets/concept/streamline-handshake.webp';
+import icon3dGear from '../assets/concept/icon3d-gear.png';
+import icon3dAward from '../assets/concept/icon3d-award.png';
+import icon3dEnvelope from '../assets/concept/icon3d-envelope.png';
 import whyHandshake from '../assets/home/why-handshake.png';
 import partnerMicrosoft from '../assets/home/partner-microsoft.png';
 import partnerAws from '../assets/home/partner-aws.png';
@@ -123,13 +125,16 @@ function SectionHead({ id, title, lead, align = 'center' }: { id: string; title:
   );
 }
 
-/** "See more" button under a section, in the site's outline button style. */
-function SeeMore({ to, label }: { to: string; label: string }) {
+/** Round arrow link on a card (the "see more" of that card). */
+function ArrowLink({ to, label, className }: { to: string; label: string; className?: string }) {
   return (
-    <SiteButtonLink to={to} variant="header-outline" aria-label={label} className="group/more">
-      See more
-      <span aria-hidden="true" className="transition-transform duration-base ease-standard group-hover/more:translate-x-1">→</span>
-    </SiteButtonLink>
+    <Link
+      to={to}
+      aria-label={label}
+      className={cn('group/arrow flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-primary text-text-inverse transition-colors hover:bg-brand-primary-hover focus-visible:outline-none focus-visible:shadow-focus', className)}
+    >
+      <span aria-hidden="true" className="transition-transform duration-base group-hover/arrow:-translate-y-px group-hover/arrow:translate-x-px">↗</span>
+    </Link>
   );
 }
 
@@ -221,16 +226,16 @@ function Hero({ suggest }: { suggest: boolean }) {
  * tokens, with sample data) or a screenshot placeholder, with the module's title and description over the bottom on
  * a soft vignette. Icons are the ones the product sidebar uses (NavMenu.fixtures `businessSections`).
  */
-type Module = { title: string; body: string; icon: DsIcon; to?: string };
+type Module = { title: string; body: string; icon: DsIcon; to: string };
 
 const M: Record<'budgets' | 'reports' | 'deals' | 'companies' | 'contacts' | 'activity' | 'orbit', Module> = {
   budgets: { title: 'Budgets', body: 'Plan budgets by period and department, and measure achievement against closed deals.', icon: { Icon: LucideChartLineIcon, stroke: 1 }, to: '/features/budget-targets' },
   reports: { title: 'Reports', body: 'Performance, activity, collaboration and task reports, with breakdowns you can export for reviews.', icon: { Icon: LucideInboxIcon, stroke: 1 }, to: '/features/activities-reporting' },
   deals: { title: 'Deals', body: 'Track every opportunity from qualification to closure with pipelines, deal stages and ownership controls.', icon: { Icon: PeopleIcon, stroke: 1.5 }, to: '/features/deal-management' },
-  companies: { title: 'Companies', body: 'Every account you sell to on one record, with its contacts, owners and deals.', icon: { Icon: Buildings2Icon, stroke: 1.5 } },
+  companies: { title: 'Companies', body: 'Every account you sell to on one record, with its contacts, owners and deals.', icon: { Icon: Buildings2Icon, stroke: 1.5 }, to: '/features/contact-management' },
   contacts: { title: 'Contacts', body: 'Search customer profiles, import lists and give every contact an owner.', icon: { Icon: Profile2UserIcon, stroke: 1.5 }, to: '/features/contact-management' },
-  activity: { title: 'Activity', body: 'Calls, meetings, emails and tasks in one timeline, synced from Microsoft 365 or Google.', icon: { Icon: LucideCalendarIcon, stroke: 1 } },
-  orbit: { title: 'Orbit AI', body: 'An assistant built into wCRM that finds answers in your pipeline, contacts and activity.', icon: { Icon: SolarPlanetLinearIcon, stroke: 1.25 } },
+  activity: { title: 'Activity', body: 'Calls, meetings, emails and tasks in one timeline, synced from Microsoft 365 or Google.', icon: { Icon: LucideCalendarIcon, stroke: 1 }, to: '/features/activities-reporting' },
+  orbit: { title: 'Orbit AI', body: 'An assistant built into wCRM that finds answers in your pipeline, contacts and activity.', icon: { Icon: SolarPlanetLinearIcon, stroke: 1.25 }, to: '/contact?topic=Orbit%20AI' },
 };
 
 /**
@@ -250,15 +255,7 @@ function BentoCard({ m, span, children }: { m: Module; span: string; children: R
           </h3>
           <p className="text-body-sm leading-150 text-text-slate">{m.body}</p>
         </div>
-        {m.to && (
-          <Link
-            to={m.to}
-            aria-label={`Learn more about ${m.title}`}
-            className="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-primary text-text-inverse transition-colors hover:bg-brand-primary-hover focus-visible:outline-none focus-visible:shadow-focus"
-          >
-            <span aria-hidden="true" className="transition-transform duration-base group-hover:-translate-y-px group-hover:translate-x-px">↗</span>
-          </Link>
-        )}
+        <ArrowLink to={m.to} label={`See more about ${m.title}`} />
       </div>
     </article>
   );
@@ -413,7 +410,6 @@ function Modules() {
             <ReportsWidget />
           </BentoCard>
         </div>
-        <SeeMore to="/#features" label="See more about wCRM's features" />
       </div>
     </section>
   );
@@ -462,11 +458,11 @@ function SocialProof() {
 
 /* 4 · Product tour (design-system Tabs) ------------------------------------------------------------------- */
 
-const SCREENS: { id: ShotId; label: string; points: string[] }[] = [
-  { id: 'deals', label: 'Deals', points: ['Open, won and lost totals above the register', 'Profit and expected profit on every deal', 'Stage changes in one click'] },
-  { id: 'contacts', label: 'Contacts', points: ['Import the lists you already keep', 'An owner on every contact', 'Search by name, email or company'] },
-  { id: 'reports', label: 'Reports', points: ['Goal realization at a glance', 'Revenue by business stream', 'Export for reviews and board packs'] },
-  { id: 'budgets', label: 'Budgets', points: ['Targets split by team and practice area', 'Achieved from closed deals', 'Variance per allocation'] },
+const SCREENS: { id: ShotId; label: string; to: string; points: string[] }[] = [
+  { id: 'deals', label: 'Deals', to: '/features/deal-management', points: ['Open, won and lost totals above the register', 'Profit and expected profit on every deal', 'Stage changes in one click'] },
+  { id: 'contacts', label: 'Contacts', to: '/features/contact-management', points: ['Import the lists you already keep', 'An owner on every contact', 'Search by name, email or company'] },
+  { id: 'reports', label: 'Reports', to: '/features/activities-reporting', points: ['Goal realization at a glance', 'Revenue by business stream', 'Export for reviews and board packs'] },
+  { id: 'budgets', label: 'Budgets', to: '/features/budget-targets', points: ['Targets split by team and practice area', 'Achieved from closed deals', 'Variance per allocation'] },
 ];
 
 function ProductTour() {
@@ -497,13 +493,15 @@ function ProductTour() {
                   <span className="size-2.5 rounded-full bg-status-success" />
                   <span className="ml-4 flex-1 rounded-full bg-surface-sunken px-3 py-0.5 text-caption-xs text-text-muted">app.wcrm.com/{s.id}</span>
                 </div>
-                <FullShot id={s.id} header={false} />
+                <div className="relative">
+                  <FullShot id={s.id} header={false} />
+                  <ArrowLink to={s.to} label={`See more about ${s.label}`} className="absolute bottom-4 right-4 shadow-lg" />
+                </div>
               </div>
             </div>
           </TabsContent>
         ))}
       </Tabs>
-      <SeeMore to="/features/deal-management" label="See more of the product in the feature pages" />
     </section>
   );
 }
@@ -545,61 +543,38 @@ function Foundation({ suggest }: { suggest: boolean }) {
       ) : (
         values
       )}
-      <SeeMore to="/#why-choose-us" label="See more about why teams choose wCRM" />
     </section>
   );
 }
 
-/* 6 · Latest from wCRM ----------------------------------------------------------------------------------------- */
+/* 6 · Streamline your sales workflow --------------------------------------------------------------------- */
 
-/* Placeholder articles: titles show the kind of content the section is for; nothing here is published yet. */
-const UPDATES = [
-  { tag: 'Guide', title: 'Setting up stages that match how your team sells', body: 'Define reusable deal stages and pipelines that guide every opportunity from qualification to closure.', icon: { Icon: Setting2Icon, stroke: 1.8, label: 'Gear' }, stock: 'Whiteboard with a sales pipeline sketched on it' },
-  { tag: 'Product', title: 'Bring Microsoft 365 and Google activity into wCRM', body: 'Emails and calendar events now land on the contact and deal they belong to.', icon: { Icon: LucideMailIcon, stroke: 1.9, label: 'Envelope' }, stock: 'Laptop with an inbox and calendar open' },
-  { tag: 'Webinar', title: 'Planning next year’s sales budget by team', body: 'Allocate targets across practice areas and watch variance as deals close.', icon: { Icon: LucideAwardIcon, stroke: 1.9, label: 'Award' }, stock: 'Presenter in front of a room, mid-talk' },
+/* Copy from the homepage "Streamline Your Sales Workflow" section (Figma 691:5050); 3D icons supplied for this page. */
+const NEEDS = [
+  { title: 'Pipeline visibility', body: 'Monitor deals across every stage with clear pipeline views and conversion insights.', img: icon3dGear, to: '/features/deal-management' },
+  { title: 'Smart deal tracking', body: "Capture deal value, stage, contacts, and closure outcomes to focus your team's efforts.", img: icon3dAward, to: '/features/deal-management' },
+  { title: 'Integrated activity logging', body: 'Sync emails and calendar events from Microsoft 365 or Google directly into CRM records.', img: icon3dEnvelope, to: '/features/activities-reporting' },
 ];
 
-function Updates({ suggest }: { suggest: boolean }) {
+function Streamline() {
   return (
-    <section aria-labelledby="updates" className="flex flex-col items-center gap-14 px-50 py-20">
-      <SectionHead id="updates" title="Latest from wCRM" lead="Guides, product updates, webinars and customer stories." />
-      {suggest && (
-        <Note n={4} title="Use stock photos here, not screenshots or 3D icons">
-          A customer story is about people, so lead with a photo of a sales team rather than a product screen. The glossy red 3D icons clash with the photographic hero; one photo per article (or a single consistent illustration set) reads as editorial content.
-        </Note>
-      )}
+    <section aria-labelledby="streamline" className="flex flex-col items-center gap-14 px-50 py-20">
+      <SectionHead id="streamline" title="Streamline Your Sales Workflow" lead="Discover how wCRM's Business Development tools help your team manage pipelines, track deals, and hit targets." />
       <div className="grid w-full grid-cols-2 gap-12">
-        <article className="group flex flex-col gap-5">
-          {suggest ? (
-            <Placeholder kind="stock" title="Sales team reviewing results together around a laptop" size="16:9" className="h-site-need-card w-full" radius="rounded-xl" />
-          ) : (
-            <div data-shot="window-reports" className="flex h-site-need-card w-full items-center justify-center overflow-hidden rounded-xl border border-border-default bg-surface-canvas p-4">
-              <FullShot id="reports" className="rounded-md border border-border-default shadow-md" />
-            </div>
-          )}
-          <span className="text-overline uppercase tracking-wide text-site-red">Customer story</span>
-          <h3 className="font-display text-heading-xl text-site-ink group-hover:text-site-red">How a growing sales team replaced five spreadsheets with one pipeline</h3>
-          <p className="text-body leading-150 text-text-slate">From scattered trackers to a single register of contacts, deals and targets, and a weekly report that builds itself.</p>
-        </article>
-        <ul className="flex flex-col divide-y divide-border-default">
-          {UPDATES.map((u) => (
-            <li key={u.title} className="group flex gap-6 py-6 first:pt-0">
-              {suggest ? (
-                <Placeholder kind="stock" title={u.stock} className="h-site-need-img-h w-site-need-card shrink-0" />
-              ) : (
-                <Icon3D Icon={u.icon.Icon} stroke={u.icon.stroke} label={`3D ${u.icon.label.toLowerCase()} icon`} className="h-site-need-img-h w-site-need-img shrink-0" />
-              )}
+        <img src={streamlineHandshake} alt="Two colleagues shaking hands" className="size-full rounded-xl object-cover" />
+        <ul className="flex flex-col gap-4">
+          {NEEDS.map((n) => (
+            <li key={n.title} className="group flex items-center gap-5 rounded-xl border border-border-default bg-surface-subtle p-5 transition duration-base ease-standard hover:-translate-y-1 hover:shadow-md">
+              <img src={n.img} alt="" className="size-20 shrink-0 object-contain transition-transform duration-site-slow ease-standard group-hover:scale-105" />
               <div className="flex flex-1 flex-col gap-2">
-                <span className="text-overline uppercase tracking-wide text-site-red">{u.tag}</span>
-                <h3 className="text-heading-3 text-site-ink group-hover:text-site-red">{u.title}</h3>
-                <p className="text-body-sm leading-150 text-text-slate">{u.body}</p>
+                <h3 className="font-outfit text-heading-2 text-site-ink">{n.title}</h3>
+                <p className="text-body-sm leading-150 text-text-slate">{n.body}</p>
               </div>
+              <ArrowLink to={n.to} label={`See more about ${n.title.toLowerCase()}`} />
             </li>
           ))}
         </ul>
       </div>
-      {/* No resources page exists yet; point this at the blog or resource hub once there is one. */}
-      <SeeMore to="#" label="See more guides, updates and stories" />
     </section>
   );
 }
@@ -611,7 +586,6 @@ function Pricing() {
     <section aria-labelledby="plans" className="flex flex-col items-center gap-12 border-t border-border-default px-50 py-20">
       <SectionHead id="plans" title="Simple, transparent pricing" lead="All plans include a 14-day free trial." />
       <PlanCards />
-      <SeeMore to="/pricing#compare" label="See more: compare every plan feature" />
     </section>
   );
 }
@@ -622,7 +596,7 @@ function CtaBand({ suggest }: { suggest: boolean }) {
   return (
     <section className="flex flex-col gap-6 bg-site-stats px-50 py-16 text-text-inverse">
       {suggest && (
-        <Note n={5} title="Put a face next to the button">
+        <Note n={4} title="Put a face next to the button">
           With the contact section gone, this is the page’s last way to reach the team. A small photo of the sales rep who answers (stock for now, a real one later) makes “Contact us” feel like talking to a person.
         </Note>
       )}
@@ -654,7 +628,7 @@ export function ConceptPage({ suggest = false }: { suggest?: boolean }) {
         {suggest && <SocialProof />}
         <ProductTour />
         <Foundation suggest={suggest} />
-        <Updates suggest={suggest} />
+        <Streamline />
         <Pricing />
         <CtaBand suggest={suggest} />
       </main>
