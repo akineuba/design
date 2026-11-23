@@ -184,7 +184,7 @@ function FeatureCard({ f, height }: { f: (typeof FEATURES)[number]; height: stri
         <p className="text-body leading-150 text-text-slate">{f.body}</p>
         {/* No feature pages exist yet, so "Learn more" asks sales about this feature. */}
         <Link
-          to={`/contact?topic=${encodeURIComponent(f.title)}`}
+          to={`/features/${f.id}`}
           aria-label={`Learn more about ${f.title}`}
           className="group/learn flex items-center gap-1 self-start rounded-xs text-label-sm text-site-red hover:text-brand-primary-hover focus-visible:outline-none focus-visible:shadow-focus"
         >

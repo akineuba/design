@@ -274,6 +274,11 @@
       "value": "120px",
       "usage": "Pricing hero side inset",
       "figma": "231:653"
+    },
+    "40": {
+      "value": "160px",
+      "usage": "Feature page: section padding under the overlapping product screen (80px overlap + 80px)",
+      "figma": "not in Figma (feature pages preview)"
     }
   },
   "radius": {
