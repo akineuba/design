@@ -1,7 +1,9 @@
 import type { ComponentType, ReactNode, SVGProps } from 'react';
 import { Link } from 'react-router-dom';
 import {
+  Avatar,
   Buildings2Icon,
+  LucideSearchIcon,
   LucideAwardIcon,
   LucideCalendarIcon,
   LucideChartLineIcon,
@@ -77,10 +79,10 @@ const PLACEHOLDER_STYLE: Record<PlaceholderKind, { label: string; box: string }>
 };
 
 /** Wireframe placeholder: dashed box with a cross, the kind of asset and what it should show. */
-function Placeholder({ kind, title, size, className, radius = 'rounded-lg' }: { kind: PlaceholderKind; title?: string; size?: string; className?: string; radius?: string }) {
+function Placeholder({ kind, title, size, className, radius = 'rounded-lg', align = 'center' }: { kind: PlaceholderKind; title?: string; size?: string; className?: string; radius?: string; align?: 'center' | 'top' }) {
   const k = PLACEHOLDER_STYLE[kind];
   return (
-    <div role="img" aria-label={`${k.label} placeholder${title ? `: ${title}` : ''}`} className={cn('relative flex items-center justify-center overflow-hidden border border-dashed', radius, k.box, className)}>
+    <div role="img" aria-label={`${k.label} placeholder${title ? `: ${title}` : ''}`} className={cn('relative flex justify-center overflow-hidden border border-dashed', align === 'top' ? 'items-start pt-8' : 'items-center', radius, k.box, className)}>
       <svg aria-hidden="true" className="absolute inset-0 size-full opacity-20" preserveAspectRatio="none" viewBox="0 0 100 100">
         <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" strokeWidth="0.4" vectorEffect="non-scaling-stroke" />
         <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" strokeWidth="0.4" vectorEffect="non-scaling-stroke" />
@@ -154,7 +156,7 @@ function Hero({ suggest }: { suggest: boolean }) {
   return (
     <section className="relative flex items-center gap-16 overflow-hidden bg-site-midnight px-50 pb-40 pt-25">
       <img src={whyHandshake} alt="" className="absolute inset-0 size-full object-cover opacity-30" />
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-site-midnight via-site-midnight to-transparent opacity-90" />
+      <div aria-hidden="true" className="absolute inset-0 bg-site-hero-scrim opacity-90" />
       <div className="relative flex w-site-split-media flex-col gap-6 text-text-inverse">
         <p className="text-overline uppercase tracking-wide text-site-on-dark-muted">wCRM · Business Development</p>
         <h1 className="font-display text-site-hero">
@@ -200,39 +202,200 @@ function Hero({ suggest }: { suggest: boolean }) {
 /* 3 · Overlapping "What wCRM does" card ------------------------------------------------------------------- */
 
 /*
- * The seven Business Development modules, in the order of the product's sidebar, with its icons
- * (design system NavMenu.fixtures `businessSections`). Modules with a feature page link to it.
+ * The seven Business Development modules as a bento grid: each card holds a product widget (built on design-system
+ * tokens, with sample data) or a screenshot placeholder, with the module's title and description over the bottom on
+ * a soft vignette. Icons are the ones the product sidebar uses (NavMenu.fixtures `businessSections`).
  */
-const MODULES: { title: string; body: string; icon: DsIcon; to?: string }[] = [
-  { title: 'Budgets', body: 'Plan sales budgets by period and department, split targets across teams, and measure achievement against closed deals.', icon: { Icon: LucideChartLineIcon, stroke: 1 }, to: '/features/budget-targets' },
-  { title: 'Reports', body: 'Performance, activity, collaboration and task reports, with breakdowns you can export for reviews.', icon: { Icon: LucideInboxIcon, stroke: 1 }, to: '/features/activities-reporting' },
-  { title: 'Deals', body: 'Track every opportunity from qualification to closure with pipelines, deal stages and ownership controls.', icon: { Icon: PeopleIcon, stroke: 1.5 }, to: '/features/deal-management' },
-  { title: 'Companies', body: 'Keep every account you sell to on one record, with its contacts, owners and deals.', icon: { Icon: Buildings2Icon, stroke: 1.5 } },
-  { title: 'Contacts', body: 'Store and search customer profiles, import contact lists, and keep every relationship detail to hand.', icon: { Icon: Profile2UserIcon, stroke: 1.5 }, to: '/features/contact-management' },
-  { title: 'Activity', body: 'Log calls, meetings, emails and tasks in one timeline, synced from Microsoft 365 or Google.', icon: { Icon: LucideCalendarIcon, stroke: 1 } },
-  { title: 'Orbit AI', body: 'An assistant built into wCRM that helps your team find answers in its pipeline, contacts and activity.', icon: { Icon: SolarPlanetLinearIcon, stroke: 1.25 } },
+type Module = { title: string; body: string; icon: DsIcon; to?: string };
+
+const M: Record<'budgets' | 'reports' | 'deals' | 'companies' | 'contacts' | 'activity' | 'orbit', Module> = {
+  budgets: { title: 'Budgets', body: 'Plan budgets by period and department, and measure achievement against closed deals.', icon: { Icon: LucideChartLineIcon, stroke: 1 }, to: '/features/budget-targets' },
+  reports: { title: 'Reports', body: 'Performance, activity, collaboration and task reports, with breakdowns you can export for reviews.', icon: { Icon: LucideInboxIcon, stroke: 1 }, to: '/features/activities-reporting' },
+  deals: { title: 'Deals', body: 'Track every opportunity from qualification to closure with pipelines, deal stages and ownership controls.', icon: { Icon: PeopleIcon, stroke: 1.5 }, to: '/features/deal-management' },
+  companies: { title: 'Companies', body: 'Every account you sell to on one record, with its contacts, owners and deals.', icon: { Icon: Buildings2Icon, stroke: 1.5 } },
+  contacts: { title: 'Contacts', body: 'Search customer profiles, import lists and give every contact an owner.', icon: { Icon: Profile2UserIcon, stroke: 1.5 }, to: '/features/contact-management' },
+  activity: { title: 'Activity', body: 'Calls, meetings, emails and tasks in one timeline, synced from Microsoft 365 or Google.', icon: { Icon: LucideCalendarIcon, stroke: 1 } },
+  orbit: { title: 'Orbit AI', body: 'An assistant built into wCRM that finds answers in your pipeline, contacts and activity.', icon: { Icon: SolarPlanetLinearIcon, stroke: 1.25 } },
+};
+
+/** Bento card: visual fills the card; title and description sit over a bottom vignette. */
+function BentoCard({ m, tone, span, children }: { m: Module; tone: 'light' | 'dark'; span: string; children: ReactNode }) {
+  const dark = tone === 'dark';
+  return (
+    <article className={cn('group relative h-site-bento-row overflow-hidden rounded-xl transition duration-base ease-standard hover:-translate-y-1 hover:shadow-lg', span, dark ? 'bg-site-midnight' : 'border border-border-default bg-surface-subtle')}>
+      <div className="absolute inset-0">{children}</div>
+      <div aria-hidden="true" className={cn('absolute inset-x-0 bottom-0 h-3/5', dark ? 'bg-site-vignette-dark opacity-90' : 'bg-site-vignette-light')} />
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+        <div className="flex flex-col gap-1.5">
+          <h3 className={cn('flex items-center gap-2 font-display text-heading-xl', dark ? 'text-text-inverse' : 'text-site-ink')}>
+            <m.icon.Icon aria-hidden="true" strokeWidth={m.icon.stroke} className={cn('size-5', dark ? 'text-site-on-dark-muted' : 'text-accent-navy')} />
+            {m.title}
+          </h3>
+          <p className={cn('text-body-sm leading-150', dark ? 'text-site-on-dark-muted' : 'text-text-slate')}>{m.body}</p>
+        </div>
+        {m.to && (
+          <Link
+            to={m.to}
+            aria-label={`Learn more about ${m.title}`}
+            className={cn('flex size-10 shrink-0 items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:shadow-focus', dark ? 'bg-surface-default text-site-ink hover:bg-brand-primary hover:text-text-inverse' : 'bg-site-ink text-text-inverse hover:bg-brand-primary')}
+          >
+            <span aria-hidden="true" className="transition-transform duration-base group-hover:-translate-y-px group-hover:translate-x-px">↗</span>
+          </Link>
+        )}
+      </div>
+    </article>
+  );
+}
+
+/* Widgets (illustrations, sample data). Each is inert and labelled as one image. */
+
+function Widget({ label, className, children }: { label: string; className?: string; children: ReactNode }) {
+  return (
+    <div role="img" aria-label={label} className={cn('absolute inset-x-6 top-6', className)}>
+      <div aria-hidden="true" className="contents">{children}</div>
+    </div>
+  );
+}
+
+const WEEK = [
+  { d: 17, day: 'Mon' }, { d: 18, day: 'Tue' }, { d: 19, day: 'Wed' }, { d: 20, day: 'Thu' }, { d: 21, day: 'Fri' },
 ];
+
+function ActivityWidget() {
+  return (
+    <Widget label="Activity widget: this week's calls and meetings against plan" className="flex flex-col gap-3">
+      <div className="flex justify-between rounded-pill bg-surface-default p-1 shadow-sm">
+        {WEEK.map((w, i) => (
+          <span key={w.d} className={cn('flex flex-col items-center rounded-pill px-2.5 py-1.5', i === 1 ? 'bg-site-ink text-text-inverse' : 'text-text-secondary')}>
+            <span className="text-label-sm">{w.d}</span>
+            <span className="text-caption-xs">{w.day}</span>
+          </span>
+        ))}
+      </div>
+      {[{ k: 'Calls', v: '12 / 15', pct: 'w-4/5' }, { k: 'Meetings', v: '4 / 6', pct: 'w-2/3' }].map((r) => (
+        <div key={r.k} className="flex flex-col gap-1.5 rounded-lg bg-surface-default px-3 py-2 shadow-sm">
+          <span className="flex justify-between text-caption"><span className="text-text-secondary">{r.k}</span><span className="font-semibold text-site-ink">{r.v}</span></span>
+          <span className="h-1.5 rounded-full bg-surface-sunken"><span className={cn('block h-full rounded-full bg-brand-primary', r.pct)} /></span>
+        </div>
+      ))}
+    </Widget>
+  );
+}
+
+function BudgetWidget() {
+  // Ring geometry: r = 42 in a 100-unit box; 82% of the circumference is drawn.
+  const c = 2 * Math.PI * 42;
+  return (
+    <Widget label="Budget widget: 82% of the quarter's target achieved" className="flex items-center gap-5">
+      <svg viewBox="0 0 100 100" className="size-30 shrink-0 -rotate-90">
+        <circle cx="50" cy="50" r="42" fill="none" strokeWidth="9" className="stroke-border-default" />
+        <circle cx="50" cy="50" r="42" fill="none" strokeWidth="9" strokeLinecap="round" strokeDasharray={`${c * 0.82} ${c}`} className="stroke-brand-primary" />
+      </svg>
+      <div className="flex flex-col gap-1">
+        <span className="font-onest text-heading-xl text-site-ink">82%</span>
+        <span className="text-caption text-text-secondary">of Q3 target</span>
+        <span className="text-caption font-semibold text-status-success-strong">₦45.2M achieved</span>
+      </div>
+    </Widget>
+  );
+}
+
+const PEOPLE = ['Sarah Connor', 'Jane Doe', 'Yhandi Singh', 'Timi Turner'];
+
+function ContactsWidget() {
+  return (
+    <Widget label="Contacts widget: contact search and owners" className="flex flex-col gap-4">
+      <div className="flex items-center gap-2 rounded-full border border-border-default bg-surface-default px-4 py-2.5 text-body-sm text-text-placeholder shadow-sm">
+        <LucideSearchIcon strokeWidth={1.5} className="size-4" />
+        Search contacts…
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="flex gap-1">
+          {PEOPLE.map((n) => (
+            <Avatar key={n} name={n} size="md" />
+          ))}
+        </span>
+        <span className="flex flex-col items-end">
+          <span className="font-onest text-heading-xl text-site-ink">2,418</span>
+          <span className="text-caption text-text-secondary">contacts</span>
+        </span>
+      </div>
+    </Widget>
+  );
+}
+
+function OrbitWidget() {
+  return (
+    <Widget label="Orbit AI widget: a question about this month's deals and the answer" className="flex flex-col gap-2.5">
+      <p className="self-end rounded-xl rounded-br-xs bg-surface-default px-3.5 py-2 text-body-sm text-site-ink">Which deals close this month?</p>
+      <p className="flex items-start gap-2 self-start rounded-xl rounded-bl-xs border border-site-divider-on-dark px-3.5 py-2 text-body-sm text-text-inverse">
+        <SolarPlanetLinearIcon strokeWidth={1.25} className="mt-0.5 size-4 shrink-0 text-brand-primary" />
+        6 deals, ₦38.4M expected. 2 need a follow-up this week.
+      </p>
+    </Widget>
+  );
+}
+
+/*
+ * Reports chart: achieved revenue by month (sample). Path and point positions are illustration geometry in a
+ * 600 × 160 box; the highlighted point is placed by percentage so it tracks the stretched SVG.
+ */
+const CHART_PATH = 'M0,120 C60,120 70,40 120,40 S180,120 220,110 S280,60 320,70 S370,95 380,96 S440,50 480,55 S540,130 560,120 S590,90 600,92';
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+
+function ReportsWidget() {
+  return (
+    <Widget label="Reports widget: achieved revenue by month, April highlighted at ₦75M" className="flex flex-col gap-2">
+      <div className="relative h-40">
+        <svg viewBox="0 0 600 160" preserveAspectRatio="none" className="absolute inset-0 size-full overflow-visible">
+          {[20, 60, 100, 140].map((y) => (
+            <line key={y} x1="0" x2="600" y1={y} y2={y} strokeWidth="1" vectorEffect="non-scaling-stroke" className="stroke-site-divider-on-dark" />
+          ))}
+          <line x1="380" x2="380" y1="0" y2="160" strokeWidth="1" vectorEffect="non-scaling-stroke" className="stroke-site-on-dark-muted" />
+          <path d={CHART_PATH} fill="none" strokeWidth="2.5" vectorEffect="non-scaling-stroke" className="stroke-surface-default" />
+        </svg>
+        <span style={{ left: '63.3%', top: '60%' }} className="absolute size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-brand-primary bg-surface-default" />
+        <span style={{ left: '63.3%', top: '8%' }} className="absolute -translate-x-1/2 whitespace-nowrap rounded-md bg-surface-default px-2.5 py-1 text-caption text-site-ink shadow-md">
+          April, <b>₦75M</b>
+        </span>
+      </div>
+      <div className="flex justify-between text-caption text-site-on-dark-muted">
+        {MONTHS.map((m) => (
+          <span key={m} className={m === 'Apr' ? 'text-text-inverse' : undefined}>{m}</span>
+        ))}
+      </div>
+    </Widget>
+  );
+}
 
 function Modules() {
   return (
     <section aria-labelledby="modules" className="relative -mt-30 px-50">
-      <div className="flex flex-col items-center gap-14 rounded-xl border border-border-default bg-surface-default px-14 py-16 shadow-lg">
+      <div className="flex flex-col items-center gap-12 rounded-xl border border-border-default bg-surface-default p-8 pt-14 shadow-lg">
         <SectionHead id="modules" title="What wCRM does" lead="Seven Business Development modules, all working from the same customer record." />
-        {/* Four modules on the first row, three centred on the second. */}
-        <ul className="flex w-full flex-wrap justify-center gap-y-12">
-          {MODULES.map((m) => (
-            <li key={m.title} className="group flex basis-1/4 flex-col items-start gap-4 px-5">
-              <IconTile icon={m.icon} />
-              <h3 className="font-outfit text-heading-2 text-text-ink">{m.title}</h3>
-              <p className="text-body-sm leading-150 text-text-slate">{m.body}</p>
-              {m.to && (
-                <Link to={m.to} aria-label={`Learn more about ${m.title}`} className="mt-auto flex items-center gap-1 rounded-xs text-label-sm text-site-red hover:text-brand-primary-hover focus-visible:outline-none focus-visible:shadow-focus">
-                  Learn more <span aria-hidden="true">→</span>
-                </Link>
-              )}
-            </li>
-          ))}
-        </ul>
+        <div className="grid w-full grid-cols-6 gap-4">
+          <BentoCard m={M.deals} tone="dark" span="col-span-4">
+            <Placeholder kind="screenshot" title="Deals register: KPI row and the first rows of the table" size="1400 × 680" align="top" radius="rounded-none" className="size-full border-0" />
+          </BentoCard>
+          <BentoCard m={M.activity} tone="light" span="col-span-2">
+            <ActivityWidget />
+          </BentoCard>
+          <BentoCard m={M.budgets} tone="light" span="col-span-2">
+            <BudgetWidget />
+          </BentoCard>
+          <BentoCard m={M.contacts} tone="light" span="col-span-2">
+            <ContactsWidget />
+          </BentoCard>
+          <BentoCard m={M.orbit} tone="dark" span="col-span-2">
+            <OrbitWidget />
+          </BentoCard>
+          <BentoCard m={M.companies} tone="dark" span="col-span-2">
+            <Placeholder kind="screenshot" title="Company record: contacts, owners and deals" size="Cropped company profile" align="top" radius="rounded-none" className="size-full border-0" />
+          </BentoCard>
+          <BentoCard m={M.reports} tone="dark" span="col-span-4">
+            <ReportsWidget />
+          </BentoCard>
+        </div>
       </div>
     </section>
   );
@@ -288,15 +451,10 @@ const SCREENS: { id: string; label: string; screen: string; points: string[] }[]
   { id: 'budget', label: 'Budget & Targets', screen: 'Budget allocations: target, achieved, variance by practice area', points: ['Targets split by team and practice area', 'Achieved from closed deals', 'Variance per allocation'] },
 ];
 
-function ProductTour({ suggest }: { suggest: boolean }) {
+function ProductTour() {
   return (
     <section aria-labelledby="tour" className="flex flex-col items-center gap-10 px-50 pb-20 pt-25">
       <SectionHead id="tour" title="See it at work" lead="The same screens your team will use on day one." />
-      {suggest && (
-        <Note n={3} title="Keep real screenshots here, and frame them">
-          Stock photos can’t show the product, so this is the one place screenshots must stay. Put them in a browser frame and add three short callouts beside each, so a tab reads without zooming in.
-        </Note>
-      )}
       <Tabs defaultValue="deals" className="w-full items-center">
         <TabsList className="self-center">
           {SCREENS.map((s) => (
@@ -305,31 +463,25 @@ function ProductTour({ suggest }: { suggest: boolean }) {
         </TabsList>
         {SCREENS.map((s) => (
           <TabsContent key={s.id} value={s.id} className="w-full">
-            {suggest ? (
-              <div className="flex items-center gap-12">
-                <ul className="flex w-site-footer-brand shrink-0 flex-col gap-6">
-                  {s.points.map((pt) => (
-                    <li key={pt} className="flex items-start gap-3 text-site-lead leading-150 text-site-ink">
-                      <Check />
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex flex-1 flex-col overflow-hidden rounded-xl border border-border-default bg-surface-default shadow-lg">
-                  <div aria-hidden="true" className="flex items-center gap-1.5 border-b border-border-default bg-surface-subtle px-4 py-3">
-                    <span className="size-2.5 rounded-full bg-status-danger" />
-                    <span className="size-2.5 rounded-full bg-status-warning-bright" />
-                    <span className="size-2.5 rounded-full bg-status-success" />
-                    <span className="ml-4 flex-1 rounded-full bg-surface-sunken px-3 py-0.5 text-caption-xs text-text-muted">app.wcrm.com/{s.id}</span>
-                  </div>
-                  <Placeholder kind="screenshot" title={s.screen} size="1400 × 680" className="aspect-video border-0" radius="rounded-none" />
+            <div className="flex items-center gap-12">
+              <ul className="flex w-site-footer-brand shrink-0 flex-col gap-6">
+                {s.points.map((pt) => (
+                  <li key={pt} className="flex items-start gap-3 text-site-lead leading-150 text-site-ink">
+                    <Check />
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-1 flex-col overflow-hidden rounded-xl border border-border-default bg-surface-default shadow-lg">
+                <div aria-hidden="true" className="flex items-center gap-1.5 border-b border-border-default bg-surface-subtle px-4 py-3">
+                  <span className="size-2.5 rounded-full bg-status-danger" />
+                  <span className="size-2.5 rounded-full bg-status-warning-bright" />
+                  <span className="size-2.5 rounded-full bg-status-success" />
+                  <span className="ml-4 flex-1 rounded-full bg-surface-sunken px-3 py-0.5 text-caption-xs text-text-muted">app.wcrm.com/{s.id}</span>
                 </div>
+                <Placeholder kind="screenshot" title={s.screen} size="1400 × 680" className="aspect-video border-0" radius="rounded-none" />
               </div>
-            ) : (
-              <div className="rounded-xl border border-border-default bg-surface-subtle p-3 shadow-md">
-                <Placeholder kind="screenshot" title={s.screen} size="1400 × 680, cropped to the top" className="h-site-split-media-h w-full" />
-              </div>
-            )}
+            </div>
           </TabsContent>
         ))}
       </Tabs>
@@ -363,7 +515,7 @@ function Foundation({ suggest }: { suggest: boolean }) {
       <SectionHead id="foundation" title="Our solid foundation" />
       {suggest ? (
         <>
-          <Note n={4} title="Give the values band a photo">
+          <Note n={3} title="Give the values band a photo">
             Four icon columns in a row repeat the modules card above. A stock photo of a team working together, with the values in a 2 × 2 grid beside it, breaks up the icon-heavy middle of the page.
           </Note>
           <div className="flex w-full items-center gap-16">
@@ -392,7 +544,7 @@ function Updates({ suggest }: { suggest: boolean }) {
     <section aria-labelledby="updates" className="flex flex-col items-center gap-14 px-50 py-20">
       <SectionHead id="updates" title="Resources & updates" />
       {suggest && (
-        <Note n={5} title="Use stock photos here, not screenshots or 3D icons">
+        <Note n={4} title="Use stock photos here, not screenshots or 3D icons">
           A customer story is about people, so lead with a photo of a sales team rather than a product screen. The glossy red 3D icons clash with the photographic hero; one photo per article (or a single consistent illustration set) reads as editorial content.
         </Note>
       )}
@@ -445,7 +597,7 @@ function CtaBand({ suggest }: { suggest: boolean }) {
   return (
     <section className="flex flex-col gap-6 bg-site-stats px-50 py-16 text-text-inverse">
       {suggest && (
-        <Note n={6} title="Put a face next to the button">
+        <Note n={5} title="Put a face next to the button">
           With the contact section gone, this is the page’s last way to reach the team. A small photo of the sales rep who answers (stock for now, a real one later) makes “Contact us” feel like talking to a person.
         </Note>
       )}
@@ -475,7 +627,7 @@ export function ConceptPage({ suggest = false }: { suggest?: boolean }) {
         <Hero suggest={suggest} />
         <Modules />
         {suggest && <SocialProof />}
-        <ProductTour suggest={suggest} />
+        <ProductTour />
         <Foundation suggest={suggest} />
         <Updates suggest={suggest} />
         <Pricing />

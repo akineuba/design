@@ -123,6 +123,7 @@
   --size-site-screen-toolbar: 62px;
   --size-site-donut: 176px;
   --size-site-menu: 359px;
+  --size-site-bento-row: 320px;
   --shadow-site-header: 0 -5px 20px 0 rgba(0, 0, 0, 0.25);
   --shadow-site-float: 0 12px 12px 0 rgba(30, 30, 47, 0.10);
   --shadow-site-float-soft: 0 6px 6px 0 rgba(30, 30, 47, 0.04);
@@ -136,6 +137,9 @@
   --shadow-site-success: 0 8px 12px 0 rgba(0, 0, 0, 0.06);
   --shadow-site-menu: 0 16px 16px 0 rgba(0, 0, 0, 0.05);
   --gradient-site-stats: linear-gradient(103.18deg, #FF6472 11.855%, #B10001 102.68%);
+  --gradient-site-vignette-dark: linear-gradient(to top, var(--color-site-midnight) 0%, var(--color-site-midnight) 25%, transparent 100%);
+  --gradient-site-vignette-light: linear-gradient(to top, var(--color-surface-subtle) 0%, var(--color-surface-subtle) 45%, transparent 100%);
+  --gradient-site-hero-scrim: linear-gradient(to right, var(--color-site-midnight) 0%, var(--color-site-midnight) 35%, transparent 100%);
   --scale-site-mini-card: 0.643;
   --scale-site-press: 0.98;
   --motion-site-duration-slow: 320ms;
