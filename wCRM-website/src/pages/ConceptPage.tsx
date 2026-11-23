@@ -15,6 +15,7 @@ import {
   StatusUpBoldIcon,
   Tabs,
   TabsContent,
+  cn,
   TabsList,
   TabsTrigger,
 } from '@ds';
@@ -24,23 +25,65 @@ import { SiteButtonLink, siteButtonClass } from '../components/SiteButton';
 import { CheckChip } from '../components/CheckChip';
 import { PlanCards } from '../components/PlanCards';
 import { ContactInput, ContactTextarea } from '../components/ContactField';
-import { ActivitiesScreen, BudgetScreen, ContactsScreen, DealsScreen, ScaledScreen } from '../components/app-screens';
 import whyHandshake from '../assets/home/why-handshake.png';
-import needPipeline from '../assets/home/need-pipeline.png';
-import needTracking from '../assets/home/need-tracking.png';
-import needLogging from '../assets/home/need-logging.png';
 import location from '../assets/shared/location.svg';
 import partnerMicrosoft from '../assets/home/partner-microsoft.png';
 import partnerAws from '../assets/home/partner-aws.png';
 import partnerHuawei from '../assets/home/partner-huawei.png';
 
 /*
- * Concept homepage (/concept). Not in Figma: it takes the section order of a classic corporate site
+ * Concept homepage. Not in Figma: it takes the section order of a classic corporate site
  * (utility bar → photo hero → overlapping services card → values band → news → contact with form → footer)
  * and fills it with wCRM's own copy, design-system tokens and the site's existing components.
+ *
+ * - /concept: the layout with a labelled placeholder wherever a product screenshot or 3D icon will go
+ *   (the hero photo stays).
+ * - /concept/suggestions: the same page with proposed changes (stock photos, social proof, map, …), each marked
+ *   with a numbered note.
  */
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
+
+type PlaceholderKind = 'screenshot' | 'icon' | 'stock' | 'map' | 'logo';
+
+const PLACEHOLDER_STYLE: Record<PlaceholderKind, { label: string; box: string }> = {
+  screenshot: { label: 'Product screenshot', box: 'border-accent-navy bg-accent-navy-subtle text-accent-navy' },
+  icon: { label: '3D icon', box: 'border-brand-primary bg-brand-primary-subtle text-brand-primary' },
+  stock: { label: 'Stock photo', box: 'border-status-success-strong bg-status-success-subtle text-status-success-text' },
+  map: { label: 'Map', box: 'border-border-muted bg-surface-sunken text-text-secondary' },
+  logo: { label: 'Logo', box: 'border-border-muted bg-surface-sunken text-text-muted' },
+};
+
+/** Wireframe placeholder: dashed box with a cross, the kind of asset and what it should show. */
+function Placeholder({ kind, title, size, className, radius = 'rounded-lg' }: { kind: PlaceholderKind; title?: string; size?: string; className?: string; radius?: string }) {
+  const k = PLACEHOLDER_STYLE[kind];
+  return (
+    <div role="img" aria-label={`${k.label} placeholder${title ? `: ${title}` : ''}`} className={cn('relative flex items-center justify-center overflow-hidden border border-dashed', radius, k.box, className)}>
+      <svg aria-hidden="true" className="absolute inset-0 size-full opacity-20" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" strokeWidth="0.4" vectorEffect="non-scaling-stroke" />
+        <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" strokeWidth="0.4" vectorEffect="non-scaling-stroke" />
+      </svg>
+      <div className="relative flex flex-col items-center gap-1 rounded-md bg-surface-default px-3 py-2 text-center shadow-sm">
+        <span className="text-badge uppercase tracking-wide">{k.label}</span>
+        {title && <span className="text-caption text-text-primary">{title}</span>}
+        {size && <span className="text-caption-xs text-text-muted">{size}</span>}
+      </div>
+    </div>
+  );
+}
+
+/** Numbered design suggestion, shown only on /concept/suggestions. */
+function Note({ n, title, children }: { n: number; title: string; children: ReactNode }) {
+  return (
+    <aside className="flex w-full items-start gap-3 rounded-md border border-alert-warning-border bg-alert-warning-bg p-4 text-left">
+      <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-alert-warning-icon text-badge text-text-inverse">{n}</span>
+      <div className="flex flex-col gap-1">
+        <p className="text-label text-alert-warning-title">Suggestion {n}: {title}</p>
+        <p className="text-body-sm leading-150 text-alert-warning-body">{children}</p>
+      </div>
+    </aside>
+  );
+}
 
 /** Section heading with the short red rule under it (the screenshot's teal rule, in wCRM red). */
 function SectionHead({ id, title, lead, align = 'center' }: { id: string; title: string; lead?: string; align?: 'center' | 'left' }) {
@@ -85,9 +128,9 @@ const PARTNERS = [
   { name: 'Huawei', src: partnerHuawei },
 ];
 
-function Hero() {
+function Hero({ suggest }: { suggest: boolean }) {
   return (
-    <section className="relative overflow-hidden bg-site-midnight px-50 pb-40 pt-25">
+    <section className="relative flex items-center gap-16 overflow-hidden bg-site-midnight px-50 pb-40 pt-25">
       <img src={whyHandshake} alt="" className="absolute inset-0 size-full object-cover opacity-30" />
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-site-midnight via-site-midnight to-transparent opacity-90" />
       <div className="relative flex w-site-split-media flex-col gap-6 text-text-inverse">
@@ -118,6 +161,16 @@ function Hero() {
           </ul>
         </div>
       </div>
+      {suggest && (
+        <div className="relative flex flex-1 flex-col gap-4">
+          <Note n={1} title="Show the product above the fold">
+            Keep the photo, but float a cropped Deals screen over it so visitors see the software in the first view, not only a handshake.
+          </Note>
+          <div className="rounded-xl bg-surface-default p-2 shadow-lg">
+            <Placeholder kind="screenshot" title="Deals register, cropped to the KPI row and first rows" size="1400 × 680, shown at about 440 wide" className="aspect-video" />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -159,19 +212,65 @@ function Services() {
   );
 }
 
-/* 4 · Product tour (design-system Tabs) ------------------------------------------------------------------- */
+/* 3b · Social proof (suggestion only) -------------------------------------------------------------------- */
 
-const SCREENS: { id: string; label: string; node: ReactNode; height: number }[] = [
-  { id: 'deals', label: 'Deals', node: <DealsScreen />, height: 681 },
-  { id: 'contacts', label: 'Contacts', node: <ContactsScreen />, height: 659 },
-  { id: 'reports', label: 'Reports', node: <ActivitiesScreen />, height: 725 },
-  { id: 'budget', label: 'Budget & Targets', node: <BudgetScreen />, height: 382 },
+const STATS = [
+  { value: '150+', label: 'Supported partners' },
+  { value: '20K+', label: 'Satisfied customers' },
+  { value: '10+', label: 'Years of experience' },
 ];
 
-function ProductTour() {
+function SocialProof() {
+  return (
+    <section aria-label="Customers" className="flex flex-col gap-10 px-50 pt-20">
+      <Note n={2} title="Add proof between “what it does” and “see it at work”">
+        The screenshot has no trust signals. A logo row, the homepage figures (once confirmed) and one named quote with a portrait answer “who uses this?” before the product tour.
+      </Note>
+      <div className="flex flex-col items-center gap-6">
+        <p className="text-caption font-semibold uppercase text-text-icon-strong">Trusted by business development teams at</p>
+        <ul className="grid w-full grid-cols-6 gap-6">
+          {Array.from({ length: 6 }, (_, i) => (
+            <li key={i}><Placeholder kind="logo" title={`Customer ${i + 1}`} className="h-12" /></li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex items-stretch gap-10 rounded-xl border border-border-default bg-surface-subtle p-8">
+        <Placeholder kind="stock" title="Portrait of the quoted customer (or a real photo they supply)" size="1:1" className="size-40 shrink-0" radius="rounded-full" />
+        <figure className="flex flex-1 flex-col justify-center gap-4">
+          <blockquote className="font-display text-heading-xl leading-140 text-site-ink">“Quote from a named customer about the result they got with wCRM.”</blockquote>
+          <figcaption className="text-body text-text-slate">Name, role · Company</figcaption>
+        </figure>
+        <dl className="flex shrink-0 flex-col justify-center gap-4 border-l border-border-default pl-10">
+          {STATS.map((st) => (
+            <div key={st.label} className="flex flex-col">
+              <dd className="font-onest text-heading-xl text-site-red">{st.value}</dd>
+              <dt className="text-body-sm text-text-slate">{st.label}</dt>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  );
+}
+
+/* 4 · Product tour (design-system Tabs) ------------------------------------------------------------------- */
+
+const SCREENS: { id: string; label: string; screen: string; points: string[] }[] = [
+  { id: 'deals', label: 'Deals', screen: 'Deals register: KPI row (total, open, won, lost, profit) and the deals table', points: ['Open, won and lost totals above the register', 'Profit and expected profit on every deal', 'Stage changes in one click'] },
+  { id: 'contacts', label: 'Contacts', screen: 'Contacts register: search, owners and company columns', points: ['Import the lists you already keep', 'An owner on every contact', 'Search by name, email or company'] },
+  { id: 'reports', label: 'Reports', screen: 'Reports: goal realization, revenue contribution, target vs achievement', points: ['Goal realization at a glance', 'Revenue by business stream', 'Export for reviews and board packs'] },
+  { id: 'budget', label: 'Budget & Targets', screen: 'Budget allocations: target, achieved, variance by practice area', points: ['Targets split by team and practice area', 'Achieved from closed deals', 'Variance per allocation'] },
+];
+
+function ProductTour({ suggest }: { suggest: boolean }) {
   return (
     <section aria-labelledby="tour" className="flex flex-col items-center gap-10 px-50 pb-20 pt-25">
       <SectionHead id="tour" title="See it at work" lead="The same screens your team will use on day one." />
+      {suggest && (
+        <Note n={3} title="Keep real screenshots here, and frame them">
+          Stock photos can’t show the product, so this is the one place screenshots must stay. Put them in a browser frame and add three short callouts beside each, so a tab reads without zooming in.
+        </Note>
+      )}
       <Tabs defaultValue="deals" className="w-full items-center">
         <TabsList className="self-center">
           {SCREENS.map((s) => (
@@ -180,13 +279,31 @@ function ProductTour() {
         </TabsList>
         {SCREENS.map((s) => (
           <TabsContent key={s.id} value={s.id} className="w-full">
-            <div className="rounded-xl border border-border-default bg-surface-subtle p-3 shadow-md">
-              <div className="relative h-site-split-media-h w-full overflow-hidden rounded-lg">
-                <ScaledScreen width={1400} height={s.height} fit="top" label={`${s.label} screen in wCRM`}>
-                  {s.node}
-                </ScaledScreen>
+            {suggest ? (
+              <div className="flex items-center gap-12">
+                <ul className="flex w-site-footer-brand shrink-0 flex-col gap-6">
+                  {s.points.map((pt) => (
+                    <li key={pt} className="flex items-start gap-3 text-site-lead leading-150 text-site-ink">
+                      <CheckChip />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-1 flex-col overflow-hidden rounded-xl border border-border-default bg-surface-default shadow-lg">
+                  <div aria-hidden="true" className="flex items-center gap-1.5 border-b border-border-default bg-surface-subtle px-4 py-3">
+                    <span className="size-2.5 rounded-full bg-status-danger" />
+                    <span className="size-2.5 rounded-full bg-status-warning-bright" />
+                    <span className="size-2.5 rounded-full bg-status-success" />
+                    <span className="ml-4 flex-1 rounded-full bg-surface-sunken px-3 py-0.5 text-caption-xs text-text-muted">app.wcrm.com/{s.id}</span>
+                  </div>
+                  <Placeholder kind="screenshot" title={s.screen} size="1400 × 680" className="aspect-video border-0" radius="rounded-none" />
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="rounded-xl border border-border-default bg-surface-subtle p-3 shadow-md">
+                <Placeholder kind="screenshot" title={s.screen} size="1400 × 680, cropped to the top" className="h-site-split-media-h w-full" />
+              </div>
+            )}
           </TabsContent>
         ))}
       </Tabs>
@@ -203,19 +320,34 @@ const FOUNDATION: { title: string; body: string; icon: Icon }[] = [
   { title: 'Results', body: 'Targets are measured against closed deals, so achievement is a number, not an estimate.', icon: StatusUpBoldIcon },
 ];
 
-function Foundation() {
-  return (
-    <section aria-labelledby="foundation" className="flex flex-col items-center gap-14 bg-accent-navy-subtle px-50 py-20">
-      <SectionHead id="foundation" title="Our solid foundation" />
-      <ul className="grid w-full grid-cols-4 gap-10">
+function Foundation({ suggest }: { suggest: boolean }) {
+  const values = (
+    <ul className={suggest ? 'grid flex-1 grid-cols-2 gap-10' : 'grid w-full grid-cols-4 gap-10'}>
         {FOUNDATION.map((f) => (
-          <li key={f.title} className="flex flex-col items-center gap-3 text-center">
+          <li key={f.title} className={suggest ? 'flex flex-col items-start gap-3' : 'flex flex-col items-center gap-3 text-center'}>
             <f.icon aria-hidden="true" strokeWidth={1.5} className="size-9 text-accent-navy-hover" />
             <h3 className="text-label uppercase tracking-wide text-site-ink">{f.title}</h3>
             <p className="text-body-sm leading-150 text-text-slate">{f.body}</p>
           </li>
         ))}
-      </ul>
+    </ul>
+  );
+  return (
+    <section aria-labelledby="foundation" className="flex flex-col items-center gap-14 bg-accent-navy-subtle px-50 py-20">
+      <SectionHead id="foundation" title="Our solid foundation" />
+      {suggest ? (
+        <>
+          <Note n={4} title="Give the values band a photo">
+            Four icon columns in a row repeat the services card above. A stock photo of a team working together, with the values in a 2 × 2 grid beside it, breaks up the icon-heavy middle of the page.
+          </Note>
+          <div className="flex w-full items-center gap-16">
+            <Placeholder kind="stock" title="Sales team working together in a modern office (West African team, natural light)" size="4:3" className="h-site-split-media-h w-site-split-media shrink-0" radius="rounded-pill" />
+            {values}
+          </div>
+        </>
+      ) : (
+        values
+      )}
     </section>
   );
 }
@@ -224,22 +356,27 @@ function Foundation() {
 
 /* Placeholder articles: titles show the kind of content the section is for; nothing here is published yet. */
 const UPDATES = [
-  { tag: 'Guide', title: 'Setting up stages that match how your team sells', body: 'Define reusable deal stages and pipelines that guide every opportunity from qualification to closure.', img: needPipeline },
-  { tag: 'Product', title: 'Bring Microsoft 365 and Google activity into wCRM', body: 'Emails and calendar events now land on the contact and deal they belong to.', img: needLogging },
-  { tag: 'Webinar', title: 'Planning next year’s sales budget by team', body: 'Allocate targets across practice areas and watch variance as deals close.', img: needTracking },
+  { tag: 'Guide', title: 'Setting up stages that match how your team sells', body: 'Define reusable deal stages and pipelines that guide every opportunity from qualification to closure.', icon: 'Gear (pipeline setup)', stock: 'Whiteboard with a sales pipeline sketched on it' },
+  { tag: 'Product', title: 'Bring Microsoft 365 and Google activity into wCRM', body: 'Emails and calendar events now land on the contact and deal they belong to.', icon: 'Notepad and pen (activity logging)', stock: 'Laptop with an inbox and calendar open' },
+  { tag: 'Webinar', title: 'Planning next year’s sales budget by team', body: 'Allocate targets across practice areas and watch variance as deals close.', icon: 'Head with chart (targets)', stock: 'Presenter in front of a room, mid-talk' },
 ];
 
-function Updates() {
+function Updates({ suggest }: { suggest: boolean }) {
   return (
     <section aria-labelledby="updates" className="flex flex-col items-center gap-14 px-50 py-20">
       <SectionHead id="updates" title="Resources & updates" />
+      {suggest && (
+        <Note n={5} title="Use stock photos here, not screenshots or 3D icons">
+          A customer story is about people, so lead with a photo of a sales team rather than a product screen. The glossy red 3D icons clash with the photographic hero; one photo per article (or a single consistent illustration set) reads as editorial content.
+        </Note>
+      )}
       <div className="grid w-full grid-cols-2 gap-12">
         <article className="group flex flex-col gap-5">
-          <div className="relative h-site-need-card w-full overflow-hidden rounded-xl border border-border-default">
-            <ScaledScreen width={1400} height={725} fit="top" label="Reports screen in wCRM">
-              <ActivitiesScreen />
-            </ScaledScreen>
-          </div>
+          {suggest ? (
+            <Placeholder kind="stock" title="Sales team reviewing results together around a laptop" size="16:9" className="h-site-need-card w-full" radius="rounded-xl" />
+          ) : (
+            <Placeholder kind="screenshot" title="Reports: goal realization and target vs achievement" size="1400 × 725, cropped to the top" className="h-site-need-card w-full" radius="rounded-xl" />
+          )}
           <span className="text-overline uppercase tracking-wide text-site-red">Customer story</span>
           <h3 className="font-display text-heading-xl text-site-ink group-hover:text-site-red">How a growing sales team replaced five spreadsheets with one pipeline</h3>
           <p className="text-body leading-150 text-text-slate">From scattered trackers to a single register of contacts, deals and targets, and a weekly report that builds itself.</p>
@@ -252,9 +389,11 @@ function Updates() {
                 <h3 className="text-heading-3 text-site-ink group-hover:text-site-red">{u.title}</h3>
                 <p className="text-body-sm leading-150 text-text-slate">{u.body}</p>
               </div>
-              <span className="flex h-site-need-img-h w-site-need-img shrink-0 items-center justify-center overflow-hidden rounded-lg bg-surface-subtle">
-                <img src={u.img} alt="" className="size-full object-cover transition-transform duration-site-slow ease-standard group-hover:scale-105" />
-              </span>
+              {suggest ? (
+                <Placeholder kind="stock" title={u.stock} className="h-site-need-img-h w-site-need-card shrink-0" />
+              ) : (
+                <Placeholder kind="icon" title={u.icon} size="120 × 128" className="h-site-need-img-h w-site-need-img shrink-0" />
+              )}
             </li>
           ))}
         </ul>
@@ -276,7 +415,7 @@ function Pricing() {
 
 /* 8 · Contact --------------------------------------------------------------------------------------------- */
 
-function Contact() {
+function Contact({ suggest }: { suggest: boolean }) {
   const [sent, setSent] = useState(false);
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -285,6 +424,11 @@ function Contact() {
   return (
     <section aria-labelledby="contact" className="flex flex-col items-center gap-14 bg-accent-navy-subtle px-50 py-20">
       <SectionHead id="contact" title="Contact us" />
+      {suggest && (
+        <Note n={6} title="Bring back the map from the reference">
+          Swap the “tailored setup” panel (it repeats the Contact Sales page) for a map of the Lekki office, as the reference does. It tells Nigerian buyers there is a local team they can visit.
+        </Note>
+      )}
       <div className="flex w-full items-start gap-16">
         <div className="flex flex-1 flex-col gap-6">
           <h3 className="text-heading-3 uppercase tracking-wide text-site-ink">Wragby Business Solutions and Technologies Limited</h3>
@@ -306,6 +450,9 @@ function Contact() {
               Typically responds within 1 business day
             </li>
           </ul>
+          {suggest ? (
+            <Placeholder kind="map" title="Map embed: Plot 21A Olubunmi Rotimi Street, Lekki Phase 1" size="Static map image or embed, about 460 × 240" className="h-site-need-card w-full" radius="rounded-xl" />
+          ) : (
           <div className="flex flex-col gap-3 rounded-xl border border-border-default bg-surface-default p-6">
             <p className="text-label text-site-ink">Need a tailored setup?</p>
             {['Tailored CRM workflows adapted to your processes', 'Custom integrations with your existing tools', 'Dedicated account manager and SLA-backed support'].map((b) => (
@@ -315,6 +462,7 @@ function Contact() {
               </p>
             ))}
           </div>
+          )}
         </div>
         <form onSubmit={submit} className="flex w-site-contact-form shrink-0 flex-col gap-5 rounded-xl border border-border-default bg-surface-default p-10 shadow-site-plan">
           {sent ? (
@@ -338,40 +486,49 @@ function Contact() {
 
 /* 9 · Closing band ---------------------------------------------------------------------------------------- */
 
-function CtaBand() {
+function CtaBand({ suggest }: { suggest: boolean }) {
   return (
-    <section className="flex items-center justify-between bg-site-stats px-50 py-16 text-text-inverse">
+    <section className="flex flex-col gap-6 bg-site-stats px-50 py-16 text-text-inverse">
+      {suggest && (
+        <Note n={7} title="Make the last ask a demo">
+          Visitors who scroll this far are comparing options. Lead with “Book a demo” and show who they will meet: a small stock (or real) photo of the sales team beside the buttons.
+        </Note>
+      )}
+      <div className="flex items-center justify-between gap-10">
       <div className="flex flex-col gap-2">
         <h2 className="font-display text-site-title">Close deals faster with wCRM</h2>
         <p className="text-site-lead">Start free for 14 days. No card needed to look around.</p>
       </div>
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <Link to="/pricing" className="rounded-callout bg-surface-default px-6 py-3 text-label text-site-red hover:bg-surface-subtle focus-visible:outline-none focus-visible:shadow-focus">
           Get Started
         </Link>
         <Link to="/contact" className="rounded-callout border border-text-inverse px-6 py-3 text-label text-text-inverse hover:bg-site-divider-on-dark focus-visible:outline-none focus-visible:shadow-focus">
           Book a demo
         </Link>
+        {suggest && <Placeholder kind="stock" size="Sales rep, 1:1" className="size-25 shrink-0" radius="rounded-full" />}
+      </div>
       </div>
     </section>
   );
 }
 
-/** Concept homepage: a corporate-site layout applied to wCRM (/concept). */
-export function ConceptPage() {
+/** Concept homepage: a corporate-site layout applied to wCRM (/concept, /concept/suggestions). */
+export function ConceptPage({ suggest = false }: { suggest?: boolean }) {
   return (
     <>
       <UtilityBar />
       <SiteHeader />
       <main className="animate-page-in">
-        <Hero />
+        <Hero suggest={suggest} />
         <Services />
-        <ProductTour />
-        <Foundation />
-        <Updates />
+        {suggest && <SocialProof />}
+        <ProductTour suggest={suggest} />
+        <Foundation suggest={suggest} />
+        <Updates suggest={suggest} />
         <Pricing />
-        <Contact />
-        <CtaBand />
+        <Contact suggest={suggest} />
+        <CtaBand suggest={suggest} />
       </main>
       <SiteFooter />
     </>

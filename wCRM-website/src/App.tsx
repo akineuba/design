@@ -35,6 +35,7 @@ export function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/features/:id" element={<FeaturePage />} />
         <Route path="/concept" element={<ConceptPage />} />
+        <Route path="/concept/suggestions" element={<ConceptPage suggest />} />
         <Route path="/checkout" element={<Navigate to="/checkout/configure" replace />} />
         <Route path="/checkout/configure" element={<ConfigurePage />} />
         <Route path="/checkout/account" element={<AccountPage />} />
