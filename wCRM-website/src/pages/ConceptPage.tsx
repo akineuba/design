@@ -458,11 +458,11 @@ function SocialProof() {
 
 /* 4 · Product tour (design-system Tabs) ------------------------------------------------------------------- */
 
-const SCREENS: { id: ShotId; label: string; to: string; points: string[] }[] = [
-  { id: 'deals', label: 'Deals', to: '/features/deal-management', points: ['Open, won and lost totals above the register', 'Profit and expected profit on every deal', 'Stage changes in one click'] },
-  { id: 'contacts', label: 'Contacts', to: '/features/contact-management', points: ['Import the lists you already keep', 'An owner on every contact', 'Search by name, email or company'] },
-  { id: 'reports', label: 'Reports', to: '/features/activities-reporting', points: ['Goal realization at a glance', 'Revenue by business stream', 'Export for reviews and board packs'] },
-  { id: 'budgets', label: 'Budgets', to: '/features/budget-targets', points: ['Targets split by team and practice area', 'Achieved from closed deals', 'Variance per allocation'] },
+const SCREENS: { id: ShotId; label: string; points: string[] }[] = [
+  { id: 'deals', label: 'Deals', points: ['Open, won and lost totals above the register', 'Profit and expected profit on every deal', 'Stage changes in one click'] },
+  { id: 'contacts', label: 'Contacts', points: ['Import the lists you already keep', 'An owner on every contact', 'Search by name, email or company'] },
+  { id: 'reports', label: 'Reports', points: ['Goal realization at a glance', 'Revenue by business stream', 'Export for reviews and board packs'] },
+  { id: 'budgets', label: 'Budgets', points: ['Targets split by team and practice area', 'Achieved from closed deals', 'Variance per allocation'] },
 ];
 
 function ProductTour() {
@@ -486,17 +486,8 @@ function ProductTour() {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-1 flex-col overflow-hidden rounded-xl border border-border-default bg-surface-default shadow-lg">
-                <div aria-hidden="true" className="flex items-center gap-1.5 border-b border-border-default bg-surface-subtle px-4 py-3">
-                  <span className="size-2.5 rounded-full bg-status-danger" />
-                  <span className="size-2.5 rounded-full bg-status-warning-bright" />
-                  <span className="size-2.5 rounded-full bg-status-success" />
-                  <span className="ml-4 flex-1 rounded-full bg-surface-sunken px-3 py-0.5 text-caption-xs text-text-muted">app.wcrm.com/{s.id}</span>
-                </div>
-                <div className="relative">
-                  <FullShot id={s.id} header={false} />
-                  <ArrowLink to={s.to} label={`See more about ${s.label}`} className="absolute bottom-4 right-4 shadow-lg" />
-                </div>
+              <div className="flex-1 overflow-hidden rounded-xl border border-border-default bg-surface-default shadow-lg">
+                <FullShot id={s.id} header={false} />
               </div>
             </div>
           </TabsContent>
@@ -551,9 +542,9 @@ function Foundation({ suggest }: { suggest: boolean }) {
 
 /* Copy from the homepage "Streamline Your Sales Workflow" section (Figma 691:5050); 3D icons supplied for this page. */
 const NEEDS = [
-  { title: 'Pipeline visibility', body: 'Monitor deals across every stage with clear pipeline views and conversion insights.', img: icon3dGear, to: '/features/deal-management' },
-  { title: 'Smart deal tracking', body: "Capture deal value, stage, contacts, and closure outcomes to focus your team's efforts.", img: icon3dAward, to: '/features/deal-management' },
-  { title: 'Integrated activity logging', body: 'Sync emails and calendar events from Microsoft 365 or Google directly into CRM records.', img: icon3dEnvelope, to: '/features/activities-reporting' },
+  { title: 'Pipeline visibility', body: 'Monitor deals across every stage with clear pipeline views and conversion insights.', img: icon3dGear },
+  { title: 'Smart deal tracking', body: "Capture deal value, stage, contacts, and closure outcomes to focus your team's efforts.", img: icon3dAward },
+  { title: 'Integrated activity logging', body: 'Sync emails and calendar events from Microsoft 365 or Google directly into CRM records.', img: icon3dEnvelope },
 ];
 
 function Streamline() {
@@ -570,7 +561,6 @@ function Streamline() {
                 <h3 className="font-outfit text-heading-2 text-site-ink">{n.title}</h3>
                 <p className="text-body-sm leading-150 text-text-slate">{n.body}</p>
               </div>
-              <ArrowLink to={n.to} label={`See more about ${n.title.toLowerCase()}`} />
             </li>
           ))}
         </ul>
