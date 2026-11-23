@@ -9,11 +9,11 @@ import { cn } from '@ds';
  */
 
 const DEPTH = 7; // extrusion layers
-const STEP = { x: 0.55, y: 0.85 }; // px per layer
+const STEP = { x: 0.45, y: 0.7 }; // px per layer
 
 export interface Icon3DProps {
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
-  /** Stroke width that makes the glyph chunky at 64px (lucide 16px glyphs ≈ 2, vuesax 24px glyphs ≈ 2.4). */
+  /** Stroke width that makes the glyph chunky at 48px (lucide 16px glyphs ≈ 1.9, vuesax 24px glyphs ≈ 1.8). */
   stroke: number;
   label: string;
   className?: string;
@@ -33,8 +33,8 @@ export function Icon3D({ Icon, stroke, label, className }: Icon3DProps) {
         </defs>
       </svg>
       {/* Ground shadow */}
-      <span aria-hidden="true" className="absolute bottom-4 h-2.5 w-14 rounded-full bg-text-black opacity-20 blur-sm" />
-      <span aria-hidden="true" className="relative size-16 -translate-x-1 -translate-y-1">
+      <span aria-hidden="true" className="absolute bottom-6 h-2 w-10 rounded-full bg-text-black opacity-20 blur-sm" />
+      <span aria-hidden="true" className="relative size-12 -translate-x-0.5 -translate-y-1">
         {Array.from({ length: DEPTH }, (_, i) => DEPTH - i).map((n) => (
           <Icon
             key={n}

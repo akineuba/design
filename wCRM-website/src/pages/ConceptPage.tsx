@@ -123,6 +123,16 @@ function SectionHead({ id, title, lead, align = 'center' }: { id: string; title:
   );
 }
 
+/** "See more" button under a section, in the site's outline button style. */
+function SeeMore({ to, label }: { to: string; label: string }) {
+  return (
+    <SiteButtonLink to={to} variant="header-outline" aria-label={label} className="group/more">
+      See more
+      <span aria-hidden="true" className="transition-transform duration-base ease-standard group-hover/more:translate-x-1">→</span>
+    </SiteButtonLink>
+  );
+}
+
 /* 1 · Utility bar ------------------------------------------------------------------------------------------- */
 
 function UtilityBar() {
@@ -397,12 +407,13 @@ function Modules() {
             <OrbitWidget />
           </BentoCard>
           <BentoCard m={M.companies} span="col-span-2">
-            <CropShot id="companies" name="companies" focus={{ x: 233, y: 70, w: 640 }} />
+            <InsetShot id="companies" />
           </BentoCard>
           <BentoCard m={M.reports} span="col-span-4">
             <ReportsWidget />
           </BentoCard>
         </div>
+        <SeeMore to="/#features" label="See more about wCRM's features" />
       </div>
     </section>
   );
@@ -492,6 +503,7 @@ function ProductTour() {
           </TabsContent>
         ))}
       </Tabs>
+      <SeeMore to="/features/deal-management" label="See more of the product in the feature pages" />
     </section>
   );
 }
@@ -533,15 +545,16 @@ function Foundation({ suggest }: { suggest: boolean }) {
       ) : (
         values
       )}
+      <SeeMore to="/#why-choose-us" label="See more about why teams choose wCRM" />
     </section>
   );
 }
 
-/* 6 · Resources & updates ---------------------------------------------------------------------------------- */
+/* 6 · Latest from wCRM ----------------------------------------------------------------------------------------- */
 
 /* Placeholder articles: titles show the kind of content the section is for; nothing here is published yet. */
 const UPDATES = [
-  { tag: 'Guide', title: 'Setting up stages that match how your team sells', body: 'Define reusable deal stages and pipelines that guide every opportunity from qualification to closure.', icon: { Icon: Setting2Icon, stroke: 2.4, label: 'Gear' }, stock: 'Whiteboard with a sales pipeline sketched on it' },
+  { tag: 'Guide', title: 'Setting up stages that match how your team sells', body: 'Define reusable deal stages and pipelines that guide every opportunity from qualification to closure.', icon: { Icon: Setting2Icon, stroke: 1.8, label: 'Gear' }, stock: 'Whiteboard with a sales pipeline sketched on it' },
   { tag: 'Product', title: 'Bring Microsoft 365 and Google activity into wCRM', body: 'Emails and calendar events now land on the contact and deal they belong to.', icon: { Icon: LucideMailIcon, stroke: 1.9, label: 'Envelope' }, stock: 'Laptop with an inbox and calendar open' },
   { tag: 'Webinar', title: 'Planning next year’s sales budget by team', body: 'Allocate targets across practice areas and watch variance as deals close.', icon: { Icon: LucideAwardIcon, stroke: 1.9, label: 'Award' }, stock: 'Presenter in front of a room, mid-talk' },
 ];
@@ -549,7 +562,7 @@ const UPDATES = [
 function Updates({ suggest }: { suggest: boolean }) {
   return (
     <section aria-labelledby="updates" className="flex flex-col items-center gap-14 px-50 py-20">
-      <SectionHead id="updates" title="Resources & updates" />
+      <SectionHead id="updates" title="Latest from wCRM" lead="Guides, product updates, webinars and customer stories." />
       {suggest && (
         <Note n={4} title="Use stock photos here, not screenshots or 3D icons">
           A customer story is about people, so lead with a photo of a sales team rather than a product screen. The glossy red 3D icons clash with the photographic hero; one photo per article (or a single consistent illustration set) reads as editorial content.
@@ -560,8 +573,8 @@ function Updates({ suggest }: { suggest: boolean }) {
           {suggest ? (
             <Placeholder kind="stock" title="Sales team reviewing results together around a laptop" size="16:9" className="h-site-need-card w-full" radius="rounded-xl" />
           ) : (
-            <div className="relative h-site-need-card w-full overflow-hidden rounded-xl border border-border-default bg-surface-canvas">
-              <CropShot id="reports" name="reports" focus={{ x: 217 + 12, y: 63 + 4, w: 1380 }} />
+            <div data-shot="window-reports" className="flex h-site-need-card w-full items-center justify-center overflow-hidden rounded-xl border border-border-default bg-surface-canvas p-4">
+              <FullShot id="reports" className="rounded-md border border-border-default shadow-md" />
             </div>
           )}
           <span className="text-overline uppercase tracking-wide text-site-red">Customer story</span>
@@ -585,6 +598,8 @@ function Updates({ suggest }: { suggest: boolean }) {
           ))}
         </ul>
       </div>
+      {/* No resources page exists yet; point this at the blog or resource hub once there is one. */}
+      <SeeMore to="#" label="See more guides, updates and stories" />
     </section>
   );
 }
@@ -596,6 +611,7 @@ function Pricing() {
     <section aria-labelledby="plans" className="flex flex-col items-center gap-12 border-t border-border-default px-50 py-20">
       <SectionHead id="plans" title="Simple, transparent pricing" lead="All plans include a 14-day free trial." />
       <PlanCards />
+      <SeeMore to="/pricing#compare" label="See more: compare every plan feature" />
     </section>
   );
 }
