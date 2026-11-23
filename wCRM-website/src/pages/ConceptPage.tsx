@@ -28,8 +28,8 @@ import { PlanCards } from '../components/PlanCards';
 import { CropShot, FullShot, InsetShot, type ShotId } from '../components/MarketingShots';
 import streamlineHandshake from '../assets/concept/streamline-handshake.webp';
 import icon3dGear from '../assets/concept/icon3d-gear.png';
-import icon3dAward from '../assets/concept/icon3d-award.png';
-import icon3dEnvelope from '../assets/concept/icon3d-envelope.png';
+import icon3dHandshake from '../assets/concept/icon3d-handshake.png';
+import icon3dNotepad from '../assets/concept/icon3d-notepad.png';
 import whyHandshake from '../assets/home/why-handshake.png';
 import partnerMicrosoft from '../assets/home/partner-microsoft.png';
 import partnerAws from '../assets/home/partner-aws.png';
@@ -543,8 +543,8 @@ function Foundation({ suggest }: { suggest: boolean }) {
 /* Copy from the homepage "Streamline Your Sales Workflow" section (Figma 691:5050); 3D icons supplied for this page. */
 const NEEDS = [
   { title: 'Pipeline visibility', body: 'Monitor deals across every stage with clear pipeline views and conversion insights.', img: icon3dGear },
-  { title: 'Smart deal tracking', body: "Capture deal value, stage, contacts, and closure outcomes to focus your team's efforts.", img: icon3dAward },
-  { title: 'Integrated activity logging', body: 'Sync emails and calendar events from Microsoft 365 or Google directly into CRM records.', img: icon3dEnvelope },
+  { title: 'Smart deal tracking', body: "Capture deal value, stage, contacts, and closure outcomes to focus your team's efforts.", img: icon3dHandshake },
+  { title: 'Integrated activity logging', body: 'Sync emails and calendar events from Microsoft 365 or Google directly into CRM records.', img: icon3dNotepad },
 ];
 
 function Streamline() {
