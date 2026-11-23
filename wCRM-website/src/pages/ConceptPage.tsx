@@ -1,48 +1,70 @@
-import { useState, type ComponentType, type FormEvent, type ReactNode, type SVGProps } from 'react';
+import type { ComponentType, ReactNode, SVGProps } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  LucideActivityIcon,
+  Buildings2Icon,
   LucideAwardIcon,
+  LucideCalendarIcon,
   LucideChartLineIcon,
-  LucideCheckCircleIcon,
-  LucideClockIcon,
-  LucideCloudSyncIcon,
-  LucideLockIcon,
+  LucideCheckIcon,
+  LucideInboxIcon,
+  LucideKeyIcon,
   LucideMailIcon,
   LucidePhoneIcon,
-  LucideUserIcon,
   PeopleIcon,
-  StatusUpBoldIcon,
+  Profile2UserIcon,
+  SolarPlanetLinearIcon,
   Tabs,
   TabsContent,
-  cn,
   TabsList,
   TabsTrigger,
+  cn,
 } from '@ds';
 import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
-import { SiteButtonLink, siteButtonClass } from '../components/SiteButton';
-import { CheckChip } from '../components/CheckChip';
+import { SiteButtonLink } from '../components/SiteButton';
 import { PlanCards } from '../components/PlanCards';
-import { ContactInput, ContactTextarea } from '../components/ContactField';
 import whyHandshake from '../assets/home/why-handshake.png';
-import location from '../assets/shared/location.svg';
 import partnerMicrosoft from '../assets/home/partner-microsoft.png';
 import partnerAws from '../assets/home/partner-aws.png';
 import partnerHuawei from '../assets/home/partner-huawei.png';
 
 /*
  * Concept homepage. Not in Figma: it takes the section order of a classic corporate site
- * (utility bar → photo hero → overlapping services card → values band → news → contact with form → footer)
+ * (utility bar → photo hero → overlapping modules card → values band → resources → closing band → footer)
  * and fills it with wCRM's own copy, design-system tokens and the site's existing components.
  *
  * - /concept: the layout with a labelled placeholder wherever a product screenshot or 3D icon will go
  *   (the hero photo stays).
  * - /concept/suggestions: the same page with proposed changes (stock photos, social proof, map, …), each marked
  *   with a numbered note.
+ * Icons are the design-system glyphs used in the product's Business Development sidebar.
  */
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
+
+/** A design-system icon with the stroke that evens out its source grid at the display size (see SiteHeader FEATURE_LINKS). */
+type DsIcon = { Icon: Icon; stroke: number };
+
+/**
+ * Icon in a square tile. Glyphs are the design-system icons the Business Development sidebar uses
+ * (NavMenu.fixtures `businessSections`), drawn as outlines in navy.
+ */
+function IconTile({ icon, tone = 'subtle' }: { icon: DsIcon; tone?: 'subtle' | 'surface' }) {
+  return (
+    <span className={cn('flex size-12 shrink-0 items-center justify-center rounded-tile border text-accent-navy transition-transform duration-base ease-standard group-hover:-translate-y-1', tone === 'subtle' ? 'border-accent-navy-subtle bg-accent-navy-subtle' : 'border-border-default bg-surface-default')}>
+      <icon.Icon aria-hidden="true" strokeWidth={icon.stroke} className="size-6" />
+    </span>
+  );
+}
+
+/** Check mark for short benefit lists, from the design-system icon set. */
+function Check() {
+  return (
+    <span aria-hidden="true" className="flex size-6 shrink-0 items-center justify-center rounded-full bg-accent-navy-subtle text-accent-navy">
+      <LucideCheckIcon strokeWidth={2} className="size-3.5" />
+    </span>
+  );
+}
 
 type PlaceholderKind = 'screenshot' | 'icon' | 'stock' | 'map' | 'logo';
 
@@ -177,30 +199,34 @@ function Hero({ suggest }: { suggest: boolean }) {
 
 /* 3 · Overlapping "What wCRM does" card ------------------------------------------------------------------- */
 
-const SERVICES: { title: string; body: string; icon: Icon; to?: string }[] = [
-  { title: 'Contact Management', body: 'Store and search customer profiles, import contact lists, and keep every relationship detail at your fingertips.', icon: PeopleIcon, to: '/features/contact-management' },
-  { title: 'Deal Management', body: 'Track every opportunity from qualification to closure with pipelines, deal stages, and ownership controls.', icon: LucideChartLineIcon, to: '/features/deal-management' },
-  { title: 'Activities & Reporting', body: 'Log emails, calls, meetings, and tasks in a unified timeline with performance trends and exportable reports.', icon: LucideActivityIcon, to: '/features/activities-reporting' },
-  { title: 'Budget & Targets', body: 'Plan sales budgets, distribute targets across teams, and measure achievement against closed deals.', icon: LucideAwardIcon, to: '/features/budget-targets' },
-  { title: 'Email & Calendar Sync', body: 'Sync emails and calendar events from Microsoft 365 or Google directly into CRM records.', icon: LucideCloudSyncIcon },
-  { title: 'Enterprise-Grade Security', body: 'Role-based access controls, end-to-end encryption, and compliance-ready audit trails.', icon: LucideLockIcon },
+/*
+ * The seven Business Development modules, in the order of the product's sidebar, with its icons
+ * (design system NavMenu.fixtures `businessSections`). Modules with a feature page link to it.
+ */
+const MODULES: { title: string; body: string; icon: DsIcon; to?: string }[] = [
+  { title: 'Budgets', body: 'Plan sales budgets by period and department, split targets across teams, and measure achievement against closed deals.', icon: { Icon: LucideChartLineIcon, stroke: 1 }, to: '/features/budget-targets' },
+  { title: 'Reports', body: 'Performance, activity, collaboration and task reports, with breakdowns you can export for reviews.', icon: { Icon: LucideInboxIcon, stroke: 1 }, to: '/features/activities-reporting' },
+  { title: 'Deals', body: 'Track every opportunity from qualification to closure with pipelines, deal stages and ownership controls.', icon: { Icon: PeopleIcon, stroke: 1.5 }, to: '/features/deal-management' },
+  { title: 'Companies', body: 'Keep every account you sell to on one record, with its contacts, owners and deals.', icon: { Icon: Buildings2Icon, stroke: 1.5 } },
+  { title: 'Contacts', body: 'Store and search customer profiles, import contact lists, and keep every relationship detail to hand.', icon: { Icon: Profile2UserIcon, stroke: 1.5 }, to: '/features/contact-management' },
+  { title: 'Activity', body: 'Log calls, meetings, emails and tasks in one timeline, synced from Microsoft 365 or Google.', icon: { Icon: LucideCalendarIcon, stroke: 1 } },
+  { title: 'Orbit AI', body: 'An assistant built into wCRM that helps your team find answers in its pipeline, contacts and activity.', icon: { Icon: SolarPlanetLinearIcon, stroke: 1.25 } },
 ];
 
-function Services() {
+function Modules() {
   return (
-    <section aria-labelledby="services" className="relative -mt-30 px-50">
+    <section aria-labelledby="modules" className="relative -mt-30 px-50">
       <div className="flex flex-col items-center gap-14 rounded-xl border border-border-default bg-surface-default px-14 py-16 shadow-lg">
-        <SectionHead id="services" title="What wCRM does" lead="Every module is built for business development teams, and they all share one customer record." />
-        <ul className="grid w-full grid-cols-3 gap-x-10 gap-y-12">
-          {SERVICES.map((s) => (
-            <li key={s.title} className="group flex flex-col items-center gap-4 text-center">
-              <span className="flex size-14 items-center justify-center rounded-full bg-site-red-tint text-site-red transition-transform duration-base ease-standard group-hover:-translate-y-1">
-                <s.icon aria-hidden="true" strokeWidth={1.5} className="size-6" />
-              </span>
-              <h3 className="font-outfit text-heading-2 text-text-ink">{s.title}</h3>
-              <p className="text-body leading-150 text-text-slate">{s.body}</p>
-              {s.to && (
-                <Link to={s.to} className="flex items-center gap-1 rounded-xs text-label-sm text-site-red hover:text-brand-primary-hover focus-visible:outline-none focus-visible:shadow-focus">
+        <SectionHead id="modules" title="What wCRM does" lead="Seven Business Development modules, all working from the same customer record." />
+        {/* Four modules on the first row, three centred on the second. */}
+        <ul className="flex w-full flex-wrap justify-center gap-y-12">
+          {MODULES.map((m) => (
+            <li key={m.title} className="group flex basis-1/4 flex-col items-start gap-4 px-5">
+              <IconTile icon={m.icon} />
+              <h3 className="font-outfit text-heading-2 text-text-ink">{m.title}</h3>
+              <p className="text-body-sm leading-150 text-text-slate">{m.body}</p>
+              {m.to && (
+                <Link to={m.to} aria-label={`Learn more about ${m.title}`} className="mt-auto flex items-center gap-1 rounded-xs text-label-sm text-site-red hover:text-brand-primary-hover focus-visible:outline-none focus-visible:shadow-focus">
                   Learn more <span aria-hidden="true">→</span>
                 </Link>
               )}
@@ -284,7 +310,7 @@ function ProductTour({ suggest }: { suggest: boolean }) {
                 <ul className="flex w-site-footer-brand shrink-0 flex-col gap-6">
                   {s.points.map((pt) => (
                     <li key={pt} className="flex items-start gap-3 text-site-lead leading-150 text-site-ink">
-                      <CheckChip />
+                      <Check />
                       {pt}
                     </li>
                   ))}
@@ -313,11 +339,11 @@ function ProductTour({ suggest }: { suggest: boolean }) {
 
 /* 5 · Foundation band ------------------------------------------------------------------------------------- */
 
-const FOUNDATION: { title: string; body: string; icon: Icon }[] = [
-  { title: 'Customer first', body: 'Every opportunity carries its company, contacts, owner, stage and value, so nobody starts a call cold.', icon: LucideUserIcon },
-  { title: 'Integrity', body: 'Role-based access and audit trails decide who can see and change each record.', icon: LucideCheckCircleIcon },
-  { title: 'Insight', body: 'Live dashboards summarise deal volume, pipeline value and conversion as the work happens.', icon: LucideChartLineIcon },
-  { title: 'Results', body: 'Targets are measured against closed deals, so achievement is a number, not an estimate.', icon: StatusUpBoldIcon },
+const FOUNDATION: { title: string; body: string; icon: DsIcon }[] = [
+  { title: 'Customer first', body: 'Every opportunity carries its company, contacts, owner, stage and value, so nobody starts a call cold.', icon: { Icon: Profile2UserIcon, stroke: 1.5 } },
+  { title: 'Integrity', body: 'Role-based access and audit trails decide who can see and change each record.', icon: { Icon: LucideKeyIcon, stroke: 1 } },
+  { title: 'Insight', body: 'Live dashboards summarise deal volume, pipeline value and conversion as the work happens.', icon: { Icon: LucideChartLineIcon, stroke: 1 } },
+  { title: 'Results', body: 'Targets are measured against closed deals, so achievement is a number, not an estimate.', icon: { Icon: LucideAwardIcon, stroke: 1 } },
 ];
 
 function Foundation({ suggest }: { suggest: boolean }) {
@@ -325,7 +351,7 @@ function Foundation({ suggest }: { suggest: boolean }) {
     <ul className={suggest ? 'grid flex-1 grid-cols-2 gap-10' : 'grid w-full grid-cols-4 gap-10'}>
         {FOUNDATION.map((f) => (
           <li key={f.title} className={suggest ? 'flex flex-col items-start gap-3' : 'flex flex-col items-center gap-3 text-center'}>
-            <f.icon aria-hidden="true" strokeWidth={1.5} className="size-9 text-accent-navy-hover" />
+            <IconTile icon={f.icon} tone="surface" />
             <h3 className="text-label uppercase tracking-wide text-site-ink">{f.title}</h3>
             <p className="text-body-sm leading-150 text-text-slate">{f.body}</p>
           </li>
@@ -338,7 +364,7 @@ function Foundation({ suggest }: { suggest: boolean }) {
       {suggest ? (
         <>
           <Note n={4} title="Give the values band a photo">
-            Four icon columns in a row repeat the services card above. A stock photo of a team working together, with the values in a 2 × 2 grid beside it, breaks up the icon-heavy middle of the page.
+            Four icon columns in a row repeat the modules card above. A stock photo of a team working together, with the values in a 2 × 2 grid beside it, breaks up the icon-heavy middle of the page.
           </Note>
           <div className="flex w-full items-center gap-16">
             <Placeholder kind="stock" title="Sales team working together in a modern office (West African team, natural light)" size="4:3" className="h-site-split-media-h w-site-split-media shrink-0" radius="rounded-pill" />
@@ -384,16 +410,16 @@ function Updates({ suggest }: { suggest: boolean }) {
         <ul className="flex flex-col divide-y divide-border-default">
           {UPDATES.map((u) => (
             <li key={u.title} className="group flex gap-6 py-6 first:pt-0">
-              <div className="flex flex-1 flex-col gap-2">
-                <span className="text-overline uppercase tracking-wide text-site-red">{u.tag}</span>
-                <h3 className="text-heading-3 text-site-ink group-hover:text-site-red">{u.title}</h3>
-                <p className="text-body-sm leading-150 text-text-slate">{u.body}</p>
-              </div>
               {suggest ? (
                 <Placeholder kind="stock" title={u.stock} className="h-site-need-img-h w-site-need-card shrink-0" />
               ) : (
                 <Placeholder kind="icon" title={u.icon} size="120 × 128" className="h-site-need-img-h w-site-need-img shrink-0" />
               )}
+              <div className="flex flex-1 flex-col gap-2">
+                <span className="text-overline uppercase tracking-wide text-site-red">{u.tag}</span>
+                <h3 className="text-heading-3 text-site-ink group-hover:text-site-red">{u.title}</h3>
+                <p className="text-body-sm leading-150 text-text-slate">{u.body}</p>
+              </div>
             </li>
           ))}
         </ul>
@@ -413,98 +439,24 @@ function Pricing() {
   );
 }
 
-/* 8 · Contact --------------------------------------------------------------------------------------------- */
-
-function Contact({ suggest }: { suggest: boolean }) {
-  const [sent, setSent] = useState(false);
-  const submit = (e: FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-  };
-  return (
-    <section aria-labelledby="contact" className="flex flex-col items-center gap-14 bg-accent-navy-subtle px-50 py-20">
-      <SectionHead id="contact" title="Contact us" />
-      {suggest && (
-        <Note n={6} title="Bring back the map from the reference">
-          Swap the “tailored setup” panel (it repeats the Contact Sales page) for a map of the Lekki office, as the reference does. It tells Nigerian buyers there is a local team they can visit.
-        </Note>
-      )}
-      <div className="flex w-full items-start gap-16">
-        <div className="flex flex-1 flex-col gap-6">
-          <h3 className="text-heading-3 uppercase tracking-wide text-site-ink">Wragby Business Solutions and Technologies Limited</h3>
-          <ul className="flex flex-col gap-4 text-body text-text-slate">
-            <li className="flex items-start gap-3">
-              <img src={location} alt="" className="size-5 shrink-0" />
-              Plot 21A Olubunmi Rotimi Street, off Abike Sulaiman St, Lekki Phase 1, Lagos 106104, Nigeria
-            </li>
-            <li className="flex items-center gap-3">
-              <LucidePhoneIcon aria-hidden="true" className="size-5 text-site-red" />
-              +234 201 700 6320
-            </li>
-            <li className="flex items-center gap-3">
-              <LucideMailIcon aria-hidden="true" className="size-5 text-site-red" />
-              <a href="mailto:info@wragbysolutions.com" className="text-accent-navy hover:text-site-red">info@wragbysolutions.com</a>
-            </li>
-            <li className="flex items-center gap-3">
-              <LucideClockIcon aria-hidden="true" className="size-5 text-site-red" />
-              Typically responds within 1 business day
-            </li>
-          </ul>
-          {suggest ? (
-            <Placeholder kind="map" title="Map embed: Plot 21A Olubunmi Rotimi Street, Lekki Phase 1" size="Static map image or embed, about 460 × 240" className="h-site-need-card w-full" radius="rounded-xl" />
-          ) : (
-          <div className="flex flex-col gap-3 rounded-xl border border-border-default bg-surface-default p-6">
-            <p className="text-label text-site-ink">Need a tailored setup?</p>
-            {['Tailored CRM workflows adapted to your processes', 'Custom integrations with your existing tools', 'Dedicated account manager and SLA-backed support'].map((b) => (
-              <p key={b} className="flex items-center gap-3 text-body-sm text-site-label">
-                <CheckChip />
-                {b}
-              </p>
-            ))}
-          </div>
-          )}
-        </div>
-        <form onSubmit={submit} className="flex w-site-contact-form shrink-0 flex-col gap-5 rounded-xl border border-border-default bg-surface-default p-10 shadow-site-plan">
-          {sent ? (
-            <p role="status" className="py-20 text-center font-display text-heading-xl text-site-red">Thanks! We&apos;ll be in touch shortly.</p>
-          ) : (
-            <>
-              <div className="flex gap-4">
-                <ContactInput label="Name" name="name" placeholder="Jane Doe" autoComplete="name" required />
-                <ContactInput label="Work email" name="email" type="email" placeholder="jane@company.com" autoComplete="email" required />
-              </div>
-              <ContactInput label="Company" name="company" placeholder="Acme Corporation" autoComplete="organization" />
-              <ContactTextarea label="Message" name="message" placeholder="Tell us about your team and what you'd like wCRM to do." />
-              <button type="submit" className={siteButtonClass('plan', 'text-site-body-lg font-semibold')}>Send message →</button>
-            </>
-          )}
-        </form>
-      </div>
-    </section>
-  );
-}
-
-/* 9 · Closing band ---------------------------------------------------------------------------------------- */
+/* 8 · Closing band ---------------------------------------------------------------------------------------- */
 
 function CtaBand({ suggest }: { suggest: boolean }) {
   return (
     <section className="flex flex-col gap-6 bg-site-stats px-50 py-16 text-text-inverse">
       {suggest && (
-        <Note n={7} title="Make the last ask a demo">
-          Visitors who scroll this far are comparing options. Lead with “Book a demo” and show who they will meet: a small stock (or real) photo of the sales team beside the buttons.
+        <Note n={6} title="Put a face next to the button">
+          With the contact section gone, this is the page’s last way to reach the team. A small photo of the sales rep who answers (stock for now, a real one later) makes “Contact us” feel like talking to a person.
         </Note>
       )}
       <div className="flex items-center justify-between gap-10">
       <div className="flex flex-col gap-2">
         <h2 className="font-display text-site-title">Close deals faster with wCRM</h2>
-        <p className="text-site-lead">Start free for 14 days. No card needed to look around.</p>
+        <p className="text-site-lead">Talk to our team about setting up wCRM for your business development team.</p>
       </div>
       <div className="flex items-center gap-4">
-        <Link to="/pricing" className="rounded-callout bg-surface-default px-6 py-3 text-label text-site-red hover:bg-surface-subtle focus-visible:outline-none focus-visible:shadow-focus">
-          Get Started
-        </Link>
-        <Link to="/contact" className="rounded-callout border border-text-inverse px-6 py-3 text-label text-text-inverse hover:bg-site-divider-on-dark focus-visible:outline-none focus-visible:shadow-focus">
-          Book a demo
+        <Link to="/contact" className="rounded-callout bg-surface-default px-6 py-3 text-label text-site-red hover:bg-surface-subtle focus-visible:outline-none focus-visible:shadow-focus">
+          Contact us
         </Link>
         {suggest && <Placeholder kind="stock" size="Sales rep, 1:1" className="size-25 shrink-0" radius="rounded-full" />}
       </div>
@@ -521,13 +473,12 @@ export function ConceptPage({ suggest = false }: { suggest?: boolean }) {
       <SiteHeader />
       <main className="animate-page-in">
         <Hero suggest={suggest} />
-        <Services />
+        <Modules />
         {suggest && <SocialProof />}
         <ProductTour suggest={suggest} />
         <Foundation suggest={suggest} />
         <Updates suggest={suggest} />
         <Pricing />
-        <Contact suggest={suggest} />
         <CtaBand suggest={suggest} />
       </main>
       <SiteFooter />
