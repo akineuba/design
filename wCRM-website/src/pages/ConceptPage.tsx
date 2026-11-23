@@ -25,6 +25,7 @@ import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteButtonLink } from '../components/SiteButton';
 import { PlanCards } from '../components/PlanCards';
+import { CropShot, FullShot, SkewShot, type ShotId } from '../components/MarketingShots';
 import whyHandshake from '../assets/home/why-handshake.png';
 import partnerMicrosoft from '../assets/home/partner-microsoft.png';
 import partnerAws from '../assets/home/partner-aws.png';
@@ -191,7 +192,9 @@ function Hero({ suggest }: { suggest: boolean }) {
             Keep the photo, but float a cropped Deals screen over it so visitors see the software in the first view, not only a handshake.
           </Note>
           <div className="rounded-xl bg-surface-default p-2 shadow-lg">
-            <Placeholder kind="screenshot" title="Deals register, cropped to the KPI row and first rows" size="1400 × 680, shown at about 440 wide" className="aspect-video" />
+            <div className="relative aspect-video overflow-hidden rounded-lg">
+              <CropShot id="deals" name="hero-deals" focus={{ x: 0, y: 0, w: 1100 }} />
+            </div>
           </div>
         </div>
       )}
@@ -375,7 +378,7 @@ function Modules() {
         <SectionHead id="modules" title="What wCRM does" lead="Seven Business Development modules, all working from the same customer record." />
         <div className="grid w-full grid-cols-6 gap-4">
           <BentoCard m={M.deals} tone="dark" span="col-span-4">
-            <Placeholder kind="screenshot" title="Deals register: KPI row and the first rows of the table" size="1400 × 680" align="top" radius="rounded-none" className="size-full border-0" />
+            <SkewShot id="deals" />
           </BentoCard>
           <BentoCard m={M.activity} tone="light" span="col-span-2">
             <ActivityWidget />
@@ -390,7 +393,7 @@ function Modules() {
             <OrbitWidget />
           </BentoCard>
           <BentoCard m={M.companies} tone="dark" span="col-span-2">
-            <Placeholder kind="screenshot" title="Company record: contacts, owners and deals" size="Cropped company profile" align="top" radius="rounded-none" className="size-full border-0" />
+            <CropShot id="companies" name="companies" focus={{ x: 233, y: 70, w: 640 }} />
           </BentoCard>
           <BentoCard m={M.reports} tone="dark" span="col-span-4">
             <ReportsWidget />
@@ -444,11 +447,11 @@ function SocialProof() {
 
 /* 4 · Product tour (design-system Tabs) ------------------------------------------------------------------- */
 
-const SCREENS: { id: string; label: string; screen: string; points: string[] }[] = [
-  { id: 'deals', label: 'Deals', screen: 'Deals register: KPI row (total, open, won, lost, profit) and the deals table', points: ['Open, won and lost totals above the register', 'Profit and expected profit on every deal', 'Stage changes in one click'] },
-  { id: 'contacts', label: 'Contacts', screen: 'Contacts register: search, owners and company columns', points: ['Import the lists you already keep', 'An owner on every contact', 'Search by name, email or company'] },
-  { id: 'reports', label: 'Reports', screen: 'Reports: goal realization, revenue contribution, target vs achievement', points: ['Goal realization at a glance', 'Revenue by business stream', 'Export for reviews and board packs'] },
-  { id: 'budget', label: 'Budget & Targets', screen: 'Budget allocations: target, achieved, variance by practice area', points: ['Targets split by team and practice area', 'Achieved from closed deals', 'Variance per allocation'] },
+const SCREENS: { id: ShotId; label: string; points: string[] }[] = [
+  { id: 'deals', label: 'Deals', points: ['Open, won and lost totals above the register', 'Profit and expected profit on every deal', 'Stage changes in one click'] },
+  { id: 'contacts', label: 'Contacts', points: ['Import the lists you already keep', 'An owner on every contact', 'Search by name, email or company'] },
+  { id: 'reports', label: 'Reports', points: ['Goal realization at a glance', 'Revenue by business stream', 'Export for reviews and board packs'] },
+  { id: 'budgets', label: 'Budgets', points: ['Targets split by team and practice area', 'Achieved from closed deals', 'Variance per allocation'] },
 ];
 
 function ProductTour() {
@@ -479,7 +482,7 @@ function ProductTour() {
                   <span className="size-2.5 rounded-full bg-status-success" />
                   <span className="ml-4 flex-1 rounded-full bg-surface-sunken px-3 py-0.5 text-caption-xs text-text-muted">app.wcrm.com/{s.id}</span>
                 </div>
-                <Placeholder kind="screenshot" title={s.screen} size="1400 × 680" className="aspect-video border-0" radius="rounded-none" />
+                <FullShot id={s.id} />
               </div>
             </div>
           </TabsContent>
@@ -553,7 +556,9 @@ function Updates({ suggest }: { suggest: boolean }) {
           {suggest ? (
             <Placeholder kind="stock" title="Sales team reviewing results together around a laptop" size="16:9" className="h-site-need-card w-full" radius="rounded-xl" />
           ) : (
-            <Placeholder kind="screenshot" title="Reports: goal realization and target vs achievement" size="1400 × 725, cropped to the top" className="h-site-need-card w-full" radius="rounded-xl" />
+            <div className="relative h-site-need-card w-full overflow-hidden rounded-xl border border-border-default bg-surface-canvas">
+              <CropShot id="reports" name="reports" focus={{ x: 217 + 12, y: 63 + 4, w: 1380 }} />
+            </div>
           )}
           <span className="text-overline uppercase tracking-wide text-site-red">Customer story</span>
           <h3 className="font-display text-heading-xl text-site-ink group-hover:text-site-red">How a growing sales team replaced five spreadsheets with one pipeline</h3>

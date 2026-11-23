@@ -8,11 +8,20 @@ import { useLayoutEffect, useRef, useState, type ReactNode } from 'react';
  */
 export type ScreenFit = 'cover' | 'top' | 'left';
 
+/** Zoom to one region instead: its left/top edge and width in native px fill the box's width. */
+export interface ScreenFocus {
+  x: number;
+  y: number;
+  w: number;
+}
+
 interface ScaledScreenProps {
   /** Native size the screen is laid out at, in px. */
   width: number;
   height: number;
   fit: ScreenFit;
+  /** Optional crop: overrides `fit` and scales so this region fills the box's width (marketing crops). */
+  focus?: ScreenFocus;
   /** Accessible description of the illustration. */
   label: string;
   children: ReactNode;
@@ -23,7 +32,7 @@ interface ScaledScreenProps {
  * The screen is built from design-system tokens, so it follows the light / dark theme. It is an illustration:
  * the subtree is `inert` (not focusable, not clickable) and exposed to assistive tech as one image.
  */
-export function ScaledScreen({ width, height, fit, label, children }: ScaledScreenProps) {
+export function ScaledScreen({ width, height, fit, focus, label, children }: ScaledScreenProps) {
   const box = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
 
@@ -38,7 +47,10 @@ export function ScaledScreen({ width, height, fit, label, children }: ScaledScre
   }, []);
 
   let transform = 'scale(0)';
-  if (size) {
+  if (size && focus) {
+    const s = size.w / focus.w;
+    transform = `translate(${-focus.x * s}px, ${-focus.y * s}px) scale(${s})`;
+  } else if (size) {
     const s = fit === 'cover' ? Math.max(size.w / width, size.h / height) : fit === 'top' ? size.w / width : size.h / height;
     const x = fit === 'cover' ? (size.w - width * s) / 2 : 0;
     const y = fit === 'cover' ? (size.h - height * s) / 2 : 0;

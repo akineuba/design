@@ -7,6 +7,7 @@ import { PricingPage } from './pages/PricingPage';
 import { ContactPage } from './pages/ContactPage';
 import { FeaturePage } from './pages/FeaturePage';
 import { ConceptPage } from './pages/ConceptPage';
+import { ScreensPage } from './pages/ScreensPage';
 import { ConfigurePage } from './pages/checkout/ConfigurePage';
 import { AccountPage } from './pages/checkout/AccountPage';
 import { VerifyPage } from './pages/checkout/VerifyPage';
@@ -36,6 +37,7 @@ export function App() {
         <Route path="/features/:id" element={<FeaturePage />} />
         <Route path="/concept" element={<ConceptPage />} />
         <Route path="/concept/suggestions" element={<ConceptPage suggest />} />
+        <Route path="/concept/screens" element={<ScreensPage />} />
         <Route path="/checkout" element={<Navigate to="/checkout/configure" replace />} />
         <Route path="/checkout/configure" element={<ConfigurePage />} />
         <Route path="/checkout/account" element={<AccountPage />} />
