@@ -80,3 +80,7 @@
 
 /* Partner wordmarks are black artwork; flip them so they stay visible on the dark theme. */
 [data-theme='dark'] .site-invert-dark { filter: invert(1); }
+
+/* Face of a 3D icon (components/Icon3D.tsx): the glyph's strokes take the gradient passed in --site-icon-3d-face. */
+.site-icon-3d-face,
+.site-icon-3d-face * { stroke: var(--site-icon-3d-face); }

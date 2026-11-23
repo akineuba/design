@@ -587,19 +587,14 @@
       "usage": "Stats bar",
       "figma": "691:5035"
     },
-    "site-vignette-dark": {
-      "value": "linear-gradient(to top, var(--color-site-midnight) 0%, var(--color-site-midnight) 25%, transparent 100%)",
-      "usage": "Bottom vignette under text on dark / screenshot bento cards (/concept)",
-      "figma": "not in Figma (concept page)"
-    },
-    "site-vignette-light": {
-      "value": "linear-gradient(to top, var(--color-surface-subtle) 0%, var(--color-surface-subtle) 45%, transparent 100%)",
-      "usage": "Bottom fade under text on light widget bento cards (/concept)",
-      "figma": "not in Figma (concept page)"
-    },
     "site-hero-scrim": {
       "value": "linear-gradient(to right, var(--color-site-midnight) 0%, var(--color-site-midnight) 35%, transparent 100%)",
       "usage": "Left-to-right scrim over the /concept hero photo so the headline reads",
+      "figma": "not in Figma (concept page)"
+    },
+    "site-vignette": {
+      "value": "linear-gradient(to top, var(--color-surface-subtle) 0%, var(--color-surface-subtle) 45%, transparent 100%)",
+      "usage": "Bottom fade under text on the bento cards (/concept). Built on surface-subtle, so it is light in the light theme and dark in the dark theme",
       "figma": "not in Figma (concept page)"
     }
   },

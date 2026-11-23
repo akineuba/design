@@ -2,6 +2,7 @@ import type { ComponentType, ReactNode, SVGProps } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Avatar,
+  Setting2Icon,
   Buildings2Icon,
   LucideSearchIcon,
   LucideAwardIcon,
@@ -25,7 +26,8 @@ import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteButtonLink } from '../components/SiteButton';
 import { PlanCards } from '../components/PlanCards';
-import { CropShot, FullShot, SkewShot, type ShotId } from '../components/MarketingShots';
+import { CropShot, FullShot, InsetShot, type ShotId } from '../components/MarketingShots';
+import { Icon3D } from '../components/Icon3D';
 import whyHandshake from '../assets/home/why-handshake.png';
 import partnerMicrosoft from '../assets/home/partner-microsoft.png';
 import partnerAws from '../assets/home/partner-aws.png';
@@ -221,26 +223,28 @@ const M: Record<'budgets' | 'reports' | 'deals' | 'companies' | 'contacts' | 'ac
   orbit: { title: 'Orbit AI', body: 'An assistant built into wCRM that finds answers in your pipeline, contacts and activity.', icon: { Icon: SolarPlanetLinearIcon, stroke: 1.25 } },
 };
 
-/** Bento card: visual fills the card; title and description sit over a bottom vignette. */
-function BentoCard({ m, tone, span, children }: { m: Module; tone: 'light' | 'dark'; span: string; children: ReactNode }) {
-  const dark = tone === 'dark';
+/**
+ * Bento card: visual fills the card; title and description sit over a bottom vignette. Card, vignette and text are
+ * theme tokens, so the card is light on the light theme and dark on the dark theme.
+ */
+function BentoCard({ m, span, children }: { m: Module; span: string; children: ReactNode }) {
   return (
-    <article className={cn('group relative h-site-bento-row overflow-hidden rounded-xl transition duration-base ease-standard hover:-translate-y-1 hover:shadow-lg', span, dark ? 'bg-site-midnight' : 'border border-border-default bg-surface-subtle')}>
+    <article className={cn('group relative h-site-bento-row overflow-hidden rounded-xl border border-border-default bg-surface-subtle transition duration-base ease-standard hover:-translate-y-1 hover:shadow-lg', span)}>
       <div className="absolute inset-0">{children}</div>
-      <div aria-hidden="true" className={cn('absolute inset-x-0 bottom-0 h-3/5', dark ? 'bg-site-vignette-dark opacity-90' : 'bg-site-vignette-light')} />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-3/5 bg-site-vignette" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
         <div className="flex flex-col gap-1.5">
-          <h3 className={cn('flex items-center gap-2 font-display text-heading-xl', dark ? 'text-text-inverse' : 'text-site-ink')}>
-            <m.icon.Icon aria-hidden="true" strokeWidth={m.icon.stroke} className={cn('size-5', dark ? 'text-site-on-dark-muted' : 'text-accent-navy')} />
+          <h3 className="flex items-center gap-2 font-display text-heading-xl text-site-ink">
+            <m.icon.Icon aria-hidden="true" strokeWidth={m.icon.stroke} className="size-5 text-accent-navy" />
             {m.title}
           </h3>
-          <p className={cn('text-body-sm leading-150', dark ? 'text-site-on-dark-muted' : 'text-text-slate')}>{m.body}</p>
+          <p className="text-body-sm leading-150 text-text-slate">{m.body}</p>
         </div>
         {m.to && (
           <Link
             to={m.to}
             aria-label={`Learn more about ${m.title}`}
-            className={cn('flex size-10 shrink-0 items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:shadow-focus', dark ? 'bg-surface-default text-site-ink hover:bg-brand-primary hover:text-text-inverse' : 'bg-site-ink text-text-inverse hover:bg-brand-primary')}
+            className="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-primary text-text-inverse transition-colors hover:bg-brand-primary-hover focus-visible:outline-none focus-visible:shadow-focus"
           >
             <span aria-hidden="true" className="transition-transform duration-base group-hover:-translate-y-px group-hover:translate-x-px">↗</span>
           </Link>
@@ -269,7 +273,7 @@ function ActivityWidget() {
     <Widget label="Activity widget: this week's calls and meetings against plan" className="flex flex-col gap-3">
       <div className="flex justify-between rounded-pill bg-surface-default p-1 shadow-sm">
         {WEEK.map((w, i) => (
-          <span key={w.d} className={cn('flex flex-col items-center rounded-pill px-2.5 py-1.5', i === 1 ? 'bg-site-ink text-text-inverse' : 'text-text-secondary')}>
+          <span key={w.d} className={cn('flex flex-col items-center rounded-pill px-2.5 py-1.5', i === 1 ? 'bg-brand-primary text-text-inverse' : 'text-text-secondary')}>
             <span className="text-label-sm">{w.d}</span>
             <span className="text-caption-xs">{w.day}</span>
           </span>
@@ -330,8 +334,8 @@ function ContactsWidget() {
 function OrbitWidget() {
   return (
     <Widget label="Orbit AI widget: a question about this month's deals and the answer" className="flex flex-col gap-2.5">
-      <p className="self-end rounded-xl rounded-br-xs bg-surface-default px-3.5 py-2 text-body-sm text-site-ink">Which deals close this month?</p>
-      <p className="flex items-start gap-2 self-start rounded-xl rounded-bl-xs border border-site-divider-on-dark px-3.5 py-2 text-body-sm text-text-inverse">
+      <p className="self-end rounded-xl rounded-br-xs bg-brand-primary px-3.5 py-2 text-body-sm text-text-inverse">Which deals close this month?</p>
+      <p className="flex items-start gap-2 self-start rounded-xl rounded-bl-xs border border-border-default bg-surface-default px-3.5 py-2 text-body-sm text-text-primary shadow-sm">
         <SolarPlanetLinearIcon strokeWidth={1.25} className="mt-0.5 size-4 shrink-0 text-brand-primary" />
         6 deals, ₦38.4M expected. 2 need a follow-up this week.
       </p>
@@ -352,19 +356,19 @@ function ReportsWidget() {
       <div className="relative h-40">
         <svg viewBox="0 0 600 160" preserveAspectRatio="none" className="absolute inset-0 size-full overflow-visible">
           {[20, 60, 100, 140].map((y) => (
-            <line key={y} x1="0" x2="600" y1={y} y2={y} strokeWidth="1" vectorEffect="non-scaling-stroke" className="stroke-site-divider-on-dark" />
+            <line key={y} x1="0" x2="600" y1={y} y2={y} strokeWidth="1" vectorEffect="non-scaling-stroke" className="stroke-border-default" />
           ))}
-          <line x1="380" x2="380" y1="0" y2="160" strokeWidth="1" vectorEffect="non-scaling-stroke" className="stroke-site-on-dark-muted" />
-          <path d={CHART_PATH} fill="none" strokeWidth="2.5" vectorEffect="non-scaling-stroke" className="stroke-surface-default" />
+          <line x1="380" x2="380" y1="0" y2="160" strokeWidth="1" vectorEffect="non-scaling-stroke" className="stroke-border-strong" />
+          <path d={CHART_PATH} fill="none" strokeWidth="2.5" vectorEffect="non-scaling-stroke" className="stroke-accent-navy-hover" />
         </svg>
         <span style={{ left: '63.3%', top: '60%' }} className="absolute size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-brand-primary bg-surface-default" />
-        <span style={{ left: '63.3%', top: '8%' }} className="absolute -translate-x-1/2 whitespace-nowrap rounded-md bg-surface-default px-2.5 py-1 text-caption text-site-ink shadow-md">
+        <span style={{ left: '63.3%', top: '8%' }} className="absolute -translate-x-1/2 whitespace-nowrap rounded-md border border-border-default bg-surface-default px-2.5 py-1 text-caption text-site-ink shadow-md">
           April, <b>₦75M</b>
         </span>
       </div>
-      <div className="flex justify-between text-caption text-site-on-dark-muted">
+      <div className="flex justify-between text-caption text-text-secondary">
         {MONTHS.map((m) => (
-          <span key={m} className={m === 'Apr' ? 'text-text-inverse' : undefined}>{m}</span>
+          <span key={m} className={m === 'Apr' ? 'font-semibold text-site-ink' : undefined}>{m}</span>
         ))}
       </div>
     </Widget>
@@ -377,25 +381,25 @@ function Modules() {
       <div className="flex flex-col items-center gap-12 rounded-xl border border-border-default bg-surface-default p-8 pt-14 shadow-lg">
         <SectionHead id="modules" title="What wCRM does" lead="Seven Business Development modules, all working from the same customer record." />
         <div className="grid w-full grid-cols-6 gap-4">
-          <BentoCard m={M.deals} tone="dark" span="col-span-4">
-            <SkewShot id="deals" />
+          <BentoCard m={M.deals} span="col-span-4">
+            <InsetShot id="deals" />
           </BentoCard>
-          <BentoCard m={M.activity} tone="light" span="col-span-2">
+          <BentoCard m={M.activity} span="col-span-2">
             <ActivityWidget />
           </BentoCard>
-          <BentoCard m={M.budgets} tone="light" span="col-span-2">
+          <BentoCard m={M.budgets} span="col-span-2">
             <BudgetWidget />
           </BentoCard>
-          <BentoCard m={M.contacts} tone="light" span="col-span-2">
+          <BentoCard m={M.contacts} span="col-span-2">
             <ContactsWidget />
           </BentoCard>
-          <BentoCard m={M.orbit} tone="dark" span="col-span-2">
+          <BentoCard m={M.orbit} span="col-span-2">
             <OrbitWidget />
           </BentoCard>
-          <BentoCard m={M.companies} tone="dark" span="col-span-2">
+          <BentoCard m={M.companies} span="col-span-2">
             <CropShot id="companies" name="companies" focus={{ x: 233, y: 70, w: 640 }} />
           </BentoCard>
-          <BentoCard m={M.reports} tone="dark" span="col-span-4">
+          <BentoCard m={M.reports} span="col-span-4">
             <ReportsWidget />
           </BentoCard>
         </div>
@@ -482,7 +486,7 @@ function ProductTour() {
                   <span className="size-2.5 rounded-full bg-status-success" />
                   <span className="ml-4 flex-1 rounded-full bg-surface-sunken px-3 py-0.5 text-caption-xs text-text-muted">app.wcrm.com/{s.id}</span>
                 </div>
-                <FullShot id={s.id} />
+                <FullShot id={s.id} header={false} />
               </div>
             </div>
           </TabsContent>
@@ -537,9 +541,9 @@ function Foundation({ suggest }: { suggest: boolean }) {
 
 /* Placeholder articles: titles show the kind of content the section is for; nothing here is published yet. */
 const UPDATES = [
-  { tag: 'Guide', title: 'Setting up stages that match how your team sells', body: 'Define reusable deal stages and pipelines that guide every opportunity from qualification to closure.', icon: 'Gear (pipeline setup)', stock: 'Whiteboard with a sales pipeline sketched on it' },
-  { tag: 'Product', title: 'Bring Microsoft 365 and Google activity into wCRM', body: 'Emails and calendar events now land on the contact and deal they belong to.', icon: 'Notepad and pen (activity logging)', stock: 'Laptop with an inbox and calendar open' },
-  { tag: 'Webinar', title: 'Planning next year’s sales budget by team', body: 'Allocate targets across practice areas and watch variance as deals close.', icon: 'Head with chart (targets)', stock: 'Presenter in front of a room, mid-talk' },
+  { tag: 'Guide', title: 'Setting up stages that match how your team sells', body: 'Define reusable deal stages and pipelines that guide every opportunity from qualification to closure.', icon: { Icon: Setting2Icon, stroke: 2.4, label: 'Gear' }, stock: 'Whiteboard with a sales pipeline sketched on it' },
+  { tag: 'Product', title: 'Bring Microsoft 365 and Google activity into wCRM', body: 'Emails and calendar events now land on the contact and deal they belong to.', icon: { Icon: LucideMailIcon, stroke: 1.9, label: 'Envelope' }, stock: 'Laptop with an inbox and calendar open' },
+  { tag: 'Webinar', title: 'Planning next year’s sales budget by team', body: 'Allocate targets across practice areas and watch variance as deals close.', icon: { Icon: LucideAwardIcon, stroke: 1.9, label: 'Award' }, stock: 'Presenter in front of a room, mid-talk' },
 ];
 
 function Updates({ suggest }: { suggest: boolean }) {
@@ -570,7 +574,7 @@ function Updates({ suggest }: { suggest: boolean }) {
               {suggest ? (
                 <Placeholder kind="stock" title={u.stock} className="h-site-need-img-h w-site-need-card shrink-0" />
               ) : (
-                <Placeholder kind="icon" title={u.icon} size="120 × 128" className="h-site-need-img-h w-site-need-img shrink-0" />
+                <Icon3D Icon={u.icon.Icon} stroke={u.icon.stroke} label={`3D ${u.icon.label.toLowerCase()} icon`} className="h-site-need-img-h w-site-need-img shrink-0" />
               )}
               <div className="flex flex-1 flex-col gap-2">
                 <span className="text-overline uppercase tracking-wide text-site-red">{u.tag}</span>

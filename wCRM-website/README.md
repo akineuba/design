@@ -23,9 +23,9 @@ app's `node_modules`.
 | `/pricing` | `crm-pricing-page` (231:636): Monthly / Annual switch, plan cards, "Compare every included feature" table (`/pricing#compare` opens it; the homepage "View comparisons" button links there) |
 | `/contact` | `crm-contact-sales` (231:1058) → sent state (367:10351) |
 | `/features/:id` | Not in Figma; built in the site's style. One page per homepage feature (`contact-management`, `deal-management`, `activities-reporting`, `budget-targets`): hero with the product screen, capabilities, how it works, related features, call-to-action band. Content lives in `src/data/features.ts` |
-| `/concept` | Not in Figma; a concept homepage that applies a classic corporate-site layout (utility bar, photo hero, overlapping modules card, values band, resources, closing band) to wCRM, built from the site's components. "What wCRM does" is a bento grid of the seven Business Development modules (Budgets, Reports, Deals, Companies, Contacts, Activity, Orbit AI): each card holds a product widget (sample data, design-system tokens) or a product shot, with the title and description over a bottom vignette and the sidebar's design-system icon. Product shots come from `src/components/MarketingShots.tsx`: full pages in the "See it at work" browser frames, a skewed Deals window and a cropped Company record in the bento, a cropped Performance report on the featured resource. The 3D icons in Resources are still placeholders, as are the resource articles and customer story. Screenshot: [`docs/concept-homepage-placeholders.jpg`](docs/concept-homepage-placeholders.jpg) |
+| `/concept` | Not in Figma; a concept homepage that applies a classic corporate-site layout (utility bar, photo hero, overlapping modules card, values band, resources, closing band) to wCRM, built from the site's components. "What wCRM does" is a bento grid of the seven Business Development modules (Budgets, Reports, Deals, Companies, Contacts, Activity, Orbit AI): each card holds a product widget (sample data, design-system tokens) or a product shot, with the title and description over a bottom vignette and the sidebar's design-system icon. Cards, widgets and the vignette (`bg-site-vignette`, built on `surface-subtle`) follow the page theme. Product shots come from `src/components/MarketingShots.tsx`: full pages without the top bar in the "See it at work" browser frames, an inset (straight) Deals window and a cropped Company record in the bento, a cropped Performance report on the featured resource. The Resources thumbnails are 3D icons (`src/components/Icon3D.tsx`). The resource articles and customer story are placeholders. Screenshot: [`docs/concept-homepage-placeholders.jpg`](docs/concept-homepage-placeholders.jpg) |
 | `/concept/suggestions` | The same page with the remaining proposed changes, each marked by a numbered note: product card in the hero, a social-proof band, a photo in the values band, stock photos for resources, and a sales-rep photo beside the closing Contact us button. Screenshot of an earlier revision (before the bento modules): [`docs/concept-homepage-suggestions.jpg`](docs/concept-homepage-suggestions.jpg) |
-| `/concept/screens` | Export sheet: every full-page product shot at its native 1617 × 860. Exported PNGs (full, cropped and skewed, 2×) are in [`docs/screens/`](docs/screens) |
+| `/concept/screens` | Export sheet: every "See it at work" shot (sidebar and content, no top bar) at its native 1617 × 797. Exported PNGs (full, cropped, inset, 3D icons, bento and resources in both themes; 2×) are in [`docs/screens/`](docs/screens) |
 | `/checkout/configure` | `crm-configure-plan` (231:956, several organisations 367:10622) + `wcrm-add-orgs-modal` (372:2334) |
 | `/checkout/account` | `wcrm-create-account` (372:2542) + `successful popup` (372:3583) |
 | `/checkout/verify` | `otp-verification` (372:3189) |
@@ -80,8 +80,11 @@ Durations and easing are the design-system motion tokens (120ms fast, 200ms base
 components: `TopBar` and `NavMenu` with the Business Development sidebar data (`NavMenu.fixtures` `businessSections`).
 `CompanyScreen` (company record) and `BudgetPanel` (achievement by practice area, design-system `ProgressBar`) were added
 for the concept page; they reuse the sample names, deals and amounts of the other screens. `MarketingShots.tsx` offers
-`FullShot` (whole window), `CropShot` (zoom to a native-px region through `ScaledScreen`'s `focus`) and `SkewShot`
-(3D-tilted window). All are live HTML, so they follow the dark theme.
+`FullShot` (whole window; `header={false}` drops the top bar), `CropShot` (zoom to a native-px region through
+`ScaledScreen`'s `focus`) and `InsetShot` (window set in from the card's corner, running off its edges). All are live HTML, so they follow the dark theme.
+
+`Icon3D` turns a design-system glyph into a 3D icon: the outline repeated as an extrusion in the darker brand red, a
+brand-gradient face on top and a ground shadow. It uses only tokens, so it works on both themes.
 
 ## Behaviour and data
 

@@ -29,21 +29,25 @@ export const SHOTS: Record<ShotId, { title: string; active: string; label: strin
   companies: { title: 'Companies', active: 'companies', label: 'wCRM company record for Cash Drive Ltd', screen: <CompanyScreen /> },
 };
 
-function Frame({ id }: { id: ShotId }) {
+function Frame({ id, header = true }: { id: ShotId; header?: boolean }) {
   const s = SHOTS[id];
   return (
-    <AppFrame title={s.title} active={s.active}>
+    <AppFrame title={s.title} active={s.active} header={header}>
       {s.screen}
     </AppFrame>
   );
 }
 
-/** Full page: the whole app window, scaled to the box width (box keeps the window's aspect ratio). */
-export function FullShot({ id, className, style }: { id: ShotId; className?: string; style?: CSSProperties }) {
+/**
+ * Full page: the whole app window, scaled to the box width (box keeps the window's aspect ratio).
+ * `header={false}` leaves out the top bar (sidebar and content only).
+ */
+export function FullShot({ id, header = true, className, style }: { id: ShotId; header?: boolean; className?: string; style?: CSSProperties }) {
+  const height = header ? APP_FRAME.height : APP_FRAME.height - APP_FRAME.header;
   return (
-    <div data-shot={`full-${id}`} className={cn('relative w-full overflow-hidden', className)} style={{ aspectRatio: `${APP_FRAME.width} / ${APP_FRAME.height}`, ...style }}>
-      <ScaledScreen width={APP_FRAME.width} height={APP_FRAME.height} fit="top" label={SHOTS[id].label}>
-        <Frame id={id} />
+    <div data-shot={`full-${id}${header ? '' : '-no-header'}`} className={cn('relative w-full overflow-hidden', className)} style={{ aspectRatio: `${APP_FRAME.width} / ${height}`, ...style }}>
+      <ScaledScreen width={APP_FRAME.width} height={height} fit="top" label={SHOTS[id].label}>
+        <Frame id={id} header={header} />
       </ScaledScreen>
     </div>
   );
@@ -61,21 +65,15 @@ export function CropShot({ id, focus, name }: { id: ShotId; focus: ScreenFocus; 
 }
 
 /*
- * Skewed: the app window tilted in 3D and bleeding off the card's right edge. The transform is illustration
- * geometry, kept with the artwork.
+ * Inset: the app window set in from the card's top-left corner and running off its right and bottom edges, straight
+ * on (not skewed). Offsets and width are illustration geometry, kept with the artwork.
  */
-const SKEW: CSSProperties = {
-  left: '30%',
-  top: '-4%',
-  width: '95%',
-  transform: 'perspective(2200px) rotateX(24deg) rotateY(-10deg) rotateZ(10deg)',
-  transformOrigin: 'top left',
-};
+const INSET: CSSProperties = { left: 32, top: 32, width: '118%' };
 
-export function SkewShot({ id }: { id: ShotId }) {
+export function InsetShot({ id }: { id: ShotId }) {
   return (
-    <div data-shot={`skew-${id}`} className="absolute" style={SKEW}>
-      <FullShot id={id} className="rounded-lg shadow-lg ring-1 ring-site-divider-on-dark" />
+    <div data-shot={`inset-${id}`} className="absolute" style={INSET}>
+      <FullShot id={id} className="rounded-lg border border-border-default shadow-lg" />
     </div>
   );
 }
