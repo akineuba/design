@@ -23,6 +23,7 @@ app's `node_modules`.
 | `/pricing` | `crm-pricing-page` (231:636): Monthly / Annual switch, plan cards, "Compare every included feature" table (`/pricing#compare` opens it; the homepage "View comparisons" button links there) |
 | `/contact` | `crm-contact-sales` (231:1058) → sent state (367:10351) |
 | `/features/:id` | Not in Figma; built in the site's style. One page per homepage feature (`contact-management`, `deal-management`, `activities-reporting`, `budget-targets`): hero with the product screen, capabilities, how it works, related features, call-to-action band. Content lives in `src/data/features.ts` |
+| `/concept` | Not in Figma; a concept homepage that applies a classic corporate-site layout (utility bar, photo hero, overlapping services card, values band, resources, contact form) to wCRM, built from the site's components. The resource articles and customer story are placeholders. Screenshot: [`docs/concept-homepage.jpg`](docs/concept-homepage.jpg) |
 | `/checkout/configure` | `crm-configure-plan` (231:956, several organisations 367:10622) + `wcrm-add-orgs-modal` (372:2334) |
 | `/checkout/account` | `wcrm-create-account` (372:2542) + `successful popup` (372:3583) |
 | `/checkout/verify` | `otp-verification` (372:3189) |
