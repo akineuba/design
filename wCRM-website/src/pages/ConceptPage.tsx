@@ -7,7 +7,6 @@ import {
   LucideAwardIcon,
   LucideCalendarIcon,
   LucideChartLineIcon,
-  LucideCheckIcon,
   LucideInboxIcon,
   LucideKeyIcon,
   LucideMailIcon,
@@ -15,33 +14,29 @@ import {
   PeopleIcon,
   Profile2UserIcon,
   SolarPlanetLinearIcon,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
   cn,
 } from '@ds';
 import { SiteHeader } from '../components/SiteHeader';
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteButtonLink } from '../components/SiteButton';
-import { PlanCards } from '../components/PlanCards';
-import { CropShot, FullShot, InsetShot, type ShotId } from '../components/MarketingShots';
+import { InsetShot } from '../components/MarketingShots';
+import { HeroDeals } from '../components/concept/HeroDeals';
+import { MeetingCloseUp, StageCloseUp, TargetCloseUp } from '../components/concept/DealStory';
+import { ConceptPlans } from '../components/concept/ConceptPlans';
 import streamlineHandshake from '../assets/concept/streamline-handshake.webp';
 import icon3dGear from '../assets/concept/icon3d-gear.png';
 import icon3dHandshake from '../assets/concept/icon3d-handshake.png';
 import icon3dNotepad from '../assets/concept/icon3d-notepad.png';
-import whyHandshake from '../assets/home/why-handshake.png';
 import partnerMicrosoft from '../assets/home/partner-microsoft.png';
 import partnerAws from '../assets/home/partner-aws.png';
 import partnerHuawei from '../assets/home/partner-huawei.png';
 
 /*
  * Concept homepage. Not in Figma: it takes the section order of a classic corporate site
- * (utility bar → photo hero → overlapping modules card → values band → resources → closing band → footer)
+ * (utility bar → hero → overlapping modules card → values band → resources → closing band → footer)
  * and fills it with wCRM's own copy, design-system tokens and the site's existing components.
  *
- * - /concept: the layout with a labelled placeholder wherever a product screenshot or 3D icon will go
- *   (the hero photo stays).
+ * - /concept: the page. Mobile-first: one column on phones, the desktop layout from the `lg` breakpoint.
  * - /concept/suggestions: the same page with proposed changes (stock photos, social proof, map, …), each marked
  *   with a numbered note.
  * Icons are the design-system glyphs used in the product's Business Development sidebar.
@@ -60,15 +55,6 @@ function IconTile({ icon, tone = 'subtle' }: { icon: DsIcon; tone?: 'subtle' | '
   return (
     <span className={cn('flex size-12 shrink-0 items-center justify-center rounded-tile border text-accent-navy transition-transform duration-base ease-standard group-hover:-translate-y-1', tone === 'subtle' ? 'border-accent-navy-subtle bg-accent-navy-subtle' : 'border-border-default bg-surface-default')}>
       <icon.Icon aria-hidden="true" strokeWidth={icon.stroke} className="size-6" />
-    </span>
-  );
-}
-
-/** Check mark for short benefit lists, from the design-system icon set. */
-function Check() {
-  return (
-    <span aria-hidden="true" className="flex size-6 shrink-0 items-center justify-center rounded-full bg-accent-navy-subtle text-accent-navy">
-      <LucideCheckIcon strokeWidth={2} className="size-3.5" />
     </span>
   );
 }
@@ -117,8 +103,8 @@ function Note({ n, title, children }: { n: number; title: string; children: Reac
 /** Section heading with the short red rule under it (the screenshot's teal rule, in wCRM red). */
 function SectionHead({ id, title, lead, align = 'center' }: { id: string; title: string; lead?: string; align?: 'center' | 'left' }) {
   return (
-    <div className={align === 'center' ? 'flex w-site-section-head flex-col items-center gap-4 text-center' : 'flex flex-col gap-4'}>
-      <h2 id={id} className="font-display text-site-section leading-120 text-site-ink">{title}</h2>
+    <div className={align === 'center' ? 'flex w-full flex-col items-center gap-4 text-center lg:w-site-section-head' : 'flex flex-col gap-4'}>
+      <h2 id={id} className="font-display text-display leading-120 text-site-ink lg:text-site-section">{title}</h2>
       <span aria-hidden="true" className="h-1 w-12 rounded-full bg-brand-primary" />
       {lead && <p className="text-site-lead leading-150 text-text-slate">{lead}</p>}
     </div>
@@ -142,7 +128,7 @@ function ArrowLink({ to, label, className }: { to: string; label: string; classN
 
 function UtilityBar() {
   return (
-    <div className="flex items-center justify-between bg-site-midnight px-50 py-2 text-caption text-site-on-dark-muted">
+    <div className="hidden items-center justify-between bg-site-midnight px-50 py-2 text-caption text-site-on-dark-muted lg:flex">
       <p className="flex items-center gap-2">
         <span className="rounded-full bg-brand-primary px-2 py-0.5 text-badge uppercase text-text-inverse">New</span>
         Email and calendar sync for Microsoft 365 and Google
@@ -161,60 +147,47 @@ function UtilityBar() {
   );
 }
 
-/* 2 · Photo hero ------------------------------------------------------------------------------------------- */
+/* 2 · Hero ------------------------------------------------------------------------------------------------- */
 
-/* SAP is left out here: its exported mark does not read on the dark photo. */
 const PARTNERS = [
   { name: 'Microsoft', src: partnerMicrosoft },
   { name: 'AWS', src: partnerAws },
   { name: 'Huawei', src: partnerHuawei },
 ];
 
-function Hero({ suggest }: { suggest: boolean }) {
+/*
+ * Hero: the promise on the left and, beside it, the Deals view with the open pipeline (HeroDeals), drawn on theme
+ * tokens so it is light or dark with the page. Phones stack the copy above the view.
+ */
+function Hero() {
   return (
-    <section className="relative flex items-center gap-16 overflow-hidden bg-site-midnight px-50 pb-40 pt-25">
-      <img src={whyHandshake} alt="" className="absolute inset-0 size-full object-cover opacity-30" />
-      <div aria-hidden="true" className="absolute inset-0 bg-site-hero-scrim opacity-90" />
-      <div className="relative flex w-site-split-media flex-col gap-6 text-text-inverse">
-        <p className="text-overline uppercase tracking-wide text-site-on-dark-muted">wCRM · Business Development</p>
-        <h1 className="font-display text-site-hero">
-          What makes wCRM different: <span className="text-brand-primary">one CRM from first call to closed deal.</span>
+    <section className="flex flex-col gap-10 bg-surface-canvas px-5 pb-40 pt-12 lg:flex-row lg:items-center lg:gap-16 lg:px-50 lg:pt-20">
+      <div className="flex flex-col gap-6 lg:w-site-hero-copy lg:shrink-0">
+        <p className="text-overline uppercase tracking-wide text-text-secondary">wCRM · Business Development</p>
+        <h1 className="font-display text-site-section leading-120 text-site-ink lg:text-site-hero">
+          Track deals, profit and sales targets <span className="text-brand-primary">in one CRM</span>
         </h1>
-        <p className="text-site-lead leading-150 text-site-on-dark-muted">
-          Contacts, deals, activities, budgets and targets in one place, so your team spends its time selling instead of chasing spreadsheets.
+        <p className="text-site-lead leading-150 text-text-slate">
+          See your open pipeline, log every call and meeting, and watch each won deal count towards your team&apos;s target.
         </p>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3">
           <SiteButtonLink to="/pricing" variant="header">Start 14-day free trial</SiteButtonLink>
-          <Link
-            to="/contact"
-            className="rounded-callout border border-text-inverse px-6 py-3 text-body font-medium text-text-inverse hover:bg-site-divider-on-dark focus-visible:outline-none focus-visible:shadow-focus"
-          >
-            Talk to sales
-          </Link>
+          <SiteButtonLink to="/contact" variant="header-outline">Talk to sales</SiteButtonLink>
         </div>
-        <div className="flex items-center gap-6 pt-6">
-          <p className="text-caption font-semibold uppercase text-site-on-dark-muted">Works with</p>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-4">
+          <p className="text-caption font-semibold uppercase text-text-secondary">Works with</p>
           <ul className="flex items-center">
             {PARTNERS.map((p) => (
               <li key={p.name} className="h-site-partner-h w-site-partner">
-                <img src={p.src} alt={p.name} className="size-full object-bottom opacity-80 brightness-0 invert" />
+                <img src={p.src} alt={p.name} className="site-invert-dark size-full object-bottom" />
               </li>
             ))}
           </ul>
         </div>
       </div>
-      {suggest && (
-        <div className="relative flex flex-1 flex-col gap-4">
-          <Note n={1} title="Show the product above the fold">
-            Keep the photo, but float a cropped Deals screen over it so visitors see the software in the first view, not only a handshake.
-          </Note>
-          <div className="rounded-xl bg-surface-default p-2 shadow-lg">
-            <div className="relative aspect-video overflow-hidden rounded-lg">
-              <CropShot id="deals" name="hero-deals" focus={{ x: 0, y: 0, w: 1100 }} />
-            </div>
-          </div>
-        </div>
-      )}
+      <div className="min-w-0 flex-1">
+        <HeroDeals />
+      </div>
     </section>
   );
 }
@@ -245,9 +218,10 @@ const M: Record<'budgets' | 'reports' | 'deals' | 'companies' | 'contacts' | 'ac
 function BentoCard({ m, span, children }: { m: Module; span: string; children: ReactNode }) {
   return (
     <article className={cn('group relative h-site-bento-row overflow-hidden rounded-xl border border-border-default bg-surface-subtle transition duration-base ease-standard hover:-translate-y-1 hover:shadow-lg', span)}>
+      {/* `span` is the desktop column span (lg:col-span-*); phones show one card per row. */}
       <div className="absolute inset-0">{children}</div>
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-3/5 bg-site-vignette" />
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 lg:p-6">
         <div className="flex flex-col gap-1.5">
           <h3 className="flex items-center gap-2 font-display text-heading-xl text-site-ink">
             <m.icon.Icon aria-hidden="true" strokeWidth={m.icon.stroke} className="size-5 text-accent-navy" />
@@ -384,29 +358,29 @@ function ReportsWidget() {
 
 function Modules() {
   return (
-    <section aria-labelledby="modules" className="relative -mt-30 px-50">
-      <div className="flex flex-col items-center gap-12 rounded-xl border border-border-default bg-surface-default p-8 pt-14 shadow-lg">
+    <section aria-labelledby="modules" className="relative -mt-30 px-5 lg:px-50">
+      <div className="flex flex-col items-center gap-10 rounded-xl border border-border-default bg-surface-default p-4 pt-10 shadow-lg lg:gap-12 lg:p-8 lg:pt-14">
         <SectionHead id="modules" title="What wCRM does" lead="Seven Business Development modules, all working from the same customer record." />
-        <div className="grid w-full grid-cols-6 gap-4">
-          <BentoCard m={M.deals} span="col-span-4">
+        <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-6">
+          <BentoCard m={M.deals} span="lg:col-span-4">
             <InsetShot id="deals" />
           </BentoCard>
-          <BentoCard m={M.activity} span="col-span-2">
+          <BentoCard m={M.activity} span="lg:col-span-2">
             <ActivityWidget />
           </BentoCard>
-          <BentoCard m={M.budgets} span="col-span-2">
+          <BentoCard m={M.budgets} span="lg:col-span-2">
             <BudgetWidget />
           </BentoCard>
-          <BentoCard m={M.contacts} span="col-span-2">
+          <BentoCard m={M.contacts} span="lg:col-span-2">
             <ContactsWidget />
           </BentoCard>
-          <BentoCard m={M.orbit} span="col-span-2">
+          <BentoCard m={M.orbit} span="lg:col-span-2">
             <OrbitWidget />
           </BentoCard>
-          <BentoCard m={M.companies} span="col-span-2">
+          <BentoCard m={M.companies} span="lg:col-span-2">
             <InsetShot id="companies" />
           </BentoCard>
-          <BentoCard m={M.reports} span="col-span-4">
+          <BentoCard m={M.reports} span="lg:col-span-4">
             <ReportsWidget />
           </BentoCard>
         </div>
@@ -425,8 +399,8 @@ const STATS = [
 
 function SocialProof() {
   return (
-    <section aria-label="Customers" className="flex flex-col gap-10 px-50 pt-20">
-      <Note n={2} title="Add proof between “what it does” and “see it at work”">
+    <section aria-label="Customers" className="flex flex-col gap-10 px-5 pt-20 lg:px-50">
+      <Note n={1} title="Add proof between “what it does” and “see it at work”">
         The screenshot has no trust signals. A logo row, the homepage figures (once confirmed) and one named quote with a portrait answer “who uses this?” before the product tour.
       </Note>
       <div className="flex flex-col items-center gap-6">
@@ -456,43 +430,45 @@ function SocialProof() {
   );
 }
 
-/* 4 · Product tour (design-system Tabs) ------------------------------------------------------------------- */
+/* 4 · See it at work: one deal, three steps -------------------------------------------------------------- */
 
-const SCREENS: { id: ShotId; label: string; points: string[] }[] = [
-  { id: 'deals', label: 'Deals', points: ['Open, won and lost totals above the register', 'Profit and expected profit on every deal', 'Stage changes in one click'] },
-  { id: 'contacts', label: 'Contacts', points: ['Import the lists you already keep', 'An owner on every contact', 'Search by name, email or company'] },
-  { id: 'reports', label: 'Reports', points: ['Goal realization at a glance', 'Revenue by business stream', 'Export for reviews and board packs'] },
-  { id: 'budgets', label: 'Budgets', points: ['Targets split by team and practice area', 'Achieved from closed deals', 'Variance per allocation'] },
+const STORY = [
+  {
+    title: 'Log the meeting',
+    body: 'Ifeoma records her proposal walkthrough with Bluewave on the deal itself: who was there, when, and what was agreed. The whole team sees it on the deal’s timeline.',
+    view: <MeetingCloseUp />,
+  },
+  {
+    title: 'Move the deal forward',
+    body: 'Finance signs off, so she moves Cloud Backup Partnership from Proposal Sent to Closed Won in one click. The qualification score and stage stay in step with the conversation.',
+    view: <StageCloseUp />,
+  },
+  {
+    title: 'See it count towards the target',
+    body: 'The ₦5,400,000 lands on the Managed Services Q4 target straight away: 78% achieved, up from 69%, with the win at the top of the list.',
+    view: <TargetCloseUp />,
+  },
 ];
 
-function ProductTour() {
+function DealStorySection() {
   return (
-    <section aria-labelledby="tour" className="flex flex-col items-center gap-10 px-50 pb-20 pt-25">
-      <SectionHead id="tour" title="See it at work" lead="The same screens your team will use on day one." />
-      <Tabs defaultValue="deals" className="w-full items-center">
-        <TabsList className="self-center">
-          {SCREENS.map((s) => (
-            <TabsTrigger key={s.id} value={s.id}>{s.label}</TabsTrigger>
-          ))}
-        </TabsList>
-        {SCREENS.map((s) => (
-          <TabsContent key={s.id} value={s.id} className="w-full">
-            <div className="flex items-center gap-12">
-              <ul className="flex w-site-footer-brand shrink-0 flex-col gap-6">
-                {s.points.map((pt) => (
-                  <li key={pt} className="flex items-start gap-3 text-site-lead leading-150 text-site-ink">
-                    <Check />
-                    {pt}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex-1 overflow-hidden rounded-xl border border-border-default bg-surface-default shadow-lg">
-                <FullShot id={s.id} header={false} />
-              </div>
+    <section aria-labelledby="tour" className="flex flex-col items-center gap-12 px-5 py-16 lg:gap-16 lg:px-50 lg:pb-20 lg:pt-25">
+      <SectionHead id="tour" title="See it at work" lead="Follow one deal, Cloud Backup Partnership for Bluewave Telecoms, from the first meeting to the sales target." />
+      <ol className="flex w-full flex-col gap-14 lg:gap-20">
+        {STORY.map((step, i) => (
+          <li key={step.title} className={cn('flex flex-col gap-6 lg:items-center lg:gap-16', i % 2 ? 'lg:flex-row-reverse' : 'lg:flex-row')}>
+            <div className="flex flex-col gap-3 lg:w-site-hero-copy lg:shrink-0">
+              <span className="flex items-center gap-3">
+                <span className="flex size-9 items-center justify-center rounded-full bg-brand-primary text-label text-text-inverse">{i + 1}</span>
+                <span className="text-overline uppercase tracking-wide text-site-red">Step {i + 1} of 3</span>
+              </span>
+              <h3 className="font-display text-heading-xl leading-140 text-site-ink lg:text-site-title lg:leading-120">{step.title}</h3>
+              <p className="text-site-lead leading-150 text-text-slate">{step.body}</p>
             </div>
-          </TabsContent>
+            <div className="min-w-0 flex-1">{step.view}</div>
+          </li>
         ))}
-      </Tabs>
+      </ol>
     </section>
   );
 }
@@ -508,7 +484,7 @@ const FOUNDATION: { title: string; body: string; icon: DsIcon }[] = [
 
 function Foundation({ suggest }: { suggest: boolean }) {
   const values = (
-    <ul className={suggest ? 'grid flex-1 grid-cols-2 gap-10' : 'grid w-full grid-cols-4 gap-10'}>
+    <ul className={suggest ? 'grid flex-1 grid-cols-1 gap-10 sm:grid-cols-2' : 'grid w-full grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4'}>
         {FOUNDATION.map((f) => (
           <li key={f.title} className={suggest ? 'flex flex-col items-start gap-3' : 'flex flex-col items-center gap-3 text-center'}>
             <IconTile icon={f.icon} tone="surface" />
@@ -519,14 +495,14 @@ function Foundation({ suggest }: { suggest: boolean }) {
     </ul>
   );
   return (
-    <section aria-labelledby="foundation" className="flex flex-col items-center gap-14 bg-accent-navy-subtle px-50 py-20">
+    <section aria-labelledby="foundation" className="flex flex-col items-center gap-10 bg-accent-navy-subtle px-5 py-16 lg:gap-14 lg:px-50 lg:py-20">
       <SectionHead id="foundation" title="Our solid foundation" />
       {suggest ? (
         <>
-          <Note n={3} title="Give the values band a photo">
+          <Note n={2} title="Give the values band a photo">
             Four icon columns in a row repeat the modules card above. A stock photo of a team working together, with the values in a 2 × 2 grid beside it, breaks up the icon-heavy middle of the page.
           </Note>
-          <div className="flex w-full items-center gap-16">
+          <div className="flex w-full flex-col items-center gap-16 lg:flex-row">
             <Placeholder kind="stock" title="Sales team working together in a modern office (West African team, natural light)" size="4:3" className="h-site-split-media-h w-site-split-media shrink-0" radius="rounded-pill" />
             {values}
           </div>
@@ -549,14 +525,14 @@ const NEEDS = [
 
 function Streamline() {
   return (
-    <section aria-labelledby="streamline" className="flex flex-col items-center gap-14 px-50 py-20">
+    <section aria-labelledby="streamline" className="flex flex-col items-center gap-10 px-5 py-16 lg:gap-14 lg:px-50 lg:py-20">
       <SectionHead id="streamline" title="Streamline Your Sales Workflow" lead="Discover how wCRM's Business Development tools help your team manage pipelines, track deals, and hit targets." />
-      <div className="grid w-full grid-cols-2 gap-12">
-        <img src={streamlineHandshake} alt="Two colleagues shaking hands" className="size-full rounded-xl object-cover" />
+      <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-12">
+        <img src={streamlineHandshake} alt="Two colleagues shaking hands" className="aspect-video size-full rounded-xl object-cover lg:aspect-auto" />
         <ul className="flex flex-col gap-4">
           {NEEDS.map((n) => (
-            <li key={n.title} className="group flex items-center gap-5 rounded-xl border border-border-default bg-surface-subtle p-5 transition duration-base ease-standard hover:-translate-y-1 hover:shadow-md">
-              <img src={n.img} alt="" className="size-20 shrink-0 object-contain transition-transform duration-site-slow ease-standard group-hover:scale-105" />
+            <li key={n.title} className="group flex items-center gap-4 rounded-xl border border-border-default bg-surface-subtle p-4 lg:gap-5 lg:p-5 transition duration-base ease-standard hover:-translate-y-1 hover:shadow-md">
+              <img src={n.img} alt="" className="size-16 shrink-0 lg:size-20 object-contain transition-transform duration-site-slow ease-standard group-hover:scale-105" />
               <div className="flex flex-1 flex-col gap-2">
                 <h3 className="font-outfit text-heading-2 text-site-ink">{n.title}</h3>
                 <p className="text-body-sm leading-150 text-text-slate">{n.body}</p>
@@ -573,9 +549,9 @@ function Streamline() {
 
 function Pricing() {
   return (
-    <section aria-labelledby="plans" className="flex flex-col items-center gap-12 border-t border-border-default px-50 py-20">
-      <SectionHead id="plans" title="Simple, transparent pricing" lead="All plans include a 14-day free trial." />
-      <PlanCards />
+    <section aria-labelledby="plans" className="flex flex-col items-center gap-10 border-t border-border-default px-5 py-16 lg:gap-12 lg:px-50 lg:py-20">
+      <SectionHead id="plans" title="Plans and pricing" lead="Prices are for your whole team, not per seat. Standard and Pro start with a 14-day free trial; you only pay if you keep using wCRM." />
+      <ConceptPlans />
     </section>
   );
 }
@@ -584,15 +560,15 @@ function Pricing() {
 
 function CtaBand({ suggest }: { suggest: boolean }) {
   return (
-    <section className="flex flex-col gap-6 bg-site-stats px-50 py-16 text-text-inverse">
+    <section className="flex flex-col gap-6 bg-site-stats px-5 py-12 text-text-inverse lg:px-50 lg:py-16">
       {suggest && (
-        <Note n={4} title="Put a face next to the button">
+        <Note n={3} title="Put a face next to the button">
           With the contact section gone, this is the page’s last way to reach the team. A small photo of the sales rep who answers (stock for now, a real one later) makes “Contact us” feel like talking to a person.
         </Note>
       )}
-      <div className="flex items-center justify-between gap-10">
+      <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center lg:gap-10">
       <div className="flex flex-col gap-2">
-        <h2 className="font-display text-site-title">Close deals faster with wCRM</h2>
+        <h2 className="font-display text-display lg:text-site-title">Close deals faster with wCRM</h2>
         <p className="text-site-lead">Talk to our team about setting up wCRM for your business development team.</p>
       </div>
       <div className="flex items-center gap-4">
@@ -613,10 +589,10 @@ export function ConceptPage({ suggest = false }: { suggest?: boolean }) {
       <UtilityBar />
       <SiteHeader />
       <main className="animate-page-in">
-        <Hero suggest={suggest} />
+        <Hero />
         <Modules />
         {suggest && <SocialProof />}
-        <ProductTour />
+        <DealStorySection />
         <Foundation suggest={suggest} />
         <Streamline />
         <Pricing />

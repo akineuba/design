@@ -36,7 +36,7 @@ export function ThemeToggle() {
         window.setTimeout(() => root.classList.remove('theme-fade'), 360);
         setDark((d) => !d);
       }}
-      className="absolute right-5.75 top-4 flex items-center justify-center rounded-full bg-surface-toggle p-2 transition-colors hover:bg-border-strong focus-visible:outline-none focus-visible:shadow-focus"
+      className="flex shrink-0 items-center justify-center rounded-full bg-surface-toggle p-2 lg:absolute lg:right-5.75 lg:top-4 transition-colors hover:bg-border-strong focus-visible:outline-none focus-visible:shadow-focus"
     >
       <img src={sun} alt="" className={`size-3 transition-transform duration-site-slow ease-standard ${dark ? 'rotate-180' : 'rotate-0'}`} />
     </button>

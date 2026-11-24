@@ -32,12 +32,12 @@ const QUICK_LINKS = [
 const columnHeading = 'font-instrument text-label text-surface-default';
 const quietLink = 'rounded-xs transition-colors hover:text-site-red focus-visible:outline-none focus-visible:shadow-focus';
 
-/** Site footer (Figma `Footer-Outer`, 691:5239). */
+/** Site footer (Figma `Footer-Outer`, 691:5239). Below the `lg` breakpoint (not in Figma) the columns stack. */
 export function SiteFooter() {
   return (
-    <footer className="flex flex-col items-center gap-15 bg-surface-default px-50 py-20">
-      <div className="flex w-full items-start justify-between">
-        <div className="flex w-site-footer-brand flex-col gap-5">
+    <footer className="flex flex-col items-center gap-10 bg-surface-default px-5 py-14 lg:gap-15 lg:px-50 lg:py-20">
+      <div className="flex w-full flex-col items-start justify-between gap-8 lg:flex-row lg:gap-0">
+        <div className="flex flex-col gap-5 lg:w-site-footer-brand">
           <img src={logoGrey} alt="Wragby" className="h-10 w-logo-w object-cover" />
           <p className="font-instrument text-body-sm leading-site-20 text-text-tertiary">
             wCRM is built to help enterprises manage end-to-end customer lifecycles and streamline operational workflows,
@@ -80,7 +80,7 @@ export function SiteFooter() {
           </a>
         </div>
 
-        <div className="flex w-site-footer-address flex-col gap-4">
+        <div className="flex flex-col gap-4 lg:w-site-footer-address">
           <h2 className={columnHeading}>Addresses</h2>
           <address className="flex gap-2.5 not-italic">
             <img src={location} alt="" className="size-5 shrink-0" />
@@ -92,7 +92,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="flex w-full items-start justify-between whitespace-nowrap border-t border-border-default pt-6 text-caption text-text-icon-strong">
+      <div className="flex w-full flex-col items-start justify-between gap-3 border-t border-border-default pt-6 text-caption text-text-icon-strong lg:flex-row lg:whitespace-nowrap">
         <p>© 2026 wCRM. All rights reserved. Licensed to Wragby Business Solutions and Technologies Limited.</p>
         <p className="flex gap-6">
           <span>Privacy Policy</span>

@@ -1,7 +1,8 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import * as RadixMenu from '@radix-ui/react-dropdown-menu';
 import type { ComponentType, SVGProps } from 'react';
-import { LucideActivityIcon, LucideAwardIcon, LucideChartLineIcon, Menu, MenuTrigger, PeopleIcon, cn } from '@ds';
+import { BiFilterLeftIcon, LucideActivityIcon, LucideAwardIcon, LucideChartLineIcon, LucideXIcon, Menu, MenuTrigger, PeopleIcon, cn } from '@ds';
 import chevronDown from '../assets/shared/chevron-down.svg';
 import { Logo } from './Logo';
 import { SiteButtonLink } from './SiteButton';
@@ -26,15 +27,22 @@ const navLink = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'font-semibold text-site-red' : 'text-text-black',
   );
 
-/** Marketing header (Figma `Header` instance 691:4901). Sticky, with the theme toggle at the far right. */
+const mobileLink = 'rounded-md px-3 py-2.5 text-body text-text-primary hover:bg-surface-subtle focus-visible:outline-none focus-visible:shadow-focus';
+
+/**
+ * Marketing header (Figma `Header` instance 691:4901). Sticky, with the theme toggle at the far right.
+ * Below the `lg` breakpoint (not in Figma) it shows the logo, Get Started, the theme toggle and a menu button that
+ * opens the links in a panel under the header.
+ */
 export function SiteHeader() {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 border-b border-border-module-header bg-surface-default shadow-site-header">
-      <div className="relative flex items-center gap-20 px-50 py-2.5">
+      <div className="relative flex items-center gap-3 px-5 py-2.5 lg:gap-20 lg:px-50">
         <div className="flex flex-1 items-center justify-between">
           <Logo />
-          <nav aria-label="Main" className="flex w-site-nav items-center justify-between">
+          <nav aria-label="Main" className="hidden w-site-nav items-center justify-between lg:flex">
             <NavLink to="/" end className={navLink}>
               Home
             </NavLink>
@@ -74,16 +82,41 @@ export function SiteHeader() {
             </NavLink>
           </nav>
           <div className="flex items-center gap-4">
-            <SiteButtonLink to="/pricing" variant="header">
+            <SiteButtonLink to="/pricing" variant="header" className="max-lg:px-4 max-lg:py-2">
               Get Started
             </SiteButtonLink>
-            <SiteButtonLink to="/checkout/account" variant="header-outline">
+            <SiteButtonLink to="/checkout/account" variant="header-outline" className="hidden lg:inline-flex">
               Sign In
             </SiteButtonLink>
           </div>
         </div>
         <ThemeToggle />
+        <button
+          type="button"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="site-mobile-menu"
+          onClick={() => setOpen((o) => !o)}
+          className="flex size-9 items-center justify-center rounded-md text-text-tertiary hover:bg-surface-subtle focus-visible:outline-none focus-visible:shadow-focus lg:hidden [&>svg]:size-6"
+        >
+          {open ? <LucideXIcon /> : <BiFilterLeftIcon />}
+        </button>
       </div>
+      {open && (
+        <nav id="site-mobile-menu" aria-label="Main" className="flex animate-menu-in flex-col gap-1 border-t border-border-default px-3 py-3 lg:hidden">
+          <Link to="/" className={mobileLink} onClick={() => setOpen(false)}>Home</Link>
+          <p className="px-3 pt-2 text-caption font-semibold uppercase text-text-tertiary">Features</p>
+          {FEATURE_LINKS.map((f) => (
+            <Link key={f.id} to={`/features/${f.id}`} className={cn(mobileLink, 'flex items-center gap-2.5')} onClick={() => setOpen(false)}>
+              <f.Icon aria-hidden="true" strokeWidth={f.stroke} className="size-5 shrink-0 text-site-menu-title" />
+              {f.title}
+            </Link>
+          ))}
+          <Link to="/pricing" className={mobileLink} onClick={() => setOpen(false)}>Pricing</Link>
+          <Link to="/contact" className={mobileLink} onClick={() => setOpen(false)}>Contact Us</Link>
+          <Link to="/checkout/account" className={mobileLink} onClick={() => setOpen(false)}>Sign In</Link>
+        </nav>
+      )}
     </header>
   );
 }
