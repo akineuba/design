@@ -156,38 +156,45 @@ const PARTNERS = [
 ];
 
 /*
- * Hero: the promise on the left and, beside it, the Deals view with the open pipeline (HeroDeals), drawn on theme
- * tokens so it is light or dark with the page. Phones stack the copy above the view.
+ * Hero: the original layout (dark band, copy on the left, scrim) with the Deals view (HeroDeals) as the image behind
+ * it, in place of the handshake photo. The view is drawn on theme tokens, so it is light or dark with the page.
  */
 function Hero() {
   return (
-    <section className="flex flex-col gap-10 bg-surface-canvas px-5 pb-40 pt-12 lg:flex-row lg:items-center lg:gap-16 lg:px-50 lg:pt-20">
-      <div className="flex flex-col gap-6 lg:w-site-hero-copy lg:shrink-0">
-        <p className="text-overline uppercase tracking-wide text-text-secondary">wCRM · Business Development</p>
-        <h1 className="font-display text-site-section leading-120 text-site-ink lg:text-site-hero">
+    <section className="relative flex flex-col overflow-hidden bg-site-midnight px-5 pb-40 pt-12 lg:px-50 lg:pt-25">
+      <div className="relative z-10 flex flex-col gap-6 text-text-inverse lg:w-site-contact-copy">
+        <p className="text-overline uppercase tracking-wide text-site-on-dark-muted">wCRM · Business Development</p>
+        <h1 className="font-display text-site-section leading-120 lg:text-site-hero">
           Track deals, profit and sales targets <span className="text-brand-primary">in one CRM</span>
         </h1>
-        <p className="text-site-lead leading-150 text-text-slate">
+        <p className="text-site-lead leading-150 text-site-on-dark-muted">
           See your open pipeline, log every call and meeting, and watch each won deal count towards your team&apos;s target.
         </p>
         <div className="flex flex-wrap items-center gap-3">
           <SiteButtonLink to="/pricing" variant="header">Start 14-day free trial</SiteButtonLink>
-          <SiteButtonLink to="/contact" variant="header-outline">Talk to sales</SiteButtonLink>
+          <Link
+            to="/contact"
+            className="rounded-callout border border-text-inverse px-6 py-3 text-body font-medium text-text-inverse hover:bg-site-divider-on-dark focus-visible:outline-none focus-visible:shadow-focus"
+          >
+            Talk to sales
+          </Link>
         </div>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-4">
-          <p className="text-caption font-semibold uppercase text-text-secondary">Works with</p>
+          <p className="text-caption font-semibold uppercase text-site-on-dark-muted">Works with</p>
           <ul className="flex items-center">
             {PARTNERS.map((p) => (
               <li key={p.name} className="h-site-partner-h w-site-partner">
-                <img src={p.src} alt={p.name} className="site-invert-dark size-full object-bottom" />
+                <img src={p.src} alt={p.name} className="size-full object-bottom opacity-80 brightness-0 invert" />
               </li>
             ))}
           </ul>
         </div>
       </div>
-      <div className="min-w-0 flex-1">
+      {/* Background: the Deals view where the photo was, under a left-to-right scrim on wide screens. */}
+      <div className="site-hero-shot">
         <HeroDeals />
       </div>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden bg-site-hero-scrim opacity-95 lg:block" />
     </section>
   );
 }

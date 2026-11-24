@@ -138,6 +138,7 @@
   --shadow-site-menu: 0 16px 16px 0 rgba(0, 0, 0, 0.05);
   --gradient-site-stats: linear-gradient(103.18deg, #FF6472 11.855%, #B10001 102.68%);
   --gradient-site-vignette: linear-gradient(to top, var(--color-surface-subtle) 0%, var(--color-surface-subtle) 45%, transparent 100%);
+  --gradient-site-hero-scrim: linear-gradient(to right, var(--color-site-midnight) 0%, var(--color-site-midnight) 42%, transparent 72%);
   --scale-site-mini-card: 0.643;
   --scale-site-press: 0.98;
   --motion-site-duration-slow: 320ms;

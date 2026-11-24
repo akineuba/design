@@ -80,3 +80,12 @@
 
 /* Partner wordmarks are black artwork; flip them so they stay visible on the dark theme. */
 [data-theme='dark'] .site-invert-dark { filter: invert(1); }
+
+/*
+ * /concept hero: the Deals view (HeroDeals) sits behind the copy where the photo was, bleeding off the right edge.
+ * Phones show it under the copy. Illustration geometry, kept with the artwork.
+ */
+.site-hero-shot { position: relative; width: 560px; margin-top: 2.5rem; }
+@media (min-width: 1024px) {
+  .site-hero-shot { position: absolute; left: 50%; top: 56px; width: 800px; margin-top: 0; }
+}
