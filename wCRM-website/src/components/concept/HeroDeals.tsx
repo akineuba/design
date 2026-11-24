@@ -6,6 +6,8 @@ import { CloseUp, QualPill, StagePill, type Stage } from './parts';
  * Hero close-up: the Deals view with the open pipeline, drawn at hero size so it reads at a glance. KPIs and rows
  * follow the current Deals register (product screenshot, Nov 2026); figures are sample data. The stage values add up
  * to the Open pipeline total (₦225.4M).
+ *
+ * `compact` (phones): only the open pipeline total and its split by stage, so the hero stays short.
  */
 
 const KPIS = [
@@ -29,9 +31,12 @@ const DEALS: { name: string; company: string; stage: Stage; qual: 0 | 1 | 2 | 3 
   { name: 'Manufacturing PIC', company: 'Harbourline Logistics Ltd', stage: 'Site Survey', qual: 1, amount: '₦1,000,000' },
 ];
 
-export function HeroDeals() {
+export function HeroDeals({ compact = false }: { compact?: boolean }) {
+  const kpis = compact ? KPIS.filter((k) => k.featured) : KPIS;
   return (
-    <CloseUp label="wCRM Deals view: ₦225,419,000 open pipeline across 20 deals, split by stage, with the open deals listed">
+    <CloseUp
+      label={compact ? 'wCRM Deals view: ₦225,419,000 open pipeline across 20 deals, split by stage' : 'wCRM Deals view: ₦225,419,000 open pipeline across 20 deals, split by stage, with the open deals listed'}
+    >
       {/* Title bar */}
       <div className="flex items-center justify-between border-b border-border-default bg-surface-default px-5 py-3.5">
         <span className="flex items-center gap-3">
@@ -40,13 +45,13 @@ export function HeroDeals() {
             Sales pipeline <LucideChevronDownIcon className="size-3.5" />
           </span>
         </span>
-        <Button size="xs" leadingIcon={<LucidePlusIcon />}>Create Deal</Button>
+        {!compact && <Button size="xs" leadingIcon={<LucidePlusIcon />}>Create Deal</Button>}
       </div>
 
-      <div className="flex flex-col gap-4 p-5">
+      <div className={cn('flex flex-col', compact ? 'gap-3 p-4' : 'gap-4 p-5')}>
         {/* KPIs */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {KPIS.map((k) => (
+        <div className={compact ? 'grid' : 'grid grid-cols-2 gap-3 sm:grid-cols-3'}>
+          {kpis.map((k) => (
             <div key={k.label} className={cn('flex flex-col gap-1 rounded-callout p-3.5', k.featured && 'col-span-2 sm:col-span-1', k.featured ? 'bg-feature text-text-inverse shadow-md' : 'border border-border-subtle bg-surface-default')}>
               <span className={cn('text-caption font-medium', k.featured ? 'text-text-inverse' : 'text-text-secondary')}>{k.label}</span>
               <span className={cn('text-heading-3', k.featured ? 'text-text-inverse' : 'text-status-success-strong')}>{k.value}</span>
@@ -80,6 +85,7 @@ export function HeroDeals() {
         </div>
 
         {/* Open deals */}
+        {!compact && (
         <div className="overflow-hidden rounded-callout border border-border-subtle bg-surface-default">
           {/* Phones: name and amount on the first line, stage and qualification under them. */}
           <div className="grid grid-cols-12 items-center gap-x-3 bg-surface-subtle px-4 py-2 text-caption-sm font-medium uppercase text-text-secondary">
@@ -100,6 +106,7 @@ export function HeroDeals() {
             </div>
           ))}
         </div>
+        )}
       </div>
     </CloseUp>
   );

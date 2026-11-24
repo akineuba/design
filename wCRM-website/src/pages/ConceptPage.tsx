@@ -190,7 +190,11 @@ function Hero() {
           </ul>
         </div>
       </div>
-      {/* Background: the Deals view where the photo was, under a left-to-right scrim on wide screens. */}
+      {/* Phones: a compact Deals card (open pipeline by stage) under the copy. */}
+      <div className="relative z-10 mt-8 lg:hidden">
+        <HeroDeals compact />
+      </div>
+      {/* Wide screens: the full Deals view behind the copy, where the photo was, under a left-to-right scrim. */}
       <div className="site-hero-shot">
         <HeroDeals />
       </div>
