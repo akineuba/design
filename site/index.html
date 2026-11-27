@@ -119,10 +119,7 @@
   <!-- Hero stage -->
   <div class="relative h-[440px] overflow-hidden rounded-2xl bg-blush sm:h-[560px]">
     <div class="arch absolute bottom-0 left-1/2 h-[88%] w-[84%] -translate-x-1/2 border border-b-0 border-blush-2 bg-gradient-to-b from-[#FFD3D8] via-[#FFE6E9] to-blush"></div>
-    <div class="absolute -bottom-2 left-1/2 w-[86%] -translate-x-1/2" data-ph="wBizManager · Dashboard" data-ph-h="h-[300px] sm:h-[380px]" data-ph-kind="dash"></div>
-    <span class="marker left-[24%] top-[44%]">1</span>
-    <span class="marker left-[61%] top-[53%]">2</span>
-    <span class="marker left-[78%] top-[73%]">3</span>
+    <div class="absolute -bottom-3 left-1/2 w-[92%] -translate-x-1/2" data-shot="hero"></div>
     <div class="absolute left-5 top-6 flex items-center gap-3 rounded-lg border border-line bg-white py-2.5 pl-2.5 pr-4 shadow-float sm:left-8 sm:top-9">
       <span class="grid size-9 place-items-center rounded-md bg-blush"><svg class="size-4 fill-red"><use href="#i-play"/></svg></span>
       <span class="text-[13.5px] font-semibold leading-tight">Click-through videos<span class="block text-[12px] font-medium text-ink-2">14 short tours</span></span>
@@ -222,7 +219,7 @@
       <!-- 2 -->
       <div>
         <div class="rounded-xl border border-blush-2 bg-white/60 p-5">
-          <div class="relative h-[210px]" data-ph="Marked-up screen" data-ph-h="h-[210px]" data-ph-kind="form"></div>
+          <div class="h-[210px] overflow-hidden rounded-lg" data-shot="how"></div>
         </div>
         <div class="mt-6 flex gap-4"><span class="grid size-9 shrink-0 place-items-center rounded-full bg-red text-[14px] font-bold text-white">2</span><div><h3 class="text-[19px] font-semibold tracking-[-0.02em]">Follow the marked-up screen</h3><p class="mt-1.5 text-[15px] leading-relaxed text-ink-2">Real screens from the live app. Each number matches a step.</p></div></div>
       </div>
@@ -381,6 +378,25 @@ function ph(label, h, kind) {
 }
 document.querySelectorAll('[data-ph]').forEach(el => el.innerHTML = ph(el.dataset.ph, el.dataset.phH || 'h-full', el.dataset.phKind));
 
+/* ---------- Product screenshots (generated from the wBizManager and wCRM component libraries) ----------
+   Each: image, alt text, label, and numbered markers as [x%, y%] of the image. */
+const SHOTS = {
+  hero:    { src: 'assets/screens/hero-wbiz-dashboard.webp', w: 1600, h: 1000, label: 'wBizManager · Dashboard', alt: 'wBizManager dashboard with revenue, unpaid invoices, bills and cash cards, a money in and out chart, and requests waiting for approval', m: [[72.9, 14], [38.1, 22.2], [90.3, 42.8]] },
+  how:     { src: 'assets/screens/how-wbiz-invoice.webp', w: 1000, h: 607, label: 'wBizManager · Sales · New invoice', alt: 'New invoice form in wBizManager with customer, invoice date and project fields', m: [[27.7, 19.6], [65.2, 19.6], [36.6, 46]] },
+  req:     { src: 'assets/screens/guide-wbiz-requisition.webp', w: 800, h: 563, label: 'wBizManager · Procurement', alt: 'New purchase requisition panel with department, reason and item lines', m: [[49.6, 16.8], [91.7, 38.9], [16.7, 52.1]] },
+  crmdash: { src: 'assets/screens/guide-crm-dashboard.webp', w: 800, h: 563, label: 'CRM Business Development · Dashboard', alt: 'Business Development dashboard with open deals, deals won, deal status and top customers', m: [[20.7, 23.3], [17.4, 65.1], [52.6, 35.2]] },
+  portal:  { src: 'assets/screens/guide-wbiz-workspace.webp', w: 800, h: 562, label: 'wBizManager · My workspace', alt: 'My workspace in wBizManager with leave, claims, loan and appraisal cards', m: [[63.4, 14.6], [83.8, 25.4], [22.6, 43.7]] },
+  company: { src: 'assets/screens/guide-crm-create-company.webp', w: 800, h: 563, label: 'CRM Business Development · Companies', alt: 'Create company drawer with company name, industry, status and phone number with country code', m: [[87.4, 36.9], [49.8, 62.2], [87.4, 87.4]] },
+};
+function shot(s, small = false) {
+  const mk = s.m.map(([x, y], i) => `<span class="marker ${small ? '!size-5 !text-[10px] !shadow-[0_0_0_3px_rgb(231_0_26/0.18)]' : '!size-7 !text-[12px]'} -translate-x-1/2 -translate-y-1/2" style="left:${x}%;top:${y}%" aria-hidden="true">${i + 1}</span>`).join('');
+  return `<figure class="overflow-hidden rounded-lg border border-line bg-white shadow-lift ${small ? '!shadow-none' : ''}">
+      <div class="flex items-center gap-1.5 border-b border-line px-3 py-2"><i class="size-2 rounded-full bg-line"></i><i class="size-2 rounded-full bg-line"></i><i class="size-2 rounded-full bg-line"></i><span class="ml-auto min-w-0 truncate text-[11px] font-medium text-ink-3">${s.label}</span></div>
+      <div class="relative"><img src="${s.src}" width="${s.w}" height="${s.h}" alt="${s.alt}" class="block h-auto w-full" ${small ? 'loading="lazy"' : ''}>${mk}</div>
+    </figure>`;
+}
+document.querySelectorAll('[data-shot]').forEach(el => el.innerHTML = shot(SHOTS[el.dataset.shot], el.dataset.shot !== 'hero'));
+
 /* ---------- Modules ---------- */
 const MODS = {
   wbiz: { summary: '9 modules in 4 areas: Accounting · Sales, purchasing &amp; stock · HR · Settings', all: 'Open the wBizManager guide, grouped by area', tile: 'bg-wbiz-50 text-wbiz', list: [
@@ -472,14 +488,14 @@ renderMods(location.hash === '#crm' ? 'crm' : 'wbiz');
 
 /* ---------- Newest guides ---------- */
 const GUIDES = [
-  ['wBizManager','Procurement','Create a purchase requisition','Ask for the goods or services your team needs, then save it as a draft or send it for approval.','6 steps','list','bg-wbiz-50 text-wbiz'],
-  ['CRM Business Development','Getting started','Dashboard','Read the headline figures: deals, contacts, wins, the status split, top customers and who has been active.','5 steps','dash','bg-blush text-red-800'],
-  ['wBizManager','My workspace','My workspace overview','What you can do yourself in My Portal (leave, expenses, loans and your appraisal) and what HR must set up first.','4 steps','form','bg-wbiz-50 text-wbiz'],
-  ['CRM Business Development','Companies and contacts','Create a company','Add an organisation you do business with, so you can attach its contacts and deals to it.','7 steps','form','bg-blush text-red-800'],
+  ['wBizManager','Procurement','Create a purchase requisition','Ask for the goods or services your team needs, then save it as a draft or send it for approval.','6 steps','req','bg-wbiz-50 text-wbiz'],
+  ['CRM Business Development','Getting started','Dashboard','Read the headline figures: deals, contacts, wins, the status split, top customers and who has been active.','5 steps','crmdash','bg-blush text-red-800'],
+  ['wBizManager','My workspace','My workspace overview','What you can do yourself in My Portal (leave, expenses, loans and your appraisal) and what HR must set up first.','4 steps','portal','bg-wbiz-50 text-wbiz'],
+  ['CRM Business Development','Companies and contacts','Create a company','Add an organisation you do business with, so you can attach its contacts and deals to it.','7 steps','company','bg-blush text-red-800'],
 ];
 document.getElementById('guides').innerHTML = GUIDES.map(([p,mod,t,d,steps,kind,tag]) => `
   <a href="#" class="group flex min-w-0 flex-col">
-    <div class="rounded-xl bg-mist p-3">${ph(p+' · '+mod, 'h-[190px] !shadow-none', kind)}</div>
+    <div class="rounded-xl bg-mist p-3">${shot(SHOTS[kind], true)}</div>
     <div class="mt-4 flex flex-wrap gap-1.5 text-[12px] font-semibold"><span class="rounded-md px-2.5 py-1 ${tag}">${p}</span><span class="rounded-md bg-mist px-2.5 py-1 text-ink-2">${mod}</span></div>
     <h3 class="mt-3 text-[18px] font-semibold tracking-[-0.02em] group-hover:text-red-700">${t}</h3>
     <p class="mt-1.5 text-[14.5px] leading-relaxed text-ink-2">${d}</p>
