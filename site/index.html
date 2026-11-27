@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="color-scheme:light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>
+/* Theme before first paint: a saved choice wins, then a data-theme the host already set, then the system setting. */
+(function () {
+  var r = document.documentElement, t = null;
+  try { t = localStorage.getItem('pv-theme'); } catch (e) {}
+  if (t === 'dark' || t === 'light') r.dataset.theme = t;
+  else if (!r.dataset.theme) r.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+})();
+</script>
 </head>
 <body>
 
@@ -17,6 +26,7 @@
     <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
     <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l12-7z"/></symbol>
@@ -48,12 +58,12 @@
 <header class="sticky top-0 z-40 border-b border-line/80 bg-paper/85 backdrop-blur-md">
   <div class="mx-auto flex h-[72px] max-w-[1280px] items-center gap-6 px-5 lg:px-10">
     <a href="#" class="flex shrink-0 items-center gap-3">
-      <img src="assets/wragby.png" alt="Wragby" class="h-7 w-auto">
+      <img src="assets/wragby.png" alt="Wragby" class="dark:hidden h-7 w-auto"><img src="assets/wragby-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto">
       <span class="hidden h-5 w-px bg-line sm:block"></span>
       <span class="hidden text-[15px] font-semibold tracking-[-0.01em] sm:block">Product Verse</span>
     </a>
 
-    <button class="mx-auto hidden h-11 w-full max-w-[440px] items-center gap-3 rounded-lg border border-line bg-white px-4 text-left text-[15px] text-ink-3 shadow-[0_1px_2px_rgb(22_20_21/0.04)] md:flex">
+    <button class="mx-auto hidden h-11 w-full max-w-[440px] items-center gap-3 rounded-lg border border-line bg-surface px-4 text-left text-[15px] text-ink-3 shadow-[0_1px_2px_rgb(22_20_21/0.04)] md:flex">
       <svg class="size-[18px] fill-none stroke-ink-2 stroke-2"><use href="#i-search"/></svg>
       Search 203 guides…
       <span class="ml-auto flex gap-1"><kbd class="rounded-md border border-line bg-mist px-1.5 py-0.5 font-mono text-[11px] text-ink-2">/</kbd></span>
@@ -62,24 +72,25 @@
     <nav class="ml-auto hidden items-center gap-1 lg:flex md:ml-0">
       <button id="products-btn" aria-haspopup="true" class="flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-[15px] font-medium hover:bg-mist">Products <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-chev"/></svg></button>
       <a href="#" class="rounded-lg px-3.5 py-2 text-[15px] font-medium hover:bg-mist">What's new</a>
-      <a href="#" class="ml-2 flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-white"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI</a>
-      <button class="ml-1 grid size-10 place-items-center rounded-lg border border-line bg-white" aria-label="Switch to dark mode"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-moon"/></svg></button>
+      <a href="#" class="ml-2 flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-on-ink"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI</a>
+      <button id="theme-btn" type="button" class="theme-btn ml-1 grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Switch to dark mode" aria-pressed="false"><svg class="size-[18px] fill-none stroke-ink stroke-2 dark:hidden"><use href="#i-moon"/></svg><svg class="hidden size-[18px] fill-none stroke-ink stroke-2 dark:block"><use href="#i-sun"/></svg></button>
     </nav>
 
     <div class="ml-auto flex items-center gap-2 lg:hidden">
-      <button class="grid size-10 place-items-center rounded-lg border border-line bg-white md:hidden" aria-label="Search"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-search"/></svg></button>
-      <button class="grid size-10 place-items-center rounded-lg border border-line bg-white" aria-label="Menu"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-menu"/></svg></button>
+      <button id="theme-btn-m" type="button" class="theme-btn  grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Switch to dark mode" aria-pressed="false"><svg class="size-[18px] fill-none stroke-ink stroke-2 dark:hidden"><use href="#i-moon"/></svg><svg class="hidden size-[18px] fill-none stroke-ink stroke-2 dark:block"><use href="#i-sun"/></svg></button>
+      <button class="grid size-10 place-items-center rounded-lg border border-line bg-surface md:hidden" aria-label="Search"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-search"/></svg></button>
+      <button class="grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Menu"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-menu"/></svg></button>
     </div>
   </div>
 
   <!-- Products menu -->
-  <div id="products-menu" class="absolute top-[64px] hidden w-[460px] rounded-xl border border-line bg-white p-2 shadow-lift">
+  <div id="products-menu" class="absolute top-[64px] hidden w-[460px] rounded-xl border border-line bg-surface p-2 shadow-lift">
     <a href="#" class="flex gap-4 rounded-lg p-4 hover:bg-mist">
-      <span class="grid size-12 shrink-0 place-items-center rounded-lg bg-wbiz-50"><img src="assets/wbiz-mark.png" alt="" class="size-7"></span>
+      <span class="grid size-12 shrink-0 place-items-center rounded-lg bg-wbiz-50"><img src="assets/wbiz-mark.png" alt="" class="dark:hidden size-7"><img src="assets/wbiz-mark-dark.png" alt="" aria-hidden="true" class="hidden dark:block size-7"></span>
       <span><span class="flex items-center gap-2 text-[15px] font-semibold">wBizManager <span class="rounded-md bg-ok-50 px-2 py-0.5 text-[11.5px] font-semibold text-ok">Available</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Enterprise resource planning: sales, purchasing, inventory, accounting, HR, projects, approvals and reports.</span></span>
     </a>
     <a href="#" class="flex gap-4 rounded-lg p-4 hover:bg-mist">
-      <span class="grid size-12 shrink-0 place-items-center rounded-lg bg-blush"><img src="assets/wragby-mark.png" alt="" class="h-7 w-auto"></span>
+      <span class="grid size-12 shrink-0 place-items-center rounded-lg bg-blush"><img src="assets/wragby-mark.png" alt="" class="dark:hidden h-7 w-auto"><img src="assets/wragby-mark-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"></span>
       <span><span class="flex items-center gap-2 text-[15px] font-semibold">CRM Business Development <span class="rounded-md bg-ok-50 px-2 py-0.5 text-[11.5px] font-semibold text-ok">Available</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Companies, contacts, deals, budgets, reports and activity.</span></span>
     </a>
     <div class="flex gap-4 rounded-lg p-4">
@@ -97,7 +108,7 @@
     <h1 class="mt-5 text-[44px] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-[60px] lg:text-[68px]">Every Wragby product, <em class="accent">explained step by&nbsp;step.</em></h1>
     <p class="mt-6 max-w-[540px] text-[18px] leading-[1.6] text-ink-2">Find the task, follow the marked-up screen, and get it right the first time.</p>
 
-    <form class="mt-8 flex h-16 max-w-[560px] items-center gap-3 rounded-xl border border-line bg-white pl-5 pr-2 shadow-float">
+    <form class="mt-8 flex h-16 max-w-[560px] items-center gap-3 rounded-xl border border-line bg-surface pl-5 pr-2 shadow-float">
       <svg class="size-5 shrink-0 fill-none stroke-ink-2 stroke-2"><use href="#i-search"/></svg>
       <input class="min-w-0 flex-1 bg-transparent text-[16px] outline-none placeholder:text-ink-3" placeholder="Search guides, e.g. create an invoice">
       <kbd class="hidden rounded-md border border-line bg-mist px-1.5 py-0.5 font-mono text-[11px] text-ink-2 sm:block">/</kbd>
@@ -111,20 +122,20 @@
     </div>
 
     <div class="mt-9 flex flex-wrap gap-3">
-      <a href="#products" class="inline-flex items-center gap-2 rounded-lg bg-ink px-6 py-3.5 text-[15px] font-semibold text-white">Choose your product <svg class="size-4 rotate-90 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a>
-      <a href="#" class="inline-flex items-center gap-2 rounded-lg border-[1.5px] border-line bg-white px-5 py-3.5 text-[15px] font-semibold"><span class="grid size-6 place-items-center rounded-full bg-blush"><svg class="size-3 fill-red"><use href="#i-play"/></svg></span>Watch a 2-min tour</a>
+      <a href="#products" class="inline-flex items-center gap-2 rounded-lg bg-ink px-6 py-3.5 text-[15px] font-semibold text-on-ink">Choose your product <svg class="size-4 rotate-90 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a>
+      <a href="#" class="inline-flex items-center gap-2 rounded-lg border-[1.5px] border-line bg-surface px-5 py-3.5 text-[15px] font-semibold"><span class="grid size-6 place-items-center rounded-full bg-blush"><svg class="size-3 fill-red"><use href="#i-play"/></svg></span>Watch a 2-min tour</a>
     </div>
   </div>
 
   <!-- Hero stage -->
   <div class="relative h-[440px] overflow-hidden rounded-2xl bg-blush sm:h-[560px]">
-    <div class="arch absolute bottom-0 left-1/2 h-[88%] w-[84%] -translate-x-1/2 border border-b-0 border-blush-2 bg-gradient-to-b from-[#FFD3D8] via-[#FFE6E9] to-blush"></div>
+    <div class="arch absolute bottom-0 left-1/2 h-[88%] w-[84%] -translate-x-1/2 border border-b-0 border-blush-2 bg-gradient-to-b from-arch-top via-arch-mid to-blush"></div>
     <div class="absolute -bottom-3 left-1/2 w-[92%] -translate-x-1/2" data-shot="hero"></div>
-    <div class="absolute left-5 top-6 flex items-center gap-3 rounded-lg border border-line bg-white py-2.5 pl-2.5 pr-4 shadow-float sm:left-8 sm:top-9">
+    <div class="absolute left-5 top-6 flex items-center gap-3 rounded-lg border border-line bg-surface py-2.5 pl-2.5 pr-4 shadow-float sm:left-8 sm:top-9">
       <span class="grid size-9 place-items-center rounded-md bg-blush"><svg class="size-4 fill-red"><use href="#i-play"/></svg></span>
       <span class="text-[13.5px] font-semibold leading-tight">Click-through videos<span class="block text-[12px] font-medium text-ink-2">14 short tours</span></span>
     </div>
-    <div class="absolute right-5 top-[104px] flex items-center gap-3 rounded-lg border border-line bg-white py-2.5 pl-2.5 pr-4 shadow-float sm:right-8 sm:top-[120px]">
+    <div class="absolute right-5 top-[104px] flex items-center gap-3 rounded-lg border border-line bg-surface py-2.5 pl-2.5 pr-4 shadow-float sm:right-8 sm:top-[120px]">
       <span class="grid size-9 place-items-center rounded-md bg-ok-50"><svg class="size-4 fill-none stroke-ok stroke-[2.5]"><use href="#i-check"/></svg></span>
       <span class="text-[13.5px] font-semibold leading-tight">Set up in the right order<span class="block text-[12px] font-medium text-ink-2">Step 2 of 5</span></span>
     </div>
@@ -133,7 +144,7 @@
 
 <!-- ================= STATS ================= -->
 <section class="mx-auto max-w-[1280px] px-5 lg:px-10">
-  <div class="grid grid-cols-2 gap-y-6 rounded-xl border border-line bg-white p-6 lg:grid-cols-4 lg:divide-x lg:divide-line lg:p-8">
+  <div class="grid grid-cols-2 gap-y-6 rounded-xl border border-line bg-surface p-6 lg:grid-cols-4 lg:divide-x lg:divide-line lg:p-8">
     <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4 lg:px-6 lg:first:pl-0"><span class="grid size-12 shrink-0 place-items-center rounded-lg bg-blush text-red"><svg class="size-[22px] fill-none stroke-current stroke-[1.9]"><use href="#i-book"/></svg></span><span><b class="block text-[28px] font-semibold leading-none tracking-[-0.03em]">203</b><span class="mt-1 block text-[14px] text-ink-2">Step-by-step guides</span></span></div>
     <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4 lg:px-6"><span class="grid size-12 shrink-0 place-items-center rounded-lg bg-blush text-red"><svg class="size-[22px] fill-none stroke-current stroke-[1.9]"><use href="#i-box"/></svg></span><span><b class="block text-[28px] font-semibold leading-none tracking-[-0.03em]">3</b><span class="mt-1 block text-[14px] text-ink-2">Products, 2 live</span></span></div>
     <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4 lg:px-6"><span class="grid size-12 shrink-0 place-items-center rounded-lg bg-blush text-red"><svg class="size-[22px] fill-none stroke-current stroke-[1.9]"><use href="#i-grid"/></svg></span><span><b class="block text-[28px] font-semibold leading-none tracking-[-0.03em]">16</b><span class="mt-1 block text-[14px] text-ink-2">Modules covered</span></span></div>
@@ -153,39 +164,39 @@
 
   <div class="mt-12 grid gap-5 lg:grid-cols-3">
     <!-- wBiz -->
-    <article class="group flex flex-col overflow-hidden rounded-xl border border-line bg-white">
+    <article class="group flex flex-col overflow-hidden rounded-xl border border-line bg-surface">
       <div class="relative h-40 overflow-hidden bg-wbiz-50">
-        <div class="arch absolute -bottom-10 left-1/2 h-48 w-64 -translate-x-1/2 bg-white/70"></div>
-        <img src="assets/wbiz.png" alt="wBizManager by Wragby" class="absolute left-1/2 top-1/2 h-14 w-auto -translate-x-1/2 -translate-y-1/2">
-        <span class="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-[12px] font-semibold text-ink"><i class="size-1.5 rounded-full bg-red"></i>Available</span>
+        <div class="arch absolute -bottom-10 left-1/2 h-48 w-64 -translate-x-1/2 bg-surface/70"></div>
+        <img src="assets/wbiz.png" alt="wBizManager by Wragby" class="dark:hidden absolute left-1/2 top-1/2 h-14 w-auto -translate-x-1/2 -translate-y-1/2"><img src="assets/wbiz-dark.png" alt="" aria-hidden="true" class="hidden dark:block absolute left-1/2 top-1/2 h-14 w-auto -translate-x-1/2 -translate-y-1/2">
+        <span class="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-md bg-surface px-2.5 py-1 text-[12px] font-semibold text-ink"><i class="size-1.5 rounded-full bg-red"></i>Available</span>
       </div>
       <div class="flex flex-1 flex-col p-7">
         <h3 class="text-[22px] font-semibold tracking-[-0.025em]">wBizManager</h3>
         <p class="mt-2 text-[15px] leading-relaxed text-ink-2">Enterprise resource planning: sales, purchasing, inventory, accounting, HR, projects, approvals and reports.</p>
         <div class="mt-5 flex flex-wrap gap-1.5 text-[13px] font-medium"><span class="rounded-md bg-mist px-2.5 py-1">Accounting</span><span class="rounded-md bg-mist px-2.5 py-1">Sales</span><span class="rounded-md bg-mist px-2.5 py-1">Reports</span><span class="rounded-md bg-mist px-2.5 py-1">+6 more</span></div>
-        <div class="mt-auto flex items-center justify-between border-t border-line pt-5 mt-7"><span class="text-[14px] text-ink-2"><b class="font-semibold text-ink">9</b> modules · <b class="font-semibold text-ink">160</b> guides</span><a href="#" class="inline-flex items-center gap-1.5 rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-white">Open guide <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a></div>
+        <div class="mt-auto flex items-center justify-between border-t border-line pt-5 mt-7"><span class="text-[14px] text-ink-2"><b class="font-semibold text-ink">9</b> modules · <b class="font-semibold text-ink">160</b> guides</span><a href="#" class="inline-flex items-center gap-1.5 rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-on-ink">Open guide <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a></div>
       </div>
     </article>
     <!-- CRM BD -->
-    <article class="group flex flex-col overflow-hidden rounded-xl border border-line bg-white">
+    <article class="group flex flex-col overflow-hidden rounded-xl border border-line bg-surface">
       <div class="relative h-40 overflow-hidden bg-blush">
-        <div class="arch absolute -bottom-10 left-1/2 h-48 w-64 -translate-x-1/2 bg-white/70"></div>
-        <img src="assets/crm.png" alt="Wragby CRM" class="absolute left-1/2 top-1/2 h-12 w-auto -translate-x-1/2 -translate-y-1/2">
-        <span class="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-[12px] font-semibold text-ink"><i class="size-1.5 rounded-full bg-red"></i>Available</span>
+        <div class="arch absolute -bottom-10 left-1/2 h-48 w-64 -translate-x-1/2 bg-surface/70"></div>
+        <img src="assets/crm.png" alt="Wragby CRM" class="dark:hidden absolute left-1/2 top-1/2 h-12 w-auto -translate-x-1/2 -translate-y-1/2"><img src="assets/crm-dark.png" alt="" aria-hidden="true" class="hidden dark:block absolute left-1/2 top-1/2 h-12 w-auto -translate-x-1/2 -translate-y-1/2">
+        <span class="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-md bg-surface px-2.5 py-1 text-[12px] font-semibold text-ink"><i class="size-1.5 rounded-full bg-red"></i>Available</span>
       </div>
       <div class="flex flex-1 flex-col p-7">
         <h3 class="text-[22px] font-semibold tracking-[-0.025em]">CRM Business Development</h3>
         <p class="mt-2 text-[15px] leading-relaxed text-ink-2">Companies, contacts, deals, budgets, reports and activity.</p>
         <div class="mt-5 flex flex-wrap gap-1.5 text-[13px] font-medium"><span class="rounded-md bg-mist px-2.5 py-1">Deals</span><span class="rounded-md bg-mist px-2.5 py-1">Companies &amp; contacts</span><span class="rounded-md bg-mist px-2.5 py-1">+5 more</span></div>
-        <div class="mt-auto flex items-center justify-between border-t border-line pt-5 mt-7"><span class="text-[14px] text-ink-2"><b class="font-semibold text-ink">7</b> modules · <b class="font-semibold text-ink">43</b> guides</span><a href="#" class="inline-flex items-center gap-1.5 rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-white">Open guide <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a></div>
+        <div class="mt-auto flex items-center justify-between border-t border-line pt-5 mt-7"><span class="text-[14px] text-ink-2"><b class="font-semibold text-ink">7</b> modules · <b class="font-semibold text-ink">43</b> guides</span><a href="#" class="inline-flex items-center gap-1.5 rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-on-ink">Open guide <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a></div>
       </div>
     </article>
     <!-- e-Invoicing -->
-    <article class="flex flex-col overflow-hidden rounded-xl border border-dashed border-[#D4D8DA] bg-white/60">
+    <article class="flex flex-col overflow-hidden rounded-xl border border-dashed border-line-strong bg-surface/60">
       <div class="relative h-40 overflow-hidden bg-einv-50">
-        <div class="arch absolute -bottom-10 left-1/2 h-48 w-64 -translate-x-1/2 bg-white/60"></div>
+        <div class="arch absolute -bottom-10 left-1/2 h-48 w-64 -translate-x-1/2 bg-surface/60"></div>
         <div class="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-3"><img src="assets/einv.png" alt="" class="size-12 rounded-md"><span class="whitespace-nowrap text-[24px] font-semibold tracking-[-0.03em] text-einv">e-Invoicing</span></div>
-        <span class="absolute left-5 top-5 rounded-md border border-dashed border-ink-3/50 bg-white px-2.5 py-1 text-[12px] font-semibold text-warn">○ Coming soon</span>
+        <span class="absolute left-5 top-5 rounded-md border border-dashed border-ink-3/50 bg-surface px-2.5 py-1 text-[12px] font-semibold text-warn">○ Coming soon</span>
       </div>
       <div class="flex flex-1 flex-col p-7">
         <h3 class="text-[22px] font-semibold tracking-[-0.025em] text-ink-2">e-Invoicing</h3>
@@ -204,8 +215,8 @@
     <div class="mt-12 grid gap-5 lg:grid-cols-3">
       <!-- 1 -->
       <div>
-        <div class="rounded-xl border border-blush-2 bg-white/60 p-5">
-          <div class="h-[210px] rounded-lg border border-line bg-white p-5 shadow-[0_1px_2px_rgb(22_20_21/0.05)]">
+        <div class="rounded-xl border border-blush-2 bg-surface/60 p-5">
+          <div class="h-[210px] rounded-lg border border-line bg-surface p-5 shadow-[0_1px_2px_rgb(22_20_21/0.05)]">
             <div class="flex h-11 items-center gap-2 rounded-lg border border-line px-4 text-[14px]"><svg class="size-4 fill-none stroke-ink-2 stroke-2"><use href="#i-search"/></svg>create an inv<span class="h-4 w-px animate-pulse bg-ink"></span></div>
             <div class="mt-3 space-y-1.5 text-[13.5px]">
               <div class="flex items-center justify-between rounded-md bg-mist px-3 py-2.5 font-semibold">Create an invoice <span class="text-[12px] font-medium text-ink-2">wBizManager · Sales</span></div>
@@ -218,15 +229,15 @@
       </div>
       <!-- 2 -->
       <div>
-        <div class="rounded-xl border border-blush-2 bg-white/60 p-5">
+        <div class="rounded-xl border border-blush-2 bg-surface/60 p-5">
           <div class="h-[210px] overflow-hidden rounded-lg" data-shot="how"></div>
         </div>
         <div class="mt-6 flex gap-4"><span class="grid size-9 shrink-0 place-items-center rounded-full bg-red text-[14px] font-bold text-white">2</span><div><h3 class="text-[19px] font-semibold tracking-[-0.02em]">Follow the marked-up screen</h3><p class="mt-1.5 text-[15px] leading-relaxed text-ink-2">Real screens from the live app. Each number matches a step.</p></div></div>
       </div>
       <!-- 3 -->
       <div>
-        <div class="rounded-xl border border-blush-2 bg-white/60 p-5">
-          <div class="relative h-[210px] overflow-hidden rounded-lg bg-ink">
+        <div class="rounded-xl border border-blush-2 bg-surface/60 p-5">
+          <div class="relative h-[210px] overflow-hidden rounded-lg bg-night">
             <div class="absolute inset-4 rounded-md bg-white/5"></div>
             <span class="absolute left-1/2 top-[42%] grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-red shadow-red"><svg class="ml-0.5 size-5 fill-white"><use href="#i-play"/></svg></span>
             <div class="absolute inset-x-5 bottom-5"><div class="flex justify-between text-[12px] font-medium text-white/70"><span>Step 2 of 5 · Choose the customer</span><span>0:48 / 2:10</span></div><div class="mt-2 h-1.5 rounded-full bg-white/15"><div class="h-full w-[38%] rounded-full bg-red"></div></div></div>
@@ -247,12 +258,12 @@
     </div>
     <div class="relative w-full sm:w-[360px]" id="mod-dd">
       <span id="mod-dd-label" class="mb-2 block text-[13px] font-medium text-ink-2">Show modules for</span>
-      <button id="mod-dd-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="mod-dd-label mod-dd-name" class="flex h-14 w-full items-center gap-3 rounded-lg border border-line bg-white pl-2.5 pr-3.5 text-left shadow-[0_1px_2px_rgb(22_20_21/0.05)] hover:border-ink-3/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red">
-        <span class="grid size-9 shrink-0 place-items-center rounded-md bg-mist"><img id="mod-dd-mark" src="assets/wbiz-mark.png" alt="" class="max-h-6 w-auto"></span>
+      <button id="mod-dd-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="mod-dd-label mod-dd-name" class="flex h-14 w-full items-center gap-3 rounded-lg border border-line bg-surface pl-2.5 pr-3.5 text-left shadow-[0_1px_2px_rgb(22_20_21/0.05)] hover:border-ink-3/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red">
+        <span class="grid size-9 shrink-0 place-items-center rounded-md bg-mist"><img id="mod-dd-mark" src="assets/wbiz-mark.png" alt="" class="max-h-6 w-auto dark:hidden"><img id="mod-dd-mark-d" src="assets/wbiz-mark-dark.png" alt="" class="hidden max-h-6 w-auto dark:block"></span>
         <span class="min-w-0 flex-1"><span id="mod-dd-name" class="block truncate text-[15px] font-semibold">wBizManager</span><span id="mod-dd-meta" class="block text-[12.5px] text-ink-2">9 modules · 160 guides</span></span>
         <svg class="size-[18px] shrink-0 fill-none stroke-ink-2 stroke-2 transition-transform" id="mod-dd-chev"><use href="#i-chev"/></svg>
       </button>
-      <div id="mod-dd-pop" class="absolute right-0 z-30 mt-2 hidden w-full rounded-xl border border-line bg-white p-1.5 shadow-lift">
+      <div id="mod-dd-pop" class="absolute right-0 z-30 mt-2 hidden w-full rounded-xl border border-line bg-surface p-1.5 shadow-lift">
         <input id="mod-dd-filter" type="search" placeholder="Find a product" aria-label="Find a product" class="mb-1.5 hidden h-11 w-full rounded-md border border-line bg-mist px-3 text-[16px] outline-none focus:border-ink-3">
         <ul id="mod-dd-list" role="listbox" aria-labelledby="mod-dd-label" tabindex="-1" class="max-h-[320px] overflow-y-auto outline-none"></ul>
       </div>
@@ -277,20 +288,20 @@
       <h2 class="mt-4 text-[36px] font-semibold leading-[1.05] tracking-[-0.04em] lg:text-[48px]">Real screens, <em class="accent">marked up step by step.</em></h2>
       <p class="mt-4 max-w-[560px] text-[16px] leading-relaxed text-ink-2">The newest guides, from every product's live app. Numbered markers match the steps where a spot needs finding.</p>
     </div>
-    <a href="#" class="inline-flex shrink-0 items-center gap-2 rounded-lg border-[1.5px] border-line bg-white px-5 py-3 text-[15px] font-semibold">Browse all guides <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a>
+    <a href="#" class="inline-flex shrink-0 items-center gap-2 rounded-lg border-[1.5px] border-line bg-surface px-5 py-3 text-[15px] font-semibold">Browse all guides <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a>
   </div>
   <div id="guides" class="mt-12 grid grid-cols-[minmax(0,1fr)] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-4"></div>
 </section>
 
 <!-- ================= WHAT'S NEW ================= -->
 <section class="mx-auto max-w-[1280px] px-5 pt-24 lg:px-10 lg:pt-32">
-  <div class="grid gap-10 rounded-2xl border border-line bg-white p-7 lg:grid-cols-[0.8fr_1.2fr] lg:p-12">
+  <div class="grid gap-10 rounded-2xl border border-line bg-surface p-7 lg:grid-cols-[0.8fr_1.2fr] lg:p-12">
     <div class="flex flex-col">
       <span class="eyebrow">What's new</span>
       <h2 class="mt-4 text-[34px] font-semibold leading-[1.05] tracking-[-0.04em] lg:text-[42px]">Fresh this month, <em class="accent">with how to use it.</em></h2>
       <p class="mt-4 text-[16px] leading-relaxed text-ink-2">15 changes to CRM Business Development since 6 Nov. Every change links to its guide.</p>
       <div class="mt-8 flex flex-wrap gap-3 lg:mt-auto lg:pt-8">
-        <a href="#" class="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-3 text-[15px] font-semibold text-white">See all changes <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a>
+        <a href="#" class="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-3 text-[15px] font-semibold text-on-ink">See all changes <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a>
         <a href="#" class="inline-flex items-center gap-2 rounded-lg border-[1.5px] border-line px-5 py-3 text-[15px] font-semibold"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-bell"/></svg>Get updates</a>
       </div>
     </div>
@@ -300,7 +311,7 @@
 
 <!-- ================= ASK AI ================= -->
 <section class="mx-auto max-w-[1280px] px-5 pt-24 lg:px-10 lg:pt-32">
-  <div class="relative overflow-hidden rounded-2xl bg-ink px-7 py-12 text-white lg:px-14 lg:py-16">
+  <div class="relative overflow-hidden rounded-2xl bg-night px-7 py-12 text-white dark:ring-1 dark:ring-line lg:px-14 lg:py-16">
     <div class="arch pointer-events-none absolute bottom-0 right-6 hidden h-[86%] w-[560px] bg-gradient-to-b from-white/[0.08] to-white/[0.02] lg:block"></div>
     <div class="pointer-events-none absolute -left-20 -top-20 size-72 rounded-full bg-red/20 blur-3xl"></div>
     <div class="relative grid gap-10 lg:grid-cols-[1fr_440px] lg:items-center">
@@ -309,9 +320,9 @@
         <h2 class="mt-4 text-[36px] font-semibold leading-[1.05] tracking-[-0.04em] lg:text-[48px]">Use the guide inside <em class="italic text-[#FF5A66]">Claude or ChatGPT.</em></h2>
         <p class="mt-5 max-w-[480px] text-[17px] leading-relaxed text-white/75">Ask in your own assistant. It reads these guides and shows the screenshots with its answer.</p>
       </div>
-      <div class="rounded-xl bg-white p-6 text-ink shadow-lift">
+      <div class="rounded-xl bg-surface p-6 text-ink shadow-lift dark:ring-1 dark:ring-line">
         <div class="flex rounded-lg bg-mist p-1 text-[14px] font-semibold">
-          <button class="ai-tab flex-1 rounded-md bg-white py-2.5 shadow-[0_1px_3px_rgb(22_20_21/0.12)]" data-ai="claude">Claude</button>
+          <button class="ai-tab flex-1 rounded-md bg-surface py-2.5 shadow-[0_1px_3px_rgb(22_20_21/0.12)]" data-ai="claude">Claude</button>
           <button class="ai-tab flex-1 rounded-md py-2.5 text-ink-2" data-ai="chatgpt">ChatGPT</button>
         </div>
         <ol class="mt-5 space-y-4">
@@ -326,12 +337,12 @@
 </main>
 
 <!-- ================= FOOTER ================= -->
-<footer class="mt-24 border-t border-line bg-white lg:mt-32">
+<footer class="mt-24 border-t border-line bg-surface lg:mt-32">
   <div class="mx-auto grid max-w-[1280px] gap-10 px-5 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-10">
     <div>
-      <div class="flex items-center gap-3"><img src="assets/wragby.png" alt="Wragby" class="h-7 w-auto"><span class="h-5 w-px bg-line"></span><span class="text-[15px] font-semibold">Product Verse</span></div>
+      <div class="flex items-center gap-3"><img src="assets/wragby.png" alt="Wragby" class="dark:hidden h-7 w-auto"><img src="assets/wragby-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"><span class="h-5 w-px bg-line"></span><span class="text-[15px] font-semibold">Product Verse</span></div>
       <p class="mt-4 max-w-[300px] text-[15px] leading-relaxed text-ink-2">Every Wragby product, explained with real screens.</p>
-      <div class="mt-6 flex flex-wrap items-center gap-5 opacity-80"><img src="assets/wbiz.png" alt="wBizManager" class="h-7 w-auto"><img src="assets/crm.png" alt="Wragby CRM" class="h-6 w-auto"><img src="assets/einv.png" alt="e-Invoicing" class="size-7 rounded-md"></div>
+      <div class="mt-6 flex flex-wrap items-center gap-5 opacity-80"><img src="assets/wbiz.png" alt="wBizManager" class="dark:hidden h-7 w-auto"><img src="assets/wbiz-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"><img src="assets/crm.png" alt="Wragby CRM" class="dark:hidden h-6 w-auto"><img src="assets/crm-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-6 w-auto"><img src="assets/einv.png" alt="e-Invoicing" class="size-7 rounded-md"></div>
     </div>
     <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Products</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">wBizManager</a></li><li><a href="#">CRM Business Development</a></li><li class="text-ink-2">e-Invoicing <span class="ml-1 rounded-md border border-dashed border-ink-3/50 px-2 py-0.5 text-[11.5px] font-semibold text-warn">Soon</span></li></ul></div>
     <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Guides</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">User journeys</a></li><li><a href="#">Configuration center</a></li><li><a href="#">What's new</a></li></ul></div>
@@ -347,7 +358,7 @@
 </footer>
 
 <!-- Mobile-only floating Ask AI -->
-<a href="#" id="fab" class="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-lg bg-ink px-5 py-3.5 text-[15px] font-semibold text-white shadow-lift lg:hidden"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI</a>
+<a href="#" id="fab" class="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-lg bg-ink px-5 py-3.5 text-[15px] font-semibold text-on-ink shadow-lift lg:hidden"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI</a>
 
 <script>
 /* ---------- Screenshot placeholder frames ---------- */
@@ -356,10 +367,10 @@ function ph(label, h, kind) {
   let body;
   if (kind === 'dash') body = `
     <div class="grid h-full grid-cols-[92px_1fr] gap-3">
-      <div class="space-y-2 rounded-md bg-mist p-3">${[70,90,60,80,55,75].map(w=>sk(w,'!bg-white')).join('')}</div>
+      <div class="space-y-2 rounded-md bg-mist p-3">${[70,90,60,80,55,75].map(w=>sk(w,'!bg-surface')).join('')}</div>
       <div class="flex flex-col gap-3">${sk(45,'!h-3.5')}${sk(70)}
-        <div class="grid grid-cols-3 gap-2">${[1,2,3].map(()=>`<div class="h-16 rounded-md bg-mist p-2.5"><div class="h-2 w-1/2 rounded-full bg-white"></div><div class="mt-2.5 h-4 w-3/4 rounded-md bg-white"></div></div>`).join('')}</div>
-        <div class="flex flex-1 items-end gap-1.5 rounded-md bg-mist p-3">${[40,65,50,80,58,92,70,48,76].map(v=>`<div class="flex-1 rounded-t-md bg-white" style="height:${v}%"></div>`).join('')}</div>
+        <div class="grid grid-cols-3 gap-2">${[1,2,3].map(()=>`<div class="h-16 rounded-md bg-mist p-2.5"><div class="h-2 w-1/2 rounded-full bg-surface"></div><div class="mt-2.5 h-4 w-3/4 rounded-md bg-surface"></div></div>`).join('')}</div>
+        <div class="flex flex-1 items-end gap-1.5 rounded-md bg-mist p-3">${[40,65,50,80,58,92,70,48,76].map(v=>`<div class="flex-1 rounded-t-md bg-surface" style="height:${v}%"></div>`).join('')}</div>
       </div></div>`;
   else if (kind === 'form') body = `
     <div class="flex h-full flex-col gap-2.5">${sk(40,'!h-3')}
@@ -371,15 +382,15 @@ function ph(label, h, kind) {
   else body = `
     <div class="flex h-full flex-col gap-2">${sk(50,'!h-3')}${sk(80)}
       <div class="mt-1 flex-1 space-y-1.5 rounded-lg border border-line p-2">${[90,75,85,60,80].map(w=>sk(w)).join('')}</div></div>`;
-  return `<div class="relative ${h} overflow-hidden rounded-lg border border-line bg-white p-3.5 shadow-lift">
-      <div class="mb-3 flex items-center gap-1.5"><i class="size-2 rounded-full bg-line"></i><i class="size-2 rounded-full bg-line"></i><i class="size-2 rounded-full bg-line"></i><span class="ml-auto min-w-0 truncate rounded-md border border-dashed border-[#D4D8DA] px-1.5 py-0.5 font-mono text-[10px] text-ink-3">screenshot · ${label}</span></div>
+  return `<div class="relative ${h} overflow-hidden rounded-lg border border-line bg-surface p-3.5 shadow-lift">
+      <div class="mb-3 flex items-center gap-1.5"><i class="size-2 rounded-full bg-line"></i><i class="size-2 rounded-full bg-line"></i><i class="size-2 rounded-full bg-line"></i><span class="ml-auto min-w-0 truncate rounded-md border border-dashed border-line-strong px-1.5 py-0.5 font-mono text-[10px] text-ink-3">screenshot · ${label}</span></div>
       <div class="h-[calc(100%-26px)]">${body}</div>
     </div>`;
 }
 document.querySelectorAll('[data-ph]').forEach(el => el.innerHTML = ph(el.dataset.ph, el.dataset.phH || 'h-full', el.dataset.phKind));
 
 /* ---------- Product screenshots (generated from the wBizManager and wCRM component libraries) ----------
-   Each: image, alt text, label, and numbered markers as [x%, y%] of the image. */
+   Each: image (a -dark.webp twin is used in dark mode), alt text, label, and numbered markers as [x%, y%] of the image. */
 const SHOTS = {
   hero:    { src: 'assets/screens/hero-wbiz-dashboard.webp', w: 1600, h: 1000, label: 'wBizManager · Dashboard', alt: 'wBizManager dashboard with revenue, unpaid invoices, bills and cash cards, a money in and out chart, and requests waiting for approval', m: [[72.9, 14], [38.1, 22.2], [90.3, 42.8]] },
   how:     { src: 'assets/screens/how-wbiz-invoice.webp', w: 1000, h: 607, label: 'wBizManager · Sales · New invoice', alt: 'New invoice form in wBizManager with customer, invoice date and project fields', m: [[27.7, 19.6], [65.2, 19.6], [36.6, 46]] },
@@ -390,9 +401,9 @@ const SHOTS = {
 };
 function shot(s, small = false) {
   const mk = s.m.map(([x, y], i) => `<span class="marker ${small ? '!size-5 !text-[10px] !shadow-[0_0_0_3px_rgb(231_0_26/0.18)]' : '!size-7 !text-[12px]'} -translate-x-1/2 -translate-y-1/2" style="left:${x}%;top:${y}%" aria-hidden="true">${i + 1}</span>`).join('');
-  return `<figure class="overflow-hidden rounded-lg border border-line bg-white shadow-lift ${small ? '!shadow-none' : ''}">
+  return `<figure class="overflow-hidden rounded-lg border border-line bg-surface shadow-lift ${small ? '!shadow-none' : ''}">
       <div class="flex items-center gap-1.5 border-b border-line px-3 py-2"><i class="size-2 rounded-full bg-line"></i><i class="size-2 rounded-full bg-line"></i><i class="size-2 rounded-full bg-line"></i><span class="ml-auto min-w-0 truncate text-[11px] font-medium text-ink-3">${s.label}</span></div>
-      <div class="relative"><img src="${s.src}" width="${s.w}" height="${s.h}" alt="${s.alt}" class="block h-auto w-full" ${small ? 'loading="lazy"' : ''}>${mk}</div>
+      <div class="relative"><img src="${s.src}" width="${s.w}" height="${s.h}" alt="${s.alt}" class="block h-auto w-full dark:hidden" loading="lazy"><img src="${s.src.replace('.webp', '-dark.webp')}" width="${s.w}" height="${s.h}" alt="${s.alt}" class="hidden h-auto w-full dark:block" loading="lazy">${mk}</div>
     </figure>`;
 }
 document.querySelectorAll('[data-shot]').forEach(el => el.innerHTML = shot(SHOTS[el.dataset.shot], el.dataset.shot !== 'hero'));
@@ -425,7 +436,7 @@ function renderMods(key) {
   document.getElementById('mod-summary').innerHTML = m.summary;
   document.getElementById('mod-all').firstChild.textContent = m.all + ' ';
   document.getElementById('mod-grid').innerHTML = m.list.map(([area,name,icon,desc,n,topics]) => `
-    <article class="flex flex-col rounded-xl border border-line bg-white p-6">
+    <article class="flex flex-col rounded-xl border border-line bg-surface p-6">
       <div class="flex items-start gap-4">
         <span class="grid size-12 shrink-0 place-items-center rounded-lg ${m.tile}"><svg class="size-[22px] fill-none stroke-current stroke-[1.9]"><use href="#${icon}"/></svg></span>
         <div class="min-w-0 flex-1"><h3 class="text-[19px] font-semibold leading-tight tracking-[-0.02em]">${name}</h3><span class="mt-1 block text-[13px] font-medium text-ink-3">${area}</span></div>
@@ -439,12 +450,13 @@ function renderMods(key) {
   document.getElementById('mod-dd-name').textContent = pr.name;
   document.getElementById('mod-dd-meta').textContent = pr.modules + ' modules · ' + pr.guides + ' guides';
   document.getElementById('mod-dd-mark').src = pr.mark;
+  document.getElementById('mod-dd-mark-d').src = pr.markDark || pr.mark;
   current = key; renderList();
 }
 /* ---------- Module product dropdown (scales to any number of products) ---------- */
 const PRODUCTS = [
-  { key: 'wbiz', name: 'wBizManager', mark: 'assets/wbiz-mark.png', modules: 9, guides: 160 },
-  { key: 'crm', name: 'CRM Business Development', mark: 'assets/wragby-mark.png', modules: 7, guides: 43 },
+  { key: 'wbiz', name: 'wBizManager', mark: 'assets/wbiz-mark.png', markDark: 'assets/wbiz-mark-dark.png', modules: 9, guides: 160 },
+  { key: 'crm', name: 'CRM Business Development', mark: 'assets/wragby-mark.png', markDark: 'assets/wragby-mark-dark.png', modules: 7, guides: 43 },
   { key: 'einv', name: 'e-Invoicing', mark: 'assets/einv.png', soon: true },
 ];
 let current = 'wbiz', active = 0;
@@ -458,7 +470,7 @@ function renderList() {
   ddList.innerHTML = list.length ? list.map((x, i) => `
     <li role="option" id="opt-${x.key}" data-key="${x.key}" aria-selected="${x.key === current}" ${x.soon ? 'aria-disabled="true"' : ''}
         class="flex items-center gap-3 rounded-md px-2.5 py-2.5 ${x.soon ? 'cursor-default opacity-60' : 'cursor-pointer'} ${i === active && !x.soon ? 'bg-mist' : ''}">
-      <span class="grid size-9 shrink-0 place-items-center rounded-md bg-mist"><img src="${x.mark}" alt="" class="max-h-6 w-auto ${x.soon ? 'rounded' : ''}"></span>
+      <span class="grid size-9 shrink-0 place-items-center rounded-md bg-mist"><img src="${x.mark}" alt="" class="max-h-6 w-auto ${x.soon ? 'rounded' : 'dark:hidden'}">${x.markDark ? `<img src="${x.markDark}" alt="" class="hidden max-h-6 w-auto dark:block">` : ''}</span>
       <span class="min-w-0 flex-1"><span class="block truncate text-[15px] font-semibold">${x.name}</span>
         <span class="block text-[12.5px] text-ink-2">${x.soon ? 'Coming soon' : x.modules + ' modules · ' + x.guides + ' guides'}</span></span>
       ${x.key === current ? '<svg class="size-4 fill-none stroke-red stroke-[2.5]"><use href="#i-check"/></svg>' : ''}
@@ -503,7 +515,7 @@ document.getElementById('guides').innerHTML = GUIDES.map(([p,mod,t,d,steps,kind,
   </a>`).join('');
 
 /* ---------- What's new teaser ---------- */
-const BADGE = { 'New':'bg-blush text-red-800', 'Improved':'bg-ink text-white', 'Bug fix':'bg-mist text-ink-2' };
+const BADGE = { 'New':'bg-blush text-red-800', 'Improved':'bg-ink text-on-ink', 'Bug fix':'bg-mist text-ink-2' };
 const CHANGES = [
   ['13 Nov','Billable work in the Task Report','See how much task work is billable, and filter tasks by billable, deal, company and more.','Reports','Sales manager','New'],
   ['13 Nov','Deal qualification (BANT)','Tick the four BANT checks on each deal, and decide what happens when a deal is won without them.','Deals','Sales executive, Sales manager','New'],
@@ -529,7 +541,7 @@ document.querySelectorAll('.ai-tab').forEach(b => b.onclick = () => {
   document.getElementById('ai-help').textContent = help;
   document.getElementById('ai-add').firstChild.textContent = add + ' ';
   document.getElementById('ai-ask').firstChild.textContent = ask + ' ';
-  document.querySelectorAll('.ai-tab').forEach(x => x.className = 'ai-tab flex-1 rounded-md py-2.5 ' + (x === b ? 'bg-white shadow-[0_1px_3px_rgb(22_20_21/0.12)]' : 'text-ink-2'));
+  document.querySelectorAll('.ai-tab').forEach(x => x.className = 'ai-tab flex-1 rounded-md py-2.5 ' + (x === b ? 'bg-surface shadow-[0_1px_3px_rgb(22_20_21/0.12)]' : 'text-ink-2'));
 });
 
 /* ---------- Products menu ---------- */
@@ -540,6 +552,20 @@ pb.onclick = () => { placeMenu(); pm.classList.toggle('hidden'); };
 document.addEventListener('click', e => { if (!pm.contains(e.target) && !pb.contains(e.target)) pm.classList.add('hidden'); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') pm.classList.add('hidden'); });
 document.querySelectorAll('form').forEach(f => f.addEventListener('submit', e => e.preventDefault()));
+/* Theme toggle: flips <html data-theme>, remembers the choice, keeps the button labels right. */
+const root = document.documentElement;
+const syncThemeButtons = () => document.querySelectorAll('.theme-btn').forEach(b => {
+  const dark = root.dataset.theme === 'dark';
+  b.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  b.setAttribute('aria-pressed', String(dark));
+});
+document.querySelectorAll('.theme-btn').forEach(b => b.addEventListener('click', () => {
+  root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  try { localStorage.setItem('pv-theme', root.dataset.theme); } catch (e) {}
+  syncThemeButtons();
+}));
+new MutationObserver(syncThemeButtons).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+syncThemeButtons();
 document.addEventListener('keydown', e => { if (e.key === '/' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); document.querySelector('main form input').focus(); } });
 </script>
 </body>

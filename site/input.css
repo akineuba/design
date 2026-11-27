@@ -1,42 +1,101 @@
 @import "tailwindcss";
 @source "./index.html";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* Dark mode follows data-theme on <html>: set by the theme button, the saved choice,
+   the system setting, or the artifact viewer. */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-@theme {
+/* Colour values live in CSS variables so one set of classes serves both themes.
+   Every text pair passes WCAG AA in both themes. */
+:root {
+  color-scheme: light;
+  --c-paper: #FAFAF9;
+  --c-surface: #FFFFFF;
+  --c-mist: #EEF1F2;
+  --c-line: #E1E4E6;
+  --c-line-strong: #D4D8DA;
+  --c-ink: #161415;
+  --c-ink-2: #57534F;
+  --c-ink-3: #737070;
+  --c-on-ink: #FFFFFF;      /* text on ink-filled buttons */
+  --c-night: #161415;       /* bands that stay dark in both themes */
+  --c-accent: #E7001A;      /* red italic headline words */
+  --c-red-text: #C8001A;    /* red links and labels */
+  --c-red-strong: #B8001A;  /* red text on blush */
+  --c-blush: #FFF1F1;
+  --c-blush-2: #FFE0E2;
+  --c-arch-top: #FFD3D8;
+  --c-arch-mid: #FFE6E9;
+  --c-einv: #1C4AAF;
+  --c-shadow-float: rgb(22 20 21 / 0.25);
+  --c-shadow-lift: rgb(22 20 21 / 0.28);
+}
+[data-theme=dark] {
+  color-scheme: dark;
+  --c-paper: #0F0E0E;
+  --c-surface: #181616;
+  --c-mist: #242121;
+  --c-line: #2F2B2B;
+  --c-line-strong: #3D3838;
+  --c-ink: #F3F1F0;
+  --c-ink-2: #B9B3B0;
+  --c-ink-3: #948E8B;
+  --c-on-ink: #161415;
+  --c-night: #1A1717;
+  --c-accent: #FF4D5A;
+  --c-red-text: #FF6B76;
+  --c-red-strong: #FF8A93;
+  --c-blush: #221113;
+  --c-blush-2: #3A1A1E;
+  --c-arch-top: #4A1C22;
+  --c-arch-mid: #2E1417;
+  --c-einv: #8AA8F2;
+  --c-shadow-float: rgb(0 0 0 / 0.55);
+  --c-shadow-lift: rgb(0 0 0 / 0.6);
+}
+
+@theme inline {
   --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  --color-ink: #161415;
-  --color-ink-2: #57534F;
-  --color-ink-3: #737070;
-  --color-paper: #FAFAF9;
-  --color-mist: #EEF1F2;
-  --color-line: #E1E4E6;
-  --color-red: #E7001A;
-  --color-red-700: #C8001A;
-  --color-red-800: #B8001A;
-  --color-blush: #FFF1F1;
-  --color-blush-2: #FFE0E2;
-  --color-wbiz: #161415;
-  --color-wbiz-50: #EEF1F2;
-  --color-einv: #1C4AAF;
-  --color-einv-50: #EEF1F2;
-  --color-ok: #161415;
-  --color-ok-50: #EEF1F2;
-  --color-warn: #57534F;
-  --color-warn-50: #FFFFFF;
+  --color-paper: var(--c-paper);
+  --color-surface: var(--c-surface);
+  --color-mist: var(--c-mist);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-ink: var(--c-ink);
+  --color-ink-2: var(--c-ink-2);
+  --color-ink-3: var(--c-ink-3);
+  --color-on-ink: var(--c-on-ink);
+  --color-night: var(--c-night);
+  --color-accent: var(--c-accent);
+  --color-red: #E7001A;                 /* fills: buttons, markers (white text on it in both themes) */
+  --color-red-700: var(--c-red-text);
+  --color-red-800: var(--c-red-strong);
+  --color-blush: var(--c-blush);
+  --color-blush-2: var(--c-blush-2);
+  --color-arch-top: var(--c-arch-top);
+  --color-arch-mid: var(--c-arch-mid);
+  --color-wbiz: var(--c-ink);
+  --color-wbiz-50: var(--c-mist);
+  --color-einv: var(--c-einv);
+  --color-einv-50: var(--c-mist);
+  --color-ok: var(--c-ink);
+  --color-ok-50: var(--c-mist);
+  --color-warn: var(--c-ink-2);
+  --color-warn-50: var(--c-surface);
 
-  --shadow-float: 0 14px 30px -12px rgb(22 20 21 / 0.25);
-  --shadow-lift: 0 30px 60px -24px rgb(22 20 21 / 0.28);
+  --shadow-float: 0 14px 30px -12px var(--c-shadow-float);
+  --shadow-lift: 0 30px 60px -24px var(--c-shadow-lift);
   --shadow-red: 0 8px 18px -8px rgb(231 0 26 / 0.6);
 }
 
 @layer base {
-  body { @apply bg-paper text-ink font-sans antialiased; }
-  .accent { @apply italic text-red; }
+  body { @apply bg-paper text-ink font-sans antialiased; transition: background-color .2s, color .2s; }
+  .accent { @apply italic text-accent; }
   h1, h2, h3 { font-feature-settings: "ss01", "cv11"; }
+  @media (prefers-reduced-motion: reduce) { body { transition: none; } }
 }
 
 @utility arch { border-radius: 999px 999px 0 0; }

@@ -18,7 +18,7 @@ function Frame({ active, title, children }: { active: string; title: string; chi
     <div className="flex h-screen w-full overflow-hidden bg-surface-canvas">
       <NavMenu sections={businessSections} settings={businessSettings} activeId={active} onLogout={() => {}} />
       <div className="flex min-w-0 flex-1 flex-col">
-        <TopBar greeting="Hi Sarah" title={title} userName="Sarah Kalu" hasUnreadNotifications />
+        <TopBar greeting="Hi Sarah" title={title} userName="Sarah Kalu" hasUnreadNotifications theme={document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'} />
         <main className="min-w-0 flex-1 overflow-hidden p-6">
           <div className="flex flex-col gap-5">{children}</div>
         </main>
