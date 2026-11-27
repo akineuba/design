@@ -129,19 +129,11 @@
 
   <!-- Hero stage: product dashboards that take turns; each one opens its product -->
   <div>
-  <div id="hero-stage" class="relative h-[440px] overflow-hidden rounded-2xl bg-blush sm:h-[560px]">
-    <div class="arch absolute bottom-0 left-1/2 h-[88%] w-[84%] -translate-x-1/2 border border-b-0 border-blush-2 bg-gradient-to-b from-arch-top via-arch-mid to-blush"></div>
-    <div id="hero-slides" class="absolute -bottom-3 left-1/2 grid w-[92%] -translate-x-1/2" role="group" aria-roledescription="carousel" aria-label="Product dashboards"></div>
-    <div class="absolute left-5 top-6 flex items-center gap-3 rounded-lg border border-line bg-surface py-2.5 pl-2.5 pr-4 shadow-float sm:left-8 sm:top-9">
-      <span class="grid size-9 place-items-center rounded-md bg-blush"><svg class="size-4 fill-red"><use href="#i-play"/></svg></span>
-      <span class="text-[13.5px] font-semibold leading-tight">Click-through videos<span class="block text-[12px] font-medium text-ink-2">14 short tours</span></span>
-    </div>
-    <div class="absolute right-5 top-[104px] flex items-center gap-3 rounded-lg border border-line bg-surface py-2.5 pl-2.5 pr-4 shadow-float sm:right-8 sm:top-[120px]">
-      <span class="grid size-9 place-items-center rounded-md bg-ok-50"><svg class="size-4 fill-none stroke-ok stroke-[2.5]"><use href="#i-check"/></svg></span>
-      <span class="text-[13.5px] font-semibold leading-tight">Set up in the right order<span class="block text-[12px] font-medium text-ink-2">Step 2 of 5</span></span>
-    </div>
+  <div id="hero-stage" class="relative overflow-hidden rounded-2xl bg-blush px-[4%] pt-12 sm:pt-16">
+    <div class="arch absolute bottom-0 left-1/2 h-[90%] w-[84%] -translate-x-1/2 border border-b-0 border-blush-2 bg-gradient-to-b from-arch-top via-arch-mid to-blush"></div>
+    <div id="hero-slides" class="relative -mb-3 grid" role="group" aria-roledescription="carousel" aria-label="Product dashboards"></div>
   </div>
-  <div id="hero-tabs" class="mt-4 flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Show a product dashboard"></div>
+  <div id="hero-controls" class="mt-4 flex items-center justify-center gap-3"></div>
   </div>
 </section>
 
@@ -412,62 +404,63 @@ function shot(s, small = false) {
 }
 document.querySelectorAll('[data-shot]').forEach(el => el.innerHTML = shot(SHOTS[el.dataset.shot], true));
 
-/* ---------- Hero: dashboards take turns every 6 s; click one to open its product ----------
-   Pauses while hovered or focused, and does not rotate for people who ask for reduced motion. */
+/* ---------- Hero: product dashboards take turns every 6 s; click one to open its product ----------
+   One line of controls under the picture: ‹ · product name · "n of N" · ›, with one progress segment per product
+   (a single bar past 10 products). Pauses while hovered or focused; no auto-advance for reduced motion. */
 {
   const HERO = [
-    { name: 'wBizManager', short: 'wBizManager', href: '#wbizmanager', shot: SHOTS.hero, mark: 'assets/wbiz-mark.png', markDark: 'assets/wbiz-mark-dark.png' },
-    { name: 'CRM Business Development', short: 'Business Dev', href: '#crm-business-development', shot: SHOTS.heroCrm, mark: 'assets/wragby-mark.png', markDark: 'assets/wragby-mark-dark.png' },
+    { name: 'wBizManager', href: '#wbizmanager', shot: SHOTS.hero, mark: 'assets/wbiz-mark.png', markDark: 'assets/wbiz-mark-dark.png' },
+    { name: 'CRM Business Development', href: '#crm-business-development', shot: SHOTS.heroCrm, mark: 'assets/wragby-mark.png', markDark: 'assets/wragby-mark-dark.png' },
   ];
-  const DWELL = 6000;
-  const slides = document.getElementById('hero-slides'), tabs = document.getElementById('hero-tabs'), stage = document.getElementById('hero-stage');
+  const N = HERO.length, DWELL = 6000, SEGMENTED = N <= 10;
+  const slides = document.getElementById('hero-slides'), stage = document.getElementById('hero-stage'), ctl = document.getElementById('hero-controls');
+  const mark = h => `<img src="${h.mark}" alt="" class="h-4 w-auto dark:hidden"><img src="${h.markDark}" alt="" class="hidden h-4 w-auto dark:block">`;
+  const arrow = d => `<button type="button" data-step="${d}" aria-label="${d > 0 ? 'Next' : 'Previous'} product" class="grid size-10 shrink-0 place-items-center rounded-lg border border-line bg-surface text-ink-2 hover:border-ink-3/40 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"><svg class="size-4 fill-none stroke-current stroke-2 ${d < 0 ? 'rotate-180' : ''}"><use href="#i-arrow"/></svg></button>`;
+
   slides.innerHTML = HERO.map((h, i) => `
-    <a href="${h.href}" id="hero-slide-${i}" role="tabpanel" aria-roledescription="slide" aria-label="${h.name} dashboard. Open the ${h.name} guide"
+    <a href="${h.href}" aria-roledescription="slide" aria-label="${h.name} dashboard, ${i + 1} of ${N}. Open the ${h.name} guide"
        class="hero-slide group/slide relative block rounded-lg transition-[opacity,translate] duration-700 ease-out [grid-area:1/1] hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red motion-reduce:transition-none">
       ${shot(h.shot)}
       <span class="pointer-events-none absolute right-2 top-1 inline-flex items-center gap-1.5 whitespace-nowrap rounded-md bg-ink px-2.5 py-1 text-[12.5px] font-semibold text-on-ink opacity-0 transition-opacity group-hover/slide:opacity-100 group-focus-visible/slide:opacity-100">Open ${h.name} guide <svg class="size-3.5 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></span>
     </a>`).join('');
-  tabs.innerHTML = HERO.map((h, i) => `
-    <button type="button" role="tab" id="hero-tab-${i}" aria-controls="hero-slide-${i}"
-       class="hero-tab relative flex items-center gap-2 overflow-hidden rounded-md border px-3 py-2 text-[13px] font-semibold">
-      <img src="${h.mark}" alt="" class="h-4 w-auto dark:hidden"><img src="${h.markDark}" alt="" class="hidden h-4 w-auto dark:block"><span class="sm:hidden">${h.short}</span><span class="hidden sm:inline">${h.name}</span>
-      <span class="hero-bar absolute inset-x-0 bottom-0 h-0.5 origin-left bg-red" style="transform:scaleX(0)"></span>
-    </button>`).join('');
-  const slideEls = [...slides.children], tabEls = [...tabs.children], bars = tabEls.map(t => t.querySelector('.hero-bar'));
+  ctl.innerHTML = `
+    ${arrow(-1)}
+    <div class="flex min-w-0 flex-col items-center gap-2">
+      <p class="flex min-w-0 items-center gap-2 text-[14px] font-semibold" aria-live="polite">
+        <span id="hero-mark" class="flex shrink-0"></span><span id="hero-name" class="truncate"></span><span id="hero-count" class="shrink-0 font-medium tabular-nums text-ink-3"></span>
+      </p>
+      <div class="flex w-[200px] max-w-full gap-1" aria-hidden="true">${SEGMENTED
+        ? HERO.map(() => '<span class="relative h-0.5 flex-1 overflow-hidden rounded-full bg-line"><span class="hero-seg absolute inset-0 origin-left bg-red" style="transform:scaleX(0)"></span></span>').join('')
+        : '<span class="relative h-0.5 flex-1 overflow-hidden rounded-full bg-line"><span class="hero-seg absolute inset-0 origin-left bg-red" style="transform:scaleX(0)"></span></span>'}</div>
+    </div>
+    ${arrow(1)}`;
+
+  const slideEls = [...slides.children], segs = [...ctl.querySelectorAll('.hero-seg')];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let cur = 0, elapsed = 0, paused = false, last = performance.now();
+  const progress = f => SEGMENTED
+    ? segs.forEach((s, i) => (s.style.transform = `scaleX(${i < cur ? 1 : i === cur ? f : 0})`))
+    : (segs[0].style.transform = `scaleX(${(cur + f) / N})`);
   function show(i) {
-    cur = (i + HERO.length) % HERO.length; elapsed = 0;
+    cur = (i + N) % N; elapsed = 0;
     slideEls.forEach((el, j) => {
       const on = j === cur;
       el.classList.toggle('opacity-100', on); el.classList.toggle('opacity-0', !on); el.classList.toggle('pointer-events-none', !on);
       el.toggleAttribute('inert', !on); el.setAttribute('aria-hidden', String(!on));
     });
-    tabEls.forEach((t, j) => {
-      const on = j === cur;
-      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
-      t.classList.toggle('border-ink', on); t.classList.toggle('bg-surface', on); t.classList.toggle('text-ink', on);
-      t.classList.toggle('border-line', !on); t.classList.toggle('text-ink-2', !on);
-      bars[j].style.transform = `scaleX(${on && reduce ? 1 : 0})`;
-    });
+    document.getElementById('hero-mark').innerHTML = mark(HERO[cur]);
+    document.getElementById('hero-name').textContent = HERO[cur].name;
+    document.getElementById('hero-count').textContent = `· ${cur + 1} of ${N}`;
+    progress(reduce ? 1 : 0);
   }
-  tabEls.forEach((t, i) => {
-    t.addEventListener('click', () => show(i));
-    t.addEventListener('keydown', e => {
-      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-      if (d) { e.preventDefault(); show(cur + d); tabEls[cur].focus(); }
-    });
-  });
-  [stage, tabs].forEach(el => {
+  ctl.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => show(cur + Number(b.dataset.step))));
+  [stage, ctl].forEach(el => {
     el.addEventListener('pointerenter', () => (paused = true)); el.addEventListener('pointerleave', () => (paused = false));
     el.addEventListener('focusin', () => (paused = true)); el.addEventListener('focusout', () => (paused = false));
   });
   function tick(now) {
     const dt = now - last; last = now;
-    if (!paused && !reduce && !document.hidden) {
-      elapsed += dt; bars[cur].style.transform = `scaleX(${Math.min(1, elapsed / DWELL)})`;
-      if (elapsed >= DWELL) show(cur + 1);
-    }
+    if (!paused && !reduce && !document.hidden) { elapsed += dt; progress(Math.min(1, elapsed / DWELL)); if (elapsed >= DWELL) show(cur + 1); }
     requestAnimationFrame(tick);
   }
   show(0); if (!reduce) requestAnimationFrame(tick);
