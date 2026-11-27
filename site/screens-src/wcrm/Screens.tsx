@@ -7,18 +7,29 @@ import {
   TableRow, TopBar,
 } from '../index';
 import { businessSections, businessSettings } from '../components/NavMenu/NavMenu.fixtures';
+import logoSrc from '../assets/wragby-logo.png';
 import {
   Buildings2Icon, ExportIcon, LucideAwardIcon, LucideCalendarIcon, LucidePlusIcon, LucideSearchIcon, PeopleIcon,
-  StatusUpBoldIcon, FilterIcon,
+  StatusUpBoldIcon, FilterIcon, BiFilterLeftIcon,
 } from '../icons';
 
-/** App frame: Business Development sidebar on the left, the app header above the page. */
+/** App frame: the sidebar carries the collapse button and the Wragby logo above the Business Development menu;
+ *  the app header to the right holds the greeting, page title and account controls only.
+ *  (The library's TopBar still draws its own menu button and logo; they are hidden here until it has a prop for this.) */
 function Frame({ active, title, children }: { active: string; title: string; children: ReactNode }) {
   return (
     <div className="flex h-screen w-full overflow-hidden bg-surface-canvas">
-      <NavMenu sections={businessSections} settings={businessSettings} activeId={active} onLogout={() => {}} />
+      <div className="flex h-full w-sidebar shrink-0 flex-col border-r border-border-default bg-surface-default">
+        <div className="flex h-header shrink-0 items-center gap-2.25 border-b border-border-default px-4">
+          <button type="button" aria-label="Collapse navigation" aria-expanded className="inline-flex size-7.75 shrink-0 items-center justify-center rounded-sm text-text-tertiary hover:bg-surface-subtle [&>svg]:size-7.75">
+            <BiFilterLeftIcon />
+          </button>
+          <img src={logoSrc} alt="Wragby" className="h-10 w-logo-w object-contain object-left" />
+        </div>
+        <NavMenu className="h-auto min-h-0 flex-1 border-r-0 pt-6" sections={businessSections} settings={businessSettings} activeId={active} onLogout={() => {}} />
+      </div>
       <div className="flex min-w-0 flex-1 flex-col">
-        <TopBar greeting="Hi Sarah" title={title} userName="Sarah Kalu" hasUnreadNotifications theme={document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'} />
+        <TopBar className="[&>div:first-child>div:first-child]:hidden" greeting="Hi Sarah" title={title} userName="Sarah Kalu" hasUnreadNotifications theme={document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'} />
         <main className="min-w-0 flex-1 overflow-hidden p-6">
           <div className="flex flex-col gap-5">{children}</div>
         </main>

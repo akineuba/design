@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@source "./index.html";
+@source "./*.html";
+@source "./shared.js";
 
 /* Dark mode follows data-theme on <html>: set by the theme button, the saved choice,
    the system setting, or the artifact viewer. */

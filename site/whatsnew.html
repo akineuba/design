@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What’s new · CRM Business Development</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>
+/* Theme before first paint: a saved choice wins, then a data-theme the host already set, then the system setting. */
+(function () {
+  var r = document.documentElement, t = null;
+  try { t = localStorage.getItem('pv-theme'); } catch (e) {}
+  if (t === 'dark' || t === 'light') r.dataset.theme = t;
+  else if (!r.dataset.theme) r.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+})();
+</script>
+</head>
+<body>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l12-7z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 7h6"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12 4 7.5M12 12l8-4.5M12 12v9"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15v3M8 18h4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c0-2.8-1.4-4.8-3.8-5.6"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></symbol>
+    <symbol id="i-approve" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M14 4c3-1 6-1 6-1s0 3-1 6l-6 6-5-5z"/><circle cx="15" cy="9" r="1.5"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 21h8V9l-8-2M8 8h.01M8 12h.01M8 16h.01M16 12h.01M16 16h.01M2 21h20"/></symbol>
+    <symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1.4 1.4 0 0 0 2-2M14 14l2.5 2.5a1.4 1.4 0 0 0 2-2L15 11M2 11l5-5 4 2 3-1 5 5 3-1M7 6l-5 5 6 6 3-3"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-cake" viewBox="0 0 24 24"><path d="M4 21v-8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8M2 21h20M4 16c2 1 4 1 6-.5 2 1.5 4 1.5 6 0 1.5 1 3 1 4 .5M12 11V8M12 5.5V5"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4zM10 21h4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  </defs>
+</svg>
+
+<!-- ================= HEADER ================= -->
+<header class="sticky top-0 z-40 border-b border-line/80 bg-paper/85 backdrop-blur-md">
+  <div class="mx-auto flex h-[72px] max-w-[1280px] items-center gap-6 px-5 lg:px-10">
+    <a href="index.html" class="flex shrink-0 items-center gap-3">
+      <img src="assets/wragby.png" alt="Wragby" class="dark:hidden h-7 w-auto"><img src="assets/wragby-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto">
+      <span class="hidden h-5 w-px bg-line sm:block"></span>
+      <span class="hidden text-[15px] font-semibold tracking-[-0.01em] sm:block">Product Verse</span>
+    </a>
+
+    <button class="mx-auto hidden h-11 w-full max-w-[400px] items-center gap-3 rounded-lg border border-line bg-surface px-4 text-left text-[15px] text-ink-3 shadow-[0_1px_2px_rgb(22_20_21/0.04)] md:flex">
+      <svg class="size-[18px] fill-none stroke-ink-2 stroke-2"><use href="#i-search"/></svg>
+      Search 203 guides…
+      <span class="ml-auto flex gap-1"><kbd class="rounded-md border border-line bg-mist px-1.5 py-0.5 font-mono text-[11px] text-ink-2">/</kbd></span>
+    </button>
+
+    <nav class="ml-auto hidden items-center gap-1 lg:flex md:ml-0">
+      <button id="products-btn" aria-haspopup="true" class="flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-[15px] font-medium hover:bg-mist">Products <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-chev"/></svg></button>
+      <a href="#" class="whitespace-nowrap rounded-lg px-3.5 py-2 text-[15px] font-medium hover:bg-mist">User journeys</a>
+      <a href="whatsnew.html" aria-current="page" class="whitespace-nowrap rounded-lg bg-mist px-3.5 py-2 text-[15px] font-semibold">What's new</a>
+      <a href="#" class="ml-2 flex items-center gap-2 whitespace-nowrap rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-on-ink"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI</a>
+      <button id="theme-btn" type="button" class="theme-btn ml-1 grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Switch to dark mode" aria-pressed="false"><svg class="size-[18px] fill-none stroke-ink stroke-2 dark:hidden"><use href="#i-moon"/></svg><svg class="hidden size-[18px] fill-none stroke-ink stroke-2 dark:block"><use href="#i-sun"/></svg></button>
+    </nav>
+
+    <div class="ml-auto flex items-center gap-2 lg:hidden">
+      <button id="theme-btn-m" type="button" class="theme-btn  grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Switch to dark mode" aria-pressed="false"><svg class="size-[18px] fill-none stroke-ink stroke-2 dark:hidden"><use href="#i-moon"/></svg><svg class="hidden size-[18px] fill-none stroke-ink stroke-2 dark:block"><use href="#i-sun"/></svg></button>
+      <button class="grid size-10 place-items-center rounded-lg border border-line bg-surface md:hidden" aria-label="Search"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-search"/></svg></button>
+      <button class="grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Menu"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+
+  <!-- Products menu -->
+  <div id="products-menu" class="absolute top-[64px] hidden w-[460px] rounded-xl border border-line bg-surface p-2 shadow-lift">
+    <a href="#" class="flex gap-4 rounded-lg p-4 hover:bg-mist">
+      <span class="grid size-12 shrink-0 place-items-center rounded-lg bg-wbiz-50"><img src="assets/wbiz-mark.png" alt="" class="dark:hidden size-7"><img src="assets/wbiz-mark-dark.png" alt="" aria-hidden="true" class="hidden dark:block size-7"></span>
+      <span><span class="flex items-center gap-2 text-[15px] font-semibold">wBizManager <span class="rounded-md bg-ok-50 px-2 py-0.5 text-[11.5px] font-semibold text-ok">Available</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Enterprise resource planning: sales, purchasing, inventory, accounting, HR, projects, approvals and reports.</span></span>
+    </a>
+    <a href="#" class="flex gap-4 rounded-lg p-4 hover:bg-mist">
+      <span class="grid size-12 shrink-0 place-items-center rounded-lg bg-blush"><img src="assets/wragby-mark.png" alt="" class="dark:hidden h-7 w-auto"><img src="assets/wragby-mark-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"></span>
+      <span><span class="flex items-center gap-2 text-[15px] font-semibold">CRM Business Development <span class="rounded-md bg-ok-50 px-2 py-0.5 text-[11.5px] font-semibold text-ok">Available</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Companies, contacts, deals, budgets, reports and activity.</span></span>
+    </a>
+    <div class="flex gap-4 rounded-lg p-4">
+      <img src="assets/einv.png" alt="" class="size-12 shrink-0 rounded-lg opacity-60">
+      <span><span class="flex items-center gap-2 text-[15px] font-semibold text-ink-2">e-Invoicing <span class="rounded-md border border-dashed border-ink-3/50 px-2 py-0.5 text-[11.5px] font-semibold text-warn">Coming soon</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Create, validate and submit electronic invoices.</span></span>
+    </div>
+  </div>
+</header>
+
+<main class="mx-auto max-w-[1280px] px-5 pb-24 pt-8 lg:px-10 lg:pt-10">
+  <!-- Breadcrumb -->
+  <nav aria-label="Breadcrumb" class="text-[13.5px] text-ink-2">
+    <ol class="flex flex-wrap items-center gap-1.5">
+      <li><a href="index.html" class="hover:text-ink">Product Verse</a></li>
+      <li aria-hidden="true" class="text-ink-3">/</li>
+      <li><a href="index.html#crm-business-development" class="hover:text-ink">CRM Business Development</a></li>
+      <li aria-hidden="true" class="text-ink-3">/</li>
+      <li aria-current="page" class="font-medium text-ink">What's new</li>
+    </ol>
+  </nav>
+
+  <!-- Title + product switcher -->
+  <div class="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+    <div class="max-w-[720px]">
+      <h1 class="text-[36px] font-semibold leading-[1.05] tracking-[-0.04em] lg:text-[48px]">What's new in <em class="accent">CRM Business Development</em></h1>
+      <p class="mt-4 text-[17px] leading-relaxed text-ink-2">What we released, newest first. Open <b class="font-semibold text-ink">How to use</b> to see the feature in the guide.</p>
+    </div>
+    <div class="flex flex-wrap items-end gap-3">
+      <div class="relative w-full sm:w-[340px]" id="prod-dd">
+        <span id="prod-dd-label" class="mb-2 block text-[13px] font-medium text-ink-2">Product</span>
+        <button id="prod-dd-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="prod-dd-label prod-dd-name" class="flex h-12 w-full items-center gap-3 rounded-lg border border-line bg-surface pl-2.5 pr-3.5 text-left hover:border-ink-3/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red">
+          <span class="grid size-8 shrink-0 place-items-center rounded-md bg-mist"><img src="assets/wragby-mark.png" alt="" class="h-5 w-auto dark:hidden"><img src="assets/wragby-mark-dark.png" alt="" class="hidden h-5 w-auto dark:block"></span>
+          <span id="prod-dd-name" class="min-w-0 flex-1 truncate text-[15px] font-semibold">CRM Business Development</span>
+          <svg class="size-[18px] shrink-0 fill-none stroke-ink-2 stroke-2"><use href="#i-chev"/></svg>
+        </button>
+        <ul id="prod-dd-list" role="listbox" aria-labelledby="prod-dd-label" class="absolute right-0 z-30 mt-2 hidden w-full rounded-xl border border-line bg-surface p-1.5 shadow-lift"></ul>
+      </div>
+      <button type="button" class="inline-flex h-12 items-center gap-2 rounded-lg border-[1.5px] border-line bg-surface px-4 text-[15px] font-semibold"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-bell"/></svg>Get updates</button>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <section aria-label="Filter changes" class="mt-10 rounded-xl border border-line bg-surface p-4 lg:p-5">
+    <div class="flex flex-col gap-3 lg:flex-row lg:items-center">
+      <label class="relative block lg:w-[300px]">
+        <span class="sr-only">Search changes</span>
+        <svg class="pointer-events-none absolute left-3.5 top-1/2 size-[18px] -translate-y-1/2 fill-none stroke-ink-2 stroke-2"><use href="#i-search"/></svg>
+        <input id="q" type="search" placeholder="Search changes" class="h-11 w-full rounded-lg border border-line bg-paper pl-10 pr-3 text-[16px] outline-none placeholder:text-ink-3 focus:border-ink-3">
+      </label>
+      <div class="grid grid-cols-2 gap-3 lg:flex">
+        <label class="relative block"><span class="sr-only">Module</span>
+          <select id="f-module" class="h-11 w-full appearance-none rounded-lg border border-line bg-paper pl-3.5 pr-9 text-[15px] font-medium outline-none focus:border-ink-3 lg:w-[220px]"></select>
+          <svg class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 fill-none stroke-ink-2 stroke-2"><use href="#i-chev"/></svg></label>
+        <label class="relative block"><span class="sr-only">For</span>
+          <select id="f-role" class="h-11 w-full appearance-none rounded-lg border border-line bg-paper pl-3.5 pr-9 text-[15px] font-medium outline-none focus:border-ink-3 lg:w-[220px]"></select>
+          <svg class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 fill-none stroke-ink-2 stroke-2"><use href="#i-chev"/></svg></label>
+      </div>
+      <div class="flex items-center gap-3 lg:ml-auto">
+        <span class="text-[13px] font-medium text-ink-2">View by</span>
+        <div class="flex rounded-lg border border-line bg-paper p-1 text-[14px] font-semibold" role="radiogroup" aria-label="View by" id="view-by"></div>
+      </div>
+    </div>
+    <div class="mt-4 flex flex-wrap items-center gap-2 border-t border-line pt-4">
+      <div class="flex flex-wrap gap-2" id="type-chips" role="group" aria-label="Type of change"></div>
+      <p class="ml-auto flex items-center gap-3 text-[14px] text-ink-2"><span id="showing" aria-live="polite"></span><button id="clear" type="button" class="hidden font-semibold text-red-700 underline decoration-red/30 underline-offset-4">Clear filters</button></p>
+    </div>
+  </section>
+
+  <!-- Jump nav + list -->
+  <div class="mt-8 grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
+    <nav aria-labelledby="jump-label" class="lg:sticky lg:top-24 lg:self-start">
+      <p id="jump-label" class="mb-3 text-[12px] font-semibold uppercase tracking-[0.08em] text-ink-3">Jump to a day</p>
+      <ul id="jump" class="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:gap-1 lg:overflow-visible"></ul>
+    </nav>
+    <div id="groups" class="flex min-w-0 flex-col gap-6"></div>
+  </div>
+</main>
+
+<footer class="border-t border-line bg-surface">
+  <div class="mx-auto grid max-w-[1280px] gap-10 px-5 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-10">
+    <div>
+      <div class="flex items-center gap-3"><img src="assets/wragby.png" alt="Wragby" class="dark:hidden h-7 w-auto"><img src="assets/wragby-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"><span class="h-5 w-px bg-line"></span><span class="text-[15px] font-semibold">Product Verse</span></div>
+      <p class="mt-4 max-w-[300px] text-[15px] leading-relaxed text-ink-2">Every Wragby product, explained with real screens.</p>
+      <div class="mt-6 flex flex-wrap items-center gap-5 opacity-80"><img src="assets/wbiz.png" alt="wBizManager" class="dark:hidden h-7 w-auto"><img src="assets/wbiz-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"><img src="assets/crm.png" alt="Wragby CRM" class="dark:hidden h-6 w-auto"><img src="assets/crm-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-6 w-auto"><img src="assets/einv.png" alt="e-Invoicing" class="size-7 rounded-md"></div>
+    </div>
+    <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Products</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">wBizManager</a></li><li><a href="#">CRM Business Development</a></li><li class="text-ink-2">e-Invoicing <span class="ml-1 rounded-md border border-dashed border-ink-3/50 px-2 py-0.5 text-[11.5px] font-semibold text-warn">Soon</span></li></ul></div>
+    <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Guides</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">User journeys</a></li><li><a href="#">Configuration center</a></li><li><a href="#">What's new</a></li></ul></div>
+    <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Help</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">Ask AI</a></li><li><a href="#">Contact support</a></li><li><a href="#">Use this guide in Claude or ChatGPT</a></li></ul></div>
+  </div>
+  <div class="border-t border-line">
+    <div class="mx-auto flex max-w-[1280px] flex-col gap-3 px-5 py-6 text-[14px] text-ink-2 sm:flex-row sm:items-center lg:px-10">
+      <span>© Wragby Business Solutions &amp; Technologies</span>
+      <span class="sm:ml-auto">Can't find it? <a href="#" class="font-semibold text-ink">Ask AI</a> or <a href="#" class="font-semibold text-ink">contact support</a>.</span>
+      <a href="#" class="font-medium underline decoration-line underline-offset-4">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile-only floating Ask AI -->
+<a href="#" id="fab" class="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-lg bg-ink px-5 py-3.5 text-[15px] font-semibold text-on-ink shadow-lift lg:hidden"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI</a>
+
+<script src="shared.js"></script>
+<script>
+/* ---------- What's new: data (from the current CRM Business Development changelog) ---------- */
+{
+  const CHANGES = [
+    { d: '2026-11-13', t: 'Billable work in the Task Report', s: 'See how much task work is billable, and filter tasks by billable, deal, company and more.', m: 'Reports', r: ['Sales manager'], k: 'New' },
+    { d: '2026-11-13', t: 'Deal qualification (BANT)', s: 'Tick the four BANT checks on each deal, and decide what happens when a deal is won without them.', m: 'Deals', r: ['Sales executive', 'Sales manager', 'CRM administrator'], k: 'New',
+      more: 'Budget, Authority, Need and Timeline appear as four checks on every deal. A CRM administrator decides whether a deal can be marked won while any check is still open.' },
+    { d: '2026-11-13', t: 'Deals by fiscal year', s: 'The Deals list opens on the current fiscal year, with a year picker for any other year.', m: 'Deals', r: ['Sales executive', 'Sales manager'], k: 'Improved',
+      more: 'The year picker sits above the list. Totals, filters and exports follow the year you pick.' },
+    { d: '2026-11-13', t: 'Top customers', s: 'See which customers bring the most won business in the fiscal year, on the Dashboard.', m: 'Dashboard', r: ['Sales manager'], k: 'New', shot: 'crmdash', at: [52.6, 35.9] },
+    { d: '2026-11-12', t: 'Reliable birthday emails', s: 'Automated birthday greetings now send once, on the day, without being missed or repeated.', m: 'Birthdays', r: ['Sales executive', 'CRM administrator'], k: 'Bug fix' },
+    { d: '2026-11-06', t: 'Audit Logs', s: 'See who did what in your organisation, with the result and what changed.', m: 'Settings', r: ['CRM administrator', 'Super admin'], k: 'New',
+      more: 'Each entry shows the person, the action, the record it touched, the time, and the values before and after.' },
+    { d: '2026-11-06', t: 'Brand colour', s: 'A super admin can set your organisation’s colour for buttons, links and highlights.', m: 'Settings', r: ['Super admin'], k: 'New',
+      more: 'Pick a colour in Settings → Organization. Everyone in the organisation sees it the next time they sign in.' },
+    { d: '2026-11-06', t: 'Choose your columns', s: 'Show or hide columns on lists and reports, such as Companies, Contacts and the Collaboration report.', m: 'Companies and contacts', r: ['Everyone'], k: 'New',
+      more: 'Your choice is saved for you only, so each person can keep the columns they use.' },
+    { d: '2026-11-06', t: 'Close By: date or quarter', s: 'Set a deal’s expected close as an exact date or as a fiscal quarter.', m: 'Deals', r: ['Sales executive', 'Sales manager'], k: 'Improved',
+      more: 'Deals with a quarter count towards that quarter’s targets until an exact date is set.' },
+    { d: '2026-11-06', t: 'Control who can delete budgets', s: 'A super admin can allow or stop budget deletion for the organisation or for named people.', m: 'Budgets and targets', r: ['Super admin'], k: 'New' },
+    { d: '2026-11-06', t: 'Fiscal year change options', s: 'When the fiscal year start month changes, choose whether open or all deals move to the new quarters.', m: 'Budgets and targets', r: ['Super admin'], k: 'New',
+      more: 'You see how many deals each choice will move before you confirm.' },
+    { d: '2026-11-06', t: 'History on companies and contacts', s: 'See who created and changed a company or contact, and when, at the bottom of its page.', m: 'Companies and contacts', r: ['Everyone'], k: 'New' },
+    { d: '2026-11-06', t: 'New company upload template', s: 'Download the updated template when you add many companies from a spreadsheet.', m: 'Companies and contacts', r: ['Sales executive', 'CRM administrator'], k: 'Improved',
+      more: 'The template now has columns for the phone country code and the account owner.' },
+    { d: '2026-11-06', t: 'Phone numbers with a country code', s: 'Pick the country when you enter a phone number for a company or contact.', m: 'Companies and contacts', r: ['Sales executive', 'Sales manager'], k: 'Improved',
+      more: 'Choose the country next to the number. Numbers you saved before keep working.', shot: 'company', at: [34.6, 87.4] },
+    { d: '2026-11-06', t: 'Rows per page', s: 'Choose how many rows a list shows, with page numbers and the total under it.', m: 'Companies and contacts', r: ['Everyone'], k: 'Improved' },
+  ].map((c, i) => ({ ...c, id: 'c' + i }));
+
+  const TYPES = ['New', 'Improved', 'Bug fix'];
+  const BADGE = { 'New': 'bg-blush text-red-800', 'Improved': 'bg-ink text-on-ink', 'Bug fix': 'bg-mist text-ink-2' };
+  const MODULES = [...new Set(CHANGES.map(c => c.m))].sort();
+  const ROLES = [...new Set(CHANGES.flatMap(c => c.r))].sort((a, b) => (a === 'Everyone') - (b === 'Everyone') || a.localeCompare(b));
+  const fmtDay = iso => new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  const weekday = iso => new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'long' });
+  const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+  const state = { q: '', type: 'all', module: '', role: '', view: 'date', open: new Set(), collapsed: new Set() };
+  try { const v = sessionStorage.getItem('wn-view'); if (['date', 'module', 'role'].includes(v)) state.view = v; } catch (e) {}
+
+  /* Controls */
+  const $ = id => document.getElementById(id);
+  $('f-module').innerHTML = '<option value="">All modules</option>' + MODULES.map(m => `<option>${m}</option>`).join('');
+  $('f-role').innerHTML = '<option value="">For: everyone</option>' + ROLES.filter(r => r !== 'Everyone').map(r => `<option value="${r}">For: ${r}</option>`).join('');
+  const VIEWS = [['date', 'Date'], ['module', 'Module'], ['role', 'Role']];
+
+  const matches = c => {
+    const q = state.q.trim().toLowerCase();
+    return (!q || (c.t + ' ' + c.s + ' ' + (c.more || '') + ' ' + c.m).toLowerCase().includes(q))
+      && (!state.module || c.m === state.module)
+      && (!state.role || c.r.includes(state.role) || c.r.includes('Everyone'));
+  };
+
+  function groupsFor(list) {
+    if (state.view === 'date') {
+      const days = [...new Set(list.map(c => c.d))].sort().reverse();
+      return days.map(d => ({ key: 'd-' + d, label: fmtDay(d), sub: weekday(d), items: list.filter(c => c.d === d) }));
+    }
+    if (state.view === 'module')
+      return MODULES.map(m => ({ key: 'm-' + slug(m), label: m, items: list.filter(c => c.m === m) })).filter(g => g.items.length);
+    return ROLES.map(r => ({ key: 'r-' + slug(r), label: r === 'Everyone' ? 'Everyone' : r, sub: r === 'Everyone' ? 'Changes for all users' : null, items: list.filter(c => c.r.includes(r)) })).filter(g => g.items.length);
+  }
+
+  const row = c => {
+    const open = state.open.has(c.id);
+    const meta = state.view === 'date' ? `<span class="inline-flex items-center gap-1.5"><svg class="size-3.5 fill-none stroke-current stroke-2"><use href="#i-grid"/></svg>${c.m}</span>`
+      : `<span>${fmtDay(c.d)}</span>${state.view === 'role' ? `<span aria-hidden="true">·</span><span>${c.m}</span>` : ''}`;
+    const s = c.shot && { ...SHOTS[c.shot], m: c.at ? [c.at] : SHOTS[c.shot].m };
+    return `<article class="grid grid-cols-[minmax(0,1fr)] gap-x-6 gap-y-3 px-5 py-5 sm:grid-cols-[minmax(0,1fr)_auto] lg:px-6" id="${c.id}">
+      <div class="min-w-0">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="rounded-md px-2 py-0.5 text-[12px] font-semibold ${BADGE[c.k]}">${c.k}</span>
+          <h3 class="text-[16.5px] font-semibold tracking-[-0.01em]">${c.t}</h3>
+        </div>
+        <p class="mt-1.5 max-w-[680px] text-[15px] leading-relaxed text-ink-2">${c.s}</p>
+        <div class="mt-2.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-3">
+          ${meta}<span aria-hidden="true">·</span><span>For ${c.r.join(', ')}</span>
+          ${c.more || s ? `<button type="button" data-more="${c.id}" aria-expanded="${open}" aria-controls="${c.id}-more" class="ml-1 inline-flex items-center gap-1 font-semibold text-red-700">${open ? 'Less' : 'More'}<svg class="size-3.5 fill-none stroke-current stroke-2 ${open ? 'rotate-180' : ''}"><use href="#i-chev"/></svg></button>` : ''}
+        </div>
+        ${open ? `<div id="${c.id}-more" class="mt-4 grid gap-4 rounded-lg border border-line bg-paper p-4 ${s ? 'md:grid-cols-[minmax(0,1fr)_minmax(0,360px)]' : ''}">
+          <div class="text-[15px] leading-relaxed">${c.more || c.s}
+            <p class="mt-3 text-[13px] text-ink-3">Released ${fmtDay(c.d)} · ${c.m}</p></div>
+          ${s ? `<div>${shot(s, true)}</div>` : ''}
+        </div>` : ''}
+      </div>
+      <a href="#" class="inline-flex h-fit items-center gap-1.5 self-start justify-self-start whitespace-nowrap rounded-lg border-[1.5px] border-line px-3.5 py-2 text-[13.5px] font-semibold hover:border-ink-3/40 sm:justify-self-end">How to use <svg class="size-3.5 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></a>
+    </article>`;
+  };
+
+  function render() {
+    const base = CHANGES.filter(matches);
+    const list = base.filter(c => state.type === 'all' || c.k === state.type);
+    const groups = groupsFor(list);
+
+    // type chips with live counts
+    $('type-chips').innerHTML = [['all', 'All', base.length], ...TYPES.map(t => [t, t, base.filter(c => c.k === t).length])].map(([v, l, n]) => {
+      const on = state.type === v;
+      return `<button type="button" data-type="${v}" aria-pressed="${on}" class="inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-[13.5px] font-semibold ${on ? 'border-ink bg-ink text-on-ink' : 'border-line bg-surface text-ink hover:border-ink-3/40'}">${l}<span class="tabular-nums ${on ? 'opacity-70' : 'text-ink-3'}">${n}</span></button>`;
+    }).join('');
+    $('view-by').innerHTML = VIEWS.map(([v, l]) => `<button type="button" role="radio" aria-checked="${state.view === v}" data-view="${v}" class="rounded-md px-3.5 py-1.5 ${state.view === v ? 'bg-surface text-ink shadow-[0_1px_3px_rgb(22_20_21/0.12)]' : 'text-ink-2'}">${l}</button>`).join('');
+    const filtered = state.q || state.type !== 'all' || state.module || state.role;
+    $('showing').textContent = `Showing ${list.length} of ${CHANGES.length} changes`;
+    $('clear').classList.toggle('hidden', !filtered);
+    $('jump-label').textContent = { date: 'Jump to a day', module: 'Jump to a module', role: 'Jump to a role' }[state.view];
+
+    $('jump').innerHTML = groups.map((g, i) => `<li class="shrink-0"><a href="#${g.key}" data-jump="${g.key}" class="flex items-center justify-between gap-4 rounded-lg px-3 py-2 text-[14px] font-medium ${i === 0 ? 'bg-blush text-red-800' : 'text-ink-2 hover:bg-mist hover:text-ink'}"><span class="whitespace-nowrap">${g.label}</span><span class="rounded-md bg-surface px-1.5 text-[12px] font-semibold tabular-nums text-ink-2">${g.items.length}</span></a></li>`).join('');
+
+    $('groups').innerHTML = groups.length ? groups.map(g => {
+      const shut = state.collapsed.has(g.key);
+      return `<section id="${g.key}" class="scroll-mt-28 overflow-hidden rounded-xl border border-line bg-surface">
+        <h2><button type="button" data-group="${g.key}" aria-expanded="${!shut}" class="flex w-full items-center gap-3 bg-mist/60 px-5 py-4 text-left lg:px-6">
+          <svg class="size-4 shrink-0 fill-none stroke-ink-2 stroke-2 transition-transform ${shut ? '-rotate-90' : ''}"><use href="#i-chev"/></svg>
+          <span class="text-[19px] font-semibold tracking-[-0.02em]">${g.label}</span>${g.sub ? `<span class="text-[14px] text-ink-3">${g.sub}</span>` : ''}
+          <span class="ml-auto text-[13px] font-medium text-ink-2">${g.items.length} ${g.items.length === 1 ? 'change' : 'changes'}</span>
+        </button></h2>
+        ${shut ? '' : `<div class="divide-y divide-line">${g.items.map(row).join('')}</div>`}
+      </section>`;
+    }).join('') : `<div class="rounded-xl border border-dashed border-line-strong bg-surface px-6 py-16 text-center">
+        <p class="text-[17px] font-semibold">No changes match these filters</p>
+        <p class="mt-1.5 text-[15px] text-ink-2">Try another word, or clear the filters to see all ${CHANGES.length} changes.</p>
+        <button type="button" data-clear class="mt-5 rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-on-ink">Clear filters</button></div>`;
+  }
+
+  /* Jump list follows the group at the top of the screen */
+  const JUMP_ON = ['bg-blush', 'text-red-800'], JUMP_OFF = ['text-ink-2', 'hover:bg-mist', 'hover:text-ink'];
+  function spy() {
+    const secs = [...document.querySelectorAll('#groups section')]; if (!secs.length) return;
+    let cur = secs[0];
+    for (const sec of secs) if (sec.getBoundingClientRect().top < 140) cur = sec;
+    document.querySelectorAll('[data-jump]').forEach(a => {
+      const on = a.dataset.jump === cur.id;
+      a.classList.remove(...(on ? JUMP_OFF : JUMP_ON)); a.classList.add(...(on ? JUMP_ON : JUMP_OFF));
+      on ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current');
+    });
+  }
+  addEventListener('scroll', spy, { passive: true });
+
+  /* Events */
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-type],[data-view],[data-group],[data-more],[data-clear],#clear');
+    if (!t) return;
+    if (t.dataset.type) state.type = t.dataset.type;
+    else if (t.dataset.view) { state.view = t.dataset.view; state.collapsed.clear(); try { sessionStorage.setItem('wn-view', state.view); } catch (er) {} }
+    else if (t.dataset.group) state.collapsed.has(t.dataset.group) ? state.collapsed.delete(t.dataset.group) : state.collapsed.add(t.dataset.group);
+    else if (t.dataset.more) state.open.has(t.dataset.more) ? state.open.delete(t.dataset.more) : state.open.add(t.dataset.more);
+    else { state.q = ''; state.type = 'all'; state.module = ''; state.role = ''; $('q').value = ''; $('f-module').value = ''; $('f-role').value = ''; }
+    render(); spy();
+  });
+  $('q').addEventListener('input', e => { state.q = e.target.value; render(); });
+  $('f-module').addEventListener('change', e => { state.module = e.target.value; render(); });
+  $('f-role').addEventListener('change', e => { state.role = e.target.value; render(); });
+  const hp = new URLSearchParams(location.search);              // screenshot hooks
+  if (hp.get('view')) state.view = hp.get('view');
+  if (hp.get('open')) hp.get('open').split(',').forEach(id => state.open.add(id));
+  if (hp.get('type')) state.type = hp.get('type');
+  if (hp.get('q')) { state.q = hp.get('q'); $('q').value = state.q; }
+  render(); spy();
+
+  /* Product switcher (same pattern as the module picker on the home page; scales to any number of products) */
+  const PRODUCTS = [
+    { name: 'wBizManager', mark: 'assets/wbiz-mark.png', markDark: 'assets/wbiz-mark-dark.png', note: 'Changes for wBizManager' },
+    { name: 'CRM Business Development', mark: 'assets/wragby-mark.png', markDark: 'assets/wragby-mark-dark.png', note: '15 changes since 6 Nov', current: true },
+    { name: 'e-Invoicing', mark: 'assets/einv.png', soon: true, note: 'Coming soon' },
+  ];
+  const ddBtn = $('prod-dd-btn'), ddList = $('prod-dd-list');
+  ddList.innerHTML = PRODUCTS.map(p => `<li role="option" aria-selected="${!!p.current}" ${p.soon ? 'aria-disabled="true"' : ''} class="flex items-center gap-3 rounded-md px-2.5 py-2.5 ${p.soon ? 'opacity-60' : 'cursor-pointer hover:bg-mist'} ${p.current ? 'bg-mist' : ''}">
+      <span class="grid size-8 shrink-0 place-items-center rounded-md bg-mist"><img src="${p.mark}" alt="" class="h-5 w-auto ${p.markDark ? 'dark:hidden' : 'rounded'}">${p.markDark ? `<img src="${p.markDark}" alt="" class="hidden h-5 w-auto dark:block">` : ''}</span>
+      <span class="min-w-0 flex-1"><span class="block truncate text-[14.5px] font-semibold">${p.name}</span><span class="block text-[12.5px] text-ink-2">${p.note}</span></span>
+      ${p.current ? '<svg class="size-4 fill-none stroke-red stroke-[2.5]"><use href="#i-check"/></svg>' : ''}</li>`).join('');
+  const openDd = o => { ddList.classList.toggle('hidden', !o); ddBtn.setAttribute('aria-expanded', String(o)); };
+  ddBtn.addEventListener('click', () => openDd(ddList.classList.contains('hidden')));
+  document.addEventListener('click', e => { if (!$('prod-dd').contains(e.target)) openDd(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') openDd(false); });
+  if (hp.has('pick')) openDd(true);
+}
+</script>
+</body>
+</html>
