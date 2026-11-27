@@ -127,10 +127,11 @@
     </div>
   </div>
 
-  <!-- Hero stage -->
-  <div class="relative h-[440px] overflow-hidden rounded-2xl bg-blush sm:h-[560px]">
+  <!-- Hero stage: product dashboards that take turns; each one opens its product -->
+  <div>
+  <div id="hero-stage" class="relative h-[440px] overflow-hidden rounded-2xl bg-blush sm:h-[560px]">
     <div class="arch absolute bottom-0 left-1/2 h-[88%] w-[84%] -translate-x-1/2 border border-b-0 border-blush-2 bg-gradient-to-b from-arch-top via-arch-mid to-blush"></div>
-    <div class="absolute -bottom-3 left-1/2 w-[92%] -translate-x-1/2" data-shot="hero"></div>
+    <div id="hero-slides" class="absolute -bottom-3 left-1/2 grid w-[92%] -translate-x-1/2" role="group" aria-roledescription="carousel" aria-label="Product dashboards"></div>
     <div class="absolute left-5 top-6 flex items-center gap-3 rounded-lg border border-line bg-surface py-2.5 pl-2.5 pr-4 shadow-float sm:left-8 sm:top-9">
       <span class="grid size-9 place-items-center rounded-md bg-blush"><svg class="size-4 fill-red"><use href="#i-play"/></svg></span>
       <span class="text-[13.5px] font-semibold leading-tight">Click-through videos<span class="block text-[12px] font-medium text-ink-2">14 short tours</span></span>
@@ -139,6 +140,8 @@
       <span class="grid size-9 place-items-center rounded-md bg-ok-50"><svg class="size-4 fill-none stroke-ok stroke-[2.5]"><use href="#i-check"/></svg></span>
       <span class="text-[13.5px] font-semibold leading-tight">Set up in the right order<span class="block text-[12px] font-medium text-ink-2">Step 2 of 5</span></span>
     </div>
+  </div>
+  <div id="hero-tabs" class="mt-4 flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Show a product dashboard"></div>
   </div>
 </section>
 
@@ -164,7 +167,7 @@
 
   <div class="mt-12 grid gap-5 lg:grid-cols-3">
     <!-- wBiz -->
-    <article class="group flex flex-col overflow-hidden rounded-xl border border-line bg-surface">
+    <article id="wbizmanager" class="group flex scroll-mt-24 flex-col overflow-hidden rounded-xl border border-line bg-surface target:ring-2 target:ring-red target:ring-offset-4 target:ring-offset-paper">
       <div class="relative h-40 overflow-hidden bg-wbiz-50">
         <div class="arch absolute -bottom-10 left-1/2 h-48 w-64 -translate-x-1/2 bg-surface/70"></div>
         <img src="assets/wbiz.png" alt="wBizManager by Wragby" class="dark:hidden absolute left-1/2 top-1/2 h-14 w-auto -translate-x-1/2 -translate-y-1/2"><img src="assets/wbiz-dark.png" alt="" aria-hidden="true" class="hidden dark:block absolute left-1/2 top-1/2 h-14 w-auto -translate-x-1/2 -translate-y-1/2">
@@ -178,7 +181,7 @@
       </div>
     </article>
     <!-- CRM BD -->
-    <article class="group flex flex-col overflow-hidden rounded-xl border border-line bg-surface">
+    <article id="crm-business-development" class="group flex scroll-mt-24 flex-col overflow-hidden rounded-xl border border-line bg-surface target:ring-2 target:ring-red target:ring-offset-4 target:ring-offset-paper">
       <div class="relative h-40 overflow-hidden bg-blush">
         <div class="arch absolute -bottom-10 left-1/2 h-48 w-64 -translate-x-1/2 bg-surface/70"></div>
         <img src="assets/crm.png" alt="Wragby CRM" class="dark:hidden absolute left-1/2 top-1/2 h-12 w-auto -translate-x-1/2 -translate-y-1/2"><img src="assets/crm-dark.png" alt="" aria-hidden="true" class="hidden dark:block absolute left-1/2 top-1/2 h-12 w-auto -translate-x-1/2 -translate-y-1/2">
@@ -393,6 +396,7 @@ document.querySelectorAll('[data-ph]').forEach(el => el.innerHTML = ph(el.datase
    Each: image (a -dark.webp twin is used in dark mode), alt text, label, and numbered markers as [x%, y%] of the image. */
 const SHOTS = {
   hero:    { src: 'assets/screens/hero-wbiz-dashboard.webp', w: 1600, h: 1000, label: 'wBizManager · Dashboard', alt: 'wBizManager dashboard with revenue, unpaid invoices, bills and cash cards, a money in and out chart, and requests waiting for approval', m: [[72.9, 14], [38.1, 22.2], [90.3, 42.8]] },
+  heroCrm: { src: 'assets/screens/hero-crm-dashboard.webp', w: 1600, h: 1000, label: 'CRM Business Development · Dashboard', alt: 'CRM Business Development dashboard with open deals, deals won, companies and contacts, deal status, top customers and recent activity', m: [[76.4, 12.4], [32.6, 25.6], [59.7, 38.8]] },
   how:     { src: 'assets/screens/how-wbiz-invoice.webp', w: 1000, h: 607, label: 'wBizManager · Sales · New invoice', alt: 'New invoice form in wBizManager with customer, invoice date and project fields', m: [[27.7, 19.6], [65.2, 19.6], [36.6, 46]] },
   req:     { src: 'assets/screens/guide-wbiz-requisition.webp', w: 800, h: 563, label: 'wBizManager · Procurement', alt: 'New purchase requisition panel with department, reason and item lines', m: [[49.6, 16.8], [91.7, 38.9], [16.7, 52.1]] },
   crmdash: { src: 'assets/screens/guide-crm-dashboard.webp', w: 800, h: 563, label: 'CRM Business Development · Dashboard', alt: 'Business Development dashboard with open deals, deals won, deal status and top customers', m: [[20.7, 23.3], [17.4, 65.1], [52.6, 35.2]] },
@@ -406,7 +410,68 @@ function shot(s, small = false) {
       <div class="relative"><img src="${s.src}" width="${s.w}" height="${s.h}" alt="${s.alt}" class="block h-auto w-full dark:hidden" loading="lazy"><img src="${s.src.replace('.webp', '-dark.webp')}" width="${s.w}" height="${s.h}" alt="${s.alt}" class="hidden h-auto w-full dark:block" loading="lazy">${mk}</div>
     </figure>`;
 }
-document.querySelectorAll('[data-shot]').forEach(el => el.innerHTML = shot(SHOTS[el.dataset.shot], el.dataset.shot !== 'hero'));
+document.querySelectorAll('[data-shot]').forEach(el => el.innerHTML = shot(SHOTS[el.dataset.shot], true));
+
+/* ---------- Hero: dashboards take turns every 6 s; click one to open its product ----------
+   Pauses while hovered or focused, and does not rotate for people who ask for reduced motion. */
+{
+  const HERO = [
+    { name: 'wBizManager', short: 'wBizManager', href: '#wbizmanager', shot: SHOTS.hero, mark: 'assets/wbiz-mark.png', markDark: 'assets/wbiz-mark-dark.png' },
+    { name: 'CRM Business Development', short: 'Business Dev', href: '#crm-business-development', shot: SHOTS.heroCrm, mark: 'assets/wragby-mark.png', markDark: 'assets/wragby-mark-dark.png' },
+  ];
+  const DWELL = 6000;
+  const slides = document.getElementById('hero-slides'), tabs = document.getElementById('hero-tabs'), stage = document.getElementById('hero-stage');
+  slides.innerHTML = HERO.map((h, i) => `
+    <a href="${h.href}" id="hero-slide-${i}" role="tabpanel" aria-roledescription="slide" aria-label="${h.name} dashboard. Open the ${h.name} guide"
+       class="hero-slide group/slide relative block rounded-lg transition-[opacity,translate] duration-700 ease-out [grid-area:1/1] hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red motion-reduce:transition-none">
+      ${shot(h.shot)}
+      <span class="pointer-events-none absolute right-2 top-1 inline-flex items-center gap-1.5 whitespace-nowrap rounded-md bg-ink px-2.5 py-1 text-[12.5px] font-semibold text-on-ink opacity-0 transition-opacity group-hover/slide:opacity-100 group-focus-visible/slide:opacity-100">Open ${h.name} guide <svg class="size-3.5 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></span>
+    </a>`).join('');
+  tabs.innerHTML = HERO.map((h, i) => `
+    <button type="button" role="tab" id="hero-tab-${i}" aria-controls="hero-slide-${i}"
+       class="hero-tab relative flex items-center gap-2 overflow-hidden rounded-md border px-3 py-2 text-[13px] font-semibold">
+      <img src="${h.mark}" alt="" class="h-4 w-auto dark:hidden"><img src="${h.markDark}" alt="" class="hidden h-4 w-auto dark:block"><span class="sm:hidden">${h.short}</span><span class="hidden sm:inline">${h.name}</span>
+      <span class="hero-bar absolute inset-x-0 bottom-0 h-0.5 origin-left bg-red" style="transform:scaleX(0)"></span>
+    </button>`).join('');
+  const slideEls = [...slides.children], tabEls = [...tabs.children], bars = tabEls.map(t => t.querySelector('.hero-bar'));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cur = 0, elapsed = 0, paused = false, last = performance.now();
+  function show(i) {
+    cur = (i + HERO.length) % HERO.length; elapsed = 0;
+    slideEls.forEach((el, j) => {
+      const on = j === cur;
+      el.classList.toggle('opacity-100', on); el.classList.toggle('opacity-0', !on); el.classList.toggle('pointer-events-none', !on);
+      el.toggleAttribute('inert', !on); el.setAttribute('aria-hidden', String(!on));
+    });
+    tabEls.forEach((t, j) => {
+      const on = j === cur;
+      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+      t.classList.toggle('border-ink', on); t.classList.toggle('bg-surface', on); t.classList.toggle('text-ink', on);
+      t.classList.toggle('border-line', !on); t.classList.toggle('text-ink-2', !on);
+      bars[j].style.transform = `scaleX(${on && reduce ? 1 : 0})`;
+    });
+  }
+  tabEls.forEach((t, i) => {
+    t.addEventListener('click', () => show(i));
+    t.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { e.preventDefault(); show(cur + d); tabEls[cur].focus(); }
+    });
+  });
+  [stage, tabs].forEach(el => {
+    el.addEventListener('pointerenter', () => (paused = true)); el.addEventListener('pointerleave', () => (paused = false));
+    el.addEventListener('focusin', () => (paused = true)); el.addEventListener('focusout', () => (paused = false));
+  });
+  function tick(now) {
+    const dt = now - last; last = now;
+    if (!paused && !reduce && !document.hidden) {
+      elapsed += dt; bars[cur].style.transform = `scaleX(${Math.min(1, elapsed / DWELL)})`;
+      if (elapsed >= DWELL) show(cur + 1);
+    }
+    requestAnimationFrame(tick);
+  }
+  show(0); if (!reduce) requestAnimationFrame(tick);
+}
 
 /* ---------- Modules ---------- */
 const MODS = {

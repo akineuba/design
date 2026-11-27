@@ -9,6 +9,7 @@ from PIL import Image
 
 JOBS = {
     'hero-wbiz-dashboard':      ('wbiz-dashboard',     None,                  1600),
+    'hero-crm-dashboard':       ('crm-dashboard',      None,                  1600),
     'how-wbiz-invoice':         ('wbiz-invoice',       (290, 220, 1410, 900), 1000),
     'guide-wbiz-requisition':   ('wbiz-requisition',   (900, 170, 1440, 550), 800),
     'guide-crm-dashboard':      ('crm-dashboard',      (217, 40, 1440, 900),  800),
