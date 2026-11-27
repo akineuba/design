@@ -15,6 +15,10 @@ JOBS = {
     'guide-crm-dashboard':      ('crm-dashboard',      (217, 40, 1440, 900),  800),
     'guide-wbiz-workspace':     ('wbiz-workspace',     (264, 64, 1440, 890),  800),
     'guide-crm-create-company': ('crm-create-company', (978, 20, 1440, 345),  800),
+    # Guide page: Create a purchase requisition (full screens; step markers in guide.html)
+    'step-req-list':            ('wbiz-req-list',      None,                  1600),
+    'step-req-panel':           ('wbiz-requisition',   None,                  1600),
+    'step-req-sent':            ('wbiz-req-sent',      None,                  1600),
 }
 
 src, out = sys.argv[1], sys.argv[2]

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create a purchase requisition · wBizManager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>
+/* Theme before first paint: a saved choice wins, then a data-theme the host already set, then the system setting. */
+(function () {
+  var r = document.documentElement, t = null;
+  try { t = localStorage.getItem('pv-theme'); } catch (e) {}
+  if (t === 'dark' || t === 'light') r.dataset.theme = t;
+  else if (!r.dataset.theme) r.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+})();
+</script>
+</head>
+<body>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M9.94 15.5a2 2 0 0 0-1.44-1.44l-6.13-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.13a.5.5 0 0 1 .96 0l1.58 6.13a2 2 0 0 0 1.44 1.44l6.13 1.58a.5.5 0 0 1 0 .96l-6.13 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l12-7z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 7h6"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12 4 7.5M12 12l8-4.5M12 12v9"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15v3M8 18h4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c0-2.8-1.4-4.8-3.8-5.6"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></symbol>
+    <symbol id="i-approve" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M14 4c3-1 6-1 6-1s0 3-1 6l-6 6-5-5z"/><circle cx="15" cy="9" r="1.5"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 21h8V9l-8-2M8 8h.01M8 12h.01M8 16h.01M16 12h.01M16 16h.01M2 21h20"/></symbol>
+    <symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1.4 1.4 0 0 0 2-2M14 14l2.5 2.5a1.4 1.4 0 0 0 2-2L15 11M2 11l5-5 4 2 3-1 5 5 3-1M7 6l-5 5 6 6 3-3"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-cake" viewBox="0 0 24 24"><path d="M4 21v-8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8M2 21h20M4 16c2 1 4 1 6-.5 2 1.5 4 1.5 6 0 1.5 1 3 1 4 .5M12 11V8M12 5.5V5"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4zM10 21h4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></symbol>
+  </defs>
+</svg>
+
+<!-- ================= HEADER ================= -->
+<header class="sticky top-0 z-40 border-b border-line/80 bg-paper/85 backdrop-blur-md">
+  <div class="mx-auto flex h-[72px] max-w-[1280px] items-center gap-6 px-5 lg:px-10">
+    <a href="index.html" class="flex shrink-0 items-center gap-3">
+      <img src="assets/wragby.png" alt="Wragby" class="dark:hidden h-7 w-auto"><img src="assets/wragby-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto">
+      <span class="hidden h-5 w-px bg-line sm:block"></span>
+      <span class="hidden text-[15px] font-semibold tracking-[-0.01em] sm:block">Product Verse</span>
+    </a>
+
+    <button class="mx-auto hidden h-11 w-full max-w-[400px] items-center gap-3 rounded-lg border border-line bg-surface px-4 text-left text-[15px] text-ink-3 shadow-[0_1px_2px_rgb(22_20_21/0.04)] md:flex">
+      <svg class="size-[18px] fill-none stroke-ink-2 stroke-2"><use href="#i-search"/></svg>
+      Search 203 guides…
+      <span class="ml-auto flex gap-1"><kbd class="rounded-md border border-line bg-mist px-1.5 py-0.5 font-mono text-[11px] text-ink-2">/</kbd></span>
+    </button>
+
+    <nav class="ml-auto hidden items-center gap-1 lg:flex md:ml-0">
+      <button id="products-btn" aria-haspopup="true" class="flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-[15px] font-medium hover:bg-mist">Products <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-chev"/></svg></button>
+      <a href="#" class="whitespace-nowrap rounded-lg px-3.5 py-2 text-[15px] font-medium hover:bg-mist">User journeys</a>
+      <a href="whatsnew.html" class="whitespace-nowrap rounded-lg px-3.5 py-2 text-[15px] font-medium hover:bg-mist">What's new</a>
+      <a href="#" class="ml-2 flex items-center gap-2 whitespace-nowrap rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-on-ink"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI</a>
+      <button id="theme-btn" type="button" class="theme-btn ml-1 grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Switch to dark mode" aria-pressed="false"><svg class="size-[18px] fill-none stroke-ink stroke-2 dark:hidden"><use href="#i-moon"/></svg><svg class="hidden size-[18px] fill-none stroke-ink stroke-2 dark:block"><use href="#i-sun"/></svg></button>
+    </nav>
+
+    <div class="ml-auto flex items-center gap-2 lg:hidden">
+      <button id="theme-btn-m" type="button" class="theme-btn  grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Switch to dark mode" aria-pressed="false"><svg class="size-[18px] fill-none stroke-ink stroke-2 dark:hidden"><use href="#i-moon"/></svg><svg class="hidden size-[18px] fill-none stroke-ink stroke-2 dark:block"><use href="#i-sun"/></svg></button>
+      <button class="grid size-10 place-items-center rounded-lg border border-line bg-surface md:hidden" aria-label="Search"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-search"/></svg></button>
+      <button class="grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Menu"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+
+  <!-- Products menu -->
+  <div id="products-menu" class="absolute top-[64px] hidden w-[460px] rounded-xl border border-line bg-surface p-2 shadow-lift">
+    <a href="#" class="flex gap-4 rounded-lg p-4 hover:bg-mist">
+      <span class="grid size-12 shrink-0 place-items-center rounded-lg bg-wbiz-50"><img src="assets/wbiz-mark.png" alt="" class="dark:hidden size-7"><img src="assets/wbiz-mark-dark.png" alt="" aria-hidden="true" class="hidden dark:block size-7"></span>
+      <span><span class="flex items-center gap-2 text-[15px] font-semibold">wBizManager <span class="rounded-md bg-ok-50 px-2 py-0.5 text-[11.5px] font-semibold text-ok">Available</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Enterprise resource planning: sales, purchasing, inventory, accounting, HR, projects, approvals and reports.</span></span>
+    </a>
+    <a href="#" class="flex gap-4 rounded-lg p-4 hover:bg-mist">
+      <span class="grid size-12 shrink-0 place-items-center rounded-lg bg-blush"><img src="assets/wragby-mark.png" alt="" class="dark:hidden h-7 w-auto"><img src="assets/wragby-mark-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"></span>
+      <span><span class="flex items-center gap-2 text-[15px] font-semibold">CRM Business Development <span class="rounded-md bg-ok-50 px-2 py-0.5 text-[11.5px] font-semibold text-ok">Available</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Companies, contacts, deals, budgets, reports and activity.</span></span>
+    </a>
+    <div class="flex gap-4 rounded-lg p-4">
+      <img src="assets/einv.png" alt="" class="size-12 shrink-0 rounded-lg opacity-60">
+      <span><span class="flex items-center gap-2 text-[15px] font-semibold text-ink-2">e-Invoicing <span class="rounded-md border border-dashed border-ink-3/50 px-2 py-0.5 text-[11.5px] font-semibold text-warn">Coming soon</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Create, validate and submit electronic invoices.</span></span>
+    </div>
+  </div>
+</header>
+
+<main class="mx-auto max-w-[1280px] px-5 pb-24 pt-8 lg:px-10 lg:pt-10">
+  <nav aria-label="Breadcrumb" class="text-[13.5px] text-ink-2">
+    <ol class="flex flex-wrap items-center gap-1.5">
+      <li><a href="index.html" class="hover:text-ink">Product Verse</a></li><li aria-hidden="true" class="text-ink-3">/</li>
+      <li><a href="index.html#wbizmanager" class="hover:text-ink">wBizManager</a></li><li aria-hidden="true" class="text-ink-3">/</li>
+      <li><a href="index.html#modules" class="hover:text-ink">Procurement</a></li><li aria-hidden="true" class="text-ink-3">/</li>
+      <li aria-current="page" class="font-medium text-ink">Create a purchase requisition</li>
+    </ol>
+  </nav>
+
+  <!-- Title -->
+  <header class="mt-6 max-w-[820px]">
+    <div class="flex flex-wrap gap-1.5 text-[12.5px] font-semibold">
+      <span class="inline-flex items-center gap-1.5 rounded-md bg-mist px-2.5 py-1"><img src="assets/wbiz-mark.png" alt="" class="h-3.5 w-auto dark:hidden"><img src="assets/wbiz-mark-dark.png" alt="" class="hidden h-3.5 w-auto dark:block">wBizManager</span>
+      <span class="rounded-md bg-mist px-2.5 py-1 text-ink-2">Procurement</span>
+    </div>
+    <h1 class="mt-4 text-[36px] font-semibold leading-[1.05] tracking-[-0.04em] lg:text-[48px]">Create a purchase requisition</h1>
+    <p class="mt-4 text-[18px] leading-relaxed text-ink-2">Ask for the goods or services your team needs, then save it as a draft or send it for approval.</p>
+    <ul class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-[14px] text-ink-2">
+      <li class="inline-flex items-center gap-2"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-list"/></svg>6 steps</li>
+      <li class="inline-flex items-center gap-2"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-clock"/></svg>About 3 minutes</li>
+      <li class="inline-flex items-center gap-2"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-user"/></svg>For anyone who buys for their team</li>
+      <li class="inline-flex items-center gap-2"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-calendar"/></svg>Updated 20 Nov 2026</li>
+    </ul>
+    <div class="mt-7 flex flex-wrap gap-3">
+      <a href="#video" class="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-3 text-[15px] font-semibold text-on-ink"><svg class="size-4 fill-current"><use href="#i-play"/></svg>Watch the click-through · 2:10</a>
+      <a href="#" class="inline-flex items-center gap-2 rounded-lg border-[1.5px] border-line bg-surface px-5 py-3 text-[15px] font-semibold"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI about this guide</a>
+      <button type="button" id="copy-link" class="inline-flex items-center gap-2 rounded-lg px-4 py-3 text-[15px] font-semibold text-ink-2 hover:bg-mist hover:text-ink"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-link"/></svg><span>Copy link</span></button>
+    </div>
+  </header>
+
+  <!-- Body: steps + sticky screen -->
+  <div class="mt-12 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,440px)_minmax(0,1fr)] lg:gap-12">
+    <div class="min-w-0">
+      <!-- Before you start -->
+      <section aria-labelledby="before" class="rounded-xl border border-line bg-surface p-5">
+        <h2 id="before" class="flex items-center gap-2 text-[16px] font-semibold"><svg class="size-[18px] fill-none stroke-red stroke-2"><use href="#i-flag"/></svg>Before you start</h2>
+        <ul class="mt-3 space-y-2.5 text-[15px] leading-relaxed text-ink-2">
+          <li class="flex gap-2.5"><svg class="mt-1 size-4 shrink-0 fill-none stroke-ink stroke-[2.5]"><use href="#i-check"/></svg><span>An approval flow for requisitions is set up. <a href="#" class="font-semibold text-red-700 underline decoration-red/30 underline-offset-4">Set up an approval flow</a></span></li>
+          <li class="flex gap-2.5"><svg class="mt-1 size-4 shrink-0 fill-none stroke-ink stroke-[2.5]"><use href="#i-check"/></svg><span>Your role can raise requisitions. If you can’t see <b class="font-semibold text-ink">New Requisition</b>, ask your administrator.</span></li>
+        </ul>
+      </section>
+
+      <!-- Steps -->
+      <h2 class="mt-10 text-[24px] font-semibold tracking-[-0.03em]">Steps</h2>
+      <ol id="steps" class="mt-4 flex flex-col gap-3"></ol>
+
+      <!-- After -->
+      <section id="after" data-step="done" class="guide-step mt-10 scroll-mt-28 rounded-xl border border-line bg-surface p-5">
+        <h2 class="flex items-center gap-3 text-[20px] font-semibold tracking-[-0.02em]"><span class="grid size-8 place-items-center rounded-full bg-ok-50"><svg class="size-4 fill-none stroke-ink stroke-[2.5]"><use href="#i-check"/></svg></span>After you send it</h2>
+        <p class="mt-3 text-[15px] leading-relaxed text-ink-2">The requisition shows as <b class="font-semibold text-ink">Pending approval</b> at the top of the list, and the approver is notified. Once it’s approved, Procurement can turn it into a purchase order.</p>
+        <div class="mt-4 lg:hidden" data-inline="done"></div>
+      </section>
+
+      <!-- Video -->
+      <section id="video" aria-labelledby="video-h" class="mt-10 scroll-mt-28">
+        <h2 id="video-h" class="text-[24px] font-semibold tracking-[-0.03em]">Prefer to watch?</h2>
+        <div class="mt-4 overflow-hidden rounded-xl bg-night">
+          <div class="relative aspect-[16/9]">
+            <img src="assets/screens/step-req-panel-dark.webp" alt="" class="absolute inset-0 size-full object-cover opacity-30">
+            <button type="button" aria-label="Play the click-through video" class="absolute left-1/2 top-1/2 grid size-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-red shadow-red"><svg class="ml-1 size-6 fill-white"><use href="#i-play"/></svg></button>
+            <span class="absolute bottom-3 right-3 rounded-md bg-black/60 px-2 py-1 text-[12px] font-semibold text-white">2:10</span>
+          </div>
+          <ol id="chapters" class="grid gap-px border-t border-white/10 bg-white/10 text-[13.5px] text-white/80 sm:grid-cols-2"></ol>
+        </div>
+      </section>
+
+      <!-- Questions -->
+      <section aria-labelledby="faq" class="mt-10">
+        <h2 id="faq" class="text-[24px] font-semibold tracking-[-0.03em]">Common questions</h2>
+        <div class="mt-4 divide-y divide-line rounded-xl border border-line bg-surface" id="faq-list"></div>
+      </section>
+
+      <!-- Helpful -->
+      <section aria-label="Feedback" class="mt-10 flex flex-wrap items-center gap-3 rounded-xl border border-line bg-surface p-5">
+        <p class="mr-auto text-[15px] font-semibold" id="helpful-q">Did this guide help?</p>
+        <div class="flex gap-2" id="helpful">
+          <button type="button" data-help="yes" class="rounded-lg border-[1.5px] border-line px-4 py-2 text-[14px] font-semibold hover:border-ink-3/40">Yes</button>
+          <button type="button" data-help="no" class="rounded-lg border-[1.5px] border-line px-4 py-2 text-[14px] font-semibold hover:border-ink-3/40">No</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Sticky screen (desktop) -->
+    <aside class="hidden lg:block" aria-label="Screen for the current step">
+      <div class="sticky top-24">
+        <figure class="overflow-hidden rounded-xl border border-line bg-surface shadow-lift">
+          <div class="flex items-center gap-1.5 border-b border-line px-3 py-2"><i class="size-2 rounded-full bg-line"></i><i class="size-2 rounded-full bg-line"></i><i class="size-2 rounded-full bg-line"></i>
+            <span class="ml-auto truncate text-[11.5px] font-medium text-ink-3">wBizManager · Procurement · Purchase Requisitions</span></div>
+          <div class="relative grid" id="viewer"></div>
+        </figure>
+        <div class="mt-4 flex items-center gap-3">
+          <button type="button" data-go="-1" aria-label="Previous step" class="grid size-10 shrink-0 place-items-center rounded-lg border border-line bg-surface text-ink-2 hover:text-ink"><svg class="size-4 rotate-180 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></button>
+          <p class="min-w-0 flex-1 text-[14.5px]" aria-live="polite"><span id="cap-n" class="font-semibold text-red-700"></span> <span id="cap-t" class="font-semibold"></span></p>
+          <button type="button" data-go="1" aria-label="Next step" class="grid size-10 shrink-0 place-items-center rounded-lg border border-line bg-surface text-ink-2 hover:text-ink"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related + next -->
+  <section aria-labelledby="related" class="mt-20">
+    <h2 id="related" class="text-[24px] font-semibold tracking-[-0.03em]">Related guides</h2>
+    <div class="mt-5 grid gap-4 md:grid-cols-3" id="related-list"></div>
+    <nav aria-label="Guide order" class="mt-8 grid gap-3 border-t border-line pt-6 sm:grid-cols-2">
+      <a href="#" class="rounded-xl border border-line bg-surface p-4 hover:border-ink-3/40"><span class="text-[13px] text-ink-3">← Previous in Procurement</span><span class="mt-1 block text-[15.5px] font-semibold">Add a vendor</span></a>
+      <a href="#" class="rounded-xl border border-line bg-surface p-4 text-right hover:border-ink-3/40"><span class="text-[13px] text-ink-3">Next in Procurement →</span><span class="mt-1 block text-[15.5px] font-semibold">Raise a purchase order</span></a>
+    </nav>
+  </section>
+</main>
+
+<footer class="border-t border-line bg-surface">
+  <div class="mx-auto grid max-w-[1280px] gap-10 px-5 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-10">
+    <div>
+      <div class="flex items-center gap-3"><img src="assets/wragby.png" alt="Wragby" class="dark:hidden h-7 w-auto"><img src="assets/wragby-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"><span class="h-5 w-px bg-line"></span><span class="text-[15px] font-semibold">Product Verse</span></div>
+      <p class="mt-4 max-w-[300px] text-[15px] leading-relaxed text-ink-2">Every Wragby product, explained with real screens.</p>
+      <div class="mt-6 flex flex-wrap items-center gap-5 opacity-80"><img src="assets/wbiz.png" alt="wBizManager" class="dark:hidden h-7 w-auto"><img src="assets/wbiz-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"><img src="assets/crm.png" alt="Wragby CRM" class="dark:hidden h-6 w-auto"><img src="assets/crm-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-6 w-auto"><img src="assets/einv.png" alt="e-Invoicing" class="size-7 rounded-md"></div>
+    </div>
+    <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Products</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">wBizManager</a></li><li><a href="#">CRM Business Development</a></li><li class="text-ink-2">e-Invoicing <span class="ml-1 rounded-md border border-dashed border-ink-3/50 px-2 py-0.5 text-[11.5px] font-semibold text-warn">Soon</span></li></ul></div>
+    <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Guides</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">User journeys</a></li><li><a href="#">Configuration center</a></li><li><a href="whatsnew.html">What's new</a></li></ul></div>
+    <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Help</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">Ask AI</a></li><li><a href="#">Contact support</a></li><li><a href="#">Use this guide in Claude or ChatGPT</a></li></ul></div>
+  </div>
+  <div class="border-t border-line">
+    <div class="mx-auto flex max-w-[1280px] flex-col gap-3 px-5 py-6 text-[14px] text-ink-2 sm:flex-row sm:items-center lg:px-10">
+      <span>© Wragby Business Solutions &amp; Technologies</span>
+      <span class="sm:ml-auto">Can't find it? <a href="#" class="font-semibold text-ink">Ask AI</a> or <a href="#" class="font-semibold text-ink">contact support</a>.</span>
+      <a href="#" class="font-medium underline decoration-line underline-offset-4">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile-only floating Ask AI -->
+<a href="#" id="fab" class="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-lg bg-ink px-5 py-3.5 text-[15px] font-semibold text-on-ink shadow-lift lg:hidden"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI</a>
+
+<script src="shared.js"></script>
+<script>
+/* ---------- Guide: Create a purchase requisition ----------
+   Steps on the left; on desktop a sticky screen on the right follows the step you are reading
+   (numbered markers match the steps). On phones each step shows a zoomed view of its own spot. */
+{
+  const IMG = {
+    list:  { src: 'assets/screens/step-req-list.webp',  alt: 'Purchase Requisitions list in wBizManager, with Requisitions open in the Inventory menu' },
+    panel: { src: 'assets/screens/step-req-panel.webp', alt: 'New Purchase Requisition panel with department, priority, reason, items and approver' },
+    sent:  { src: 'assets/screens/step-req-sent.webp',  alt: 'Purchase Requisitions list after sending, with PR-0422 pending approval and a confirmation message' },
+  };
+  // at: marker position as [x%, y%] of the screen image
+  const STEPS = [
+    { id: '1', img: 'list',  at: [16.1, 58.6], t: 'Open Purchase Requisitions', b: 'In the menu, open <b>Inventory</b>, then <b>Requisitions</b>.' },
+    { id: '2', img: 'list',  at: [82.8, 24.6], t: 'Click New Requisition', b: 'A panel opens on the right. The requisition number and today’s date fill in by themselves.' },
+    { id: '3', img: 'panel', at: [80.9, 26],  t: 'Choose the department and priority', b: 'Pick the department that needs the items. Use <b>Urgent</b> only when it can’t wait.' },
+    { id: '4', img: 'panel', at: [96.7, 35.3], t: 'Say why you need it', b: 'One clear sentence helps the approver decide faster.' },
+    { id: '5', img: 'panel', at: [76.2, 68.8], t: 'Add the items', b: 'Click <b>Add item</b> for each line, with the quantity and your best estimate of the unit cost. The total adds up as you go.' },
+    { id: '6', img: 'panel', at: [72.2, 94.4], t: 'Save as a draft, or send it for approval', b: '<b>Save as draft</b> keeps it for later. <b>Send for approval</b> sends it to the approver shown above the buttons.' },
+    { id: 'done', img: 'sent', at: [95.8, 23.8], also: [[94.4, 47.1]], t: 'After you send it', b: '' },
+  ];
+  const $ = id => document.getElementById(id);
+  const dual = (src, cls, alt = '') => `<img src="${src}" alt="${alt}" class="${cls} dark:hidden"><img src="${src.replace('.webp', '-dark.webp')}" alt="${alt}" class="${cls} hidden dark:block">`;
+  const label = s => (s.id === 'done' ? '✓' : s.id);
+
+  /* Step list */
+  $('steps').innerHTML = STEPS.filter(s => s.id !== 'done').map(s => `
+    <li id="step-${s.id}" data-step="${s.id}" class="guide-step scroll-mt-28 rounded-xl border border-line bg-surface p-5 transition-colors">
+      <button type="button" data-pick="${s.id}" class="flex w-full items-start gap-4 text-left">
+        <span class="step-num grid size-8 shrink-0 place-items-center rounded-full border-[1.5px] border-red text-[14px] font-bold text-red">${s.id}</span>
+        <span class="min-w-0"><span class="block text-[17px] font-semibold tracking-[-0.01em]">${s.t}</span>
+          <span class="mt-1.5 block text-[15px] leading-relaxed text-ink-2 [&_b]:font-semibold [&_b]:text-ink">${s.b}</span></span>
+      </button>
+      <div class="mt-4 lg:hidden" data-inline="${s.id}"></div>
+    </li>`).join('');
+
+  /* Zoomed view for phones: the screen at 2x, centred on the step's marker */
+  document.querySelectorAll('[data-inline]').forEach(el => {
+    const s = STEPS.find(x => x.id === el.dataset.inline), im = IMG[s.img];
+    const off = v => Math.min(0, Math.max(-100, 50 - 2 * v));
+    const ox = off(s.at[0]), oy = off(s.at[1]);
+    el.innerHTML = `<figure class="relative aspect-[16/10] overflow-hidden rounded-lg border border-line bg-surface">
+      <div class="absolute" style="width:200%;height:200%;left:${ox}%;top:${oy}%">${dual(im.src, 'size-full', im.alt)}</div>
+      <span class="marker -translate-x-1/2 -translate-y-1/2 !size-7 !text-[12px]" style="left:${2 * s.at[0] + ox}%;top:${2 * s.at[1] + oy}%">${label(s)}</span></figure>`;
+  });
+
+  /* Sticky viewer: one layer per screen, crossfading */
+  const viewer = $('viewer');
+  viewer.innerHTML = Object.entries(IMG).map(([k, im]) => `
+    <div data-layer="${k}" class="relative transition-opacity duration-300 [grid-area:1/1] motion-reduce:transition-none">
+      ${dual(im.src, 'block h-auto w-full', im.alt)}
+      ${STEPS.filter(s => s.img === k).flatMap(s => [[s.at, s], ...(s.also || []).map(a => [a, s])]).map(([at, s]) =>
+        `<button type="button" data-pick="${s.id}" data-mk="${s.id}" aria-label="Go to ${s.id === 'done' ? 'After you send it' : 'step ' + s.id}" class="mk absolute grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full font-bold transition-all" style="left:${at[0]}%;top:${at[1]}%">${label(s)}</button>`).join('')}
+    </div>`).join('');
+  $('chapters').innerHTML = STEPS.filter(s => s.id !== 'done').map((s, i) => `<li class="bg-night"><button type="button" data-pick="${s.id}" class="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-white/5"><span class="tabular-nums text-white/50">${Math.floor((8 + i * 20) / 60)}:${String((8 + i * 20) % 60).padStart(2, '0')}</span><span>${s.id}. ${s.t}</span></button></li>`).join('');
+
+  let active = '1';
+  function setActive(id, scroll = false) {
+    active = id;
+    const s = STEPS.find(x => x.id === id);
+    viewer.querySelectorAll('[data-layer]').forEach(l => { const on = l.dataset.layer === s.img; l.classList.toggle('opacity-0', !on); l.classList.toggle('pointer-events-none', !on); l.toggleAttribute('inert', !on); });
+    viewer.querySelectorAll('.mk').forEach(m => {
+      const on = m.dataset.mk === id;
+      m.className = `mk absolute grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full font-bold transition-all ${on
+        ? 'z-10 size-8 bg-red text-[14px] text-white shadow-[0_0_0_7px_rgb(231_0_26/0.22)]'
+        : 'size-6 border-[1.5px] border-red bg-surface text-[11px] text-red opacity-80 hover:opacity-100'}`;
+    });
+    document.querySelectorAll('.guide-step').forEach(el => {
+      const on = el.dataset.step === id;
+      el.classList.toggle('border-red', on); el.classList.toggle('border-line', !on);
+      const n = el.querySelector('.step-num'); if (n) { n.classList.toggle('bg-red', on); n.classList.toggle('text-white', on); n.classList.toggle('text-red', !on); }
+    });
+    $('cap-n').textContent = id === 'done' ? '✓' : `Step ${id} of 6 ·`;
+    $('cap-t').textContent = s.t;
+    if (scroll) document.getElementById(id === 'done' ? 'after' : 'step-' + id).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+  }
+  document.addEventListener('click', e => {
+    const p = e.target.closest('[data-pick]'); if (p) { setActive(p.dataset.pick, true); return; }
+    const g = e.target.closest('[data-go]'); if (g) { const i = STEPS.findIndex(s => s.id === active); setActive(STEPS[Math.min(STEPS.length - 1, Math.max(0, i + Number(g.dataset.go)))].id, true); }
+  });
+  // The step nearest the middle of the visible area (below the 72px header) is the one being read
+  let ticking = false;
+  addEventListener('scroll', () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false; let cur = null, best = Infinity;
+      document.querySelectorAll('.guide-step').forEach(el => {
+        const r = el.getBoundingClientRect(), d = Math.abs(r.top + Math.min(r.height, 220) / 2 - (innerHeight + 72) / 2);
+        if (d < best) { best = d; cur = el.dataset.step; }
+      });
+      if (cur && cur !== active && best < innerHeight * 0.4) setActive(cur);
+    });
+  }, { passive: true });
+  setActive(new URLSearchParams(location.search).get('step') || '1');
+
+  /* Questions, feedback, related, copy link */
+  const FAQ = [
+    ['I can’t see New Requisition', 'Your role needs permission to raise requisitions. Ask your administrator to add it.'],
+    ['Who approves my requisition?', 'The approver set for your department in Approval Settings. You see their name in the panel before you send it.'],
+    ['Can I change it after sending?', 'Not while it’s pending. Ask the approver to send it back, then edit it and send it again.'],
+  ];
+  $('faq-list').innerHTML = FAQ.map(([q, a]) => `<details class="group px-5 py-4"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15.5px] font-semibold">${q}<svg class="size-4 shrink-0 fill-none stroke-ink-2 stroke-2 transition-transform group-open:rotate-180"><use href="#i-chev"/></svg></summary><p class="mt-2 text-[15px] leading-relaxed text-ink-2">${a}</p></details>`).join('');
+  const RELATED = [
+    ['Approvals', 'Approve a requisition', 'What the approver sees, and how to approve, reject or send it back.', 'i-approve'],
+    ['Procurement', 'Raise a purchase order', 'Turn an approved requisition into a purchase order for a vendor.', 'i-cart'],
+    ['Settings', 'Set up an approval flow', 'Choose who approves requisitions for each department.', 'i-gear'],
+  ];
+  $('related-list').innerHTML = RELATED.map(([m, t, d, ic]) => `<a href="#" class="group flex gap-4 rounded-xl border border-line bg-surface p-5 hover:border-ink-3/40">
+    <span class="grid size-11 shrink-0 place-items-center rounded-lg bg-mist text-ink"><svg class="size-5 fill-none stroke-current stroke-[1.9]"><use href="#${ic}"/></svg></span>
+    <span><span class="text-[12.5px] font-medium text-ink-3">${m}</span><span class="mt-0.5 block text-[16px] font-semibold group-hover:text-red-700">${t}</span><span class="mt-1 block text-[14px] leading-relaxed text-ink-2">${d}</span></span></a>`).join('');
+  document.getElementById('helpful').addEventListener('click', e => {
+    const b = e.target.closest('[data-help]'); if (!b) return;
+    $('helpful-q').textContent = b.dataset.help === 'yes' ? 'Thanks, glad it helped.' : 'Thanks. Ask AI, or tell support what was missing.';
+    $('helpful').innerHTML = b.dataset.help === 'no' ? '<a href="#" class="rounded-lg bg-ink px-4 py-2 text-[14px] font-semibold text-on-ink">Ask AI</a>' : '';
+  });
+  $('copy-link').addEventListener('click', async e => {
+    const span = e.currentTarget.querySelector('span');
+    try { await navigator.clipboard.writeText(location.href); span.textContent = 'Link copied'; } catch (er) { span.textContent = 'Copy the address bar link'; }
+    setTimeout(() => (span.textContent = 'Copy link'), 2000);
+  });
+}
+</script>
+</body>
+</html>

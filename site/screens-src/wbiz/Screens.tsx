@@ -112,7 +112,9 @@ const reqLines = [
   { item: 'Laptop bag', qty: 4, unit: 35_000 },
 ];
 
-function Requisition() {
+const sentReq: Req = { id: 'PR-0422', dept: 'IT', items: 'Laptops (4), laptop bags (4)', total: 3_420_000, date: '27 Nov 2026', status: { label: 'Pending approval', tone: 'warning' } };
+
+function Requisition({ mode = 'panel' }: { mode?: 'panel' | 'list' | 'sent' }) {
   const cols: DataTableColumn<Req>[] = [
     { key: 'id', header: 'Requisition No.', emphasis: 'link' },
     { key: 'dept', header: 'Department' },
@@ -125,15 +127,16 @@ function Requisition() {
   return (
     <Shell activeId="inventory/requisitions" breadcrumbs={[{ label: 'Procurement', href: '#' }, { label: 'Purchase Requisitions' }]}>
       <PageHeader title="Purchase Requisitions" description="Ask for the goods or services your team needs." />
+      {mode === 'sent' && <Alert tone="success" title="PR-0422 sent for approval">Ada Obi (Head, Operations) has been notified. You’ll see the decision here and in your notifications.</Alert>}
       <TableCard>
         <TableToolbar>
           <TableToolbarGroup><SearchField aria-label="Search requisitions" placeholder="Search" /></TableToolbarGroup>
           <TableToolbarGroup><Button leadingIcon={<PlusIcon />}>New Requisition</Button></TableToolbarGroup>
         </TableToolbar>
-        <DataTable caption="Requisitions" columns={cols} rows={reqs} getRowId={(r) => r.id} />
+        <DataTable caption="Requisitions" columns={cols} rows={mode === 'sent' ? [sentReq, ...reqs] : reqs} getRowId={(r) => r.id} />
       </TableCard>
       <SidePanel
-        open
+        open={mode === 'panel'}
         onClose={() => {}}
         title="New Purchase Requisition"
         description="Save it as a draft, or send it for approval."
@@ -245,6 +248,8 @@ function MyWorkspace() {
 const screens: Record<string, () => ReactNode> = {
   'wbiz-dashboard': () => <Dashboard />,
   'wbiz-requisition': () => <Requisition />,
+  'wbiz-req-list': () => <Requisition mode="list" />,
+  'wbiz-req-sent': () => <Requisition mode="sent" />,
   'wbiz-workspace': () => <MyWorkspace />,
   'wbiz-invoice': () => (InvoiceFilled.render as () => ReactNode)(),
 };
