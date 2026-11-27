@@ -17,7 +17,7 @@
 })();
 </script>
 </head>
-<body>
+<body data-scope="crm">
 
 <!-- Icon sprite -->
 <svg width="0" height="0" class="absolute" aria-hidden="true">
@@ -51,6 +51,9 @@
     <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></symbol>
     <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4zM10 21h4"/></symbol>
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-thumb" viewBox="0 0 24 24"><path d="M7 10v11H4V10zM7 10l4-7a2 2 0 0 1 2.5 2.6L12.6 10H19a2 2 0 0 1 2 2.3l-1.2 7A2 2 0 0 1 17.8 21H7"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
   </defs>
 </svg>
 
@@ -63,7 +66,7 @@
       <span class="hidden text-[15px] font-semibold tracking-[-0.01em] sm:block">Product Verse</span>
     </a>
 
-    <button class="mx-auto hidden h-11 w-full max-w-[400px] items-center gap-3 rounded-lg border border-line bg-surface px-4 text-left text-[15px] text-ink-3 shadow-[0_1px_2px_rgb(22_20_21/0.04)] md:flex">
+    <button class="mx-auto hidden h-11 w-full max-w-[400px] items-center gap-3 overflow-hidden whitespace-nowrap rounded-lg border border-line bg-surface px-4 text-left text-[15px] text-ink-3 shadow-[0_1px_2px_rgb(22_20_21/0.04)] md:flex">
       <svg class="size-[18px] fill-none stroke-ink-2 stroke-2"><use href="#i-search"/></svg>
       Search 203 guides…
       <span class="ml-auto flex gap-1"><kbd class="rounded-md border border-line bg-mist px-1.5 py-0.5 font-mono text-[11px] text-ink-2">/</kbd></span>
