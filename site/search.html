@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search · Wragby Product Verse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>
+/* Theme before first paint: a saved choice wins, then a data-theme the host already set, then the system setting. */
+(function () {
+  var r = document.documentElement, t = null;
+  try { t = localStorage.getItem('pv-theme'); } catch (e) {}
+  if (t === 'dark' || t === 'light') r.dataset.theme = t;
+  else if (!r.dataset.theme) r.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+})();
+</script>
+</head>
+<body data-scope="home" data-page="search">
+
+<!-- Icon sprite -->
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M9.94 15.5a2 2 0 0 0-1.44-1.44l-6.13-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.13a.5.5 0 0 1 .96 0l1.58 6.13a2 2 0 0 0 1.44 1.44l6.13 1.58a.5.5 0 0 1 0 .96l-6.13 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l12-7z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 7h6"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12 4 7.5M12 12l8-4.5M12 12v9"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15v3M8 18h4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/><path d="M3 4h2l2.4 11h10.2L20 8H6.2"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c0-2.8-1.4-4.8-3.8-5.6"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></symbol>
+    <symbol id="i-approve" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M14 4c3-1 6-1 6-1s0 3-1 6l-6 6-5-5z"/><circle cx="15" cy="9" r="1.5"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 21h8V9l-8-2M8 8h.01M8 12h.01M8 16h.01M16 12h.01M16 16h.01M2 21h20"/></symbol>
+    <symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1.4 1.4 0 0 0 2-2M14 14l2.5 2.5a1.4 1.4 0 0 0 2-2L15 11M2 11l5-5 4 2 3-1 5 5 3-1M7 6l-5 5 6 6 3-3"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-cake" viewBox="0 0 24 24"><path d="M4 21v-8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8M2 21h20M4 16c2 1 4 1 6-.5 2 1.5 4 1.5 6 0 1.5 1 3 1 4 .5M12 11V8M12 5.5V5"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4zM10 21h4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-thumb" viewBox="0 0 24 24"><path d="M7 10v11H4V10zM7 10l4-7a2 2 0 0 1 2.5 2.6L12.6 10H19a2 2 0 0 1 2 2.3l-1.2 7A2 2 0 0 1 17.8 21H7"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+  </defs>
+</svg>
+
+<!-- ================= HEADER ================= -->
+<header class="sticky top-0 z-40 border-b border-line/80 bg-paper/85 backdrop-blur-md">
+  <div class="mx-auto flex h-[72px] max-w-[1280px] items-center gap-6 px-5 lg:px-10">
+    <a href="index.html" class="flex shrink-0 items-center gap-3">
+      <img src="assets/wragby.png" alt="Wragby" class="dark:hidden h-7 w-auto"><img src="assets/wragby-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto">
+      <span class="hidden h-5 w-px bg-line sm:block"></span>
+      <span class="hidden text-[15px] font-semibold tracking-[-0.01em] sm:block">Product Verse</span>
+    </a>
+
+    <button class="mx-auto hidden h-11 w-full max-w-[400px] items-center gap-3 overflow-hidden whitespace-nowrap rounded-lg border border-line bg-surface px-4 text-left text-[15px] text-ink-3 shadow-[0_1px_2px_rgb(22_20_21/0.04)] md:flex">
+      <svg class="size-[18px] fill-none stroke-ink-2 stroke-2"><use href="#i-search"/></svg>
+      Search 203 guides…
+      <span class="ml-auto flex gap-1"><kbd class="rounded-md border border-line bg-mist px-1.5 py-0.5 font-mono text-[11px] text-ink-2">/</kbd></span>
+    </button>
+
+    <nav class="ml-auto hidden items-center gap-1 lg:flex md:ml-0">
+      <button id="products-btn" aria-haspopup="true" class="flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-[15px] font-medium hover:bg-mist">Products <svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-chev"/></svg></button>
+      <a href="#" class="whitespace-nowrap rounded-lg px-3.5 py-2 text-[15px] font-medium hover:bg-mist">User journeys</a>
+      <a href="whatsnew.html" class="whitespace-nowrap rounded-lg px-3.5 py-2 text-[15px] font-medium hover:bg-mist">What's new</a>
+      <a href="#" class="ml-2 flex items-center gap-2 whitespace-nowrap rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-on-ink"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI</a>
+      <button id="theme-btn" type="button" class="theme-btn ml-1 grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Switch to dark mode" aria-pressed="false"><svg class="size-[18px] fill-none stroke-ink stroke-2 dark:hidden"><use href="#i-moon"/></svg><svg class="hidden size-[18px] fill-none stroke-ink stroke-2 dark:block"><use href="#i-sun"/></svg></button>
+    </nav>
+
+    <div class="ml-auto flex items-center gap-2 lg:hidden">
+      <button id="theme-btn-m" type="button" class="theme-btn  grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Switch to dark mode" aria-pressed="false"><svg class="size-[18px] fill-none stroke-ink stroke-2 dark:hidden"><use href="#i-moon"/></svg><svg class="hidden size-[18px] fill-none stroke-ink stroke-2 dark:block"><use href="#i-sun"/></svg></button>
+      <button class="grid size-10 place-items-center rounded-lg border border-line bg-surface md:hidden" aria-label="Search"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-search"/></svg></button>
+      <button class="grid size-10 place-items-center rounded-lg border border-line bg-surface" aria-label="Menu"><svg class="size-[18px] fill-none stroke-ink stroke-2"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+
+  <!-- Products menu -->
+  <div id="products-menu" class="absolute top-[64px] hidden w-[460px] rounded-xl border border-line bg-surface p-2 shadow-lift">
+    <a href="#" class="flex gap-4 rounded-lg p-4 hover:bg-mist">
+      <span class="grid size-12 shrink-0 place-items-center rounded-lg bg-wbiz-50"><img src="assets/wbiz-mark.png" alt="" class="dark:hidden size-7"><img src="assets/wbiz-mark-dark.png" alt="" aria-hidden="true" class="hidden dark:block size-7"></span>
+      <span><span class="flex items-center gap-2 text-[15px] font-semibold">wBizManager <span class="rounded-md bg-ok-50 px-2 py-0.5 text-[11.5px] font-semibold text-ok">Available</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Enterprise resource planning: sales, purchasing, inventory, accounting, HR, projects, approvals and reports.</span></span>
+    </a>
+    <a href="#" class="flex gap-4 rounded-lg p-4 hover:bg-mist">
+      <span class="grid size-12 shrink-0 place-items-center rounded-lg bg-blush"><img src="assets/wragby-mark.png" alt="" class="dark:hidden h-7 w-auto"><img src="assets/wragby-mark-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"></span>
+      <span><span class="flex items-center gap-2 text-[15px] font-semibold">CRM Business Development <span class="rounded-md bg-ok-50 px-2 py-0.5 text-[11.5px] font-semibold text-ok">Available</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Companies, contacts, deals, budgets, reports and activity.</span></span>
+    </a>
+    <div class="flex gap-4 rounded-lg p-4">
+      <img src="assets/einv.png" alt="" class="size-12 shrink-0 rounded-lg opacity-60">
+      <span><span class="flex items-center gap-2 text-[15px] font-semibold text-ink-2">e-Invoicing <span class="rounded-md border border-dashed border-ink-3/50 px-2 py-0.5 text-[11.5px] font-semibold text-warn">Coming soon</span></span><span class="mt-1 block text-[14px] leading-snug text-ink-2">Create, validate and submit electronic invoices.</span></span>
+    </div>
+  </div>
+</header>
+
+<main class="mx-auto max-w-[1280px] px-5 pb-24 pt-10 lg:px-10 lg:pt-12">
+  <form id="sform" role="search" class="flex h-16 max-w-[760px] items-center gap-3 rounded-xl border border-line bg-surface pl-5 pr-2 shadow-float focus-within:border-ink-3">
+    <svg class="size-5 shrink-0 fill-none stroke-ink-2 stroke-2"><use href="#i-search"/></svg>
+    <input id="sq" name="q" type="search" autocomplete="off" aria-label="Search guides" placeholder="Search guides, e.g. create an invoice" class="min-w-0 flex-1 bg-transparent text-[18px] outline-none placeholder:text-ink-3 [&::-webkit-search-cancel-button]:hidden">
+    <button type="submit" class="h-12 rounded-lg bg-red px-6 text-[15px] font-semibold text-white shadow-red">Search</button>
+  </form>
+  <h1 id="s-title" class="mt-6 text-[28px] font-semibold tracking-[-0.03em] lg:text-[34px]" aria-live="polite"></h1>
+
+  <!-- Filters -->
+  <div id="s-filters" class="mt-5 flex flex-col gap-3 border-b border-line pb-5 lg:flex-row lg:items-center">
+    <div class="flex flex-wrap gap-2" id="s-types" role="group" aria-label="Type"></div>
+    <div class="grid grid-cols-2 gap-3 lg:ml-auto lg:flex">
+      <label class="relative block"><span class="sr-only">Product</span>
+        <select id="s-product" class="h-11 w-full appearance-none rounded-lg border border-line bg-surface pl-3.5 pr-9 text-[14.5px] font-medium outline-none focus:border-ink-3 lg:w-[240px]"></select>
+        <svg class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 fill-none stroke-ink-2 stroke-2"><use href="#i-chev"/></svg></label>
+      <label class="relative block"><span class="sr-only">Module</span>
+        <select id="s-module" class="h-11 w-full appearance-none rounded-lg border border-line bg-surface pl-3.5 pr-9 text-[14.5px] font-medium outline-none focus:border-ink-3 lg:w-[220px]"></select>
+        <svg class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 fill-none stroke-ink-2 stroke-2"><use href="#i-chev"/></svg></label>
+    </div>
+  </div>
+
+  <div class="mt-8 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+    <div id="s-results" class="flex min-w-0 flex-col gap-3"></div>
+    <aside class="flex flex-col gap-5 lg:sticky lg:top-24 lg:self-start">
+      <section class="rounded-xl bg-night p-5 text-white dark:ring-1 dark:ring-line">
+        <span class="grid size-9 place-items-center rounded-md bg-white/10"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg></span>
+        <h2 class="mt-4 text-[17px] font-semibold">Ask it as a question</h2>
+        <p class="mt-1.5 text-[14px] leading-relaxed text-white/70">Ask AI answers from these guides, with the steps and the screen.</p>
+        <button type="button" id="s-ask" class="mt-4 flex w-full items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-left text-[14px] font-semibold text-[#161415]"><svg class="size-4 shrink-0 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg><span id="s-ask-label" class="min-w-0 flex-1 truncate">Ask AI</span><svg class="size-4 shrink-0 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></button>
+      </section>
+      <section class="rounded-xl border border-line bg-surface p-5">
+        <h2 class="text-[15px] font-semibold">Popular searches</h2>
+        <div class="mt-3 flex flex-wrap gap-2" id="s-popular"></div>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<footer class="border-t border-line bg-surface">
+  <div class="mx-auto grid max-w-[1280px] gap-10 px-5 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-10">
+    <div>
+      <div class="flex items-center gap-3"><img src="assets/wragby.png" alt="Wragby" class="dark:hidden h-7 w-auto"><img src="assets/wragby-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"><span class="h-5 w-px bg-line"></span><span class="text-[15px] font-semibold">Product Verse</span></div>
+      <p class="mt-4 max-w-[300px] text-[15px] leading-relaxed text-ink-2">Every Wragby product, explained with real screens.</p>
+      <div class="mt-6 flex flex-wrap items-center gap-5 opacity-80"><img src="assets/wbiz.png" alt="wBizManager" class="dark:hidden h-7 w-auto"><img src="assets/wbiz-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-7 w-auto"><img src="assets/crm.png" alt="Wragby CRM" class="dark:hidden h-6 w-auto"><img src="assets/crm-dark.png" alt="" aria-hidden="true" class="hidden dark:block h-6 w-auto"><img src="assets/einv.png" alt="e-Invoicing" class="size-7 rounded-md"></div>
+    </div>
+    <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Products</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">wBizManager</a></li><li><a href="#">CRM Business Development</a></li><li class="text-ink-2">e-Invoicing <span class="ml-1 rounded-md border border-dashed border-ink-3/50 px-2 py-0.5 text-[11.5px] font-semibold text-warn">Soon</span></li></ul></div>
+    <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Guides</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">User journeys</a></li><li><a href="#">Configuration center</a></li><li><a href="whatsnew.html">What's new</a></li></ul></div>
+    <div><h4 class="text-[13px] font-semibold uppercase tracking-[0.08em] text-ink-3">Help</h4><ul class="mt-4 space-y-3 text-[15px]"><li><a href="#">Ask AI</a></li><li><a href="#">Contact support</a></li><li><a href="#">Use this guide in Claude or ChatGPT</a></li></ul></div>
+  </div>
+  <div class="border-t border-line">
+    <div class="mx-auto flex max-w-[1280px] flex-col gap-3 px-5 py-6 text-[14px] text-ink-2 sm:flex-row sm:items-center lg:px-10">
+      <span>© Wragby Business Solutions &amp; Technologies</span>
+      <span class="sm:ml-auto">Can't find it? <a href="#" class="font-semibold text-ink">Ask AI</a> or <a href="#" class="font-semibold text-ink">contact support</a>.</span>
+      <a href="#" class="font-medium underline decoration-line underline-offset-4">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile-only floating Ask AI -->
+<a href="#" id="fab" class="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-lg bg-ink px-5 py-3.5 text-[15px] font-semibold text-on-ink shadow-lift lg:hidden"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI</a>
+
+<script src="shared.js"></script>
+<script>
+/* ---------- Search results ----------
+   Sample index of guides, videos and What's new entries; replace INDEX with the real guide index.
+   Every word must match somewhere; title matches rank highest, then module, keywords and summary. */
+{
+  const P = {
+    wbiz: { name: 'wBizManager', mark: 'assets/wbiz-mark.png', dark: 'assets/wbiz-mark-dark.png' },
+    crm: { name: 'CRM Business Development', mark: 'assets/wragby-mark.png', dark: 'assets/wragby-mark-dark.png' },
+  };
+  // [product, module, title, summary, steps, video, kind, href, shot, keywords]
+  const INDEX = [
+    ['wbiz', 'Procurement', 'Create a purchase requisition', 'Ask for the goods or services your team needs, then save it as a draft or send it for approval.', 6, '2:10', 'guide', 'guide.html', 'req', 'request buy purchase approval'],
+    ['wbiz', 'Approvals', 'Approve a requisition', 'What the approver sees, and how to approve, reject or send a requisition back.', 5, '', 'guide', '#', '', 'approval reject'],
+    ['wbiz', 'Approvals', 'Set up an approval flow', 'Choose who approves requisitions, expenses and leave for each department.', 8, '3:05', 'guide', '#', '', 'workflow approver settings'],
+    ['wbiz', 'Approvals', 'Delegate your approvals', 'Let someone approve for you while you are away.', 4, '', 'guide', '#', '', 'approval holiday'],
+    ['wbiz', 'Procurement', 'Raise a purchase order', 'Turn an approved requisition into a purchase order for a vendor.', 7, '2:40', 'guide', '#', '', 'po requisition vendor'],
+    ['wbiz', 'Procurement', 'Add a vendor', 'Save a supplier’s details, bank account and payment terms.', 5, '', 'guide', '#', '', 'supplier'],
+    ['wbiz', 'Procurement', 'Receive goods (GRN)', 'Record what arrived against a purchase order.', 6, '', 'guide', '#', '', 'grn delivery'],
+    ['wbiz', 'Sales', 'Create an invoice', 'Bill a customer for goods or services, then send it or save it as a draft.', 7, '1:55', 'guide', '#', 'how', 'bill customer'],
+    ['wbiz', 'Sales', 'Receive a payment', 'Record money a customer paid and match it to their invoices.', 5, '', 'guide', '#', '', 'invoice receipt'],
+    ['wbiz', 'Sales', 'Add a customer', 'Save a customer’s contact details, currency and payment terms.', 4, '', 'guide', '#', '', 'client contact'],
+    ['wbiz', 'Accounting', 'Close a period', 'Lock a month so no one can post to it by mistake.', 5, '', 'guide', '#', '', 'month end'],
+    ['wbiz', 'Accounting', 'Reconcile a bank account', 'Match your bank statement to the ledger, line by line.', 8, '3:30', 'guide', '#', '', 'bank reconciliation'],
+    ['wbiz', 'Reports', 'Run a trial balance', 'See every account’s balance for a period, and export it.', 3, '', 'guide', '#', '', 'report'],
+    ['wbiz', 'My workspace', 'Request leave', 'Ask for time off, and see how many days you have left.', 4, '', 'guide', '#', 'portal', 'holiday time off approval'],
+    ['wbiz', 'My workspace', 'Claim an expense', 'Send a receipt for approval and get paid back.', 5, '', 'guide', '#', '', 'expense receipt approval'],
+    ['wbiz', 'HR', 'Add an employee', 'Create an employee record with job, salary and documents.', 6, '', 'guide', '#', '', 'staff'],
+    ['wbiz', 'Inventory', 'Transfer stock', 'Move items between warehouses and keep counts right.', 5, '', 'guide', '#', '', 'warehouse'],
+    ['crm', 'Getting started', 'Dashboard', 'Read the headline figures: deals, contacts, wins, the status split, top customers and activity.', 5, '', 'guide', '#', 'crmdash', 'overview'],
+    ['crm', 'Companies and contacts', 'Create a company', 'Add an organisation you do business with, then attach its contacts and deals.', 7, '2:05', 'guide', '#', 'company', 'organisation add'],
+    ['crm', 'Companies and contacts', 'Create a contact', 'Add a person and link them to their company.', 5, '', 'guide', '#', '', 'add person'],
+    ['crm', 'Deals', 'Create a deal', 'Start a deal for a company, with its value, owner and close date.', 6, '2:20', 'guide', '#', '', 'opportunity'],
+    ['crm', 'Deals', 'Move a deal through stages', 'Move a deal forward, and record why it was won or lost.', 5, '', 'guide', '#', '', 'pipeline stage'],
+    ['crm', 'Budgets and targets', 'Set a budget', 'Set targets by fiscal year and quarter for each salesperson.', 6, '', 'guide', '#', '', 'target'],
+    ['crm', 'Settings', 'Audit Logs', 'See who did what in your organisation, and what changed.', 3, '', 'guide', '#', '', 'history log'],
+    ['crm', 'Deals', 'Deal qualification (BANT)', 'Tick the four BANT checks on each deal, and decide what happens when a deal is won without them.', 0, '', 'update', 'whatsnew.html#c1', '', '13 Nov 2026 approval'],
+    ['crm', 'Budgets and targets', 'Control who can delete budgets', 'A super admin can allow or stop budget deletion for the organisation or for named people.', 0, '', 'update', 'whatsnew.html#c9', '', '6 Nov 2026 permission'],
+    ['crm', 'Companies and contacts', 'Phone numbers with a country code', 'Pick the country when you enter a phone number for a company or contact.', 0, '', 'update', 'whatsnew.html#c13', '', '6 Nov 2026'],
+  ].map(([p, m, t, s, steps, video, kind, href, shot, kw], i) => ({ id: i, p, m, t, s, steps, video, kind, href, shot, kw }));
+  // Most-used guides rank a little higher when the words match equally well
+  const TOP = new Set(['Create a purchase requisition', 'Create an invoice', 'Request leave', 'Create a company', 'Set up an approval flow']);
+  const POPULAR = ['create an invoice', 'purchase requisition', 'request leave', 'add a company', 'approval', 'bank reconciliation'];
+  const STOP = new Set(['how', 'do', 'i', 'a', 'an', 'the', 'to', 'my', 'in', 'of', 'for', 'and', 'can', 'what', 'is', 'on']);
+  const $ = id => document.getElementById(id);
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const stems = q => q.toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length > 1 && !STOP.has(w)).map(w => w.length > 5 ? w.slice(0, w.length - 2) : w.replace(/s$/, ''));
+
+  const st = { q: '', product: 'all', module: '', type: 'all', shown: 8 };
+  try { st.q = new URLSearchParams(location.search).get('q') || sessionStorage.getItem('pv-q') || ''; } catch (e) {}
+
+  function score(r, ss) {
+    if (!ss.length) return 0;
+    const title = r.t.toLowerCase(), hay = [r.t, r.m, r.s, r.kw, P[r.p].name].join(' ').toLowerCase();
+    let sc = 0;
+    for (const w of ss) {
+      if (!hay.includes(w)) return -1;
+      sc += (title.includes(w) ? 6 : 0) + (r.m.toLowerCase().includes(w) ? 3 : 0) + (r.kw.includes(w) ? 2 : 0) + (r.s.toLowerCase().includes(w) ? 1 : 0);
+    }
+    if (title.includes(st.q.trim().toLowerCase())) sc += 6;
+    return sc + (r.kind === 'guide' ? 1 : 0) + (TOP.has(r.t) ? 3 : 0);
+  }
+  const mark = (text, ss) => ss.length ? esc(text).replace(new RegExp('(' + ss.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')\\w*', 'gi'), m => `<mark class="rounded-sm bg-blush px-0.5 text-red-800">${m}</mark>`) : esc(text);
+  const pmark = p => `<img src="${P[p].mark}" alt="" class="h-3.5 w-auto dark:hidden"><img src="${P[p].dark}" alt="" class="hidden h-3.5 w-auto dark:block">`;
+  const KIND = { guide: 'Guide', update: 'What’s new' };
+
+  function meta(r) {
+    const bits = [];
+    if (r.kind === 'guide') bits.push(`<span class="inline-flex items-center gap-1.5"><svg class="size-3.5 fill-none stroke-current stroke-2"><use href="#i-list"/></svg>${r.steps} steps</span>`);
+    if (r.video) bits.push(`<span class="inline-flex items-center gap-1.5"><svg class="size-3.5 fill-current"><use href="#i-play"/></svg>Video ${r.video}</span>`);
+    if (r.kind === 'update') bits.push(`<span>${r.kw.split(' ').slice(0, 3).join(' ')}</span>`);
+    return bits.join('<span aria-hidden="true">·</span>');
+  }
+  function card(r, ss, best) {
+    const crumbs = `<span class="flex flex-wrap items-center gap-1.5 text-[12.5px] font-medium text-ink-2">${pmark(r.p)}${P[r.p].name}<span aria-hidden="true" class="text-ink-3">›</span>${r.m}
+      <span class="ml-1 rounded-md px-1.5 py-0.5 text-[11.5px] font-semibold ${r.kind === 'update' ? 'bg-blush text-red-800' : 'bg-mist text-ink-2'}">${KIND[r.kind]}</span></span>`;
+    const body = `<div class="min-w-0">${best ? '<span class="mb-2 inline-block text-[12px] font-semibold uppercase tracking-[0.06em] text-red-700">Best match</span>' : ''}${crumbs}
+      <h2 class="mt-2 ${best ? 'text-[22px]' : 'text-[17px]'} font-semibold tracking-[-0.015em] group-hover:text-red-700">${mark(r.t, ss)}</h2>
+      <p class="mt-1.5 text-[15px] leading-relaxed text-ink-2">${mark(r.s, ss)}</p>
+      <p class="mt-2.5 flex flex-wrap items-center gap-2 text-[13px] text-ink-3">${meta(r)}</p>
+      ${best ? `<span class="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-on-ink">Open guide<svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-arrow"/></svg></span>` : ''}</div>`;
+    if (best) return `<a href="${r.href}" data-r="${r.id}" class="group grid gap-6 rounded-xl border border-line bg-surface p-5 hover:border-ink-3/40 lg:p-6 ${r.shot ? 'md:grid-cols-[minmax(0,1fr)_minmax(0,320px)]' : ''}">${body}${r.shot ? `<div class="self-center">${shot(SHOTS[r.shot], true)}</div>` : ''}</a>`;
+    return `<a href="${r.href}" data-r="${r.id}" class="group flex items-start gap-4 rounded-xl border border-line bg-surface p-5 hover:border-ink-3/40">${body}<svg class="ml-auto mt-1 size-4 shrink-0 fill-none stroke-ink-3 stroke-2 group-hover:stroke-red"><use href="#i-arrow"/></svg></a>`;
+  }
+
+  function recent() { try { return JSON.parse(localStorage.getItem('pv-recent') || '[]'); } catch (e) { return []; } }
+  function remember(q) { q = q.trim(); if (!q) return; try { localStorage.setItem('pv-recent', JSON.stringify([q, ...recent().filter(x => x !== q)].slice(0, 6))); } catch (e) {} }
+
+  function render() {
+    const ss = stems(st.q);
+    $('s-ask-label').textContent = st.q.trim() ? `Ask AI: “${st.q.trim()}”` : 'Ask AI';
+    $('s-popular').innerHTML = POPULAR.map(p => `<button type="button" data-q="${p}" class="rounded-md bg-mist px-3 py-1.5 text-[13.5px] font-medium hover:bg-line">${p}</button>`).join('');
+    const filtersEl = $('s-filters');
+    if (!ss.length) {
+      filtersEl.classList.add('hidden');
+      $('s-title').textContent = 'Search the guides';
+      const rec = recent();
+      $('s-results').innerHTML = `${rec.length ? `<section><div class="flex items-center justify-between"><h2 class="text-[15px] font-semibold">Recent searches</h2><button type="button" data-clear-recent class="text-[13px] font-semibold text-ink-2 hover:text-ink">Clear</button></div>
+          <div class="mt-3 flex flex-wrap gap-2">${rec.map(q => `<button type="button" data-q="${esc(q)}" class="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-3 py-1.5 text-[14px] font-medium hover:border-ink-3/40"><svg class="size-3.5 fill-none stroke-ink-3 stroke-2"><use href="#i-clock"/></svg>${esc(q)}</button>`).join('')}</div></section>` : ''}
+        <section class="${rec.length ? 'mt-6' : ''}"><h2 class="text-[15px] font-semibold">Browse by product</h2>
+          <div class="mt-3 grid gap-3 sm:grid-cols-2">${Object.entries(P).map(([k, p]) => `<a href="index.html#${k === 'wbiz' ? 'wbizmanager' : 'crm-business-development'}" class="flex items-center gap-3 rounded-xl border border-line bg-surface p-4 hover:border-ink-3/40"><span class="grid size-10 place-items-center rounded-lg bg-mist"><img src="${p.mark}" alt="" class="h-5 w-auto dark:hidden"><img src="${p.dark}" alt="" class="hidden h-5 w-auto dark:block"></span><span><span class="block text-[15px] font-semibold">${p.name}</span><span class="text-[13px] text-ink-2">${INDEX.filter(r => r.p === k && r.kind === 'guide').length} guides here</span></span></a>`).join('')}</div></section>`;
+      return;
+    }
+    let hits = INDEX.map(r => ({ r, sc: score(r, ss) })).filter(x => x.sc >= 0);
+    filtersEl.classList.toggle('hidden', !hits.length);
+    const inProduct = hits.filter(x => st.product === 'all' || x.r.p === st.product);
+    const inModule = inProduct.filter(x => !st.module || x.r.m === st.module);
+    const typeOk = (r, t) => t === 'all' || (t === 'video' ? !!r.video : r.kind === t);
+    const list = inModule.filter(x => typeOk(x.r, st.type)).sort((a, b) => b.sc - a.sc).map(x => x.r);
+
+    // filters with live counts
+    $('s-types').innerHTML = [['all', 'All'], ['guide', 'Guides'], ['video', 'Videos'], ['update', 'What’s new']].map(([v, l]) => {
+      const n = inModule.filter(x => typeOk(x.r, v)).length, on = st.type === v;
+      return `<button type="button" data-type="${v}" aria-pressed="${on}" class="inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-[13.5px] font-semibold ${on ? 'border-ink bg-ink text-on-ink' : 'border-line bg-surface hover:border-ink-3/40'}">${l}<span class="tabular-nums ${on ? 'opacity-70' : 'text-ink-3'}">${n}</span></button>`;
+    }).join('');
+    $('s-product').innerHTML = `<option value="all">All products · ${hits.length}</option>` + Object.entries(P).map(([k, p]) => `<option value="${k}">${p.name} · ${hits.filter(x => x.r.p === k).length}</option>`).join('');
+    $('s-product').value = st.product;
+    const mods = [...new Set(inProduct.map(x => x.r.m))].sort();
+    if (st.module && !mods.includes(st.module)) st.module = '';
+    $('s-module').innerHTML = '<option value="">All modules</option>' + mods.map(m => `<option>${m}</option>`).join('');
+    $('s-module').value = st.module;
+
+    const q = esc(st.q.trim());
+    $('s-title').innerHTML = list.length ? `${list.length} ${list.length === 1 ? 'result' : 'results'} for <span class="text-red-700">“${q}”</span>` : `No results for <span class="text-red-700">“${q}”</span>`;
+    if (!list.length) {
+      const widen = st.product !== 'all' || st.module || st.type !== 'all';
+      $('s-results').innerHTML = `<div class="rounded-xl border border-dashed border-line-strong bg-surface px-6 py-12 text-center">
+        <span class="mx-auto grid size-12 place-items-center rounded-full bg-mist"><svg class="size-5 fill-none stroke-ink-2 stroke-2"><use href="#i-search"/></svg></span>
+        <p class="mt-4 text-[17px] font-semibold">${widen ? 'Nothing here with these filters' : 'No guide matches those words'}</p>
+        <p class="mt-1.5 text-[15px] text-ink-2">${widen ? 'Try all products, modules and types.' : 'Try fewer or simpler words, or ask it as a question.'}</p>
+        <div class="mt-5 flex flex-wrap justify-center gap-2">${widen ? '<button type="button" data-widen class="rounded-lg bg-ink px-4 py-2.5 text-[14px] font-semibold text-on-ink">Show all results</button>' : ''}
+          <button type="button" data-ask-here class="inline-flex items-center gap-2 rounded-lg ${widen ? 'border-[1.5px] border-line' : 'bg-ink text-on-ink'} px-4 py-2.5 text-[14px] font-semibold"><svg class="size-4 fill-none stroke-current stroke-2"><use href="#i-spark"/></svg>Ask AI: “${q}”</button></div></div>`;
+      return;
+    }
+    $('s-results').innerHTML = list.slice(0, st.shown).map((r, i) => card(r, ss, i === 0)).join('') +
+      (list.length > st.shown ? `<button type="button" data-more class="mt-2 self-center rounded-lg border-[1.5px] border-line bg-surface px-5 py-2.5 text-[14px] font-semibold hover:border-ink-3/40">Show ${Math.min(8, list.length - st.shown)} more of ${list.length - st.shown}</button>` : '');
+  }
+
+  let t;
+  const setQ = (q, save) => {
+    st.q = q; st.shown = 8; $('sq').value = q; render();
+    try { sessionStorage.setItem('pv-q', q); history.replaceState(null, '', location.pathname + (q ? '?q=' + encodeURIComponent(q).replace(/%20/g, '+') : '')); } catch (e) {}
+    if (save) remember(q);
+  };
+  $('sq').value = st.q;
+  $('sq').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => setQ(e.target.value, false), 120); });
+  $('sform').addEventListener('submit', e => { e.preventDefault(); setQ($('sq').value, true); });
+  $('s-product').addEventListener('change', e => { st.product = e.target.value; st.module = ''; render(); });
+  $('s-module').addEventListener('change', e => { st.module = e.target.value; render(); });
+  $('s-ask').addEventListener('click', () => window.askAI?.(st.q.trim()));
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-q],[data-type],[data-more],[data-widen],[data-clear-recent],[data-ask-here],[data-r]');
+    if (!b) return;
+    if (b.dataset.r) return remember(st.q);
+    if (b.dataset.q) setQ(b.dataset.q, true);
+    else if (b.dataset.type) { st.type = b.dataset.type; render(); }
+    else if ('more' in b.dataset) { st.shown += 8; render(); }
+    else if ('widen' in b.dataset) { st.product = 'all'; st.module = ''; st.type = 'all'; render(); }
+    else if ('clearRecent' in b.dataset) { try { localStorage.removeItem('pv-recent'); } catch (er) {} render(); }
+    else if ('askHere' in b.dataset) window.askAI?.(st.q.trim());
+  });
+  render();
+  if (!st.q) $('sq').focus();
+}
+</script>
+</body>
+</html>

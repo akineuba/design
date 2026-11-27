@@ -26,6 +26,12 @@ pb.onclick = () => { placeMenu(); pm.classList.toggle('hidden'); };
 document.addEventListener('click', e => { if (!pm.contains(e.target) && !pb.contains(e.target)) pm.classList.add('hidden'); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') pm.classList.add('hidden'); });
 document.querySelectorAll('form').forEach(f => f.addEventListener('submit', e => e.preventDefault()));
+/* Search: every search box and button leads to the results page (search.html?q=…; the query is also kept in sessionStorage). */
+const goSearch = q => { try { sessionStorage.setItem('pv-q', q || ''); } catch (e) {} location.href = 'search.html' + (q ? '?q=' + encodeURIComponent(q).replace(/%20/g, '+') : ''); };
+document.querySelectorAll('form[data-search]').forEach(f => f.addEventListener('submit', () => goSearch(f.q.value.trim())));
+document.querySelectorAll('header button').forEach(b => {
+  if (b.querySelector('use[href="#i-search"]')) b.addEventListener('click', () => document.body.dataset.page === 'search' ? document.getElementById('sq').focus() : goSearch(''));
+});
 /* Theme toggle: flips <html data-theme>, remembers the choice, keeps the button labels right. */
 const root = document.documentElement;
 const syncThemeButtons = () => document.querySelectorAll('.theme-btn').forEach(b => {
@@ -40,7 +46,7 @@ document.querySelectorAll('.theme-btn').forEach(b => b.addEventListener('click',
 }));
 new MutationObserver(syncThemeButtons).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 syncThemeButtons();
-document.addEventListener('keydown', e => { if (e.key === '/' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); (document.querySelector('main input[type=search], main form input') || {}).focus?.(); } });
+document.addEventListener('keydown', e => { if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); const i = document.querySelector('main input[type=search], main form input'); i ? i.focus() : goSearch(''); } });
 
 /* ---------- Ask AI panel ----------
    Opens from every "Ask AI" button. Answers come only from Product Verse guides, for one product at a time:
@@ -184,6 +190,8 @@ document.addEventListener('keydown', e => { if (e.key === '/' && !/INPUT|TEXTARE
   qEl.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(qEl.value); } });
   qEl.addEventListener('input', () => { qEl.style.height = 'auto'; qEl.style.height = qEl.scrollHeight + 'px'; });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) open(false); });
+
+  window.askAI = q => { open(true); if (q) ask(q); };
 
   // Screenshot hooks: ?ask=open | ?ask=<question>
   const hook = new URLSearchParams(location.search).get('ask');
